@@ -1,0 +1,3 @@
+displayName = TerraTCG
+author = billybobmcbo
+version = 0.1
