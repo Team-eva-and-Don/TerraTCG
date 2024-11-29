@@ -12,13 +12,18 @@ namespace TerraTCG.Common.UI.GameFieldUI
     internal class GameFieldState : UIState
     {
         private GameFieldElement gameField;
+        private HandElement handElement;
 
         public override void OnInitialize()
         {
             base.OnInitialize();
             gameField = new();
-            SetRectangle(gameField, Main.screenWidth / 2, (Main.screenHeight - FieldRenderer.FIELD_HEIGHT) / 2, 50, 50);
+            SetRectangle(gameField, Main.screenWidth / 2 - 32, (Main.screenHeight - FieldRenderer.FIELD_HEIGHT) / 2, 50, 50);
             Append(gameField);
+
+            handElement = new();
+            SetRectangle(handElement, Main.screenWidth / 2, Main.screenHeight - 180, 50, 50);
+            Append(handElement);
         }
         private void SetRectangle(UIElement uiElement, float left, float top, float width, float height)
         {

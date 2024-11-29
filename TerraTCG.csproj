@@ -8,7 +8,10 @@
 		
 	</PropertyGroup>
 	<ItemGroup>
-	  <Folder Include="Assets\Cards\" />
+	  <None Remove="Assets\Cards\Bunny.png" />
+	  <None Remove="Assets\Cards\Demon_Eye.png" />
+	  <None Remove="Assets\Cards\Dryad.png" />
+	  <None Remove="Assets\Cards\Zombie.png" />
 	</ItemGroup>
 
 	<!-- References -->
