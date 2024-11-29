@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
+using TerraTCG.Common.GameSystem.GameState;
 
 namespace TerraTCG.Common.GameSystem.Drawing
 {
@@ -28,7 +29,11 @@ namespace TerraTCG.Common.GameSystem.Drawing
         private Matrix projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45), 1, 0.01f, 100f);
 
         public const int FIELD_WIDTH = 482;
-        public const int FIELD_HEIGHT = 528;
+        public const int FIELD_HEIGHT = 528 + 48;
+
+        public const int CARD_WIDTH = 90;
+        public const int CARD_HEIGHT = 120;
+        public const int CARD_MARGIN = 8;
 
         // need to run this on the main thread
         public void OnEnterWorld()
@@ -69,19 +74,8 @@ namespace TerraTCG.Common.GameSystem.Drawing
             Main.OnPreDraw -= OnPreDraw;
         }
 
-
-        private void OnPreDraw(GameTime gameTime)
+        private void RenderFieldWithPerspective()
         {
-
-            if(TextureCache.Field == null)
-            {
-                return;
-            }
-
-            Main.instance.GraphicsDevice.SetRenderTarget(PerspectiveRenderTarget);
-            Main.instance.GraphicsDevice.Clear(Color.Transparent);
-
-            effect.Texture = TextureCache.Field.Value;
 
             // 4 corners, two triangles
             Vector3[] points = [ new(-1, 1, 0), new (1, 1, 0), new (-1, -1, 0), new (1, -1, 0) ];
@@ -105,6 +99,45 @@ namespace TerraTCG.Common.GameSystem.Drawing
                     indices,
                     0, 2);
             }
+        }
+
+        private void DrawGameField(GamePlayer player)
+        {
+            // Draw the current player's zones close to the camera
+            var playerFieldPos = new Vector2(CARD_WIDTH + CARD_MARGIN, FIELD_HEIGHT - 2 * CARD_HEIGHT - CARD_MARGIN);
+            player.Field.Draw(Main.spriteBatch, playerFieldPos, 0f);
+
+            // Draw the opposing player's zones far from the camera
+            var opponentFieldPos = new Vector2(3 * (CARD_WIDTH + CARD_MARGIN), CARD_HEIGHT + CARD_MARGIN);
+            player.Opponent.Field.Draw(Main.spriteBatch, opponentFieldPos, MathF.PI);
+        }
+
+
+        private void OnPreDraw(GameTime gameTime)
+        {
+
+            var localGamePlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer;
+            if(TextureCache.Instance.Field == null || localGamePlayer == null)
+            {
+                return;
+            }
+            Main.instance.GraphicsDevice.SetRenderTarget(fieldRenderTarget);
+            Main.instance.GraphicsDevice.Clear(Color.Transparent);
+
+            Main.spriteBatch.Begin(
+                SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise);
+
+            DrawGameField(localGamePlayer);
+
+            Main.spriteBatch.End();
+
+            Main.instance.GraphicsDevice.SetRenderTarget(PerspectiveRenderTarget);
+            Main.instance.GraphicsDevice.Clear(Color.Transparent);
+
+            effect.Texture = fieldRenderTarget;
+
+            RenderFieldWithPerspective();
+
             Main.instance.GraphicsDevice.SetRenderTarget(null);
 
         }

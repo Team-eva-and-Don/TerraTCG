@@ -15,11 +15,16 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal Field Field { get; set; }
 
+        internal Card SelectedHandCard { get; set; }
+
+        internal Zone SelectedFieldZone { get; set; }
+        public GamePlayer Opponent => Game.GamePlayers.Find(p => p != this);
+
         public GamePlayer()
         {
             Hand = new CardCollection()
             {
-                Cards = [Zombie.Instance.CreateCard(), Zombie.Instance.CreateCard(), Zombie.Instance.CreateCard()]
+                Cards = [Zombie.Instance.CreateCard(), Bunny.Instance.CreateCard(), DemonEye.Instance.CreateCard()]
             };
 
             Deck = new CardCollection()
@@ -28,6 +33,10 @@ namespace TerraTCG.Common.GameSystem.GameState
             };
 
             Field = new();
+
+            SelectedHandCard = Hand.Cards[1];
+
+            SelectedFieldZone = Field.Zones[0];
         }
     }
 }

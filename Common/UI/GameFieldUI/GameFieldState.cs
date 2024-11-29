@@ -18,7 +18,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
         {
             base.OnInitialize();
             gameField = new();
-            SetRectangle(gameField, Main.screenWidth / 2 - 32, (Main.screenHeight - FieldRenderer.FIELD_HEIGHT) / 2, 50, 50);
+            SetRectangle(gameField, (Main.screenWidth - FieldRenderer.FIELD_WIDTH + 48) / 2, (Main.screenHeight - FieldRenderer.FIELD_HEIGHT + 16) / 2, 50, 50);
             Append(gameField);
 
             handElement = new();

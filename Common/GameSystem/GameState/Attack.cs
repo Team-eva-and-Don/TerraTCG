@@ -9,5 +9,6 @@ namespace TerraTCG.Common.GameSystem.GameState
     internal struct Attack
     {
         internal int Damage { get; set; }
+        internal int Cost { get; set; }
     }
 }

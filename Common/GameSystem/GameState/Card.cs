@@ -24,11 +24,11 @@ namespace TerraTCG.Common.GameSystem.GameState
         EYE
     }
 
-    internal struct Card
+    internal class Card
     {
         internal string Name { get; set; }
 
-        internal readonly Asset<Texture2D> Texture => ModContent.GetInstance<TerraTCG>().Assets.Request<Texture2D>($"Assets/Cards/{Name}");
+        internal Asset<Texture2D> Texture => ModContent.GetInstance<TerraTCG>().Assets.Request<Texture2D>($"Assets/Cards/{Name}");
 
         internal CardType CardType { get; set; }
 

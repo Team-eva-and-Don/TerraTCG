@@ -8,19 +8,19 @@ using TerraTCG.Common.GameSystem.GameState;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class Zombie : ModSystem, ICardTemplate
+    internal class DemonEye : ModSystem, ICardTemplate
     {
-        internal static ICardTemplate Instance => ModContent.GetInstance<Zombie>();
+        internal static ICardTemplate Instance => ModContent.GetInstance<DemonEye>();
         public Card CreateCard() => new ()
         {
-            Name = "Zombie",
-            MaxHealth = 70,
+            Name = "DemonEye",
+            MaxHealth = 60,
             MoveCost = 2,
             CardType = CardType.CREATURE,
-            SubTypes = [CardSubtype.FOREST, CardSubtype.UNDEAD],
+            SubTypes = [CardSubtype.FOREST, CardSubtype.EYE],
             Attacks = [
                 new() {
-                    Damage = 30,
+                    Damage = 20,
                     Cost = 2,
                 }
             ]
