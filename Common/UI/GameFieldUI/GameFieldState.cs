@@ -22,7 +22,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
             Append(gameField);
 
             handElement = new();
-            SetRectangle(handElement, Main.screenWidth / 2, Main.screenHeight - 180, 50, 50);
+            SetRectangle(handElement, Main.screenWidth / 2 - 186, Main.screenHeight - 180, 50, 50);
             Append(handElement);
         }
         private void SetRectangle(UIElement uiElement, float left, float top, float width, float height)

@@ -17,11 +17,35 @@ namespace TerraTCG.Common.UI.GameFieldUI
         internal Vector2 Position => new(Left.Pixels, Top.Pixels);
 
         const float CARD_SCALE = 0.5f;
+        const int CARD_MARGIN = 8;
 
         public override void Update(GameTime gameTime)
         {
             // TODO this is a bit silly, manually implement "onclick" rather than properly setting
             // UI element bounds
+            var gamePlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer;
+            if (gamePlayer == null || gamePlayer.Hand?.Cards?.Count == 0)
+            {
+                return;
+            }
+            for(int i = 0; i < gamePlayer.Hand.Cards.Count; i++)
+            {
+                var card = gamePlayer.Hand.Cards[i];
+                var bounds = card.Texture.Value.Bounds;
+
+                var scaledBounds = new Rectangle(
+                    (int)(Position.X + (bounds.Width * CARD_SCALE + CARD_MARGIN) * i),
+                    (int)Position.Y,
+                    (int)(bounds.Width * CARD_SCALE),
+                    (int)(bounds.Height * CARD_SCALE));
+
+                Main.NewText(scaledBounds + " " + Main.MouseScreen);
+                if(scaledBounds.Contains((int)Main.MouseScreen.X, (int)Main.MouseScreen.Y) && Main.mouseLeft) {
+                    Main.LocalPlayer.mouseInterface = true;
+                    gamePlayer.SelectedHandCard = card;
+                    break;
+                }
+            }
             base.Update(gameTime);
         }
 
@@ -43,7 +67,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
                     var highlightTexture = TextureCache.Instance.ZoneHighlighted;
                     spriteBatch.Draw(highlightTexture.Value, currentPos, highlightTexture.Value.Bounds, Color.White, 0, default, 1.5f, SpriteEffects.None, 0f);
                 }
-                currentPos.X += card.Texture.Width() * CARD_SCALE + 8;
+                currentPos.X += card.Texture.Width() * CARD_SCALE + CARD_MARGIN;
             }
             base.Draw(spriteBatch);
         }
