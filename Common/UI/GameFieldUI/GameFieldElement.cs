@@ -61,7 +61,6 @@ namespace TerraTCG.Common.UI.GameFieldUI
                 float xMin = xScale * ((FieldRenderer.CARD_WIDTH + FieldRenderer.CARD_MARGIN) * horizontalSlot - FieldRenderer.CARD_WIDTH / 2);
                 float xMax = xScale * ((FieldRenderer.CARD_WIDTH + FieldRenderer.CARD_MARGIN) * (horizontalSlot + 1) - FieldRenderer.CARD_WIDTH/ 2);
 
-                Main.NewText($"{i} {horizontalSlot}: {xMin} -> {xMax}, {yMin} -> {yMax}, {mouseHorizontalOffset} {mouseVerticalOffset}");
                 if (Main.mouseLeft && 
                     mouseVerticalOffset > yMin && 
                     mouseVerticalOffset < yMax &&
@@ -71,9 +70,27 @@ namespace TerraTCG.Common.UI.GameFieldUI
                     gamePlayer.SelectedFieldZone = gamePlayer.Field.Zones[i];
                     break;
                 }
-
             }
             // Check the opponent's field
+            for ( int i = 0; i < zones.Count; i++)
+            {
+                int yMin = i < zones.Count / 2 ? verticalGridLines[2] : verticalGridLines[0];
+                int yMax = i < zones.Count / 2 ? verticalGridLines[3] : verticalGridLines[1];
+
+                int horizontalSlot = 1 - i % (zones.Count / 2);
+                float xMin = xScale * ((FieldRenderer.CARD_WIDTH + FieldRenderer.CARD_MARGIN) * horizontalSlot - FieldRenderer.CARD_WIDTH / 2);
+                float xMax = xScale * ((FieldRenderer.CARD_WIDTH + FieldRenderer.CARD_MARGIN) * (horizontalSlot + 1) - FieldRenderer.CARD_WIDTH/ 2);
+
+                if (Main.mouseLeft && 
+                    mouseVerticalOffset > yMin && 
+                    mouseVerticalOffset < yMax &&
+                    mouseHorizontalOffset > xMin &&
+                    mouseHorizontalOffset < xMax)
+                {
+                    gamePlayer.SelectedFieldZone = gamePlayer.Opponent.Field.Zones[i];
+                    break;
+                }
+            }
 
         }
 
