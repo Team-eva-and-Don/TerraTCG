@@ -15,6 +15,34 @@ namespace TerraTCG.Common.UI.GameFieldUI
     internal class GameFieldElement : UIElement
     {
         internal Vector2 Position => new(Left.Pixels, Top.Pixels);
+
+        // TODO computing this properly outside of trail and error will be a nightmare,
+        // convert from screen coordinates to projected view
+        internal float[] rowHeights = [
+            -(475f / 576f), -(405f / 576f), 
+            -(420f / 575f), -(320f / 567f),
+            -(255f / 576f), -(155f / 576f),
+            -(145f / 565f), -(30f  / 566f),
+        ];
+
+        private bool PerspectiveQuadContainsMouse(float xMin, float yMin, float xMax, float yMax)
+        {
+            // TODO computing this properly outside of trail and error will be a nightmare,
+            // convert from screen coordinates to projected view
+            var mouseVertical = Main.MouseScreen.Y - (Position.Y + FieldRenderer.FIELD_HEIGHT);
+            var mouseHorizontal = Main.MouseScreen.X - (Position.X + FieldRenderer.FIELD_WIDTH / 2);
+            var widthScaleFactor0 = 1f;
+            var widthScaleFactor1 = 65f / 90f;
+
+            float xScale = MathHelper.Lerp(
+                widthScaleFactor0, widthScaleFactor1,
+                (float)(mouseVertical/FieldRenderer.FIELD_HEIGHT - rowHeights[7]) / (rowHeights[0] - rowHeights[7]));
+
+            return Main.mouseLeft &&
+                mouseVertical > yMin && mouseVertical < yMax &&
+                mouseHorizontal > xScale * xMin && mouseHorizontal < xScale * xMax;
+        }
+
         public override void Update(GameTime gameTime)
         {
             var gamePlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer;
@@ -22,70 +50,36 @@ namespace TerraTCG.Common.UI.GameFieldUI
             {
                 return;
             }
-            var bounds = new Rectangle(
-                (int)Position.X,
-                (int)Position.Y,
-                FieldRenderer.FIELD_WIDTH,
-                FieldRenderer.FIELD_HEIGHT);
-            // TODO computing this properly outside of trail and error will be a nightmare,
-            // convert from screen coordinates to projected view
-            var mouseX = Main.MouseScreen.X;
-            var mouseY = Main.MouseScreen.Y;
 
-            var mouseVerticalOffset = mouseY - bounds.Bottom;
-            var mouseHorizontalOffset = mouseX - bounds.Center.X;
-
-            // TODO empirically determined, need to come up with an actual formula
-            var verticalGridLines = new int[] { 
-                -475, -405, 
-                -420, -320,
-                -255, -155,
-                -145, -30,
-            };
-
-            var widthScaleFactor0 = 1f;
-            var widthScaleFactor1 = 65f / 90f;
-
-
-            float xScale = MathHelper.Lerp(
-                widthScaleFactor0, widthScaleFactor1,
-                (float)(mouseVerticalOffset - verticalGridLines[7]) / (verticalGridLines[0] - verticalGridLines[7]));
             // Check the player's field
-            var zones = gamePlayer.Field.Zones;
-            for ( int i = 0; i < zones.Count; i++)
+            var zoneCount = gamePlayer.Field.Zones.Count;
+            for ( int i = 0; i < zoneCount; i++)
             {
-                int yMin = i < zones.Count / 2 ? verticalGridLines[4] : verticalGridLines[6];
-                int yMax = i < zones.Count / 2 ? verticalGridLines[5] : verticalGridLines[7];
+                float yMin = FieldRenderer.FIELD_HEIGHT * (i < zoneCount / 2 ? rowHeights[4] : rowHeights[6]);
+                float yMax = FieldRenderer.FIELD_HEIGHT * (i < zoneCount / 2 ? rowHeights[5] : rowHeights[7]);
 
-                int horizontalSlot = i % (zones.Count / 2) - 1;
-                float xMin = xScale * ((FieldRenderer.CARD_WIDTH + FieldRenderer.CARD_MARGIN) * horizontalSlot - FieldRenderer.CARD_WIDTH / 2);
-                float xMax = xScale * ((FieldRenderer.CARD_WIDTH + FieldRenderer.CARD_MARGIN) * (horizontalSlot + 1) - FieldRenderer.CARD_WIDTH/ 2);
+                int horizontalSlot = i % (zoneCount / 2) - 1;
+                float xMin = (FieldRenderer.CARD_WIDTH + FieldRenderer.CARD_MARGIN) * horizontalSlot - FieldRenderer.CARD_WIDTH / 2;
+                float xMax = (FieldRenderer.CARD_WIDTH + FieldRenderer.CARD_MARGIN) * (horizontalSlot + 1) - FieldRenderer.CARD_WIDTH / 2;
 
-                if (Main.mouseLeft && 
-                    mouseVerticalOffset > yMin && 
-                    mouseVerticalOffset < yMax &&
-                    mouseHorizontalOffset > xMin &&
-                    mouseHorizontalOffset < xMax)
+                if (PerspectiveQuadContainsMouse(xMin, yMin, xMax, yMax))
                 {
                     gamePlayer.SelectedFieldZone = gamePlayer.Field.Zones[i];
                     break;
                 }
             }
+
             // Check the opponent's field
-            for ( int i = 0; i < zones.Count; i++)
+            for ( int i = 0; i < zoneCount; i++)
             {
-                int yMin = i < zones.Count / 2 ? verticalGridLines[2] : verticalGridLines[0];
-                int yMax = i < zones.Count / 2 ? verticalGridLines[3] : verticalGridLines[1];
+                float yMin = FieldRenderer.FIELD_HEIGHT * (i < zoneCount / 2 ? rowHeights[2] : rowHeights[0]);
+                float yMax = FieldRenderer.FIELD_HEIGHT * (i < zoneCount / 2 ? rowHeights[3] : rowHeights[1]);
 
-                int horizontalSlot = 1 - i % (zones.Count / 2);
-                float xMin = xScale * ((FieldRenderer.CARD_WIDTH + FieldRenderer.CARD_MARGIN) * horizontalSlot - FieldRenderer.CARD_WIDTH / 2);
-                float xMax = xScale * ((FieldRenderer.CARD_WIDTH + FieldRenderer.CARD_MARGIN) * (horizontalSlot + 1) - FieldRenderer.CARD_WIDTH/ 2);
+                int horizontalSlot = 1 - i % (zoneCount / 2);
+                float xMin = (FieldRenderer.CARD_WIDTH + FieldRenderer.CARD_MARGIN) * horizontalSlot - FieldRenderer.CARD_WIDTH / 2;
+                float xMax = (FieldRenderer.CARD_WIDTH + FieldRenderer.CARD_MARGIN) * (horizontalSlot + 1) - FieldRenderer.CARD_WIDTH/ 2;
 
-                if (Main.mouseLeft && 
-                    mouseVerticalOffset > yMin && 
-                    mouseVerticalOffset < yMax &&
-                    mouseHorizontalOffset > xMin &&
-                    mouseHorizontalOffset < xMax)
+                if (PerspectiveQuadContainsMouse(xMin, yMin, xMax, yMax))
                 {
                     gamePlayer.SelectedFieldZone = gamePlayer.Opponent.Field.Zones[i];
                     break;
