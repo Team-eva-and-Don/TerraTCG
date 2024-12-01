@@ -9,10 +9,11 @@ using Terraria;
 using Terraria.UI;
 using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.Drawing;
+using TerraTCG.Common.UI.Common;
 
 namespace TerraTCG.Common.UI.GameFieldUI
 {
-    internal class HandElement : UIElement
+    internal class HandElement : CustomClickUIElement
     {
         internal Vector2 Position => new(Left.Pixels, Top.Pixels);
 
@@ -39,10 +40,13 @@ namespace TerraTCG.Common.UI.GameFieldUI
                     (int)(bounds.Width * CARD_SCALE),
                     (int)(bounds.Height * CARD_SCALE));
 
-                if(scaledBounds.Contains((int)Main.MouseScreen.X, (int)Main.MouseScreen.Y) && Main.mouseLeft) {
+                if(scaledBounds.Contains((int)Main.MouseScreen.X, (int)Main.MouseScreen.Y)) {
                     Main.LocalPlayer.mouseInterface = true;
-                    gamePlayer.SelectCardInHand(card);
-                    break;
+                    if(IsClicked())
+                    {
+                        gamePlayer.SelectCardInHand(card);
+                        break;
+                    }
                 }
             }
             base.Update(gameTime);

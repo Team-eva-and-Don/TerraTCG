@@ -9,10 +9,11 @@ using Terraria;
 using Terraria.UI;
 using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.Drawing;
+using TerraTCG.Common.UI.Common;
 
 namespace TerraTCG.Common.UI.GameFieldUI
 {
-    internal class GameFieldElement : UIElement
+    internal class GameFieldElement : CustomClickUIElement
     {
         internal Vector2 Position => new(Left.Pixels, Top.Pixels);
 
@@ -38,9 +39,8 @@ namespace TerraTCG.Common.UI.GameFieldUI
                 widthScaleFactor0, widthScaleFactor1,
                 (float)(mouseVertical/FieldRenderer.FIELD_HEIGHT - rowHeights[7]) / (rowHeights[0] - rowHeights[7]));
 
-            return Main.mouseLeft &&
-                mouseVertical > yMin && mouseVertical < yMax &&
-                mouseHorizontal > xScale * xMin && mouseHorizontal < xScale * xMax;
+            return mouseVertical > yMin && mouseVertical < yMax &&
+                   mouseHorizontal > xScale * xMin && mouseHorizontal < xScale * xMax;
         }
 
         public override void Update(GameTime gameTime)
@@ -62,7 +62,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
                 float xMin = (FieldRenderer.CARD_WIDTH + FieldRenderer.CARD_MARGIN) * horizontalSlot - FieldRenderer.CARD_WIDTH / 2;
                 float xMax = (FieldRenderer.CARD_WIDTH + FieldRenderer.CARD_MARGIN) * (horizontalSlot + 1) - FieldRenderer.CARD_WIDTH / 2;
 
-                if (PerspectiveQuadContainsMouse(xMin, yMin, xMax, yMax))
+                if (PerspectiveQuadContainsMouse(xMin, yMin, xMax, yMax) && IsClicked())
                 {
                     gamePlayer.SelectZone(gamePlayer.Field.Zones[i]);
                     break;
@@ -79,7 +79,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
                 float xMin = (FieldRenderer.CARD_WIDTH + FieldRenderer.CARD_MARGIN) * horizontalSlot - FieldRenderer.CARD_WIDTH / 2;
                 float xMax = (FieldRenderer.CARD_WIDTH + FieldRenderer.CARD_MARGIN) * (horizontalSlot + 1) - FieldRenderer.CARD_WIDTH/ 2;
 
-                if (PerspectiveQuadContainsMouse(xMin, yMin, xMax, yMax))
+                if (PerspectiveQuadContainsMouse(xMin, yMin, xMax, yMax) && IsClicked())
                 {
                     gamePlayer.SelectZone(gamePlayer.Opponent.Field.Zones[i]);
                     break;
