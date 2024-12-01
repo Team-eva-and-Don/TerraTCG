@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria.ModLoader;
+using TerraTCG.Common.GameSystem.CardData;
 
 namespace TerraTCG.Common.GameSystem.GameState
 {
@@ -18,6 +19,9 @@ namespace TerraTCG.Common.GameSystem.GameState
                 new GamePlayer() { Game = this }
             ];
             player.GamePlayer = GamePlayers[0];
+
+            // Put a reference enemy onto the opponent's board
+            GamePlayers[1].Field.Zones[1].PlaceCard(Bunny.Instance.CreateCard());
         }
     }
 

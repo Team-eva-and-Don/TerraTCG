@@ -41,7 +41,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
 
                 if(scaledBounds.Contains((int)Main.MouseScreen.X, (int)Main.MouseScreen.Y) && Main.mouseLeft) {
                     Main.LocalPlayer.mouseInterface = true;
-                    gamePlayer.SelectedHandCard = card;
+                    gamePlayer.SelectCardInHand(card);
                     break;
                 }
             }

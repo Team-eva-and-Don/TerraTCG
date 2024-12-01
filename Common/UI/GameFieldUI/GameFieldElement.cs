@@ -64,7 +64,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
 
                 if (PerspectiveQuadContainsMouse(xMin, yMin, xMax, yMax))
                 {
-                    gamePlayer.SelectedFieldZone = gamePlayer.Field.Zones[i];
+                    gamePlayer.SelectZone(gamePlayer.Field.Zones[i]);
                     break;
                 }
             }
@@ -81,7 +81,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
 
                 if (PerspectiveQuadContainsMouse(xMin, yMin, xMax, yMax))
                 {
-                    gamePlayer.SelectedFieldZone = gamePlayer.Opponent.Field.Zones[i];
+                    gamePlayer.SelectZone(gamePlayer.Opponent.Field.Zones[i]);
                     break;
                 }
             }
@@ -90,11 +90,11 @@ namespace TerraTCG.Common.UI.GameFieldUI
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            var referenceTexture = TextureCache.Instance.Field;
+            // var referenceTexture = TextureCache.Instance.Field;
             var texture = FieldRenderer.Instance.PerspectiveRenderTarget;
             if(texture != null)
             {
-                spriteBatch.Draw(referenceTexture.Value, Position, Color.White);
+                // spriteBatch.Draw(referenceTexture.Value, Position, Color.White);
                 spriteBatch.Draw(texture, Position, Color.White);
             }
         }

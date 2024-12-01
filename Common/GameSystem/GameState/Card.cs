@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria.ModLoader;
+using TerraTCG.Common.GameSystem.GameState.GameActions;
 
 namespace TerraTCG.Common.GameSystem.GameState
 {
@@ -37,6 +38,9 @@ namespace TerraTCG.Common.GameSystem.GameState
         internal int MaxHealth { get; set; }
 
         internal int MoveCost { get; set; }
+
+        internal List<IGameAction> InHandActions { get; set; }
+        internal List<IGameAction> OnFieldActions { get; set; }
 
         internal List<Ability> Abilities { get; set; }
 

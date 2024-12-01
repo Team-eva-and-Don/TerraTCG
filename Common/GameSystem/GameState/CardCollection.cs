@@ -28,5 +28,10 @@ namespace TerraTCG.Common.GameSystem.GameState
         {
             Cards.Add(card);
         } 
+
+        public void Remove(Card card)
+        {
+            Cards.Remove(card);
+        }
     }
 }

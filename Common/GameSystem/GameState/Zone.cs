@@ -20,6 +20,8 @@ namespace TerraTCG.Common.GameSystem.GameState
         internal PlacedCard PlacedCard { get; set; }
         internal ZoneRole Role { get; set; }
 
+        const float CARD_DRAW_SCALE = 1f / 3f;
+
         public void PlaceCard(Card card)
         {
             PlacedCard = new PlacedCard(card);
@@ -43,12 +45,17 @@ namespace TerraTCG.Common.GameSystem.GameState
             spriteBatch.Draw(texture.Value, position, bounds, Color.White, rotation, origin, 1f, SpriteEffects.None, 0);
         }
 
+        internal bool IsEmpty() => PlacedCard == null;
+
         internal void Draw(SpriteBatch spriteBatch, Vector2 position, float rotation)
         {
             var localPlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>();
             if(PlacedCard != null)
             {
-
+                var texture = PlacedCard.Template.Texture;
+                var bounds = texture.Value.Bounds;
+                var origin = new Vector2(bounds.Width, bounds.Height) / 2;
+                spriteBatch.Draw(texture.Value, position + origin * CARD_DRAW_SCALE, bounds, Color.White, rotation, origin, CARD_DRAW_SCALE, SpriteEffects.None, 0);
             } else
             {
                 var texture = TextureCache.Instance.Zone;

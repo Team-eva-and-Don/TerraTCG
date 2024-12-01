@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TerraTCG.Common.GameSystem.CardData;
+using TerraTCG.Common.GameSystem.GameState.GameActions;
 
 namespace TerraTCG.Common.GameSystem.GameState
 {
@@ -20,6 +21,8 @@ namespace TerraTCG.Common.GameSystem.GameState
         internal Zone SelectedFieldZone { get; set; }
         public GamePlayer Opponent => Game.GamePlayers.Find(p => p != this);
 
+        internal IGameAction InProgressAction { get; set; }
+
         public GamePlayer()
         {
             Hand = new CardCollection()
@@ -33,10 +36,36 @@ namespace TerraTCG.Common.GameSystem.GameState
             };
 
             Field = new();
-
-            SelectedHandCard = Hand.Cards[1];
-
-            SelectedFieldZone = Field.Zones[0];
         }
+
+        public void SelectZone(Zone zone)
+        {
+            // TODO determine action start based on click more elegantly
+            if(InProgressAction?.CanAcceptZone(zone) ?? false)
+            {
+                SelectedFieldZone = zone;
+                var done = InProgressAction.AcceptZone(zone);
+                if(done)
+                {
+                    InProgressAction.Complete();
+                    InProgressAction = null;
+                    SelectedFieldZone = null;
+                }
+            } else if(InProgressAction == null && Owns(zone) && !zone.IsEmpty())
+            {
+                SelectedFieldZone = zone;
+                InProgressAction = new MoveCardOrAttackAction(zone, this);
+            }
+        }
+
+        public void SelectCardInHand(Card card)
+        {
+            SelectedHandCard = card;
+            // Cancel the previous action
+            InProgressAction?.Cancel();
+            InProgressAction = new DeployCardAction(card, this);
+        }
+
+        internal bool Owns(Zone zone) => Field.Zones.Contains(zone);
     }
 }
