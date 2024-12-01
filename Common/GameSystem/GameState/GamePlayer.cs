@@ -61,6 +61,7 @@ namespace TerraTCG.Common.GameSystem.GameState
         public void SelectCardInHand(Card card)
         {
             SelectedHandCard = card;
+            SelectedFieldZone = null;
             // Cancel the previous action
             InProgressAction?.Cancel();
             InProgressAction = new DeployCardAction(card, this);
