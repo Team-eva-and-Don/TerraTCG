@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria;
 using TerraTCG.Common.GameSystem.CardData;
+using TerraTCG.Common.GameSystem.Drawing.Animations;
 using TerraTCG.Common.GameSystem.GameState.GameActions;
 
 namespace TerraTCG.Common.GameSystem.GameState
@@ -22,6 +24,7 @@ namespace TerraTCG.Common.GameSystem.GameState
         public GamePlayer Opponent => Game.GamePlayers.Find(p => p != this);
 
         internal IGameAction InProgressAction { get; set; }
+
 
         public GamePlayer()
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,11 @@ namespace TerraTCG.Common.GameSystem
     {
 
         internal GamePlayer GamePlayer { get; set; }
+
+        // TODO this is not the correct place to cache this info, but is the easiest
+        // Place within UI coordinates that the bottom center of the player's
+        // back-center game zone is drawn
+        internal Vector2 GameFieldOrigin { get; set; }
 
         public override void OnEnterWorld()
         {

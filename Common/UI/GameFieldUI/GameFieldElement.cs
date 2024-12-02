@@ -38,7 +38,10 @@ namespace TerraTCG.Common.UI.GameFieldUI
 
         public override void Update(GameTime gameTime)
         {
-            var gamePlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer;
+            var localPlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>();
+            localPlayer.GameFieldOrigin = FieldOrigin;
+
+            var gamePlayer = localPlayer.GamePlayer;
             if (gamePlayer == null || gamePlayer.Field?.Zones == null)
             {
                 return;
@@ -74,7 +77,8 @@ namespace TerraTCG.Common.UI.GameFieldUI
         private void DrawZoneNPCs(SpriteBatch spriteBatch)
         {
             var gamePlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer;
-            foreach (var zone in gamePlayer.Game.AllZones())
+            // Iterate backwards to layer closer zones on top of farther zones
+            foreach (var zone in gamePlayer.Game.AllZones().Reverse())
             {
                 var lerpPoint = gamePlayer.Owns(zone) ? 0.3f : 0.8f;
                 var yPlacement = ProjectedFieldUtils.Instance.GetYBoundsForZone(gamePlayer, zone).Lerp(lerpPoint);
