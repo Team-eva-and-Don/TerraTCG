@@ -32,7 +32,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
                 // move within own field
                 endZone.PlacedCard = startZone.PlacedCard;
                 startZone.PlacedCard = null;
-                startZone.Animation = new RemoveCardAnimation(startZone, endZone.PlacedCard.Template, Main._drawInterfaceGameTime.TotalGameTime);
+                startZone.Animation = new RemoveCardAnimation(startZone, endZone.PlacedCard, Main._drawInterfaceGameTime.TotalGameTime);
                 endZone.Animation = new PlaceCardAnimation(endZone, Main._drawInterfaceGameTime.TotalGameTime);
             } else
             {
@@ -41,7 +41,15 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
                 var prevHealth = endZone.PlacedCard.CurrentHealth;
                 endZone.PlacedCard.CurrentHealth -= startZone.PlacedCard.Template.Attacks[0].Damage;
                 startZone.Animation = new MeleeAttackAnimation(startZone, endZone, currTime);
-                endZone.Animation = new TakeDamageAnimation(endZone, currTime, TimeSpan.FromSeconds(0.5f), prevHealth, endZone.Animation.StartTime);
+                if(endZone.PlacedCard.CurrentHealth > 0)
+                {
+                    endZone.Animation = new TakeDamageAnimation(endZone, currTime, TimeSpan.FromSeconds(0.5f), prevHealth, endZone.Animation.StartTime);
+                } else
+                {
+                    endZone.Animation = new DeathAnimation(
+                        endZone, currTime, TimeSpan.FromSeconds(0.5f), prevHealth, endZone.PlacedCard, endZone.Animation.StartTime);
+                    endZone.PlacedCard = null;
+                }
             }
         }
 

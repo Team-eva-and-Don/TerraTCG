@@ -96,12 +96,6 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal void DrawNPC(SpriteBatch spriteBatch, Vector2 position, float scale)
         {
-            var npcId = PlacedCard?.Template?.NPCID ?? 0;
-            var gamePlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer;
-            if(npcId <= 0)
-            {
-                return;
-            }
             Animation?.DrawZoneOverlay(spriteBatch, position, scale);
         }
     }

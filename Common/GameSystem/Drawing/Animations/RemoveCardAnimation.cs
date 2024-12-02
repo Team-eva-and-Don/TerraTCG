@@ -10,7 +10,7 @@ using TerraTCG.Common.GameSystem.GameState;
 
 namespace TerraTCG.Common.GameSystem.Drawing.Animations
 {
-    internal class RemoveCardAnimation(Zone zone, Card leavingCard, TimeSpan startTime) : IAnimation
+    internal class RemoveCardAnimation(Zone zone, PlacedCard leavingCard, TimeSpan startTime) : IAnimation
     {
         public TimeSpan StartTime { get; } = startTime;
         internal TimeSpan Duration { get; } = TimeSpan.FromSeconds(0.25f);
@@ -27,8 +27,16 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
         {
             var scale = MathHelper.Lerp(baseScale, 0, (float) (ElapsedTime.TotalSeconds/ Duration.TotalSeconds));
             var transparency = Math.Max(0, 1 - (float)(ElapsedTime.TotalSeconds/ Duration.TotalSeconds));
-            AnimationUtils.DrawZoneNPC(spriteBatch, zone, basePosition, scale, Color.White * transparency);
-            AnimationUtils.DrawZoneNPCHealth(spriteBatch, zone, basePosition, baseScale, transparency: transparency);
+            AnimationUtils.DrawZoneNPC(
+                spriteBatch, zone, basePosition, scale, Color.White * transparency, card: leavingCard.Template);
+            AnimationUtils.DrawZoneNPCHealth(
+                spriteBatch, 
+                zone, 
+                basePosition, 
+                baseScale, 
+                transparency: transparency, 
+                card: leavingCard.Template,
+                health: leavingCard.CurrentHealth);
         }
 
         public bool IsComplete() =>

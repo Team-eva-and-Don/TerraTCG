@@ -27,9 +27,16 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
 
     internal class AnimationUtils 
     {
-        public static void DrawZoneNPC(SpriteBatch spriteBatch, Zone zone, Vector2 position, float scale, Color? color = null, int frame = 0)
+        public static void DrawZoneNPC(
+            SpriteBatch spriteBatch, 
+            Zone zone, 
+            Vector2 position, 
+            float scale, 
+            Color? color = null, 
+            int frame = 0, 
+            Card card = null)
         {
-            var npcId = zone.PlacedCard?.Template?.NPCID ?? 0;
+            var npcId = card?.NPCID ?? zone.PlacedCard?.Template?.NPCID ?? 0;
             if(npcId == 0)
             {
                 return;
@@ -43,9 +50,10 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             spriteBatch.Draw(texture.Value, position, bounds, color ?? Color.White, 0, origin, scale, effects, 0);
         }
 
-        public static void DrawZoneCard(SpriteBatch spriteBatch, Zone zone, Vector2 position, float rotation, Color? color = default)
+        public static void DrawZoneCard(
+            SpriteBatch spriteBatch, Zone zone, Vector2 position, float rotation, Color? color = default, Card card = null)
         {
-            var texture = zone.PlacedCard?.Template.Texture;
+            var texture = (card ?? zone.PlacedCard?.Template)?.Texture;
             if(texture == null)
             {
                 return;
@@ -58,16 +66,37 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
                 texture.Value, position + origin * Zone.CARD_DRAW_SCALE, bounds, color ?? Color.White, rotation, origin, Zone.CARD_DRAW_SCALE, SpriteEffects.None, 0);
         }
 
-        public static void DrawZoneNPCHealth(
-            SpriteBatch spriteBatch, Zone zone, Vector2 position, float scale, float fontScale = 1f, float transparency = 1f, int? health = null)
+        private static Color GetNPCHealthColor(int currentHealth, int maxHealth)
         {
-            var npcId = zone.PlacedCard?.Template?.NPCID ?? 0;
+            float healthFraction = (float)Math.Max(0, currentHealth) / maxHealth;
+
+            Color start = healthFraction > 0.5f ? Color.White : Color.Yellow;
+            Color end = healthFraction > 0.5f ? Color.Yellow : Color.Red;
+
+            float lerpPoint = healthFraction > 0.5f ? (2 * (healthFraction - 0.5f)) : 2 * healthFraction;
+
+            return new Color(
+                (byte)MathHelper.Lerp(end.R, start.R, lerpPoint),
+                (byte)MathHelper.Lerp(end.G, start.G, lerpPoint),
+                (byte)MathHelper.Lerp(end.B, start.B, lerpPoint));
+        }
+        public static void DrawZoneNPCHealth(
+            SpriteBatch spriteBatch, 
+            Zone zone, 
+            Vector2 position, 
+            float scale, 
+            float fontScale = 1f, 
+            float transparency = 1f, 
+            int? health = null,
+            Card card = null)
+        {
+            var npcId = card?.NPCID ?? zone.PlacedCard?.Template?.NPCID ?? 0;
             if(npcId == 0)
             {
                 return;
             }
 
-            health ??= zone.PlacedCard.CurrentHealth;
+            health ??= zone.PlacedCard?.CurrentHealth ?? 0;
 
             var font = FontAssets.ItemStack.Value;
             var vMargin = -4f;
@@ -86,7 +115,8 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
                 spriteBatch.DrawString(font, $"{health}", textPos + offset, Color.Black * transparency, 0, Vector2.Zero, fontScale, SpriteEffects.None, 0);
                 spriteBatch.DrawString(font, $"{health}", textPos - offset, Color.Black * transparency, 0, Vector2.Zero, fontScale, SpriteEffects.None, 0);
             }
-            spriteBatch.DrawString(font, $"{health}", textPos, Color.White * transparency, 0, Vector2.Zero, fontScale, SpriteEffects.None, 0);
+            var color = GetNPCHealthColor((int)health, (card ?? zone.PlacedCard.Template).MaxHealth);
+            spriteBatch.DrawString(font, $"{health}", textPos, color * transparency, 0, Vector2.Zero, fontScale, SpriteEffects.None, 0);
 
             var heartPos = position - npcOffset - new Vector2(-4, textOffset.Y);
             var heartTexture = TextureCache.Instance.HeartIcon.Value;
