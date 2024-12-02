@@ -69,17 +69,9 @@ namespace TerraTCG.Common.GameSystem.GameState
             {
                 DrawDefenseIcon(spriteBatch, position + origin, rotation);
             }
-            // Draw the placed card, either static or animated, or the empty zone icons
-            if(Animation != null)
-            {
-                Animation.DrawZone(spriteBatch, position, rotation);
-            } else if (PlacedCard != null)
-            {
-                texture = PlacedCard.Template.Texture;
-                bounds = texture.Value.Bounds;
-                origin = new Vector2(bounds.Width, bounds.Height) / 2;
-                spriteBatch.Draw(texture.Value, position + origin * CARD_DRAW_SCALE, bounds, Color.White, rotation, origin, CARD_DRAW_SCALE, SpriteEffects.None, 0);
-            } 
+
+            // Draw the placed card
+            Animation?.DrawZone(spriteBatch, position, rotation);
 
             if(gamePlayer.SelectedFieldZone == this)
             {
@@ -109,19 +101,7 @@ namespace TerraTCG.Common.GameSystem.GameState
             {
                 return;
             }
-            if(Animation != null)
-            {
-                Animation.DrawZoneOverlay(spriteBatch, position, scale);
-            } else
-            {
-                var texture = TextureCache.Instance.GetNPCTexture(npcId);
-                var bounds = texture.Frame(1, Main.npcFrameCount[npcId], 0, 0);
-                // position given is for point-of-contact with card, attempt to line up with
-                // center-bottom of frame
-                var origin = new Vector2(bounds.Width / 2, bounds.Height);
-                var effects = gamePlayer.Owns(this) ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
-                spriteBatch.Draw(texture.Value, position, bounds, Color.White, 0, origin, scale, effects, 0);
-            }
+            Animation?.DrawZoneOverlay(spriteBatch, position, scale);
         }
     }
 }

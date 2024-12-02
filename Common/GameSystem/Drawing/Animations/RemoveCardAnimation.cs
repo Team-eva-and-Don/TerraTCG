@@ -18,29 +18,15 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
 
         public void DrawZone(SpriteBatch spriteBatch, Vector2 basePosition, float rotation)
         {
-            var texture = leavingCard.Texture;
-            var bounds = texture.Value.Bounds;
-            var origin = new Vector2(bounds.Width, bounds.Height) / 2;
-
-            float transparency = Math.Max(0, 1 - (float)(ElapsedTime.TotalSeconds/ Duration.TotalSeconds));
-            spriteBatch.Draw(
-                texture.Value, basePosition + origin * Zone.CARD_DRAW_SCALE, bounds, Color.White * transparency, rotation, origin, Zone.CARD_DRAW_SCALE, SpriteEffects.None, 0);
+            var transparency = Math.Max(0, 1 - (float)(ElapsedTime.TotalSeconds/ Duration.TotalSeconds));
+            AnimationUtils.DrawZoneCard(spriteBatch, zone, basePosition, rotation, Color.White * transparency);
         }
 
         public void DrawZoneOverlay(SpriteBatch spriteBatch, Vector2 basePosition, float baseScale)
         {
-            var npcId = leavingCard.NPCID;
-            var gamePlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer;
-
-            var texture = TextureCache.Instance.GetNPCTexture(npcId);
-            var bounds = texture.Frame(1, Main.npcFrameCount[npcId], 0, 0);
-            // position given is for point-of-contact with card, attempt to line up with
-            // center-bottom of frame
-            var origin = new Vector2(bounds.Width / 2, bounds.Height);
-            var effects = gamePlayer.Owns(zone) ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
             var scale = MathHelper.Lerp(baseScale, 0, (float) (ElapsedTime.TotalSeconds/ Duration.TotalSeconds));
-            float transparency = Math.Max(0, 1 - (float)(ElapsedTime.TotalSeconds/ Duration.TotalSeconds));
-            spriteBatch.Draw(texture.Value, basePosition, bounds, Color.White * transparency, 0, origin, scale, effects, 0);
+            var transparency = Math.Max(0, 1 - (float)(ElapsedTime.TotalSeconds/ Duration.TotalSeconds));
+            AnimationUtils.DrawZoneNPC(spriteBatch, zone, basePosition, scale, Color.White * transparency);
         }
 
         public bool IsComplete() =>
