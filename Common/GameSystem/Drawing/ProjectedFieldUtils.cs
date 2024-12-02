@@ -28,6 +28,10 @@ namespace TerraTCG.Common.GameSystem.Drawing
         public float Min { get; } = min;
         public float Max { get; } = max;
 
+        public float Center => (Min + Max) / 2;
+
+        public float Lerp(float percent) => MathHelper.Lerp(Min, Max, percent);
+
         public static ProjBounds operator*(ProjBounds left, float right) =>
             new(right *  left.Min, right * left.Max);
     }

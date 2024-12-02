@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.CardData;
+using TerraTCG.Common.GameSystem.Drawing.Animations;
 
 namespace TerraTCG.Common.GameSystem.GameState
 {
@@ -21,8 +23,16 @@ namespace TerraTCG.Common.GameSystem.GameState
             player.GamePlayer = GamePlayers[0];
 
             // Put a reference enemy onto the opponent's board
-            GamePlayers[1].Field.Zones[1].PlaceCard(Bunny.Instance.CreateCard());
+            GamePlayers[1].Field.Zones[1].PlaceCard(Zombie.Instance.CreateCard());
+            GamePlayers[1].Field.Zones[4].PlaceCard(Bunny.Instance.CreateCard());
+            GamePlayers[1].Field.Zones[1].Animation = new IdleAnimation(
+                GamePlayers[1].Field.Zones[1], Main._drawInterfaceGameTime.TotalGameTime);
+            GamePlayers[1].Field.Zones[4].Animation = new IdleAnimation(
+                GamePlayers[1].Field.Zones[4], Main._drawInterfaceGameTime.TotalGameTime - TimeSpan.FromSeconds(1f));
         }
+
+        public IEnumerable<Zone> AllZones() =>
+            GamePlayers[0].Field.Zones.Concat(GamePlayers[1].Field.Zones);
     }
 
     internal class GameModSystem : ModSystem

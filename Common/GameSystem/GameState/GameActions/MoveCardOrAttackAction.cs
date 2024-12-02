@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria;
+using TerraTCG.Common.GameSystem.Drawing.Animations;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
@@ -30,6 +32,8 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
                 // move within own field
                 endZone.PlacedCard = startZone.PlacedCard;
                 startZone.PlacedCard = null;
+                startZone.Animation = new RemoveCardAnimation(startZone, endZone.PlacedCard.Template, Main._drawInterfaceGameTime.TotalGameTime);
+                endZone.Animation = new PlaceCardAnimation(endZone, Main._drawInterfaceGameTime.TotalGameTime);
             } else
             {
                 // attack opposing field

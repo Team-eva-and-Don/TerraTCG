@@ -21,21 +21,33 @@ namespace TerraTCG.Common.GameSystem.Drawing
         internal Asset<Texture2D> Zone { get; private set; }
         internal Asset<Texture2D> ZoneHighlighted { get; private set; }
 
+        internal Asset<Texture2D> ZoneSelectable { get; private set; }
+
         internal Asset<Texture2D> OffenseIcon { get; private set; }
         internal Asset<Texture2D> DefenseIcon { get; private set; }
+
+        internal Dictionary<int, Asset<Texture2D>> NPCTextureCache { get; private set; }
         public override void Load()
         {
             base.Load();
             Field = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Field");
             Zone = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Zone");
             ZoneHighlighted = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Zone_Highlighted");
+            ZoneSelectable = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Zone_Selectable");
             OffenseIcon = Main.Assets.Request<Texture2D>("Images/UI/PVP_0");
             DefenseIcon = Main.Assets.Request<Texture2D>("Images/Item_" + ItemID.CobaltShield);
+
+            NPCTextureCache = [];
         }
 
-        public override void Unload()
+        public Asset<Texture2D> GetNPCTexture(int npcId)
         {
-            Field = null;
+            if(!NPCTextureCache.TryGetValue(npcId, out var asset))
+            {
+                asset = Main.Assets.Request<Texture2D>($"Images/NPC_{npcId}");
+                NPCTextureCache[npcId] = asset;
+            }             
+            return asset;
         }
     }
 }

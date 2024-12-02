@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.GameState;
 
@@ -17,6 +18,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             MaxHealth = 60,
             MoveCost = 2,
             CardType = CardType.CREATURE,
+            NPCID = NPCID.DemonEye,
             SubTypes = [CardSubtype.FOREST, CardSubtype.EYE],
             Attacks = [
                 new() {

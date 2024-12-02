@@ -9,6 +9,7 @@ using Terraria;
 using Terraria.UI;
 using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.Drawing;
+using TerraTCG.Common.GameSystem.Drawing.Animations;
 using TerraTCG.Common.UI.Common;
 
 namespace TerraTCG.Common.UI.GameFieldUI
@@ -17,17 +18,19 @@ namespace TerraTCG.Common.UI.GameFieldUI
     {
         internal Vector2 Position => new(Left.Pixels, Top.Pixels);
 
+        internal Vector2 FieldOrigin => new (
+            Position.X + FieldRenderer.FIELD_WIDTH / 2,
+            Position.Y + FieldRenderer.FIELD_HEIGHT);
+
         private bool PerspectiveQuadContainsMouse(ProjBounds xBounds, ProjBounds yBounds)
         {
             // TODO computing this properly outside of trail and error will be a nightmare,
             // convert from screen coordinates to projected view
-            var mouseVertical = Main.MouseScreen.Y - (Position.Y + FieldRenderer.FIELD_HEIGHT);
-            var mouseHorizontal = Main.MouseScreen.X - (Position.X + FieldRenderer.FIELD_WIDTH / 2);
+            var mouseHorizontal = Main.MouseScreen.X - FieldOrigin.X;
+            var mouseVertical = Main.MouseScreen.Y - FieldOrigin.Y;
 
             float xScale = ProjectedFieldUtils.Instance.GetScaleFactorAt(mouseVertical);
             xBounds *= xScale;
-
-            Main.NewText($"{mouseHorizontal} {mouseVertical}, {xBounds.Min} {xBounds.Max}, {yBounds.Min}, {yBounds.Max}");
 
             return mouseVertical > yBounds.Min && mouseVertical < yBounds.Max &&
                    mouseHorizontal > xScale * xBounds.Min && mouseHorizontal < xScale * xBounds.Max;
@@ -40,9 +43,18 @@ namespace TerraTCG.Common.UI.GameFieldUI
             {
                 return;
             }
+            // TODO there is probably a better place for this
+            foreach (var zone in gamePlayer.Game.AllZones())
+            {
+                if(zone.Animation?.IsComplete() ?? false)
+                {
+                    zone.Animation = zone.HasPlacedCard() ?
+                         new IdleAnimation(zone, gameTime.TotalGameTime) : null;
+                }
+            }
 
             // Check both players' fields
-            foreach (var zone in gamePlayer.Field.Zones.Concat(gamePlayer.Opponent.Field.Zones))
+            foreach (var zone in gamePlayer.Game.AllZones())
             {
                 var yBounds = ProjectedFieldUtils.Instance.GetYBoundsForZone(gamePlayer, zone);
                 var xBounds = ProjectedFieldUtils.Instance.GetXBoundsForZone(gamePlayer, zone);
@@ -59,14 +71,27 @@ namespace TerraTCG.Common.UI.GameFieldUI
             }
         }
 
+        private void DrawZoneNPCs(SpriteBatch spriteBatch)
+        {
+            var gamePlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer;
+            foreach (var zone in gamePlayer.Game.AllZones())
+            {
+                var lerpPoint = gamePlayer.Owns(zone) ? 0.3f : 0.8f;
+                var yPlacement = ProjectedFieldUtils.Instance.GetYBoundsForZone(gamePlayer, zone).Lerp(lerpPoint);
+                var xCenter = ProjectedFieldUtils.Instance.GetXBoundsForZone(gamePlayer, zone).Center;
+                var scale = ProjectedFieldUtils.Instance.GetScaleFactorAt(yPlacement);
+                xCenter *= scale;
+                zone.DrawNPC(spriteBatch, FieldOrigin + new Vector2(xCenter, yPlacement), scale);
+            }
+        }
+
         public override void Draw(SpriteBatch spriteBatch)
         {
-            // var referenceTexture = TextureCache.Instance.Field;
             var texture = FieldRenderer.Instance.PerspectiveRenderTarget;
             if(texture != null)
             {
-                // spriteBatch.Draw(referenceTexture.Value, Position, Color.White);
                 spriteBatch.Draw(texture, Position, Color.White);
+                DrawZoneNPCs(spriteBatch);
             }
         }
     }

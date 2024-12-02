@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.GameState;
 
@@ -15,8 +16,9 @@ namespace TerraTCG.Common.GameSystem.CardData
         {
             Name = "Bunny",
             MaxHealth = 40,
-            MoveCost = 3,
+            MoveCost = 1,
             CardType = CardType.CREATURE,
+            NPCID = NPCID.Bunny,
             SubTypes = [CardSubtype.FOREST, CardSubtype.CRITTER],
             Attacks = [
                 new() {

@@ -17,12 +17,12 @@ namespace TerraTCG.Common.GameSystem.GameState
         public Field()
         {
             Zones = [
-                new() { Role = ZoneRole.OFFENSE},
-                new() { Role = ZoneRole.OFFENSE},
-                new() { Role = ZoneRole.OFFENSE},
-                new() { Role = ZoneRole.DEFENSE},
-                new() { Role = ZoneRole.DEFENSE},
-                new() { Role = ZoneRole.DEFENSE},
+                new() { Role = ZoneRole.OFFENSE, Index = 0},
+                new() { Role = ZoneRole.OFFENSE, Index = 1},
+                new() { Role = ZoneRole.OFFENSE, Index = 2},
+                new() { Role = ZoneRole.DEFENSE, Index = 3},
+                new() { Role = ZoneRole.DEFENSE, Index = 4},
+                new() { Role = ZoneRole.DEFENSE, Index = 5},
             ];
         }
 

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria;
+using TerraTCG.Common.GameSystem.Drawing.Animations;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
@@ -24,6 +26,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
         public void Complete()
         {
             zone.PlaceCard(card);
+            zone.Animation = new PlaceCardAnimation(zone, Main._drawInterfaceGameTime.TotalGameTime);
             player.Hand.Remove(card);
         }
 

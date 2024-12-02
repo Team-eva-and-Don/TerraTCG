@@ -29,6 +29,8 @@ namespace TerraTCG.Common.GameSystem.GameState
     {
         internal string Name { get; set; }
 
+        internal int NPCID { get; set; }
+
         internal Asset<Texture2D> Texture => ModContent.GetInstance<TerraTCG>().Assets.Request<Texture2D>($"Assets/Cards/{Name}");
 
         internal CardType CardType { get; set; }

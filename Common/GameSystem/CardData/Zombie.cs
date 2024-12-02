@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.GameState;
 
@@ -16,6 +17,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             Name = "Zombie",
             MaxHealth = 70,
             MoveCost = 2,
+            NPCID = NPCID.Zombie,
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.FOREST, CardSubtype.UNDEAD],
             Attacks = [
