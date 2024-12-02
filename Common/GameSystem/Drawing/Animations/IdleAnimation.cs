@@ -12,8 +12,9 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
 {
     internal class IdleAnimation(Zone zone, TimeSpan startTime) : IAnimation
     {
+        public TimeSpan StartTime { get; } = startTime;
         private TimeSpan Period { get; } = TimeSpan.FromSeconds(2f);
-        private TimeSpan ElapsedTime => Main._drawInterfaceGameTime.TotalGameTime - startTime;
+        private TimeSpan ElapsedTime => Main._drawInterfaceGameTime.TotalGameTime - StartTime;
 
         public void DrawZone(SpriteBatch spriteBatch, Vector2 basePosition, float rotation) =>
             AnimationUtils.DrawZoneCard(spriteBatch, zone, basePosition, rotation);
@@ -22,6 +23,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
         {
             var posOffset = baseScale * 3f * MathF.Sin(MathF.Tau * (float) (ElapsedTime.TotalSeconds / Period.TotalSeconds));
             AnimationUtils.DrawZoneNPC(spriteBatch, zone, basePosition + new Vector2(0, posOffset), baseScale);
+            AnimationUtils.DrawZoneNPCHealth(spriteBatch, zone, basePosition, baseScale);
         }
 
         public bool IsComplete() => false;

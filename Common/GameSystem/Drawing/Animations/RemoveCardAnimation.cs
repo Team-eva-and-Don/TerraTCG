@@ -12,9 +12,10 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
 {
     internal class RemoveCardAnimation(Zone zone, Card leavingCard, TimeSpan startTime) : IAnimation
     {
+        public TimeSpan StartTime { get; } = startTime;
         internal TimeSpan Duration { get; } = TimeSpan.FromSeconds(0.25f);
 
-        private TimeSpan ElapsedTime => Main._drawInterfaceGameTime.TotalGameTime - startTime;
+        private TimeSpan ElapsedTime => Main._drawInterfaceGameTime.TotalGameTime - StartTime;
 
         public void DrawZone(SpriteBatch spriteBatch, Vector2 basePosition, float rotation)
         {
@@ -27,9 +28,10 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             var scale = MathHelper.Lerp(baseScale, 0, (float) (ElapsedTime.TotalSeconds/ Duration.TotalSeconds));
             var transparency = Math.Max(0, 1 - (float)(ElapsedTime.TotalSeconds/ Duration.TotalSeconds));
             AnimationUtils.DrawZoneNPC(spriteBatch, zone, basePosition, scale, Color.White * transparency);
+            AnimationUtils.DrawZoneNPCHealth(spriteBatch, zone, basePosition, baseScale, transparency: transparency);
         }
 
         public bool IsComplete() =>
-            Main._drawInterfaceGameTime.TotalGameTime > startTime + Duration;
+            Main._drawInterfaceGameTime.TotalGameTime > StartTime + Duration;
     }
 }

@@ -38,9 +38,10 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             {
                 var currTime = Main._drawInterfaceGameTime.TotalGameTime;
                 // attack opposing field
+                var prevHealth = endZone.PlacedCard.CurrentHealth;
                 endZone.PlacedCard.CurrentHealth -= startZone.PlacedCard.Template.Attacks[0].Damage;
                 startZone.Animation = new MeleeAttackAnimation(startZone, endZone, currTime);
-                endZone.Animation = new TakeDamageAnimation(endZone, currTime, TimeSpan.FromSeconds(0.5f), endZone.Animation);
+                endZone.Animation = new TakeDamageAnimation(endZone, currTime, TimeSpan.FromSeconds(0.5f), prevHealth, endZone.Animation.StartTime);
             }
         }
 

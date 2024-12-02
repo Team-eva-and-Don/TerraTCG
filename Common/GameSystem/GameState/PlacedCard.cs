@@ -6,15 +6,10 @@ using System.Threading.Tasks;
 
 namespace TerraTCG.Common.GameSystem.GameState
 {
-    internal class PlacedCard
+    internal class PlacedCard(Card template)
     {
-        internal Card Template { get; set; }
+        internal Card Template { get; set; } = template;
 
-        internal int CurrentHealth { get; set; }
-
-        public PlacedCard(Card template)
-        {
-            Template = template;
-        }
+        internal int CurrentHealth { get; set; } = template.MaxHealth;
     }
 }

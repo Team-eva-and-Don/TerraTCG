@@ -12,8 +12,9 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
 {
     internal class MeleeAttackAnimation(Zone zone, Zone targetZone, TimeSpan startTime) : IAnimation
     {
+        public TimeSpan StartTime { get; } = startTime;
         private TimeSpan Duration { get; } = TimeSpan.FromSeconds(1f);
-        private TimeSpan ElapsedTime => Main._drawInterfaceGameTime.TotalGameTime - startTime;
+        private TimeSpan ElapsedTime => Main._drawInterfaceGameTime.TotalGameTime - StartTime;
 
         private Vector2 Destination
         {
@@ -62,9 +63,10 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             var currentX = MathHelper.Lerp(basePosition.X, Destination.X, lerpPoint);
             var currentY = MathHelper.Lerp(basePosition.Y, Destination.Y, lerpPoint);
             AnimationUtils.DrawZoneNPC(spriteBatch, zone, new(currentX, currentY), baseScale, frame: frame);
+            AnimationUtils.DrawZoneNPCHealth(spriteBatch, zone, basePosition, baseScale);
         }
 
         public bool IsComplete() =>
-            Main._drawInterfaceGameTime.TotalGameTime > startTime + Duration;
+            Main._drawInterfaceGameTime.TotalGameTime > StartTime + Duration;
     }
 }

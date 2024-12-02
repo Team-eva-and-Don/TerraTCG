@@ -25,6 +25,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
 
         internal Asset<Texture2D> OffenseIcon { get; private set; }
         internal Asset<Texture2D> DefenseIcon { get; private set; }
+        internal Asset<Texture2D> HeartIcon { get; private set; }
 
         internal Dictionary<int, Asset<Texture2D>> NPCTextureCache { get; private set; }
         public override void Load()
@@ -36,6 +37,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
             ZoneSelectable = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Zone_Selectable");
             OffenseIcon = Main.Assets.Request<Texture2D>("Images/UI/PVP_0");
             DefenseIcon = Main.Assets.Request<Texture2D>("Images/Item_" + ItemID.CobaltShield);
+            HeartIcon = Main.Assets.Request<Texture2D>("Images/Item_" + ItemID.Heart);
 
             NPCTextureCache = [];
         }
