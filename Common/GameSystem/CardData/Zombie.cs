@@ -22,8 +22,9 @@ namespace TerraTCG.Common.GameSystem.CardData
             SubTypes = [CardSubtype.FOREST, CardSubtype.UNDEAD],
             Attacks = [
                 new() {
-                    Damage = 30,
-                    Cost = 2,
+                    Name = "Zombie Bite",
+                    Damage = 40,
+                    Cost = 3,
                 }
             ]
         };

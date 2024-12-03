@@ -25,7 +25,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal IAnimation Animation { get; set; }
 
-        internal const float CARD_DRAW_SCALE = 1f / 3f;
+        internal const float CARD_DRAW_SCALE = 2f / 3f;
 
         public void PlaceCard(Card card)
         {

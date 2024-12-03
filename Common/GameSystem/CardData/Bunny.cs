@@ -22,8 +22,16 @@ namespace TerraTCG.Common.GameSystem.CardData
             SubTypes = [CardSubtype.FOREST, CardSubtype.CRITTER],
             Attacks = [
                 new() {
-                    Damage = 30,
-                    Cost = 2,
+                    Name = "Bunny Kick",
+                    Damage = 10,
+                    Cost = 1,
+                }
+            ],
+            Skills = [
+                new() {
+                    Name = "Skill: Forest Wish",
+                    Cost = 0,
+                    Description = "Gain 1 MP"
                 }
             ]
         };

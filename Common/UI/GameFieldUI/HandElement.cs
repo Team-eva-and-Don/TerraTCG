@@ -17,7 +17,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
     {
         internal Vector2 Position => new(Left.Pixels, Top.Pixels);
 
-        const float CARD_SCALE = 0.5f;
+        const float CARD_SCALE = 1f;
         const int CARD_MARGIN = 8;
 
         public override void Update(GameTime gameTime)
@@ -70,6 +70,8 @@ namespace TerraTCG.Common.UI.GameFieldUI
                     var highlightTexture = TextureCache.Instance.ZoneHighlighted;
                     spriteBatch.Draw(highlightTexture.Value, currentPos, highlightTexture.Value.Bounds, Color.White, 0, default, 1.5f, SpriteEffects.None, 0f);
                 }
+                CardTextRenderer.Instance.DrawCardText(spriteBatch, card, currentPos, CARD_SCALE);
+
                 currentPos.X += card.Texture.Width() * CARD_SCALE + CARD_MARGIN;
             }
             base.Draw(spriteBatch);

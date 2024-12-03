@@ -1,10 +1,12 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria.GameContent;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.GameState.GameActions;
 
@@ -44,9 +46,11 @@ namespace TerraTCG.Common.GameSystem.GameState
         internal List<IGameAction> InHandActions { get; set; }
         internal List<IGameAction> OnFieldActions { get; set; }
 
-        internal List<Ability> Abilities { get; set; }
+        internal List<Skill> Skills { get; set; }
 
         internal List<Attack> Attacks { get; set; }
+
+        internal List<StaticModifier> Modifiers { get; set; }
 
     }
 }
