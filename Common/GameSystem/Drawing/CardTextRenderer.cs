@@ -43,7 +43,8 @@ namespace TerraTCG.Common.GameSystem.Drawing
         float BaseTextHeight = 0;
         float SmallTextHeight = 0;
 
-        private void DrawString(SpriteBatch spriteBatch, string text, Vector2 position, Color? color = null, float scale = 1f, bool centered = false)
+        private void DrawString(
+            SpriteBatch spriteBatch, string text, Vector2 position, Color? color = null, float scale = 1f, bool centered = false, SpriteEffects effects = SpriteEffects.None)
         {
             var font = FontAssets.ItemStack.Value;
             var origin = Vector2.Zero;
@@ -52,17 +53,18 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 var size = font.MeasureString(text);
                 origin = size / 2;
             }
-            spriteBatch.DrawString(font, text, position, color ?? Color.White, 0, origin, scale, SpriteEffects.None, 0);
+            spriteBatch.DrawString(font, text, position, color ?? Color.White, 0, origin, scale, effects, 0);
         }
 
-        private void DrawStringWithBorder(SpriteBatch spriteBatch, string text, Vector2 position, Color? color = null, float scale = 1f, bool centered = false)
+        private void DrawStringWithBorder(
+            SpriteBatch spriteBatch, string text, Vector2 position, Color? color = null, float scale = 1f, bool centered = false, SpriteEffects effects = SpriteEffects.None)
         {
             foreach(var offset in new Vector2[] { Vector2.UnitX, Vector2.UnitY })
             {
-                DrawString(spriteBatch, text, position + 2 * offset, Color.Black, scale, centered);
-                DrawString(spriteBatch, text, position - 2 * offset, Color.Black, scale, centered);
+                DrawString(spriteBatch, text, position + 2 * offset, Color.Black, scale, centered, effects);
+                DrawString(spriteBatch, text, position - 2 * offset, Color.Black, scale, centered, effects);
             }
-            DrawString(spriteBatch, text, position, color, scale, centered);
+            DrawString(spriteBatch, text, position, color, scale, centered, effects);
         }
 
         public void DrawManaCost(SpriteBatch spriteBatch, int cost, Vector2 position, float scale = 1f)
@@ -224,9 +226,8 @@ namespace TerraTCG.Common.GameSystem.Drawing
         public void DrawCardText(SpriteBatch spriteBatch, Card card, Vector2 position, float scale = 1f)
         {
             var font = FontAssets.ItemStack.Value;
-            BaseTextHeight = font.MeasureString("Hello, world!").Y * BaseTextScale * 0.8f;
-            SmallTextHeight = font.MeasureString("Hello, world!").Y * SmallTextScale * 0.8f;
-            // Top Row: Name + HP
+            BaseTextHeight = font.MeasureString(" ").Y * BaseTextScale * 0.8f;
+            SmallTextHeight = font.MeasureString(" ").Y * SmallTextScale * 0.8f;
             DrawCardTopLine(spriteBatch, card, position, scale);
 
             DrawBodyText(spriteBatch, card, position, scale);

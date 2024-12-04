@@ -68,9 +68,9 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
 
             if(rotation == 0)
             {
-                // If the card is rotated towards the player, draw its text as well
+                // If the card is rotated towards the player, draw its text
                 CardTextRenderer.Instance.DrawCardText(spriteBatch, card, position, Zone.CARD_DRAW_SCALE);
-            }
+            } 
         }
 
         private static Color GetNPCHealthColor(int currentHealth, int maxHealth)

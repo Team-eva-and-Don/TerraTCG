@@ -43,6 +43,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         public void SelectZone(Zone zone)
         {
+            SelectedHandCard = null;
             // TODO determine action start based on click more elegantly
             if(InProgressAction?.CanAcceptZone(zone) ?? false)
             {
@@ -54,8 +55,11 @@ namespace TerraTCG.Common.GameSystem.GameState
                     InProgressAction = null;
                     SelectedFieldZone = null;
                 }
-            } else if(InProgressAction == null && Owns(zone) && !zone.IsEmpty())
+            } else if(Owns(zone) && !zone.IsEmpty())
             {
+                // Cancel any previous action
+                InProgressAction?.Cancel();
+
                 SelectedFieldZone = zone;
                 InProgressAction = new MoveCardOrAttackAction(zone, this);
             }
@@ -63,6 +67,8 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         public void SelectCardInHand(Card card)
         {
+            SelectedFieldZone = null;
+
             SelectedHandCard = card;
             // Cancel the previous action
             InProgressAction?.Cancel();
