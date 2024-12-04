@@ -22,15 +22,14 @@ namespace TerraTCG.Common.GameSystem.CardData
             SubTypes = [CardSubtype.FOREST, CardSubtype.EYE],
             Attacks = [
                 new() {
-                    Name = "Harsh Gaze",
                     Damage = 20,
                     Cost = 2,
+                    Description = "H"
                 }
             ],
             Modifiers = [
                 new() {
-                    Name = "Evasive",
-                    Description = "May attack any enemy"
+                    Description = "Evasive",
                 }
             ]
         };
