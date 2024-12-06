@@ -15,15 +15,22 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
     // enough info has been gathered to perform an action
     internal interface IGameAction
     {
-        public bool CanAcceptZone(Zone zone);
-        public bool AcceptZone(Zone zone);
+        public bool CanAcceptZone(Zone zone) => false;
+        public bool AcceptZone(Zone zone) => false;
 
-        public bool CanAcceptCardInHand(Card card);
+        public bool CanAcceptCardInHand(Card card) => false;
 
-        public bool AcceptCardInHand(Card card);
+        public bool AcceptCardInHand(Card card) => false;
+
+        public bool CanAcceptActionButton(ActionType actionType) => false;
+
+        public bool AcceptActionButton(ActionType actionType) => false;
 
         public void Complete();
 
-        public void Cancel();
+        public void Cancel() 
+        {
+            // No-op
+        }
     }
 }

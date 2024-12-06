@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Schema;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.GameState;
 
@@ -94,10 +95,21 @@ namespace TerraTCG.Common.GameSystem.Drawing
             {
                 horizontalSlot = 1 - player.Opponent.Field.Zones.IndexOf(zone) % (zoneCount / 2);
             }
-
-            float xMin = (FieldRenderer.CARD_WIDTH + FieldRenderer.CARD_MARGIN) * horizontalSlot - FieldRenderer.CARD_WIDTH / 2;
-            float xMax = (FieldRenderer.CARD_WIDTH + FieldRenderer.CARD_MARGIN) * (horizontalSlot + 1) - FieldRenderer.CARD_WIDTH / 2;
-
+            float xMin = 0;
+            float xMax = 0;
+            if(horizontalSlot == 0)
+            {
+                xMin = -FieldRenderer.CARD_WIDTH / 2;
+                xMax = FieldRenderer.CARD_WIDTH / 2;
+            } else if (horizontalSlot == 1)
+            {
+                xMin = FieldRenderer.CARD_WIDTH / 2 + FieldRenderer.CARD_MARGIN;
+                xMax = 1.5f * FieldRenderer.CARD_WIDTH + FieldRenderer.CARD_MARGIN;
+            } else if (horizontalSlot == -1)
+            {
+                xMin = - ( 1.5f * FieldRenderer.CARD_WIDTH + FieldRenderer.CARD_MARGIN);
+                xMax = - (FieldRenderer.CARD_WIDTH / 2 + FieldRenderer.CARD_MARGIN);
+            }
             return new ProjBounds(xMin, xMax);
 
         }

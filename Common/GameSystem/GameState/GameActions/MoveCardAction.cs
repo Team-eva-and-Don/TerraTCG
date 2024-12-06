@@ -14,12 +14,9 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
         private Zone destZone;
 
         private int Step => sourceZone == null ? 0 : 1;
-        public bool CanAcceptCardInHand(Card card) => false;
 
         public bool CanAcceptZone(Zone zone) =>
             target.Owns(zone) && (Step == 0 ? !zone.IsEmpty() : zone.IsEmpty());
-
-        public bool AcceptCardInHand(Card card) => false;
 
         public bool AcceptZone(Zone zone)
         {
@@ -41,11 +38,5 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             destZone.Animation = new PlaceCardAnimation(destZone, Main._drawInterfaceGameTime.TotalGameTime);
             player.Hand.Remove(card);
         }
-
-        public void Cancel()
-        {
-            // No-op
-        }
-
     }
 }

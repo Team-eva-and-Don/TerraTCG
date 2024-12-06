@@ -11,11 +11,8 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
     internal class DeployCardAction(Card card, GamePlayer player) : IGameAction
     {
         private Zone zone;
-        public bool CanAcceptCardInHand(Card card) => false;
 
         public bool CanAcceptZone(Zone zone) => player.Owns(zone) && zone.IsEmpty();
-
-        public bool AcceptCardInHand(Card card) => false;
 
         public bool AcceptZone(Zone zone)
         {

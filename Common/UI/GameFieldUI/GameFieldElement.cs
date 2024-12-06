@@ -16,11 +16,11 @@ namespace TerraTCG.Common.UI.GameFieldUI
 {
     internal class GameFieldElement : CustomClickUIElement
     {
-        internal Vector2 Position => new(Left.Pixels, Top.Pixels);
-
         internal Vector2 FieldOrigin => new (
             Position.X + FieldRenderer.FIELD_WIDTH / 2,
             Position.Y + FieldRenderer.FIELD_HEIGHT);
+
+        internal override bool IsClicked() => !((GameFieldState)Parent).actionButtons.ContainsMouse && base.IsClicked();
 
         private bool PerspectiveQuadContainsMouse(ProjBounds xBounds, ProjBounds yBounds)
         {

@@ -13,15 +13,27 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
     internal class MoveCardOrAttackAction(Zone startZone, GamePlayer player) : IGameAction
     {
         private Zone endZone;
+
+        private ActionType actionType = ActionType.NONE;
+
         public bool CanAcceptCardInHand(Card card) => false;
 
         public bool CanAcceptZone(Zone zone) => (player.Owns(zone) && zone.IsEmpty()) || (!player.Owns(zone) && ! zone.IsEmpty());
 
         public bool AcceptCardInHand(Card card) => false;
 
+        public bool CanAcceptActionButton(ActionType actionType) => 
+            startZone.PlacedCard.Template.HasSkill;
+
         public bool AcceptZone(Zone zone)
         {
             endZone = zone;
+            return true;
+        }
+
+        public bool AcceptActionButton(ActionType actionType)
+        {
+            this.actionType = actionType;
             return true;
         }
 
@@ -59,7 +71,10 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public void Complete()
         {
-            if (player.Owns(endZone))
+            if(actionType != ActionType.NONE)
+            {
+                DoSkill();
+            } else if (player.Owns(endZone))
             {
                 DoMove();
             } else  

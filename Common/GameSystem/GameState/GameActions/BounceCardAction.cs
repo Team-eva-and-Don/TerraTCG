@@ -11,11 +11,8 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
     internal class BounceCardAction(Card card, GamePlayer player) : IGameAction
     {
         private Zone zone;
-        public bool CanAcceptCardInHand(Card card) => false;
 
         public bool CanAcceptZone(Zone zone) => player.Owns(zone) && !zone.IsEmpty();
-
-        public bool AcceptCardInHand(Card card) => false;
 
         public bool AcceptZone(Zone zone)
         {
@@ -30,11 +27,5 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             zone.PlacedCard = null;
             player.Hand.Remove(card);
         }
-
-        public void Cancel()
-        {
-            // No-op
-        }
-
     }
 }

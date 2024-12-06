@@ -26,9 +26,9 @@ namespace TerraTCG.Common.GameSystem.GameState
             GamePlayers[1].Field.Zones[1].PlaceCard(Zombie.Instance.CreateCard());
             GamePlayers[1].Field.Zones[4].PlaceCard(Bunny.Instance.CreateCard());
             GamePlayers[1].Field.Zones[1].Animation = new IdleAnimation(
-                GamePlayers[1].Field.Zones[1], Main._drawInterfaceGameTime.TotalGameTime);
+                GamePlayers[1].Field.Zones[1], TimeSpan.FromSeconds(1));
             GamePlayers[1].Field.Zones[4].Animation = new IdleAnimation(
-                GamePlayers[1].Field.Zones[4], Main._drawInterfaceGameTime.TotalGameTime - TimeSpan.FromSeconds(1f));
+                GamePlayers[1].Field.Zones[4], TimeSpan.FromSeconds(0));
         }
 
         public IEnumerable<Zone> AllZones() =>

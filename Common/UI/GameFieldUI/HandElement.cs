@@ -15,7 +15,6 @@ namespace TerraTCG.Common.UI.GameFieldUI
 {
     internal class HandElement : CustomClickUIElement
     {
-        internal Vector2 Position => new(Left.Pixels, Top.Pixels);
 
         const float CARD_SCALE = 1f;
         const int CARD_MARGIN = 8;
