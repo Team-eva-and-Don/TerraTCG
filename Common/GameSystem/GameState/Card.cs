@@ -25,7 +25,8 @@ namespace TerraTCG.Common.GameSystem.GameState
         FOREST,
         UNDEAD,
         CRITTER,
-        EYE
+        EYE,
+        TOWNSFOLK // CardType isn't rendered, so need to repeat it as a subtype
     }
 
     internal class Card
@@ -44,8 +45,10 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal int MoveCost { get; set; }
 
-        internal List<IGameAction> InHandActions { get; set; }
-        internal List<IGameAction> OnFieldActions { get; set; }
+        internal SelectInHandAction SelectInHandAction { get; set; }
+            = (zone, player) => new DeployCardAction(zone, player);
+        internal SelectOnFieldAction SelectOnFieldAction { get; set; }
+            = (zone, player) => new MoveCardOrAttackAction(zone, player);
 
         internal List<Skill> Skills { get; set; }
 

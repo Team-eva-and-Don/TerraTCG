@@ -26,6 +26,25 @@ Cards: {
 			'''
 	}
 
+	Dryad: {
+		Name: Dryad's Ward
+		Modifier.Description:
+			'''
+			Return target creature
+			you control to the hand
+			'''
+	}
+
+	OldMan: {
+		Name: Old Man's Curse
+		Modifier.Description:
+			'''
+			Move target creature
+			opponent controls to
+			an unoccupied zone
+			'''
+	}
+
 	Bunny: {
 		Name: Bunny
 		Attack.Name: Bunny Kick

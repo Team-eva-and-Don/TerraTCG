@@ -14,7 +14,8 @@ namespace TerraTCG.Common.GameSystem.GameState
     internal enum ZoneRole
     {
         OFFENSE,
-        DEFENSE
+        DEFENSE,
+        SKILL
     }
     internal class Zone
     {

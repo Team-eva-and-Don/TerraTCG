@@ -7,6 +7,10 @@ using Terraria.ModLoader;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
+    internal delegate IGameAction SelectInHandAction(Card card, GamePlayer gamePlayer);
+
+    internal delegate IGameAction SelectOnFieldAction(Zone zone, GamePlayer gamePlayer);
+
     // Interface for a state machine that accepts player input until
     // enough info has been gathered to perform an action
     internal interface IGameAction

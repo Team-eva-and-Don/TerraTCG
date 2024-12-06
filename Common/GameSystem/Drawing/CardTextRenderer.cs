@@ -93,15 +93,18 @@ namespace TerraTCG.Common.GameSystem.Drawing
             DrawStringWithBorder(spriteBatch, card.CardName, position + nameOffset, scale: scale * BaseTextScale);
 
             // Top Right: Max HP
-            var hpIcon = TextureCache.Instance.HeartIcon.Value;
-            var hpIconWidth = hpIcon.Bounds.Width * BaseTextScale;
+            if(card.MaxHealth > 0) // non-creature cards have 0 health
+            {
+                var hpIcon = TextureCache.Instance.HeartIcon.Value;
+                var hpIconWidth = hpIcon.Bounds.Width * BaseTextScale;
 
-            var hpBounds = font.MeasureString($"{card.MaxHealth}") * HPIconScale;
-            var hpIconOffset = new Vector2(bounds.Width - hpIconWidth - MARGIN_L, MARGIN_S);
-            var hpOffset = new Vector2(hpIconOffset.X - hpBounds.X - MARGIN_S, MARGIN_S);
+                var hpBounds = font.MeasureString($"{card.MaxHealth}") * HPIconScale;
+                var hpIconOffset = new Vector2(bounds.Width - hpIconWidth - MARGIN_L, MARGIN_S);
+                var hpOffset = new Vector2(hpIconOffset.X - hpBounds.X - MARGIN_S, MARGIN_S);
 
-            spriteBatch.Draw(hpIcon, position + hpIconOffset * scale, hpIcon.Bounds, Color.White, 0, default, scale * HPIconScale, SpriteEffects.None, 0);
-            DrawStringWithBorder(spriteBatch, $"{card.MaxHealth}", position + hpOffset * scale, scale: scale * BaseTextScale);
+                spriteBatch.Draw(hpIcon, position + hpIconOffset * scale, hpIcon.Bounds, Color.White, 0, default, scale * HPIconScale, SpriteEffects.None, 0);
+                DrawStringWithBorder(spriteBatch, $"{card.MaxHealth}", position + hpOffset * scale, scale: scale * BaseTextScale);
+            }
 
             // Beneath Portrait: Type line
             var typelineRowHeight = 88;
@@ -172,7 +175,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 {
                     var posOffset = new Vector2(1.5f * MARGIN_L, rowY);
                     DrawString(spriteBatch, line, position + posOffset * scale, Color.Black, SmallTextScale * scale);
-                    if(line == modifierLines[0])
+                    if(line == modifierLines[0] && line.Contains(':'))
                     {
                         var keyword = line.Split(":")[0];
                         DrawStringWithBorder(

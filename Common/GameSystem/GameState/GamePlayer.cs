@@ -30,7 +30,7 @@ namespace TerraTCG.Common.GameSystem.GameState
         {
             Hand = new CardCollection()
             {
-                Cards = [Zombie.Instance.CreateCard(), Bunny.Instance.CreateCard(), DemonEye.Instance.CreateCard()]
+                Cards = [Zombie.Instance.CreateCard(), OldMan.Instance.CreateCard(), DemonEye.Instance.CreateCard()]
             };
 
             Deck = new CardCollection()
@@ -61,7 +61,7 @@ namespace TerraTCG.Common.GameSystem.GameState
                 InProgressAction?.Cancel();
 
                 SelectedFieldZone = zone;
-                InProgressAction = new MoveCardOrAttackAction(zone, this);
+                InProgressAction = zone.PlacedCard?.Template.SelectOnFieldAction(zone, this);
             }
         }
 
@@ -72,7 +72,7 @@ namespace TerraTCG.Common.GameSystem.GameState
             SelectedHandCard = card;
             // Cancel the previous action
             InProgressAction?.Cancel();
-            InProgressAction = new DeployCardAction(card, this);
+            InProgressAction = card?.SelectInHandAction(card, this);
         }
 
         internal bool Owns(Zone zone) => Field.Zones.Contains(zone);

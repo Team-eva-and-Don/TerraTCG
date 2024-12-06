@@ -28,7 +28,9 @@ namespace TerraTCG.Common.GameSystem.Drawing
         internal Asset<Texture2D> HeartIcon { get; private set; }
 
         internal Asset<Texture2D> CostIcon { get; private set; }
-
+        public Asset<Texture2D> Button { get; private set; }
+        public Asset<Texture2D> ButtonHighlighted { get; private set; }
+        public Asset<Texture2D> StarIcon { get; private set; }
         internal Dictionary<int, Asset<Texture2D>> NPCTextureCache { get; private set; }
         public override void Load()
         {
@@ -41,6 +43,9 @@ namespace TerraTCG.Common.GameSystem.Drawing
             DefenseIcon = Main.Assets.Request<Texture2D>("Images/Item_" + ItemID.CobaltShield);
             HeartIcon = Main.Assets.Request<Texture2D>("Images/Item_" + ItemID.Heart);
             CostIcon = Main.Assets.Request<Texture2D>("Images/Item_" + ItemID.Star);
+            Button = Main.Assets.Request<Texture2D>("Images/Item_" + ItemID.Star);
+            ButtonHighlighted = Main.Assets.Request<Texture2D>("Images/Item_" + ItemID.Star);
+            StarIcon = Main.Assets.Request<Texture2D>("Images/Projectile_" + ProjectileID.FallingStar);
             NPCTextureCache = [];
         }
 

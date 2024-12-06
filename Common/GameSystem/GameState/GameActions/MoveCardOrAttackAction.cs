@@ -25,31 +25,46 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             return true;
         }
 
+        private void DoMove()
+        {
+            // move within own field
+            endZone.PlacedCard = startZone.PlacedCard;
+            startZone.PlacedCard = null;
+            startZone.Animation = new RemoveCardAnimation(startZone, endZone.PlacedCard, Main._drawInterfaceGameTime.TotalGameTime);
+            endZone.Animation = new PlaceCardAnimation(endZone, Main._drawInterfaceGameTime.TotalGameTime);
+        }
+
+        private void DoAttack()
+        {
+            var currTime = Main._drawInterfaceGameTime.TotalGameTime;
+            // attack opposing field
+            var prevHealth = endZone.PlacedCard.CurrentHealth;
+            endZone.PlacedCard.CurrentHealth -= startZone.PlacedCard.Template.Attacks[0].Damage;
+            startZone.Animation = new MeleeAttackAnimation(startZone, endZone, currTime);
+            if(endZone.PlacedCard.CurrentHealth > 0)
+            {
+                endZone.Animation = new TakeDamageAnimation(endZone, currTime, TimeSpan.FromSeconds(0.5f), prevHealth, endZone.Animation.StartTime);
+            } else
+            {
+                endZone.Animation = new DeathAnimation(
+                    endZone, currTime, TimeSpan.FromSeconds(0.5f), prevHealth, endZone.PlacedCard, endZone.Animation.StartTime);
+                endZone.PlacedCard = null;
+            }
+        }
+
+        private void DoSkill()
+        {
+            Main.NewText("Doing skill!");
+        }
+
         public void Complete()
         {
             if (player.Owns(endZone))
             {
-                // move within own field
-                endZone.PlacedCard = startZone.PlacedCard;
-                startZone.PlacedCard = null;
-                startZone.Animation = new RemoveCardAnimation(startZone, endZone.PlacedCard, Main._drawInterfaceGameTime.TotalGameTime);
-                endZone.Animation = new PlaceCardAnimation(endZone, Main._drawInterfaceGameTime.TotalGameTime);
-            } else
+                DoMove();
+            } else  
             {
-                var currTime = Main._drawInterfaceGameTime.TotalGameTime;
-                // attack opposing field
-                var prevHealth = endZone.PlacedCard.CurrentHealth;
-                endZone.PlacedCard.CurrentHealth -= startZone.PlacedCard.Template.Attacks[0].Damage;
-                startZone.Animation = new MeleeAttackAnimation(startZone, endZone, currTime);
-                if(endZone.PlacedCard.CurrentHealth > 0)
-                {
-                    endZone.Animation = new TakeDamageAnimation(endZone, currTime, TimeSpan.FromSeconds(0.5f), prevHealth, endZone.Animation.StartTime);
-                } else
-                {
-                    endZone.Animation = new DeathAnimation(
-                        endZone, currTime, TimeSpan.FromSeconds(0.5f), prevHealth, endZone.PlacedCard, endZone.Animation.StartTime);
-                    endZone.PlacedCard = null;
-                }
+                DoAttack();
             }
         }
 
