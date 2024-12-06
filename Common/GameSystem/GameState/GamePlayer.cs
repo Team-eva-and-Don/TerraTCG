@@ -83,6 +83,10 @@ namespace TerraTCG.Common.GameSystem.GameState
                 if(done)
                 {
                     InProgressAction.Complete();
+                    if(SelectedFieldZone != null)
+                    {
+                        SelectedFieldZone.Animation = new ActionAnimation(SelectedFieldZone, Main._drawInterfaceGameTime.TotalGameTime);
+                    }
                     SelectedFieldZone = null;
                     InProgressAction = null;
                 }

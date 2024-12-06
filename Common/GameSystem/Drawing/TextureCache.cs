@@ -43,7 +43,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
             DefenseIcon = Main.Assets.Request<Texture2D>("Images/Item_" + ItemID.CobaltShield);
             HeartIcon = Main.Assets.Request<Texture2D>("Images/Item_" + ItemID.Heart);
             CostIcon = Main.Assets.Request<Texture2D>("Images/Item_" + ItemID.Star);
-            Button = Main.Assets.Request<Texture2D>("Images/UI/Wires_0");
+            Button = Mod.Assets.Request<Texture2D>("Assets/FieldElements/RadialButton");
             ButtonHighlighted = Main.Assets.Request<Texture2D>("Images/UI/Wires_1");
             StarIcon = Main.Assets.Request<Texture2D>("Images/Projectile_" + ProjectileID.FallingStar);
             NPCTextureCache = [];
