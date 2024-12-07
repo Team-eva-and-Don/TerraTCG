@@ -13,11 +13,8 @@ using TerraTCG.Common.UI.Common;
 
 namespace TerraTCG.Common.UI.GameFieldUI
 {
-    internal class ActionButtons : CustomClickUIElement
+    internal class UseSkillButton : RadialButton
     {
-        private const int CLICK_RADIUS = 20;
-
-        public bool ContainsMouse => (Main.MouseScreen - Position).LengthSquared() < CLICK_RADIUS * CLICK_RADIUS;
 
         public override void Update(GameTime gameTime)
         {

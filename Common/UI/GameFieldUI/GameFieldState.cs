@@ -14,7 +14,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
     {
         private GameFieldElement gameField;
         private HandElement handElement;
-        internal ActionButtons actionButtons;
+        internal UseSkillButton actionButtons;
 
         public override void OnInitialize()
         {

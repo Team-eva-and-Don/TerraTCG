@@ -25,6 +25,9 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal IGameAction InProgressAction { get; set; }
 
+        // TODO real implementation
+        internal bool IsMyTurn => true;
+
 
         public GamePlayer()
         {
@@ -91,6 +94,11 @@ namespace TerraTCG.Common.GameSystem.GameState
                     InProgressAction = null;
                 }
             }
+        }
+
+        public void PassTurn()
+        {
+            // TODO real implementation
         }
 
         internal bool Owns(Zone zone) => Field.Zones.Contains(zone);

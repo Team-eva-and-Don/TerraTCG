@@ -21,7 +21,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
 
         public void DrawZoneOverlay(SpriteBatch spriteBatch, Vector2 basePosition, float baseScale)
         {
-            var posOffset = baseScale * (5f + -5f * MathF.Cos(2*MathF.Tau * (float) (ElapsedTime.TotalSeconds / Duration.TotalSeconds)));
+            var posOffset = baseScale * (-5f + 5f * MathF.Cos(2*MathF.Tau * (float) (ElapsedTime.TotalSeconds / Duration.TotalSeconds)));
             AnimationUtils.DrawZoneNPC(spriteBatch, zone, basePosition + new Vector2(0, posOffset), baseScale);
             AnimationUtils.DrawZoneNPCHealth(spriteBatch, zone, basePosition, baseScale);
         }

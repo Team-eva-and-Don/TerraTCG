@@ -64,4 +64,10 @@ Cards: {
 		CRITTER: Critter
 		EYE: Eye
 	}
+
+	GameActions.EndTurn:
+		'''
+		End
+		Turn
+		'''
 }
