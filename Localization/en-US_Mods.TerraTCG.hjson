@@ -65,9 +65,5 @@ Cards: {
 		EYE: Eye
 	}
 
-	GameActions.EndTurn:
-		'''
-		End
-		Turn
-		'''
+	GameActions.EndTurn: Pass
 }

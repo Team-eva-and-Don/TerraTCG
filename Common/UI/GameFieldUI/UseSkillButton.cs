@@ -15,7 +15,6 @@ namespace TerraTCG.Common.UI.GameFieldUI
 {
     internal class UseSkillButton : RadialButton
     {
-
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);

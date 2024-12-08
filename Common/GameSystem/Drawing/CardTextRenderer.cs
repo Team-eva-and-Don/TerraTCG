@@ -43,7 +43,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
         float BaseTextHeight = 0;
         float SmallTextHeight = 0;
 
-        private void DrawString(
+        public void DrawString(
             SpriteBatch spriteBatch, string text, Vector2 position, Color? color = null, float scale = 1f, bool centered = false, SpriteEffects effects = SpriteEffects.None)
         {
             var font = FontAssets.ItemStack.Value;
@@ -56,7 +56,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
             spriteBatch.DrawString(font, text, position, color ?? Color.White, 0, origin, scale, effects, 0);
         }
 
-        private void DrawStringWithBorder(
+        public void DrawStringWithBorder(
             SpriteBatch spriteBatch, string text, Vector2 position, Color? color = null, float scale = 1f, bool centered = false, SpriteEffects effects = SpriteEffects.None)
         {
             foreach(var offset in new Vector2[] { Vector2.UnitX, Vector2.UnitY })

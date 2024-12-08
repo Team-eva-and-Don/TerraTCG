@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.GameContent;
 using Terraria.Localization;
 using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.Drawing;
@@ -51,13 +52,8 @@ namespace TerraTCG.Common.UI.GameFieldUI
             var origin = new Vector2(bgTexture.Width, bgTexture.Height) / 2;
             spriteBatch.Draw(bgTexture, Position, bgTexture.Bounds, Color.White, 0, origin, 1f, SpriteEffects.None, 0);
 
-            var buttonText = Language.GetTextValue($"Mods.TerraTCG.GameActions.EndTurn");
-            var buttonLines = buttonText.Split('\n');
-            foreach( var line in buttonLines )
-            {
-                // TODO
-            }
-
+            var buttonText = Language.GetTextValue($"Mods.TerraTCG.Cards.GameActions.EndTurn");
+            CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, buttonText, Position, centered: true);
         }
     }
 }

@@ -65,6 +65,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
                 if (PerspectiveQuadContainsMouse(xBounds, yBounds))
                 {
                     Main.LocalPlayer.mouseInterface = true;
+                    gamePlayer.MouseoverCard = zone?.PlacedCard?.Template ?? gamePlayer.MouseoverCard;
                     if(IsClicked())
                     {
                         gamePlayer.SelectZone(zone);

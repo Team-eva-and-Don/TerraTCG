@@ -28,6 +28,7 @@ namespace TerraTCG.Common.GameSystem.GameState
         // TODO real implementation
         internal bool IsMyTurn => true;
 
+        public Card MouseoverCard { get; internal set; }
 
         public GamePlayer()
         {

@@ -15,14 +15,17 @@ namespace TerraTCG.Common.UI.GameFieldUI
 {
     internal class HandElement : CustomClickUIElement
     {
+        internal Vector2 CardPosition0 => Position - Vector2.UnitX *
+            (CARD_WIDTH + CARD_MARGIN) * Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer.Hand.Cards.Count / 2;
 
         const float CARD_SCALE = 1f;
         const int CARD_MARGIN = 8;
 
+        internal const int CARD_HEIGHT = 180;
+        internal const int CARD_WIDTH = 135;
+
         public override void Update(GameTime gameTime)
         {
-            // TODO this is a bit silly, manually implement "onclick" rather than properly setting
-            // UI element bounds
             var gamePlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer;
             if (gamePlayer == null || gamePlayer.Hand?.Cards?.Count == 0)
             {
@@ -34,13 +37,14 @@ namespace TerraTCG.Common.UI.GameFieldUI
                 var bounds = card.Texture.Value.Bounds;
 
                 var scaledBounds = new Rectangle(
-                    (int)(Position.X + (bounds.Width * CARD_SCALE + CARD_MARGIN) * i),
-                    (int)Position.Y,
+                    (int)(CardPosition0.X + (bounds.Width * CARD_SCALE + CARD_MARGIN) * i),
+                    (int)CardPosition0.Y,
                     (int)(bounds.Width * CARD_SCALE),
                     (int)(bounds.Height * CARD_SCALE));
 
                 if(scaledBounds.Contains((int)Main.MouseScreen.X, (int)Main.MouseScreen.Y)) {
                     Main.LocalPlayer.mouseInterface = true;
+                    gamePlayer.MouseoverCard = card;
                     if(IsClicked())
                     {
                         gamePlayer.SelectCardInHand(card);
@@ -58,7 +62,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
             {
                 return;
             }
-            Vector2 currentPos = Position;
+            Vector2 currentPos = CardPosition0;
             foreach (var card in gamePlayer.Hand.Cards)
             {
                 var texture = card.Texture;
