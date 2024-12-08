@@ -31,7 +31,10 @@ namespace TerraTCG.Common.GameSystem.CardData
                 new() {
                     Name = "Skill: Forest Wish",
                     Cost = 0,
-                    Description = "Gain 1 MP"
+                    Description = "Gain 1 MP",
+                    DoSkill = (GamePlayer player, Zone zone) => {
+                        player.Resources = player.Resources.UseResource(mana: -1);
+                    }
                 }
             ]
         };

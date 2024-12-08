@@ -12,12 +12,23 @@ namespace TerraTCG.Common.GameSystem.GameState
 {
     internal class GamePlayer
     {
+        internal const int MAX_HEALTH = 3;
+        internal const int MAX_MANA = 8;
         internal Game Game { get; set; } // back reference to the game this player belongs to
         internal CardCollection Hand { get; set; }
         internal CardCollection Deck { get; set; }
-        internal int Health { get; set; } = 3;
         internal int ManaPerTurn { get; set; } = 3;
-        internal int Mana { get; set; } = 0;
+
+        public PlayerResources _resources = new(3, 2, 1);
+        public PlayerResources Resources { 
+            get => _resources; 
+            set
+            {
+                PrevResources = _resources;
+                _resources = value;
+            }
+        }
+        public PlayerResources PrevResources { get; private set; }
 
         internal Field Field { get; set; }
 
@@ -32,7 +43,6 @@ namespace TerraTCG.Common.GameSystem.GameState
         internal bool IsMyTurn => Game.CurrentTurn.ActivePlayer == this;
 
         public Card MouseoverCard { get; internal set; }
-        public int TownsfolkMana { get; internal set; }
 
         public GamePlayer()
         {

@@ -9,8 +9,6 @@ namespace TerraTCG.Common.GameSystem.GameState
 {
     internal class Turn
     {
-        internal const int MAX_MANA_PER_TURN = 8;
-
         internal Game Game { get; set; }
         internal GamePlayer ActivePlayer { get; set; }
         internal int TurnCount { get; set; }
@@ -19,12 +17,15 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         public void Start()
         {
-            if(ActivePlayer.ManaPerTurn < MAX_MANA_PER_TURN)
+            if(ActivePlayer.ManaPerTurn < GamePlayer.MAX_MANA)
             {
                 ActivePlayer.ManaPerTurn += 1;
             }
-            ActivePlayer.Mana = ActivePlayer.ManaPerTurn;
-            ActivePlayer.TownsfolkMana = 1;
+            ActivePlayer.Resources = new(
+                ActivePlayer.Resources.Health,
+                ActivePlayer.ManaPerTurn,
+                1
+            );
         }
 
         public void End()

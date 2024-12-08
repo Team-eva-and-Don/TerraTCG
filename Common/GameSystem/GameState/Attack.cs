@@ -6,11 +6,20 @@ using System.Threading.Tasks;
 
 namespace TerraTCG.Common.GameSystem.GameState
 {
-    internal struct Attack
+    internal delegate void DoAttack(Attack attack, Zone sourceZone, Zone targetZone);
+    internal struct Attack()
     {
         internal string Name { get; set; }
         internal string Description { get; set; }
         internal int Damage { get; set; }
         internal int Cost { get; set; }
+
+        internal DoAttack DoAttack { get; set; } = DefaultAttack;
+
+
+        internal static void DefaultAttack(Attack attack, Zone sourceZone, Zone targetZone)
+        {
+            targetZone.PlacedCard.CurrentHealth -= attack.Damage;
+        }
     }
 }

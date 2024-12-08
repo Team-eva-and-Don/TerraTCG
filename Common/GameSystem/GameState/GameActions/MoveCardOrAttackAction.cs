@@ -18,12 +18,28 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public bool CanAcceptCardInHand(Card card) => false;
 
-        public bool CanAcceptZone(Zone zone) => (player.Owns(zone) && zone.IsEmpty()) || (!player.Owns(zone) && ! zone.IsEmpty());
+        public bool CanAcceptZone(Zone zone) 
+        { 
+            if(player.Owns(zone) && zone.IsEmpty())
+            {
+                return startZone.PlacedCard.Template.MoveCost <= player.Resources.Mana;
+
+            } else if (!player.Owns(zone) && !zone.IsEmpty())
+            {
+                return startZone.PlacedCard.Template.Attacks[0].Cost <= player.Resources.Mana;
+            } else
+            {
+                return false;
+            }
+        }
 
         public bool AcceptCardInHand(Card card) => false;
 
-        public bool CanAcceptActionButton(ActionType actionType) => 
-            startZone.PlacedCard.Template.HasSkill;
+        public bool CanAcceptActionButton(ActionType actionType)
+        {
+            return startZone.PlacedCard.Template.HasSkill &&
+                startZone.PlacedCard.Template.Skills[0].Cost <= player.Resources.Mana;
+        }
 
         public bool AcceptZone(Zone zone)
         {
@@ -44,6 +60,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             startZone.PlacedCard = null;
             startZone.Animation = new RemoveCardAnimation(startZone, endZone.PlacedCard, Main._drawInterfaceGameTime.TotalGameTime);
             endZone.Animation = new PlaceCardAnimation(endZone, Main._drawInterfaceGameTime.TotalGameTime);
+            player.Resources = player.Resources.UseResource(mana: startZone.PlacedCard.Template.MoveCost);
         }
 
         private void DoAttack()
@@ -51,7 +68,11 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             var currTime = Main._drawInterfaceGameTime.TotalGameTime;
             // attack opposing field
             var prevHealth = endZone.PlacedCard.CurrentHealth;
-            endZone.PlacedCard.CurrentHealth -= startZone.PlacedCard.Template.Attacks[0].Damage;
+            var attack = startZone.PlacedCard.Template.Attacks[0];
+            attack.DoAttack(attack, startZone, endZone);
+
+            player.Resources = player.Resources.UseResource(mana: startZone.PlacedCard.Template.Attacks[0].Cost);
+
             startZone.Animation = new MeleeAttackAnimation(startZone, endZone, currTime);
             if(endZone.PlacedCard.CurrentHealth > 0)
             {
@@ -60,13 +81,16 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             {
                 endZone.Animation = new DeathAnimation(
                     endZone, currTime, TimeSpan.FromSeconds(0.5f), prevHealth, endZone.PlacedCard, endZone.Animation.StartTime);
+                endZone.Owner.Resources = endZone.Owner.Resources.UseResource(health: 1);
                 endZone.PlacedCard = null;
             }
         }
 
         private void DoSkill()
         {
-            Main.NewText("Doing skill!");
+            var skill = startZone.PlacedCard.Template.Skills[0];
+            player.Resources = player.Resources.UseResource(mana: skill.Cost);
+            skill.DoSkill(player, startZone);
         }
 
         public void Complete()
