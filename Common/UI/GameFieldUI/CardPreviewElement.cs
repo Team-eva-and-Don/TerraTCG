@@ -15,7 +15,7 @@ using TerraTCG.Common.UI.Common;
 
 namespace TerraTCG.Common.UI.GameFieldUI
 {
-    internal class CardPreviewElement : CustomClickUIElement
+    internal class CardPreviewElement : DraggableUIElement
     {
         internal const float CARD_SCALE = 4f / 3f;
         public override void Draw(SpriteBatch spriteBatch)

@@ -11,7 +11,17 @@ namespace TerraTCG.Common.UI.Common
 {
     internal class CustomClickUIElement : UIElement
     {
-        internal Vector2 Position => new(Left.Pixels, Top.Pixels);
+        internal Vector2 Position
+        {
+            get => new(Left.Pixels, Top.Pixels);
+            set
+            {
+                Left.Pixels = value.X;
+                Top.Pixels = value.Y;
+            }
+
+
+        } 
 
         private bool clickStarted;
 

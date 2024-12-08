@@ -30,7 +30,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
             Append(handElement);
 
             previewElement = new();
-            SetRectangle(previewElement, gameField.Position.X - 120, gameField.Position.Y + 175);
+            SetRectangle(previewElement, gameField.Position.X - 120, gameField.Position.Y + 175, 180, 240);
             Append(previewElement);
 
             actionButtons = new();
@@ -52,7 +52,6 @@ namespace TerraTCG.Common.UI.GameFieldUI
         public override void Update(GameTime gameTime)
         {
             SetRectangle(gameField, (Main.screenWidth - FieldRenderer.FIELD_WIDTH + 48) / 2, (Main.screenHeight - FieldRenderer.FIELD_HEIGHT) / 2, 1, 1);
-            SetRectangle(previewElement, gameField.Position.X - 120, gameField.Position.Y + 175);
             SetRectangle(handElement, Main.screenWidth / 2, Main.screenHeight - HandElement.CARD_HEIGHT, 1, 1);
             SetRectangle(passTurnButton, (Main.screenWidth + FieldRenderer.FIELD_WIDTH) / 2, Main.screenHeight / 2);
             base.Update(gameTime);
