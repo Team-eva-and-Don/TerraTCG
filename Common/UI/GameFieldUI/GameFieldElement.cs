@@ -90,6 +90,26 @@ namespace TerraTCG.Common.UI.GameFieldUI
             }
         }
 
+        private void DrawPlayerStats(SpriteBatch spriteBatch)
+        {
+            // My player
+            var gamePlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer;
+            var pos = FieldOrigin - new Vector2(
+                FieldRenderer.FIELD_WIDTH / 2 + FieldRenderer.CARD_MARGIN, 
+                TextureCache.Instance.PlayerStatsZone.Height() -
+                ProjectedFieldUtils.Instance.rowHeights.Last() * FieldRenderer.FIELD_HEIGHT);
+            PlayerStatRenderer.Instance.DrawPlayerStats(spriteBatch, pos, gamePlayer, 1f);
+
+            // Opposing player
+            var opponent = gamePlayer.Opponent;
+            var scale = ProjectedFieldUtils.Instance.widthScaleFactors[1];
+            var oppPos = FieldOrigin + new Vector2(
+                3 * FieldRenderer.FIELD_WIDTH / 8 - TextureCache.Instance.PlayerStatsZone.Width() * scale, 
+                ProjectedFieldUtils.Instance.rowHeights.First() * FieldRenderer.FIELD_HEIGHT);
+            PlayerStatRenderer.Instance.DrawPlayerStats(spriteBatch, oppPos, opponent, scale);
+
+        }
+
         public override void Draw(SpriteBatch spriteBatch)
         {
             var texture = FieldRenderer.Instance.PerspectiveRenderTarget;
@@ -97,6 +117,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
             {
                 spriteBatch.Draw(texture, Position, Color.White);
                 DrawZoneNPCs(spriteBatch);
+                DrawPlayerStats(spriteBatch);
             }
         }
     }

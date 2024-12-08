@@ -53,7 +53,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
         {
             SetRectangle(gameField, (Main.screenWidth - FieldRenderer.FIELD_WIDTH + 48) / 2, (Main.screenHeight - FieldRenderer.FIELD_HEIGHT) / 2, 1, 1);
             SetRectangle(handElement, Main.screenWidth / 2, Main.screenHeight - HandElement.CARD_HEIGHT, 1, 1);
-            SetRectangle(passTurnButton, (Main.screenWidth + FieldRenderer.FIELD_WIDTH) / 2, Main.screenHeight / 2);
+            SetRectangle(passTurnButton, Main.screenWidth / 2 + 3 * FieldRenderer.FIELD_WIDTH / 8, Main.screenHeight / 2);
             base.Update(gameTime);
         }
     }

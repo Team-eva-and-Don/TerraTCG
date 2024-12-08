@@ -14,6 +14,14 @@ namespace TerraTCG.Common.GameSystem.GameState
     {
         internal List<GamePlayer> GamePlayers { get; set; }
 
+        internal List<Turn> Turns { get; set; } = [];
+
+        internal Turn CurrentTurn
+        {
+            get => Turns.Last();
+            set => Turns.Add(value);
+        }
+
         public void StartGame(TCGPlayer player)
         {
             GamePlayers = [
@@ -29,6 +37,15 @@ namespace TerraTCG.Common.GameSystem.GameState
                 GamePlayers[1].Field.Zones[1], TimeSpan.FromSeconds(1));
             GamePlayers[1].Field.Zones[4].Animation = new IdleAnimation(
                 GamePlayers[1].Field.Zones[4], TimeSpan.FromSeconds(0));
+
+            CurrentTurn = new()
+            {
+                Game = this,
+                ActivePlayer = GamePlayers[0],
+                TurnCount = 1
+            };
+            CurrentTurn.Start();
+
         }
 
         public IEnumerable<Zone> AllZones() =>

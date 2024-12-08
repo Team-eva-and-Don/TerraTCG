@@ -15,6 +15,9 @@ namespace TerraTCG.Common.GameSystem.GameState
         internal Game Game { get; set; } // back reference to the game this player belongs to
         internal CardCollection Hand { get; set; }
         internal CardCollection Deck { get; set; }
+        internal int Health { get; set; } = 3;
+        internal int ManaPerTurn { get; set; } = 3;
+        internal int Mana { get; set; } = 0;
 
         internal Field Field { get; set; }
 
@@ -26,9 +29,10 @@ namespace TerraTCG.Common.GameSystem.GameState
         internal IGameAction InProgressAction { get; set; }
 
         // TODO real implementation
-        internal bool IsMyTurn => true;
+        internal bool IsMyTurn => Game.CurrentTurn.ActivePlayer == this;
 
         public Card MouseoverCard { get; internal set; }
+        public int TownsfolkMana { get; internal set; }
 
         public GamePlayer()
         {
@@ -49,7 +53,7 @@ namespace TerraTCG.Common.GameSystem.GameState
         {
             SelectedHandCard = null;
             // TODO determine action start based on click more elegantly
-            if(InProgressAction?.CanAcceptZone(zone) ?? false)
+            if(IsMyTurn && (InProgressAction?.CanAcceptZone(zone) ?? false))
             {
                 SelectedFieldZone = zone;
                 var done = InProgressAction.AcceptZone(zone);
@@ -59,7 +63,7 @@ namespace TerraTCG.Common.GameSystem.GameState
                     InProgressAction = null;
                     SelectedFieldZone = null;
                 }
-            } else if(Owns(zone) && !zone.IsEmpty())
+            } else if(IsMyTurn && Owns(zone) && !zone.IsEmpty())
             {
                 // Cancel any previous action
                 InProgressAction?.Cancel();
@@ -74,9 +78,12 @@ namespace TerraTCG.Common.GameSystem.GameState
             SelectedFieldZone = null;
 
             SelectedHandCard = card;
-            // Cancel the previous action
-            InProgressAction?.Cancel();
-            InProgressAction = card?.SelectInHandAction(card, this);
+            if(IsMyTurn)
+            {
+                // Cancel the previous action
+                InProgressAction?.Cancel();
+                InProgressAction = card?.SelectInHandAction(card, this);
+            }
         }
 
         public void SelectActionButton(ActionType actionType)
@@ -100,6 +107,10 @@ namespace TerraTCG.Common.GameSystem.GameState
         public void PassTurn()
         {
             // TODO real implementation
+            if(IsMyTurn)
+            {
+                Game.CurrentTurn.End();
+            }
         }
 
         internal bool Owns(Zone zone) => Field.Zones.Contains(zone);

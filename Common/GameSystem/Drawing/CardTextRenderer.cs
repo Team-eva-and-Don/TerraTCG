@@ -69,7 +69,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
 
         public void DrawManaCost(SpriteBatch spriteBatch, int cost, Vector2 position, float scale = 1f)
         {
-            var texture = TextureCache.Instance.CostIcon.Value;
+            var texture = TextureCache.Instance.ManaIcon.Value;
             spriteBatch.Draw(texture, position, texture.Bounds, Color.White, 0, default, scale * MPIconScale, SpriteEffects.None, 0);
 
             // Center text on the middle of the mana star
@@ -79,7 +79,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
 
         public Vector2 GetManaCostSize()
         {
-            var texture = TextureCache.Instance.CostIcon.Value;
+            var texture = TextureCache.Instance.ManaIcon.Value;
             return new Vector2(texture.Width, texture.Height) * MPIconScale;
         }
         

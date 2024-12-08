@@ -27,10 +27,12 @@ namespace TerraTCG.Common.GameSystem.Drawing
         internal Asset<Texture2D> DefenseIcon { get; private set; }
         internal Asset<Texture2D> HeartIcon { get; private set; }
 
-        internal Asset<Texture2D> CostIcon { get; private set; }
+        internal Asset<Texture2D> ManaIcon { get; private set; }
         public Asset<Texture2D> Button { get; private set; }
         public Asset<Texture2D> ButtonHighlighted { get; private set; }
         public Asset<Texture2D> StarIcon { get; private set; }
+        public Asset<Texture2D> TownsfolkIcon { get; private set; }
+        public Asset<Texture2D> PlayerStatsZone { get; private set; }
         internal Dictionary<int, Asset<Texture2D>> NPCTextureCache { get; private set; }
         public override void Load()
         {
@@ -42,10 +44,12 @@ namespace TerraTCG.Common.GameSystem.Drawing
             OffenseIcon = Main.Assets.Request<Texture2D>("Images/UI/PVP_0");
             DefenseIcon = Main.Assets.Request<Texture2D>("Images/Item_" + ItemID.CobaltShield);
             HeartIcon = Main.Assets.Request<Texture2D>("Images/Item_" + ItemID.Heart);
-            CostIcon = Main.Assets.Request<Texture2D>("Images/Item_" + ItemID.Star);
+            ManaIcon = Main.Assets.Request<Texture2D>("Images/Item_" + ItemID.Star);
             Button = Mod.Assets.Request<Texture2D>("Assets/FieldElements/RadialButton");
             ButtonHighlighted = Main.Assets.Request<Texture2D>("Images/UI/Wires_1");
             StarIcon = Main.Assets.Request<Texture2D>("Images/Projectile_" + ProjectileID.FallingStar);
+            TownsfolkIcon = Mod.Assets.Request<Texture2D>("Assets/FieldElements/TownsfolkMana");
+            PlayerStatsZone = Mod.Assets.Request<Texture2D>("Assets/FieldElements/PlayerStats");
             NPCTextureCache = [];
         }
 
