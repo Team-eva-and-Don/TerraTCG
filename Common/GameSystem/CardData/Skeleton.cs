@@ -9,22 +9,22 @@ using TerraTCG.Common.GameSystem.GameState;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class Zombie : ModSystem, ICardTemplate
+    internal class Skeleton : ModSystem, ICardTemplate
     {
-        internal static ICardTemplate Instance => ModContent.GetInstance<Zombie>();
+        internal static ICardTemplate Instance => ModContent.GetInstance<Skeleton>();
         public Card CreateCard() => new ()
         {
-            Name = "Zombie",
-            MaxHealth = 70,
+            Name = "Skeleton",
+            MaxHealth = 80,
             MoveCost = 2,
-            NPCID = NPCID.Zombie,
+            NPCID = NPCID.Skeleton,
             CardType = CardType.CREATURE,
-            SubTypes = [CardSubtype.FOREST, CardSubtype.UNDEAD],
+            SubTypes = [CardSubtype.CAVERN, CardSubtype.UNDEAD],
             Attacks = [
                 new() {
-                    Name = "Diseased Bite",
-                    Damage = 30,
-                    Cost = 2,
+                    Name = "Bone Break",
+                    Damage = 40,
+                    Cost = 3,
                 }
             ]
         };

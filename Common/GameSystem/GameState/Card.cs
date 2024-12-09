@@ -26,7 +26,9 @@ namespace TerraTCG.Common.GameSystem.GameState
         UNDEAD,
         CRITTER,
         EYE,
-        TOWNSFOLK // CardType isn't rendered, so need to repeat it as a subtype
+        TOWNSFOLK, // CardType isn't rendered, so need to repeat it as a subtype
+        CAVERN,
+        BAT
     }
 
     internal class Card

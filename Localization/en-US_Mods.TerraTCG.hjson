@@ -55,14 +55,31 @@ Cards: {
 		}
 	}
 
+	Bat: {
+		Name: Cave Bat
+		Attack.Name: Swoop
+		Modifier.Description:
+			'''
+			Evasive: May target any 
+			enemy for attacks
+			'''
+	}
+
+	Skeleton: {
+		Name: Skeleton
+		Attack.Name: Bone Break
+	}
+
 	Types: {
 		CREATURE: Creature
 		ITEM: Item
 		TOWNSFOLK: Townsfolk
 		FOREST: Forest
+		CAVERN: Cavern
 		UNDEAD: Undead
 		CRITTER: Critter
 		EYE: Eye
+		BAT: Bat
 	}
 
 	GameActions.EndTurn: Pass
