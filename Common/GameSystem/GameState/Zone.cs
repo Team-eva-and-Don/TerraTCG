@@ -19,6 +19,7 @@ namespace TerraTCG.Common.GameSystem.GameState
     }
     internal class Zone
     {
+        internal Game Game { get; set; }
         internal PlacedCard PlacedCard { get; set; }
         internal ZoneRole Role { get; set; }
 
@@ -36,7 +37,7 @@ namespace TerraTCG.Common.GameSystem.GameState
         public bool HasPlacedCard() => PlacedCard != null;
 
         // TODO this implementation is not correct outside of goldfishing
-        public GamePlayer Owner => Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer;
+        public GamePlayer Owner => Game.GamePlayers.Where(p => p.Field.Zones.Contains(this)).FirstOrDefault();
         private void DrawOffenseIcon(SpriteBatch spriteBatch, Vector2 position, float rotation)
         {
             var texture = TextureCache.Instance.OffenseIcon;

@@ -60,7 +60,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             startZone.PlacedCard = null;
             startZone.Animation = new RemoveCardAnimation(startZone, endZone.PlacedCard, Main._drawInterfaceGameTime.TotalGameTime);
             endZone.Animation = new PlaceCardAnimation(endZone, Main._drawInterfaceGameTime.TotalGameTime);
-            player.Resources = player.Resources.UseResource(mana: startZone.PlacedCard.Template.MoveCost);
+            player.Resources = player.Resources.UseResource(mana: endZone.PlacedCard.Template.MoveCost);
         }
 
         private void DoAttack()

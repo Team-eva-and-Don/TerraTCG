@@ -27,5 +27,6 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
         }
 
         public bool IsComplete() => false;
+        public bool IsDefault() => true;
     }
 }

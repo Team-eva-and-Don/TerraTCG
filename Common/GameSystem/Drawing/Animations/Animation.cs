@@ -22,6 +22,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
         // Draw additional items (such as an NPC sprite) on top of the zone
         void DrawZoneOverlay(SpriteBatch spriteBatch, Vector2 basePosition, float baseScale);
 
+        bool IsDefault() => false;
         bool IsComplete();
     }
 

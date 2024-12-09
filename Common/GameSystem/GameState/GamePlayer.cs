@@ -17,9 +17,9 @@ namespace TerraTCG.Common.GameSystem.GameState
         internal Game Game { get; set; } // back reference to the game this player belongs to
         internal CardCollection Hand { get; set; }
         internal CardCollection Deck { get; set; }
-        internal int ManaPerTurn { get; set; } = 3;
+        internal int ManaPerTurn { get; set; } = 0;
 
-        public PlayerResources _resources = new(3, 2, 1);
+        public PlayerResources _resources = new(3, 0, 0);
         public PlayerResources Resources { 
             get => _resources; 
             set
@@ -44,8 +44,9 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         public Card MouseoverCard { get; internal set; }
 
-        public GamePlayer()
+        public GamePlayer(Game game)
         {
+            Game = game;
             Hand = new CardCollection()
             {
                 Cards = [Zombie.Instance.CreateCard(), OldMan.Instance.CreateCard(), DemonEye.Instance.CreateCard(), Bunny.Instance.CreateCard()]
@@ -56,7 +57,7 @@ namespace TerraTCG.Common.GameSystem.GameState
                 Cards = [Zombie.Instance.CreateCard(), Zombie.Instance.CreateCard(), Zombie.Instance.CreateCard()]
             };
 
-            Field = new();
+            Field = new(game);
         }
 
         public void SelectZone(Zone zone)

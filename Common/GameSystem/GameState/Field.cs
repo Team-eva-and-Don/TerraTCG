@@ -14,15 +14,15 @@ namespace TerraTCG.Common.GameSystem.GameState
     {
         internal List<Zone> Zones { get; set; }
 
-        public Field()
+        public Field(Game game)
         {
             Zones = [
-                new() { Role = ZoneRole.OFFENSE, Index = 0},
-                new() { Role = ZoneRole.OFFENSE, Index = 1},
-                new() { Role = ZoneRole.OFFENSE, Index = 2},
-                new() { Role = ZoneRole.DEFENSE, Index = 3},
-                new() { Role = ZoneRole.DEFENSE, Index = 4},
-                new() { Role = ZoneRole.DEFENSE, Index = 5},
+                new() { Role = ZoneRole.OFFENSE, Index = 0, Game = game},
+                new() { Role = ZoneRole.OFFENSE, Index = 1, Game = game},
+                new() { Role = ZoneRole.OFFENSE, Index = 2, Game = game},
+                new() { Role = ZoneRole.DEFENSE, Index = 3, Game = game},
+                new() { Role = ZoneRole.DEFENSE, Index = 4, Game = game},
+                new() { Role = ZoneRole.DEFENSE, Index = 5, Game = game},
             ];
         }
 
