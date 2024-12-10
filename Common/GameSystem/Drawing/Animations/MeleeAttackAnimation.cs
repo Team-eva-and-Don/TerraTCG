@@ -22,12 +22,9 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             {
                 var localPlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>();
                 var gamePlayer = localPlayer.GamePlayer;
-                var lerpPoint = gamePlayer.Owns(targetZone) ? 0.3f : 0.8f;
-                var yPlacement = ProjectedFieldUtils.Instance.GetYBoundsForZone(gamePlayer, targetZone).Lerp(lerpPoint);
-                var xCenter = ProjectedFieldUtils.Instance.GetXBoundsForZone(gamePlayer, targetZone).Center;
-                var scale = ProjectedFieldUtils.Instance.GetScaleFactorAt(yPlacement);
-                xCenter *= scale;
-                return localPlayer.GameFieldOrigin + new Vector2(xCenter, yPlacement);
+                var yLerpPoint = gamePlayer.Owns(targetZone) ? 0.3f : 0.8f;
+                var placement = ProjectedFieldUtils.Instance.WorldSpaceToScreenSpace(gamePlayer, targetZone, new(0.5f, yLerpPoint));
+                return localPlayer.GameFieldPosition + placement;
             }
         }
 

@@ -18,7 +18,7 @@ namespace TerraTCG.Common.GameSystem
         // TODO this is not the correct place to cache this info, but is the easiest
         // Place within UI coordinates that the bottom center of the player's
         // back-center game zone is drawn
-        internal Vector2 GameFieldOrigin { get; set; }
+        internal Vector2 GameFieldPosition { get; set; }
 
         public override void OnEnterWorld()
         {

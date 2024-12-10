@@ -22,24 +22,10 @@ namespace TerraTCG.Common.UI.GameFieldUI
 
         internal override bool IsClicked() => !((GameFieldState)Parent).actionButtons.ContainsMouse && base.IsClicked();
 
-        private bool PerspectiveQuadContainsMouse(ProjBounds xBounds, ProjBounds yBounds)
-        {
-            // TODO computing this properly outside of trail and error will be a nightmare,
-            // convert from screen coordinates to projected view
-            var mouseHorizontal = Main.MouseScreen.X - FieldOrigin.X;
-            var mouseVertical = Main.MouseScreen.Y - FieldOrigin.Y;
-
-            float xScale = ProjectedFieldUtils.Instance.GetScaleFactorAt(mouseVertical);
-            xBounds *= xScale;
-
-            return mouseVertical > yBounds.Min && mouseVertical < yBounds.Max &&
-                   mouseHorizontal > xScale * xBounds.Min && mouseHorizontal < xScale * xBounds.Max;
-        }
-
         public override void Update(GameTime gameTime)
         {
             var localPlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>();
-            localPlayer.GameFieldOrigin = FieldOrigin;
+            localPlayer.GameFieldPosition = Position;
 
             var gamePlayer = localPlayer.GamePlayer;
             if (gamePlayer == null || gamePlayer.Field?.Zones == null)
@@ -55,14 +41,12 @@ namespace TerraTCG.Common.UI.GameFieldUI
                          new IdleAnimation(zone, gameTime.TotalGameTime) : null;
                 }
             }
+            var mouseField = Main.MouseScreen - Position;
 
             // Check both players' fields
             foreach (var zone in gamePlayer.Game.AllZones())
             {
-                var yBounds = ProjectedFieldUtils.Instance.GetYBoundsForZone(gamePlayer, zone);
-                var xBounds = ProjectedFieldUtils.Instance.GetXBoundsForZone(gamePlayer, zone);
-
-                if (PerspectiveQuadContainsMouse(xBounds, yBounds))
+                if (ProjectedFieldUtils.Instance.ZoneContainsScreenVector(gamePlayer, zone, mouseField))
                 {
                     Main.LocalPlayer.mouseInterface = true;
                     gamePlayer.MouseoverCard = zone?.PlacedCard?.Template ?? gamePlayer.MouseoverCard;
@@ -81,31 +65,34 @@ namespace TerraTCG.Common.UI.GameFieldUI
             // Iterate backwards to layer closer zones on top of farther zones
             foreach (var zone in gamePlayer.Game.AllZones().Reverse())
             {
-                var lerpPoint = gamePlayer.Owns(zone) ? 0.3f : 0.8f;
-                var yPlacement = ProjectedFieldUtils.Instance.GetYBoundsForZone(gamePlayer, zone).Lerp(lerpPoint);
-                var xCenter = ProjectedFieldUtils.Instance.GetXBoundsForZone(gamePlayer, zone).Center;
-                var scale = ProjectedFieldUtils.Instance.GetScaleFactorAt(yPlacement);
-                xCenter *= scale;
-                zone.DrawNPC(spriteBatch, FieldOrigin + new Vector2(xCenter, yPlacement), scale);
+                var yLerpPoint = gamePlayer.Owns(zone) ? 0.3f : 0.8f;
+                var placement = ProjectedFieldUtils.Instance.WorldSpaceToScreenSpace(gamePlayer, zone, new(0.5f, yLerpPoint));
+                var scale = ProjectedFieldUtils.Instance.GetXScaleForZone(gamePlayer, zone, yLerpPoint);
+                zone.DrawNPC(spriteBatch, Position + placement, scale);
             }
         }
 
         private void DrawPlayerStats(SpriteBatch spriteBatch)
         {
+            var texture = TextureCache.Instance.PlayerStatsZone;
             // My player
             var gamePlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer;
-            var pos = FieldOrigin - new Vector2(
-                FieldRenderer.FIELD_WIDTH / 2 + FieldRenderer.CARD_MARGIN, 
-                TextureCache.Instance.PlayerStatsZone.Height() -
-                ProjectedFieldUtils.Instance.rowHeights.Last() * FieldRenderer.FIELD_HEIGHT);
+            var anchorZonePos = 
+                ProjectedFieldUtils.Instance.WorldSpaceToScreenSpace(gamePlayer, gamePlayer.Field.Zones[3], new(0, 1));
+
+            var pos = Position + new Vector2(
+                anchorZonePos.X - texture.Width(),
+                anchorZonePos.Y - texture.Height());
             PlayerStatRenderer.Instance.DrawPlayerStats(spriteBatch, pos, gamePlayer, 1f);
 
             // Opposing player
             var opponent = gamePlayer.Opponent;
-            var scale = ProjectedFieldUtils.Instance.widthScaleFactors[1];
-            var oppPos = FieldOrigin + new Vector2(
-                3 * FieldRenderer.FIELD_WIDTH / 8 - TextureCache.Instance.PlayerStatsZone.Width() * scale, 
-                ProjectedFieldUtils.Instance.rowHeights.First() * FieldRenderer.FIELD_HEIGHT);
+            var scale = ProjectedFieldUtils.Instance.GetXScaleForZone(gamePlayer, opponent.Field.Zones[3], 0f);
+            anchorZonePos = 
+                ProjectedFieldUtils.Instance.WorldSpaceToScreenSpace(gamePlayer, opponent.Field.Zones[3], new(1, 0));
+            var oppPos = Position + new Vector2(
+                anchorZonePos.X + FieldRenderer.CARD_MARGIN,
+                anchorZonePos.Y);
             PlayerStatRenderer.Instance.DrawPlayerStats(spriteBatch, oppPos, opponent, scale);
 
         }

@@ -21,12 +21,12 @@ namespace TerraTCG.Common.GameSystem.Drawing
 
         private BasicEffect effect;
 
-        private Matrix world = Matrix.CreateTranslation(0, 0, 0);
+        internal Matrix world = Matrix.CreateTranslation(0, 0, 0);
 
         // Look down and slightly offset from center at the field
-        private Matrix view = Matrix.CreateLookAt(new Vector3(0, -0.5f, 1) * 2.55f, new Vector3(0, 0, 0), new Vector3(0, 1, 0));
+        internal Matrix view = Matrix.CreateLookAt(new Vector3(0, -0.5f, 1) * 2.55f, new Vector3(0, 0, 0), new Vector3(0, 1, 0));
 
-        private Matrix projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45), 1, 0.01f, 100f);
+        internal Matrix projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45), 1, 0.01f, 100f);
 
         public const int FIELD_WIDTH = 482;
         public const int FIELD_HEIGHT = 528 + 48;

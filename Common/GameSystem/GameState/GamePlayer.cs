@@ -54,7 +54,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 
             Deck = new CardCollection()
             {
-                Cards = [Zombie.Instance.CreateCard(), Zombie.Instance.CreateCard(), Zombie.Instance.CreateCard()]
+                Cards = [Dryad.Instance.CreateCard(), Zombie.Instance.CreateCard(), Zombie.Instance.CreateCard()]
             };
 
             Field = new(game);

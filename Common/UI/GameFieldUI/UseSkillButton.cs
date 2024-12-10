@@ -29,12 +29,9 @@ namespace TerraTCG.Common.UI.GameFieldUI
             if(gamePlayer.SelectedFieldZone != null)
             {
                 var zone = gamePlayer.SelectedFieldZone;
-                var yPlacement = ProjectedFieldUtils.Instance.GetYBoundsForZone(gamePlayer, zone).Lerp(-0.2f);
-                var xCenter = ProjectedFieldUtils.Instance.GetXBoundsForZone(gamePlayer, zone).Center;
-                var scale = ProjectedFieldUtils.Instance.GetScaleFactorAt(yPlacement);
-                xCenter *= scale;
+                var placement = ProjectedFieldUtils.Instance.WorldSpaceToScreenSpace(gamePlayer, zone, new(0.5f, -0.2f));
+                var center = localPlayer.GameFieldPosition + placement;
 
-                var center = localPlayer.GameFieldOrigin + new Vector2(xCenter, yPlacement);
                 Left.Set(center.X, 0f);
                 Top.Set(center.Y, 0f);
             } else if (gamePlayer.SelectedHandCard != null)
