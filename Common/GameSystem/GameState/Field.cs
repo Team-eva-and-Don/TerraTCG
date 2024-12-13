@@ -43,7 +43,7 @@ namespace TerraTCG.Common.GameSystem.GameState
                 Zones[i].Draw(spriteBatch, offset, rotation);
             }
 
-            // Draw the deck
+            // Draw the deck zone
             var deckPosition = position + new Vector2(
                 (FieldRenderer.CARD_WIDTH + FieldRenderer.CARD_MARGIN) * (Zones.Count/2), 
                 FieldRenderer.CARD_HEIGHT + FieldRenderer.CARD_MARGIN).RotatedBy(rotation);
@@ -51,6 +51,17 @@ namespace TerraTCG.Common.GameSystem.GameState
             var bounds = texture.Value.Bounds;
             var origin = new Vector2(bounds.Width, bounds.Height) / 2;
             spriteBatch.Draw(texture.Value, deckPosition + origin, bounds, Color.White, rotation, origin, 1f, SpriteEffects.None, 0);
+            // Draw cards in deck (if any)
+            // TODO get my player some other way
+            var myPlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer;
+            var player = rotation == 0 ? myPlayer : myPlayer.Opponent;
+            int deckCount = player.Deck.Cards.Count;
+            for(int i = 0; i < deckCount; i++)
+            {
+                deckPosition += rotation == 0 ? new Vector2(2, -2) : new Vector2(-2, -2);
+                texture = TextureCache.Instance.CardBack;
+                spriteBatch.Draw(texture.Value, deckPosition + origin, bounds, Color.White, rotation, origin, 1f, SpriteEffects.None, 0);
+            }
         }
     }
 }

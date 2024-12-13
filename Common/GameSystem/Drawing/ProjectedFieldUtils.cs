@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Schema;
 using Terraria;
+using Terraria.GameContent.ObjectInteractions;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.GameState;
 
@@ -47,7 +48,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
             // need to account for mirroring of opponent's rows
             var zoneCount = player.Field.Zones.Count;
             int horizontalSlot;
-            int baseOffset = FieldRenderer.CARD_WIDTH + FieldRenderer.CARD_MARGIN;
+            int baseOffset = FieldRenderer.CARD_WIDTH + FieldRenderer.CARD_MARGIN + FieldRenderer.FIELD_MARGIN;
             if(player.Owns(zone))
             {
                 horizontalSlot = player.Field.Zones.IndexOf(zone) % (zoneCount / 2);
@@ -71,16 +72,16 @@ namespace TerraTCG.Common.GameSystem.Drawing
             // locations in texture space
             if(zoneIdx >= 0 && zoneIdx < zonesPerRow)
             {
-                y0 = FieldRenderer.FIELD_HEIGHT - FieldRenderer.CARD_MARGIN - 2 * FieldRenderer.CARD_HEIGHT;
+                y0 = FieldRenderer.FIELD_HEIGHT - FieldRenderer.CARD_MARGIN - 2 * FieldRenderer.CARD_HEIGHT - FieldRenderer.FIELD_MARGIN;
             } else if(zoneIdx >= 0 && zoneIdx >= zonesPerRow)
             {
-                y0 = FieldRenderer.FIELD_HEIGHT - FieldRenderer.CARD_HEIGHT;
+                y0 = FieldRenderer.FIELD_HEIGHT - FieldRenderer.CARD_HEIGHT - FieldRenderer.FIELD_MARGIN;
             } else if(oppZoneIdx >= 0 && oppZoneIdx < zonesPerRow)
             {
-                y0 = FieldRenderer.CARD_HEIGHT + FieldRenderer.CARD_MARGIN;
+                y0 = FieldRenderer.CARD_HEIGHT + FieldRenderer.CARD_MARGIN + FieldRenderer.FIELD_MARGIN;
             } else
             {
-                y0 = 0;
+                y0 = FieldRenderer.FIELD_MARGIN;
             }
             float y1 = y0 + FieldRenderer.CARD_HEIGHT;
             return new ProjBounds(y0, y1);

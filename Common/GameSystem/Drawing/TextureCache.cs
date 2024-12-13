@@ -23,6 +23,8 @@ namespace TerraTCG.Common.GameSystem.Drawing
 
         internal Asset<Texture2D> ZoneSelectable { get; private set; }
 
+        internal Asset<Texture2D> CardBack { get; private set; }
+
         internal Asset<Texture2D> OffenseIcon { get; private set; }
         internal Asset<Texture2D> DefenseIcon { get; private set; }
         internal Asset<Texture2D> HeartIcon { get; private set; }
@@ -41,6 +43,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
             Zone = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Zone");
             ZoneHighlighted = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Zone_Highlighted");
             ZoneSelectable = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Zone_Selectable");
+            CardBack = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Card_Back");
             OffenseIcon = Main.Assets.Request<Texture2D>("Images/UI/PVP_0");
             DefenseIcon = Main.Assets.Request<Texture2D>("Images/Item_" + ItemID.CobaltShield);
             HeartIcon = Main.Assets.Request<Texture2D>("Images/Item_" + ItemID.Heart);

@@ -28,12 +28,16 @@ namespace TerraTCG.Common.GameSystem.Drawing
 
         internal Matrix projection = Matrix.CreatePerspectiveFieldOfView(MathHelper.ToRadians(45), 1, 0.01f, 100f);
 
-        public const int FIELD_WIDTH = 482;
-        public const int FIELD_HEIGHT = 528 + 48;
-
+        public const int FIELD_MARGIN = 16; // space on all sides of the field for eg. animations
         public const int CARD_WIDTH = 90;
         public const int CARD_HEIGHT = 120;
         public const int CARD_MARGIN = 8;
+
+        public const int FIELD_GAP = 58; // space between fields so that the player sprite(batch) isn't covered up
+
+        public const int FIELD_WIDTH = 5 * CARD_WIDTH + 4 * CARD_MARGIN + 2 * FIELD_MARGIN;
+        public const int FIELD_HEIGHT = 4 * CARD_HEIGHT + 4 * CARD_MARGIN + FIELD_GAP + 2 * FIELD_MARGIN;
+
 
         // need to run this on the main thread
         public void OnEnterWorld()
@@ -104,11 +108,11 @@ namespace TerraTCG.Common.GameSystem.Drawing
         private void DrawGameField(GamePlayer player)
         {
             // Draw the current player's zones close to the camera
-            var playerFieldPos = new Vector2(CARD_WIDTH + CARD_MARGIN, FIELD_HEIGHT - 2 * CARD_HEIGHT - CARD_MARGIN);
+            var playerFieldPos = new Vector2(CARD_WIDTH + CARD_MARGIN + FIELD_MARGIN, FIELD_HEIGHT - 2 * CARD_HEIGHT - CARD_MARGIN - FIELD_MARGIN);
             player.Field.Draw(Main.spriteBatch, playerFieldPos, 0f);
 
             // Draw the opposing player's zones far from the camera
-            var opponentFieldPos = new Vector2(3 * (CARD_WIDTH + CARD_MARGIN), CARD_HEIGHT + CARD_MARGIN);
+            var opponentFieldPos = new Vector2(3 * (CARD_WIDTH + CARD_MARGIN) + FIELD_MARGIN, CARD_HEIGHT + CARD_MARGIN + FIELD_MARGIN);
             player.Opponent.Field.Draw(Main.spriteBatch, opponentFieldPos, MathF.PI);
         }
 
