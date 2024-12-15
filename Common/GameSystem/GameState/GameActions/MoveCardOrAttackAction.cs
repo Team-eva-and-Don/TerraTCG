@@ -68,7 +68,11 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             var currTime = Main._drawInterfaceGameTime.TotalGameTime;
             // attack opposing field
             var prevHealth = endZone.PlacedCard.CurrentHealth;
-            var attack = startZone.PlacedCard.Template.Attacks[0];
+            var attack = startZone.PlacedCard.Template.Attacks[0].Copy();
+            foreach (var modifier in startZone.PlacedCard.CardModifiers)
+            {
+                modifier.ModifyAttack(ref attack, startZone, endZone);
+            }
             attack.DoAttack(attack, startZone, endZone);
 
             player.Resources = player.Resources.UseResource(mana: startZone.PlacedCard.Template.Attacks[0].Cost);

@@ -21,5 +21,17 @@ namespace TerraTCG.Common.GameSystem.GameState
         {
             targetZone.PlacedCard.CurrentHealth -= attack.Damage;
         }
+
+        internal Attack Copy()
+        {
+            return new Attack() 
+            {
+                Name = Name,
+                Description = Description,
+                Damage = Damage,
+                Cost = Cost,
+                DoAttack = DoAttack
+            };
+        }
     }
 }

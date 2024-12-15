@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.GameState;
+using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
@@ -15,22 +16,20 @@ namespace TerraTCG.Common.GameSystem.CardData
         public Card CreateCard() => new ()
         {
             Name = "DemonEye",
-            MaxHealth = 60,
+            MaxHealth = 6,
             MoveCost = 2,
             CardType = CardType.CREATURE,
             NPCID = NPCID.DemonEye,
             SubTypes = [CardSubtype.FOREST, CardSubtype.EYE],
             Attacks = [
                 new() {
-                    Damage = 20,
+                    Damage = 2,
                     Cost = 2,
                     Description = "H"
                 }
             ],
             Modifiers = [
-                new() {
-                    Description = "Evasive",
-                }
+                new EvasiveModifier(),
             ]
         };
     }

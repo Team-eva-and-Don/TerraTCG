@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.GameState;
+using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
@@ -15,21 +16,19 @@ namespace TerraTCG.Common.GameSystem.CardData
         public Card CreateCard() => new ()
         {
             Name = "Bat",
-            MaxHealth = 50,
+            MaxHealth = 5,
             MoveCost = 2,
             CardType = CardType.CREATURE,
             NPCID = NPCID.CaveBat,
             SubTypes = [CardSubtype.CAVERN, CardSubtype.BAT],
             Attacks = [
                 new() {
-                    Damage = 30,
+                    Damage = 3,
                     Cost = 2,
                 }
             ],
             Modifiers = [
-                new() {
-                    Description = "Evasive",
-                }
+                new EvasiveModifier(),
             ]
         };
     }

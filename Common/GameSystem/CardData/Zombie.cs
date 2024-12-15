@@ -15,7 +15,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         public Card CreateCard() => new ()
         {
             Name = "Zombie",
-            MaxHealth = 70,
+            MaxHealth = 7,
             MoveCost = 2,
             NPCID = NPCID.Zombie,
             CardType = CardType.CREATURE,
@@ -23,7 +23,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             Attacks = [
                 new() {
                     Name = "Diseased Bite",
-                    Damage = 30,
+                    Damage = 3,
                     Cost = 2,
                 }
             ]

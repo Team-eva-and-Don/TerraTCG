@@ -15,7 +15,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         public Card CreateCard() => new ()
         {
             Name = "Bunny",
-            MaxHealth = 40,
+            MaxHealth = 4,
             MoveCost = 1,
             CardType = CardType.CREATURE,
             NPCID = NPCID.Bunny,
@@ -23,7 +23,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             Attacks = [
                 new() {
                     Name = "Bunny Kick",
-                    Damage = 10,
+                    Damage = 1,
                     Cost = 1,
                 }
             ],

@@ -45,6 +45,19 @@ Cards: {
 			'''
 	}
 
+	CopperShortsword: {
+		Name: Copper Short Sword
+
+		Skill: {
+			Name: Equip
+			Description:
+				'''
+				Equipped creature
+				deals +1 damage
+				'''
+		}
+	}
+
 	Bunny: {
 		Name: Bunny
 		Attack.Name: Bunny Kick
@@ -80,6 +93,7 @@ Cards: {
 		CRITTER: Critter
 		EYE: Eye
 		BAT: Bat
+		EQUIPMENT: Equipment
 	}
 
 	GameActions.EndTurn: Pass

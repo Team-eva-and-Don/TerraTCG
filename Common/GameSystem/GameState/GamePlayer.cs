@@ -49,7 +49,7 @@ namespace TerraTCG.Common.GameSystem.GameState
             Game = game;
             Hand = new CardCollection()
             {
-                Cards = [Zombie.Instance.CreateCard(), OldMan.Instance.CreateCard(), DemonEye.Instance.CreateCard(), Bunny.Instance.CreateCard()]
+                Cards = [Zombie.Instance.CreateCard(), CopperShortsword.Instance.CreateCard(), DemonEye.Instance.CreateCard(), Bunny.Instance.CreateCard(), Dryad.Instance.CreateCard()]
             };
 
             Deck = new CardCollection()

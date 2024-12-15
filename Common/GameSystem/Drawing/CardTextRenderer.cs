@@ -200,8 +200,14 @@ namespace TerraTCG.Common.GameSystem.Drawing
             // Skill Description
             if(card.HasSkillDescription)
             {
-                var skillTextOffset = new Vector2(1.5f * MARGIN_L, startY + heightInfo.skillDescriptionHeight);
-                DrawString(spriteBatch, card.SkillDescription, position + skillTextOffset * scale, Color.Black, scale * SmallTextScale);
+                var rowY = startY + heightInfo.skillDescriptionHeight;
+                var skillLines = card.SkillDescription.Split("\n");
+                foreach (var line in skillLines)
+                {
+                    var posOffset = new Vector2(1.5f * MARGIN_L, rowY);
+                    DrawString(spriteBatch, line, position + posOffset * scale, Color.Black, SmallTextScale * scale);
+                    rowY += SmallTextHeight;
+                }
             }
 
             // Attack

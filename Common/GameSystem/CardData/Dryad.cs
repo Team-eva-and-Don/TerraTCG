@@ -7,6 +7,7 @@ using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.GameSystem.GameState.GameActions;
+using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
@@ -20,10 +21,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             SubTypes = [CardSubtype.TOWNSFOLK],
             SelectInHandAction = (card, player) => new BounceCardAction(card, player),
             Modifiers = [
-                new() {
-                    // TODO this should probably not be empty, just used to set the flag
-                    // to draw modifier text
-                }
+                new NoOpModifier() 
             ]
         };
     }

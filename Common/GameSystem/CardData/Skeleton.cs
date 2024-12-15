@@ -15,7 +15,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         public Card CreateCard() => new ()
         {
             Name = "Skeleton",
-            MaxHealth = 80,
+            MaxHealth = 8,
             MoveCost = 2,
             NPCID = NPCID.Skeleton,
             CardType = CardType.CREATURE,
@@ -23,7 +23,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             Attacks = [
                 new() {
                     Name = "Bone Break",
-                    Damage = 40,
+                    Damage = 4,
                     Cost = 3,
                 }
             ]

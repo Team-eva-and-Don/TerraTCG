@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.GameState
 {
@@ -11,5 +12,8 @@ namespace TerraTCG.Common.GameSystem.GameState
         internal Card Template { get; set; } = template;
 
         internal int CurrentHealth { get; set; } = template.MaxHealth;
+
+        internal List<ICardModifier> CardModifiers { get; set; } = [];
+
     }
 }
