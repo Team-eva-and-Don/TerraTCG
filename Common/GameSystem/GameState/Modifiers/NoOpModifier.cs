@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +10,7 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
 {
     internal class NoOpModifier : ICardModifier
     {
-        public string Texture => "";
+        public Asset<Texture2D> Texture => null;
 
         public string Description => "";
     }

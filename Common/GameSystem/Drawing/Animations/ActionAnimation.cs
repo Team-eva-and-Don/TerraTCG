@@ -23,7 +23,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
         {
             var posOffset = baseScale * (-5f + 5f * MathF.Cos(2*MathF.Tau * (float) (ElapsedTime.TotalSeconds / Duration.TotalSeconds)));
             AnimationUtils.DrawZoneNPC(spriteBatch, zone, basePosition + new Vector2(0, posOffset), baseScale);
-            AnimationUtils.DrawZoneNPCHealth(spriteBatch, zone, basePosition, baseScale);
+            AnimationUtils.DrawZoneNPCStats(spriteBatch, zone, basePosition, baseScale);
         }
 
         public bool IsComplete() => ElapsedTime > Duration;

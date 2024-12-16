@@ -70,7 +70,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             if(rotation == 0)
             {
                 // If the card is rotated towards the player, draw its text
-                CardTextRenderer.Instance.DrawCardText(spriteBatch, card, position, Zone.CARD_DRAW_SCALE);
+                // CardTextRenderer.Instance.DrawCardText(spriteBatch, card, position, Zone.CARD_DRAW_SCALE);
             } 
         }
 
@@ -88,7 +88,8 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
                 (byte)MathHelper.Lerp(end.G, start.G, lerpPoint),
                 (byte)MathHelper.Lerp(end.B, start.B, lerpPoint));
         }
-        public static void DrawZoneNPCHealth(
+
+        public static void DrawZoneNPCStats(
             SpriteBatch spriteBatch, 
             Zone zone, 
             Vector2 position, 
@@ -96,39 +97,53 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             float fontScale = 1f, 
             float transparency = 1f, 
             int? health = null,
-            Card card = null)
+            PlacedCard card = null)
         {
-            var npcId = card?.NPCID ?? zone.PlacedCard?.Template?.NPCID ?? 0;
+            // Health
+            var npcId = card?.Template?.NPCID ?? zone.PlacedCard?.Template?.NPCID ?? 0;
             if(npcId == 0)
             {
                 return;
             }
 
             health ??= zone.PlacedCard?.CurrentHealth ?? 0;
+            var attack = (card ?? zone.PlacedCard).GetAttackWithModifiers(zone, null); // TODO don't explicitly pass null
 
             var font = FontAssets.ItemStack.Value;
             var vMargin = -4f;
 
             var texture = TextureCache.Instance.GetNPCTexture(npcId);
             var bounds = texture.Frame(1, Main.npcFrameCount[npcId], 0, 0);
-            var npcOffset = new Vector2(-bounds.Width / 2, bounds.Height + vMargin) * scale;
 
+            var localPlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>();
+            var gamePlayer = localPlayer.GamePlayer;
             // right-justify health above the NPC
-            var textOffset = font.MeasureString($"{health}");
-
-            var textPos = position - npcOffset - textOffset;
-            // Draw a black border for the text, then the text proper
-            foreach(var offset in new Vector2[] {Vector2.UnitX, Vector2.UnitY })
             {
-                spriteBatch.DrawString(font, $"{health}", textPos + offset, Color.Black * transparency, 0, Vector2.Zero, fontScale, SpriteEffects.None, 0);
-                spriteBatch.DrawString(font, $"{health}", textPos - offset, Color.Black * transparency, 0, Vector2.Zero, fontScale, SpriteEffects.None, 0);
+                var zoneOffset = gamePlayer.Owns(zone) ? new Vector2(0.75f, 1.05f) : new Vector2(0.75f, 0.4f);
+                var placement = ProjectedFieldUtils.Instance.WorldSpaceToScreenSpace(gamePlayer, zone, zoneOffset);
+                var center = localPlayer.GameFieldPosition + placement;
+                var textOffset = font.MeasureString($"{health}");
+                var textPos = center - textOffset;
+                var color = GetNPCHealthColor((int)health, (card?.Template ?? zone.PlacedCard.Template).MaxHealth);
+                CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, $"{health}", textPos, color * transparency, fontScale);
+                var heartPos = center - new Vector2(-4, textOffset.Y);
+                var heartTexture = TextureCache.Instance.HeartIcon.Value;
+                spriteBatch.Draw(heartTexture, heartPos, heartTexture.Bounds, Color.White * transparency, 0, default, 0.75f * fontScale, SpriteEffects.None, 0);
             }
-            var color = GetNPCHealthColor((int)health, (card ?? zone.PlacedCard.Template).MaxHealth);
-            spriteBatch.DrawString(font, $"{health}", textPos, color * transparency, 0, Vector2.Zero, fontScale, SpriteEffects.None, 0);
 
-            var heartPos = position - npcOffset - new Vector2(-4, textOffset.Y);
-            var heartTexture = TextureCache.Instance.HeartIcon.Value;
-            spriteBatch.Draw(heartTexture, heartPos, heartTexture.Bounds, Color.White * transparency, 0, default, 0.75f * fontScale, SpriteEffects.None, 0);
+            // left-justify attack damage above npc
+            {
+                var zoneOffset = gamePlayer.Owns(zone) ? new Vector2(0.1f, 1.05f) : new Vector2(0.15f, 0.4f);
+                var placement = ProjectedFieldUtils.Instance.WorldSpaceToScreenSpace(gamePlayer, zone, zoneOffset);
+                var center = localPlayer.GameFieldPosition + placement;
+                var textOffset = font.MeasureString($"{attack.Damage}");
+                var textPos = center - textOffset;
+                CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, $"{attack.Damage}", textPos, Color.White * transparency, fontScale);
+                var swordPos = textPos + new Vector2(textOffset.X, 0);
+                var swordTexture = TextureCache.Instance.AttackIcon.Value;
+                spriteBatch.Draw(swordTexture, swordPos, swordTexture.Bounds, Color.White * transparency, 0, default, fontScale, SpriteEffects.None, 0);
+            }
+
         }
     }
 }

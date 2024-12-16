@@ -60,7 +60,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             var currentX = MathHelper.Lerp(basePosition.X, Destination.X, lerpPoint);
             var currentY = MathHelper.Lerp(basePosition.Y, Destination.Y, lerpPoint);
             AnimationUtils.DrawZoneNPC(spriteBatch, zone, new(currentX, currentY), baseScale, frame: frame);
-            AnimationUtils.DrawZoneNPCHealth(spriteBatch, zone, basePosition, baseScale);
+            AnimationUtils.DrawZoneNPCStats(spriteBatch, zone, basePosition, baseScale);
         }
 
         public bool IsComplete() =>

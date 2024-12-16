@@ -28,7 +28,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             var scale = MathHelper.Lerp(0, baseScale, (float) (ElapsedTime.TotalSeconds/ Duration.TotalSeconds));
             var transparency = Math.Min(1, (float)(ElapsedTime.TotalSeconds/ Duration.TotalSeconds));
             AnimationUtils.DrawZoneNPC(spriteBatch, zone, basePosition, scale, Color.White * transparency);
-            AnimationUtils.DrawZoneNPCHealth(spriteBatch, zone, basePosition, baseScale, transparency: transparency);
+            AnimationUtils.DrawZoneNPCStats(spriteBatch, zone, basePosition, baseScale, transparency: transparency);
         }
 
         public bool IsComplete() =>

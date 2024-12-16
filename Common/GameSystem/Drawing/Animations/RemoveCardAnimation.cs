@@ -29,13 +29,13 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             var transparency = Math.Max(0, 1 - (float)(ElapsedTime.TotalSeconds/ Duration.TotalSeconds));
             AnimationUtils.DrawZoneNPC(
                 spriteBatch, zone, basePosition, scale, Color.White * transparency, card: leavingCard.Template);
-            AnimationUtils.DrawZoneNPCHealth(
+            AnimationUtils.DrawZoneNPCStats(
                 spriteBatch, 
                 zone, 
                 basePosition, 
                 baseScale, 
                 transparency: transparency, 
-                card: leavingCard.Template,
+                card: leavingCard,
                 health: leavingCard.CurrentHealth);
         }
 

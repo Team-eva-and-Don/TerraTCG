@@ -32,14 +32,14 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
                 var health = MathHelper.Lerp(startHealth, zone.PlacedCard.CurrentHealth, 2 * (float)(ElapsedTime.TotalSeconds - impactTime.TotalSeconds));
                 var transparency = sign > 0 ? 0.8f : 0.6f;
                 AnimationUtils.DrawZoneNPC(spriteBatch, zone, basePosition, baseScale, Color.White * transparency);
-                AnimationUtils.DrawZoneNPCHealth(spriteBatch, zone, basePosition, baseScale, health: (int)health);
+                AnimationUtils.DrawZoneNPCStats(spriteBatch, zone, basePosition, baseScale, health: (int)health);
             } else
             {
                 // TODO is this too hacky - keep the same floating cycle as the previous idle animation
                 var idleElapsed = Main._drawInterfaceGameTime.TotalGameTime - previousStartTime;
                 var posOffset = baseScale * 3f * MathF.Sin(MathF.Tau * (float) (idleElapsed.TotalSeconds / IdlePeriod.TotalSeconds));
                 AnimationUtils.DrawZoneNPC(spriteBatch, zone, basePosition + new Vector2(0, posOffset), baseScale);
-                AnimationUtils.DrawZoneNPCHealth(spriteBatch, zone, basePosition, baseScale, health: startHealth);
+                AnimationUtils.DrawZoneNPCStats(spriteBatch, zone, basePosition, baseScale, health: startHealth);
             }
         }
 

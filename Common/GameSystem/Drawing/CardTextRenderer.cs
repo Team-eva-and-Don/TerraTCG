@@ -43,6 +43,13 @@ namespace TerraTCG.Common.GameSystem.Drawing
         float BaseTextHeight = 0;
         float SmallTextHeight = 0;
 
+        public Vector2 MPIconSize {
+             get {
+                var texture = TextureCache.Instance.ManaIcon.Value;
+                return new Vector2(texture.Width, texture.Height) * MPIconScale;
+            } 
+        }
+
         public void DrawString(
             SpriteBatch spriteBatch, string text, Vector2 position, Color? color = null, float scale = 1f, bool centered = false, SpriteEffects effects = SpriteEffects.None)
         {
@@ -77,11 +84,6 @@ namespace TerraTCG.Common.GameSystem.Drawing
             DrawStringWithBorder(spriteBatch, $"{cost}", position + textOrigin * scale, scale: scale * SmallTextScale, centered: true);
         }
 
-        public Vector2 GetManaCostSize()
-        {
-            var texture = TextureCache.Instance.ManaIcon.Value;
-            return new Vector2(texture.Width, texture.Height) * MPIconScale;
-        }
         
         private void DrawCardTopLine(SpriteBatch spriteBatch, Card card, Vector2 position, float scale = 1f)
         {
@@ -163,8 +165,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
 
             var startY = centerOfBody - heightInfo.height / 2;
 
-            var manaSize = GetManaCostSize();
-            var baseTextX = 1.5f * MARGIN_L + manaSize.X;
+            var baseTextX = 1.5f * MARGIN_L + MPIconSize.X;
 
             // Modifier
             if(card.HasModifier)
@@ -220,9 +221,17 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 DrawManaCost(spriteBatch, attack.Cost, position + manaOffset * scale, scale);
                 DrawString(spriteBatch, card.AttackName, position + attackTextOffset * scale, Color.Black, scale * BaseTextScale);
 
+
+                var attackIcon = TextureCache.Instance.AttackIcon.Value;
+                var attackIconWidth = attackIcon.Bounds.Width * MPIconScale;
+
                 var dmgBounds = font.MeasureString($"{attack.Damage}") * BaseTextScale;
-                var dmgOffset = new Vector2(bounds.Width - dmgBounds.X - 1.5f * MARGIN_L, attackRowHeight);
+                var dmgOffset = new Vector2(bounds.Width - dmgBounds.X - 1.25f * MARGIN_L - attackIconWidth, attackRowHeight);
                 DrawString(spriteBatch, $"{attack.Damage}", position + dmgOffset * scale, Color.Black, scale * BaseTextScale);
+
+                var attackIconOffset = new Vector2(bounds.Width - MARGIN_L - attackIconWidth, attackRowHeight);
+                spriteBatch.Draw(
+                    attackIcon, position + attackIconOffset * scale, attackIcon.Bounds, Color.White, 0, default, scale * HPIconScale, SpriteEffects.None, 0);
             }
             // Attack Description
             if(card.HasAttackDescription)

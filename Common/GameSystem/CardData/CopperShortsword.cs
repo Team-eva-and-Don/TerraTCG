@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria.ID;
 using Terraria.ModLoader;
+using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.GameSystem.GameState.GameActions;
 using TerraTCG.Common.GameSystem.GameState.Modifiers;
@@ -24,7 +25,9 @@ namespace TerraTCG.Common.GameSystem.CardData
                 new() { Cost = 1 }
             ],
             Modifiers = [
-                new FlatDamageModifier(1) 
+                new FlatDamageModifier(1)  {
+                    Texture = TextureCache.Instance.GetItemTexture(ItemID.CopperShortsword),
+                }
             ]
         };
     }

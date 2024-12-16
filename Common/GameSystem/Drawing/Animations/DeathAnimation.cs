@@ -50,13 +50,13 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
                 var scale = MathHelper.Lerp(baseScale, 0, fadeProgress);
                 AnimationUtils.DrawZoneNPC(
                     spriteBatch, zone, basePosition, scale, Color.White * transparency, card: leavingCard.Template);
-                AnimationUtils.DrawZoneNPCHealth(
+                AnimationUtils.DrawZoneNPCStats(
                     spriteBatch, 
                     zone, 
                     basePosition, 
                     baseScale, 
                     health: leavingCard.CurrentHealth, 
-                    card: leavingCard.Template);
+                    card: leavingCard);
             } else if (ElapsedTime >= impactTime)
             {
                 // flash the npc transparent as when the player takes damage
@@ -64,7 +64,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
                 var health = MathHelper.Lerp(startHealth, leavingCard.CurrentHealth, 2 * (float)(ElapsedTime.TotalSeconds - impactTime.TotalSeconds));
                 var transparency = sign > 0 ? 0.8f : 0.6f;
                 AnimationUtils.DrawZoneNPC(spriteBatch, zone, basePosition, baseScale, Color.White * transparency, card: leavingCard.Template);
-                AnimationUtils.DrawZoneNPCHealth(spriteBatch, zone, basePosition, baseScale, health: (int)health, card: leavingCard.Template);
+                AnimationUtils.DrawZoneNPCStats(spriteBatch, zone, basePosition, baseScale, health: (int)health, card: leavingCard);
             } else
             {
                 // TODO is this too hacky - keep the same floating cycle as the previous idle animation
@@ -76,13 +76,13 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
                     basePosition + new Vector2(0, posOffset), 
                     baseScale, 
                     card: leavingCard.Template);
-                AnimationUtils.DrawZoneNPCHealth(
+                AnimationUtils.DrawZoneNPCStats(
                     spriteBatch, 
                     zone, 
                     basePosition, 
                     baseScale, 
                     health: startHealth, 
-                    card: leavingCard.Template);
+                    card: leavingCard);
             }
         }
 
