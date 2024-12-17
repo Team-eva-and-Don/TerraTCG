@@ -83,11 +83,11 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             startZone.Animation = new MeleeAttackAnimation(startZone, endZone, currTime);
             if(endZone.PlacedCard.CurrentHealth > 0)
             {
-                endZone.Animation = new TakeDamageAnimation(endZone, currTime, TimeSpan.FromSeconds(0.5f), prevHealth, endZone.Animation.StartTime);
+                endZone.Animation = new TakeDamageAnimation(endZone, currTime, TimeSpan.FromSeconds(0.5f), prevHealth);
             } else
             {
                 endZone.Animation = new DeathAnimation(
-                    endZone, currTime, TimeSpan.FromSeconds(0.5f), prevHealth, endZone.PlacedCard, endZone.Animation.StartTime);
+                    endZone, currTime, TimeSpan.FromSeconds(0.5f), prevHealth, endZone.PlacedCard);
                 endZone.Owner.Resources = endZone.Owner.Resources.UseResource(health: 1);
                 endZone.PlacedCard = null;
             }

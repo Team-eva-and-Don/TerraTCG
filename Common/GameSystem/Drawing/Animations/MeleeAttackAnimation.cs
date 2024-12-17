@@ -16,6 +16,9 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
         private TimeSpan Duration { get; } = TimeSpan.FromSeconds(1f);
         private TimeSpan ElapsedTime => Main._drawInterfaceGameTime.TotalGameTime - StartTime;
 
+        private float WindupDuration => (float)Duration.TotalSeconds * 0.25f;
+        private float SwingDuration => (float)Duration.TotalSeconds * 0.5f;
+
         private Vector2 Destination
         {
             get
@@ -28,23 +31,31 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             }
         }
 
-        public void DrawZone(SpriteBatch spriteBatch, Vector2 basePosition, float rotation) =>
-            AnimationUtils.DrawZoneCard(spriteBatch, zone, basePosition, rotation);
+        public void DrawZone(SpriteBatch spriteBatch, Vector2 basePosition, float rotation) {
+            var drawColor = Color.White;
+            if(ElapsedTime.TotalSeconds > WindupDuration + SwingDuration)
+            {
+                var colorLerp = (ElapsedTime.TotalSeconds - (WindupDuration + SwingDuration)) / WindupDuration;
+                drawColor = Color.Lerp(Color.White, Color.LightGray, (float)colorLerp);
+            }
+            AnimationUtils.DrawZoneCard(spriteBatch, zone, basePosition, rotation, drawColor);
+        }
 
         public void DrawZoneOverlay(SpriteBatch spriteBatch, Vector2 basePosition, float baseScale)
         {
-            var windupDuration = Duration.TotalSeconds * 0.25f;
-            var swingDuration = 0.5f * Duration.TotalSeconds;
             float lerpPoint;
-            if(ElapsedTime.TotalSeconds <= windupDuration)
+            var drawColor = Color.White;
+            if(ElapsedTime.TotalSeconds <= WindupDuration)
             {
-                lerpPoint = -0.25f * MathF.Sin(MathF.PI * (float) (ElapsedTime.TotalSeconds / windupDuration));
-            } else if (ElapsedTime.TotalSeconds <= windupDuration + swingDuration)
+                lerpPoint = -0.25f * MathF.Sin(MathF.PI * (float) (ElapsedTime.TotalSeconds / WindupDuration));
+            } else if (ElapsedTime.TotalSeconds <= WindupDuration + SwingDuration)
             {
-                lerpPoint = MathF.Sin(MathF.PI * (float) ((ElapsedTime.TotalSeconds - windupDuration) / swingDuration));
+                lerpPoint = MathF.Sin(MathF.PI * (float) ((ElapsedTime.TotalSeconds - WindupDuration) / SwingDuration));
             } else
             {
-                lerpPoint = -0.25f * MathF.Sin(MathF.PI * (float) ((ElapsedTime.TotalSeconds - (windupDuration + swingDuration)) / windupDuration));
+                var colorLerp = (ElapsedTime.TotalSeconds - (WindupDuration + SwingDuration)) / WindupDuration;
+                drawColor = Color.Lerp(Color.White, Color.LightGray, (float)colorLerp);
+                lerpPoint = -0.25f * MathF.Sin(MathF.PI * (float) ((ElapsedTime.TotalSeconds - (WindupDuration + SwingDuration)) / WindupDuration));
             }
 
             // Do two walk cycles in the span of the animation
@@ -59,7 +70,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
 
             var currentX = MathHelper.Lerp(basePosition.X, Destination.X, lerpPoint);
             var currentY = MathHelper.Lerp(basePosition.Y, Destination.Y, lerpPoint);
-            AnimationUtils.DrawZoneNPC(spriteBatch, zone, new(currentX, currentY), baseScale, frame: frame);
+            AnimationUtils.DrawZoneNPC(spriteBatch, zone, new(currentX, currentY), baseScale, color: drawColor, frame: frame);
             AnimationUtils.DrawZoneNPCStats(spriteBatch, zone, basePosition, baseScale);
         }
 

@@ -21,16 +21,18 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
 
         public void DrawZone(SpriteBatch spriteBatch, Vector2 basePosition, float rotation)
         {
-            AnimationUtils.DrawZoneCard(spriteBatch, zone, basePosition, rotation);
+            var zoneColor = zone.PlacedCard.IsExerted ? Color.LightGray : Color.White;
+            AnimationUtils.DrawZoneCard(spriteBatch, zone, basePosition, rotation, zoneColor);
         }
 
         public void DrawZoneOverlay(SpriteBatch spriteBatch, Vector2 basePosition, float baseScale)
         {
-            var posOffset = baseScale * 3f * MathF.Sin(MathF.Tau * (float) (ElapsedTime.TotalSeconds / Period.TotalSeconds));
+            var posOffset = IdleAnimation.IdleHoverPos(zone.PlacedCard, baseScale);
+            var zoneColor = IdleAnimation.OverlayColor(zone.PlacedCard);
             var lerpPoint = (float)(ElapsedTime.TotalSeconds < 1f ? 0f : 4f * (ElapsedTime.TotalSeconds - 1f));
             var itemOffset = MathHelper.Lerp(48f, 0f, lerpPoint) + posOffset;
             DrawLightRays(spriteBatch, basePosition - Vector2.UnitY * itemOffset, baseScale * (1 - lerpPoint));
-            AnimationUtils.DrawZoneNPC(spriteBatch, zone, basePosition + Vector2.UnitY * posOffset, baseScale);
+            AnimationUtils.DrawZoneNPC(spriteBatch, zone, basePosition + Vector2.UnitY * posOffset, baseScale, zoneColor);
             AnimationUtils.DrawZoneNPCStats(spriteBatch, zone, basePosition, baseScale);
 
             // Draw the item itself on top of everything
@@ -38,7 +40,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             var bounds = texture.Bounds;
             var origin = new Vector2(bounds.Width, bounds.Height) / 2;
             spriteBatch.Draw(texture, basePosition - Vector2.UnitY * itemOffset, bounds,
-                Color.White, 0f,
+                zoneColor, 0f,
                 origin, baseScale * (1 - lerpPoint), 0, 0);
         }
 

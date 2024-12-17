@@ -17,8 +17,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
         TimeSpan startTime, 
         TimeSpan impactTime, 
         int startHealth, 
-        PlacedCard leavingCard,
-        TimeSpan previousStartTime) : IAnimation
+        PlacedCard leavingCard) : IAnimation
     {
         public TimeSpan StartTime { get; } = startTime;
         internal TimeSpan Duration { get; } = TimeSpan.FromSeconds(1.25f);
@@ -37,23 +36,26 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
                 var fadeProgress = (float)((ElapsedTime - FadeOutTime).TotalSeconds / (Duration - FadeOutTime).TotalSeconds);
                 transparency = Math.Max(0, 1 - fadeProgress);
             }
+            var zoneColor = IdleAnimation.ZoneColor(leavingCard);
             AnimationUtils.DrawZoneCard(
-                spriteBatch, zone, basePosition, rotation, color: Color.White * transparency, card:leavingCard.Template);
+                spriteBatch, zone, basePosition, rotation, color: zoneColor * transparency, card:leavingCard.Template);
         }
 
         public void DrawZoneOverlay(SpriteBatch spriteBatch, Vector2 basePosition, float baseScale)
         {
+            var posOffset = IdleAnimation.IdleHoverPos(leavingCard, baseScale);
+            var zoneColor = IdleAnimation.OverlayColor(leavingCard);
             if(ElapsedTime >= FadeOutTime) {
                 // fade the NPC out after death
                 var fadeProgress = (float)((ElapsedTime - FadeOutTime).TotalSeconds / (Duration - FadeOutTime).TotalSeconds);
                 var transparency = Math.Max(0, 1 - fadeProgress);
                 var scale = MathHelper.Lerp(baseScale, 0, fadeProgress);
                 AnimationUtils.DrawZoneNPC(
-                    spriteBatch, zone, basePosition, scale, Color.White * transparency, card: leavingCard.Template);
+                    spriteBatch, zone, basePosition, scale, zoneColor * transparency, card: leavingCard.Template);
                 AnimationUtils.DrawZoneNPCStats(
                     spriteBatch, 
                     zone, 
-                    basePosition, 
+                    basePosition + new Vector2(0, posOffset), 
                     baseScale, 
                     health: leavingCard.CurrentHealth, 
                     card: leavingCard);
@@ -63,18 +65,17 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
                 var sign = MathF.Sin(8f * MathF.Tau * (float)ElapsedTime.TotalSeconds);
                 var health = MathHelper.Lerp(startHealth, leavingCard.CurrentHealth, 2 * (float)(ElapsedTime.TotalSeconds - impactTime.TotalSeconds));
                 var transparency = sign > 0 ? 0.8f : 0.6f;
-                AnimationUtils.DrawZoneNPC(spriteBatch, zone, basePosition, baseScale, Color.White * transparency, card: leavingCard.Template);
+                AnimationUtils.DrawZoneNPC(spriteBatch, zone, basePosition, baseScale, zoneColor * transparency, card: leavingCard.Template);
                 AnimationUtils.DrawZoneNPCStats(spriteBatch, zone, basePosition, baseScale, health: (int)health, card: leavingCard);
             } else
             {
                 // TODO is this too hacky - keep the same floating cycle as the previous idle animation
-                var idleElapsed = Main._drawInterfaceGameTime.TotalGameTime - previousStartTime;
-                var posOffset = baseScale * 3f * MathF.Sin(MathF.Tau * (float) (idleElapsed.TotalSeconds / IdlePeriod.TotalSeconds));
                 AnimationUtils.DrawZoneNPC(
                     spriteBatch, 
                     zone, 
                     basePosition + new Vector2(0, posOffset), 
                     baseScale, 
+                    zoneColor,
                     card: leavingCard.Template);
                 AnimationUtils.DrawZoneNPCStats(
                     spriteBatch, 

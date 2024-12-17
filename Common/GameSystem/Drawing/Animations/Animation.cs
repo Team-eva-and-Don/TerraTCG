@@ -34,7 +34,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             Zone zone, 
             Vector2 position, 
             float scale, 
-            Color? color = null, 
+            Color? color, 
             int frame = 0, 
             Card card = null)
         {
@@ -53,7 +53,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
         }
 
         public static void DrawZoneCard(
-            SpriteBatch spriteBatch, Zone zone, Vector2 position, float rotation, Color? color = default, Card card = null)
+            SpriteBatch spriteBatch, Zone zone, Vector2 position, float rotation, Color? color, Card card = null)
         {
             card ??= zone.PlacedCard?.Template;
             var texture = card?.Texture;
@@ -84,10 +84,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
 
             float lerpPoint = healthFraction > 0.5f ? (2 * (healthFraction - 0.5f)) : 2 * healthFraction;
 
-            return new Color(
-                (byte)MathHelper.Lerp(end.R, start.R, lerpPoint),
-                (byte)MathHelper.Lerp(end.G, start.G, lerpPoint),
-                (byte)MathHelper.Lerp(end.B, start.B, lerpPoint));
+            return start.Lerp(end, lerpPoint);
         }
 
         public static void DrawZoneNPCStats(
@@ -145,6 +142,17 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
                 spriteBatch.Draw(swordTexture, swordPos, swordTexture.Bounds, Color.White * transparency, 0, default, fontScale, SpriteEffects.None, 0);
             }
 
+        }
+    }
+
+    internal static class ColorUtil
+    {
+        internal static Color Lerp(this Color start, Color end, float lerpPoint)
+        {
+            return new Color(
+                (byte)MathHelper.Lerp(end.R, start.R, lerpPoint),
+                (byte)MathHelper.Lerp(end.G, start.G, lerpPoint),
+                (byte)MathHelper.Lerp(end.B, start.B, lerpPoint));
         }
     }
 }

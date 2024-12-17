@@ -31,7 +31,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         public void PlaceCard(Card card)
         {
-            PlacedCard = new PlacedCard(card) {  IsExerted = true };
+            PlacedCard = new PlacedCard(card) {  IsExerted = true, PlaceTime = Main._drawInterfaceGameTime.TotalGameTime };
         }
 
         public bool HasPlacedCard() => PlacedCard != null;

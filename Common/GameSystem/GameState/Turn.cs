@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using TerraTCG.Common.GameSystem.Drawing.Animations;
 using TerraTCG.Common.GameSystem.Drawing.Animations.FieldAnimations;
 
 namespace TerraTCG.Common.GameSystem.GameState
@@ -35,6 +36,10 @@ namespace TerraTCG.Common.GameSystem.GameState
             }
             foreach(var zone in ActivePlayer.Field.Zones.Where(z=>!z.IsEmpty()))
             {
+                if(zone.PlacedCard.IsExerted)
+                {
+                    zone.Animation = new BecomeActiveAnimation(zone, Main._drawInterfaceGameTime.TotalGameTime);
+                }
                 zone.PlacedCard.IsExerted = false;
             }
 

@@ -58,18 +58,12 @@ namespace TerraTCG.Common.GameSystem.GameState
             {
                 Cards = [
                     CreateCard<Zombie>(), 
-                    CreateCard<Zombie>(), 
-                    CreateCard<Dryad>(), 
+                    CreateCard<CopperShortsword>(), 
                     CreateCard<Dryad>(), 
                     CreateCard<OldMan>(), 
-                    CreateCard<OldMan>(), 
-                    CreateCard<DemonEye>(),
                     CreateCard<DemonEye>(),
                     CreateCard<Bunny>(),
-                    CreateCard<Bunny>(),
                     CreateCard<Skeleton>(),
-                    CreateCard<Skeleton>(),
-                    CreateCard<Bat>(),
                     CreateCard<Bat>(),
                 ]
             };
@@ -80,7 +74,7 @@ namespace TerraTCG.Common.GameSystem.GameState
                 Cards = [ ]
             };
 
-            for(int _ = 0; _ < 5; _++)
+            for(int _ = 0; _ < 3; _++)
             {
                 Hand.Add(Deck.Draw());
             }
