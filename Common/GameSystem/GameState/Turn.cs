@@ -29,6 +29,17 @@ namespace TerraTCG.Common.GameSystem.GameState
                 1
             );
 
+            if(TurnCount > 1)
+            {
+                ActivePlayer.Hand.Add(ActivePlayer.Deck.Draw());
+            }
+            foreach(var zone in ActivePlayer.Field.Zones.Where(z=>!z.IsEmpty()))
+            {
+                zone.PlacedCard.IsExerted = false;
+            }
+
+            // Don't draw on the first turn
+
             Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer.Game.FieldAnimation =
                 new TurnChangeAnimation(Main._drawInterfaceGameTime.TotalGameTime, this);
         }

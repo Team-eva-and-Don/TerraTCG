@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.GameSystem.Drawing.Animations;
 using TerraTCG.Common.GameSystem.GameState.GameActions;
@@ -44,19 +45,45 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         public Card MouseoverCard { get; internal set; }
 
+        public Card CreateCard<T>() where T : ModSystem, ICardTemplate
+        {
+            return ModContent.GetInstance<T>().CreateCard();
+        }
+
         public GamePlayer(Game game)
         {
             Game = game;
-            Hand = new CardCollection()
-            {
-                Cards = [Zombie.Instance.CreateCard(), CopperShortsword.Instance.CreateCard(), DemonEye.Instance.CreateCard(), Bunny.Instance.CreateCard(), Dryad.Instance.CreateCard()]
-            };
 
             Deck = new CardCollection()
             {
-                Cards = [Dryad.Instance.CreateCard(), Zombie.Instance.CreateCard(), Zombie.Instance.CreateCard()]
+                Cards = [
+                    CreateCard<Zombie>(), 
+                    CreateCard<Zombie>(), 
+                    CreateCard<Dryad>(), 
+                    CreateCard<Dryad>(), 
+                    CreateCard<OldMan>(), 
+                    CreateCard<OldMan>(), 
+                    CreateCard<DemonEye>(),
+                    CreateCard<DemonEye>(),
+                    CreateCard<Bunny>(),
+                    CreateCard<Bunny>(),
+                    CreateCard<Skeleton>(),
+                    CreateCard<Skeleton>(),
+                    CreateCard<Bat>(),
+                    CreateCard<Bat>(),
+                ]
+            };
+            Deck.Shuffle();
+
+            Hand = new CardCollection()
+            {
+                Cards = [ ]
             };
 
+            for(int _ = 0; _ < 5; _++)
+            {
+                Hand.Add(Deck.Draw());
+            }
             Field = new(game);
         }
 

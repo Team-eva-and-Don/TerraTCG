@@ -56,10 +56,10 @@ namespace TerraTCG.Common.GameSystem.GameState
             var myPlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer;
             var player = rotation == 0 ? myPlayer : myPlayer.Opponent;
             int deckCount = player.Deck.Cards.Count;
-            for(int i = 0; i < deckCount; i++)
+            for(int i = 0; i < deckCount / 2; i++)
             {
                 deckPosition += rotation == 0 ? new Vector2(2, -2) : new Vector2(-2, -2);
-                texture = TextureCache.Instance.CardBack;
+                texture = (i % 2 == 0 || i == deckCount/2 - 1) ? TextureCache.Instance.CardBack : TextureCache.Instance.ZoneHighlighted;
                 spriteBatch.Draw(texture.Value, deckPosition + origin, bounds, Color.White, rotation, origin, 1f, SpriteEffects.None, 0);
             }
         }

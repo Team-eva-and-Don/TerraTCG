@@ -10,11 +10,13 @@ namespace TerraTCG.Common.GameSystem.GameState
     internal class CardCollection
     {
         internal List<Card> Cards { get; set; } = new List<Card>();
+        private Random random = new();
 
 
         public void Shuffle()
         {
             // TODO
+            Cards = [.. Cards.OrderBy(c => random.NextInt64())];
         }
 
         public Card Draw()

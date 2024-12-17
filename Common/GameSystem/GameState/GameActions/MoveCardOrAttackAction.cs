@@ -20,6 +20,11 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public bool CanAcceptZone(Zone zone) 
         { 
+            if(startZone.PlacedCard.IsExerted)
+            {
+                return false;
+            }
+
             if(player.Owns(zone) && zone.IsEmpty())
             {
                 return startZone.PlacedCard.Template.MoveCost <= player.Resources.Mana;
@@ -38,7 +43,8 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
         public bool CanAcceptActionButton(ActionType actionType)
         {
             return startZone.PlacedCard.Template.HasSkill &&
-                startZone.PlacedCard.Template.Skills[0].Cost <= player.Resources.Mana;
+                startZone.PlacedCard.Template.Skills[0].Cost <= player.Resources.Mana &&
+                !startZone.PlacedCard.IsExerted;
         }
 
         public bool AcceptZone(Zone zone)
@@ -68,10 +74,11 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             var currTime = Main._drawInterfaceGameTime.TotalGameTime;
             // attack opposing field
             var prevHealth = endZone.PlacedCard.CurrentHealth;
+            startZone.PlacedCard.IsExerted = true;
             var attack = startZone.PlacedCard.GetAttackWithModifiers(startZone, endZone);
+            player.Resources = player.Resources.UseResource(mana: startZone.PlacedCard.Template.Attacks[0].Cost);
             attack.DoAttack(attack, startZone, endZone);
 
-            player.Resources = player.Resources.UseResource(mana: startZone.PlacedCard.Template.Attacks[0].Cost);
 
             startZone.Animation = new MeleeAttackAnimation(startZone, endZone, currTime);
             if(endZone.PlacedCard.CurrentHealth > 0)
@@ -89,6 +96,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
         private void DoSkill()
         {
             var skill = startZone.PlacedCard.Template.Skills[0];
+            startZone.PlacedCard.IsExerted = true;
             player.Resources = player.Resources.UseResource(mana: skill.Cost);
             skill.DoSkill(player, startZone);
         }

@@ -15,6 +15,8 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal List<ICardModifier> CardModifiers { get; set; } = [];
 
+        internal bool IsExerted { get; set; } = false;
+
         public Attack GetAttackWithModifiers(Zone startZone, Zone endZone)
         {
             var attack = Template.Attacks[0].Copy();

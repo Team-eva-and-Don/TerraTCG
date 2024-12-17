@@ -20,14 +20,16 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
         public void DrawZone(SpriteBatch spriteBatch, Vector2 basePosition, float rotation)
         {
             float transparency = Math.Min(1, (float)(ElapsedTime.TotalSeconds/ Duration.TotalSeconds));
-            AnimationUtils.DrawZoneCard(spriteBatch, zone, basePosition, rotation, Color.White * transparency);
+            var zoneColor = zone.PlacedCard.IsExerted ? Color.LightGray : Color.White;
+            AnimationUtils.DrawZoneCard(spriteBatch, zone, basePosition, rotation, zoneColor * transparency);
         }
 
         public void DrawZoneOverlay(SpriteBatch spriteBatch, Vector2 basePosition, float baseScale)
         {
             var scale = MathHelper.Lerp(0, baseScale, (float) (ElapsedTime.TotalSeconds/ Duration.TotalSeconds));
             var transparency = Math.Min(1, (float)(ElapsedTime.TotalSeconds/ Duration.TotalSeconds));
-            AnimationUtils.DrawZoneNPC(spriteBatch, zone, basePosition, scale, Color.White * transparency);
+            var zoneColor = zone.PlacedCard.IsExerted ? Color.Gray : Color.White;
+            AnimationUtils.DrawZoneNPC(spriteBatch, zone, basePosition, scale, zoneColor * transparency);
             AnimationUtils.DrawZoneNPCStats(spriteBatch, zone, basePosition, baseScale, transparency: transparency);
         }
 
