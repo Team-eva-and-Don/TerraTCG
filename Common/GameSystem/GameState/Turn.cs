@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria;
+using TerraTCG.Common.GameSystem.Drawing.Animations.FieldAnimations;
 
 namespace TerraTCG.Common.GameSystem.GameState
 {
@@ -26,6 +28,9 @@ namespace TerraTCG.Common.GameSystem.GameState
                 ActivePlayer.ManaPerTurn,
                 1
             );
+
+            Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer.Game.FieldAnimation =
+                new TurnChangeAnimation(Main._drawInterfaceGameTime.TotalGameTime, this);
         }
 
         public void End()

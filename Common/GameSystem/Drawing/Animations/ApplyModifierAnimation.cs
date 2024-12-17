@@ -50,16 +50,17 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             var origin = new Vector2(bounds.Width, bounds.Height) / 2;
             var baseAngle = MathF.Sin(MathF.PI * (float) (ElapsedTime.TotalSeconds / Duration.TotalSeconds));
             var rayCount = 7;
+            var verticalSquish = 0.5f;
             for (int i = 0; i < rayCount; i++)
             {
                 float localAngle = baseAngle + MathHelper.TwoPi * i / rayCount;
                 float localIntensity = MathF.Sin(1.75f * localAngle);
                 float scale = (0.5f + 0.25f * localIntensity) * baseScale;
                 float brightness = 0.65f + 0.25f * localIntensity;
-                Vector2 drawOffset = localAngle.ToRotationVector2() * scale * bounds.Height / 2;
+                Vector2 drawOffset = localAngle.ToRotationVector2() * scale * bounds.Height / 2 * verticalSquish;
                 spriteBatch.Draw(texture, position + drawOffset, bounds,
                     Color.White * brightness, localAngle + MathF.PI / 2,
-                    origin, scale, 0, 0);
+                    origin, new Vector2(scale, verticalSquish * scale), 0, 0);
 
             }
         }

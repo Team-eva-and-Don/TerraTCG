@@ -96,5 +96,6 @@ Cards: {
 		EQUIPMENT: Equipment
 	}
 
+	Common.Turn: Turn
 	GameActions.EndTurn: Pass
 }

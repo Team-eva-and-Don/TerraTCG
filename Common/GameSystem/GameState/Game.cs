@@ -8,6 +8,7 @@ using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.BotPlayer;
 using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.GameSystem.Drawing.Animations;
+using TerraTCG.Common.GameSystem.Drawing.Animations.FieldAnimations;
 
 namespace TerraTCG.Common.GameSystem.GameState
 {
@@ -16,6 +17,8 @@ namespace TerraTCG.Common.GameSystem.GameState
         internal List<GamePlayer> GamePlayers { get; set; }
 
         internal List<Turn> Turns { get; set; } = [];
+
+        internal IFieldAnimation FieldAnimation { get; set; }
 
         internal Turn CurrentTurn
         {
@@ -61,6 +64,10 @@ namespace TerraTCG.Common.GameSystem.GameState
         // Utility method used by bots to check whether any action animation is still in progress
         internal bool IsDoingAnimation()
         {
+            if(FieldAnimation != null)
+            {
+                return true;
+            }
             foreach (var zone in AllZones())
             {
                 if(!(zone.Animation?.IsDefault() ?? true))

@@ -32,7 +32,11 @@ namespace TerraTCG.Common.UI.GameFieldUI
             {
                 return;
             }
-            // TODO there is probably a better place for this
+            // TODO there is probably a better place for setting animation state
+            if(gamePlayer.Game.FieldAnimation?.IsComplete() ?? true)
+            {
+                gamePlayer.Game.FieldAnimation = null;
+            }             
             foreach (var zone in gamePlayer.Game.AllZones())
             {
                 if(zone.Animation?.IsComplete() ?? false)
@@ -94,6 +98,12 @@ namespace TerraTCG.Common.UI.GameFieldUI
                 anchorZonePos.X + FieldRenderer.CARD_MARGIN,
                 anchorZonePos.Y);
             PlayerStatRenderer.Instance.DrawPlayerStats(spriteBatch, oppPos, opponent, scale);
+        }
+
+        private void DrawFieldOverlays(SpriteBatch spriteBatch)
+        {
+            var gamePlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer;
+            gamePlayer.Game.FieldAnimation?.DrawFieldOverlay(spriteBatch, Position);
 
         }
 
@@ -105,6 +115,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
                 spriteBatch.Draw(texture, Position, Color.White);
                 DrawZoneNPCs(spriteBatch);
                 DrawPlayerStats(spriteBatch);
+                DrawFieldOverlays(spriteBatch);
             }
         }
     }

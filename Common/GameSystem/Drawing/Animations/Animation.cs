@@ -15,8 +15,9 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
 {
     internal interface IAnimation
     {
-        // Draw the card within the zone itself, if applicable
         TimeSpan StartTime { get; }
+
+        // Draw the card within the zone itself, if applicable
         void DrawZone(SpriteBatch spriteBatch, Vector2 basePosition, float rotation);
 
         // Draw additional items (such as an NPC sprite) on top of the zone
@@ -70,7 +71,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             if(rotation == 0)
             {
                 // If the card is rotated towards the player, draw its text
-                // CardTextRenderer.Instance.DrawCardText(spriteBatch, card, position, Zone.CARD_DRAW_SCALE);
+                CardTextRenderer.Instance.DrawCardText(spriteBatch, card, position, Zone.CARD_DRAW_SCALE, details: false);
             } 
         }
 
@@ -119,7 +120,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             var gamePlayer = localPlayer.GamePlayer;
             // right-justify health above the NPC
             {
-                var zoneOffset = gamePlayer.Owns(zone) ? new Vector2(0.75f, 1.05f) : new Vector2(0.75f, 0.4f);
+                var zoneOffset = gamePlayer.Owns(zone) ? new Vector2(0.75f, 0.7f) : new Vector2(0.75f, 0.4f);
                 var placement = ProjectedFieldUtils.Instance.WorldSpaceToScreenSpace(gamePlayer, zone, zoneOffset);
                 var center = localPlayer.GameFieldPosition + placement;
                 var textOffset = font.MeasureString($"{health}");
@@ -133,7 +134,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
 
             // left-justify attack damage above npc
             {
-                var zoneOffset = gamePlayer.Owns(zone) ? new Vector2(0.1f, 1.05f) : new Vector2(0.15f, 0.4f);
+                var zoneOffset = gamePlayer.Owns(zone) ? new Vector2(0.1f, 0.7f) : new Vector2(0.15f, 0.4f);
                 var placement = ProjectedFieldUtils.Instance.WorldSpaceToScreenSpace(gamePlayer, zone, zoneOffset);
                 var center = localPlayer.GameFieldPosition + placement;
                 var textOffset = font.MeasureString($"{attack.Damage}");
