@@ -60,7 +60,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
             var highlightTexture = TextureCache.Instance.ButtonHighlighted.Value;
             var fgTexture = TextureCache.Instance.StarIcon.Value;
 
-            float brightness = 0.5f + 0.5f * MathF.Sin(MathF.Tau * (float)Main._drawInterfaceGameTime.TotalGameTime.TotalSeconds / 2f);
+            float brightness = 0.5f + 0.5f * MathF.Sin(MathF.Tau * (float)TCGPlayer.TotalGameTime.TotalSeconds / 2f);
             var origin = new Vector2(bgTexture.Width, bgTexture.Height) / 2;
             var starOrigin = new Vector2(fgTexture.Width, fgTexture.Height) / 2;
             spriteBatch.Draw(bgTexture, Position, bgTexture.Bounds, Color.White, 0, origin, 1f, SpriteEffects.None, 0);

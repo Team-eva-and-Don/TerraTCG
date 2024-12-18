@@ -17,7 +17,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations.FieldAnimations
         public TimeSpan StartTime { get; } = startTime;
 
         public TimeSpan Duration { get; } = TimeSpan.FromSeconds(1.5f);
-        public TimeSpan ElapsedTime => Main._drawInterfaceGameTime.TotalGameTime - StartTime;
+        public TimeSpan ElapsedTime => TCGPlayer.TotalGameTime - StartTime;
 
         public void DrawFieldOverlay(SpriteBatch spriteBatch, Vector2 basePosition)
         {

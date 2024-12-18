@@ -119,14 +119,14 @@ namespace TerraTCG.Common.GameSystem.Drawing
             // Calculate the total height of card text/abilities
             var heightInfo = new BodyHeightInfo();
             
-            if(card.HasModifier)
+            if(card.HasModifierText)
             {
                 heightInfo.modifierHeight = heightInfo.height;
                 var lineCount = card.ModifierDescription.Split('\n').Length;
                 heightInfo.height += lineCount * SmallTextHeight + MARGIN_S;
             }
 
-            if(card.HasSkill)
+            if(card.HasSkillText)
             {
                 heightInfo.skillHeight = heightInfo.height;
                 heightInfo.height += BaseTextHeight;
@@ -137,12 +137,12 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 var lineCount = card.SkillDescription.Split('\n').Length;
                 heightInfo.height += lineCount * SmallTextHeight;
             }
-            if(card.HasSkill || card.HasSkillDescription)
+            if(card.HasSkillText || card.HasSkillDescription)
             {
                 heightInfo.height += MARGIN_S;
             }
 
-            if(card.HasAttack)
+            if(card.HasAttackText)
             {
                 heightInfo.attackHeight = heightInfo.height;
                 heightInfo.height += BaseTextHeight;
@@ -168,7 +168,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
             var baseTextX = 1.5f * MARGIN_L + MPIconSize.X;
 
             // Modifier
-            if(card.HasModifier)
+            if(card.HasModifierText)
             {
                 var rowY = startY + heightInfo.modifierHeight;
                 var modifierLines = card.ModifierDescription.Split("\n");
@@ -186,7 +186,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 }
             }
             // Skill 
-            if(card.HasSkill)
+            if(card.HasSkillText)
             {
                 var skillRowHeight = startY + heightInfo.skillHeight;
                 var manaOffset = new Vector2(1.5f * MARGIN_L, skillRowHeight - MARGIN_S / 2);
@@ -212,7 +212,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
             }
 
             // Attack
-            if(card.HasAttack)
+            if(card.HasAttackText)
             {
                 var attack = card.Attacks[0];
                 var attackRowHeight = startY + heightInfo.attackHeight;

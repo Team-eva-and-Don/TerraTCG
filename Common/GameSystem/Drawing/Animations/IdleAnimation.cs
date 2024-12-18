@@ -15,7 +15,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
         public TimeSpan StartTime { get; } = startTime;
 
         private static TimeSpan Period { get; } = TimeSpan.FromSeconds(2f);
-        private TimeSpan ElapsedTime => Main._drawInterfaceGameTime.TotalGameTime - zone.PlacedCard.PlaceTime;
+        private TimeSpan ElapsedTime => TCGPlayer.TotalGameTime - zone.PlacedCard.PlaceTime;
 
         public void DrawZone(SpriteBatch spriteBatch, Vector2 basePosition, float rotation)
         {
@@ -35,7 +35,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
 
         public static float IdleHoverPos(PlacedCard placedCard, float baseScale)
         {
-            var idleElapsed = Main._drawInterfaceGameTime.TotalGameTime - placedCard.PlaceTime;
+            var idleElapsed = TCGPlayer.TotalGameTime - placedCard.PlaceTime;
             return baseScale * 3f * MathF.Sin(MathF.Tau * (float) (idleElapsed.TotalSeconds / Period.TotalSeconds));
         }
 

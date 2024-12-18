@@ -57,6 +57,8 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal List<Skill> Skills { get; set; }
 
+        internal bool HasSkill => (Skills?.Count ?? 0) > 0;
+
         internal List<Attack> Attacks { get; set; }
 
         internal List<ICardModifier> Modifiers { get; set; }
@@ -71,6 +73,7 @@ namespace TerraTCG.Common.GameSystem.GameState
         internal int Priority { get; set; } = 0;
 
 
+        // Localization utils
         internal string CardName => Language.GetTextValue($"Mods.TerraTCG.Cards.{Name}.Name");
 
         internal string AttackName => Language.GetTextValue($"Mods.TerraTCG.Cards.{Name}.Attack.Name");
@@ -80,11 +83,11 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal string ModifierDescription => Language.GetTextValue($"Mods.TerraTCG.Cards.{Name}.Modifier.Description");
 
-        internal bool HasAttack => Language.Exists($"Mods.TerraTCG.Cards.{Name}.Attack.Name");
-        internal bool HasAttackDescription => HasAttack && Language.Exists($"Mods.TerraTCG.Cards.{Name}.Attack.Description");
-        internal bool HasSkill => Language.Exists($"Mods.TerraTCG.Cards.{Name}.Skill.Name");
-        internal bool HasSkillDescription => HasSkill && Language.Exists($"Mods.TerraTCG.Cards.{Name}.Skill.Description");
-        internal bool HasModifier => Language.Exists($"Mods.TerraTCG.Cards.{Name}.Modifier.Description");
+        internal bool HasAttackText => Language.Exists($"Mods.TerraTCG.Cards.{Name}.Attack.Name");
+        internal bool HasAttackDescription => HasAttackText && Language.Exists($"Mods.TerraTCG.Cards.{Name}.Attack.Description");
+        internal bool HasSkillText => Language.Exists($"Mods.TerraTCG.Cards.{Name}.Skill.Name");
+        internal bool HasSkillDescription => HasSkillText && Language.Exists($"Mods.TerraTCG.Cards.{Name}.Skill.Description");
+        internal bool HasModifierText => Language.Exists($"Mods.TerraTCG.Cards.{Name}.Modifier.Description");
 
         internal string TypeLine => string.Join(" ", 
             SubTypes.Select(t => Language.GetTextValue($"Mods.TerraTCG.Cards.Types.{t}")));

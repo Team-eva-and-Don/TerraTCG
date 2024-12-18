@@ -15,7 +15,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
     internal class ApplyModifierAnimation(Zone zone, List<ICardModifier> modifiers, TimeSpan startTime) : IAnimation
     {
         public TimeSpan StartTime => startTime;
-        private TimeSpan ElapsedTime => Main._drawInterfaceGameTime.TotalGameTime - StartTime;
+        private TimeSpan ElapsedTime => TCGPlayer.TotalGameTime - StartTime;
         private TimeSpan Duration => TimeSpan.FromSeconds(1.25f);
         private TimeSpan Period => TimeSpan.FromSeconds(2f);
 
@@ -40,7 +40,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             var bounds = texture.Bounds;
             var origin = new Vector2(bounds.Width, bounds.Height) / 2;
             spriteBatch.Draw(texture, basePosition - Vector2.UnitY * itemOffset, bounds,
-                zoneColor, 0f,
+                Color.White, 0f,
                 origin, baseScale * (1 - lerpPoint), 0, 0);
         }
 

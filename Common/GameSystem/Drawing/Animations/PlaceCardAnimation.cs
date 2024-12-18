@@ -15,7 +15,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
         public TimeSpan StartTime { get; } = startTime;
         internal TimeSpan Duration { get; } = TimeSpan.FromSeconds(0.25f);
 
-        private TimeSpan ElapsedTime => Main._drawInterfaceGameTime.TotalGameTime - StartTime;
+        private TimeSpan ElapsedTime => TCGPlayer.TotalGameTime - StartTime;
 
         public void DrawZone(SpriteBatch spriteBatch, Vector2 basePosition, float rotation)
         {
@@ -34,6 +34,6 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
         }
 
         public bool IsComplete() =>
-            Main._drawInterfaceGameTime.TotalGameTime > StartTime + Duration;
+            TCGPlayer.TotalGameTime > StartTime + Duration;
     }
 }

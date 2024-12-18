@@ -14,7 +14,9 @@ namespace TerraTCG.Common.GameSystem
     internal class TCGPlayer : ModPlayer
     {
 
-        internal static GamePlayer LocalGamePlayer => Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer;
+        internal static TCGPlayer LocalPlayer => Main.LocalPlayer.GetModPlayer<TCGPlayer>();
+        internal static GamePlayer LocalGamePlayer => LocalPlayer.GamePlayer;
+        internal static TimeSpan TotalGameTime => Main._drawInterfaceGameTime?.TotalGameTime ?? TimeSpan.FromSeconds(0);
 
         internal GamePlayer GamePlayer { get; set; }
 

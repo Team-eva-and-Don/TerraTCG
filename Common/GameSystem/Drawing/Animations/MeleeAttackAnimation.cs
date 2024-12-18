@@ -14,7 +14,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
     {
         public TimeSpan StartTime { get; } = startTime;
         private TimeSpan Duration { get; } = TimeSpan.FromSeconds(1f);
-        private TimeSpan ElapsedTime => Main._drawInterfaceGameTime.TotalGameTime - StartTime;
+        private TimeSpan ElapsedTime => TCGPlayer.TotalGameTime - StartTime;
 
         private float WindupDuration => (float)Duration.TotalSeconds * 0.25f;
         private float SwingDuration => (float)Duration.TotalSeconds * 0.5f;
@@ -75,6 +75,6 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
         }
 
         public bool IsComplete() =>
-            Main._drawInterfaceGameTime.TotalGameTime > StartTime + Duration;
+            TCGPlayer.TotalGameTime > StartTime + Duration;
     }
 }

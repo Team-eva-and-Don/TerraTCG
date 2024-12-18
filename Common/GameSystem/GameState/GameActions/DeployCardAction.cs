@@ -23,7 +23,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
         public void Complete()
         {
             zone.PlaceCard(card);
-            zone.Animation = new PlaceCardAnimation(zone, Main._drawInterfaceGameTime.TotalGameTime);
+            zone.Animation = new PlaceCardAnimation(zone, TCGPlayer.TotalGameTime);
             player.Hand.Remove(card);
         }
 

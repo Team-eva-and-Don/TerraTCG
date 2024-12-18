@@ -38,7 +38,7 @@ namespace TerraTCG.Common.GameSystem.GameState
             {
                 if(zone.PlacedCard.IsExerted)
                 {
-                    zone.Animation = new BecomeActiveAnimation(zone, Main._drawInterfaceGameTime.TotalGameTime);
+                    zone.Animation = new BecomeActiveAnimation(zone, TCGPlayer.TotalGameTime);
                 }
                 zone.PlacedCard.IsExerted = false;
             }
@@ -46,7 +46,7 @@ namespace TerraTCG.Common.GameSystem.GameState
             // Don't draw on the first turn
 
             TCGPlayer.LocalGamePlayer.Game.FieldAnimation =
-                new TurnChangeAnimation(Main._drawInterfaceGameTime.TotalGameTime, this);
+                new TurnChangeAnimation(TCGPlayer.TotalGameTime, this);
         }
 
         public void End()

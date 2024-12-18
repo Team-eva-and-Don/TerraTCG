@@ -31,7 +31,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         public void PlaceCard(Card card)
         {
-            PlacedCard = new PlacedCard(card) {  IsExerted = true, PlaceTime = Main._drawInterfaceGameTime.TotalGameTime };
+            PlacedCard = new PlacedCard(card) {  IsExerted = true, PlaceTime = TCGPlayer.TotalGameTime };
         }
 
         public bool HasPlacedCard() => PlacedCard != null;
@@ -89,7 +89,7 @@ namespace TerraTCG.Common.GameSystem.GameState
                 bounds = texture.Value.Bounds;
                 origin = new Vector2(bounds.Width, bounds.Height) / 2;
 
-                float brightness = 0.5f + 0.5f * MathF.Sin(MathF.Tau * (float)Main._drawInterfaceGameTime.TotalGameTime.TotalSeconds / 2f);
+                float brightness = 0.5f + 0.5f * MathF.Sin(MathF.Tau * (float)TCGPlayer.TotalGameTime.TotalSeconds / 2f);
                 var color = gamePlayer.Owns(this) ? Color.LightSkyBlue : Color.LightCoral;
 
                 spriteBatch.Draw(texture.Value, position + origin, bounds, color * brightness, rotation, origin, 1f, SpriteEffects.None, 0);

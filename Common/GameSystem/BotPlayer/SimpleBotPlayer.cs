@@ -15,8 +15,35 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
         public Game Game { get; private set; }
         public GamePlayer Player { get; private set; }
 
-        private TimeSpan PauseBetweenActions = TimeSpan.FromSeconds(0.25f);
+        private TimeSpan PauseBetweenActions = TimeSpan.FromSeconds(0.5f);
         private TimeSpan LastBusyTime = TimeSpan.FromSeconds(0f);
+
+        // Pre-calculate all the damage we can do this turn, used for
+        // certain decisions (eg. whether to force-promote a weakened unit)
+        private int PossibleDamage
+        {
+            get
+            {
+                var possibleDmg = 0;
+                var availableMana = Player.Resources.Mana;
+                var sortedAttacks = Player.Field.Zones.Where(z => !z.IsEmpty())
+                .Where(z => !z.PlacedCard.IsExerted)
+                .Where(z => z.Role == ZoneRole.OFFENSE)
+                .Select(z=>z.PlacedCard.GetAttackWithModifiers(z, null))
+                .Where(a => a.Cost <= Player.Resources.Mana)
+                .OrderByDescending(a => a.Damage);
+
+                foreach(var a in sortedAttacks)
+                {
+                    if(availableMana >= a.Damage)
+                    {
+                        possibleDmg += a.Damage;
+                        availableMana -= a.Cost;
+                    }
+                }
+                return possibleDmg;
+            }
+        }
 
         public void SetGame(Game game, GamePlayer player)
         {
@@ -32,9 +59,16 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             action.Complete();
         }
 
+        private void DoUseSkill(Zone sourceZone)
+        {
+            var action = new MoveCardOrAttackAction(sourceZone, Player);
+            Player.InProgressAction = action;
+            action.AcceptActionButton(ActionType.SKILL);
+            action.Complete();
+        }
+
         private void PlaceCreature(Card sourceCard, Zone destZone)
         {
-            Main.NewText($"Bot says: Using {sourceCard.Name}!");
             var action = new DeployCardAction(sourceCard, Player);
             Player.InProgressAction = action;
             action.AcceptZone(destZone);
@@ -43,7 +77,6 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
 
         private void EquipItem(Card sourceCard, Zone destZone)
         {
-            Main.NewText($"Bot says: Using {sourceCard.Name}!");
             var action = new ApplyModifierAction(sourceCard, Player);
             Player.InProgressAction = action;
             action.AcceptZone(destZone);
@@ -52,7 +85,6 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
 
         private void UseTownsfolk(Card sourceCard, Zone destZone)
         {
-            Main.NewText($"Bot says: Using {sourceCard.Name}!");
             var action = sourceCard.SelectInHandAction(sourceCard, Player);
             Player.InProgressAction = action;
             action.AcceptZone(destZone);
@@ -61,7 +93,6 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
 
         private void UseTownsfolk(Card sourceCard, Zone destZone1, Zone destZone2)
         {
-            Main.NewText($"Bot says: Using {sourceCard.Name}!");
             var action = sourceCard.SelectInHandAction(sourceCard, Player);
             Player.InProgressAction = action;
             action.AcceptZone(destZone1);
@@ -126,9 +157,11 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             }
             var oldManCard = OldMan.Instance.CreateCard().CardName;
             var cardInHand = Player.Hand.Cards.Where(c => c.CardName == oldManCard).FirstOrDefault();
+            var possibleDamage = PossibleDamage;
 
             var bestMoveZone = Player.Opponent.Field.Zones.Where(z => !z.IsEmpty())
                 .Where(z => z.Role == srcRole && z.PlacedCard.Template.Role == srcRole)
+                .Where(z => z.PlacedCard.CurrentHealth <= possibleDamage)
                 .OrderBy(z => z.PlacedCard.Template.MoveCost)
                 .FirstOrDefault();
 
@@ -164,7 +197,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
         }
 
         // Check whether any good candidates for using an equipment exist
-        private bool DecideEquipItem()
+        private bool DecideUseItem()
         {
             var bestCardInHand = Player.Hand.Cards.Where(c => c.CardType == CardType.ITEM)
                 .Where(c => c.SubTypes.Contains(CardSubtype.EQUIPMENT))
@@ -229,13 +262,31 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             return false;
         }
 
+        // Use any available critter skills
+        private bool DecideUseSkill()
+        {
+            var bestSkillZone = Player.Field.Zones.Where(z => !z.IsEmpty())
+                .Where(z => !z.PlacedCard.IsExerted && z.PlacedCard.Template.HasSkill)
+                .Where(z => z.PlacedCard.Template.Skills[0].Cost <= Player.Resources.Mana)
+                .OrderBy(z => z.PlacedCard.Template.Skills[0].Cost)
+                .FirstOrDefault();
+
+            if(bestSkillZone != null)
+            {
+                DoUseSkill(bestSkillZone);
+                return true;
+            }
+            return false;
+
+        }
+
         public void Update()
         {
             if (!Player.IsMyTurn || Game.IsDoingAnimation())
             {
-                LastBusyTime = Main._drawInterfaceGameTime.TotalGameTime;
+                LastBusyTime = TCGPlayer.TotalGameTime;
                 return;
-            } else if (Main._drawInterfaceGameTime.TotalGameTime < LastBusyTime + PauseBetweenActions)
+            } else if (TCGPlayer.TotalGameTime < LastBusyTime + PauseBetweenActions)
             {
                 return;
             }
@@ -248,7 +299,9 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
 
             if(DecideRetreatCritter()) return;
 
-            if(DecideEquipItem()) return;
+            if(DecideUseItem()) return;
+
+            if(DecideUseSkill()) return;
 
             if(DecideAttack()) return;
 

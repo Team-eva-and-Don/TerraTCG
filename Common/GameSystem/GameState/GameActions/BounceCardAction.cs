@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using TerraTCG.Common.GameSystem.Drawing.Animations;
+using TerraTCG.Common.GameSystem.Drawing.Animations.FieldAnimations;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
@@ -20,12 +21,20 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             return true;
         }
 
+        public override Zone TargetZone() => zone;
+
         public override void Complete()
         {
             base.Complete();
-            zone.Animation = new RemoveCardAnimation(zone, zone.PlacedCard, Main._drawInterfaceGameTime.TotalGameTime);
-            Player.Hand.Add(zone.PlacedCard.Template);
+            var duration = GetAnimationStartDelay();
+
+            var leavingCard = zone.PlacedCard;
             zone.PlacedCard = null;
+
+            zone.Animation = new DelayAnimation(duration, zone, leavingCard, t =>
+                new RemoveCardAnimation(zone, leavingCard, TCGPlayer.TotalGameTime));
+
+            Player.Hand.Add(leavingCard.Template);
         }
     }
 }

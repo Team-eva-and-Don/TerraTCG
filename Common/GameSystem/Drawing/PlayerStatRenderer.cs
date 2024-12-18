@@ -41,7 +41,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
         {
             var statTexture = TextureCache.Instance.PlayerStatsZone.Value;
             spriteBatch.Draw(statTexture, position, statTexture.Bounds, Color.White, 0, default, scale, SpriteEffects.None, 0);
-            var elapsedTime = (Main._drawInterfaceGameTime.TotalGameTime - player.Resources.SetTime).TotalSeconds;
+            var elapsedTime = (TCGPlayer.TotalGameTime - player.Resources.SetTime).TotalSeconds;
             float lerpPoint = MathF.Min(1, (float)(elapsedTime / Duration.TotalSeconds));
 
             // Health

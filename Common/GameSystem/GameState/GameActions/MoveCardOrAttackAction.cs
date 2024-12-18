@@ -42,7 +42,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public bool CanAcceptActionButton(ActionType actionType)
         {
-            return startZone.PlacedCard.Template.HasSkill &&
+            return startZone.PlacedCard.Template.HasSkillText &&
                 startZone.PlacedCard.Template.Skills[0].Cost <= player.Resources.Mana &&
                 !startZone.PlacedCard.IsExerted;
         }
@@ -64,14 +64,14 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             // move within own field
             endZone.PlacedCard = startZone.PlacedCard;
             startZone.PlacedCard = null;
-            startZone.Animation = new RemoveCardAnimation(startZone, endZone.PlacedCard, Main._drawInterfaceGameTime.TotalGameTime);
-            endZone.Animation = new PlaceCardAnimation(endZone, Main._drawInterfaceGameTime.TotalGameTime);
+            startZone.Animation = new RemoveCardAnimation(startZone, endZone.PlacedCard, TCGPlayer.TotalGameTime);
+            endZone.Animation = new PlaceCardAnimation(endZone, TCGPlayer.TotalGameTime);
             player.Resources = player.Resources.UseResource(mana: endZone.PlacedCard.Template.MoveCost);
         }
 
         private void DoAttack()
         {
-            var currTime = Main._drawInterfaceGameTime.TotalGameTime;
+            var currTime = TCGPlayer.TotalGameTime;
             // attack opposing field
             var prevHealth = endZone.PlacedCard.CurrentHealth;
             startZone.PlacedCard.IsExerted = true;
@@ -99,6 +99,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             startZone.PlacedCard.IsExerted = true;
             player.Resources = player.Resources.UseResource(mana: skill.Cost);
             skill.DoSkill(player, startZone);
+            startZone.Animation = new ActionAnimation(startZone, TCGPlayer.TotalGameTime);
         }
 
         public void Complete()

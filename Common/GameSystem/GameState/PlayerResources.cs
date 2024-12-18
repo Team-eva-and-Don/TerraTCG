@@ -14,7 +14,7 @@ namespace TerraTCG.Common.GameSystem.GameState
         public int Mana { get; } = mana;
         public int TownsfolkMana { get; } = townsfolkMana;
 
-        public TimeSpan SetTime { get; } = Main._drawInterfaceGameTime?.TotalGameTime ?? TimeSpan.FromSeconds(0);
+        public TimeSpan SetTime { get; } = TCGPlayer.TotalGameTime;
 
         public PlayerResources UseResource(int health = 0, int mana = 0, int townsfolkMana = 0)
             => new(Health - health, Mana - mana, TownsfolkMana - townsfolkMana);
