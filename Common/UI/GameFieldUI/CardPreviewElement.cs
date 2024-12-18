@@ -20,7 +20,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
         internal const float CARD_SCALE = 4f / 3f;
         public override void Draw(SpriteBatch spriteBatch)
         {
-            var gamePlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer;
+            var gamePlayer = TCGPlayer.LocalGamePlayer;
             if (gamePlayer == null || gamePlayer.MouseoverCard == null)
             {
                 return;

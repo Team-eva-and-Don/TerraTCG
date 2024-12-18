@@ -30,7 +30,7 @@ namespace TerraTCG.Common.GameSystem.GameState
                 1
             );
 
-            if(TurnCount > 1)
+            if(TurnCount > 1 && !ActivePlayer.Deck.Empty())
             {
                 ActivePlayer.Hand.Add(ActivePlayer.Deck.Draw());
             }
@@ -45,7 +45,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 
             // Don't draw on the first turn
 
-            Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer.Game.FieldAnimation =
+            TCGPlayer.LocalGamePlayer.Game.FieldAnimation =
                 new TurnChangeAnimation(Main._drawInterfaceGameTime.TotalGameTime, this);
         }
 

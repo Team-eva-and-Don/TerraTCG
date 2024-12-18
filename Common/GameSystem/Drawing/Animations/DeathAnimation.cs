@@ -22,8 +22,6 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
         public TimeSpan StartTime { get; } = startTime;
         internal TimeSpan Duration { get; } = TimeSpan.FromSeconds(1.25f);
 
-        private TimeSpan IdlePeriod { get; } = TimeSpan.FromSeconds(2f);
-
         private TimeSpan FadeOutTime { get; } = impactTime + TimeSpan.FromSeconds(0.5f);
 
         private TimeSpan ElapsedTime => Main._drawInterfaceGameTime.TotalGameTime - StartTime;

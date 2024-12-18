@@ -35,5 +35,10 @@ namespace TerraTCG.Common.GameSystem.GameState
         {
             Cards.Remove(card);
         }
+
+        public bool Empty()
+        {
+            return Cards.Count == 0;
+        }
     }
 }

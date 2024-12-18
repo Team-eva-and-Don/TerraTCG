@@ -16,7 +16,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
     internal class HandElement : CustomClickUIElement
     {
         internal Vector2 CardPosition0 => Position - Vector2.UnitX *
-            (CARD_WIDTH + CARD_MARGIN) * Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer.Hand.Cards.Count / 2;
+            (CARD_WIDTH + CARD_MARGIN) * TCGPlayer.LocalGamePlayer.Hand.Cards.Count / 2;
 
         const float CARD_SCALE = 1f;
         const int CARD_MARGIN = 8;
@@ -26,7 +26,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
 
         public override void Update(GameTime gameTime)
         {
-            var gamePlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer;
+            var gamePlayer = TCGPlayer.LocalGamePlayer;
             if (gamePlayer == null || gamePlayer.Hand?.Cards?.Count == 0)
             {
                 return;
@@ -57,7 +57,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            var gamePlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer;
+            var gamePlayer = TCGPlayer.LocalGamePlayer;
             if (gamePlayer == null || gamePlayer.Hand?.Cards?.Count == 0)
             {
                 return;

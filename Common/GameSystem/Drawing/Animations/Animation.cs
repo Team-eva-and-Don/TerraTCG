@@ -43,7 +43,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             {
                 return;
             }
-            var gamePlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer;
+            var gamePlayer = TCGPlayer.LocalGamePlayer;
 
             var texture = TextureCache.Instance.GetNPCTexture(npcId);
             var bounds = texture.Frame(1, Main.npcFrameCount[npcId], 0, frame);

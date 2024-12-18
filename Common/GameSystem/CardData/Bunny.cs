@@ -20,6 +20,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             CardType = CardType.CREATURE,
             NPCID = NPCID.Bunny,
             SubTypes = [CardSubtype.FOREST, CardSubtype.CRITTER],
+            Role = ZoneRole.DEFENSE,
             Attacks = [
                 new() {
                     Name = "Bunny Kick",

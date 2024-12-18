@@ -53,7 +53,7 @@ namespace TerraTCG.Common.GameSystem.GameState
             spriteBatch.Draw(texture.Value, deckPosition + origin, bounds, Color.White, rotation, origin, 1f, SpriteEffects.None, 0);
             // Draw cards in deck (if any)
             // TODO get my player some other way
-            var myPlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer;
+            var myPlayer = TCGPlayer.LocalGamePlayer;
             var player = rotation == 0 ? myPlayer : myPlayer.Opponent;
             int deckCount = player.Deck.Cards.Count;
             for(int i = 0; i < deckCount / 2; i++)

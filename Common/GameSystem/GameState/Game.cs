@@ -34,10 +34,6 @@ namespace TerraTCG.Common.GameSystem.GameState
             ];
             player.GamePlayer = GamePlayers[0];
 
-            // Put a reference set of enemies onto the opponent's board
-            GamePlayers[1].Field.Zones[0].PlaceCard(Skeleton.Instance.CreateCard());
-            GamePlayers[1].Field.Zones[2].PlaceCard(Bat.Instance.CreateCard());
-
             for(int i =  0; i < GamePlayers[1].Field.Zones.Count; i++)
             {
                 var zone = GamePlayers[1].Field.Zones[i];

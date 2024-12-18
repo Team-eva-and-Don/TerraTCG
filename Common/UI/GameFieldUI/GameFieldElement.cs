@@ -65,7 +65,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
 
         private void DrawZoneNPCs(SpriteBatch spriteBatch)
         {
-            var gamePlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer;
+            var gamePlayer = TCGPlayer.LocalGamePlayer;
             // Iterate backwards to layer closer zones on top of farther zones
             foreach (var zone in gamePlayer.Game.AllZones().Reverse())
             {
@@ -80,7 +80,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
         {
             var texture = TextureCache.Instance.PlayerStatsZone;
             // My player
-            var gamePlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer;
+            var gamePlayer = TCGPlayer.LocalGamePlayer;
             var anchorZonePos = 
                 ProjectedFieldUtils.Instance.WorldSpaceToScreenSpace(gamePlayer, gamePlayer.Field.Zones[3], new(0, 1));
 
@@ -102,9 +102,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
 
         private void DrawFieldOverlays(SpriteBatch spriteBatch)
         {
-            var gamePlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer;
-            gamePlayer.Game.FieldAnimation?.DrawFieldOverlay(spriteBatch, Position);
-
+            TCGPlayer.LocalGamePlayer.Game.FieldAnimation?.DrawFieldOverlay(spriteBatch, Position);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

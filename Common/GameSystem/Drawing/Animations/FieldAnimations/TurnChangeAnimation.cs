@@ -21,7 +21,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations.FieldAnimations
 
         public void DrawFieldOverlay(SpriteBatch spriteBatch, Vector2 basePosition)
         {
-            var gamePlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer;
+            var gamePlayer = TCGPlayer.LocalGamePlayer;
             var textPos = ProjectedFieldUtils.Instance.WorldSpaceToScreenSpace(gamePlayer, gamePlayer.Field.Zones[1], new(0.5f, -0.25f));
             var font = FontAssets.MouseText.Value;
             var text = Language.GetTextValue("Mods.TerraTCG.Cards.Common.Turn") + $" {turn.TurnCount}";

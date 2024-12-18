@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState;
@@ -12,6 +13,8 @@ namespace TerraTCG.Common.GameSystem
 {
     internal class TCGPlayer : ModPlayer
     {
+
+        internal static GamePlayer LocalGamePlayer => Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer;
 
         internal GamePlayer GamePlayer { get; set; }
 

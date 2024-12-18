@@ -60,7 +60,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal void Draw(SpriteBatch spriteBatch, Vector2 position, float rotation)
         {
-            var gamePlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer;
+            var gamePlayer = TCGPlayer.LocalGamePlayer;
             var texture = TextureCache.Instance.Zone;
             var bounds = texture.Value.Bounds;
             var origin = new Vector2(bounds.Width, bounds.Height) / 2;

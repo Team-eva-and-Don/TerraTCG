@@ -61,6 +61,15 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal List<ICardModifier> Modifiers { get; set; }
 
+        // Tags to help bot players decide what to do with cards
+
+        // Where to place the card on the board
+        internal ZoneRole Role { get; set; } = ZoneRole.OFFENSE;
+
+
+        // Among cards of the same type, how important is it to play this one first?
+        internal int Priority { get; set; } = 0;
+
 
         internal string CardName => Language.GetTextValue($"Mods.TerraTCG.Cards.{Name}.Name");
 

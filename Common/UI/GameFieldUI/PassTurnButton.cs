@@ -41,8 +41,8 @@ namespace TerraTCG.Common.UI.GameFieldUI
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            var localPlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer;
-            if (!(localPlayer?.IsMyTurn ?? false))
+            var gamePlayer = TCGPlayer.LocalGamePlayer;
+            if (!(gamePlayer?.IsMyTurn ?? false))
             {
                 return;
             }

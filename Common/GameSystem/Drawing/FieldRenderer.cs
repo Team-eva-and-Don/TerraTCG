@@ -120,7 +120,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
         private void OnPreDraw(GameTime gameTime)
         {
 
-            var localGamePlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer;
+            var localGamePlayer = TCGPlayer.LocalGamePlayer;
             if(TextureCache.Instance.Field == null || localGamePlayer == null)
             {
                 return;

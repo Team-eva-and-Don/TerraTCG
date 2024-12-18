@@ -74,7 +74,7 @@ namespace TerraTCG.Common.GameSystem.GameState
                 Cards = [ ]
             };
 
-            for(int _ = 0; _ < 3; _++)
+            for(int _ = 0; _ < 4; _++)
             {
                 Hand.Add(Deck.Draw());
             }

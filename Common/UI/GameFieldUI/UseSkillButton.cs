@@ -51,8 +51,8 @@ namespace TerraTCG.Common.UI.GameFieldUI
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            var localPlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>().GamePlayer;
-            if (!(localPlayer?.InProgressAction?.CanAcceptActionButton(ActionType.SKILL) ?? false))
+            var gamePlayer = TCGPlayer.LocalGamePlayer;
+            if (!(gamePlayer?.InProgressAction?.CanAcceptActionButton(ActionType.SKILL) ?? false))
             {
                 return;
             }
