@@ -11,21 +11,20 @@ using TerraTCG.Common.GameSystem.GameState;
 
 namespace TerraTCG.Common.Commands
 {
-    internal class BotGameCommand : ModCommand
+    internal class SurrenderCommand : ModCommand
     {
         public override CommandType Type => CommandType.Chat;
 
-        public override string Command => "botgame";
+        public override string Command => "surrender";
 
-        public override string Description => "Start a TerraTCG game against a bot opponent";
+        public override string Description => "Surrender an active TerraTCG game";
 
         public override void Action(CommandCaller caller, string input, string[] args)
         {
             if(caller.Player.whoAmI == Main.myPlayer)
             {
-                ModContent.GetInstance<GameModSystem>().StartGame(
-                    Main.LocalPlayer.GetModPlayer<TCGPlayer>(),
-                    new SimpleBotPlayer());
+                TCGPlayer.LocalGamePlayer.Resources =
+                    TCGPlayer.LocalGamePlayer.Resources.UseResource(health: TCGPlayer.LocalGamePlayer.Resources.Health);
             }
         }
     }

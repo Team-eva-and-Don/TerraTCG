@@ -37,6 +37,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
         public Asset<Texture2D> PlayerStatsZone { get; private set; }
         public Asset<Texture2D> AttackIcon { get; private set; }
         public Asset<Texture2D> LightRay { get; private set; }
+        public Asset<Texture2D> MapBG { get; private set; }
         internal Dictionary<int, Asset<Texture2D>> NPCTextureCache { get; private set; }
         internal Dictionary<int, Asset<Texture2D>> ItemTextureCache { get; private set; }
         public override void Load()
@@ -58,6 +59,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
             PlayerStatsZone = Mod.Assets.Request<Texture2D>("Assets/FieldElements/PlayerStats");
             AttackIcon = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Attack_Icon");
             LightRay = Main.Assets.Request<Texture2D>("Images/Projectile_" + ProjectileID.MedusaHeadRay);
+            MapBG = Main.Assets.Request<Texture2D>("Images/MapBG1");
             NPCTextureCache = [];
             ItemTextureCache = [];
         }

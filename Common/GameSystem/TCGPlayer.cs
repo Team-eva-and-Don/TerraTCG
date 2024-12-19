@@ -37,7 +37,10 @@ namespace TerraTCG.Common.GameSystem
 
         public override void OnEnterWorld()
         {
-            ModContent.GetInstance<FieldRenderer>().OnEnterWorld();
+            if(Player.whoAmI == Main.myPlayer)
+            {
+                ModContent.GetInstance<FieldRenderer>().OnEnterWorld();
+            }
         }
 
         public void StartGame(GamePlayer player, CardGame game)

@@ -44,10 +44,10 @@ namespace TerraTCG.Common.UI
 
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
         {
-            int mouseTextIdx = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Text"));
+            int mouseTextIdx = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Map / Minimap"));
             if(mouseTextIdx != -1)
             {
-                layers.Insert(mouseTextIdx, new LegacyGameInterfaceLayer("TerraTCG: Game Field", delegate
+                layers.Insert(mouseTextIdx + 3, new LegacyGameInterfaceLayer("TerraTCG: Game Field", delegate
                 {
                     if(_userInterface?.CurrentState != null)
                     {

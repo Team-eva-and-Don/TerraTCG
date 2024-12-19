@@ -42,7 +42,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
             var texture = TextureCache.Instance.CardBack;
             for (int _ = 0; _ < gamePlayer.Hand.Cards.Count; _++)
             {
-                spriteBatch.Draw(texture.Value, currentPos, texture.Value.Bounds, Color.White * 0.4f, 0, default, CARD_SCALE, SpriteEffects.None, 0f);
+                spriteBatch.Draw(texture.Value, currentPos, texture.Value.Bounds, Color.White, 0, default, CARD_SCALE, SpriteEffects.None, 0f);
                 currentPos.X += texture.Width() * CARD_SCALE + CARD_MARGIN;
             }
             base.Draw(spriteBatch);
