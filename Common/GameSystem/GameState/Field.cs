@@ -14,7 +14,7 @@ namespace TerraTCG.Common.GameSystem.GameState
     {
         internal List<Zone> Zones { get; set; }
 
-        public Field(Game game)
+        public Field(CardGame game)
         {
             Zones = [
                 new() { Role = ZoneRole.OFFENSE, Index = 0, Game = game},

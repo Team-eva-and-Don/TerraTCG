@@ -32,6 +32,16 @@ namespace TerraTCG.Common.UI
             _userInterface.Update(gameTime);
         }
 
+        public void StartGame()
+        {
+            _userInterface.SetState(GameField);
+        }
+
+        public void EndGame()
+        {
+            _userInterface.SetState(null);
+        }
+
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
         {
             int mouseTextIdx = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Text"));

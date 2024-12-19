@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Steamworks;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,9 +13,11 @@ using TerraTCG.Common.GameSystem.Drawing.Animations.FieldAnimations;
 
 namespace TerraTCG.Common.GameSystem.GameState
 {
-    internal class Game
+    internal class CardGame
     {
         internal List<GamePlayer> GamePlayers { get; set; }
+
+        internal List<IGamePlayerController> GamePlayerControllers { get; set; }
 
         internal List<Turn> Turns { get; set; } = [];
 
@@ -26,13 +29,19 @@ namespace TerraTCG.Common.GameSystem.GameState
             set => Turns.Add(value);
         }
 
-        public void StartGame(TCGPlayer player, IBotPlayer botPlayer)
+        internal bool IsActive { get; private set; } = true;
+
+        public void StartGame(IGamePlayerController player1, IGamePlayerController player2)
         {
             GamePlayers = [
                 new GamePlayer(this),
                 new GamePlayer(this)
             ];
-            player.GamePlayer = GamePlayers[0];
+
+            GamePlayerControllers = [
+                player1, 
+                player2
+            ];
 
             for(int i =  0; i < GamePlayers[1].Field.Zones.Count; i++)
             {
@@ -43,7 +52,10 @@ namespace TerraTCG.Common.GameSystem.GameState
                 }
             }
 
-            BotPlayerSystem.Instance.RegisterBotPlayer(botPlayer, this, GamePlayers[1]);
+            for(int i = 0; i < GamePlayers.Count; i++)
+            {
+                GamePlayerControllers[i].StartGame(GamePlayers[i], this);
+            }
 
             CurrentTurn = new()
             {
@@ -52,6 +64,15 @@ namespace TerraTCG.Common.GameSystem.GameState
                 TurnCount = 1
             };
             CurrentTurn.Start();
+        }
+        public void EndGame()
+        {
+            // de-register game players
+            foreach(var controller in GamePlayerControllers)
+            {
+                controller.EndGame();
+            }
+            IsActive = false;
         }
 
         public IEnumerable<Zone> AllZones() =>
@@ -73,11 +94,29 @@ namespace TerraTCG.Common.GameSystem.GameState
             }
             return false;
         }
+
+        // Check for state based actions, such as the game ending when a player has zero hp
+        public void CheckStateActions()
+        {
+            if(IsDoingAnimation())
+            {
+                // allow animations to finish before updating game state
+                return; 
+            }
+            foreach(var player in GamePlayers)
+            {
+                if(player.Resources.Health <= 0)
+                {
+                    EndGame();
+                    break;
+                }
+            }
+        }
     }
 
     internal class GameModSystem : ModSystem
     {
-        internal List<Game> ActiveGames { get; set; }
+        internal List<CardGame> ActiveGames { get; set; }
 
         public override void Load()
         {
@@ -85,12 +124,23 @@ namespace TerraTCG.Common.GameSystem.GameState
         }
 
 
-        public Game StartGame(TCGPlayer player)
+        public CardGame StartGame(IGamePlayerController player1, IGamePlayerController player2)
         {
-            var game = new Game();
-            game.StartGame(player, new SimpleBotPlayer());
+            var game = new CardGame();
+            game.StartGame(player1, player2);
             ActiveGames.Add(game);
             return game;
         }
+
+        public override void PreUpdatePlayers()
+        {
+            foreach (var game in ActiveGames)
+            {
+                game.CheckStateActions();
+            }
+            // games end via state check, prune them
+            ActiveGames = ActiveGames.Where(g => g.IsActive).ToList();
+        }
+
     }
 }

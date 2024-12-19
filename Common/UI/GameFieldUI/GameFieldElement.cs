@@ -108,7 +108,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
         public override void Draw(SpriteBatch spriteBatch)
         {
             var texture = FieldRenderer.Instance.PerspectiveRenderTarget;
-            if(texture != null)
+            if(texture != null && TCGPlayer.LocalGamePlayer != null)
             {
                 spriteBatch.Draw(texture, Position, Color.White);
                 DrawZoneNPCs(spriteBatch);

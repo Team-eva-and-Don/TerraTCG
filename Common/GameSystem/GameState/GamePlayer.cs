@@ -15,7 +15,7 @@ namespace TerraTCG.Common.GameSystem.GameState
     {
         internal const int MAX_HEALTH = 3;
         internal const int MAX_MANA = 8;
-        internal Game Game { get; set; } // back reference to the game this player belongs to
+        internal CardGame Game { get; set; } // back reference to the game this player belongs to
         internal CardCollection Hand { get; set; }
         internal CardCollection Deck { get; set; }
         internal int ManaPerTurn { get; set; } = 0;
@@ -50,7 +50,7 @@ namespace TerraTCG.Common.GameSystem.GameState
             return ModContent.GetInstance<T>().CreateCard();
         }
 
-        public GamePlayer(Game game)
+        public GamePlayer(CardGame game)
         {
             Game = game;
 

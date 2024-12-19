@@ -19,7 +19,7 @@ namespace TerraTCG.Common.GameSystem.GameState
     }
     internal class Zone
     {
-        internal Game Game { get; set; }
+        internal CardGame Game { get; set; }
         internal PlacedCard PlacedCard { get; set; }
         internal ZoneRole Role { get; set; }
 

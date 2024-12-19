@@ -9,11 +9,11 @@ using TerraTCG.Common.GameSystem.GameState;
 
 namespace TerraTCG.Common.GameSystem.BotPlayer
 {
-    internal interface IBotPlayer
+    internal interface IBotPlayer : IGamePlayerController
     {
-        public void SetGame(Game game, GamePlayer player);
         public void Update();
     }
+
     internal class BotPlayerSystem : ModSystem
     {
         public static BotPlayerSystem Instance => ModContent.GetInstance<BotPlayerSystem>();
@@ -33,11 +33,14 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             }
         }
 
-        public void RegisterBotPlayer(IBotPlayer botPlayer, Game game, GamePlayer player)
+        public void RegisterBotPlayer(IBotPlayer botPlayer, CardGame game, GamePlayer player)
         {
-            botPlayer.SetGame(game, player);
             Players.Add(botPlayer);
         }
 
+        internal void UnregisterBotPlayer(IBotPlayer botPlayer)
+        {
+            Players.Remove(botPlayer);
+        }
     }
 }

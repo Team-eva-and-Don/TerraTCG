@@ -12,7 +12,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 {
     internal class Turn
     {
-        internal Game Game { get; set; }
+        internal CardGame Game { get; set; }
         internal GamePlayer ActivePlayer { get; set; }
         internal int TurnCount { get; set; }
 
