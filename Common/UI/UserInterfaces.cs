@@ -23,7 +23,6 @@ namespace TerraTCG.Common.UI
             GameField = new();
             GameField.Activate();
             _userInterface = new();
-            _userInterface.SetState(GameField);
         }
 
         public override void UpdateUI(GameTime gameTime)
@@ -44,10 +43,10 @@ namespace TerraTCG.Common.UI
 
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
         {
-            int mouseTextIdx = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Map / Minimap"));
+            int mouseTextIdx = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Text"));
             if(mouseTextIdx != -1)
             {
-                layers.Insert(mouseTextIdx + 3, new LegacyGameInterfaceLayer("TerraTCG: Game Field", delegate
+                layers.Insert(mouseTextIdx + 2, new LegacyGameInterfaceLayer("TerraTCG: Game Field", delegate
                 {
                     if(_userInterface?.CurrentState != null)
                     {

@@ -18,6 +18,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
         internal UseSkillButton actionButtons;
         internal PassTurnButton passTurnButton;
         internal CardPreviewElement previewElement;
+        internal CancelResumeGameButton cancelButton;
 
         public override void OnInitialize()
         {
@@ -45,6 +46,10 @@ namespace TerraTCG.Common.UI.GameFieldUI
             passTurnButton = new();
             SetRectangle(passTurnButton, (Main.screenWidth + FieldRenderer.FIELD_WIDTH) / 2, Main.screenHeight / 2);
             Append(passTurnButton);
+
+            cancelButton = new();
+            SetRectangle(cancelButton, 16, Main.screenHeight - 16 - 48, 38, 48);
+            Append(cancelButton);
         }
         private void SetRectangle(UIElement uiElement, float left, float top, float width = 1, float height = 1)
         {
@@ -60,6 +65,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
             SetRectangle(handElement, Main.screenWidth / 2, Main.screenHeight - HandElement.CARD_HEIGHT, 1, 1);
             SetRectangle(oppHandElement, Main.screenWidth / 2, gameField.Position.Y);
             SetRectangle(passTurnButton, Main.screenWidth / 2 + 3 * FieldRenderer.FIELD_WIDTH / 8, Main.screenHeight / 2);
+            SetRectangle(cancelButton, 16, Main.screenHeight - 16 - 48, 38, 48);
             base.Update(gameTime);
         }
     }
