@@ -114,7 +114,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
             var origin = new Vector2(texture.Width, texture.Height) / 2;
             var drawPos = new Vector2(Main.screenWidth, Main.screenHeight) / 2;
 
-            spriteBatch.Draw(texture, drawPos, texture.Bounds, Color.White, 0, origin, scale, SpriteEffects.None, 0);
+            spriteBatch.Draw(texture, drawPos, texture.Bounds, Color.White * TCGPlayer.FieldTransitionPoint, 0, origin, scale, SpriteEffects.None, 0);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

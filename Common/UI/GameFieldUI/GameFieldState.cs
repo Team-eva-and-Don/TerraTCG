@@ -6,7 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using Terraria.UI;
+using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.Drawing;
+using TerraTCG.Common.GameSystem.GameState;
 
 namespace TerraTCG.Common.UI.GameFieldUI
 {
@@ -20,19 +22,19 @@ namespace TerraTCG.Common.UI.GameFieldUI
         internal CardPreviewElement previewElement;
         internal CancelResumeGameButton cancelButton;
 
+        // TODO "hiding" the field by sliding it off the bottom of the screen is a bit iffy
+        internal static int UI_MAX_HEIGHT => Main.screenHeight - (Main.screenHeight - FieldRenderer.FIELD_HEIGHT + 16) / 2;
+
         public override void OnInitialize()
         {
             base.OnInitialize();
             gameField = new();
-            SetRectangle(gameField, (Main.screenWidth - FieldRenderer.FIELD_WIDTH + 48) / 2, (Main.screenHeight - FieldRenderer.FIELD_HEIGHT + 16) / 2);
             Append(gameField);
 
             handElement = new();
-            SetRectangle(handElement, Main.screenWidth / 2, Main.screenHeight - HandElement.CARD_HEIGHT);
             Append(handElement);
 
             oppHandElement = new();
-            SetRectangle(oppHandElement, Main.screenWidth / 2, gameField.Position.Y);
             Append(oppHandElement);
 
             previewElement = new();
@@ -40,18 +42,17 @@ namespace TerraTCG.Common.UI.GameFieldUI
             Append(previewElement);
 
             actionButtons = new();
-            SetRectangle(actionButtons, Main.screenWidth / 2, Main.screenHeight / 2);
             Append(actionButtons);
 
             passTurnButton = new();
-            SetRectangle(passTurnButton, (Main.screenWidth + FieldRenderer.FIELD_WIDTH) / 2, Main.screenHeight / 2);
             Append(passTurnButton);
 
             cancelButton = new();
-            SetRectangle(cancelButton, 16, Main.screenHeight - 16 - 48, 38, 48);
             Append(cancelButton);
+
+            SetRectangles(0);
         }
-        private void SetRectangle(UIElement uiElement, float left, float top, float width = 1, float height = 1)
+        private static void SetRectangle(UIElement uiElement, float left, float top, float width = 1, float height = 1)
         {
             uiElement.Left.Set(left, 0f);
             uiElement.Top.Set(top, 0f);
@@ -59,13 +60,19 @@ namespace TerraTCG.Common.UI.GameFieldUI
             uiElement.Height.Set(height, 0f);
         }
 
+        private void SetRectangles(float? lerpPoint = null)
+        {
+            var yOffset = MathHelper.Lerp(UI_MAX_HEIGHT, 0, lerpPoint ?? TCGPlayer.FieldTransitionPoint);
+            SetRectangle(gameField, (Main.screenWidth - FieldRenderer.FIELD_WIDTH + 48) / 2, yOffset + (Main.screenHeight - FieldRenderer.FIELD_HEIGHT) / 2, 1, 1);
+            SetRectangle(handElement, Main.screenWidth / 2, yOffset + Main.screenHeight - HandElement.CARD_HEIGHT);
+            SetRectangle(oppHandElement, Main.screenWidth / 2, yOffset + gameField.Position.Y);
+            SetRectangle(passTurnButton, Main.screenWidth / 2 + 3 * FieldRenderer.FIELD_WIDTH / 8, yOffset + Main.screenHeight / 2);
+            SetRectangle(cancelButton, 16, Main.screenHeight - 16 - 48, 38, 48);
+        }
+
         public override void Update(GameTime gameTime)
         {
-            SetRectangle(gameField, (Main.screenWidth - FieldRenderer.FIELD_WIDTH + 48) / 2, (Main.screenHeight - FieldRenderer.FIELD_HEIGHT) / 2, 1, 1);
-            SetRectangle(handElement, Main.screenWidth / 2, Main.screenHeight - HandElement.CARD_HEIGHT, 1, 1);
-            SetRectangle(oppHandElement, Main.screenWidth / 2, gameField.Position.Y);
-            SetRectangle(passTurnButton, Main.screenWidth / 2 + 3 * FieldRenderer.FIELD_WIDTH / 8, Main.screenHeight / 2);
-            SetRectangle(cancelButton, 16, Main.screenHeight - 16 - 48, 38, 48);
+            SetRectangles();
             base.Update(gameTime);
         }
     }

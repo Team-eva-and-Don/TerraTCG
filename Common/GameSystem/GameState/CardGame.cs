@@ -23,13 +23,18 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal IFieldAnimation FieldAnimation { get; set; }
 
+        internal TimeSpan StartTime { get; private set; }
+        internal TimeSpan EndTime { get; private set; }
+
+        internal TimeSpan FadeOutTime { get; } = TimeSpan.FromSeconds(0.5f);
+
         internal Turn CurrentTurn
         {
             get => Turns.Last();
             set => Turns.Add(value);
         }
 
-        internal bool IsActive { get; private set; } = true;
+        internal bool IsActive => EndTime == default || TCGPlayer.TotalGameTime - EndTime < FadeOutTime;
 
         public void StartGame(IGamePlayerController player1, IGamePlayerController player2)
         {
@@ -64,7 +69,20 @@ namespace TerraTCG.Common.GameSystem.GameState
                 TurnCount = 1
             };
             CurrentTurn.Start();
+
+            StartTime = Main._drawInterfaceGameTime.TotalGameTime;
         }
+
+        // Start game wrap-up animations
+        public void MarkGameComplete()
+        {
+            if(EndTime == default)
+            {
+                EndTime = Main._drawInterfaceGameTime.TotalGameTime;
+            }
+        }
+
+        // Wrap up game
         public void EndGame()
         {
             // de-register game players
@@ -72,8 +90,8 @@ namespace TerraTCG.Common.GameSystem.GameState
             {
                 controller.EndGame();
             }
-            IsActive = false;
         }
+
 
         public IEnumerable<Zone> AllZones() =>
             GamePlayers[0].Field.Zones.Concat(GamePlayers[1].Field.Zones);
@@ -107,7 +125,7 @@ namespace TerraTCG.Common.GameSystem.GameState
             {
                 if(player.Resources.Health <= 0)
                 {
-                    EndGame();
+                    MarkGameComplete();
                     break;
                 }
             }
@@ -137,6 +155,10 @@ namespace TerraTCG.Common.GameSystem.GameState
             foreach (var game in ActiveGames)
             {
                 game.CheckStateActions();
+                if(!game.IsActive)
+                {
+                    game.EndGame();
+                }
             }
             // games end via state check, prune them
             ActiveGames = ActiveGames.Where(g => g.IsActive).ToList();

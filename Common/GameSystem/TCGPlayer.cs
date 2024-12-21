@@ -28,6 +28,28 @@ namespace TerraTCG.Common.GameSystem
         internal static GamePlayer LocalGamePlayer => LocalPlayer.GamePlayer;
         internal static TimeSpan TotalGameTime => Main._drawInterfaceGameTime?.TotalGameTime ?? TimeSpan.FromSeconds(0);
 
+        // TODO putting all this UI stuff here is probably not correct
+        internal static float FieldTransitionPoint
+        {
+            get
+            {
+                float lerpPoint = 0;
+                if(LocalGamePlayer?.Game is CardGame game)
+                {
+                    if(game.EndTime != default) 
+                    {
+                        var timeSinceGameEnd = TotalGameTime - game.EndTime;
+                        lerpPoint = 1 - Math.Min(1, 2f * (float)timeSinceGameEnd.TotalSeconds);
+                    } else
+                    {
+                        var timeSinceGameStart = TotalGameTime - game.StartTime;
+                        lerpPoint = Math.Min(1, 2f * (float)timeSinceGameStart.TotalSeconds);
+                    }
+                }
+                return lerpPoint;
+            }
+        }
+
         public GamePlayer GamePlayer { get; set; }
 
         // TODO this is not the correct place to cache this info, but is the easiest

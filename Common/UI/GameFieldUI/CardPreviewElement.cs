@@ -27,7 +27,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
             }
             var card = gamePlayer.MouseoverCard;
             var texture = card.Texture;
-            spriteBatch.Draw(texture.Value, Position, texture.Value.Bounds, Color.White, 0, default, CARD_SCALE, SpriteEffects.None, 0f);
+            spriteBatch.Draw(texture.Value, Position, texture.Value.Bounds, Color.White * TCGPlayer.FieldTransitionPoint, 0, default, CARD_SCALE, SpriteEffects.None, 0f);
             CardTextRenderer.Instance.DrawCardText(spriteBatch, card, Position, CARD_SCALE);
         }
     }

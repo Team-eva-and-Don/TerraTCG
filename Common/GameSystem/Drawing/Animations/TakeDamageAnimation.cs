@@ -28,9 +28,12 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             var zoneColor = IdleAnimation.OverlayColor(zone.PlacedCard);
             if(ElapsedTime >= impactTime) {
                 // flash the npc transparent as when the player takes damage
-                var sign = MathF.Sin(8f * MathF.Tau * (float)ElapsedTime.TotalSeconds);
+                var impactSign = TCGPlayer.LocalGamePlayer.Owns(zone) ? -1 : 1;
+                posOffset =  impactSign * baseScale * 5f * MathF.Sin(MathF.Tau * (float) ((ElapsedTime - impactTime).TotalSeconds / 0.5f));
+
+                var flashSign = MathF.Sin(8f * MathF.Tau * (float)ElapsedTime.TotalSeconds);
                 var health = MathHelper.Lerp(startHealth, zone.PlacedCard.CurrentHealth, 2 * (float)(ElapsedTime.TotalSeconds - impactTime.TotalSeconds));
-                var transparency = sign > 0 ? 0.8f : 0.6f;
+                var transparency = flashSign > 0 ? 0.8f : 0.6f;
                 AnimationUtils.DrawZoneNPC(spriteBatch, zone, basePosition + new Vector2(0, posOffset), baseScale, zoneColor * transparency);
                 AnimationUtils.DrawZoneNPCStats(spriteBatch, zone, basePosition, baseScale, health: (int)health);
             } else
