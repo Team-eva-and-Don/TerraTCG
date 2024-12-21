@@ -10,28 +10,34 @@ using TerraTCG.Common.GameSystem.GameState;
 
 namespace TerraTCG.Common.GameSystem.Drawing.Animations
 {
-    internal class IdleAnimation(Zone zone, TimeSpan startTime) : IAnimation
+    internal class IdleAnimation(
+        Zone zone, PlacedCard placedCard = null, TimeSpan duration = default, int? healthOverride = null) : IAnimation
     {
-        public TimeSpan StartTime { get; } = startTime;
+        public TimeSpan StartTime { get; set; }
 
         private static TimeSpan Period { get; } = TimeSpan.FromSeconds(2f);
-        private TimeSpan ElapsedTime => TCGPlayer.TotalGameTime - zone.PlacedCard.PlaceTime;
+        private TimeSpan ElapsedTime => TCGPlayer.TotalGameTime - StartTime;
+
+        private PlacedCard PlacedCard => placedCard ?? zone.PlacedCard;
 
         public void DrawZone(SpriteBatch spriteBatch, Vector2 basePosition, float rotation)
         {
-            AnimationUtils.DrawZoneCard(spriteBatch, zone, basePosition, rotation, color: ZoneColor(zone.PlacedCard));
+            if(PlacedCard == null) return;
+            AnimationUtils.DrawZoneCard(
+                spriteBatch, zone, basePosition, rotation, color: ZoneColor(PlacedCard), card: PlacedCard.Template);
         }
 
         public void DrawZoneOverlay(SpriteBatch spriteBatch, Vector2 basePosition, float baseScale)
         {
-            var posOffset = IdleHoverPos(zone.PlacedCard, baseScale);
-            var zoneColor = OverlayColor(zone.PlacedCard);
-            AnimationUtils.DrawZoneNPC(spriteBatch, zone, basePosition + new Vector2(0, posOffset), baseScale, color: zoneColor);
-            AnimationUtils.DrawZoneNPCStats(spriteBatch, zone, basePosition, baseScale);
+            if(PlacedCard == null) return;
+            var posOffset = IdleHoverPos(PlacedCard, baseScale);
+            var zoneColor = OverlayColor(PlacedCard);
+            AnimationUtils.DrawZoneNPC(spriteBatch, zone, basePosition + new Vector2(0, posOffset), baseScale, card: PlacedCard.Template, color: zoneColor);
+            AnimationUtils.DrawZoneNPCStats(spriteBatch, zone, basePosition, baseScale, card: PlacedCard, health: healthOverride ?? placedCard?.CurrentHealth);
         }
 
-        public bool IsComplete() => false;
-        public bool IsDefault() => true;
+        public bool IsComplete() => duration != default && ElapsedTime > duration;
+        public bool IsDefault() => duration == default;
 
         public static float IdleHoverPos(PlacedCard placedCard, float baseScale)
         {

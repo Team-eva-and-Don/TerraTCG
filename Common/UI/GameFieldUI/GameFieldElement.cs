@@ -39,11 +39,11 @@ namespace TerraTCG.Common.UI.GameFieldUI
             }             
             foreach (var zone in gamePlayer.Game.AllZones())
             {
-                if(zone.Animation?.IsComplete() ?? false)
+                if((zone.Animation?.IsComplete() ?? false) && zone.HasPlacedCard())
                 {
-                    zone.Animation = zone.HasPlacedCard() ?
-                         new IdleAnimation(zone, gameTime.TotalGameTime) : null;
+                    zone.Animation = new IdleAnimation(zone);
                 }
+                zone.UpdateAnimationQueue();
             }
             var mouseField = Main.MouseScreen - Position;
 

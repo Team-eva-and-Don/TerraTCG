@@ -10,9 +10,9 @@ using TerraTCG.Common.GameSystem.GameState;
 
 namespace TerraTCG.Common.GameSystem.Drawing.Animations
 {
-    internal class MeleeAttackAnimation(Zone zone, Zone targetZone, TimeSpan startTime) : IAnimation
+    internal class MeleeAttackAnimation(Zone zone, Zone targetZone) : IAnimation
     {
-        public TimeSpan StartTime { get; } = startTime;
+        public TimeSpan StartTime { get; set;  } 
         private TimeSpan Duration { get; } = TimeSpan.FromSeconds(1f);
         private TimeSpan ElapsedTime => TCGPlayer.TotalGameTime - StartTime;
 

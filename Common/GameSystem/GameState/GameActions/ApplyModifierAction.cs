@@ -27,8 +27,8 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             player.Game.FieldAnimation = showAnimation;
             var duration = showAnimation.Duration;
 
-            zone.Animation = new DelayAnimation(duration, zone, zone.PlacedCard, t =>
-                new ApplyModifierAnimation(zone, card.Modifiers, t));
+            zone.QueueAnimation(new IdleAnimation(zone, duration: duration));
+            zone.QueueAnimation(new ApplyModifierAnimation(zone, card.Modifiers));
 
             zone.PlacedCard.CardModifiers.AddRange(card.Modifiers);
             player.Resources = player.Resources.UseResource(mana: card.Skills[0].Cost);

@@ -53,7 +53,7 @@ namespace TerraTCG.Common.GameSystem.GameState
                 var zone = GamePlayers[1].Field.Zones[i];
                 if(!zone.IsEmpty())
                 {
-                    zone.Animation = new IdleAnimation(zone, TimeSpan.FromSeconds(-i/3f));
+                    zone.Animation = new IdleAnimation(zone);
                 }
             }
 

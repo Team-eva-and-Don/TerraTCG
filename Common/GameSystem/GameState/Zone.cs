@@ -26,7 +26,8 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal int Index { get; set; }
 
-        internal IAnimation Animation { get; set; }
+        private readonly List<IAnimation> animationQueue = [];
+        internal IAnimation Animation { get => animationQueue.Count > 0 ? animationQueue[0] : null; set { QueueAnimation(value); } }
 
         internal const float CARD_DRAW_SCALE = 2f / 3f;
 
@@ -42,8 +43,30 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         public bool HasPlacedCard() => PlacedCard != null;
 
-        // TODO this implementation is not correct outside of goldfishing
+        internal void QueueAnimation(IAnimation animation)
+        {
+            if (animationQueue.Count > 0 && animationQueue[0].IsDefault())
+            {
+                animationQueue.RemoveAt(0);
+            }
+            animation.StartTime = TCGPlayer.TotalGameTime;
+            animationQueue.Add(animation);
+        }
+
+        internal void UpdateAnimationQueue()
+        {
+            if (animationQueue.Count > 0 && animationQueue[0].IsComplete())
+            {
+                animationQueue.RemoveAt(0);
+                if(animationQueue.Count > 0)
+                {
+                    animationQueue[0].StartTime = TCGPlayer.TotalGameTime;
+                }
+            }
+        }
+
         public GamePlayer Owner => Game.GamePlayers.Where(p => p.Field.Zones.Contains(this)).FirstOrDefault();
+
         private void DrawOffenseIcon(SpriteBatch spriteBatch, Vector2 position, float rotation)
         {
             var texture = TextureCache.Instance.OffenseIcon;

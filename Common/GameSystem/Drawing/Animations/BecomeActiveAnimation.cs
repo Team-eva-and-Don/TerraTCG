@@ -10,9 +10,9 @@ using TerraTCG.Common.GameSystem.GameState;
 
 namespace TerraTCG.Common.GameSystem.Drawing.Animations
 {
-    internal class BecomeActiveAnimation(Zone zone, TimeSpan startTime) : IAnimation
+    internal class BecomeActiveAnimation(Zone zone) : IAnimation
     {
-        public TimeSpan StartTime { get; } = startTime;
+        public TimeSpan StartTime { get; set;  }
 
         private static TimeSpan Duration { get; } = TimeSpan.FromSeconds(0.25f);
         private TimeSpan ElapsedTime => TCGPlayer.TotalGameTime - StartTime;

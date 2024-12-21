@@ -10,9 +10,9 @@ using TerraTCG.Common.GameSystem.GameState;
 
 namespace TerraTCG.Common.GameSystem.Drawing.Animations
 {
-    internal class RemoveCardAnimation(Zone zone, PlacedCard leavingCard, TimeSpan startTime) : IAnimation
+    internal class RemoveCardAnimation(Zone zone, PlacedCard leavingCard) : IAnimation
     {
-        public TimeSpan StartTime { get; } = startTime;
+        public TimeSpan StartTime { get; set; } 
         internal TimeSpan Duration { get; } = TimeSpan.FromSeconds(0.25f);
 
         private TimeSpan ElapsedTime => TCGPlayer.TotalGameTime - StartTime;

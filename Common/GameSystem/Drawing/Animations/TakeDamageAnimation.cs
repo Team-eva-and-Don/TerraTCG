@@ -10,9 +10,9 @@ using TerraTCG.Common.GameSystem.GameState;
 
 namespace TerraTCG.Common.GameSystem.Drawing.Animations
 {
-    internal class TakeDamageAnimation(Zone zone, TimeSpan startTime, TimeSpan impactTime, int startHealth) : IAnimation
+    internal class TakeDamageAnimation(Zone zone, TimeSpan impactTime, int startHealth) : IAnimation
     {
-        public TimeSpan StartTime { get; } = startTime;
+        public TimeSpan StartTime { get; set; } 
         internal TimeSpan Duration { get; } = TimeSpan.FromSeconds(1f);
         private TimeSpan ElapsedTime => TCGPlayer.TotalGameTime - StartTime;
 

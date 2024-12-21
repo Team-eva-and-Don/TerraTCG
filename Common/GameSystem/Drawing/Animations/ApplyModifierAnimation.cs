@@ -12,9 +12,9 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.Drawing.Animations
 {
-    internal class ApplyModifierAnimation(Zone zone, List<ICardModifier> modifiers, TimeSpan startTime) : IAnimation
+    internal class ApplyModifierAnimation(Zone zone, List<ICardModifier> modifiers) : IAnimation
     {
-        public TimeSpan StartTime => startTime;
+        public TimeSpan StartTime { get; set; }
         private TimeSpan ElapsedTime => TCGPlayer.TotalGameTime - StartTime;
         private TimeSpan Duration => TimeSpan.FromSeconds(1.25f);
         private TimeSpan Period => TimeSpan.FromSeconds(2f);

@@ -16,7 +16,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
     internal delegate IAnimation AnimationSupplier(TimeSpan startTime);
     internal class DelayAnimation(TimeSpan duration, Zone srcZone, PlacedCard placedCard, AnimationSupplier nextAnimation) : IAnimation
     {
-        public TimeSpan StartTime { get; } = TCGPlayer.TotalGameTime;
+        public TimeSpan StartTime { get; set;  }
 
         public void DrawZone(SpriteBatch spriteBatch, Vector2 basePosition, float rotation)
         {

@@ -14,12 +14,11 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
     // begins to get unwieldy
     internal class DeathAnimation(
         Zone zone, 
-        TimeSpan startTime, 
         TimeSpan impactTime, 
         int startHealth, 
         PlacedCard leavingCard) : IAnimation
     {
-        public TimeSpan StartTime { get; } = startTime;
+        public TimeSpan StartTime { get; set;  }
         internal TimeSpan Duration { get; } = TimeSpan.FromSeconds(1.25f);
 
         private TimeSpan FadeOutTime { get; } = impactTime + TimeSpan.FromSeconds(0.5f);

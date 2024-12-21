@@ -65,8 +65,8 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             // move within own field
             endZone.PlacedCard = startZone.PlacedCard;
             startZone.PlacedCard = null;
-            startZone.Animation = new RemoveCardAnimation(startZone, endZone.PlacedCard, TCGPlayer.TotalGameTime);
-            endZone.Animation = new PlaceCardAnimation(endZone, TCGPlayer.TotalGameTime);
+            startZone.Animation = new RemoveCardAnimation(startZone, endZone.PlacedCard);
+            endZone.Animation = new PlaceCardAnimation(endZone);
             player.Resources = player.Resources.UseResource(mana: endZone.PlacedCard.Template.MoveCost);
         }
 
@@ -84,14 +84,14 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             player.Opponent.Field.ClearModifiers(endZone, GameEvent.AFTER_RECEIVE_ATTACK);
 
 
-            startZone.Animation = new MeleeAttackAnimation(startZone, endZone, currTime);
+            startZone.Animation = new MeleeAttackAnimation(startZone, endZone);
             if(endZone.PlacedCard.CurrentHealth > 0)
             {
-                endZone.Animation = new TakeDamageAnimation(endZone, currTime, TimeSpan.FromSeconds(0.5f), prevHealth);
+                endZone.Animation = new TakeDamageAnimation(endZone, TimeSpan.FromSeconds(0.5f), prevHealth);
             } else
             {
                 endZone.Animation = new DeathAnimation(
-                    endZone, currTime, TimeSpan.FromSeconds(0.5f), prevHealth, endZone.PlacedCard);
+                    endZone, TimeSpan.FromSeconds(0.5f), prevHealth, endZone.PlacedCard);
                 endZone.Owner.Resources = endZone.Owner.Resources.UseResource(health: 1);
                 endZone.PlacedCard = null;
             }
@@ -103,7 +103,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             startZone.PlacedCard.IsExerted = true;
             player.Resources = player.Resources.UseResource(mana: skill.Cost);
             skill.DoSkill(player, startZone);
-            startZone.Animation = new ActionAnimation(startZone, TCGPlayer.TotalGameTime);
+            startZone.Animation = new ActionAnimation(startZone);
         }
 
         public void Complete()

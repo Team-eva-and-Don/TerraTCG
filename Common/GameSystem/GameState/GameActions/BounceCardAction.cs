@@ -31,8 +31,8 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             var leavingCard = zone.PlacedCard;
             zone.PlacedCard = null;
 
-            zone.Animation = new DelayAnimation(duration, zone, leavingCard, t =>
-                new RemoveCardAnimation(zone, leavingCard, TCGPlayer.TotalGameTime));
+            zone.QueueAnimation(new IdleAnimation(zone, leavingCard, duration));
+            zone.QueueAnimation(new RemoveCardAnimation(zone, leavingCard));
 
             Player.Hand.Add(leavingCard.Template);
         }

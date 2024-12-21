@@ -39,7 +39,7 @@ namespace TerraTCG.Common.GameSystem.GameState
             {
                 if(zone.PlacedCard.IsExerted)
                 {
-                    zone.Animation = new BecomeActiveAnimation(zone, TCGPlayer.TotalGameTime);
+                    zone.Animation = new BecomeActiveAnimation(zone);
                 }
                 zone.PlacedCard.IsExerted = false;
             }
