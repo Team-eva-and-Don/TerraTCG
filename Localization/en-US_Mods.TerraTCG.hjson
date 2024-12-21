@@ -68,6 +68,20 @@ Cards: {
 		}
 	}
 
+	Squirrel: {
+		Name: Squirrel
+		Attack.Name: Acorn Toss
+
+		Skill: {
+			Name: Skill: Forest Cheer
+			Description:
+				'''
+				Your next attack this
+				turn deals +1 dmg
+				'''
+		}
+	}
+
 	Bat: {
 		Name: Cave Bat
 		Attack.Name: Swoop

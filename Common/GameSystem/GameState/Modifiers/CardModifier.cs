@@ -11,14 +11,29 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
 {
     internal enum GameEvent
     {
-        END_TURN
+        // End of the current turn
+        END_TURN,
+
+        // After doing an attack
+        AFTER_ATTACK,
+
+        // After receiving an attack
+        AFTER_RECEIVE_ATTACK,
     }
 
     internal interface ICardModifier
     {
         public Asset<Texture2D> Texture { get; }
         public string Description { get; }
+
+        // Modify an attack as this card performs it
         public void ModifyAttack(ref Attack attack, Zone sourceZone, Zone destZone) 
+        {
+            // no-op
+        }
+
+        // Modify an attack as it is performed against this card
+        public void ModifyIncomingAttack(ref Attack attack, Zone sourceZone, Zone destZone) 
         {
             // no-op
         }

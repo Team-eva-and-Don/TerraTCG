@@ -12,7 +12,6 @@ namespace TerraTCG.Common.GameSystem.CardData
 {
     internal class DemonEye : ModSystem, ICardTemplate
     {
-        internal static ICardTemplate Instance => ModContent.GetInstance<DemonEye>();
         public Card CreateCard() => new ()
         {
             Name = "DemonEye",

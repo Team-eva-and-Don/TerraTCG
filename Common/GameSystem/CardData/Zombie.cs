@@ -11,7 +11,6 @@ namespace TerraTCG.Common.GameSystem.CardData
 {
     internal class Zombie : ModSystem, ICardTemplate
     {
-        internal static ICardTemplate Instance => ModContent.GetInstance<Zombie>();
         public Card CreateCard() => new ()
         {
             Name = "Zombie",

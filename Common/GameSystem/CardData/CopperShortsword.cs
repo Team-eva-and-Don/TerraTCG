@@ -14,7 +14,6 @@ namespace TerraTCG.Common.GameSystem.CardData
 {
     internal class CopperShortsword : ModSystem, ICardTemplate
     {
-        internal static ICardTemplate Instance => ModContent.GetInstance<CopperShortsword>();
         public Card CreateCard() => new ()
         {
             Name = "CopperShortsword",

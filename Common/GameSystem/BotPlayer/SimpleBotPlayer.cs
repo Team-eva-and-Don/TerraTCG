@@ -129,7 +129,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             {
                 return false;
             }
-            var dryadCard = Dryad.Instance.CreateCard().CardName;
+            var dryadCard = GamePlayer.CreateCard<Dryad>().CardName;
             var cardInHand = GamePlayer.Hand.Cards.Where(c => c.CardName == dryadCard).FirstOrDefault();
 
             var bestRetreatTarget = GamePlayer.Field.Zones.Where(z => !z.IsEmpty())
@@ -150,7 +150,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             {
                 return false;
             }
-            var oldManCard = OldMan.Instance.CreateCard().CardName;
+            var oldManCard = GamePlayer.CreateCard<OldMan>().CardName;
             var cardInHand = GamePlayer.Hand.Cards.Where(c => c.CardName == oldManCard).FirstOrDefault();
             var possibleDamage = PossibleDamage;
 

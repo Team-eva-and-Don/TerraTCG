@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Terraria;
 using TerraTCG.Common.GameSystem.Drawing.Animations;
 using TerraTCG.Common.GameSystem.Drawing.Animations.FieldAnimations;
+using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.GameState
 {
@@ -51,6 +52,11 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         public void End()
         {
+            foreach(var zone in ActivePlayer.Field.Zones)
+            {
+                ActivePlayer.Field.ClearModifiers(zone, GameEvent.END_TURN);
+            }
+
             Game.CurrentTurn = new()
             {
                 Game = Game,

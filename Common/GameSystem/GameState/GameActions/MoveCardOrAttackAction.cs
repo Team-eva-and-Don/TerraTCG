@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using TerraTCG.Common.GameSystem.Drawing.Animations;
+using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
@@ -78,6 +79,9 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             var attack = startZone.PlacedCard.GetAttackWithModifiers(startZone, endZone);
             player.Resources = player.Resources.UseResource(mana: startZone.PlacedCard.Template.Attacks[0].Cost);
             attack.DoAttack(attack, startZone, endZone);
+
+            player.Field.ClearModifiers(startZone, GameEvent.AFTER_ATTACK);
+            player.Opponent.Field.ClearModifiers(endZone, GameEvent.AFTER_RECEIVE_ATTACK);
 
 
             startZone.Animation = new MeleeAttackAnimation(startZone, endZone, currTime);

@@ -11,7 +11,6 @@ namespace TerraTCG.Common.GameSystem.CardData
 {
     internal class Skeleton : ModSystem, ICardTemplate
     {
-        internal static ICardTemplate Instance => ModContent.GetInstance<Skeleton>();
         public Card CreateCard() => new ()
         {
             Name = "Skeleton",

@@ -7,12 +7,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using TerraTCG.Common.GameSystem.Drawing;
+using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.GameState
 {
     internal class Field
     {
         internal List<Zone> Zones { get; set; }
+
+        internal List<ICardModifier> CardModifiers { get; private set; } = [];
 
         public Field(CardGame game)
         {
@@ -24,6 +27,15 @@ namespace TerraTCG.Common.GameSystem.GameState
                 new() { Role = ZoneRole.DEFENSE, Index = 4, Game = game},
                 new() { Role = ZoneRole.DEFENSE, Index = 5, Game = game},
             ];
+        }
+
+        internal void ClearModifiers(Zone zoneToClear, GameEvent gameEvent)
+        {
+            CardModifiers = CardModifiers.Where(m => !m.ShouldRemove(gameEvent)).ToList();
+            if(zoneToClear.PlacedCard is PlacedCard card)
+            {
+                card.CardModifiers = card.CardModifiers.Where(m => !m.ShouldRemove(gameEvent)).ToList();
+            }
         }
 
         internal void Draw(SpriteBatch spriteBatch, Vector2 position, float rotation)

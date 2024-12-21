@@ -6,33 +6,34 @@ using System.Threading.Tasks;
 using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.GameState;
+using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class Bunny : ModSystem, ICardTemplate
+    internal class Squirrel : ModSystem, ICardTemplate
     {
         public Card CreateCard() => new ()
         {
-            Name = "Bunny",
-            MaxHealth = 4,
+            Name = "Squirrel",
+            MaxHealth = 5,
             MoveCost = 1,
             CardType = CardType.CREATURE,
-            NPCID = NPCID.Bunny,
+            NPCID = NPCID.Squirrel,
             SubTypes = [CardSubtype.FOREST, CardSubtype.CRITTER],
             Role = ZoneRole.DEFENSE,
             Attacks = [
                 new() {
+                    Name = "Acorn Toss",
                     Damage = 1,
                     Cost = 1,
                 }
             ],
             Skills = [
                 new() {
-                    Name = "Skill: Forest Wish",
-                    Cost = 0,
-                    Description = "Gain 1 MP",
+                    Name = "Skill: Forest Cheer",
+                    Cost = 1,
                     DoSkill = (GamePlayer player, Zone zone) => {
-                        player.Resources = player.Resources.UseResource(mana: -1);
+                        player.Field.CardModifiers.Add(new FlatDamageModifier(1, [GameEvent.AFTER_ATTACK, GameEvent.END_TURN]));
                     }
                 }
             ]

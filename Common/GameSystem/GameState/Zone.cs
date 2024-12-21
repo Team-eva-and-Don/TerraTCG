@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Terraria;
 using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.Drawing.Animations;
+using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.GameState
 {
@@ -31,7 +32,12 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         public void PlaceCard(Card card)
         {
-            PlacedCard = new PlacedCard(card) {  IsExerted = true, PlaceTime = TCGPlayer.TotalGameTime };
+            PlacedCard = new PlacedCard(card)
+            {
+                IsExerted = true,
+                PlaceTime = TCGPlayer.TotalGameTime,
+                CardModifiers = [.. card.Modifiers ?? []]
+            };
         }
 
         public bool HasPlacedCard() => PlacedCard != null;

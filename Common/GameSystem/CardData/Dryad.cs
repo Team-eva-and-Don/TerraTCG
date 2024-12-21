@@ -13,7 +13,6 @@ namespace TerraTCG.Common.GameSystem.CardData
 {
     internal class Dryad : ModSystem, ICardTemplate
     {
-        internal static ICardTemplate Instance => ModContent.GetInstance<Dryad>();
         public Card CreateCard() => new ()
         {
             Name = "Dryad",

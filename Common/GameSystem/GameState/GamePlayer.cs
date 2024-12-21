@@ -45,7 +45,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         public Card MouseoverCard { get; internal set; }
 
-        public Card CreateCard<T>() where T : ModSystem, ICardTemplate
+        public static Card CreateCard<T>() where T : ModSystem, ICardTemplate
         {
             return ModContent.GetInstance<T>().CreateCard();
         }
@@ -71,10 +71,10 @@ namespace TerraTCG.Common.GameSystem.GameState
 
             Hand = new CardCollection()
             {
-                Cards = [ ]
+                Cards = [ CreateCard<Squirrel>() ]
             };
 
-            for(int _ = 0; _ < 4; _++)
+            for(int _ = 0; _ < 3; _++)
             {
                 Hand.Add(Deck.Draw());
             }

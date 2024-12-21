@@ -12,7 +12,6 @@ namespace TerraTCG.Common.GameSystem.CardData
 {
     internal class Bat : ModSystem, ICardTemplate
     {
-        internal static ICardTemplate Instance => ModContent.GetInstance<Bat>();
         public Card CreateCard() => new ()
         {
             Name = "Bat",

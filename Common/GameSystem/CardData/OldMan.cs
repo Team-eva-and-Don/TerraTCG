@@ -13,7 +13,6 @@ namespace TerraTCG.Common.GameSystem.CardData
 {
     internal class OldMan : ModSystem, ICardTemplate
     {
-        internal static ICardTemplate Instance => ModContent.GetInstance<OldMan>();
         public Card CreateCard() => new ()
         {
             Name = "OldMan",

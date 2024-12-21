@@ -21,9 +21,16 @@ namespace TerraTCG.Common.GameSystem.GameState
         public Attack GetAttackWithModifiers(Zone startZone, Zone endZone)
         {
             var attack = Template.Attacks[0].Copy();
-            foreach (var modifier in CardModifiers)
+            foreach (var modifier in CardModifiers.Concat(startZone.Owner.Field.CardModifiers))
             {
                 modifier.ModifyAttack(ref attack, startZone, endZone);
+            }
+            if (endZone?.PlacedCard is PlacedCard endCard)
+            {
+                foreach (var modifier in endCard.CardModifiers.Concat(endZone.Owner.Field.CardModifiers))
+                {
+                    modifier.ModifyIncomingAttack(ref attack, startZone, endZone);
+                }
             }
             return attack;
         }
