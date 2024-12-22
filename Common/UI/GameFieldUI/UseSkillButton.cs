@@ -21,7 +21,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
             var isClicked = IsClicked();
             var localPlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>();
             var gamePlayer = localPlayer.GamePlayer;
-            if (!(gamePlayer?.InProgressAction?.CanAcceptActionButton(ActionType.SKILL) ?? false))
+            if (!(gamePlayer?.InProgressAction?.CanAcceptActionButton() ?? false))
             {
                 return;
             }
@@ -52,7 +52,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
         public override void Draw(SpriteBatch spriteBatch)
         {
             var gamePlayer = TCGPlayer.LocalGamePlayer;
-            if (!(gamePlayer?.InProgressAction?.CanAcceptActionButton(ActionType.SKILL) ?? false))
+            if (!(gamePlayer?.InProgressAction?.CanAcceptActionButton() ?? false))
             {
                 return;
             }

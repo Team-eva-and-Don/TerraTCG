@@ -18,6 +18,13 @@ namespace TerraTCG.Common.GameSystem.GameState
         internal TimeSpan PlaceTime { get; set; }
         internal bool IsExerted { get; set; } = false;
 
+        internal bool IsDamaged => CurrentHealth < Template.MaxHealth;
+
+        internal void Heal(int amount)
+        {
+            CurrentHealth = Math.Min(Template.MaxHealth, CurrentHealth + amount);
+        }
+
         public Attack GetAttackWithModifiers(Zone startZone, Zone endZone)
         {
             var attack = Template.Attacks[0].Copy();

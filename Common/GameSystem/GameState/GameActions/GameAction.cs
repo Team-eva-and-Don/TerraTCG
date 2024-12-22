@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,11 +23,16 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public bool AcceptCardInHand(Card card) => false;
 
-        public bool CanAcceptActionButton(ActionType actionType) => false;
+        public bool CanAcceptActionButton() => false;
 
-        public bool AcceptActionButton(ActionType actionType) => false;
+        public bool AcceptActionButton() => false;
 
         public void Complete();
+
+        public Color HighlightColor(Zone zone)
+        {
+            return TCGPlayer.LocalGamePlayer.Owns(zone) ? Color.LightSkyBlue : Color.LightCoral;
+        }
 
         public void Cancel() 
         {

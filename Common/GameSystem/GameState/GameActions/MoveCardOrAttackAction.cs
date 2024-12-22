@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
     {
         private Zone endZone;
 
-        private ActionType actionType = ActionType.NONE;
+        private ActionType actionType = ActionType.DEFAULT;
 
         public bool CanAcceptCardInHand(Card card) => false;
 
@@ -26,13 +27,16 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
                 return false;
             }
 
-            if(player.Owns(zone) && zone.IsEmpty())
+            if(actionType == ActionType.DEFAULT && player.Owns(zone) && zone.IsEmpty())
             {
                 return startZone.PlacedCard.Template.MoveCost <= player.Resources.Mana;
 
-            } else if (!player.Owns(zone) && !zone.IsEmpty())
+            } else if (actionType == ActionType.DEFAULT && !player.Owns(zone) && !zone.IsEmpty())
             {
                 return startZone.PlacedCard.Template.Attacks[0].Cost <= player.Resources.Mana;
+            } else if (actionType == ActionType.TARGET_ALLY && player.Owns(zone) && !zone.IsEmpty())
+            {
+                return true;
             } else
             {
                 return false;
@@ -41,9 +45,9 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public bool AcceptCardInHand(Card card) => false;
 
-        public bool CanAcceptActionButton(ActionType actionType)
+        public bool CanAcceptActionButton()
         {
-            return startZone.PlacedCard.Template.HasSkillText &&
+            return actionType == ActionType.DEFAULT && startZone.PlacedCard.Template.HasSkillText &&
                 startZone.PlacedCard.Template.Skills[0].Cost <= player.Resources.Mana &&
                 !startZone.PlacedCard.IsExerted;
         }
@@ -54,10 +58,10 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             return true;
         }
 
-        public bool AcceptActionButton(ActionType actionType)
+        public bool AcceptActionButton()
         {
-            this.actionType = actionType;
-            return true;
+            actionType = startZone.PlacedCard.Template.Skills[0].SkillType;
+            return actionType == ActionType.SKILL;
         }
 
         private void DoMove()
@@ -100,13 +104,14 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             var skill = startZone.PlacedCard.Template.Skills[0];
             startZone.PlacedCard.IsExerted = true;
             player.Resources = player.Resources.UseResource(mana: skill.Cost);
-            skill.DoSkill(player, startZone);
+            skill.DoSkill(player, startZone, endZone);
             startZone.QueueAnimation(new ActionAnimation(startZone.PlacedCard));
+            endZone?.QueueAnimation(new ActionAnimation(endZone.PlacedCard));
         }
 
         public void Complete()
         {
-            if(actionType != ActionType.NONE)
+            if(actionType != ActionType.DEFAULT)
             {
                 DoSkill();
             } else if (player.Owns(endZone))
@@ -116,6 +121,18 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             {
                 DoAttack();
             }
+        }
+
+        public Color HighlightColor(Zone zone)
+        {
+            if(actionType == ActionType.DEFAULT)
+            {
+                return TCGPlayer.LocalGamePlayer.Owns(zone) ? Color.LightSkyBlue : Color.LightCoral;
+            } else
+            {
+                return Color.Goldenrod;
+            }
+
         }
 
         public void Cancel()

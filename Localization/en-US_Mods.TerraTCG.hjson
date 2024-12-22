@@ -30,8 +30,8 @@ Cards: {
 		Name: Dryad's Ward
 		Modifier.Description:
 			'''
-			Return target creature
-			you control to the hand
+			Return target allied
+			creature to the hand
 			'''
 	}
 
@@ -39,8 +39,7 @@ Cards: {
 		Name: Old Man's Curse
 		Modifier.Description:
 			'''
-			Move target creature
-			opponent controls to
+			Move target enemy to
 			an unoccupied zone
 			'''
 	}
@@ -76,9 +75,19 @@ Cards: {
 			Name: Skill: Forest Cheer
 			Description:
 				'''
-				Your next attack this
-				turn deals +1 dmg
+				Target ally's next attack
+				this turn deals +1 dmg
 				'''
+		}
+	}
+
+	Goldfish: {
+		Name: Goldfish
+		Attack.Name: Fin Slap
+
+		Skill: {
+			Name: Skill: Pond Healing
+			Description: Target ally heals 1 dmg
 		}
 	}
 

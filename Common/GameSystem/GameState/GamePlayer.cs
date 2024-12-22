@@ -57,7 +57,7 @@ namespace TerraTCG.Common.GameSystem.GameState
             Deck = new CardCollection()
             {
                 Cards = [
-//                    CreateCard<Zombie>(), 
+                    CreateCard<Squirrel>(), 
 //                    CreateCard<CopperShortsword>(), 
 //                    CreateCard<OldMan>(), 
 //                    CreateCard<DemonEye>(),
@@ -70,7 +70,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 
             Hand = new CardCollection()
             {
-                Cards = [CreateCard<Zombie>(), CreateCard<CopperShortsword>(),]
+                Cards = [CreateCard<Zombie>(), CreateCard<Goldfish>(), CreateCard<CopperShortsword>(),]
             };
 
             //for(int _ = 0; _ < 2; _++)
@@ -119,9 +119,9 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         public void SelectActionButton(ActionType actionType)
         {
-            if(InProgressAction?.CanAcceptActionButton(actionType) ?? false)
+            if(InProgressAction?.CanAcceptActionButton() ?? false)
             {
-                var done = InProgressAction.AcceptActionButton(ActionType.SKILL);
+                var done = InProgressAction.AcceptActionButton();
                 if(done)
                 {
                     InProgressAction.Complete();

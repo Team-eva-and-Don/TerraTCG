@@ -126,7 +126,7 @@ namespace TerraTCG.Common.GameSystem.GameState
                 origin = new Vector2(bounds.Width, bounds.Height) / 2;
 
                 float brightness = 0.5f + 0.5f * MathF.Sin(MathF.Tau * (float)TCGPlayer.TotalGameTime.TotalSeconds / 2f);
-                var color = gamePlayer.Owns(this) ? Color.LightSkyBlue : Color.LightCoral;
+                var color = gamePlayer.InProgressAction.HighlightColor(this);
 
                 spriteBatch.Draw(texture.Value, position + origin, bounds, color * brightness, rotation, origin, 1f, SpriteEffects.None, 0);
             }

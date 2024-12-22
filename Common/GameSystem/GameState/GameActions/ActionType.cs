@@ -8,7 +8,8 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
     internal enum ActionType
     {
-        NONE,
-        SKILL
+        DEFAULT,
+        SKILL,
+        TARGET_ALLY,
     }
 }

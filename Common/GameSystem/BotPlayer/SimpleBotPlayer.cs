@@ -58,7 +58,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
         {
             var action = new MoveCardOrAttackAction(sourceZone, GamePlayer);
             GamePlayer.InProgressAction = action;
-            action.AcceptActionButton(ActionType.SKILL);
+            action.AcceptActionButton();
             action.Complete();
         }
 
@@ -263,6 +263,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             var bestSkillZone = GamePlayer.Field.Zones.Where(z => !z.IsEmpty())
                 .Where(z => !z.PlacedCard.IsExerted && z.PlacedCard.Template.HasSkill)
                 .Where(z => z.PlacedCard.Template.Skills[0].Cost <= GamePlayer.Resources.Mana)
+                .Where(z => z.PlacedCard.Template.Skills[0].SkillType == ActionType.SKILL)
                 .OrderBy(z => z.PlacedCard.Template.Skills[0].Cost)
                 .FirstOrDefault();
 

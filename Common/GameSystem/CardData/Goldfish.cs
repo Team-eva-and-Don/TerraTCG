@@ -11,35 +11,35 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class Squirrel : ModSystem, ICardTemplate
+    internal class Goldfish: ModSystem, ICardTemplate
     {
-        private void ForestCheer(GamePlayer player, Zone zone, Zone targetZone)
+        private void PondHealing(GamePlayer player, Zone zone, Zone targetZone)
         {
-            targetZone.PlacedCard.CardModifiers.Add(new FlatDamageModifier(1, [GameEvent.AFTER_ATTACK, GameEvent.END_TURN]));
+            targetZone.PlacedCard.Heal(1);
         }
 
         public Card CreateCard() => new ()
         {
-            Name = "Squirrel",
-            MaxHealth = 5,
+            Name = "Goldfish",
+            MaxHealth = 6,
             MoveCost = 1,
             CardType = CardType.CREATURE,
-            NPCID = NPCID.Squirrel,
+            NPCID = NPCID.GoldfishWalker,
             SubTypes = [CardSubtype.FOREST, CardSubtype.CRITTER],
             Role = ZoneRole.DEFENSE,
             Attacks = [
                 new() {
-                    Name = "Acorn Toss",
+                    Name = "Fin Slap",
                     Damage = 1,
                     Cost = 1,
                 }
             ],
             Skills = [
                 new() {
-                    Name = "Skill: Forest Cheer",
+                    Name = "Skill: Pond Healing",
                     Cost = 1,
                     SkillType = ActionType.TARGET_ALLY,
-                    DoSkill = ForestCheer,
+                    DoSkill = PondHealing,
                 }
             ]
         };
