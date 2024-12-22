@@ -37,6 +37,12 @@ namespace TerraTCG.Common.UI.GameFieldUI
             } else if (gamePlayer.SelectedHandCard != null)
             {
                 // TODO place the button above the card in hand
+                var handElem = ((GameFieldState)Parent).handElement;
+                var cardPos = handElem.GetCardPosition(gamePlayer.SelectedHandCard);
+                var center = cardPos + new Vector2(HandElement.CARD_WIDTH / 2, - 12f);
+
+                Left.Set(center.X, 0f);
+                Top.Set(center.Y, 0f);
             }
 
             if (ContainsMouse)

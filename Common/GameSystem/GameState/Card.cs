@@ -23,15 +23,20 @@ namespace TerraTCG.Common.GameSystem.GameState
 
     internal enum CardSubtype
     {
+        // Biomes
         FOREST,
-        UNDEAD,
-        CRITTER,
-        EYE,
-        TOWNSFOLK, // CardType isn't rendered, so need to repeat it as a subtype
         CAVERN,
-        BAT,
+        // Duplicate CardTypes (for text rendering)
+        TOWNSFOLK,
         ITEM,
-        EQUIPMENT
+        EQUIPMENT,
+        // Creature Roles
+        FIGHTER,
+        SCOUT,
+        DEFENDER,
+        SLIME,
+        CRITTER,
+        CASTER,
     }
 
     internal class Card

@@ -81,7 +81,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             var prevHealth = endZone.PlacedCard.CurrentHealth;
             startZone.PlacedCard.IsExerted = true;
             var attack = startZone.PlacedCard.GetAttackWithModifiers(startZone, endZone);
-            player.Resources = player.Resources.UseResource(mana: startZone.PlacedCard.Template.Attacks[0].Cost);
+            player.Resources = player.Resources.UseResource(mana: attack.Cost);
             attack.DoAttack(attack, startZone, endZone);
 
             player.Field.ClearModifiers(startZone, GameEvent.AFTER_ATTACK);

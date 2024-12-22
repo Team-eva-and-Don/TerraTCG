@@ -11,14 +11,14 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class Dryad : ModSystem, ICardTemplate
+    internal class Wizard : ModSystem, ICardTemplate
     {
         public Card CreateCard() => new ()
         {
-            Name = "Dryad",
+            Name = "Wizard",
             CardType = CardType.TOWNSFOLK,
             SubTypes = [CardSubtype.TOWNSFOLK],
-            SelectInHandAction = (card, player) => new BounceCardAction(card, player),
+            SelectInHandAction = (card, player) => new RampAction(card, player, 1),
         };
     }
 }

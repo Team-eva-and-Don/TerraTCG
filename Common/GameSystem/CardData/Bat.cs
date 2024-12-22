@@ -19,7 +19,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             MoveCost = 2,
             CardType = CardType.CREATURE,
             NPCID = NPCID.CaveBat,
-            SubTypes = [CardSubtype.CAVERN, CardSubtype.BAT],
+            SubTypes = [CardSubtype.CAVERN, CardSubtype.SCOUT],
             Attacks = [
                 new() {
                     Damage = 3,

@@ -102,7 +102,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             // While we have mana - choose the available attack with the highest damage and use it
             // against the enemy in the front row with the lowest health
             var bestAttackZone = GamePlayer.Field.Zones.Where(z => !z.IsEmpty())
-                .Where(z => z.PlacedCard.Template.Attacks[0].Cost <= GamePlayer.Resources.Mana)
+                .Where(z => z.PlacedCard.GetAttackWithModifiers(z, null).Cost <= GamePlayer.Resources.Mana)
                 .Where(z => !z.PlacedCard.IsExerted)
                 .Where(z => z.Role == ZoneRole.OFFENSE)
                 .OrderByDescending(z => z.PlacedCard.GetAttackWithModifiers(z, null).Damage)

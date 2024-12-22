@@ -81,7 +81,8 @@ namespace TerraTCG.Common.GameSystem.Drawing
 
             // Center text on the middle of the mana star
             var textOrigin = new Vector2(texture.Bounds.Width / 2, texture.Bounds.Height * 0.67f) * MPIconScale;
-            DrawStringWithBorder(spriteBatch, $"{cost}", position + textOrigin * scale, scale: scale * SmallTextScale, centered: true);
+            var costStr = cost == -1 ? "X" : $"{cost}";
+            DrawStringWithBorder(spriteBatch, costStr, position + textOrigin * scale, scale: scale * SmallTextScale, centered: true);
         }
 
         
@@ -225,9 +226,10 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 var attackIcon = TextureCache.Instance.AttackIcon.Value;
                 var attackIconWidth = attackIcon.Bounds.Width * MPIconScale;
 
-                var dmgBounds = font.MeasureString($"{attack.Damage}") * BaseTextScale;
+                var atkDmg = attack.Damage == -1 ? "X" : $"{attack.Damage}";
+                var dmgBounds = font.MeasureString(atkDmg) * BaseTextScale;
                 var dmgOffset = new Vector2(bounds.Width - dmgBounds.X - 1.25f * MARGIN_L - attackIconWidth, attackRowHeight);
-                DrawString(spriteBatch, $"{attack.Damage}", position + dmgOffset * scale, Color.Black, scale * BaseTextScale);
+                DrawString(spriteBatch, atkDmg, position + dmgOffset * scale, Color.Black, scale * BaseTextScale);
 
                 var attackIconOffset = new Vector2(bounds.Width - MARGIN_L - attackIconWidth, attackRowHeight);
                 spriteBatch.Draw(
@@ -236,8 +238,14 @@ namespace TerraTCG.Common.GameSystem.Drawing
             // Attack Description
             if(card.HasAttackDescription)
             {
-                var attackTextOffset = new Vector2(1.5f * MARGIN_L, startY + heightInfo.attackDescriptionHeight);
-                DrawString(spriteBatch, card.AttackDescription, position + attackTextOffset * scale, Color.Black, scale * SmallTextScale);
+                var rowY = startY + heightInfo.attackDescriptionHeight;
+                var attackLines = card.AttackDescription.Split("\n");
+                foreach (var line in attackLines)
+                {
+                    var posOffset = new Vector2(1.5f * MARGIN_L, rowY);
+                    DrawString(spriteBatch, line, position + posOffset * scale, Color.Black, SmallTextScale * scale);
+                    rowY += SmallTextHeight;
+                }
             }
         }
 

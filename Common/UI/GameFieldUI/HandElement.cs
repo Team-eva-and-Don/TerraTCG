@@ -9,6 +9,7 @@ using Terraria;
 using Terraria.UI;
 using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.Drawing;
+using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.UI.Common;
 
 namespace TerraTCG.Common.UI.GameFieldUI
@@ -55,6 +56,13 @@ namespace TerraTCG.Common.UI.GameFieldUI
             base.Update(gameTime);
         }
 
+        internal Vector2 GetCardPosition(Card card)
+        {
+            var cardIdx = TCGPlayer.LocalGamePlayer.Hand.Cards.IndexOf(card);
+            return CardPosition0 + Vector2.UnitX * cardIdx * (CARD_WIDTH + CARD_MARGIN);
+
+        }
+
         public override void Draw(SpriteBatch spriteBatch)
         {
             var gamePlayer = TCGPlayer.LocalGamePlayer;
@@ -62,9 +70,9 @@ namespace TerraTCG.Common.UI.GameFieldUI
             {
                 return;
             }
-            Vector2 currentPos = CardPosition0;
             foreach (var card in gamePlayer.Hand.Cards)
             {
+                Vector2 currentPos = GetCardPosition(card);
                 var texture = card.Texture;
                 spriteBatch.Draw(texture.Value, currentPos, texture.Value.Bounds, Color.White, 0, default, CARD_SCALE, SpriteEffects.None, 0f);
                 if (card == gamePlayer.SelectedHandCard)
@@ -74,8 +82,6 @@ namespace TerraTCG.Common.UI.GameFieldUI
                     spriteBatch.Draw(highlightTexture.Value, currentPos, highlightTexture.Value.Bounds, Color.White, 0, default, 1.5f, SpriteEffects.None, 0f);
                 }
                 CardTextRenderer.Instance.DrawCardText(spriteBatch, card, currentPos, CARD_SCALE);
-
-                currentPos.X += card.Texture.Width() * CARD_SCALE + CARD_MARGIN;
             }
             base.Draw(spriteBatch);
         }

@@ -18,7 +18,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             MoveCost = 2,
             NPCID = NPCID.Skeleton,
             CardType = CardType.CREATURE,
-            SubTypes = [CardSubtype.CAVERN, CardSubtype.UNDEAD],
+            SubTypes = [CardSubtype.CAVERN, CardSubtype.FIGHTER],
             Attacks = [
                 new() {
                     Name = "Bone Break",

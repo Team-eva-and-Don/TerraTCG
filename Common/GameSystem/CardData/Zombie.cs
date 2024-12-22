@@ -18,7 +18,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             MoveCost = 2,
             NPCID = NPCID.Zombie,
             CardType = CardType.CREATURE,
-            SubTypes = [CardSubtype.FOREST, CardSubtype.UNDEAD],
+            SubTypes = [CardSubtype.FOREST, CardSubtype.FIGHTER],
             Attacks = [
                 new() {
                     Name = "Diseased Bite",

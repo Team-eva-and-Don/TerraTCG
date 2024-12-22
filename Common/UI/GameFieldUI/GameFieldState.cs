@@ -14,9 +14,9 @@ namespace TerraTCG.Common.UI.GameFieldUI
 {
     internal class GameFieldState : UIState
     {
-        private GameFieldElement gameField;
-        private HandElement handElement;
-        private OpponentHandElement oppHandElement;
+        internal GameFieldElement gameField;
+        internal HandElement handElement;
+        internal OpponentHandElement oppHandElement;
         internal UseSkillButton actionButtons;
         internal PassTurnButton passTurnButton;
         internal CardPreviewElement previewElement;

@@ -26,6 +26,20 @@ Cards: {
 			'''
 	}
 
+	Tim: {
+		Name: Tim
+
+		Attack: {
+			Name: Magic Missile
+			Description:
+				'''
+				Use all remaining MP,
+				then deal 1 dmg for
+				each MP spent.
+				'''
+		}
+	}
+
 	Dryad: {
 		Name: Dryad's Ward
 		Modifier.Description:
@@ -33,6 +47,16 @@ Cards: {
 			Return target allied
 			creature to the hand
 			'''
+	}
+
+	Guide: {
+		Name: Guide's Guidance
+		Modifier.Description: Draw 2 cards.
+	}
+
+	Wizard: {
+		Name: Wizard's Wisdom
+		Modifier.Description: Add 1 Mana Crystal
 	}
 
 	OldMan: {
@@ -112,11 +136,11 @@ Cards: {
 		TOWNSFOLK: Townsfolk
 		FOREST: Forest
 		CAVERN: Cavern
-		UNDEAD: Undead
+		FIGHTER: Fighter
 		CRITTER: Critter
-		EYE: Eye
-		BAT: Bat
-		EQUIPMENT: Equipment
+		SCOUT: Scout
+		DEFENDER: Defender
+		CASTER: Caster
 	}
 
 	Common.Turn: Turn

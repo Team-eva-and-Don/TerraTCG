@@ -19,7 +19,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             MoveCost = 2,
             CardType = CardType.CREATURE,
             NPCID = NPCID.DemonEye,
-            SubTypes = [CardSubtype.FOREST, CardSubtype.EYE],
+            SubTypes = [CardSubtype.FOREST, CardSubtype.SCOUT],
             Attacks = [
                 new() {
                     Damage = 2,
