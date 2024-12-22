@@ -12,28 +12,29 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.Drawing.Animations
 {
-    internal class ApplyModifierAnimation(Zone zone, List<ICardModifier> modifiers) : IAnimation
+    internal class ApplyModifierAnimation(PlacedCard placedCard, List<ICardModifier> modifiers) : IAnimation
     {
         public TimeSpan StartTime { get; set; }
+        public Zone SourceZone { private get; set; }
         private TimeSpan ElapsedTime => TCGPlayer.TotalGameTime - StartTime;
         private TimeSpan Duration => TimeSpan.FromSeconds(1.25f);
         private TimeSpan Period => TimeSpan.FromSeconds(2f);
 
         public void DrawZone(SpriteBatch spriteBatch, Vector2 basePosition, float rotation)
         {
-            var zoneColor = zone.PlacedCard.IsExerted ? Color.LightGray : Color.White;
-            AnimationUtils.DrawZoneCard(spriteBatch, zone, basePosition, rotation, zoneColor);
+            var zoneColor = placedCard.IsExerted ? Color.LightGray : Color.White;
+            AnimationUtils.DrawZoneCard(spriteBatch, placedCard, basePosition, rotation, zoneColor);
         }
 
         public void DrawZoneOverlay(SpriteBatch spriteBatch, Vector2 basePosition, float baseScale)
         {
-            var posOffset = IdleAnimation.IdleHoverPos(zone.PlacedCard, baseScale);
-            var zoneColor = IdleAnimation.OverlayColor(zone.PlacedCard);
+            var posOffset = IdleAnimation.IdleHoverPos(placedCard, baseScale);
+            var zoneColor = IdleAnimation.OverlayColor(placedCard);
             var lerpPoint = (float)(ElapsedTime.TotalSeconds < 1f ? 0f : 4f * (ElapsedTime.TotalSeconds - 1f));
             var itemOffset = MathHelper.Lerp(48f, 0f, lerpPoint) + posOffset;
             DrawLightRays(spriteBatch, basePosition - Vector2.UnitY * itemOffset, baseScale * (1 - lerpPoint));
-            AnimationUtils.DrawZoneNPC(spriteBatch, zone, basePosition + Vector2.UnitY * posOffset, baseScale, zoneColor);
-            AnimationUtils.DrawZoneNPCStats(spriteBatch, zone, basePosition, baseScale);
+            AnimationUtils.DrawZoneNPC(spriteBatch, SourceZone, placedCard, basePosition + Vector2.UnitY * posOffset, baseScale, zoneColor);
+            AnimationUtils.DrawZoneNPCStats(spriteBatch, SourceZone, placedCard, baseScale);
 
             // Draw the item itself on top of everything
             var texture = modifiers[0].Texture.Value;

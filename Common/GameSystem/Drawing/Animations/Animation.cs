@@ -16,6 +16,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
     internal interface IAnimation
     {
         TimeSpan StartTime { get; set;  }
+        Zone SourceZone { set;  }
 
         // Draw the card within the zone itself, if applicable
         void DrawZone(SpriteBatch spriteBatch, Vector2 basePosition, float rotation);
@@ -31,14 +32,14 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
     {
         public static void DrawZoneNPC(
             SpriteBatch spriteBatch, 
-            Zone zone, 
+            Zone zone,
+            PlacedCard card,
             Vector2 position, 
             float scale, 
             Color? color, 
-            int frame = 0, 
-            Card card = null)
+            int frame = 0)
         {
-            var npcId = card?.NPCID ?? zone.PlacedCard?.Template?.NPCID ?? 0;
+            var npcId = card.Template.NPCID;
             if(npcId == 0)
             {
                 return;
@@ -53,10 +54,9 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
         }
 
         public static void DrawZoneCard(
-            SpriteBatch spriteBatch, Zone zone, Vector2 position, float rotation, Color? color, Card card = null)
+            SpriteBatch spriteBatch, PlacedCard card, Vector2 position, float rotation, Color? color)
         {
-            card ??= zone.PlacedCard?.Template;
-            var texture = card?.Texture;
+            var texture = card?.Template?.Texture;
             if(texture == null)
             {
                 return;
@@ -71,7 +71,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             if(rotation == 0)
             {
                 // If the card is rotated towards the player, draw its text
-                CardTextRenderer.Instance.DrawCardText(spriteBatch, card, position, Zone.CARD_DRAW_SCALE, details: false);
+                CardTextRenderer.Instance.DrawCardText(spriteBatch, card.Template, position, Zone.CARD_DRAW_SCALE, details: false);
             } 
         }
 
@@ -90,28 +90,25 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
         public static void DrawZoneNPCStats(
             SpriteBatch spriteBatch, 
             Zone zone, 
-            Vector2 position, 
-            float scale, 
+            PlacedCard card,
             float fontScale = 1f, 
             float transparency = 1f, 
-            int? health = null,
-            PlacedCard card = null)
+            int? health = null)
         {
             // Health
-            var npcId = card?.Template?.NPCID ?? zone.PlacedCard?.Template?.NPCID ?? 0;
+            var npcId = card?.Template?.NPCID ??  0;
             if(npcId == 0)
             {
                 return;
             }
 
-            health ??= zone.PlacedCard?.CurrentHealth ?? 0;
-            var attack = (card ?? zone.PlacedCard).GetAttackWithModifiers(zone, null); // TODO don't explicitly pass null
+            health ??= card.CurrentHealth;
+            var attack = card.GetAttackWithModifiers(zone, null); // TODO don't explicitly pass null
 
             var font = FontAssets.ItemStack.Value;
             var vMargin = -4f;
 
             var texture = TextureCache.Instance.GetNPCTexture(npcId);
-            var bounds = texture.Frame(1, Main.npcFrameCount[npcId], 0, 0);
 
             var localPlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>();
             var gamePlayer = localPlayer.GamePlayer;
@@ -122,7 +119,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
                 var center = localPlayer.GameFieldPosition + placement;
                 var textOffset = font.MeasureString($"{health}");
                 var textPos = center - textOffset;
-                var color = GetNPCHealthColor((int)health, (card?.Template ?? zone.PlacedCard.Template).MaxHealth);
+                var color = GetNPCHealthColor((int)health, card.Template.MaxHealth);
                 CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, $"{health}", textPos, color * transparency, fontScale);
                 var heartPos = center - new Vector2(-4, textOffset.Y);
                 var heartTexture = TextureCache.Instance.HeartIcon.Value;

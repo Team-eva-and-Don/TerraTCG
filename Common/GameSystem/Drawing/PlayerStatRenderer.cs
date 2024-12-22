@@ -75,6 +75,10 @@ namespace TerraTCG.Common.GameSystem.Drawing
             for(int i = 0; i < GamePlayer.MAX_MANA; i++)
             {
                 float transparency = GetTransparency(i, player.Resources.Mana, player.PrevResources.Mana, lerpPoint);
+                if(player.ManaPerTurn >= i+1 && transparency <= 0.5f)
+                {
+                    transparency = 0.5f;
+                }
                 int row = i / MP_PER_ROW;
                 int col = i % MP_PER_ROW;
                 var mpPos = position + (mpOffsets[row] + col * mpSpacing) * scale;

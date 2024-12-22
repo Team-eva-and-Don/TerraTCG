@@ -57,26 +57,26 @@ namespace TerraTCG.Common.GameSystem.GameState
             Deck = new CardCollection()
             {
                 Cards = [
-                    CreateCard<Zombie>(), 
-                    CreateCard<CopperShortsword>(), 
-                    CreateCard<OldMan>(), 
-                    CreateCard<DemonEye>(),
-                    CreateCard<Bunny>(),
-                    CreateCard<Skeleton>(),
-                    CreateCard<Bat>(),
+//                    CreateCard<Zombie>(), 
+//                    CreateCard<CopperShortsword>(), 
+//                    CreateCard<OldMan>(), 
+//                    CreateCard<DemonEye>(),
+//                    CreateCard<Bunny>(),
+//                    CreateCard<Skeleton>(),
+//                    CreateCard<Bat>(),
                 ]
             };
             Deck.Shuffle();
 
             Hand = new CardCollection()
             {
-                Cards = [CreateCard<Squirrel>(), CreateCard<Dryad>(),]
+                Cards = [CreateCard<Zombie>(), CreateCard<CopperShortsword>(),]
             };
 
-            for(int _ = 0; _ < 2; _++)
-            {
-                Hand.Add(Deck.Draw());
-            }
+            //for(int _ = 0; _ < 2; _++)
+            //{
+            //    Hand.Add(Deck.Draw());
+            //}
             Field = new(game);
         }
 

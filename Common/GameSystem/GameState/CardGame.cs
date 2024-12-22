@@ -48,15 +48,6 @@ namespace TerraTCG.Common.GameSystem.GameState
                 player2
             ];
 
-            for(int i =  0; i < GamePlayers[1].Field.Zones.Count; i++)
-            {
-                var zone = GamePlayers[1].Field.Zones[i];
-                if(!zone.IsEmpty())
-                {
-                    zone.Animation = new IdleAnimation(zone);
-                }
-            }
-
             for(int i = 0; i < GamePlayers.Count; i++)
             {
                 GamePlayerControllers[i].StartGame(GamePlayers[i], this);

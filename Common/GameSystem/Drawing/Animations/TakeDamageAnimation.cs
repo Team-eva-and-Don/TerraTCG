@@ -10,38 +10,31 @@ using TerraTCG.Common.GameSystem.GameState;
 
 namespace TerraTCG.Common.GameSystem.Drawing.Animations
 {
-    internal class TakeDamageAnimation(Zone zone, TimeSpan impactTime, int startHealth) : IAnimation
+    internal class TakeDamageAnimation(PlacedCard placedCard, int startHealth) : IAnimation
     {
         public TimeSpan StartTime { get; set; } 
-        internal TimeSpan Duration { get; } = TimeSpan.FromSeconds(1f);
+        public Zone SourceZone { private get; set; }
+        internal TimeSpan Duration { get; } = TimeSpan.FromSeconds(0.5f);
         private TimeSpan ElapsedTime => TCGPlayer.TotalGameTime - StartTime;
 
         public void DrawZone(SpriteBatch spriteBatch, Vector2 basePosition, float rotation)
         {
-            var zoneColor = IdleAnimation.ZoneColor(zone.PlacedCard);
-            AnimationUtils.DrawZoneCard(spriteBatch, zone, basePosition, rotation, zoneColor);
+            var zoneColor = IdleAnimation.ZoneColor(placedCard);
+            AnimationUtils.DrawZoneCard(spriteBatch, placedCard, basePosition, rotation, zoneColor);
         }
 
         public void DrawZoneOverlay(SpriteBatch spriteBatch, Vector2 basePosition, float baseScale)
         {
-            var posOffset = IdleAnimation.IdleHoverPos(zone.PlacedCard, baseScale);
-            var zoneColor = IdleAnimation.OverlayColor(zone.PlacedCard);
-            if(ElapsedTime >= impactTime) {
-                // flash the npc transparent as when the player takes damage
-                var impactSign = TCGPlayer.LocalGamePlayer.Owns(zone) ? -1 : 1;
-                posOffset =  impactSign * baseScale * 5f * MathF.Sin(MathF.Tau * (float) ((ElapsedTime - impactTime).TotalSeconds / 0.5f));
+            // flash the npc transparent as when the player takes damage
+            var zoneColor = IdleAnimation.OverlayColor(placedCard);
+            var impactSign = TCGPlayer.LocalGamePlayer.Owns(SourceZone) ? -1 : 1;
+            var posOffset =  impactSign * baseScale * 5f * MathF.Sin(MathF.Tau * (float) (ElapsedTime.TotalSeconds / 0.5f));
 
-                var flashSign = MathF.Sin(8f * MathF.Tau * (float)ElapsedTime.TotalSeconds);
-                var health = MathHelper.Lerp(startHealth, zone.PlacedCard.CurrentHealth, 2 * (float)(ElapsedTime.TotalSeconds - impactTime.TotalSeconds));
-                var transparency = flashSign > 0 ? 0.8f : 0.6f;
-                AnimationUtils.DrawZoneNPC(spriteBatch, zone, basePosition + new Vector2(0, posOffset), baseScale, zoneColor * transparency);
-                AnimationUtils.DrawZoneNPCStats(spriteBatch, zone, basePosition, baseScale, health: (int)health);
-            } else
-            {
-                // TODO is this too hacky - keep the same floating cycle as the previous idle animation
-                AnimationUtils.DrawZoneNPC(spriteBatch, zone, basePosition + new Vector2(0, posOffset), baseScale, zoneColor);
-                AnimationUtils.DrawZoneNPCStats(spriteBatch, zone, basePosition, baseScale, health: startHealth);
-            }
+            var flashSign = MathF.Sin(8f * MathF.Tau * (float)ElapsedTime.TotalSeconds);
+            var health = MathHelper.Lerp(startHealth, placedCard.CurrentHealth, 2 * (float)ElapsedTime.TotalSeconds);
+            var transparency = flashSign > 0 ? 0.8f : 0.4f;
+            AnimationUtils.DrawZoneNPC(spriteBatch, SourceZone, placedCard, basePosition + new Vector2(0, posOffset), baseScale, zoneColor * transparency);
+            AnimationUtils.DrawZoneNPCStats(spriteBatch, SourceZone, placedCard, baseScale, health: (int)health);
         }
 
         public bool IsComplete() => ElapsedTime > Duration;

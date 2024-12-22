@@ -10,9 +10,11 @@ using TerraTCG.Common.GameSystem.GameState;
 
 namespace TerraTCG.Common.GameSystem.Drawing.Animations
 {
-    internal class MeleeAttackAnimation(Zone zone, Zone targetZone) : IAnimation
+    internal class MeleeAttackAnimation(PlacedCard placedCard, Zone targetZone) : IAnimation
     {
         public TimeSpan StartTime { get; set;  } 
+        public Zone SourceZone { private get; set; }
+
         private TimeSpan Duration { get; } = TimeSpan.FromSeconds(1f);
         private TimeSpan ElapsedTime => TCGPlayer.TotalGameTime - StartTime;
 
@@ -38,7 +40,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
                 var colorLerp = (ElapsedTime.TotalSeconds - (WindupDuration + SwingDuration)) / WindupDuration;
                 drawColor = Color.Lerp(Color.White, Color.LightGray, (float)colorLerp);
             }
-            AnimationUtils.DrawZoneCard(spriteBatch, zone, basePosition, rotation, drawColor);
+            AnimationUtils.DrawZoneCard(spriteBatch, placedCard, basePosition, rotation, drawColor);
         }
 
         public void DrawZoneOverlay(SpriteBatch spriteBatch, Vector2 basePosition, float baseScale)
@@ -59,7 +61,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             }
 
             // Do two walk cycles in the span of the animation
-            var npcId = zone.PlacedCard?.Template?.NPCID ?? 0;
+            var npcId = placedCard.Template.NPCID;
             int frame = 0;
             if(npcId > 0)
             {
@@ -70,8 +72,8 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
 
             var currentX = MathHelper.Lerp(basePosition.X, Destination.X, lerpPoint);
             var currentY = MathHelper.Lerp(basePosition.Y, Destination.Y, lerpPoint);
-            AnimationUtils.DrawZoneNPC(spriteBatch, zone, new(currentX, currentY), baseScale, color: drawColor, frame: frame);
-            AnimationUtils.DrawZoneNPCStats(spriteBatch, zone, basePosition, baseScale);
+            AnimationUtils.DrawZoneNPC(spriteBatch, SourceZone, placedCard, new(currentX, currentY), baseScale, color: drawColor, frame: frame);
+            AnimationUtils.DrawZoneNPCStats(spriteBatch, SourceZone, placedCard, baseScale);
         }
 
         public bool IsComplete() =>

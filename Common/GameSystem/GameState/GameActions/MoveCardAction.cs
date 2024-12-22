@@ -43,11 +43,11 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
             var movedCard = destZone.PlacedCard;
 
-            sourceZone.QueueAnimation(new IdleAnimation(sourceZone, movedCard, duration));
-            sourceZone.QueueAnimation(new RemoveCardAnimation(sourceZone, movedCard));
+            sourceZone.QueueAnimation(new IdleAnimation(movedCard, duration));
+            sourceZone.QueueAnimation(new RemoveCardAnimation(movedCard));
 
-            destZone.QueueAnimation(new NoOpAnimation(destZone, duration));
-            destZone.QueueAnimation(new PlaceCardAnimation(destZone));
+            destZone.QueueAnimation(new NoOpAnimation(duration));
+            destZone.QueueAnimation(new PlaceCardAnimation(movedCard));
         }
     }
 }

@@ -10,9 +10,11 @@ using TerraTCG.Common.GameSystem.GameState;
 
 namespace TerraTCG.Common.GameSystem.Drawing.Animations
 {
-    internal class PlaceCardAnimation(Zone zone) : IAnimation
+    internal class PlaceCardAnimation(PlacedCard placedCard) : IAnimation
     {
         public TimeSpan StartTime { get; set;  } 
+        public Zone SourceZone { private get; set; }
+
         internal TimeSpan Duration { get; } = TimeSpan.FromSeconds(0.25f);
 
         private TimeSpan ElapsedTime => TCGPlayer.TotalGameTime - StartTime;
@@ -20,17 +22,17 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
         public void DrawZone(SpriteBatch spriteBatch, Vector2 basePosition, float rotation)
         {
             float transparency = Math.Min(1, (float)(ElapsedTime.TotalSeconds/ Duration.TotalSeconds));
-            var zoneColor = zone.PlacedCard.IsExerted ? Color.LightGray : Color.White;
-            AnimationUtils.DrawZoneCard(spriteBatch, zone, basePosition, rotation, zoneColor * transparency);
+            var zoneColor = placedCard.IsExerted ? Color.LightGray : Color.White;
+            AnimationUtils.DrawZoneCard(spriteBatch, placedCard, basePosition, rotation, zoneColor * transparency);
         }
 
         public void DrawZoneOverlay(SpriteBatch spriteBatch, Vector2 basePosition, float baseScale)
         {
             var scale = MathHelper.Lerp(0, baseScale, (float) (ElapsedTime.TotalSeconds/ Duration.TotalSeconds));
             var transparency = Math.Min(1, (float)(ElapsedTime.TotalSeconds/ Duration.TotalSeconds));
-            var zoneColor = zone.PlacedCard.IsExerted ? Color.Gray : Color.White;
-            AnimationUtils.DrawZoneNPC(spriteBatch, zone, basePosition, scale, zoneColor * transparency);
-            AnimationUtils.DrawZoneNPCStats(spriteBatch, zone, basePosition, baseScale, transparency: transparency);
+            var zoneColor = placedCard.IsExerted ? Color.Gray : Color.White;
+            AnimationUtils.DrawZoneNPC(spriteBatch, SourceZone, placedCard, basePosition, scale, zoneColor * transparency);
+            AnimationUtils.DrawZoneNPCStats(spriteBatch, SourceZone, placedCard, baseScale, transparency: transparency);
         }
 
         public bool IsComplete() =>

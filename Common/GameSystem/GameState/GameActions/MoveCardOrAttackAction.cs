@@ -65,8 +65,8 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             // move within own field
             endZone.PlacedCard = startZone.PlacedCard;
             startZone.PlacedCard = null;
-            startZone.Animation = new RemoveCardAnimation(startZone, endZone.PlacedCard);
-            endZone.Animation = new PlaceCardAnimation(endZone);
+            startZone.QueueAnimation(new RemoveCardAnimation(endZone.PlacedCard));
+            endZone.QueueAnimation(new PlaceCardAnimation(endZone.PlacedCard));
             player.Resources = player.Resources.UseResource(mana: endZone.PlacedCard.Template.MoveCost);
         }
 
@@ -84,14 +84,12 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             player.Opponent.Field.ClearModifiers(endZone, GameEvent.AFTER_RECEIVE_ATTACK);
 
 
-            startZone.Animation = new MeleeAttackAnimation(startZone, endZone);
-            if(endZone.PlacedCard.CurrentHealth > 0)
+            startZone.QueueAnimation(new MeleeAttackAnimation(startZone.PlacedCard, endZone));
+            endZone.QueueAnimation(new IdleAnimation(endZone.PlacedCard, TimeSpan.FromSeconds(0.5f), prevHealth));
+            endZone.QueueAnimation(new TakeDamageAnimation(endZone.PlacedCard, prevHealth));
+            if(endZone.PlacedCard.CurrentHealth <= 0)
             {
-                endZone.Animation = new TakeDamageAnimation(endZone, TimeSpan.FromSeconds(0.5f), prevHealth);
-            } else
-            {
-                endZone.Animation = new DeathAnimation(
-                    endZone, TimeSpan.FromSeconds(0.5f), prevHealth, endZone.PlacedCard);
+                endZone.QueueAnimation(new RemoveCardAnimation(endZone.PlacedCard));
                 endZone.Owner.Resources = endZone.Owner.Resources.UseResource(health: 1);
                 endZone.PlacedCard = null;
             }
@@ -103,7 +101,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             startZone.PlacedCard.IsExerted = true;
             player.Resources = player.Resources.UseResource(mana: skill.Cost);
             skill.DoSkill(player, startZone);
-            startZone.Animation = new ActionAnimation(startZone);
+            startZone.QueueAnimation(new ActionAnimation(startZone.PlacedCard));
         }
 
         public void Complete()

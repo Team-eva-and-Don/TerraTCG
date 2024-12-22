@@ -10,9 +10,11 @@ using TerraTCG.Common.GameSystem.GameState;
 
 namespace TerraTCG.Common.GameSystem.Drawing.Animations
 {
-    internal class RemoveCardAnimation(Zone zone, PlacedCard leavingCard) : IAnimation
+    internal class RemoveCardAnimation(PlacedCard leavingCard) : IAnimation
     {
         public TimeSpan StartTime { get; set; } 
+        public Zone SourceZone { private get; set; }
+
         internal TimeSpan Duration { get; } = TimeSpan.FromSeconds(0.25f);
 
         private TimeSpan ElapsedTime => TCGPlayer.TotalGameTime - StartTime;
@@ -21,7 +23,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
         {
             var transparency = Math.Max(0, 1 - (float)(ElapsedTime.TotalSeconds/ Duration.TotalSeconds));
             var zoneColor = IdleAnimation.ZoneColor(leavingCard);
-            AnimationUtils.DrawZoneCard(spriteBatch, zone, basePosition, rotation, zoneColor * transparency);
+            AnimationUtils.DrawZoneCard(spriteBatch, leavingCard, basePosition, rotation, zoneColor * transparency);
         }
 
         public void DrawZoneOverlay(SpriteBatch spriteBatch, Vector2 basePosition, float baseScale)
@@ -29,14 +31,13 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             var scale = MathHelper.Lerp(baseScale, 0, (float) (ElapsedTime.TotalSeconds/ Duration.TotalSeconds));
             var transparency = Math.Max(0, 1 - (float)(ElapsedTime.TotalSeconds/ Duration.TotalSeconds));
             AnimationUtils.DrawZoneNPC(
-                spriteBatch, zone, basePosition, scale, Color.White * transparency, card: leavingCard.Template);
+                spriteBatch, SourceZone, leavingCard, basePosition, scale, Color.White * transparency);
             AnimationUtils.DrawZoneNPCStats(
                 spriteBatch, 
-                zone, 
-                basePosition, 
+                SourceZone, 
+                leavingCard,
                 baseScale, 
                 transparency: transparency, 
-                card: leavingCard,
                 health: leavingCard.CurrentHealth);
         }
 

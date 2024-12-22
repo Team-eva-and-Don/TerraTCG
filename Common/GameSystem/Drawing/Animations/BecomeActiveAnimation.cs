@@ -10,9 +10,11 @@ using TerraTCG.Common.GameSystem.GameState;
 
 namespace TerraTCG.Common.GameSystem.Drawing.Animations
 {
-    internal class BecomeActiveAnimation(Zone zone) : IAnimation
+    internal class BecomeActiveAnimation(PlacedCard placedCard) : IAnimation
     {
         public TimeSpan StartTime { get; set;  }
+
+        public Zone SourceZone { private get; set; }
 
         private static TimeSpan Duration { get; } = TimeSpan.FromSeconds(0.25f);
         private TimeSpan ElapsedTime => TCGPlayer.TotalGameTime - StartTime;
@@ -22,18 +24,18 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             var lerpPoint = (float)(ElapsedTime.TotalSeconds / Duration.TotalSeconds);
 
             var zoneColor = Color.Lerp(Color.LightGray, Color.White, lerpPoint);
-            AnimationUtils.DrawZoneCard(spriteBatch, zone, basePosition, rotation, zoneColor);
+            AnimationUtils.DrawZoneCard(spriteBatch, placedCard, basePosition, rotation, zoneColor);
         }
 
         public void DrawZoneOverlay(SpriteBatch spriteBatch, Vector2 basePosition, float baseScale)
         {
-            var posOffset = IdleAnimation.IdleHoverPos(zone.PlacedCard, baseScale);
+            var posOffset = IdleAnimation.IdleHoverPos(placedCard, baseScale);
 
             var lerpPoint = (float)(ElapsedTime.TotalSeconds / Duration.TotalSeconds);
             var zoneColor = Color.Lerp(Color.Gray, Color.White, lerpPoint);
 
-            AnimationUtils.DrawZoneNPC(spriteBatch, zone, basePosition + new Vector2(0, posOffset), baseScale, color: zoneColor);
-            AnimationUtils.DrawZoneNPCStats(spriteBatch, zone, basePosition, baseScale);
+            AnimationUtils.DrawZoneNPC(spriteBatch, SourceZone, placedCard, basePosition + new Vector2(0, posOffset), baseScale, color: zoneColor);
+            AnimationUtils.DrawZoneNPCStats(spriteBatch, SourceZone, placedCard, baseScale);
         }
 
         public bool IsComplete() => ElapsedTime > Duration;

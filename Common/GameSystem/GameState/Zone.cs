@@ -26,7 +26,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal int Index { get; set; }
 
-        private readonly List<IAnimation> animationQueue = [];
+        private List<IAnimation> animationQueue = [];
         internal IAnimation Animation { get => animationQueue.Count > 0 ? animationQueue[0] : null; set { QueueAnimation(value); } }
 
         internal const float CARD_DRAW_SCALE = 2f / 3f;
@@ -45,16 +45,23 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal void QueueAnimation(IAnimation animation)
         {
-            if (animationQueue.Count > 0 && animationQueue[0].IsDefault())
+            // Clear out any infinite idle animations
+            if(!animation.IsDefault())
             {
-                animationQueue.RemoveAt(0);
+                animationQueue = animationQueue.Where(q => !q.IsDefault()).ToList();
             }
             animation.StartTime = TCGPlayer.TotalGameTime;
+            animation.SourceZone = this;
             animationQueue.Add(animation);
         }
 
         internal void UpdateAnimationQueue()
         {
+            // Ensure that there's always an empty animation waiting at the end of the queue
+            if(!IsEmpty() && (animationQueue.Count == 0 || !animationQueue.Last().IsDefault()))
+            {
+                QueueAnimation(new IdleAnimation(PlacedCard));
+            }
             if (animationQueue.Count > 0 && animationQueue[0].IsComplete())
             {
                 animationQueue.RemoveAt(0);
