@@ -21,8 +21,8 @@ Cards: {
 
 		Modifier.Description:
 			'''
-			Evasive: May target any 
-			enemy for attacks
+			Evasive: May attack 
+			blocked enemies
 			'''
 	}
 
@@ -81,6 +81,20 @@ Cards: {
 		}
 	}
 
+	FledglingWings: {
+		Name: Fledgling Wings
+
+		Skill: {
+			Name: Equip
+			Description:
+				'''
+				Equipped creature gains
+				Evasive (it may attack
+				blocked enemies)
+				'''
+		}
+	}
+
 	Bunny: {
 		Name: Bunny
 		Attack.Name: Bunny Kick
@@ -134,6 +148,7 @@ Cards: {
 		CREATURE: Creature
 		ITEM: Item
 		TOWNSFOLK: Townsfolk
+		EQUIPMENT: Equipment
 		FOREST: Forest
 		CAVERN: Cavern
 		FIGHTER: Fighter

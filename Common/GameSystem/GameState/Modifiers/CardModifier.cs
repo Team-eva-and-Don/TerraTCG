@@ -38,7 +38,12 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
             // no-op
         }
 
-        public void ModifyZoneSelection(Zone sourceZone, List<Zone> destZones)
+        public void ModifyZoneSelection(Zone sourceZone, Zone endZone, ref List<Zone> destZones)
+        {
+            // no-op
+        }
+
+        public void ModifyIncomingZoneSelection(Zone sourceZone, Zone endZone, ref List<Zone> destZones)
         {
             // no-op
         }

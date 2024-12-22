@@ -10,8 +10,10 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
-    // Action to either move a card to a neighboring zone or attack against an enemy creature
-    // TODO we probably want to split those out, UI-permitting
+    // "Do everything" action that encompasses any game action initiated by clicking an on-field card.
+    // - Declare an attack by clicking an ally zone, then any enemy zone
+    // - Move a creature by clicking two ally zones
+    // - Use a skill by clicking an ally zone, then a "use skill" button
     internal class MoveCardOrAttackAction(Zone startZone, GamePlayer player) : IGameAction
     {
         private Zone endZone;
@@ -22,7 +24,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public bool CanAcceptZone(Zone zone) 
         { 
-            if(startZone.PlacedCard.IsExerted)
+            if(startZone?.PlacedCard?.IsExerted ?? true)
             {
                 return false;
             }
@@ -33,7 +35,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
             } else if (actionType == ActionType.DEFAULT && !player.Owns(zone) && !zone.IsEmpty())
             {
-                return startZone.PlacedCard.Template.Attacks[0].Cost <= player.Resources.Mana;
+                return CanAttackZone(zone);
             } else if (actionType == ActionType.TARGET_ALLY && player.Owns(zone) && !zone.IsEmpty())
             {
                 return true;
@@ -41,6 +43,12 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             {
                 return false;
             }
+        }
+
+        private bool CanAttackZone(Zone zone)
+        {
+            return startZone.PlacedCard.GetAttackWithModifiers(startZone, zone).Cost <= player.Resources.Mana &&
+                startZone.PlacedCard.GetValidAttackZones(startZone, zone).Contains(zone);
         }
 
         public bool AcceptCardInHand(Card card) => false;

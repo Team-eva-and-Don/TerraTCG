@@ -137,6 +137,13 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
                 var swordPos = textPos + new Vector2(textOffset.X, 0);
                 var swordTexture = TextureCache.Instance.AttackIcon.Value;
                 spriteBatch.Draw(swordTexture, swordPos, swordTexture.Bounds, Color.White * transparency, 0, default, fontScale, SpriteEffects.None, 0);
+
+                // For the player's creatures, draw the attack mana cost as well
+                if(gamePlayer.Owns(zone))
+                {
+                    var manaPos = swordPos + new Vector2(-4, 12);
+                    CardTextRenderer.Instance.DrawManaCost(spriteBatch, attack.Cost, manaPos, fontScale);
+                }
             }
 
         }

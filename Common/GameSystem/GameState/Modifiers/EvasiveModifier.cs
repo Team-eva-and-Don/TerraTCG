@@ -10,8 +10,14 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
 {
     internal class EvasiveModifier : ICardModifier
     {
-        public Asset<Texture2D> Texture => null;
+        public Asset<Texture2D> Texture { get; set; }
 
         public string Description => "";
+
+        public void ModifyZoneSelection(Zone sourceZone, Zone endZone, ref List<Zone> destZones)
+        {
+            // allow the targeting of blocked enemy zones
+            destZones = endZone.Owner.Field.Zones.Where(z => !z.IsEmpty()).ToList();
+        }
     }
 }

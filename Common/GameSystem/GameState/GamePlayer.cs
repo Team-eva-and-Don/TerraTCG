@@ -65,6 +65,8 @@ namespace TerraTCG.Common.GameSystem.GameState
                     CreateCard<Bunny>(),
                     CreateCard<Skeleton>(),
                     CreateCard<Bat>(),
+                    CreateCard<Guide>(),
+                    CreateCard<Wizard>(),
                 ]
             };
             Deck.Shuffle();
@@ -74,8 +76,7 @@ namespace TerraTCG.Common.GameSystem.GameState
                 Cards = [
                     CreateCard<Zombie>(), 
                     CreateCard<Tim>(), 
-                    CreateCard<Guide>(),
-                    CreateCard<Wizard>(),
+                    CreateCard<FledglingWings>(), 
                 ]
             };
 

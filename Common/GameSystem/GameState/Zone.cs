@@ -31,6 +31,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal const float CARD_DRAW_SCALE = 2f / 3f;
 
+
         public void PlaceCard(Card card)
         {
             PlacedCard = new PlacedCard(card)
@@ -42,6 +43,9 @@ namespace TerraTCG.Common.GameSystem.GameState
         }
 
         public bool HasPlacedCard() => PlacedCard != null;
+
+        // For defense zones, check whether an enemy is in the aligned offense zone
+        public bool IsBlocked() => Role == ZoneRole.DEFENSE && !Owner.Field.Zones[Index - 3].IsEmpty();
 
         internal void QueueAnimation(IAnimation animation)
         {
