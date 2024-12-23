@@ -29,7 +29,9 @@ namespace TerraTCG.Common.GameSystem.GameState
         // Duplicate CardTypes (for text rendering)
         TOWNSFOLK,
         ITEM,
+        // Item Subtypes
         EQUIPMENT,
+        CONSUMABLE,
         // Creature Roles
         FIGHTER,
         SCOUT,

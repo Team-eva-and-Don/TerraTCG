@@ -65,7 +65,6 @@ namespace TerraTCG.Common.GameSystem.GameState
                     CreateCard<FledglingWings>(), 
                     CreateCard<Goldfish>(), 
                     CreateCard<Guide>(),
-                    CreateCard<Harpy>(), 
                     CreateCard<JungleTurtle>(), 
                     CreateCard<OldMan>(),
                     CreateCard<Skeleton>(),
@@ -73,6 +72,10 @@ namespace TerraTCG.Common.GameSystem.GameState
                     CreateCard<Tim>(),
                     CreateCard<Wizard>(),
                     CreateCard<Zombie>(),
+                    CreateCard<BloodZombie>(),
+                    CreateCard<WanderingEyeFish>(),
+                    CreateCard<Drippler>(),
+                    CreateCard<SpikedJungleSlime>(),
                 ]
             };
             Deck.Shuffle();
@@ -80,9 +83,10 @@ namespace TerraTCG.Common.GameSystem.GameState
             Hand = new CardCollection()
             {
                 Cards = [ 
-                    CreateCard<Drippler>(),
-                    CreateCard<BloodZombie>(),
-                    CreateCard<WanderingEyeFish>(),
+                    CreateCard<Zombie>(), 
+                    CreateCard<ThornsPotion>(),
+                    CreateCard<RagePotion>(),
+                    CreateCard<IronskinPotion>(),
                 ]
             };
 

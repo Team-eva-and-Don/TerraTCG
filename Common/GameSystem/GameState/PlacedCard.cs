@@ -25,6 +25,11 @@ namespace TerraTCG.Common.GameSystem.GameState
             CurrentHealth = Math.Min(Template.MaxHealth, CurrentHealth + amount);
         }
 
+        internal void AddModifiers(List<ICardModifier> modifiers)
+        {
+            CardModifiers.AddRange(modifiers);
+        }
+
         public Attack GetAttackWithModifiers(Zone startZone, Zone endZone)
         {
             var attack = Template.Attacks[0].Copy();

@@ -23,7 +23,7 @@ namespace TerraTCG.Common.GameSystem.CardData
                     destZones.Add(targetZone);
                 }
             }
-            public bool ShouldRemove(GamePlayer turnPlayer, GameEvent gameEvent) => gameEvent == GameEvent.END_TURN;
+            public bool ShouldRemove(GameEventInfo gameEvent) => gameEvent.Event == GameEvent.END_TURN;
         }
 
         public Card CreateCard() => new ()
@@ -38,10 +38,7 @@ namespace TerraTCG.Common.GameSystem.CardData
                 new() {
                     Damage = 2,
                     Cost = 2,
-                    DoAttack = (Attack attack, Zone sourceZone, Zone destZone) => {
-                        Attack.DefaultAttack(attack, sourceZone, destZone);
-                        destZone.PlacedCard.CardModifiers.Add(new HarpyDefenseBreakModifier(destZone));
-                    }
+                    TargetModifiers = t=>[new HarpyDefenseBreakModifier(t)],
                 }
             ],
             Modifiers = [

@@ -21,6 +21,13 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
         AFTER_RECEIVE_ATTACK,
     }
 
+    internal struct GameEventInfo
+    {
+        public GameEvent Event { get; set; }
+        public bool IsMyTurn { get; set; }
+        public GamePlayer TurnPlayer { get; set; }
+    }
+
     internal interface ICardModifier
     {
         public Asset<Texture2D> Texture { get => null; }
@@ -53,7 +60,7 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
             // no-op
         }
 
-        public bool ShouldRemove(GamePlayer turnPlayer, GameEvent gameEvent) {
+        public bool ShouldRemove(GameEventInfo eventInfo) {
             return false;
         }
     }

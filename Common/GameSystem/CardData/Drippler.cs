@@ -24,10 +24,7 @@ namespace TerraTCG.Common.GameSystem.CardData
                 new() {
                     Damage = 3,
                     Cost = 2,
-                    DoAttack = (Attack attack, Zone sourceZone, Zone destZone) => {
-                        Attack.DefaultAttack(attack, sourceZone, destZone);
-                        sourceZone.PlacedCard.CurrentHealth -= 1;
-                    }
+                    SelfDamage = 1,
                 }
             ],
             Modifiers = [

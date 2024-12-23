@@ -68,10 +68,6 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             }
         }
 
-        public bool IsComplete()
-        {
-            // TODO
-            return ElapsedTime > Duration;
-        }
+        public bool IsComplete() => ElapsedTime > Duration;
     }
 }

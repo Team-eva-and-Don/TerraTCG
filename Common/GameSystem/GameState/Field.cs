@@ -31,10 +31,13 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal void ClearModifiers(GamePlayer turnPlayer, Zone zoneToClear, GameEvent gameEvent)
         {
-            CardModifiers = CardModifiers.Where(m => !m.ShouldRemove(turnPlayer, gameEvent)).ToList();
+            bool isMyTurn = turnPlayer == zoneToClear.Owner;
+            var eventInfo = new GameEventInfo { IsMyTurn = isMyTurn, Event = gameEvent, TurnPlayer = turnPlayer };
+
+            CardModifiers = CardModifiers.Where(m => !m.ShouldRemove(eventInfo)).ToList();
             if(zoneToClear.PlacedCard is PlacedCard card)
             {
-                card.CardModifiers = card.CardModifiers.Where(m => !m.ShouldRemove(turnPlayer, gameEvent)).ToList();
+                card.CardModifiers = card.CardModifiers.Where(m => !m.ShouldRemove(eventInfo)).ToList();
             }
         }
 

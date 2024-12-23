@@ -10,8 +10,5 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
 {
     internal class NoOpModifier : ICardModifier
     {
-        public Asset<Texture2D> Texture => null;
-
-        public string Description => "";
     }
 }

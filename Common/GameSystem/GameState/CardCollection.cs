@@ -10,7 +10,7 @@ namespace TerraTCG.Common.GameSystem.GameState
     internal class CardCollection
     {
         internal List<Card> Cards { get; set; } = new List<Card>();
-        private Random random = new();
+        private readonly Random random = new();
 
 
         public void Shuffle()

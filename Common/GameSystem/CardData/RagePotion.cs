@@ -12,20 +12,20 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class CopperShortsword : ModSystem, ICardTemplate
+    internal class RagePotion: ModSystem, ICardTemplate
     {
         public Card CreateCard() => new ()
         {
-            Name = "CopperShortsword",
+            Name = "RagePotion",
             CardType = CardType.ITEM,
-            SubTypes = [CardSubtype.EQUIPMENT, CardSubtype.ITEM],
+            SubTypes = [CardSubtype.CONSUMABLE, CardSubtype.ITEM],
             SelectInHandAction = (card, player) => new ApplyModifierAction(card, player),
             Skills = [ // TODO this is wonky, but item texts are drawn using the skill template
-                new() { Cost = 2 }
+                new() { Cost = 1 }
             ],
             Modifiers = [
-                new FlatDamageModifier(1)  {
-                    Texture = TextureCache.Instance.GetItemTexture(ItemID.CopperShortsword),
+                new FlatDamageModifier(2, [GameEvent.END_TURN])  {
+                    Texture = TextureCache.Instance.GetItemTexture(ItemID.RagePotion),
                 }
             ]
         };

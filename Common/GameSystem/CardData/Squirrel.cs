@@ -15,7 +15,7 @@ namespace TerraTCG.Common.GameSystem.CardData
     {
         private void ForestCheer(GamePlayer player, Zone zone, Zone targetZone)
         {
-            targetZone.PlacedCard.CardModifiers.Add(new FlatDamageModifier(1, [GameEvent.AFTER_ATTACK, GameEvent.END_TURN]));
+            targetZone.PlacedCard.AddModifiers([new FlatDamageModifier(1, [GameEvent.AFTER_ATTACK, GameEvent.END_TURN])]);
         }
 
         public Card CreateCard() => new ()

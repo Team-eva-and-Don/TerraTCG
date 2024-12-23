@@ -24,8 +24,8 @@ namespace TerraTCG.Common.GameSystem.CardData
                     destZones = [turtleZone];
                 }
             }
-            public bool ShouldRemove(GamePlayer turnPlayer, GameEvent gameEvent) => 
-                gameEvent == GameEvent.END_TURN && turnPlayer != turtleZone.Owner;
+            public bool ShouldRemove(GameEventInfo gameEvent) => 
+                gameEvent.Event == GameEvent.END_TURN && !gameEvent.IsMyTurn;
         }
 
         public Card CreateCard() => new ()

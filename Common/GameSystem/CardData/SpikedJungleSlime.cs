@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,25 +12,24 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class WanderingEyeFish : ModSystem, ICardTemplate
+    internal class SpikedJungleSlime : ModSystem, ICardTemplate
     {
         public Card CreateCard() => new ()
         {
-            Name = "WanderingEyeFish",
-            MaxHealth = 5,
-            MoveCost = 2,
+            Name = "SpikedJungleSlime",
+            MaxHealth = 9,
+            MoveCost = 3,
             CardType = CardType.CREATURE,
-            NPCID = NPCID.EyeballFlyingFish,
-            SubTypes = [CardSubtype.BLOOD_MOON, CardSubtype.SCOUT],
+            NPCID = NPCID.SpikedJungleSlime,
+            SubTypes = [CardSubtype.JUNGLE, CardSubtype.DEFENDER],
             Attacks = [
                 new() {
-                    Damage = 2,
-                    Cost = 1,
-                    SelfDamage = 1,
+                    Damage = 3,
+                    Cost = 3,
                 }
             ],
             Modifiers = [
-                new ZealousModifier(),
+                new SpikedModifier(2)
             ]
         };
     }

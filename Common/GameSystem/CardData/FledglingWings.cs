@@ -21,7 +21,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             SubTypes = [CardSubtype.EQUIPMENT, CardSubtype.ITEM],
             SelectInHandAction = (card, player) => new ApplyModifierAction(card, player),
             Skills = [ // TODO this is wonky, but item texts are drawn using the skill template
-                new() { Cost = 1 }
+                new() { Cost = 2 }
             ],
             Modifiers = [
                 new EvasiveModifier() { Texture = TextureCache.Instance.GetItemTexture(4978)}

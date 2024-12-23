@@ -51,13 +51,22 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
 
         private void CalculateReservedAttackMana()
         {
+            var attackInfo = GetPossibleDamageAndCost();
+            PossibleDamage = attackInfo.Item1;
             if(ReservedAttackMana > 0)
             {
                 return;
             }
-            var attackInfo = GetPossibleDamageAndCost();
-            PossibleDamage = attackInfo.Item1;
-            ReservedAttackMana = attackInfo.Item2;
+            // Every other turn, dedicate all mana to attacking
+            // This is a little wonky but the bot won't always use
+            // its other cards otherwise
+            if(Game.CurrentTurn.TurnCount % 2 == 0)
+            {
+                ReservedAttackMana = 0;
+            } else
+            {
+                ReservedAttackMana = attackInfo.Item2;
+            }
         }
 
 

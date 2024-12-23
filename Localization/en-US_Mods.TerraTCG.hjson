@@ -41,7 +41,7 @@ Cards: {
 	}
 
 	WanderingEyeFish: {
-		Name: Wandering Eye Fish
+		Name: Eye Fish
 
 		Attack: {
 			Name: Bloody Gaze
@@ -67,7 +67,7 @@ Cards: {
 			Description:
 				'''
 				This creature also
-				takes 1 dmg
+				takes 2 dmg
 				'''
 		}
 
@@ -111,6 +111,17 @@ Cards: {
 		}
 	}
 
+	SpikedJungleSlime: {
+		Name: Jungle Slime
+		Attack.Name: Toxic Ooze
+		Modifier.Description:
+			'''
+			Spiked: A creature that
+			attacks this card takes
+			2 dmg
+			'''
+	}
+
 	Tim: {
 		Name: Tim
 
@@ -131,6 +142,15 @@ Cards: {
 			'''
 			Return target allied
 			creature to the hand
+			'''
+	}
+
+	PartyGirl: {
+		Name: Party Girl's Favor
+		Modifier.Description:
+			'''
+			Unpause target allied
+			creature
 			'''
 	}
 
@@ -162,6 +182,47 @@ Cards: {
 				'''
 				Equipped creature
 				deals +1 damage
+				'''
+		}
+	}
+
+	ThornsPotion: {
+		Name: Thorns Potion
+
+		Skill: {
+			Name: Use
+			Description:
+				'''
+				Next turn, enemies that
+				attack target creature
+				take 2 dmg.
+				'''
+		}
+	}
+
+	IronskinPotion: {
+		Name: Ironskin Potion
+
+		Skill: {
+			Name: Use
+			Description:
+				'''
+				Next turn, target ally
+				takes 2 less dmg from
+				attacks.
+				'''
+		}
+	}
+
+	RagePotion: {
+		Name: RagePotion
+
+		Skill: {
+			Name: Use
+			Description:
+				'''
+				This turn, target ally
+				deals +2 dmg.
 				'''
 		}
 	}
@@ -234,6 +295,7 @@ Cards: {
 		ITEM: Item
 		TOWNSFOLK: Townsfolk
 		EQUIPMENT: Equipment
+		CONSUMABLE: Consumable
 		FOREST: Forest
 		CAVERN: Cavern
 		FIGHTER: Fighter
