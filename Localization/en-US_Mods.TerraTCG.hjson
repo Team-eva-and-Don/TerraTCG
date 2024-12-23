@@ -214,6 +214,15 @@ Cards: {
 		}
 	}
 
+	LesserHealingPotion: {
+		Name: Healing Potion
+
+		Skill: {
+			Name: Use
+			Description: Target ally heals 3 hp.
+		}
+	}
+
 	RagePotion: {
 		Name: RagePotion
 

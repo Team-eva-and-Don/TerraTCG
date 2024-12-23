@@ -31,7 +31,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
             zone.PlacedCard.IsExerted = false;
 
-            zone.QueueAnimation(new IdleAnimation(zone.PlacedCard, duration));
+            zone.QueueAnimation(new IdleAnimation(zone.PlacedCard, duration, exertedOverride: true));
             zone.QueueAnimation(new BecomeActiveAnimation(zone.PlacedCard));
         }
     }

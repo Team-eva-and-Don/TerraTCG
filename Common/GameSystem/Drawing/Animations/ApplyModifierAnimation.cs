@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,7 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.Drawing.Animations
 {
-    internal class ApplyModifierAnimation(PlacedCard placedCard, List<ICardModifier> modifiers) : IAnimation
+    internal class ApplyModifierAnimation(PlacedCard placedCard, Asset<Texture2D> modifierTexture) : IAnimation
     {
         public TimeSpan StartTime { get; set; }
         public Zone SourceZone { private get; set; }
@@ -37,12 +38,14 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             AnimationUtils.DrawZoneNPCStats(spriteBatch, SourceZone, placedCard, baseScale);
 
             // Draw the item itself on top of everything
-            var texture = modifiers[0].Texture.Value;
-            var bounds = texture.Bounds;
-            var origin = new Vector2(bounds.Width, bounds.Height) / 2;
-            spriteBatch.Draw(texture, basePosition - Vector2.UnitY * itemOffset, bounds,
-                Color.White, 0f,
-                origin, baseScale * (1 - lerpPoint), 0, 0);
+            if(modifierTexture?.Value is var texture)
+            {
+                var bounds = texture.Bounds;
+                var origin = new Vector2(bounds.Width, bounds.Height) / 2;
+                spriteBatch.Draw(texture, basePosition - Vector2.UnitY * itemOffset, bounds,
+                    Color.White, 0f,
+                    origin, baseScale * (1 - lerpPoint), 0, 0);
+            }
         }
 
         // via AmuletOfManyMinions

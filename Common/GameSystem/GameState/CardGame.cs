@@ -28,6 +28,8 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal TimeSpan FadeOutTime { get; } = TimeSpan.FromSeconds(0.5f);
 
+        private readonly Random random = new ();
+
         internal Turn CurrentTurn
         {
             get => Turns.Last();
@@ -56,10 +58,10 @@ namespace TerraTCG.Common.GameSystem.GameState
             CurrentTurn = new()
             {
                 Game = this,
-                ActivePlayer = GamePlayers[1],
+                ActivePlayer = GamePlayers[Math.Abs((int)random.NextInt64()) % 2],
                 TurnCount = 1
             };
-            GamePlayers[0].ManaPerTurn = 1;
+            CurrentTurn.ActivePlayer.Opponent.ManaPerTurn += 1;
             CurrentTurn.Start();
 
             StartTime = Main._drawInterfaceGameTime.TotalGameTime;

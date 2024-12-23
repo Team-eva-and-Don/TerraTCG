@@ -21,7 +21,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                 .Where(z => z.PlacedCard.GetAttackWithModifiers(z, null).Cost <= GamePlayer.Resources.Mana)
                 .Where(z => !z.PlacedCard.IsExerted)
                 .Where(z => z.Role == ZoneRole.OFFENSE)
-                .OrderByDescending(z => z.PlacedCard.GetAttackWithModifiers(z, null).ManaEfficiency)
+                .OrderByDescending(z => z.PlacedCard.GetAttackWithModifiers(z, null).Damage)
                 .FirstOrDefault();
 
             var action = new MoveCardOrAttackAction(bestAttackZone, GamePlayer);
@@ -134,18 +134,33 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
         private bool DecideUseItem()
         {
             var bestCardInHand = GamePlayer.Hand.Cards.Where(c => c.CardType == CardType.ITEM)
-                .Where(c => c.SubTypes.Contains(CardSubtype.EQUIPMENT))
                 .Where(c => c.Skills[0].Cost <= AvailableMana)
                 .OrderByDescending(c => c.Priority)
                 .FirstOrDefault();
+            if(bestCardInHand == null)
+            {
+                return false;
+            }
 
-            var bestTargetZone = GamePlayer.Field.Zones.Where(z => !z.IsEmpty())
-                .OrderByDescending(z => z.PlacedCard.GetAttackWithModifiers(z, null).Damage)
-                .FirstOrDefault();
+
+            Zone bestTargetZone;
+            if(bestCardInHand.Role == ZoneRole.OFFENSE)
+            {
+                bestTargetZone = GamePlayer.Field.Zones.Where(z => !z.IsEmpty())
+                    .Where(z => !bestCardInHand.SubTypes.Contains(CardSubtype.CONSUMABLE) || !z.PlacedCard.IsExerted)
+                    .OrderByDescending(z => z.PlacedCard.GetAttackWithModifiers(z, null).Damage)
+                    .FirstOrDefault();
+            } else
+            {
+                bestTargetZone = GamePlayer.Field.Zones.Where(z => !z.IsEmpty())
+                    .Where(z => z.PlacedCard.IsDamaged)
+                    .OrderByDescending(z => z.PlacedCard.Template.MaxHealth - z.PlacedCard.CurrentHealth)
+                    .FirstOrDefault();
+            }
 
             if(bestCardInHand != null && bestTargetZone != null)
             {
-                EquipItem(bestCardInHand, bestTargetZone);
+                UseItem(bestCardInHand, bestTargetZone);
                 return true;
             }
             return false;
@@ -232,14 +247,22 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             var action = new MoveCardOrAttackAction(bestSkillZone, GamePlayer);
             action.AcceptActionButton();
 
-            var bestTargetZone = GamePlayer.Field.Zones.Where(z => !z.IsEmpty() && !z.PlacedCard.IsExerted)
-                .Where(action.CanAcceptZone)
-                .OrderByDescending(z => skill.Role == ZoneRole.OFFENSE ? 
-                    z.PlacedCard.GetAttackWithModifiers(z, null).ManaEfficiency : 
-                    z.PlacedCard.Template.MaxHealth - z.PlacedCard.CurrentHealth)
-                .FirstOrDefault();
+            Zone bestTargetZone;
+            if(skill.Role == ZoneRole.OFFENSE)
+            {
+                bestTargetZone = GamePlayer.Field.Zones.Where(z => !z.IsEmpty() && !z.PlacedCard.IsExerted)
+                    .Where(action.CanAcceptZone)
+                    .OrderByDescending(z => z.PlacedCard.GetAttackWithModifiers(z, null).Damage)
+                    .FirstOrDefault();
+            } else
+            {
+                bestTargetZone = GamePlayer.Field.Zones.Where(z => !z.IsEmpty() && z.PlacedCard.IsDamaged)
+                    .Where(action.CanAcceptZone)
+                    .OrderByDescending(z => z.PlacedCard.Template.MaxHealth - z.PlacedCard.CurrentHealth)
+                    .FirstOrDefault();
+            }
 
-            if(bestSkillZone != null)
+            if(bestSkillZone != null && bestTargetZone != null)
             {
                 DoUseTargetedSkill(bestSkillZone, bestTargetZone);
                 return true;

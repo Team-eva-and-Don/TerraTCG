@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Graphics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,23 +13,22 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class IronskinPotion: ModSystem, ICardTemplate
+    internal class HealingPotion: ModSystem, ICardTemplate
     {
         public Card CreateCard() => new ()
         {
-            Name = "IronskinPotion",
+            Name = "LesserHealingPotion",
             CardType = CardType.ITEM,
             SubTypes = [CardSubtype.CONSUMABLE, CardSubtype.ITEM],
-            SelectInHandAction = (card, player) => new ApplyModifierAction(card, player),
+            SelectInHandAction = (card, player) => new ApplySkillAction(card, player),
             Role = ZoneRole.DEFENSE,
             Skills = [ // TODO this is wonky, but item texts are drawn using the skill template
-                new() { Cost = 1 }
-            ],
-            Modifiers = [
-                new ReduceDamageModifier(2, [GameEvent.END_TURN])  {
-                    Texture = TextureCache.Instance.GetItemTexture(ItemID.IronskinPotion),
+                new() { 
+                    Cost = 1,
+                    Texture = TextureCache.Instance.GetItemTexture(ItemID.LesserHealingPotion),
+                    DoSkill = (GamePlayer player, Zone zone, Zone targetZone) => targetZone.PlacedCard.Heal(3),
                 }
-            ]
+            ],
         };
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +12,7 @@ namespace TerraTCG.Common.GameSystem.GameState
     internal delegate void DoSkill(GamePlayer player, Zone cardZone, Zone endZone);
     internal struct Skill()
     {
-
+        public Asset<Texture2D> Texture { get; internal set; }
         internal string Name { get; set; }
         internal int Cost { get; set; }
         internal string Description { get; set; }

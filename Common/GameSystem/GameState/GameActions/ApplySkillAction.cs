@@ -9,7 +9,7 @@ using TerraTCG.Common.GameSystem.Drawing.Animations.FieldAnimations;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
-    internal class ApplyModifierAction(Card card, GamePlayer player) : IGameAction
+    internal class ApplySkillAction(Card card, GamePlayer player) : IGameAction
     {
         private Zone zone;
 
@@ -28,9 +28,9 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             var duration = showAnimation.Duration;
 
             zone.QueueAnimation(new IdleAnimation(zone.PlacedCard, duration: duration));
-            zone.QueueAnimation(new ApplyModifierAnimation(zone.PlacedCard, card.Modifiers[0].Texture));
+            zone.QueueAnimation(new ApplyModifierAnimation(zone.PlacedCard, card.Skills[0].Texture));
 
-            zone.PlacedCard.CardModifiers.AddRange(card.Modifiers);
+            card.Skills[0].DoSkill(player, null, zone);
             player.Resources = player.Resources.UseResource(mana: card.Skills[0].Cost);
             player.Hand.Remove(card);
         }

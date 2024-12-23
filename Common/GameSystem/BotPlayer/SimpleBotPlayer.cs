@@ -36,7 +36,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                 .Where(z => z.Role == ZoneRole.OFFENSE)
                 .Select(z=>z.PlacedCard.GetAttackWithModifiers(z, null))
                 .Where(a => a.Cost <= GamePlayer.Resources.Mana)
-                .OrderByDescending(a => a.ManaEfficiency);
+                .OrderByDescending(a => a.Damage);
 
             foreach(var a in sortedAttacks)
             {
@@ -60,7 +60,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             // Every other turn, dedicate all mana to attacking
             // This is a little wonky but the bot won't always use
             // its other cards otherwise
-            if(Game.CurrentTurn.TurnCount % 2 == 0)
+            if(Game.CurrentTurn.TurnCount % 4 <= 1)
             {
                 ReservedAttackMana = 0;
             } else
@@ -103,9 +103,9 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             action.Complete();
         }
 
-        private void EquipItem(Card sourceCard, Zone destZone)
+        private void UseItem(Card sourceCard, Zone destZone)
         {
-            var action = new ApplyModifierAction(sourceCard, GamePlayer);
+            var action = sourceCard.SelectInHandAction(sourceCard, GamePlayer);
             GamePlayer.InProgressAction = action;
             action.AcceptZone(destZone);
             action.Complete();
@@ -164,9 +164,9 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
 
             if(DecideAdvanceAttacker()) return;
 
-            if(DecideRetreatCreature()) return;
-
             if(DecideAttack()) return;
+
+            if(DecideRetreatCreature()) return;
 
             ResetStateAndPassTurn();
         }

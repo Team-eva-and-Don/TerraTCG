@@ -31,7 +31,7 @@ namespace TerraTCG.Common.GameSystem.GameState
                 1
             );
 
-            if(TurnCount > 1 && !ActivePlayer.Deck.Empty())
+            if(TurnCount > 2 && !ActivePlayer.Deck.Empty())
             {
                 ActivePlayer.Hand.Add(ActivePlayer.Deck.Draw());
             }
