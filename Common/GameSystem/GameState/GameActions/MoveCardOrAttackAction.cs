@@ -47,7 +47,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         private bool CanAttackZone(Zone zone)
         {
-            return startZone.PlacedCard.GetAttackWithModifiers(startZone, zone).Cost <= player.Resources.Mana &&
+            return startZone.HasPlacedCard() && startZone.PlacedCard.GetAttackWithModifiers(startZone, zone).Cost <= player.Resources.Mana &&
                 startZone.PlacedCard.GetValidAttackZones(startZone, zone).Contains(zone);
         }
 
@@ -55,7 +55,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public bool CanAcceptActionButton()
         {
-            return actionType == ActionType.DEFAULT && startZone.PlacedCard.Template.HasSkillText &&
+            return startZone.HasPlacedCard() &&  actionType == ActionType.DEFAULT && startZone.PlacedCard.Template.HasSkillText &&
                 startZone.PlacedCard.Template.Skills[0].Cost <= player.Resources.Mana &&
                 !startZone.PlacedCard.IsExerted;
         }

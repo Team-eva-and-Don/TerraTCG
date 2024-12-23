@@ -56,9 +56,10 @@ namespace TerraTCG.Common.GameSystem.GameState
             CurrentTurn = new()
             {
                 Game = this,
-                ActivePlayer = GamePlayers[0],
+                ActivePlayer = GamePlayers[1],
                 TurnCount = 1
             };
+            GamePlayers[0].ManaPerTurn = 1;
             CurrentTurn.Start();
 
             StartTime = Main._drawInterfaceGameTime.TotalGameTime;

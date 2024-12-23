@@ -57,6 +57,11 @@ namespace TerraTCG.Common.GameSystem.GameState
                 ActivePlayer.Field.ClearModifiers(ActivePlayer, zone, GameEvent.END_TURN);
             }
 
+            foreach(var zone in ActivePlayer.Opponent.Field.Zones)
+            {
+                ActivePlayer.Opponent.Field.ClearModifiers(ActivePlayer, zone, GameEvent.END_TURN);
+            }
+
             Game.CurrentTurn = new()
             {
                 Game = Game,

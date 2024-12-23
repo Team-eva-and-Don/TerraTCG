@@ -19,7 +19,10 @@ namespace TerraTCG.Common.GameSystem.CardData
             public void ModifyIncomingZoneSelection(Zone sourceZone, Zone endZone, ref List<Zone> destZones)
             {
                 // Only allow attacks against the turtle
-                destZones = [turtleZone];
+                if(!turtleZone.IsEmpty())
+                {
+                    destZones = [turtleZone];
+                }
             }
             public bool ShouldRemove(GamePlayer turnPlayer, GameEvent gameEvent) => 
                 gameEvent == GameEvent.END_TURN && turnPlayer != turtleZone.Owner;

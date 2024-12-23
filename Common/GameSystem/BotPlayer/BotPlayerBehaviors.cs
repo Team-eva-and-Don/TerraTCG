@@ -232,7 +232,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             var action = new MoveCardOrAttackAction(bestSkillZone, GamePlayer);
             action.AcceptActionButton();
 
-            var bestTargetZone = GamePlayer.Field.Zones.Where(z => !z.IsEmpty())
+            var bestTargetZone = GamePlayer.Field.Zones.Where(z => !z.IsEmpty() && !z.PlacedCard.IsExerted)
                 .Where(action.CanAcceptZone)
                 .OrderByDescending(z => skill.Role == ZoneRole.OFFENSE ? 
                     z.PlacedCard.GetAttackWithModifiers(z, null).ManaEfficiency : 

@@ -21,57 +21,48 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
 
         private int ReservedAttackMana { get; set; }
 
-        private bool HasAttacked { get; set; }
-
-        private int AvailableMana => HasAttacked ? GamePlayer.Resources.Mana : GamePlayer.Resources.Mana - ReservedAttackMana;
+        private int AvailableMana => GamePlayer.Resources.Mana - ReservedAttackMana;
 
         // Pre-calculate all the damage we can do this turn, used for
         // certain decisions (eg. whether to force-promote a weakened unit)
-        private int PossibleDamage
+        private int PossibleDamage;
+        private (int, int) GetPossibleDamageAndCost()
         {
-            get
-            {
-                var possibleDmg = 0;
-                var availableMana = GamePlayer.Resources.Mana;
-                var sortedAttacks = GamePlayer.Field.Zones.Where(z => !z.IsEmpty())
+            var possibleDmg = 0;
+            var totalCost = 0;
+            var availableMana = GamePlayer.Resources.Mana;
+            var sortedAttacks = GamePlayer.Field.Zones.Where(z => !z.IsEmpty())
                 .Where(z => !z.PlacedCard.IsExerted)
                 .Where(z => z.Role == ZoneRole.OFFENSE)
                 .Select(z=>z.PlacedCard.GetAttackWithModifiers(z, null))
                 .Where(a => a.Cost <= GamePlayer.Resources.Mana)
-                .OrderByDescending(a => a.Damage);
+                .OrderByDescending(a => a.ManaEfficiency);
 
-                foreach(var a in sortedAttacks)
+            foreach(var a in sortedAttacks)
+            {
+                if(availableMana >= totalCost + a.Cost)
                 {
-                    if(availableMana >= a.Damage)
-                    {
-                        possibleDmg += a.Damage;
-                        availableMana -= a.Cost;
-                    }
+                    possibleDmg += a.Damage;
+                    totalCost += a.Cost;
                 }
-                return possibleDmg;
             }
+            return (possibleDmg, totalCost);
         }
 
         private void CalculateReservedAttackMana()
         {
-            if(ReservedAttackMana > 0 || HasAttacked)
+            if(ReservedAttackMana > 0)
             {
                 return;
             }
-            var bestAttack = GamePlayer.Field.Zones.Where(z => !z.IsEmpty())
-                .Where(z => z.PlacedCard.GetAttackWithModifiers(z, null).Cost <= GamePlayer.Resources.Mana)
-                .Where(z => !z.PlacedCard.IsExerted)
-                .Where(z => z.Role == ZoneRole.OFFENSE)
-                .Select(z=>z.PlacedCard.GetAttackWithModifiers(z, null))
-                .OrderByDescending(a => a.ManaEfficiency)
-                .FirstOrDefault();
-            ReservedAttackMana = bestAttack.Cost;
+            var attackInfo = GetPossibleDamageAndCost();
+            PossibleDamage = attackInfo.Item1;
+            ReservedAttackMana = attackInfo.Item2;
         }
 
 
         private void DoMoveOrAttack(Zone sourceZone, Zone destZone)
         {
-            HasAttacked = true;
             var action = new MoveCardOrAttackAction(sourceZone, GamePlayer);
             GamePlayer.InProgressAction = action;
             action.AcceptZone(destZone);
@@ -162,18 +153,18 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
 
             if(DecideUseTargetedSkill()) return;
 
-            if(DecideAttack()) return;
-
             if(DecideAdvanceAttacker()) return;
 
             if(DecideRetreatCreature()) return;
+
+            if(DecideAttack()) return;
 
             ResetStateAndPassTurn();
         }
 
         private void ResetStateAndPassTurn()
         {
-            HasAttacked = false;
+            PossibleDamage = 0;
             ReservedAttackMana = 0;
             GamePlayer.PassTurn();
         }
