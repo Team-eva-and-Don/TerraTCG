@@ -23,8 +23,8 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
 
     internal interface ICardModifier
     {
-        public Asset<Texture2D> Texture { get; }
-        public string Description { get; }
+        public Asset<Texture2D> Texture { get => null; }
+        public string Description { get => ""; }
 
         // Modify an attack as this card performs it
         public void ModifyAttack(ref Attack attack, Zone sourceZone, Zone destZone) 
@@ -48,7 +48,7 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
             // no-op
         }
 
-        public bool ShouldRemove(GameEvent gameEvent) {
+        public bool ShouldRemove(GamePlayer turnPlayer, GameEvent gameEvent) {
             return false;
         }
     }

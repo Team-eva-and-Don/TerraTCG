@@ -124,7 +124,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
             {
                 heightInfo.modifierHeight = heightInfo.height;
                 var lineCount = card.ModifierDescription.Split('\n').Length;
-                heightInfo.height += lineCount * SmallTextHeight + MARGIN_S;
+                heightInfo.height += lineCount * SmallTextHeight + MARGIN_S / 2;
             }
 
             if(card.HasSkillText)
@@ -140,7 +140,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
             }
             if(card.HasSkillText || card.HasSkillDescription)
             {
-                heightInfo.height += MARGIN_S;
+                heightInfo.height += MARGIN_S / 2;
             }
 
             if(card.HasAttackText)

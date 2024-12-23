@@ -24,7 +24,6 @@ namespace TerraTCG.Common.GameSystem.CardData
                 new() {
                     Damage = 2,
                     Cost = 2,
-                    Description = "H"
                 }
             ],
             Modifiers = [

@@ -56,6 +56,10 @@ namespace TerraTCG.Common.GameSystem.GameState
             {
                 modifier.ModifyIncomingZoneSelection(startZone, endZone, ref targetZones);
             }
+            foreach(var modifier in endZone.Owner.Field.Zones.Where(z=>!z.IsEmpty()).SelectMany(z=>z.PlacedCard.CardModifiers))
+            {
+                modifier.ModifyIncomingZoneSelection(startZone, endZone, ref targetZones);
+            }
 
             return targetZones;
         }

@@ -92,8 +92,8 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             player.Resources = player.Resources.UseResource(mana: attack.Cost);
             attack.DoAttack(attack, startZone, endZone);
 
-            player.Field.ClearModifiers(startZone, GameEvent.AFTER_ATTACK);
-            player.Opponent.Field.ClearModifiers(endZone, GameEvent.AFTER_RECEIVE_ATTACK);
+            player.Field.ClearModifiers(player, startZone, GameEvent.AFTER_ATTACK);
+            player.Opponent.Field.ClearModifiers(player, endZone, GameEvent.AFTER_RECEIVE_ATTACK);
 
 
             startZone.QueueAnimation(new MeleeAttackAnimation(startZone.PlacedCard, endZone));

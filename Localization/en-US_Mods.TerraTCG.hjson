@@ -13,10 +13,24 @@ Cards: {
 
 	DemonEye: {
 		Name: Demon Eye
+		Attack.Name: Harsh Gaze
+		Modifier.Description:
+			'''
+			Evasive: May attack 
+			blocked enemies
+			'''
+	}
+
+	Harpy: {
+		Name: Harpy
 
 		Attack: {
-			Name: Harsh Gaze
-			Description: What're you lookin' at?
+			Name: Dive-bomb
+			Description:
+				'''
+				All allies may attack
+				target blocked enemy
+				'''
 		}
 
 		Modifier.Description:
@@ -24,6 +38,20 @@ Cards: {
 			Evasive: May attack 
 			blocked enemies
 			'''
+	}
+
+	JungleTurtle: {
+		Name: Jungle Turtle
+		Attack.Name: Hard Shell
+
+		Skill: {
+			Name: Skill: Guardian
+			Description:
+				'''
+				Your opponent must 
+				attack this next turn
+				'''
+		}
 	}
 
 	Tim: {
@@ -156,6 +184,8 @@ Cards: {
 		SCOUT: Scout
 		DEFENDER: Defender
 		CASTER: Caster
+		JUNGLE: Jungle
+		SKY: Sky
 	}
 
 	Common.Turn: Turn

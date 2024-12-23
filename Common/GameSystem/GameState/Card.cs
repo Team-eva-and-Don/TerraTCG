@@ -37,6 +37,8 @@ namespace TerraTCG.Common.GameSystem.GameState
         SLIME,
         CRITTER,
         CASTER,
+        JUNGLE,
+        SKY,
     }
 
     internal class Card

@@ -62,7 +62,6 @@ namespace TerraTCG.Common.GameSystem.GameState
                     CreateCard<CopperShortsword>(),
                     CreateCard<OldMan>(),
                     CreateCard<DemonEye>(),
-                    CreateCard<Bunny>(),
                     CreateCard<Skeleton>(),
                     CreateCard<Bat>(),
                     CreateCard<Guide>(),
@@ -74,16 +73,16 @@ namespace TerraTCG.Common.GameSystem.GameState
             Hand = new CardCollection()
             {
                 Cards = [
-                    CreateCard<Zombie>(), 
-                    CreateCard<Tim>(), 
-                    CreateCard<FledglingWings>(), 
+                    CreateCard<Harpy>(), 
+                    CreateCard<Bunny>(), 
+                    CreateCard<JungleTurtle>(), 
                 ]
             };
 
-            //for(int _ = 0; _ < 2; _++)
-            //{
-            //    Hand.Add(Deck.Draw());
-            //}
+            for (int _ = 0; _ < 2; _++)
+            {
+                Hand.Add(Deck.Draw());
+            }
             Field = new(game);
         }
 

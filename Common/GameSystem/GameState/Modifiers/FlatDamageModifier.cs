@@ -18,7 +18,7 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
             attack.Damage += modifier;
         }
 
-        public bool ShouldRemove(GameEvent gameEvent) {
+        public bool ShouldRemove(GamePlayer turnPlayer, GameEvent gameEvent) {
             return removeOn?.Contains(gameEvent) ?? false;
         }
 
