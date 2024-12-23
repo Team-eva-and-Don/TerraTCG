@@ -162,7 +162,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
             var font = FontAssets.ItemStack.Value;
             var bounds = card.Texture.Value.Bounds;
             var heightInfo = GetBodyTextHeight(card);
-            var centerOfBody = 130;
+            var centerOfBody = 135;
 
             var startY = centerOfBody - heightInfo.height / 2;
 

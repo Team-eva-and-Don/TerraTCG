@@ -21,6 +21,63 @@ Cards: {
 			'''
 	}
 
+	Drippler: {
+		Name: Drippler
+
+		Attack: {
+			Name: Blood Drip
+			Description:
+				'''
+				This creature also
+				takes 1 dmg
+				'''
+		}
+
+		Modifier.Description:
+			'''
+			Zealous: This card may
+			act the turn it enters
+			'''
+	}
+
+	WanderingEyeFish: {
+		Name: Wandering Eye Fish
+
+		Attack: {
+			Name: Bloody Gaze
+			Description:
+				'''
+				This creature also
+				takes 1 dmg
+				'''
+		}
+
+		Modifier.Description:
+			'''
+			Zealous: This card may
+			act the turn it enters
+			'''
+	}
+
+	BloodZombie: {
+		Name: Blood Zombie
+
+		Attack: {
+			Name: Vicious Tear
+			Description:
+				'''
+				This creature also
+				takes 1 dmg
+				'''
+		}
+
+		Modifier.Description:
+			'''
+			Zealous: This card may
+			act the turn it enters
+			'''
+	}
+
 	Harpy: {
 		Name: Harpy
 
@@ -186,6 +243,7 @@ Cards: {
 		CASTER: Caster
 		JUNGLE: Jungle
 		SKY: Sky
+		BLOOD_MOON: Blood Moon
 	}
 
 	Common.Turn: Turn

@@ -48,6 +48,11 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
             // no-op
         }
 
+        public void ModifyCardEntrance(Zone sourceZone) 
+        {
+            // no-op
+        }
+
         public bool ShouldRemove(GamePlayer turnPlayer, GameEvent gameEvent) {
             return false;
         }

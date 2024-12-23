@@ -79,10 +79,14 @@ namespace TerraTCG.Common.GameSystem.GameState
 
             Hand = new CardCollection()
             {
-                Cards = [ ]
+                Cards = [ 
+                    CreateCard<Drippler>(),
+                    CreateCard<BloodZombie>(),
+                    CreateCard<WanderingEyeFish>(),
+                ]
             };
 
-            for (int _ = 0; _ < 4; _++)
+            for (int _ = 0; _ < 1; _++)
             {
                 Hand.Add(Deck.Draw());
             }

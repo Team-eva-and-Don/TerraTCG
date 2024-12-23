@@ -39,6 +39,7 @@ namespace TerraTCG.Common.GameSystem.GameState
         CASTER,
         JUNGLE,
         SKY,
+        BLOOD_MOON,
     }
 
     internal class Card

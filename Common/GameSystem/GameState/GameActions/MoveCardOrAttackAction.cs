@@ -105,6 +105,14 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
                 endZone.Owner.Resources = endZone.Owner.Resources.UseResource(health: 1);
                 endZone.PlacedCard = null;
             }
+
+            // both cards can die during an attack exchange
+            if(startZone.PlacedCard.CurrentHealth <= 0)
+            {
+                startZone.QueueAnimation(new RemoveCardAnimation(startZone.PlacedCard));
+                startZone.Owner.Resources = startZone.Owner.Resources.UseResource(health: 1);
+                startZone.PlacedCard = null;
+            }
         }
 
         private void DoSkill()

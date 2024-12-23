@@ -10,24 +10,28 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class Bat : ModSystem, ICardTemplate
+    internal class Drippler : ModSystem, ICardTemplate
     {
         public Card CreateCard() => new ()
         {
-            Name = "Bat",
+            Name = "Drippler",
             MaxHealth = 5,
-            MoveCost = 1,
+            MoveCost = 2,
             CardType = CardType.CREATURE,
-            NPCID = NPCID.CaveBat,
-            SubTypes = [CardSubtype.CAVERN, CardSubtype.SCOUT],
+            NPCID = NPCID.Drippler,
+            SubTypes = [CardSubtype.BLOOD_MOON, CardSubtype.SCOUT],
             Attacks = [
                 new() {
-                    Damage = 2,
+                    Damage = 3,
                     Cost = 2,
+                    DoAttack = (Attack attack, Zone sourceZone, Zone destZone) => {
+                        Attack.DefaultAttack(attack, sourceZone, destZone);
+                        sourceZone.PlacedCard.CurrentHealth -= 1;
+                    }
                 }
             ],
             Modifiers = [
-                new EvasiveModifier(),
+                new ZealousModifier(),
             ]
         };
     }

@@ -40,6 +40,11 @@ namespace TerraTCG.Common.GameSystem.GameState
                 PlaceTime = TCGPlayer.TotalGameTime,
                 CardModifiers = [.. card.Modifiers ?? []]
             };
+
+            foreach (var modifier in PlacedCard.CardModifiers.Concat(Owner.Field.CardModifiers))
+            {
+                modifier.ModifyCardEntrance(this);
+            }
         }
 
         public bool HasPlacedCard() => PlacedCard != null;
