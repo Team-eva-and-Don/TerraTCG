@@ -17,6 +17,10 @@ namespace TerraTCG.Common.GameSystem.GameState
         internal DoAttack DoAttack { get; set; } = DefaultAttack;
 
 
+        // How much damage this attack does per mana spent, used by bots
+        // in decision sequencing
+        internal readonly float ManaEfficiency => Damage / (float)(Math.Max(Cost, 1));
+
         internal static void DefaultAttack(Attack attack, Zone sourceZone, Zone targetZone)
         {
             targetZone.PlacedCard.CurrentHealth -= attack.Damage;

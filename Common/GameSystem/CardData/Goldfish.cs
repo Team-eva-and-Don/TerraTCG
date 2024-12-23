@@ -38,6 +38,7 @@ namespace TerraTCG.Common.GameSystem.CardData
                 new() {
                     Name = "Skill: Pond Healing",
                     Cost = 1,
+                    Role = ZoneRole.DEFENSE,
                     SkillType = ActionType.TARGET_ALLY,
                     DoSkill = PondHealing,
                 }

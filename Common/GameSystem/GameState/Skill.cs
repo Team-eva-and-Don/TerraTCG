@@ -15,6 +15,9 @@ namespace TerraTCG.Common.GameSystem.GameState
         internal int Cost { get; set; }
         internal string Description { get; set; }
 
+        // Flag used by bots to determine how to select targets for skills
+        internal ZoneRole Role { get; set; } = ZoneRole.OFFENSE;
+
         internal ActionType SkillType { get; set; } = ActionType.SKILL;
         internal DoSkill DoSkill { get; set; }
 

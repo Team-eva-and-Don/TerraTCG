@@ -57,29 +57,32 @@ namespace TerraTCG.Common.GameSystem.GameState
             Deck = new CardCollection()
             {
                 Cards = [
-                    CreateCard<Goldfish>(), 
-                    CreateCard<Squirrel>(),
-                    CreateCard<CopperShortsword>(),
-                    CreateCard<OldMan>(),
-                    CreateCard<DemonEye>(),
-                    CreateCard<Skeleton>(),
                     CreateCard<Bat>(),
+                    CreateCard<Bunny>(), 
+                    CreateCard<CopperShortsword>(),
+                    CreateCard<DemonEye>(),
+                    CreateCard<Dryad>(), 
+                    CreateCard<FledglingWings>(), 
+                    CreateCard<Goldfish>(), 
                     CreateCard<Guide>(),
+                    CreateCard<Harpy>(), 
+                    CreateCard<JungleTurtle>(), 
+                    CreateCard<OldMan>(),
+                    CreateCard<Skeleton>(),
+                    CreateCard<Squirrel>(),
+                    CreateCard<Tim>(),
                     CreateCard<Wizard>(),
+                    CreateCard<Zombie>(),
                 ]
             };
             Deck.Shuffle();
 
             Hand = new CardCollection()
             {
-                Cards = [
-                    CreateCard<Harpy>(), 
-                    CreateCard<Bunny>(), 
-                    CreateCard<JungleTurtle>(), 
-                ]
+                Cards = [ ]
             };
 
-            for (int _ = 0; _ < 2; _++)
+            for (int _ = 0; _ < 4; _++)
             {
                 Hand.Add(Deck.Draw());
             }
