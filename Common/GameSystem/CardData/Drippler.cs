@@ -22,7 +22,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             SubTypes = [CardSubtype.BLOOD_MOON, CardSubtype.SCOUT],
             Attacks = [
                 new() {
-                    Damage = 3,
+                    Damage = 4,
                     Cost = 2,
                     SelfDamage = 1,
                 }

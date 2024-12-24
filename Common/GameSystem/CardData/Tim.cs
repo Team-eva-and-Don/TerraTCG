@@ -18,8 +18,9 @@ namespace TerraTCG.Common.GameSystem.CardData
         {
             public void ModifyAttack(ref Attack attack, Zone sourceZone, Zone destZone) 
             {
-                attack.Cost = Math.Max(1, sourceZone.Owner.Resources.Mana);
-                attack.Damage = sourceZone.Owner.Resources.Mana;
+                var manaSpend = Math.Min(5, sourceZone.Owner.Resources.Mana);
+                attack.Cost = Math.Max(1, manaSpend);
+                attack.Damage = manaSpend;
             }
         }
 

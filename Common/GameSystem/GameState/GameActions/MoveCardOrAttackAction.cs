@@ -55,10 +55,13 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public bool CanAcceptActionButton()
         {
-            var skill = startZone.PlacedCard.GetSkillWithModifiers(startZone, null);
-            return startZone.HasPlacedCard() &&  actionType == ActionType.DEFAULT && startZone.PlacedCard.Template.HasSkillText &&
-                skill.Cost <= player.Resources.Mana &&
-                !startZone.PlacedCard.IsExerted;
+            if(startZone.PlacedCard?.GetSkillWithModifiers(startZone, null) is Skill skill)
+            {
+                return startZone.HasPlacedCard() &&  actionType == ActionType.DEFAULT && startZone.PlacedCard.Template.HasSkillText &&
+                    skill.Cost <= player.Resources.Mana &&
+                    !startZone.PlacedCard.IsExerted;
+            }
+            return false;
         }
 
         public bool AcceptZone(Zone zone)

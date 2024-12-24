@@ -44,7 +44,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             ],
             Skills = [
                 new() {
-                    Cost = 2,
+                    Cost = 1,
                     DoSkill = (GamePlayer player, Zone cardZone, Zone endZone) => {
                         player.Field.CardModifiers.Add(new TurtleMustAttackModifier(cardZone));
                     }
