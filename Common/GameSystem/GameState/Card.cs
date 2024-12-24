@@ -23,6 +23,8 @@ namespace TerraTCG.Common.GameSystem.GameState
 
     internal enum CardSubtype
     {
+        // Empty value
+        NONE,
         // Biomes
         FOREST,
         CAVERN,

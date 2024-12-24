@@ -11,6 +11,8 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
     internal class EvasiveModifier : ICardModifier
     {
         public Asset<Texture2D> Texture { get; set; }
+        public CardSubtype Source { get; set; }
+
         public void ModifyZoneSelection(Zone sourceZone, Zone endZone, ref List<Zone> destZones)
         {
             // allow the targeting of blocked enemy zones

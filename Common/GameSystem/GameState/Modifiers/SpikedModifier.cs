@@ -11,6 +11,7 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
     internal class SpikedModifier(int spikeDamage, List<GameEvent> removeOn = null) : ICardModifier
     {
         public Asset<Texture2D> Texture { get; set; }
+        public CardSubtype Source { get; set; }
 
         public void ModifyIncomingAttack(ref Attack attack, Zone sourceZone, Zone destZone) 
         {

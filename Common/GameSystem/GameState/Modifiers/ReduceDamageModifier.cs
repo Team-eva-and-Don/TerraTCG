@@ -11,6 +11,8 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
     internal class ReduceDamageModifier(int modifier, List<GameEvent> removeOn = null) : ICardModifier
     {
         public Asset<Texture2D> Texture { get; set; }
+        public CardSubtype Source { get; set; }
+
         public void ModifyIncomingAttack(ref Attack attack, Zone sourceZone, Zone destZone) 
         {
             attack.Damage = Math.Max(0, attack.Damage - modifier);

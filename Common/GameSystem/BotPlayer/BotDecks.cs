@@ -20,9 +20,10 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
         public static CardCollection GetRandomDeck()
         {
             var allDecks = new List<Func<CardCollection>> {
-                GetJungleDeck,
-                GetForestDeck,
-                GetBloodMoonDeck
+                //GetJungleDeck,
+                //GetForestDeck,
+                //GetBloodMoonDeck,
+                GetSkeletonDeck,
             };
 
             return allDecks[Math.Abs((int)random.NextInt64()) % allDecks.Count].Invoke();
@@ -104,6 +105,33 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     CreateCard<HealingPotion>(), 
                     CreateCard<FledglingWings>(), 
                     CreateCard<Harpy>(), 
+                ]
+            };
+
+        public static CardCollection GetSkeletonDeck() =>
+            new()
+            {
+                Cards = [
+                    CreateCard<Guide>(), 
+                    CreateCard<Guide>(), 
+                    CreateCard<Wizard>(), 
+                    CreateCard<Wizard>(), 
+                    CreateCard<CopperShortsword>(), 
+                    CreateCard<CopperShortsword>(), 
+                    CreateCard<FledglingWings>(), 
+                    CreateCard<PlatinumBroadsword>(), 
+                    CreateCard<Shackle>(), 
+                    CreateCard<Shackle>(), 
+                    CreateCard<CobaltShield>(), 
+                    CreateCard<Skeleton>(), 
+                    CreateCard<AngryBones>(), 
+                    CreateCard<AngryBones>(), 
+                    CreateCard<UndeadMiner>(), 
+                    CreateCard<UndeadMiner>(), 
+                    CreateCard<UndeadViking>(), 
+                    CreateCard<UndeadViking>(), 
+                    CreateCard<HealingPotion>(), 
+                    CreateCard<HealingPotion>(), 
                 ]
             };
     }

@@ -47,6 +47,17 @@ namespace TerraTCG.Common.GameSystem.GameState
             return attack;
         }
 
+        public Skill ModifyIncomingSkill(Card sourceCard)
+        {
+            var skill = sourceCard.Skills[0].Copy();
+            foreach(var modifier in CardModifiers)
+            {
+                modifier.ModifyIncomingSkill(ref skill, sourceCard);
+
+            }
+            return skill;
+        }
+
         internal List<Zone> GetValidAttackZones(Zone startZone, Zone endZone) 
         {
             // default list of zones: Attack zones and unblocked defense zones

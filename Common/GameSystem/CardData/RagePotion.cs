@@ -26,6 +26,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             Modifiers = [
                 new FlatDamageModifier(2, [GameEvent.END_TURN])  {
                     Texture = TextureCache.Instance.GetItemTexture(ItemID.RagePotion),
+                    Source = CardSubtype.CONSUMABLE,
                 }
             ]
         };

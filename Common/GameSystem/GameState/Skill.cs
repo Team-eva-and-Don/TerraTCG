@@ -23,5 +23,19 @@ namespace TerraTCG.Common.GameSystem.GameState
         internal ActionType SkillType { get; set; } = ActionType.SKILL;
         internal DoSkill DoSkill { get; set; }
 
+        public Skill Copy()
+        {
+            return new()
+            {
+                Texture = Texture,
+                Name = Name,
+                Cost = Cost,
+                Description = Description,
+                Role = Role,
+                SkillType = SkillType,
+                DoSkill = DoSkill,
+            };
+        }
+
     }
 }

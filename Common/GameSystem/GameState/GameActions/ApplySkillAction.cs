@@ -13,7 +13,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
     {
         private Zone zone;
 
-        public bool CanAcceptZone(Zone zone) => player.Owns(zone) && !zone.IsEmpty() && player.Resources.Mana >= card.Skills[0].Cost;
+        public bool CanAcceptZone(Zone zone) => player.Owns(zone) && !zone.IsEmpty() && player.Resources.Mana >= zone.PlacedCard.ModifyIncomingSkill(card).Cost;
 
         public bool AcceptZone(Zone zone)
         {
@@ -24,6 +24,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
         public void Complete()
         {
             var showAnimation = new ShowCardAnimation(TCGPlayer.TotalGameTime, card, zone);
+            var skill = zone.PlacedCard.ModifyIncomingSkill(card);
             player.Game.FieldAnimation = showAnimation;
             var duration = showAnimation.Duration;
 
@@ -31,7 +32,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             zone.QueueAnimation(new ApplyModifierAnimation(zone.PlacedCard, card.Skills[0].Texture));
 
             card.Skills[0].DoSkill(player, null, zone);
-            player.Resources = player.Resources.UseResource(mana: card.Skills[0].Cost);
+            player.Resources = player.Resources.UseResource(mana: skill.Cost);
             player.Hand.Remove(card);
         }
     }

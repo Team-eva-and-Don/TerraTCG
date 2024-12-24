@@ -31,7 +31,16 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
     internal interface ICardModifier
     {
         public Asset<Texture2D> Texture { get => null; }
+
+        public CardSubtype Source { get => CardSubtype.NONE; set { } }
+
         public string Description { get => ""; }
+
+        // Modify a skill as it's performed against this card
+        public void ModifyIncomingSkill(ref Skill skill, Card sourceCard) 
+        {
+            // no-op
+        }
 
         // Modify an attack as this card performs it
         public void ModifyAttack(ref Attack attack, Zone sourceZone, Zone destZone) 

@@ -26,6 +26,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             Modifiers = [
                 new ReduceDamageModifier(2)  {
                     Texture = TextureCache.Instance.GetItemTexture(ItemID.CobaltShield),
+                    Source = CardSubtype.EQUIPMENT,
                 }
             ]
         };

@@ -25,7 +25,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             Skills = [ // TODO this is wonky, but item texts are drawn using the skill template
                 new() { 
                     Cost = 1,
-                    Texture = TextureCache.Instance.GetItemTexture(ItemID.LesserHealingPotion),
+                    Texture = TextureCache.Instance.GetItemTexture(ItemID.SwiftnessPotion),
                     DoSkill = (GamePlayer player, Zone zone, Zone targetZone) => targetZone.PlacedCard.IsExerted = false,
                 }
             ],

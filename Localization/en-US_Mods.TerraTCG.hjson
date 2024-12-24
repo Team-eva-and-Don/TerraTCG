@@ -228,6 +228,19 @@ Cards: {
 		}
 	}
 
+	CobaltShield: {
+		Name: Cobalt Shield
+
+		Skill: {
+			Name: Equip
+			Description:
+				'''
+				Equipped creature takes
+				-2 dmg from attacks.
+				'''
+		}
+	}
+
 	ThornsPotion: {
 		Name: Thorns Potion
 
@@ -339,6 +352,48 @@ Cards: {
 	Skeleton: {
 		Name: Skeleton
 		Attack.Name: Bone Break
+	}
+
+	UndeadMiner: {
+		Name: Undead Miner
+
+		Attack: {
+			Name: Pickaxe Swing
+			Description:
+				'''
+				Costs 1 MP less for
+				each equipment on
+				this creature
+				'''
+		}
+	}
+
+	UndeadViking: {
+		Name: Undead Viking
+
+		Attack: {
+			Name: Frozen Axe
+			Description:
+				'''
+				Deals +1 dmg if
+				this creature is
+				equipped.
+				'''
+		}
+	}
+
+	AngryBones: {
+		Name: Angry Bones
+
+		Attack: {
+			Name: Cursed Axe
+			Description:
+				'''
+				Equipping this
+				creature costs
+				1 MP less.
+				'''
+		}
 	}
 
 	Types: {

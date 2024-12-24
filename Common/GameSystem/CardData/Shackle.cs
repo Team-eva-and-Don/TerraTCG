@@ -26,6 +26,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             Modifiers = [
                 new ReduceDamageModifier(1)  {
                     Texture = TextureCache.Instance.GetItemTexture(ItemID.Shackle),
+                    Source = CardSubtype.EQUIPMENT,
                 }
             ]
         };
