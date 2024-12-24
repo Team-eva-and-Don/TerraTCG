@@ -46,6 +46,27 @@ namespace TerraTCG.Common.GameSystem.GameState
             }
             return attack;
         }
+        public Skill GetSkillWithModifiers(Zone startZone, Zone endZone)
+        {
+            if(Template.Skills == null || Template.Skills.Count == 0)
+            {
+                return default;
+            }
+
+            var skill = Template.Skills[0].Copy();
+            foreach (var modifier in CardModifiers.Concat(startZone.Owner.Field.CardModifiers))
+            {
+                modifier.ModifySkill(ref skill, startZone, endZone);
+            }
+            if (endZone?.PlacedCard is PlacedCard endCard)
+            {
+                foreach (var modifier in endCard.CardModifiers.Concat(endZone.Owner.Field.CardModifiers))
+                {
+                    modifier.ModifySkill(ref skill, startZone, endZone);
+                }
+            }
+            return skill;
+        }
 
         public Skill ModifyIncomingSkill(Card sourceCard)
         {

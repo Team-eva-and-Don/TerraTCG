@@ -55,8 +55,9 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public bool CanAcceptActionButton()
         {
+            var skill = startZone.PlacedCard.GetSkillWithModifiers(startZone, null);
             return startZone.HasPlacedCard() &&  actionType == ActionType.DEFAULT && startZone.PlacedCard.Template.HasSkillText &&
-                startZone.PlacedCard.Template.Skills[0].Cost <= player.Resources.Mana &&
+                skill.Cost <= player.Resources.Mana &&
                 !startZone.PlacedCard.IsExerted;
         }
 
@@ -117,7 +118,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         private void DoSkill()
         {
-            var skill = startZone.PlacedCard.Template.Skills[0];
+            var skill = startZone.PlacedCard.GetSkillWithModifiers(startZone, null);
             startZone.PlacedCard.IsExerted = true;
             player.Resources = player.Resources.UseResource(mana: skill.Cost);
             skill.DoSkill(player, startZone, endZone);

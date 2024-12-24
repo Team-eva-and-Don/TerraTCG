@@ -141,8 +141,8 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                 Cards = [
                     CreateCard<Guide>(), 
                     CreateCard<Guide>(), 
-                    CreateCard<Wizard>(), 
-                    CreateCard<Bunny>(), 
+                    CreateCard<GoblinThief>(), 
+                    CreateCard<GoblinThief>(), 
                     CreateCard<Shackle>(), 
                     CreateCard<Shackle>(), 
                     CreateCard<Mimic>(), 

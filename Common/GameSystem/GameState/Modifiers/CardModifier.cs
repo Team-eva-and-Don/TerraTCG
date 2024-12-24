@@ -42,6 +42,12 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
             // no-op
         }
 
+        // Modify a skill as this card uses it
+        public void ModifySkill(ref Skill skill, Zone sourceZone, Zone destZone) 
+        {
+            // no-op
+        }
+
         // Modify an attack as this card performs it
         public void ModifyAttack(ref Attack attack, Zone sourceZone, Zone destZone) 
         {

@@ -360,6 +360,21 @@ Cards: {
 		}
 	}
 
+	GoblinThief: {
+		Name: Goblin Thief
+		Attack.Name: Shank
+
+		Skill: {
+			Name: Skill: Pickpocket
+			Description:
+				'''
+				If you used an item 
+				this turn, draw 1 
+				card.
+				'''
+		}
+	}
+
 	GoblinScout: {
 		Name: Goblin Scout
 

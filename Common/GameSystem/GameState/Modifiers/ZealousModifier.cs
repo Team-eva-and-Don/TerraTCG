@@ -16,7 +16,12 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
 
         public void ModifyCardEntrance(Zone sourceZone) 
         {
-            sourceZone.PlacedCard.IsExerted = false;
+            // Having cards enter unpaused on turn 1 screws up a 
+            // bunch of enemy decision-making.
+            if(sourceZone.Owner.Game.CurrentTurn.TurnCount > 1)
+            {
+                sourceZone.PlacedCard.IsExerted = false;
+            }
         }
     }
 }
