@@ -146,6 +146,16 @@ Cards: {
 		}
 	}
 
+	Crab: {
+		Name: Crab
+		Attack.Name: Pinch
+		Modifier.Description:
+			'''
+			Relentless: May attack
+			twice per turn.
+			'''
+	}
+
 	Tim: {
 		Name: Tim
 
@@ -540,6 +550,7 @@ Cards: {
 		SKY: Sky
 		BLOOD_MOON: Blood Moon
 		DESERT: Desert
+		OCEAN: Ocean
 	}
 
 	Common.Turn: Turn

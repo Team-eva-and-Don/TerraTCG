@@ -45,6 +45,7 @@ namespace TerraTCG.Common.GameSystem.GameState
         SKY,
         BLOOD_MOON,
         DESERT,
+        OCEAN,
     }
 
     // Bot helper function, apply additional
