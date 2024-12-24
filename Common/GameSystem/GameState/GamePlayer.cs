@@ -51,17 +51,16 @@ namespace TerraTCG.Common.GameSystem.GameState
             return ModContent.GetInstance<T>().CreateCard();
         }
 
-        public GamePlayer(CardGame game)
+        public GamePlayer(CardGame game, CardCollection deck)
         {
             Game = game;
 
-            Deck = BotDecks.GetRandomDeck();
+            Deck = deck;
             Deck.Shuffle();
 
             Hand = new CardCollection()
             {
-                Cards = [ 
-                ]
+                Cards = [ ]
             };
 
             for (int _ = 0; _ < 4; _++)

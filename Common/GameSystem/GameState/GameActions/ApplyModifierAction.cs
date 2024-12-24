@@ -27,6 +27,10 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             player.Game.FieldAnimation = showAnimation;
             var duration = showAnimation.Duration;
             var skill = zone.PlacedCard.ModifyIncomingSkill(card);
+            if(card.CardType == CardType.ITEM)
+            {
+                player.Game.CurrentTurn.UsedItemCount += 1;
+            }
 
             zone.QueueAnimation(new IdleAnimation(zone.PlacedCard, duration: duration));
             zone.QueueAnimation(new ApplyModifierAnimation(zone.PlacedCard, card.Modifiers[0].Texture));

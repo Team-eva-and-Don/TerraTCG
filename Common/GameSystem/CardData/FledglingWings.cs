@@ -23,6 +23,8 @@ namespace TerraTCG.Common.GameSystem.CardData
             Skills = [ // TODO this is wonky, but item texts are drawn using the skill template
                 new() { Cost = 2 }
             ],
+            // TODO probably want a flag for this instead of type introspection
+            ShouldTarget = (Zone zone) => !(zone.PlacedCard?.CardModifiers.Where(m=> m is EvasiveModifier).Any() ?? false),
             Modifiers = [
                 new EvasiveModifier() { 
                     Texture = TextureCache.Instance.GetItemTexture(4978),

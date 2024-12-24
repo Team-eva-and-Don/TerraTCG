@@ -17,16 +17,17 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             return ModContent.GetInstance<T>().CreateCard();
         }
         
-        public static CardCollection GetRandomDeck()
+        public static CardCollection GetDeck(int deckIdx = -1)
         {
             var allDecks = new List<Func<CardCollection>> {
-                //GetJungleDeck,
-                //GetForestDeck,
-                //GetBloodMoonDeck,
+                GetJungleDeck,
+                GetForestDeck,
+                GetBloodMoonDeck,
                 GetSkeletonDeck,
+                GetGoblinDeck,
             };
-
-            return allDecks[Math.Abs((int)random.NextInt64()) % allDecks.Count].Invoke();
+            var randIdx = Math.Abs((int)random.NextInt64()) % allDecks.Count;
+            return allDecks[deckIdx == -1 ? randIdx : deckIdx].Invoke();
         }
 
         public static CardCollection GetJungleDeck() =>
@@ -35,7 +36,6 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                 Cards = [
                     CreateCard<Bunny>(), 
                     CreateCard<Bunny>(), 
-                    CreateCard<Dryad>(), 
                     CreateCard<Dryad>(), 
                     CreateCard<Goldfish>(), 
                     CreateCard<Guide>(),
@@ -46,11 +46,12 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     CreateCard<Tim>(),
                     CreateCard<Wizard>(),
                     CreateCard<Wizard>(),
+                    CreateCard<DoctorBones>(),
+                    CreateCard<DoctorBones>(),
                     CreateCard<SpikedJungleSlime>(),
                     CreateCard<SpikedJungleSlime>(),
                     CreateCard<HealingPotion>(), 
                     CreateCard<HealingPotion>(), 
-                    CreateCard<IronskinPotion>(), 
                     CreateCard<CobaltShield>(), 
                     CreateCard<CobaltShield>(), 
                 ]
@@ -64,8 +65,8 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     CreateCard<Dryad>(), 
                     CreateCard<Dryad>(), 
                     CreateCard<Wizard>(), 
-                    CreateCard<Wizard>(), 
-                    CreateCard<PartyGirl>(), 
+                    CreateCard<ArmsDealer>(), 
+                    CreateCard<ArmsDealer>(), 
                     CreateCard<SwiftnessPotion>(), 
                     CreateCard<AntlionSwarmer>(), 
                     CreateCard<AntlionSwarmer>(), 
@@ -132,6 +133,32 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     CreateCard<UndeadViking>(), 
                     CreateCard<HealingPotion>(), 
                     CreateCard<HealingPotion>(), 
+                ]
+            };
+        public static CardCollection GetGoblinDeck() =>
+            new()
+            {
+                Cards = [
+                    CreateCard<Guide>(), 
+                    CreateCard<Guide>(), 
+                    CreateCard<Wizard>(), 
+                    CreateCard<Bunny>(), 
+                    CreateCard<Shackle>(), 
+                    CreateCard<Shackle>(), 
+                    CreateCard<Mimic>(), 
+                    CreateCard<Mimic>(), 
+                    CreateCard<GoblinArcher>(), 
+                    CreateCard<GoblinArcher>(), 
+                    CreateCard<GoblinScout>(), 
+                    CreateCard<GoblinScout>(), 
+                    CreateCard<HealingPotion>(), 
+                    CreateCard<HealingPotion>(), 
+                    CreateCard<RagePotion>(), 
+                    CreateCard<RagePotion>(), 
+                    CreateCard<AngelStatue>(), 
+                    CreateCard<AngelStatue>(), 
+                    CreateCard<SwiftnessPotion>(), 
+                    CreateCard<SwiftnessPotion>(), 
                 ]
             };
     }

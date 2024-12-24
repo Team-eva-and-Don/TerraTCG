@@ -15,6 +15,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
     {
         public CardGame Game { get; private set; }
         public GamePlayer GamePlayer { get; set; }
+        public CardCollection Deck { get; set; }
 
         private readonly TimeSpan PauseBetweenActions = TimeSpan.FromSeconds(0.5f);
         private TimeSpan LastBusyTime = TimeSpan.FromSeconds(0f);

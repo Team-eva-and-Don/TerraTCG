@@ -15,7 +15,7 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
 
         public void ModifyIncomingAttack(ref Attack attack, Zone sourceZone, Zone destZone) 
         {
-            attack.Damage = Math.Max(0, attack.Damage - modifier);
+            attack.Damage = Math.Max(1, attack.Damage - modifier);
         }
 
         public bool ShouldRemove(GameEventInfo eventInfo) =>

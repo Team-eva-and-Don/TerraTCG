@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
+using TerraTCG.Common.GameSystem.BotPlayer;
 using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.UI;
@@ -16,6 +17,7 @@ namespace TerraTCG.Common.GameSystem
     {
         public GamePlayer GamePlayer {get; set;}
 
+        public CardCollection Deck { get; set; }
         public void StartGame(GamePlayer player, CardGame game);
 
         public void EndGame();
@@ -51,6 +53,8 @@ namespace TerraTCG.Common.GameSystem
         }
 
         public GamePlayer GamePlayer { get; set; }
+
+        public CardCollection Deck { get; set; }
 
         // TODO this is not the correct place to cache this info, but is the easiest
         // Place within UI coordinates that the bottom center of the player's

@@ -47,6 +47,11 @@ namespace TerraTCG.Common.GameSystem.GameState
         DESERT,
     }
 
+    // Bot helper function, apply additional
+    // logic for whether the bot should use
+    // this item on an ally
+    internal delegate bool ShouldTarget(Zone zone);
+
     internal class Card
     {
         internal string Name { get; set; }
@@ -84,6 +89,8 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         // Among cards of the same type, how important is it to play this one first?
         internal int Priority { get; set; } = 0;
+
+        internal ShouldTarget ShouldTarget { get; set; } = z => true;
 
 
         // Localization utils

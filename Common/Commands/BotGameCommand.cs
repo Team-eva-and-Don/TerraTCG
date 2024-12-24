@@ -15,7 +15,7 @@ namespace TerraTCG.Common.Commands
     {
         public override CommandType Type => CommandType.Chat;
 
-        public override string Command => "botgame";
+        public override string Command => "bg";
 
         public override string Description => "Start a TerraTCG game against a bot opponent";
 
@@ -23,9 +23,12 @@ namespace TerraTCG.Common.Commands
         {
             if(caller.Player.whoAmI == Main.myPlayer)
             {
-                ModContent.GetInstance<GameModSystem>().StartGame(
-                    Main.LocalPlayer.GetModPlayer<TCGPlayer>(),
-                    new SimpleBotPlayer());
+                var myPlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>();
+                var opponent = new SimpleBotPlayer();
+
+                myPlayer.Deck = BotDecks.GetDeck(args.Length > 0 ? int.Parse(args[0]) : -1);
+                opponent.Deck = BotDecks.GetDeck(args.Length > 1 ? int.Parse(args[1]) : -1);
+                ModContent.GetInstance<GameModSystem>().StartGame(myPlayer, opponent);
             }
         }
     }

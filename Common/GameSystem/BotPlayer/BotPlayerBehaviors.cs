@@ -11,6 +11,32 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
 {
     internal partial class SimpleBotPlayer
     {
+
+        // Get the best zone on my field to use a buff on,
+        // depending on whether the buff is labeled as offensive or defensive
+        private Zone GetBestBuffTarget(Card cardToUse)
+        {
+            if(cardToUse == null)
+            {
+                return null;
+            }
+
+            if(cardToUse.Role == ZoneRole.OFFENSE)
+            {
+                return GamePlayer.Field.Zones.Where(z => !z.IsEmpty())
+                    .Where(z => cardToUse.ShouldTarget(z))
+                    .Where(z => !cardToUse.SubTypes.Contains(CardSubtype.CONSUMABLE) || !z.PlacedCard.IsExerted)
+                    .OrderByDescending(z => z.PlacedCard.GetAttackWithModifiers(z, null).Damage)
+                    .FirstOrDefault();
+            } else
+            {
+                return GamePlayer.Field.Zones.Where(z => !z.IsEmpty())
+                    .Where(z => cardToUse.ShouldTarget(z))
+                    .Where(z => z.PlacedCard.IsDamaged)
+                    .OrderByDescending(z => z.PlacedCard.Template.MaxHealth - z.PlacedCard.CurrentHealth)
+                    .FirstOrDefault();
+            }
+        }
         // Check whether any good candidates for attacking an enemy with a placed card exist
         // Return whether we decided to do an action
         private bool DecideAttack()
@@ -83,6 +109,35 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             return false;
         }
 
+        private bool DecideUseTargetingTownsfolk()
+        {
+            if(GamePlayer.Resources.TownsfolkMana == 0)
+            {
+                return false;
+            }
+            // Handlers with their own logic
+            List<string> customHandlers = [
+                GamePlayer.CreateCard<Dryad>().CardName,
+                GamePlayer.CreateCard<OldMan>().CardName,
+            ];
+
+            // TODO priority ordering of townsfolk cards
+            var bestTownsfolk = GamePlayer.Hand.Cards
+                .Where(c=>c.CardType == CardType.TOWNSFOLK)
+                .Where(c=>!customHandlers.Contains(c.CardName))
+                .Where(c=>!c.SelectInHandAction(c, GamePlayer).CanAcceptActionButton())
+                .FirstOrDefault();
+
+            var bestBuffZone = GetBestBuffTarget(bestTownsfolk);
+
+            if(bestTownsfolk != null && bestBuffZone != null)
+            {
+                UseTownsfolk(bestTownsfolk);
+                return true;
+            }
+            return false;
+        }
+
         private bool DecideMoveOpponent(ZoneRole srcRole, ZoneRole dstRole)
         {
             if(GamePlayer.Resources.TownsfolkMana == 0)
@@ -137,26 +192,8 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                 .Where(c => c.Skills[0].Cost <= AvailableMana)
                 .OrderByDescending(c => c.Priority)
                 .FirstOrDefault();
-            if(bestCardInHand == null)
-            {
-                return false;
-            }
 
-
-            Zone bestTargetZone;
-            if(bestCardInHand.Role == ZoneRole.OFFENSE)
-            {
-                bestTargetZone = GamePlayer.Field.Zones.Where(z => !z.IsEmpty())
-                    .Where(z => !bestCardInHand.SubTypes.Contains(CardSubtype.CONSUMABLE) || !z.PlacedCard.IsExerted)
-                    .OrderByDescending(z => z.PlacedCard.GetAttackWithModifiers(z, null).Damage)
-                    .FirstOrDefault();
-            } else
-            {
-                bestTargetZone = GamePlayer.Field.Zones.Where(z => !z.IsEmpty())
-                    .Where(z => z.PlacedCard.IsDamaged)
-                    .OrderByDescending(z => z.PlacedCard.Template.MaxHealth - z.PlacedCard.CurrentHealth)
-                    .FirstOrDefault();
-            }
+            Zone bestTargetZone = GetBestBuffTarget(bestCardInHand);
 
             if(bestCardInHand != null && bestTargetZone != null)
             {

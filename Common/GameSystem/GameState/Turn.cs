@@ -17,7 +17,8 @@ namespace TerraTCG.Common.GameSystem.GameState
         internal GamePlayer ActivePlayer { get; set; }
         internal int TurnCount { get; set; }
 
-        internal List<Action> ActionLog { get; set; } = [];
+        // Certain cards care about item usage count
+        internal int UsedItemCount { get; set; }
 
         public void Start()
         {

@@ -10,22 +10,28 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class AntlionCharger : ModSystem, ICardTemplate
+    internal class GoblinArcher : ModSystem, ICardTemplate
     {
+
         public Card CreateCard() => new ()
         {
-            Name = "AntlionCharger",
+            Name = "GoblinArcher",
             MaxHealth = 7,
             MoveCost = 1,
+            NPCID = NPCID.GoblinArcher,
             CardType = CardType.CREATURE,
-            NPCID = NPCID.WalkingAntlion,
-            SubTypes = [CardSubtype.DESERT, CardSubtype.SCOUT],
+            SubTypes = [CardSubtype.CAVERN, CardSubtype.FIGHTER],
+            Modifiers = [
+                new ZealousModifier(),
+                new GoblinScout.DamageModifier(),
+            ],
             Attacks = [
                 new() {
-                    Damage = 2,
+                    Name = "GoblinArcher",
+                    Damage = 1,
                     Cost = 1,
                 }
-            ],
+            ]
         };
     }
 }

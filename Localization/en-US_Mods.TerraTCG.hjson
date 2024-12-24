@@ -49,11 +49,6 @@ Cards: {
 	AntlionCharger: {
 		Name: Antlion Charger
 		Attack.Name: Mandible Charge
-		Modifier.Description:
-			'''
-			Zealous: This card may
-			act the turn it enters
-			'''
 	}
 
 	WanderingEyeFish: {
@@ -138,6 +133,19 @@ Cards: {
 			'''
 	}
 
+	DoctorBones: {
+		Name: Doctor Bones
+
+		Attack: {
+			Name: Find Fauna
+			Description:
+				'''
+				Deals +1 dmg if you
+				control a Critter.
+				'''
+		}
+	}
+
 	Tim: {
 		Name: Tim
 
@@ -145,8 +153,22 @@ Cards: {
 			Name: Magic Missile
 			Description:
 				'''
-				Use all remaining MP,
-				then deal 1 dmg for
+				Use all remaining MP
+				(max 5), then deal 1 
+				dmg for each MP spent.
+				'''
+		}
+	}
+
+	RuneWizard: {
+		Name: Rune Wizard
+
+		Attack: {
+			Name: Magic Missile
+			Description:
+				'''
+				Use all remaining MP, 
+				then deal 1 dmg for 
 				each MP spent.
 				'''
 		}
@@ -165,8 +187,19 @@ Cards: {
 		Name: Party Girl's Favor
 		Modifier.Description:
 			'''
+			Target ally's attack
+			costs 2 MP less this
+			turn.
+			'''
+	}
+
+	ArmsDealer: {
+		Name: Arms Dealer's Aim
+		Modifier.Description:
+			'''
 			Unpause target allied
-			creature
+			creature. Its next attack
+			deals +2 dmg.
 			'''
 	}
 
@@ -241,6 +274,15 @@ Cards: {
 		}
 	}
 
+	SwiftnessPotion: {
+		Name: Swiftness Potion
+
+		Skill: {
+			Name: Use
+			Description: Unpause target creature.
+		}
+	}
+
 	ThornsPotion: {
 		Name: Thorns Potion
 
@@ -278,6 +320,19 @@ Cards: {
 		}
 	}
 
+	AngelStatue: {
+		Name: Angel Statue
+
+		Skill: {
+			Name: Use
+			Description:
+				'''
+				Target creature does 
+				nothing.
+				'''
+		}
+	}
+
 	RagePotion: {
 		Name: RagePotion
 
@@ -303,6 +358,63 @@ Cards: {
 				blocked enemies)
 				'''
 		}
+	}
+
+	GoblinScout: {
+		Name: Goblin Scout
+
+		Attack: {
+			Name: Scout
+			Description:
+				'''
+				Deals +1 dmg for each
+				item used this turn.
+				'''
+		}
+
+		Modifier.Description:
+			'''
+			Zealous: This card may
+			act the turn it enters
+			'''
+	}
+
+	GoblinArcher: {
+		Name: Goblin Archer
+
+		Attack: {
+			Name: Sharpshoot
+			Description:
+				'''
+				Deals +1 dmg for each
+				item used this turn.
+				'''
+		}
+
+		Modifier.Description:
+			'''
+			Evasive: May target any 
+			enemy for attacks
+			'''
+	}
+
+	Mimic: {
+		Name: Mimic
+
+		Attack: {
+			Name: Lure
+			Description:
+				'''
+				Costs 1 less for each 
+				item used this game.
+				'''
+		}
+
+		Modifier.Description:
+			'''
+			Sturdy: Takes 1 less
+			dmg from attacks.
+			'''
 	}
 
 	Bunny: {

@@ -11,11 +11,11 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class PartyGirl : ModSystem, ICardTemplate
+    internal class ArmsDealer : ModSystem, ICardTemplate
     {
         public Card CreateCard() => new ()
         {
-            Name = "PartyGirl",
+            Name = "ArmsDealer",
             CardType = CardType.TOWNSFOLK,
             SubTypes = [CardSubtype.TOWNSFOLK],
             SelectInHandAction = (card, player) => new UnpauseAndBuffCardAction(card, player),
