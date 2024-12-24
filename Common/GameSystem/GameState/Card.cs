@@ -42,6 +42,7 @@ namespace TerraTCG.Common.GameSystem.GameState
         JUNGLE,
         SKY,
         BLOOD_MOON,
+        DESERT,
     }
 
     internal class Card

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
+using TerraTCG.Common.GameSystem.BotPlayer;
 using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.GameSystem.Drawing.Animations;
 using TerraTCG.Common.GameSystem.GameState.GameActions;
@@ -54,30 +55,7 @@ namespace TerraTCG.Common.GameSystem.GameState
         {
             Game = game;
 
-            Deck = new CardCollection()
-            {
-                Cards = [
-                    CreateCard<Bat>(),
-                    CreateCard<Bunny>(), 
-                    CreateCard<CopperShortsword>(),
-                    CreateCard<DemonEye>(),
-                    CreateCard<Dryad>(), 
-                    CreateCard<FledglingWings>(), 
-                    CreateCard<Goldfish>(), 
-                    CreateCard<Guide>(),
-                    CreateCard<JungleTurtle>(), 
-                    CreateCard<OldMan>(),
-                    CreateCard<Skeleton>(),
-                    CreateCard<Squirrel>(),
-                    CreateCard<Tim>(),
-                    CreateCard<Wizard>(),
-                    CreateCard<Zombie>(),
-                    CreateCard<BloodZombie>(),
-                    CreateCard<WanderingEyeFish>(),
-                    CreateCard<Drippler>(),
-                    CreateCard<SpikedJungleSlime>(),
-                ]
-            };
+            Deck = BotDecks.GetRandomDeck();
             Deck.Shuffle();
 
             Hand = new CardCollection()

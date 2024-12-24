@@ -40,6 +40,22 @@ Cards: {
 			'''
 	}
 
+	AntlionSwarmer: {
+		Name: Antlion Swarmer
+		Attack.Name: Mandible Swarm
+		Modifier.Description: Zealous, Evasive
+	}
+
+	AntlionCharger: {
+		Name: Antlion Charger
+		Attack.Name: Mandible Charge
+		Modifier.Description:
+			'''
+			Zealous: This card may
+			act the turn it enters
+			'''
+	}
+
 	WanderingEyeFish: {
 		Name: Eye Fish
 
@@ -181,7 +197,33 @@ Cards: {
 			Description:
 				'''
 				Equipped creature
-				deals +1 damage
+				deals +1 damage.
+				'''
+		}
+	}
+
+	PlatinumBroadsword: {
+		Name: Platinum Broadsword
+
+		Skill: {
+			Name: Equip
+			Description:
+				'''
+				Equipped creature
+				deals +2 damage.
+				'''
+		}
+	}
+
+	Shackle: {
+		Name: Shackle
+
+		Skill: {
+			Name: Equip
+			Description:
+				'''
+				Equipped creature takes
+				-1 dmg from attacks.
 				'''
 		}
 	}
@@ -315,6 +357,7 @@ Cards: {
 		JUNGLE: Jungle
 		SKY: Sky
 		BLOOD_MOON: Blood Moon
+		DESERT: Desert
 	}
 
 	Common.Turn: Turn
