@@ -18,7 +18,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             Name = "PartyGirl",
             CardType = CardType.TOWNSFOLK,
             SubTypes = [CardSubtype.TOWNSFOLK],
-            SelectInHandAction = (card, player) => new UnpauseAndBuffCardAction(card, player),
+            SelectInHandAction = (card, player) => new ReduceAttackCostAction(card, player),
         };
     }
 }

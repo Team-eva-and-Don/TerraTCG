@@ -152,8 +152,46 @@ Cards: {
 		Modifier.Description:
 			'''
 			Relentless: May attack
-			twice per turn.
+			an additional time each
+			turn.
 			'''
+	}
+
+	Jellyfish: {
+		Name: Jellyfish
+		Attack.Name: Sting
+		Modifier.Description:
+			'''
+			Relentless: May attack
+			an additional time each
+			turn.
+			'''
+	}
+
+	Shark: {
+		Name: Shark
+		Attack.Name: Jaws
+		Modifier.Description:
+			'''
+			Relentless: May attack
+			an additional time each
+			turn.
+			'''
+	}
+
+	FeralClaws: {
+		Name: Feral Claws
+
+		Skill: {
+			Name: Equip
+			Description:
+				'''
+				Equipped creature gains
+				Relentless (it may attack
+				an additional time each
+				turn.)
+				'''
+		}
 	}
 
 	Tim: {

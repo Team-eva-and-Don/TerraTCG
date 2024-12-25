@@ -26,6 +26,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                 GetSkeletonDeck,
                 GetGoblinDeck,
                 GetMimicDeck,
+                GetCrabDeck,
             };
             var randIdx = Math.Abs((int)random.NextInt64()) % allDecks.Count;
             return allDecks[deckIdx == -1 ? randIdx : deckIdx].Invoke();
@@ -43,8 +44,8 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     CreateCard<Guide>(),
                     CreateCard<JungleTurtle>(), 
                     CreateCard<JungleTurtle>(), 
-                    CreateCard<Tim>(),
-                    CreateCard<Tim>(),
+                    CreateCard<Shark>(),
+                    CreateCard<Shark>(),
                     CreateCard<Wizard>(),
                     CreateCard<Wizard>(),
                     CreateCard<DoctorBones>(),
@@ -187,6 +188,32 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     CreateCard<AngelStatue>(), 
                     CreateCard<SwiftnessPotion>(), 
                     CreateCard<SwiftnessPotion>(), 
+                ]
+            };
+        public static CardCollection GetCrabDeck() =>
+            new()
+            {
+                Cards = [
+                    CreateCard<Guide>(), 
+                    CreateCard<Guide>(), 
+                    CreateCard<PartyGirl>(), 
+                    CreateCard<PartyGirl>(), 
+                    CreateCard<CopperShortsword>(), 
+                    CreateCard<CopperShortsword>(), 
+                    CreateCard<PlatinumBroadsword>(), 
+                    CreateCard<RagePotion>(), 
+                    CreateCard<RagePotion>(), 
+                    CreateCard<AngryBones>(), 
+                    CreateCard<AngryBones>(), 
+                    CreateCard<Crab>(), 
+                    CreateCard<Crab>(), 
+                    CreateCard<Jellyfish>(), 
+                    CreateCard<Jellyfish>(), 
+                    CreateCard<Shark>(), 
+                    CreateCard<Shark>(), 
+                    CreateCard<FeralClaws>(), 
+                    CreateCard<FeralClaws>(), 
+                    CreateCard<HealingPotion>(), 
                 ]
             };
     }

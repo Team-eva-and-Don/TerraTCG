@@ -12,6 +12,7 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
     internal class RelentlessModifier : ICardModifier
     {
         public Asset<Texture2D> Texture { get; set; }
+        public CardSubtype Source { get; set; }
 
         public string Description => "";
 
@@ -25,7 +26,7 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
         }
 
         public bool ShouldRemove(GameEventInfo eventInfo) {
-            if(eventInfo.Event == GameEvent.AFTER_ATTACK && doUnpause && sourceZone?.PlacedCard is PlacedCard card)
+            if(eventInfo.Event == GameEvent.AFTER_ATTACK && doUnpause && sourceZone?.PlacedCard is PlacedCard card && card.IsExerted)
             {
                 card.IsExerted = false;
                 sourceZone.QueueAnimation(new BecomeActiveAnimation(card));
