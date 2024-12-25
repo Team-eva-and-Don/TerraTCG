@@ -20,7 +20,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             MoveCost = 1,
             NPCID = NPCID.GoblinArcher,
             CardType = CardType.CREATURE,
-            SubTypes = [CardSubtype.FOREST, CardSubtype.FIGHTER],
+            SubTypes = [CardSubtype.GOBLIN_ARMY, CardSubtype.FIGHTER],
             Modifiers = [
                 new EvasiveModifier(),
                 new GoblinScout.DamageModifier(),

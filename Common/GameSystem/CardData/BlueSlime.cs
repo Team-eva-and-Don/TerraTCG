@@ -6,29 +6,25 @@ using System.Threading.Tasks;
 using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.GameState;
-using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class BloodZombie : ModSystem, ICardTemplate
+    internal class BlueSlime : ModSystem, ICardTemplate
     {
         public Card CreateCard() => new ()
         {
-            Name = "BloodZombie",
+            Name = "BlueSlime",
             MaxHealth = 6,
             MoveCost = 2,
+            NPCID = NPCID.BlueSlime,
             CardType = CardType.CREATURE,
-            NPCID = NPCID.BloodZombie,
-            SubTypes = [CardSubtype.BLOOD_MOON, CardSubtype.SCOUT],
+            SubTypes = [CardSubtype.FOREST, CardSubtype.SLIME, CardSubtype.FIGHTER],
             Attacks = [
                 new() {
-                    Damage = 4,
-                    Cost = 3,
+                    Name = "Slimed",
+                    Damage = 3,
+                    Cost = 2,
                 }
-            ],
-            Modifiers = [
-                new ZealousModifier(),
-                new FlatDamageModifier(1, removeOn: [GameEvent.END_TURN]),
             ]
         };
     }

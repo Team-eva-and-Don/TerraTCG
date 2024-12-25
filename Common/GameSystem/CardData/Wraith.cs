@@ -10,25 +10,25 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class WanderingEyeFish : ModSystem, ICardTemplate
+    internal class Wraith: ModSystem, ICardTemplate
     {
         public Card CreateCard() => new ()
         {
-            Name = "WanderingEyeFish",
-            MaxHealth = 5,
+            Name = "Wraith",
+            MaxHealth = 9,
             MoveCost = 2,
+            NPCID = NPCID.Wraith,
             CardType = CardType.CREATURE,
-            NPCID = NPCID.EyeballFlyingFish,
-            SubTypes = [CardSubtype.BLOOD_MOON, CardSubtype.SCOUT],
+            SubTypes = [CardSubtype.EXPERT, CardSubtype.FOREST, CardSubtype.FIGHTER],
+            Modifiers = [
+                new EvasiveModifier(),
+            ],
             Attacks = [
                 new() {
-                    Damage = 2,
-                    Cost = 1,
+                    Name = "Haunt",
+                    Damage = 4,
+                    Cost = 2,
                 }
-            ],
-            Modifiers = [
-                new ZealousModifier(),
-                new FlatDamageModifier(1, removeOn: [GameEvent.END_TURN]),
             ]
         };
     }

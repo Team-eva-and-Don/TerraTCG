@@ -109,7 +109,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
 
         private void PlaceCreature(Card sourceCard, Zone destZone)
         {
-            var action = new DeployCardAction(sourceCard, GamePlayer);
+            var action = new DeployCreatureAction(sourceCard, GamePlayer);
             GamePlayer.InProgressAction = action;
             action.AcceptZone(destZone);
             action.Complete();
@@ -165,6 +165,8 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             if(DecidePlayCreature()) return;
 
             if(DecideUseNonTargetingTownsfolk()) return;
+
+            if(DecideUseTargetingTownsfolk()) return;
 
             if(DecideRetreatCritter()) return;
 

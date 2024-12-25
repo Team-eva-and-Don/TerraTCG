@@ -21,16 +21,7 @@ namespace TerraTCG.Common.GameSystem.CardData
                 bool didDrawItem = eventInfo.TurnPlayer.Hand.Cards.LastOrDefault()?.CardType == CardType.ITEM;
                 if(eventInfo.IsMyTurn && eventInfo.Event == GameEvent.START_TURN && didDrawItem)
                 {
-                    var leavingCard = eventInfo.Zone.PlacedCard;
-                    var dmgTaken = leavingCard.Template.MaxHealth - leavingCard.CurrentHealth;
-                    var nymphCard = ModContent.GetInstance<Nymph>().CreateCard();
-
-                    eventInfo.Zone.PlaceCard(nymphCard);
-                    eventInfo.Zone.PlacedCard.IsExerted = false;
-                    eventInfo.Zone.PlacedCard.CurrentHealth -= dmgTaken;
-
-                    eventInfo.Zone.QueueAnimation(new RemoveCardAnimation(leavingCard));
-                    eventInfo.Zone.QueueAnimation(new PlaceCardAnimation(eventInfo.Zone.PlacedCard));
+                    eventInfo.Zone.PromoteCard(ModContent.GetInstance<Nymph>().CreateCard());
                 }
                 return false;
             }

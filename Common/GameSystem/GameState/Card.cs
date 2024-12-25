@@ -34,6 +34,9 @@ namespace TerraTCG.Common.GameSystem.GameState
         // Item Subtypes
         EQUIPMENT,
         CONSUMABLE,
+        // Creature Supertypes
+        EXPERT,
+        BOSS,
         // Creature Roles
         FIGHTER,
         SCOUT,
@@ -41,11 +44,14 @@ namespace TerraTCG.Common.GameSystem.GameState
         SLIME,
         CRITTER,
         CASTER,
+
+        // Biomes
         JUNGLE,
         SKY,
         BLOOD_MOON,
         DESERT,
         OCEAN,
+        GOBLIN_ARMY,
     }
 
     // Bot helper function, apply additional
@@ -70,7 +76,7 @@ namespace TerraTCG.Common.GameSystem.GameState
         internal int MoveCost { get; set; }
 
         internal SelectInHandAction SelectInHandAction { get; set; }
-            = (zone, player) => new DeployCardAction(zone, player);
+            = (zone, player) => new DeployCreatureAction(zone, player);
         internal SelectOnFieldAction SelectOnFieldAction { get; set; }
             = (zone, player) => new MoveCardOrAttackAction(zone, player);
 

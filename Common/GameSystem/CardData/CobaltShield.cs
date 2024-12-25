@@ -21,10 +21,10 @@ namespace TerraTCG.Common.GameSystem.CardData
             SubTypes = [CardSubtype.EQUIPMENT, CardSubtype.ITEM],
             SelectInHandAction = (card, player) => new ApplyModifierAction(card, player),
             Skills = [ // TODO this is wonky, but item texts are drawn using the skill template
-                new() { Cost = 3 }
+                new() { Cost = 2 }
             ],
             Modifiers = [
-                new ReduceDamageModifier(2)  {
+                new ReduceDamageModifier(1)  {
                     Texture = TextureCache.Instance.GetItemTexture(ItemID.CobaltShield),
                     Source = CardSubtype.EQUIPMENT,
                 }

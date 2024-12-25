@@ -1,5 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Mono.Cecil.Cil;
+using Newtonsoft.Json.Bson;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,6 +47,24 @@ namespace TerraTCG.Common.GameSystem.GameState
             {
                 modifier.ModifyCardEntrance(this);
             }
+        }
+
+        public void PromoteCard(Card newCard)
+        {
+            var leavingCard = PlacedCard;
+            var dmgTaken = leavingCard.Template.MaxHealth - leavingCard.CurrentHealth;
+            // Keep all item-sourced modifiers on the card post-promotion,
+            // Remove debuffs
+            var itemModifiers = leavingCard.CardModifiers
+                .Where(m => m.Source == CardSubtype.EQUIPMENT || m.Source == CardSubtype.CONSUMABLE)
+                .ToList();
+            PlaceCard(newCard);
+            PlacedCard.IsExerted = false;
+            PlacedCard.CurrentHealth -= dmgTaken;
+            PlacedCard.AddModifiers(itemModifiers);
+
+            QueueAnimation(new RemoveCardAnimation(leavingCard));
+            QueueAnimation(new PlaceCardAnimation(PlacedCard));
         }
 
         public bool HasPlacedCard() => PlacedCard != null;

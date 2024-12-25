@@ -75,8 +75,13 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             }
             var dryadCard = GamePlayer.CreateCard<Dryad>().CardName;
             var cardInHand = GamePlayer.Hand.Cards.Where(c => c.CardName == dryadCard).FirstOrDefault();
+            if(cardInHand == null)
+            {
+                return false;
+            }
 
             var bestRetreatTarget = GamePlayer.Field.Zones.Where(z => !z.IsEmpty())
+                .Where(z => new BounceCardAction(cardInHand, GamePlayer).CanAcceptZone(z))
                 .Where(z => z.PlacedCard.CurrentHealth <= z.PlacedCard.Template.MaxHealth / 2)
                 .FirstOrDefault();
 
@@ -170,10 +175,17 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
         private bool DecidePlayCreature()
         {
             var bestCardInHand = GamePlayer.Hand.Cards.Where(c => c.CardType == CardType.CREATURE)
+                .Where(c => GamePlayer.Field.Zones.Any(z=>new DeployCreatureAction(c, GamePlayer).CanAcceptZone(z)))
                 .OrderByDescending(c => c.Attacks[0].Damage)
                 .FirstOrDefault();
 
-            var bestTargetZone = GamePlayer.Field.Zones.Where(z => z.IsEmpty())
+            if(bestCardInHand == null)
+            {
+                return false;
+            }
+
+            var bestTargetZone = GamePlayer.Field.Zones
+                .Where(z => new DeployCreatureAction(bestCardInHand, GamePlayer).CanAcceptZone(z))
                 .Where(z => z.Role == (bestCardInHand?.Role ?? ZoneRole.OFFENSE))
                 .FirstOrDefault();
 

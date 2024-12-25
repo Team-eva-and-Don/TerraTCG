@@ -6,29 +6,25 @@ using System.Threading.Tasks;
 using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.GameState;
-using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class WanderingEyeFish : ModSystem, ICardTemplate
+    internal class GreenSlime : ModSystem, ICardTemplate
     {
         public Card CreateCard() => new ()
         {
-            Name = "WanderingEyeFish",
+            Name = "GreenSlime",
             MaxHealth = 5,
             MoveCost = 2,
+            NPCID = NPCID.BlueSlime,
             CardType = CardType.CREATURE,
-            NPCID = NPCID.EyeballFlyingFish,
-            SubTypes = [CardSubtype.BLOOD_MOON, CardSubtype.SCOUT],
+            SubTypes = [CardSubtype.FOREST, CardSubtype.SLIME, CardSubtype.SCOUT],
             Attacks = [
                 new() {
+                    Name = "Slimed",
                     Damage = 2,
                     Cost = 1,
                 }
-            ],
-            Modifiers = [
-                new ZealousModifier(),
-                new FlatDamageModifier(1, removeOn: [GameEvent.END_TURN]),
             ]
         };
     }

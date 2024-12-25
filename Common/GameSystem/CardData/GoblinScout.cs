@@ -28,7 +28,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             MoveCost = 1,
             NPCID = NPCID.GoblinScout,
             CardType = CardType.CREATURE,
-            SubTypes = [CardSubtype.FOREST, CardSubtype.SCOUT],
+            SubTypes = [CardSubtype.GOBLIN_ARMY, CardSubtype.SCOUT],
             Modifiers = [
                 new ZealousModifier(),
                 new DamageModifier(),

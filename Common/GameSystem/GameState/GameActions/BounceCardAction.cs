@@ -13,7 +13,8 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
     {
         private Zone zone;
 
-        public override bool CanAcceptZone(Zone zone) => base.CanAcceptZone(zone) && Player.Owns(zone) && !zone.IsEmpty();
+        public override bool CanAcceptZone(Zone zone) => base.CanAcceptZone(zone) 
+            && Player.Owns(zone) && !zone.IsEmpty() && !zone.PlacedCard.Template.SubTypes.Contains(CardSubtype.EXPERT);
 
         public override bool AcceptZone(Zone zone)
         {

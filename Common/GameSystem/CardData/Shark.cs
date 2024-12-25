@@ -15,11 +15,11 @@ namespace TerraTCG.Common.GameSystem.CardData
         public Card CreateCard() => new ()
         {
             Name = "Shark",
-            MaxHealth = 9,
+            MaxHealth = 11,
             MoveCost = 3,
             NPCID = NPCID.Shark,
             CardType = CardType.CREATURE,
-            SubTypes = [CardSubtype.OCEAN, CardSubtype.FIGHTER],
+            SubTypes = [CardSubtype.EXPERT, CardSubtype.OCEAN, CardSubtype.FIGHTER],
             Modifiers = [
                 new RelentlessModifier(),
             ],

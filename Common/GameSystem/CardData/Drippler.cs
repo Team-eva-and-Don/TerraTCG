@@ -22,13 +22,13 @@ namespace TerraTCG.Common.GameSystem.CardData
             SubTypes = [CardSubtype.BLOOD_MOON, CardSubtype.SCOUT],
             Attacks = [
                 new() {
-                    Damage = 4,
+                    Damage = 2,
                     Cost = 2,
-                    SelfDamage = 1,
                 }
             ],
             Modifiers = [
                 new ZealousModifier(),
+                new FlatDamageModifier(2, removeOn: [GameEvent.END_TURN]),
             ]
         };
     }

@@ -11,6 +11,49 @@ Cards: {
 		Attack.Name: Zombie Bite
 	}
 
+	GreenSlime: {
+		Name: Green Slime
+		Attack.Name: Slime Ball
+	}
+
+	BlueSlime: {
+		Name: Blue Slime
+		Attack.Name: Slime Slap
+	}
+
+	Wraith: {
+		Name: Wraith
+		Attack.Name: Haunt
+		Modifier.Description:
+			'''
+			Evasive: May attack 
+			blocked enemies
+			'''
+	}
+
+	PosessedArmor: {
+		Name: PosessedArmor
+		Attack.Name: Cursed Steel
+		Modifier.Description:
+			'''
+			Sturdy: Takes 1 less
+			dmg from attacks.
+			'''
+	}
+
+	WanderingEye: {
+		Name: Wandering Eye
+
+		Attack: {
+			Name: Eyebite
+			Description:
+				'''
+				If under half HP,
+				deal double dmg.
+				'''
+		}
+	}
+
 	DemonEye: {
 		Name: Demon Eye
 		Attack.Name: Harsh Gaze
@@ -28,8 +71,8 @@ Cards: {
 			Name: Blood Drip
 			Description:
 				'''
-				This creature also
-				takes 1 dmg
+				+2 dmg the turn 
+				this creature enters
 				'''
 		}
 
@@ -58,8 +101,8 @@ Cards: {
 			Name: Bloody Gaze
 			Description:
 				'''
-				This creature also
-				takes 1 dmg
+				+1 dmg the turn 
+				this creature enters
 				'''
 		}
 
@@ -77,8 +120,8 @@ Cards: {
 			Name: Vicious Tear
 			Description:
 				'''
-				This creature also
-				takes 2 dmg
+				+1 dmg the turn 
+				this creature enters
 				'''
 		}
 
@@ -118,6 +161,32 @@ Cards: {
 				'''
 				Your opponent must 
 				attack this next turn
+				'''
+		}
+	}
+
+	GiantTortoise: {
+		Name: Giant Tortoise
+		Attack.Name: Shell Smash
+		Modifier.Description:
+			'''
+			Spiked Shell: Enemies
+			must attack this card.
+			A creature that attacks
+			this card takes 2 dmg.
+			'''
+	}
+
+	Piranha: {
+		Name: Piranha
+
+		Attack: {
+			Name: Lethal Bite
+			Description:
+				'''
+				Attack target takes
+				+1 dmg from future
+				attacks.
 				'''
 		}
 	}
@@ -248,7 +317,8 @@ Cards: {
 		Modifier.Description:
 			'''
 			Return target allied
-			creature to the hand
+			non-expert creature 
+			to the hand
 			'''
 	}
 
@@ -605,11 +675,15 @@ Cards: {
 		SCOUT: Scout
 		DEFENDER: Defender
 		CASTER: Caster
+		SLIME: Slime
 		JUNGLE: Jungle
 		SKY: Sky
 		BLOOD_MOON: Blood Moon
 		DESERT: Desert
 		OCEAN: Ocean
+		GOBLIN_ARMY: Goblin Army
+		EXPERT: Expert
+		BOSS: Boss
 	}
 
 	Common.Turn: Turn

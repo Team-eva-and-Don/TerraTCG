@@ -26,11 +26,12 @@ namespace TerraTCG.Common.GameSystem.CardData
         public Card CreateCard() => new ()
         {
             Name = "GoblinThief",
-            MaxHealth = 4,
+            MaxHealth = 5,
             MoveCost = 1,
             NPCID = NPCID.GoblinThief,
             CardType = CardType.CREATURE,
-            SubTypes = [CardSubtype.FOREST, CardSubtype.CRITTER],
+            SubTypes = [CardSubtype.GOBLIN_ARMY, CardSubtype.SCOUT],
+            Role = ZoneRole.DEFENSE,
             Skills = [
                 new() {
                     Cost = 2,
