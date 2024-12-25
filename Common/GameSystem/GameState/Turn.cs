@@ -50,7 +50,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 
             foreach(var zone in ActivePlayer.Game.AllZones())
             {
-                ActivePlayer.Field.ClearModifiers(ActivePlayer, zone, GameEvent.START_TURN);
+                zone.Owner.Field.ClearModifiers(ActivePlayer, zone, GameEvent.START_TURN);
             }
 
             TCGPlayer.LocalGamePlayer.Game.FieldAnimation =
@@ -61,7 +61,7 @@ namespace TerraTCG.Common.GameSystem.GameState
         {
             foreach(var zone in ActivePlayer.Game.AllZones())
             {
-                ActivePlayer.Field.ClearModifiers(ActivePlayer, zone, GameEvent.END_TURN);
+                zone.Owner.Field.ClearModifiers(ActivePlayer, zone, GameEvent.END_TURN);
             }
 
             Game.CurrentTurn = new()

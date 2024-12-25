@@ -31,8 +31,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal void ClearModifiers(GamePlayer turnPlayer, Zone zoneToClear, GameEvent gameEvent)
         {
-            bool isMyTurn = turnPlayer == zoneToClear.Owner;
-            var eventInfo = new GameEventInfo { Zone = zoneToClear, IsMyTurn = isMyTurn, Event = gameEvent, TurnPlayer = turnPlayer };
+            var eventInfo = new GameEventInfo { Zone = zoneToClear, IsMyTurn = zoneToClear.Owner.IsMyTurn, Event = gameEvent, TurnPlayer = turnPlayer };
 
             CardModifiers = CardModifiers.Where(m => !m.ShouldRemove(eventInfo)).ToList();
             if(zoneToClear.PlacedCard is PlacedCard card)
