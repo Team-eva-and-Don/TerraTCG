@@ -15,7 +15,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         public Card CreateCard() => new ()
         {
             Name = "Shark",
-            MaxHealth = 11,
+            MaxHealth = 10,
             MoveCost = 3,
             NPCID = NPCID.Shark,
             CardType = CardType.CREATURE,

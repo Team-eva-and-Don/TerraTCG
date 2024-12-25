@@ -30,9 +30,9 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             var duration = GetAnimationStartDelay();
 
             zone.PlacedCard.IsExerted = false;
-            zone.PlacedCard.AddModifiers([new AttackCostReductionModifier(2, removeOn: [GameEvent.END_TURN])]);
+            zone.PlacedCard.AddModifiers([new AttackCostReductionModifier(1, removeOn: [GameEvent.END_TURN])]);
 
-            zone.QueueAnimation(new IdleAnimation(zone.PlacedCard, duration, exertedOverride: true));
+            zone.QueueAnimation(new IdleAnimation(zone.PlacedCard, duration));
             zone.QueueAnimation(new ActionAnimation(zone.PlacedCard));
             base.Complete();
         }

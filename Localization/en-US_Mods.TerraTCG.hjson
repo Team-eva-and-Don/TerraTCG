@@ -327,7 +327,7 @@ Cards: {
 		Modifier.Description:
 			'''
 			Target ally's attack
-			costs 2 MP less this
+			costs 1 MP less this
 			turn.
 			'''
 	}

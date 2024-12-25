@@ -137,7 +137,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
 
             if(bestTownsfolk != null && bestBuffZone != null)
             {
-                UseTownsfolk(bestTownsfolk);
+                UseTownsfolk(bestTownsfolk, bestBuffZone);
                 return true;
             }
             return false;

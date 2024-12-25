@@ -25,7 +25,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         public Card CreateCard() => new ()
         {
             Name = "Piranha",
-            MaxHealth = 7,
+            MaxHealth = 6,
             MoveCost = 2,
             CardType = CardType.CREATURE,
             NPCID = NPCID.Piranha,

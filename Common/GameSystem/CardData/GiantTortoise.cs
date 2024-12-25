@@ -42,7 +42,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         public Card CreateCard() => new ()
         {
             Name = "GiantTortoise",
-            MaxHealth = 12,
+            MaxHealth = 11,
             MoveCost = 3,
             CardType = CardType.CREATURE,
             NPCID = NPCID.GiantTortoise,
@@ -53,7 +53,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             Attacks = [
                 new() {
                     Damage = 5,
-                    Cost = 4,
+                    Cost = 5,
                 }
             ],
         };
