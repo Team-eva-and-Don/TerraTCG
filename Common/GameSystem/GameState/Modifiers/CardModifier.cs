@@ -19,6 +19,7 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
 
         // After receiving an attack
         AFTER_RECEIVE_ATTACK,
+        START_TURN,
     }
 
     internal struct GameEventInfo
@@ -26,6 +27,7 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
         public GameEvent Event { get; set; }
         public bool IsMyTurn { get; set; }
         public GamePlayer TurnPlayer { get; set; }
+        public Zone Zone { get; set; }
     }
 
     internal interface ICardModifier

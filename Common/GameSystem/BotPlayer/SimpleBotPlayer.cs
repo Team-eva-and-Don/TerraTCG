@@ -27,10 +27,20 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
         // Pre-calculate all the damage we can do this turn, used for
         // certain decisions (eg. whether to force-promote a weakened unit)
         private int PossibleDamage;
-        private (int, int) GetPossibleDamageAndCost()
+
+        private struct AttackDamageAndCostInfo(int possibleDmg, int totalCost, int highestCost)
+        {
+            internal int PossibleDmg { get; } = possibleDmg;
+            internal int TotalCost { get; } = totalCost;
+            internal int HighestCost { get; } = highestCost;
+        }
+
+        private AttackDamageAndCostInfo GetPossibleDamageAndCost()
         {
             var possibleDmg = 0;
             var totalCost = 0;
+            var highestCost = 0;
+
             var availableMana = GamePlayer.Resources.Mana;
             var sortedAttacks = GamePlayer.Field.Zones.Where(z => !z.IsEmpty())
                 .Where(z => !z.PlacedCard.IsExerted)
@@ -39,6 +49,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                 .Where(a => a.Cost <= GamePlayer.Resources.Mana)
                 .OrderByDescending(a => a.Damage);
 
+            highestCost = sortedAttacks.FirstOrDefault().Cost;
             foreach(var a in sortedAttacks)
             {
                 if(availableMana >= totalCost + a.Cost)
@@ -47,13 +58,13 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     totalCost += a.Cost;
                 }
             }
-            return (possibleDmg, totalCost);
+            return new AttackDamageAndCostInfo(possibleDmg, totalCost, highestCost);
         }
 
         private void CalculateReservedAttackMana()
         {
             var attackInfo = GetPossibleDamageAndCost();
-            PossibleDamage = attackInfo.Item1;
+            PossibleDamage = attackInfo.PossibleDmg;
             if(ReservedAttackMana > 0)
             {
                 return;
@@ -63,10 +74,10 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             // its other cards otherwise
             if(Game.CurrentTurn.TurnCount % 4 <= 1)
             {
-                ReservedAttackMana = 0;
+                ReservedAttackMana = attackInfo.HighestCost;
             } else
             {
-                ReservedAttackMana = attackInfo.Item2;
+                ReservedAttackMana = attackInfo.TotalCost;
             }
         }
 

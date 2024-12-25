@@ -32,10 +32,13 @@ namespace TerraTCG.Common.GameSystem.GameState
                 1
             );
 
+
+            // Don't draw on the first turn
             if(TurnCount > 2 && !ActivePlayer.Deck.Empty())
             {
                 ActivePlayer.Hand.Add(ActivePlayer.Deck.Draw());
             }
+
             foreach(var zone in ActivePlayer.Field.Zones.Where(z=>!z.IsEmpty()))
             {
                 if(zone.PlacedCard.IsExerted)
@@ -45,7 +48,10 @@ namespace TerraTCG.Common.GameSystem.GameState
                 zone.PlacedCard.IsExerted = false;
             }
 
-            // Don't draw on the first turn
+            foreach(var zone in ActivePlayer.Game.AllZones())
+            {
+                ActivePlayer.Field.ClearModifiers(ActivePlayer, zone, GameEvent.START_TURN);
+            }
 
             TCGPlayer.LocalGamePlayer.Game.FieldAnimation =
                 new TurnChangeAnimation(TCGPlayer.TotalGameTime, this);
@@ -53,14 +59,9 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         public void End()
         {
-            foreach(var zone in ActivePlayer.Field.Zones)
+            foreach(var zone in ActivePlayer.Game.AllZones())
             {
                 ActivePlayer.Field.ClearModifiers(ActivePlayer, zone, GameEvent.END_TURN);
-            }
-
-            foreach(var zone in ActivePlayer.Opponent.Field.Zones)
-            {
-                ActivePlayer.Opponent.Field.ClearModifiers(ActivePlayer, zone, GameEvent.END_TURN);
             }
 
             Game.CurrentTurn = new()

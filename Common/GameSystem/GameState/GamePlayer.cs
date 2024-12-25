@@ -57,13 +57,19 @@ namespace TerraTCG.Common.GameSystem.GameState
 
             Deck = deck;
             Deck.Shuffle();
+        
+            // Auto-mulligan a single-creature hand for the player
+            while(!Deck.Cards.Take(4).Where(c=>c.CardType == CardType.CREATURE).Any())
+            {
+                Deck.Shuffle();
+            }
 
             Hand = new CardCollection()
             {
-                Cards = [ CreateCard<Crab>() ]
+                Cards = [ ]
             };
 
-            for (int _ = 0; _ < 3; _++)
+            for (int _ = 0; _ < 4; _++)
             {
                 Hand.Add(Deck.Draw());
             }

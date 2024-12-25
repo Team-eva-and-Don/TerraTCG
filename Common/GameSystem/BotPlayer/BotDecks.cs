@@ -25,6 +25,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                 GetBloodMoonDeck,
                 GetSkeletonDeck,
                 GetGoblinDeck,
+                GetMimicDeck,
             };
             var randIdx = Math.Abs((int)random.NextInt64()) % allDecks.Count;
             return allDecks[deckIdx == -1 ? randIdx : deckIdx].Invoke();
@@ -155,6 +156,33 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     CreateCard<HealingPotion>(), 
                     CreateCard<RagePotion>(), 
                     CreateCard<RagePotion>(), 
+                    CreateCard<AngelStatue>(), 
+                    CreateCard<AngelStatue>(), 
+                    CreateCard<SwiftnessPotion>(), 
+                    CreateCard<SwiftnessPotion>(), 
+                ]
+            };
+
+        public static CardCollection GetMimicDeck() =>
+            new()
+            {
+                Cards = [
+                    CreateCard<Guide>(), 
+                    CreateCard<Guide>(), 
+                    CreateCard<LostGirl>(), 
+                    CreateCard<LostGirl>(), 
+                    CreateCard<Shackle>(), 
+                    CreateCard<Shackle>(), 
+                    CreateCard<Mimic>(), 
+                    CreateCard<Mimic>(), 
+                    CreateCard<Tim>(), 
+                    CreateCard<Tim>(), 
+                    CreateCard<GoblinThief>(), 
+                    CreateCard<GoblinThief>(), 
+                    CreateCard<HealingPotion>(), 
+                    CreateCard<HealingPotion>(), 
+                    CreateCard<IronskinPotion>(), 
+                    CreateCard<IronskinPotion>(), 
                     CreateCard<AngelStatue>(), 
                     CreateCard<AngelStatue>(), 
                     CreateCard<SwiftnessPotion>(), 

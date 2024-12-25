@@ -163,11 +163,32 @@ Cards: {
 			Name: Magic Missile
 			Description:
 				'''
-				Use all remaining MP
-				(max 5), then deal 1 
-				dmg for each MP spent.
+				Deals 1 dmg for each
+				item you used this
+				game.
 				'''
 		}
+	}
+
+	LostGirl: {
+		Name: Lost Girl
+		Attack.Name: Fake Tears
+		Modifier.Description:
+			'''
+			If you draw an item
+			for turn, transform
+			this card.
+			'''
+	}
+
+	Nymph: {
+		Name: Nymph
+		Attack.Name: Ensnare
+		Modifier.Description:
+			'''
+			Evasive: May attack 
+			blocked enemies
+			'''
 	}
 
 	RuneWizard: {

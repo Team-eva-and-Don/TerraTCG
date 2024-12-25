@@ -31,7 +31,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             MoveCost = 2,
             NPCID = NPCID.Mimic,
             CardType = CardType.CREATURE,
-            SubTypes = [CardSubtype.CAVERN, CardSubtype.FIGHTER],
+            SubTypes = [CardSubtype.CAVERN, CardSubtype.DEFENDER],
             Modifiers = [
                 new EquipCostModifier(),
                 new ReduceDamageModifier(1),

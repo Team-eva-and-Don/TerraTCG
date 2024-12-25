@@ -18,16 +18,18 @@ namespace TerraTCG.Common.GameSystem.CardData
         {
             public void ModifyAttack(ref Attack attack, Zone sourceZone, Zone destZone) 
             {
-                var manaSpend = Math.Min(5, sourceZone.Owner.Resources.Mana);
-                attack.Cost = Math.Max(1, manaSpend);
-                attack.Damage = manaSpend;
+                var itemCount = sourceZone.Owner.Game.Turns
+                    .Where(t => t.ActivePlayer == sourceZone.Owner)
+                    .Select(t => t.UsedItemCount)
+                    .Sum();
+                attack.Damage = itemCount;
             }
         }
 
         public Card CreateCard() => new ()
         {
             Name = "Tim",
-            MaxHealth = 7,
+            MaxHealth = 8,
             MoveCost = 2,
             NPCID = NPCID.Tim,
             CardType = CardType.CREATURE,
@@ -37,7 +39,7 @@ namespace TerraTCG.Common.GameSystem.CardData
                 new() {
                     Name = "Magic Missile",
                     Damage = -1,
-                    Cost = -1,
+                    Cost = 3,
                 }
             ]
         };
