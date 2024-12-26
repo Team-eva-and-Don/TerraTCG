@@ -153,7 +153,6 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             {
                 return Color.Goldenrod;
             }
-
         }
 
         public void Cancel()

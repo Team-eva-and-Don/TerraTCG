@@ -29,7 +29,8 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
         BLEEDING,
         RELENTLESS,
         EVASIVE,
-        SPIKED
+        SPIKED,
+        LIFESTEAL
     }
 
     internal struct GameEventInfo

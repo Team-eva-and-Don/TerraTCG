@@ -52,6 +52,7 @@ namespace TerraTCG.Common.GameSystem.GameState
         DESERT,
         OCEAN,
         GOBLIN_ARMY,
+        MUSHROOM,
     }
 
     // Bot helper function, apply additional

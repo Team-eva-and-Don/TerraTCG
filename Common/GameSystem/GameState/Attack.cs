@@ -34,7 +34,13 @@ namespace TerraTCG.Common.GameSystem.GameState
         internal static void DefaultAttack(Attack attack, Zone sourceZone, Zone targetZone)
         {
             targetZone.PlacedCard.CurrentHealth -= attack.Damage;
-            sourceZone.PlacedCard.CurrentHealth -= attack.SelfDamage;
+            if(attack.SelfDamage >= 0)
+            {
+                sourceZone.PlacedCard.CurrentHealth -= attack.SelfDamage;
+            } else
+            {
+                sourceZone.PlacedCard.Heal(-attack.SelfDamage);
+            }
 
             sourceZone.PlacedCard.CardModifiers.AddRange([.. attack.SourceModifiers?.Invoke(sourceZone) ?? []]);
             targetZone.PlacedCard.CardModifiers.AddRange([.. attack.TargetModifiers?.Invoke(targetZone) ?? []]);

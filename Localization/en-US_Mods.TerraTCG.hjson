@@ -21,6 +21,66 @@ Cards: {
 		Attack.Name: Slime Slap
 	}
 
+	MushroomZombie: {
+		Name: Mushroom Zombie
+		Attack.Name: Spore Bite
+		Modifier.Description:
+			'''
+			Lifesteal: Gains 1
+			HP after attacking.
+			'''
+	}
+
+	SporeSkeleton: {
+		Name: Spore Skeleton
+		Attack.Name: Fungal Bone
+		Modifier.Description:
+			'''
+			Lifesteal: Gains 1
+			HP after attacking.
+			'''
+	}
+
+	SporeBat: {
+		Name: Spore Bat
+		Attack.Name: Spore Bite
+		Modifier.Description: Lifesteal, Evasive
+	}
+
+	GlowingSnail: {
+		Name: Glowing Snail
+		Attack.Name: Glowing Shell
+
+		Skill: {
+			Name: Skill: Spore Spread
+			Description:
+				'''
+				Allies gain Lifesteal
+				this turn (they gain
+				1 HP after attacking)
+				'''
+		}
+	}
+
+	AnomuraFungus: {
+		Name: Anomura Fungus
+
+		Attack: {
+			Name: Infect
+			Description:
+				'''
+				Allies that attack target 
+				creature get +1 HP.
+				'''
+		}
+
+		Modifier.Description:
+			'''
+			Lifesteal: Gains 1
+			HP after attacking.
+			'''
+	}
+
 	Wraith: {
 		Name: Wraith
 		Attack.Name: Haunt
@@ -726,6 +786,7 @@ Cards: {
 		DESERT: Desert
 		OCEAN: Ocean
 		GOBLIN_ARMY: Goblin Army
+		MUSHROOM: Mushroom
 		EXPERT: Expert
 		BOSS: Boss
 	}

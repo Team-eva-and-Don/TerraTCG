@@ -27,6 +27,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                 GetGoblinDeck,
                 GetMimicDeck,
                 GetCrabDeck,
+                GetMushroomDeck,
             };
             var randIdx = Math.Abs((int)random.NextInt64()) % allDecks.Count;
             return allDecks[deckIdx == -1 ? randIdx : deckIdx].Invoke();
@@ -214,6 +215,32 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     CreateCard<FeralClaws>(), 
                     CreateCard<FeralClaws>(), 
                     CreateCard<HealingPotion>(), 
+                ]
+            };
+        public static CardCollection GetMushroomDeck() =>
+            new ()
+            {
+                Cards = [
+                    CreateCard<GlowingSnail>(), 
+                    CreateCard<GlowingSnail>(), 
+                    CreateCard<Guide>(),
+                    CreateCard<Guide>(),
+                    CreateCard<MushroomZombie>(), 
+                    CreateCard<MushroomZombie>(), 
+                    CreateCard<AnomuraFungus>(),
+                    CreateCard<AnomuraFungus>(),
+                    CreateCard<Wizard>(),
+                    CreateCard<Wizard>(),
+                    CreateCard<SporeSkeleton>(),
+                    CreateCard<SporeSkeleton>(),
+                    CreateCard<SporeBat>(),
+                    CreateCard<SporeBat>(),
+                    CreateCard<HealingPotion>(), 
+                    CreateCard<HealingPotion>(), 
+                    CreateCard<CobaltShield>(), 
+                    CreateCard<CobaltShield>(), 
+                    CreateCard<PlatinumBroadsword>(),
+                    CreateCard<PlatinumBroadsword>(),
                 ]
             };
     }

@@ -76,6 +76,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 [ModifierType.EVASIVE] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Evasive_Icon"),
                 [ModifierType.RELENTLESS] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Relentless_Icon"),
                 [ModifierType.BLEEDING] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Bleed_Icon"),
+                [ModifierType.LIFESTEAL] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Lifesteal_Icon"),
             };
         }
 

@@ -18,6 +18,12 @@ namespace TerraTCG.Common.UI.GameFieldUI
     internal class CardPreviewElement : DraggableUIElement
     {
         internal const float CARD_SCALE = 4f / 3f;
+        private string BuffIconTooltip;
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+        }
         public override void Draw(SpriteBatch spriteBatch)
         {
             var gamePlayer = TCGPlayer.LocalGamePlayer;
@@ -42,6 +48,13 @@ namespace TerraTCG.Common.UI.GameFieldUI
                     spriteBatch.Draw(iconTexture, center, iconTexture.Bounds, Color.White, 0, origin, 1, SpriteEffects.None, 0);
                     center.X += iconTexture.Width + 2;
                 }
+            }
+
+            if(BuffIconTooltip != null)
+            {
+                var buffIconPos = Main.MouseScreen + new Vector2(16, 16);
+                var font = FontAssets.MouseText.Value;
+                CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, BuffIconTooltip, buffIconPos, font: font);
             }
         }
     }

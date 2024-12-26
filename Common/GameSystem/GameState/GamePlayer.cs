@@ -59,8 +59,8 @@ namespace TerraTCG.Common.GameSystem.GameState
             Deck = deck;
             Deck.Shuffle();
         
-            // Auto-mulligan a single-creature hand for the player
-            while(!Deck.Cards.Take(4).Any(c=>c.CardType == CardType.CREATURE))
+            // Auto-mulligan a 1+ creature hand for the player
+            while(!Deck.Cards.Take(5).Any(c=>c.CardType == CardType.CREATURE && c.SubTypes[0] != CardSubtype.EXPERT))
             {
                 Deck.Shuffle();
             }
