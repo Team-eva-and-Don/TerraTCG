@@ -63,6 +63,11 @@ namespace TerraTCG.Common.GameSystem.GameState
             PlacedCard.CurrentHealth -= dmgTaken;
             PlacedCard.AddModifiers(itemModifiers);
 
+            foreach (var modifier in PlacedCard.CardModifiers.Concat(Owner.Field.CardModifiers))
+            {
+                modifier.ModifyCardEntrance(this);
+            }
+
             QueueAnimation(new RemoveCardAnimation(leavingCard));
             QueueAnimation(new PlaceCardAnimation(PlacedCard));
         }

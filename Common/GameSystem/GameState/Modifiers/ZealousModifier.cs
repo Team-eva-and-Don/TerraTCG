@@ -10,6 +10,8 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
 {
     internal class ZealousModifier : ICardModifier
     {
+        public int Amount => 1;
+
         public Asset<Texture2D> Texture { get; set; }
 
         public string Description => "";

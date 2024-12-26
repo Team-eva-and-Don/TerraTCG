@@ -13,6 +13,8 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
         public Asset<Texture2D> Texture { get; set; }
         public CardSubtype Source { get; set; }
 
+        public ModifierType Category => ModifierType.EVASIVE;
+
         public void ModifyZoneSelection(Zone sourceZone, Zone endZone, ref List<Zone> destZones)
         {
             // allow the targeting of blocked enemy zones

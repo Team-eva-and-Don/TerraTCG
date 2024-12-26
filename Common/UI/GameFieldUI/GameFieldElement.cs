@@ -49,7 +49,11 @@ namespace TerraTCG.Common.UI.GameFieldUI
                 if (ProjectedFieldUtils.Instance.ZoneContainsScreenVector(gamePlayer, zone, mouseField))
                 {
                     Main.LocalPlayer.mouseInterface = true;
-                    gamePlayer.MouseoverCard = zone?.PlacedCard?.Template ?? gamePlayer.MouseoverCard;
+                    if(zone.HasPlacedCard())
+                    {
+                        gamePlayer.MouseoverZone = zone;
+                        gamePlayer.MouseoverCard = zone.PlacedCard.Template;
+                    }
                     if(IsClicked())
                     {
                         gamePlayer.SelectZone(zone);

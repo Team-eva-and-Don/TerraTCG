@@ -6,19 +6,21 @@ using System.Threading.Tasks;
 using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.GameState;
+using TerraTCG.Common.GameSystem.GameState.GameActions;
+using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class Bunny : ModSystem, ICardTemplate
+    internal class Dolphin : ModSystem, ICardTemplate
     {
         public Card CreateCard() => new ()
         {
-            Name = "Bunny",
+            Name = "Dolphin",
             MaxHealth = 5,
             MoveCost = 1,
             CardType = CardType.CREATURE,
-            NPCID = NPCID.Bunny,
-            SubTypes = [CardSubtype.FOREST, CardSubtype.CRITTER],
+            NPCID = NPCID.Dolphin,
+            SubTypes = [CardSubtype.OCEAN, CardSubtype.CRITTER],
             Role = ZoneRole.DEFENSE,
             Attacks = [
                 new() {
@@ -28,11 +30,13 @@ namespace TerraTCG.Common.GameSystem.CardData
             ],
             Skills = [
                 new() {
-                    Name = "Skill: Forest Wish",
+                    Name = "Skill: Ocean Wish",
                     Cost = 0,
-                    Description = "Gain 1 MP",
+                    SkillType = ActionType.TARGET_ALLY,
                     DoSkill = (GamePlayer player, Zone zone, Zone targetZone) => {
-                        player.Resources = player.Resources.UseResource(mana: -1);
+                        targetZone.PlacedCard.AddModifiers(
+                            [new AttackCostReductionModifier(1, [GameEvent.END_TURN])]
+                        );
                     }
                 }
             ]

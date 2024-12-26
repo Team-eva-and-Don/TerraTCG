@@ -12,6 +12,7 @@
 	  <None Remove="Assets\Cards\DemonEye.png" />
 	  <None Remove="Assets\Cards\Dryad.png" />
 	  <None Remove="Assets\Cards\Zombie.png" />
+	  <None Remove="Assets\FieldElements\Boots_Icon.png" />
 	</ItemGroup>
 
 	<!-- References -->

@@ -26,11 +26,6 @@ namespace TerraTCG.Common.GameSystem.CardData
                 }
             }
 
-            public void ModifyIncomingAttack(ref Attack attack, Zone sourceZone, Zone destZone) 
-            {
-                attack.SelfDamage += 1;
-            }
-
             public bool ShouldRemove(GameEventInfo gameEvent) 
             {
                 // TODO setting state in a modifier is not preferred
@@ -48,7 +43,8 @@ namespace TerraTCG.Common.GameSystem.CardData
             NPCID = NPCID.GiantTortoise,
             SubTypes = [CardSubtype.EXPERT, CardSubtype.JUNGLE, CardSubtype.DEFENDER],
             Modifiers = [
-                new TortoiseMustAttackModifier()
+                new TortoiseMustAttackModifier(),
+                new SpikedModifier(1),
             ],
             Attacks = [
                 new() {

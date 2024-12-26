@@ -395,7 +395,9 @@ Cards: {
 			Description:
 				'''
 				Equipped creature takes
-				-1 dmg from attacks.
+				-2 dmg from the next 
+				attack against it. Then,
+				remove Shackle.
 				'''
 		}
 	}
@@ -473,7 +475,7 @@ Cards: {
 	}
 
 	RagePotion: {
-		Name: RagePotion
+		Name: Rage Potion
 
 		Skill: {
 			Name: Use
@@ -481,6 +483,19 @@ Cards: {
 				'''
 				This turn, target ally
 				deals +2 dmg.
+				'''
+		}
+	}
+
+	ThrowingKnife: {
+		Name: Throwing Knife
+
+		Skill: {
+			Name: Use
+			Description:
+				'''
+				target ally's next
+				attack deals +1 dmg.
 				'''
 		}
 	}
@@ -552,6 +567,20 @@ Cards: {
 			'''
 	}
 
+	GoblinWarlock: {
+		Name: Goblin Warlock
+
+		Attack: {
+			Name: Shadowflame
+			Description:
+				'''
+				Deals +1 dmg each 
+				time you use an 
+				item.
+				'''
+		}
+	}
+
 	Mimic: {
 		Name: Mimic
 
@@ -578,6 +607,21 @@ Cards: {
 		Skill: {
 			Name: Skill: Forest Wish
 			Description: Gain 1 MP
+		}
+	}
+
+	Dolphin: {
+		Name: Dolphin
+		Attack.Name: Nose Boop
+
+		Skill: {
+			Name: Skill: Ocean Wish
+			Description:
+				'''
+				Target creature's
+				attack costs 1 MP less
+				this turn.
+				'''
 		}
 	}
 
@@ -684,6 +728,14 @@ Cards: {
 		GOBLIN_ARMY: Goblin Army
 		EXPERT: Expert
 		BOSS: Boss
+	}
+
+	Modifiers: {
+		DEFENSE_BOOST: Defense is increased
+		BLEEDING: Takes increased damage
+		RELENTLESS: May attack multiple times
+		EVASIVE: May attack blocked opponents
+		SPIKED: Attackers take damage
 	}
 
 	Common.Turn: Turn

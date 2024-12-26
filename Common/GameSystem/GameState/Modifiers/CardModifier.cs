@@ -22,6 +22,16 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
         START_TURN,
     }
 
+    internal enum ModifierType
+    {
+        NONE,
+        DEFENSE_BOOST,
+        BLEEDING,
+        RELENTLESS,
+        EVASIVE,
+        SPIKED
+    }
+
     internal struct GameEventInfo
     {
         public GameEvent Event { get; set; }
@@ -36,7 +46,12 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
 
         public CardSubtype Source { get => CardSubtype.NONE; set { } }
 
+        public ModifierType Category { get => ModifierType.NONE; }
+
         public string Description { get => ""; }
+
+        // Scale of the buff, used to generate tooltips for stacked buffs
+        public int Amount { get => 0; }
 
         // Modify a skill as it's performed against this card
         public void ModifyIncomingSkill(ref Skill skill, Card sourceCard) 

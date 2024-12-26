@@ -11,8 +11,11 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
 {
     internal class RelentlessModifier : ICardModifier
     {
+        public int Amount => 1;
+
         public Asset<Texture2D> Texture { get; set; }
         public CardSubtype Source { get; set; }
+        public ModifierType Category => ModifierType.RELENTLESS;
 
         public string Description => "";
 

@@ -33,12 +33,12 @@ namespace TerraTCG.Common.UI
 
         public void StartGame()
         {
-            _userInterface.SetState(GameField);
+            IngameFancyUI.OpenUIState(GameField);
         }
 
         public void EndGame()
         {
-            _userInterface.SetState(null);
+            IngameFancyUI.Close();
         }
 
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)

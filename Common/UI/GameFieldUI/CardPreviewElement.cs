@@ -27,8 +27,22 @@ namespace TerraTCG.Common.UI.GameFieldUI
             }
             var card = gamePlayer.MouseoverCard;
             var texture = card.Texture;
+            var attackOverride = gamePlayer.MouseoverZone?.PlacedCard?.GetAttackWithModifiers(gamePlayer.MouseoverZone, null);
             spriteBatch.Draw(texture.Value, Position, texture.Value.Bounds, Color.White * TCGPlayer.FieldTransitionPoint, 0, default, CARD_SCALE, SpriteEffects.None, 0f);
-            CardTextRenderer.Instance.DrawCardText(spriteBatch, card, Position, CARD_SCALE);
+            CardTextRenderer.Instance.DrawCardText(
+                spriteBatch, card, Position, CARD_SCALE, attackOverride: attackOverride);
+
+            if(attackOverride != null)
+            {
+                var center = Position + new Vector2(2, texture.Value.Height * CARD_SCALE);
+                foreach(var modifier in gamePlayer.MouseoverZone.PlacedCard.GetKeywordModifiers().Keys.Order())
+                {
+                    var iconTexture = TextureCache.Instance.ModifierIconTextures[modifier].Value;
+                    var origin = new Vector2(0, iconTexture.Height);
+                    spriteBatch.Draw(iconTexture, center, iconTexture.Bounds, Color.White, 0, origin, 1, SpriteEffects.None, 0);
+                    center.X += iconTexture.Width + 2;
+                }
+            }
         }
     }
 }

@@ -30,6 +30,20 @@ namespace TerraTCG.Common.GameSystem.GameState
             CardModifiers.AddRange(modifiers);
         }
 
+        internal Dictionary<ModifierType, int> GetKeywordModifiers()
+        {
+            var modifierMap = new Dictionary<ModifierType, int>();
+            foreach(var modifier in CardModifiers.Where(m=>m.Category != ModifierType.NONE))
+            {
+                if (!modifierMap.TryGetValue(modifier.Category, out int currentAmount))
+                {
+                    currentAmount = 0;
+                }
+                modifierMap[modifier.Category] = currentAmount + modifier.Amount;
+            }
+            return modifierMap;
+        }
+
         public Attack GetAttackWithModifiers(Zone startZone, Zone endZone)
         {
             var attack = Template.Attacks[0].Copy();

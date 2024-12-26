@@ -157,7 +157,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
 
             return heightInfo;
         }
-        private void DrawBodyText(SpriteBatch spriteBatch, Card card, Vector2 position, float scale = 1f)
+        private void DrawBodyText(SpriteBatch spriteBatch, Card card, Vector2 position, float scale = 1f, Attack? attackOverride = null)
         {
             var font = FontAssets.ItemStack.Value;
             var bounds = card.Texture.Value.Bounds;
@@ -215,7 +215,10 @@ namespace TerraTCG.Common.GameSystem.Drawing
             // Attack
             if(card.HasAttackText)
             {
-                var attack = card.Attacks[0];
+                if (attackOverride is not Attack attack)
+                {
+                    attack = card.Attacks[0];    
+                }
                 var attackRowHeight = startY + heightInfo.attackHeight;
                 var manaOffset = new Vector2(1.5f * MARGIN_L, attackRowHeight - MARGIN_S / 2);
                 var attackTextOffset = new Vector2(baseTextX, attackRowHeight);
@@ -247,9 +250,27 @@ namespace TerraTCG.Common.GameSystem.Drawing
                     rowY += SmallTextHeight;
                 }
             }
+
+            // Move cost
+            if(card.HasAttackText)
+            {
+                var moveIcon = TextureCache.Instance.MoveIcon.Value;
+                var moveIconWidth = moveIcon.Bounds.Width * BaseTextScale;
+                var moveCostOffset = new Vector2(bounds.Width - MPIconSize.X - MARGIN_S, bounds.Height - MPIconSize.Y);
+                var moveIconOffset = moveCostOffset - Vector2.UnitX * moveIconWidth;
+                DrawManaCost(spriteBatch, card.MoveCost, position + moveCostOffset * scale, scale);
+                spriteBatch.Draw(
+                    moveIcon, position + moveIconOffset * scale, moveIcon.Bounds, Color.White, 0, default, scale * MPIconScale, SpriteEffects.None, 0);
+            }
         }
 
-        public void DrawCardText(SpriteBatch spriteBatch, Card card, Vector2 position, float scale = 1f, bool details = true)
+        public void DrawCardText(
+            SpriteBatch spriteBatch, 
+            Card card, 
+            Vector2 position, 
+            float scale = 1f, 
+            bool details = true,
+            Attack? attackOverride = null)
         {
             var font = FontAssets.ItemStack.Value;
             BaseTextHeight = font.MeasureString(" ").Y * BaseTextScale * 0.8f;
@@ -258,7 +279,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
 
             if(details)
             {
-                DrawBodyText(spriteBatch, card, position, scale);
+                DrawBodyText(spriteBatch, card, position, scale, attackOverride);
             }
         }
     }

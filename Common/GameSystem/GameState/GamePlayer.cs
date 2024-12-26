@@ -45,6 +45,7 @@ namespace TerraTCG.Common.GameSystem.GameState
         internal bool IsMyTurn => Game.CurrentTurn.ActivePlayer == this;
 
         public Card MouseoverCard { get; internal set; }
+        public Zone MouseoverZone { get; internal set; }
 
         public static Card CreateCard<T>() where T : ModSystem, ICardTemplate
         {

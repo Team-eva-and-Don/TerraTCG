@@ -12,21 +12,21 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class Shackle : ModSystem, ICardTemplate
+    internal class ThrowingKnife : ModSystem, ICardTemplate
     {
         public Card CreateCard() => new ()
         {
-            Name = "Shackle",
+            Name = "ThrowingKnife",
             CardType = CardType.ITEM,
-            SubTypes = [CardSubtype.EQUIPMENT, CardSubtype.ITEM],
+            SubTypes = [CardSubtype.CONSUMABLE, CardSubtype.ITEM],
             SelectInHandAction = (card, player) => new ApplyModifierAction(card, player),
             Skills = [ // TODO this is wonky, but item texts are drawn using the skill template
                 new() { Cost = 1 }
             ],
             Modifiers = [
-                new ReduceDamageModifier(2, [GameEvent.AFTER_RECEIVE_ATTACK])  {
-                    Texture = TextureCache.Instance.GetItemTexture(ItemID.Shackle),
-                    Source = CardSubtype.EQUIPMENT,
+                new FlatDamageModifier(1, [GameEvent.AFTER_ATTACK])  {
+                    Texture = TextureCache.Instance.GetItemTexture(ItemID.ThrowingKnife),
+                    Source = CardSubtype.CONSUMABLE,
                 }
             ]
         };

@@ -14,14 +14,6 @@ namespace TerraTCG.Common.GameSystem.CardData
 {
     internal class Piranha : ModSystem, ICardTemplate
     {
-        private class PiranhaBleedDamage: ICardModifier
-        {
-            public void ModifyIncomingAttack(ref Attack attack, Zone sourceZone, Zone destZone) 
-            {
-                attack.Damage += 1;
-            }
-        }
-
         public Card CreateCard() => new ()
         {
             Name = "Piranha",
@@ -34,7 +26,7 @@ namespace TerraTCG.Common.GameSystem.CardData
                 new() {
                     Damage = 6,
                     Cost = 4,
-                    TargetModifiers = z=>[new PiranhaBleedDamage()]
+                    TargetModifiers = z=>[new BleedModifier(1)]
                 }
             ],
         };

@@ -63,6 +63,12 @@ namespace TerraTCG.Common.GameSystem.GameState
             {
                 zone.Owner.Field.ClearModifiers(ActivePlayer, zone, GameEvent.END_TURN);
             }
+            // If the turn player was unable to keep a creature on board this turn,
+            // end the game
+            if(!ActivePlayer.Field.Zones.Any(z=>z.HasPlacedCard()))
+            {
+                ActivePlayer.Resources = ActivePlayer.Resources.UseResource(health: ActivePlayer.Resources.Health);
+            }
 
             Game.CurrentTurn = new()
             {

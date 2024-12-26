@@ -8,14 +8,18 @@ using System.Threading.Tasks;
 
 namespace TerraTCG.Common.GameSystem.GameState.Modifiers
 {
-    internal class SpikedModifier(int spikeDamage, List<GameEvent> removeOn = null) : ICardModifier
+    internal class SpikedModifier(int amount, List<GameEvent> removeOn = null) : ICardModifier
     {
+        public int Amount => amount;
+
         public Asset<Texture2D> Texture { get; set; }
         public CardSubtype Source { get; set; }
 
+        public ModifierType Category => ModifierType.SPIKED;
+
         public void ModifyIncomingAttack(ref Attack attack, Zone sourceZone, Zone destZone) 
         {
-            attack.SelfDamage += spikeDamage;
+            attack.SelfDamage += amount;
         }
 
         public bool ShouldRemove(GameEventInfo eventInfo) {

@@ -38,7 +38,6 @@ namespace TerraTCG.Common.UI.GameFieldUI
             Append(oppHandElement);
 
             previewElement = new();
-            SetRectangle(previewElement, gameField.Position.X - 120, gameField.Position.Y + 175, 180, 240);
             Append(previewElement);
 
             actionButtons = new();
@@ -64,6 +63,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
         {
             var yOffset = MathHelper.Lerp(UI_MAX_HEIGHT, 0, lerpPoint ?? TCGPlayer.FieldTransitionPoint);
             SetRectangle(gameField, (Main.screenWidth - FieldRenderer.FIELD_WIDTH + 48) / 2, yOffset + (Main.screenHeight - FieldRenderer.FIELD_HEIGHT) / 2, 1, 1);
+            SetRectangle(previewElement, gameField.Position.X - 150, gameField.Position.Y + 205, 180, 240);
             SetRectangle(handElement, Main.screenWidth / 2, yOffset + Main.screenHeight - HandElement.CARD_HEIGHT);
             SetRectangle(oppHandElement, Main.screenWidth / 2, yOffset + gameField.Position.Y);
             SetRectangle(passTurnButton, Main.screenWidth / 2 + 3 * FieldRenderer.FIELD_WIDTH / 8, yOffset + Main.screenHeight / 2);

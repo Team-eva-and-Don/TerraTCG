@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.Drawing
 {
@@ -30,6 +31,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
         internal Asset<Texture2D> HeartIcon { get; private set; }
 
         internal Asset<Texture2D> ManaIcon { get; private set; }
+        public Asset<Texture2D> MoveIcon { get; private set; }
         public Asset<Texture2D> Button { get; private set; }
         public Asset<Texture2D> ButtonHighlighted { get; private set; }
         public Asset<Texture2D> StarIcon { get; private set; }
@@ -41,6 +43,8 @@ namespace TerraTCG.Common.GameSystem.Drawing
         public Asset<Texture2D> CancelButton { get; private set; }
         internal Dictionary<int, Asset<Texture2D>> NPCTextureCache { get; private set; }
         internal Dictionary<int, Asset<Texture2D>> ItemTextureCache { get; private set; }
+
+        internal Dictionary<ModifierType, Asset<Texture2D>> ModifierIconTextures { get; private set; }
         public override void Load()
         {
             base.Load();
@@ -53,6 +57,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
             DefenseIcon = Main.Assets.Request<Texture2D>("Images/Item_" + ItemID.CobaltShield);
             HeartIcon = Main.Assets.Request<Texture2D>("Images/Item_" + ItemID.Heart);
             ManaIcon = Main.Assets.Request<Texture2D>("Images/Item_" + ItemID.Star);
+            MoveIcon = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Boots_Icon");
             Button = Mod.Assets.Request<Texture2D>("Assets/FieldElements/RadialButton");
             ButtonHighlighted = Main.Assets.Request<Texture2D>("Images/UI/Wires_1");
             StarIcon = Main.Assets.Request<Texture2D>("Images/Projectile_" + ProjectileID.FallingStar);
@@ -64,6 +69,14 @@ namespace TerraTCG.Common.GameSystem.Drawing
             CancelButton = Mod.Assets.Request<Texture2D>("Assets/FieldElements/CancelGame");
             NPCTextureCache = [];
             ItemTextureCache = [];
+            ModifierIconTextures = new Dictionary<ModifierType, Asset<Texture2D>>
+            {
+                [ModifierType.SPIKED] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Spiked_Icon"),
+                [ModifierType.DEFENSE_BOOST] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Defense_Icon"),
+                [ModifierType.EVASIVE] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Evasive_Icon"),
+                [ModifierType.RELENTLESS] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Relentless_Icon"),
+                [ModifierType.BLEEDING] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Bleed_Icon"),
+            };
         }
 
         public Asset<Texture2D> GetNPCTexture(int npcId)

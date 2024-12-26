@@ -106,15 +106,12 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             var attack = card.GetAttackWithModifiers(zone, null); // TODO don't explicitly pass null
 
             var font = FontAssets.ItemStack.Value;
-            var vMargin = -4f;
-
-            var texture = TextureCache.Instance.GetNPCTexture(npcId);
 
             var localPlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>();
             var gamePlayer = localPlayer.GamePlayer;
             // right-justify health above the NPC
             {
-                var zoneOffset = gamePlayer.Owns(zone) ? new Vector2(0.75f, 0.7f) : new Vector2(0.75f, 0.4f);
+                var zoneOffset = gamePlayer.Owns(zone) ? new Vector2(0.75f, 0.7f) : new Vector2(0.75f, 0.3f);
                 var placement = ProjectedFieldUtils.Instance.WorldSpaceToScreenSpace(gamePlayer, zone, zoneOffset);
                 var center = localPlayer.GameFieldPosition + placement;
                 var textOffset = font.MeasureString($"{health}");
@@ -128,7 +125,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
 
             // left-justify attack damage above npc
             {
-                var zoneOffset = gamePlayer.Owns(zone) ? new Vector2(0.1f, 0.7f) : new Vector2(0.15f, 0.4f);
+                var zoneOffset = gamePlayer.Owns(zone) ? new Vector2(0.1f, 0.7f) : new Vector2(0.15f, 0.3f);
                 var placement = ProjectedFieldUtils.Instance.WorldSpaceToScreenSpace(gamePlayer, zone, zoneOffset);
                 var center = localPlayer.GameFieldPosition + placement;
                 var textOffset = font.MeasureString($"{attack.Damage}");
@@ -138,11 +135,21 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
                 var swordTexture = TextureCache.Instance.AttackIcon.Value;
                 spriteBatch.Draw(swordTexture, swordPos, swordTexture.Bounds, Color.White * transparency, 0, default, fontScale, SpriteEffects.None, 0);
 
-                // For the player's creatures, draw the attack mana cost as well
-                if(gamePlayer.Owns(zone))
+                // Draw the attack mana cost below damage
+                var manaPos = swordPos + new Vector2(-4, 12);
+                CardTextRenderer.Instance.DrawManaCost(spriteBatch, attack.Cost, manaPos, fontScale);
+            }
+
+            // Draw buff icons at the bottom/top of the card
+            {
+                var zoneOffset = new Vector2(0f, 0.85f);
+                var placement = ProjectedFieldUtils.Instance.WorldSpaceToScreenSpace(gamePlayer, zone, zoneOffset);
+                var center = localPlayer.GameFieldPosition + placement;
+                foreach(var modifier in card.GetKeywordModifiers().Keys.Order())
                 {
-                    var manaPos = swordPos + new Vector2(-4, 12);
-                    CardTextRenderer.Instance.DrawManaCost(spriteBatch, attack.Cost, manaPos, fontScale);
+                    var iconTexture = TextureCache.Instance.ModifierIconTextures[modifier].Value;
+                    spriteBatch.Draw(iconTexture, center, iconTexture.Bounds, Color.White * transparency, 0, default, 1, SpriteEffects.None, 0);
+                    center.X += iconTexture.Width;
                 }
             }
 
