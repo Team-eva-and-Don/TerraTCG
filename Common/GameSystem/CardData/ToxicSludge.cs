@@ -22,7 +22,8 @@ namespace TerraTCG.Common.GameSystem.CardData
             if(latestEquipment != null)
             {
                 targetZone.PlacedCard.CardModifiers.Remove(latestEquipment);
-                targetZone.QueueAnimation(new RemoveModifierAnimation(targetZone.PlacedCard, latestEquipment.Texture));
+                // TODO sequence this after damage-taking animation
+                // targetZone.QueueAnimation(new RemoveModifierAnimation(targetZone.PlacedCard, latestEquipment.Texture));
             }
             Attack.DefaultAttack(attack, sourceZone, targetZone);
         }

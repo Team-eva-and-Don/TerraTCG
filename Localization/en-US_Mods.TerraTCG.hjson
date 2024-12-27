@@ -447,6 +447,20 @@ Cards: {
 		}
 	}
 
+	Muramasa: {
+		Name: Muramasa
+
+		Skill: {
+			Name: Equip
+			Description:
+				'''
+				Equipped creature's
+				attack costs 1 MP
+				less.
+				'''
+		}
+	}
+
 	Shackle: {
 		Name: Shackle
 
