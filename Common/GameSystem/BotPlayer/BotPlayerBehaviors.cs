@@ -48,6 +48,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                 .Where(z => !z.PlacedCard.IsExerted)
                 .Where(z => z.Role == ZoneRole.OFFENSE)
                 .OrderByDescending(z => z.PlacedCard.GetAttackWithModifiers(z, null).Damage)
+                .ThenBy(z=>z.PlacedCard.GetSkillWithModifiers(z, null).Cost)
                 .FirstOrDefault();
 
             var action = new MoveCardOrAttackAction(bestAttackZone, GamePlayer);
@@ -266,7 +267,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
         {
             var bestSkillZone = GamePlayer.Field.Zones.Where(z => !z.IsEmpty())
                 .Where(z => !z.PlacedCard.IsExerted && z.PlacedCard.Template.HasSkill)
-                .Where(z => z.PlacedCard.Template.Skills[0].Cost <= AvailableMana)
+                .Where(z => z.PlacedCard.GetSkillWithModifiers(z, null).Cost <= AvailableMana)
                 .Where(z => z.PlacedCard.Template.Skills[0].SkillType == ActionType.SKILL)
                 .OrderBy(z => z.PlacedCard.Template.Skills[0].Cost)
                 .FirstOrDefault();
@@ -284,7 +285,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
         {
             var bestSkillZone = GamePlayer.Field.Zones.Where(z => !z.IsEmpty())
                 .Where(z => !z.PlacedCard.IsExerted && z.PlacedCard.Template.HasSkill)
-                .Where(z => z.PlacedCard.Template.Skills[0].Cost <= AvailableMana)
+                .Where(z => z.PlacedCard.GetSkillWithModifiers(z, null).Cost <= AvailableMana)
                 .Where(z => z.PlacedCard.Template.Skills[0].SkillType == ActionType.TARGET_ALLY)
                 .OrderBy(z => z.PlacedCard.Template.Skills[0].Cost)
                 .FirstOrDefault();

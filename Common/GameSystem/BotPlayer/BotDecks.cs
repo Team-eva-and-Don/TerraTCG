@@ -28,6 +28,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                 GetMimicDeck,
                 GetCrabDeck,
                 GetMushroomDeck,
+                GetCurseDeck,
             };
             var randIdx = Math.Abs((int)random.NextInt64()) % allDecks.Count;
             return allDecks[deckIdx == -1 ? randIdx : deckIdx].Invoke();
@@ -241,6 +242,33 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     CreateCard<CobaltShield>(), 
                     CreateCard<PlatinumBroadsword>(),
                     CreateCard<PlatinumBroadsword>(),
+                ]
+            };
+
+        public static CardCollection GetCurseDeck() =>
+            new ()
+            {
+                Cards = [
+                    CreateCard<GlowingSnail>(), 
+                    CreateCard<GlowingSnail>(), 
+                    CreateCard<Guide>(),
+                    CreateCard<Guide>(),
+                    CreateCard<CursedSkull>(), 
+                    CreateCard<ToxicSludge>(),
+                    CreateCard<Wizard>(),
+                    CreateCard<Wizard>(),
+                    CreateCard<DarkCaster>(),
+                    CreateCard<DarkCaster>(),
+                    CreateCard<JungleTurtle>(),
+                    CreateCard<JungleTurtle>(),
+                    CreateCard<HealingPotion>(), 
+                    CreateCard<HealingPotion>(), 
+                    CreateCard<CobaltShield>(), 
+                    CreateCard<CobaltShield>(), 
+                    CreateCard<IronskinPotion>(),
+                    CreateCard<IronskinPotion>(),
+                    CreateCard<GiantTortoise>(),
+                    CreateCard<GiantTortoise>(),
                 ]
             };
     }

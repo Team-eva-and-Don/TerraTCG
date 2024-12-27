@@ -19,10 +19,21 @@ namespace TerraTCG.Common.GameSystem.CardData
             private Zone turtleZone;
             public void ModifyIncomingZoneSelection(Zone sourceZone, Zone endZone, ref List<Zone> destZones)
             {
-                // Only allow attacks against the turtle
+                // Don't allow attacks against the most damaged enemies
                 if (!(turtleZone?.IsEmpty() ?? false))
                 {
-                    destZones = [turtleZone];
+                    var lowestHPNonTurtle = endZone.Owner.Field.Zones
+                        .Where(z => z.HasPlacedCard() && z != turtleZone)
+                        .Select(z => z.PlacedCard.CurrentHealth)
+                        .Min();
+
+                    var newDestZones = destZones
+                        .Where(z => z == turtleZone || (z.PlacedCard?.CurrentHealth ?? 0) > lowestHPNonTurtle)
+                        .ToList();
+                    if(newDestZones.Count > 0)
+                    {
+                        destZones = newDestZones;
+                    }
                 }
             }
 
@@ -37,14 +48,14 @@ namespace TerraTCG.Common.GameSystem.CardData
         public Card CreateCard() => new ()
         {
             Name = "GiantTortoise",
-            MaxHealth = 11,
+            MaxHealth = 12,
             MoveCost = 3,
             CardType = CardType.CREATURE,
             NPCID = NPCID.GiantTortoise,
             SubTypes = [CardSubtype.EXPERT, CardSubtype.JUNGLE, CardSubtype.DEFENDER],
             Modifiers = [
                 new TortoiseMustAttackModifier(),
-                new SpikedModifier(1),
+                new SpikedModifier(2),
             ],
             Attacks = [
                 new() {

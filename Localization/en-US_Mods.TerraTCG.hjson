@@ -230,10 +230,10 @@ Cards: {
 		Attack.Name: Shell Smash
 		Modifier.Description:
 			'''
-			Spiked Shell: Enemies
-			must attack this card.
-			A creature that attacks
-			this card takes 2 dmg.
+			Spiked Shell: Spiked.
+			Enemies can't attack 
+			ally(s) with the lowest
+			HP.
 			'''
 	}
 
@@ -764,6 +764,48 @@ Cards: {
 				1 MP less.
 				'''
 		}
+	}
+
+	ToxicSludge: {
+		Name: Toxic Sludge
+
+		Attack: {
+			Name: Corrode
+			Description:
+				'''
+				Remove the newest
+				equipment from 
+				target enemy.
+				'''
+		}
+	}
+
+	DarkCaster: {
+		Name: Dark Caster
+
+		Attack: {
+			Name: Hex
+			Description:
+				'''
+				Target enemy's attack
+				costs +2 MP next turn.
+				'''
+		}
+	}
+
+	CursedSkull: {
+		Name: Cursed Skull
+
+		Attack: {
+			Name: Curse
+			Description:
+				'''
+				Target enemy can't use
+				skills next turn.
+				'''
+		}
+
+		Modifier.Description: Evasive
 	}
 
 	Types: {
