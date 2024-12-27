@@ -12,7 +12,7 @@ namespace TerraTCG.Common.GameSystem.CardData
 {
     internal class AngryBones : ModSystem, ICardTemplate
     {
-        private class EquipCostModifier : ICardModifier
+        internal class EquipCostModifier : ICardModifier
         {
             public void ModifyIncomingSkill(ref Skill skill, Card sourceCard) 
             {

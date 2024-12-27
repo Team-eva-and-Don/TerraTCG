@@ -12,7 +12,7 @@ namespace TerraTCG.Common.GameSystem.CardData
 {
     internal class UndeadMiner : ModSystem, ICardTemplate
     {
-        private class EquipCostModifier : ICardModifier
+        internal class EquipCostModifier : ICardModifier
         {
             public void ModifyAttack(ref Attack attack, Zone sourceZone, Zone destZone) 
             {

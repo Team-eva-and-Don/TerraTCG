@@ -745,23 +745,36 @@ Cards: {
 			Name: Frozen Axe
 			Description:
 				'''
-				Deals +1 dmg if
-				this creature is
-				equipped.
+				Deals +1 dmg if this 
+				creature is equipped.
 				'''
 		}
 	}
 
 	AngryBones: {
 		Name: Angry Bones
+		Modifier.Description:
+			'''
+			Equipping this crea-
+			ture costs 1 MP less.
+			'''
+		Attack.Name: Cursed Axe
+	}
+
+	ArmoredSkeleton: {
+		Name: Armed Skeleton
+		Modifier.Description:
+			'''
+			Equipping this crea-
+			ture costs 1 MP less.
+			'''
 
 		Attack: {
-			Name: Cursed Axe
+			Name: Mighty Swing
 			Description:
 				'''
-				Equipping this
-				creature costs
-				1 MP less.
+				Costs 1 MP less for ea-
+				ch equipment on this
 				'''
 		}
 	}
