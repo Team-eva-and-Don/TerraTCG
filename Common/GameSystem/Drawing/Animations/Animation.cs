@@ -46,11 +46,8 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             }
             var gamePlayer = TCGPlayer.LocalGamePlayer;
 
-            var texture = TextureCache.Instance.GetNPCTexture(npcId);
-            var bounds = texture.Frame(1, Main.npcFrameCount[npcId], 0, frame);
-            var origin = new Vector2(bounds.Width / 2, bounds.Height);
             var effects = gamePlayer.Owns(zone) ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
-            spriteBatch.Draw(texture.Value, position, bounds, color ?? Color.White, 0, origin, scale, effects, 0);
+            card.Template.DrawZoneNPC(spriteBatch, card.Template, position, frame, color ?? Color.White, scale, effects);
         }
 
         public static void DrawZoneCard(

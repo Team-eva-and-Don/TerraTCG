@@ -6,9 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria;
 using Terraria.GameContent;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState.GameActions;
 using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
@@ -76,6 +78,9 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal int MoveCost { get; set; }
 
+        // Points awarded on defeating this card
+        internal int Points { get; set; } = 1;
+
         internal SelectInHandAction SelectInHandAction { get; set; }
             = (zone, player) => new DeployCreatureAction(zone, player);
         internal SelectOnFieldAction SelectOnFieldAction { get; set; }
@@ -119,6 +124,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal string TypeLine => string.Join(" ", 
             SubTypes.Select(t => Language.GetTextValue($"Mods.TerraTCG.Cards.Types.{t}")));
-            
+
+        internal DrawZoneNPC DrawZoneNPC { get; set; } = CardOverlayRenderer.Instance.DefaultDrawZoneNPC;
     }
 }

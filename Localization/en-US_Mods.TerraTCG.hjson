@@ -21,6 +21,50 @@ Cards: {
 		Attack.Name: Slime Slap
 	}
 
+	MotherSlime: {
+		Name: Mother Slime
+
+		Attack: {
+			Name: Slime Brood
+			Description:
+				'''
+				Deals +1 dmg for
+				each slime you 
+				control.
+				'''
+		}
+	}
+
+	Pinky: {
+		Name: Pinky
+
+		Attack: {
+			Name: Pink Slime
+			Description:
+				'''
+				Costs 1 MP less for
+				each slime you 
+				control.
+				'''
+		}
+	}
+
+	KingSlime: {
+		Name: King Slime
+
+		Skill: {
+			Name: Royal Decree
+			Description:
+				'''
+				All allied Slimes deal 
+				+1 dmg this turn, and 
+				heal 1 HP.
+				'''
+		}
+
+		Attack.Name: Royal Bounce
+	}
+
 	MushroomZombie: {
 		Name: Mushroom Zombie
 		Attack.Name: Spore Bite

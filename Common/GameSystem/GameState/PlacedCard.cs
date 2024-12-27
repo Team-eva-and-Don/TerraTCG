@@ -96,7 +96,7 @@ namespace TerraTCG.Common.GameSystem.GameState
         internal List<Zone> GetValidAttackZones(Zone startZone, Zone endZone) 
         {
             // default list of zones: Attack zones and unblocked defense zones
-            var targetZones = endZone.Owner.Field.Zones.Where(z => !z.IsEmpty() && !z.IsBlocked()).ToList();
+            var targetZones = endZone.Siblings.Where(z => !z.IsEmpty() && !z.IsBlocked()).ToList();
 
             foreach(var modifier in CardModifiers.Concat(startZone.Owner.Field.CardModifiers))
             {
@@ -107,7 +107,7 @@ namespace TerraTCG.Common.GameSystem.GameState
             {
                 modifier.ModifyIncomingZoneSelection(startZone, endZone, ref targetZones);
             }
-            foreach(var modifier in endZone.Owner.Field.Zones.Where(z=>!z.IsEmpty()).SelectMany(z=>z.PlacedCard.CardModifiers))
+            foreach(var modifier in endZone.Siblings.Where(z=>!z.IsEmpty()).SelectMany(z=>z.PlacedCard.CardModifiers))
             {
                 modifier.ModifyIncomingZoneSelection(startZone, endZone, ref targetZones);
             }

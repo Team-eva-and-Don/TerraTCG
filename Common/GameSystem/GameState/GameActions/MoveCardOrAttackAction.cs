@@ -107,7 +107,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             if(endZone.PlacedCard.CurrentHealth <= 0)
             {
                 endZone.QueueAnimation(new RemoveCardAnimation(endZone.PlacedCard));
-                endZone.Owner.Resources = endZone.Owner.Resources.UseResource(health: 1);
+                endZone.Owner.Resources = endZone.Owner.Resources.UseResource(health: endZone.PlacedCard.Template.Points);
                 endZone.PlacedCard = null;
             }
 
@@ -115,7 +115,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             if(startZone.PlacedCard.CurrentHealth <= 0)
             {
                 startZone.QueueAnimation(new RemoveCardAnimation(startZone.PlacedCard));
-                startZone.Owner.Resources = startZone.Owner.Resources.UseResource(health: 1);
+                startZone.Owner.Resources = startZone.Owner.Resources.UseResource(health: startZone.PlacedCard.Template.Points);
                 startZone.PlacedCard = null;
             }
         }

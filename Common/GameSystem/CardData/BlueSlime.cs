@@ -1,10 +1,12 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria.ID;
 using Terraria.ModLoader;
+using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState;
 
 namespace TerraTCG.Common.GameSystem.CardData
@@ -19,6 +21,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             NPCID = NPCID.BlueSlime,
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.FOREST, CardSubtype.SLIME, CardSubtype.FIGHTER],
+            DrawZoneNPC = CardOverlayRenderer.Instance.DrawSlimeNPC(1f, new Color(0, 80, 255, 180)),
             Attacks = [
                 new() {
                     Name = "Slimed",

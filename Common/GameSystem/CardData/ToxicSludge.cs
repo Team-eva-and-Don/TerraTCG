@@ -35,7 +35,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             MoveCost = 2,
             NPCID = NPCID.ToxicSludge,
             CardType = CardType.CREATURE,
-            SubTypes = [CardSubtype.CAVERN, CardSubtype.CASTER],
+            SubTypes = [CardSubtype.CAVERN, CardSubtype.SLIME, CardSubtype.CASTER],
             Attacks = [
                 new() {
                     Name = "Corrode",

@@ -18,7 +18,7 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
         public void ModifyZoneSelection(Zone sourceZone, Zone endZone, ref List<Zone> destZones)
         {
             // allow the targeting of blocked enemy zones
-            destZones = endZone.Owner.Field.Zones.Where(z => !z.IsEmpty()).ToList();
+            destZones = endZone.Siblings.Where(z => !z.IsEmpty()).ToList();
         }
     }
 }

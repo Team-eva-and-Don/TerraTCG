@@ -16,7 +16,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         {
             public void ModifyAttack(ref Attack attack, Zone sourceZone, Zone destZone) 
             {
-                var hasCritter = sourceZone.Owner.Field.Zones
+                var hasCritter = sourceZone.Siblings
                     .Where(z => z.PlacedCard?.Template?.SubTypes?.Contains(CardSubtype.CRITTER) ?? false)
                     .Any();
                 if(hasCritter)

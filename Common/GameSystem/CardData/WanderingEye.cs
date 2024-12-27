@@ -25,7 +25,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         public Card CreateCard() => new ()
         {
             Name = "WanderingEye",
-            MaxHealth = 8,
+            MaxHealth = 10,
             MoveCost = 2,
             NPCID = NPCID.WanderingEye,
             CardType = CardType.CREATURE,

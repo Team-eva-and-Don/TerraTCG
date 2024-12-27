@@ -14,10 +14,11 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public bool CanAcceptZone(Zone zone)
         {
-            if(!card.SubTypes.Contains(CardSubtype.EXPERT))
+            if(card.SubTypes.Contains(CardSubtype.BOSS))
             {
-                return player.Owns(zone) && zone.IsEmpty();
-            } else
+                var noBossPresent = !zone.Siblings.Any(z => z.PlacedCard?.Template.SubTypes.Contains(CardSubtype.BOSS) ?? false);
+                return noBossPresent && player.Owns(zone) && zone.IsEmpty();
+            } else if(card.SubTypes.Contains(CardSubtype.EXPERT))
             {
                 // Check whether the Expert creature type and placed creature type match, eg.
                 // EXPERT FOREST FIGHTER -> FOREST (SLIME) FIGHTER
@@ -25,6 +26,9 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
                     zone.PlacedCard?.Template.SubTypes.Last() == card.SubTypes.Last(); 
                 return player.Owns(zone) && !zone.IsEmpty() && !zone.PlacedCard.IsExerted && 
                     cardTypeMatches;
+            } else
+            {
+                return player.Owns(zone) && zone.IsEmpty();
             }
         }
 

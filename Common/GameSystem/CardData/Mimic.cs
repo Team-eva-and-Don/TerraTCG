@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria.ID;
 using Terraria.ModLoader;
+using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
@@ -32,6 +33,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             NPCID = NPCID.Mimic,
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.CAVERN, CardSubtype.DEFENDER],
+            DrawZoneNPC = CardOverlayRenderer.Instance.DrawMimicNPC,
             Modifiers = [
                 new EquipCostModifier(),
                 new ReduceDamageModifier(1),

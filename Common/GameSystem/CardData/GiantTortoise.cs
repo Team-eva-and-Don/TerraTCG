@@ -22,7 +22,7 @@ namespace TerraTCG.Common.GameSystem.CardData
                 // Don't allow attacks against the most damaged enemies
                 if (!(turtleZone?.IsEmpty() ?? false))
                 {
-                    var lowestHPNonTurtle = endZone.Owner.Field.Zones
+                    var lowestHPNonTurtle = endZone.Siblings
                         .Where(z => z.HasPlacedCard() && z != turtleZone)
                         .Select(z => z.PlacedCard.CurrentHealth)
                         .Min();

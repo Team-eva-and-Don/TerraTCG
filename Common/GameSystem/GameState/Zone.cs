@@ -108,6 +108,8 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         public GamePlayer Owner => Game.GamePlayers.Where(p => p.Field.Zones.Contains(this)).FirstOrDefault();
 
+        public List<Zone> Siblings => Owner.Field.Zones;
+
         private void DrawOffenseIcon(SpriteBatch spriteBatch, Vector2 position, float rotation)
         {
             var texture = TextureCache.Instance.OffenseIcon;

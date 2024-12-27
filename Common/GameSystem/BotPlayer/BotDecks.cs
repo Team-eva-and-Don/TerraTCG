@@ -29,6 +29,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                 GetCrabDeck,
                 GetMushroomDeck,
                 GetCurseDeck,
+                GetSlimeDeck,
             };
             var randIdx = Math.Abs((int)random.NextInt64()) % allDecks.Count;
             return allDecks[deckIdx == -1 ? randIdx : deckIdx].Invoke();
@@ -269,6 +270,33 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     CreateCard<IronskinPotion>(),
                     CreateCard<GiantTortoise>(),
                     CreateCard<GiantTortoise>(),
+                ]
+            };
+
+        public static CardCollection GetSlimeDeck() =>
+            new ()
+            {
+                Cards = [
+                    CreateCard<BlueSlime>(), 
+                    CreateCard<BlueSlime>(), 
+                    CreateCard<Guide>(),
+                    CreateCard<Guide>(),
+                    CreateCard<GreenSlime>(), 
+                    CreateCard<GreenSlime>(),
+                    CreateCard<Wizard>(),
+                    CreateCard<Wizard>(),
+                    CreateCard<ToxicSludge>(),
+                    CreateCard<ToxicSludge>(),
+                    CreateCard<SpikedJungleSlime>(),
+                    CreateCard<SpikedJungleSlime>(),
+                    CreateCard<HealingPotion>(), 
+                    CreateCard<HealingPotion>(), 
+                    CreateCard<Pinky>(), 
+                    CreateCard<Pinky>(), 
+                    CreateCard<KingSlime>(),
+                    CreateCard<KingSlime>(),
+                    CreateCard<MotherSlime>(),
+                    CreateCard<MotherSlime>(),
                 ]
             };
     }
