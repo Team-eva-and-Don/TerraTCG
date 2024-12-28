@@ -39,10 +39,10 @@ namespace TerraTCG.Common.UI.GameFieldUI
             }
             Vector2 currentPos = CardPosition0;
 
-            // var texture = TextureCache.Instance.CardBack;
+            var texture = TextureCache.Instance.CardBack;
             foreach (var card in gamePlayer.Hand.Cards)
             {
-                var texture = card.Texture;
+                //var texture = card.Texture;
                 spriteBatch.Draw(texture.Value, currentPos, texture.Value.Bounds, Color.White, 0, default, CARD_SCALE, SpriteEffects.None, 0f);
                 currentPos.X += texture.Width() * CARD_SCALE + CARD_MARGIN;
             }
