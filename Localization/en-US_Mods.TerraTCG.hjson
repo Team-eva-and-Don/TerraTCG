@@ -5,6 +5,8 @@ Items: {
 	}
 }
 
+Common.DuelChat: Let's Duel!
+
 Cards: {
 	Zombie: {
 		Name: Zombie

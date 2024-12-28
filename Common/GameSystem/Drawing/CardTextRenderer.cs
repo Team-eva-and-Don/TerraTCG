@@ -64,12 +64,12 @@ namespace TerraTCG.Common.GameSystem.Drawing
         }
 
         public void DrawStringWithBorder(
-            SpriteBatch spriteBatch, string text, Vector2 position, Color? color = null, float scale = 1f, bool centered = false, DynamicSpriteFont font = null)
+            SpriteBatch spriteBatch, string text, Vector2 position, Color? color = null, float scale = 1f, bool centered = false, DynamicSpriteFont font = null, Color? bgColor = null)
         {
             foreach(var offset in new Vector2[] { Vector2.UnitX, Vector2.UnitY })
             {
-                DrawString(spriteBatch, text, position + 2 * offset, Color.Black, scale, centered, font);
-                DrawString(spriteBatch, text, position - 2 * offset, Color.Black, scale, centered, font);
+                DrawString(spriteBatch, text, position + 2 * offset, bgColor ?? Color.Black, scale, centered, font);
+                DrawString(spriteBatch, text, position - 2 * offset, bgColor ?? Color.Black, scale, centered, font);
             }
             DrawString(spriteBatch, text, position, color, scale, centered, font);
         }

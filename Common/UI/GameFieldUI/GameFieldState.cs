@@ -51,7 +51,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
 
             SetRectangles(0);
         }
-        private static void SetRectangle(UIElement uiElement, float left, float top, float width = 1, float height = 1)
+        public static void SetRectangle(UIElement uiElement, float left, float top, float width = 1, float height = 1)
         {
             uiElement.Left.Set(left, 0f);
             uiElement.Top.Set(top, 0f);

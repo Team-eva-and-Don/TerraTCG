@@ -8,6 +8,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.UI;
 using TerraTCG.Common.UI.GameFieldUI;
+using TerraTCG.Common.UI.NPCDuelChat;
 
 namespace TerraTCG.Common.UI
 {
@@ -18,11 +19,18 @@ namespace TerraTCG.Common.UI
 
         private GameFieldState GameField { get; set; }
 
+        private NPCDuelChatState DuelChat { get; set; }
+
         public override void Load()
         {
             GameField = new();
             GameField.Activate();
+
+            DuelChat = new();
+            DuelChat.Activate();
+
             _userInterface = new();
+            _userInterface.SetState(DuelChat);
         }
 
         public override void UpdateUI(GameTime gameTime)
@@ -39,14 +47,15 @@ namespace TerraTCG.Common.UI
         public void EndGame()
         {
             IngameFancyUI.Close();
+            Main.playerInventory = false;
         }
 
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
         {
-            int mouseTextIdx = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Text"));
-            if(mouseTextIdx != -1)
+            int mouseTextIdx = layers.FindIndex(layer => layer.Name.Equals("Vanilla: NPC / Sign Dialog"));
+            if(mouseTextIdx != -1 && Main.npcChatText != "")
             {
-                layers.Insert(mouseTextIdx + 2, new LegacyGameInterfaceLayer("TerraTCG: Game Field", delegate
+                layers.Insert(mouseTextIdx+1, new LegacyGameInterfaceLayer("TerraTCG: Duel Dialog", delegate
                 {
                     if(_userInterface?.CurrentState != null)
                     {
