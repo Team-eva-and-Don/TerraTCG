@@ -13,7 +13,6 @@ using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.BotPlayer;
 using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.UI.GameFieldUI;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace TerraTCG.Common.UI.NPCDuelChat
 {
@@ -37,6 +36,7 @@ namespace TerraTCG.Common.UI.NPCDuelChat
             myPlayer.Deck = BotDecks.GetDeck();
             opponent.Deck = BotDecks.GetDeck();
             Main.CloseNPCChatOrSign();
+            ModContent.GetInstance<UserInterfaces>().StopNPCChat();
             ModContent.GetInstance<GameModSystem>().StartGame(myPlayer, opponent);
         }
 

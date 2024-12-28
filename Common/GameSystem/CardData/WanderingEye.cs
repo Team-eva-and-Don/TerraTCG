@@ -16,7 +16,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         {
             public void ModifyAttack(ref Attack attack, Zone sourceZone, Zone destZone) 
             {
-                if((sourceZone.PlacedCard?.CurrentHealth ?? 0) <= (sourceZone.PlacedCard.Template.MaxHealth + 1) / 2)
+                if(sourceZone.PlacedCard is PlacedCard card && card.CurrentHealth <= (card.Template.MaxHealth + 1) / 2)
                 {
                     attack.Damage += 2;
                 }

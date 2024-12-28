@@ -18,6 +18,8 @@ namespace TerraTCG.Common.UI.GameFieldUI
         internal bool ContainsMouse => new Rectangle(
             (int)Left.Pixels, (int)Top.Pixels, (int)Width.Pixels, (int)Height.Pixels)
             .Contains((int)Main.MouseScreen.X, (int)Main.MouseScreen.Y);
+
+        public Action OnClickAction { get; set; }
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
@@ -30,8 +32,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
                 Main.LocalPlayer.mouseInterface = true;
                 if(isClicked)
                 {
-                    TCGPlayer.LocalGamePlayer.Resources =
-                        TCGPlayer.LocalGamePlayer.Resources.UseResource(health: TCGPlayer.LocalGamePlayer.Resources.Health);
+                    OnClickAction?.Invoke();
                 }
             }
         }

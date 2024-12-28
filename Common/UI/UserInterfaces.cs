@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.UI;
+using TerraTCG.Common.UI.DeckbuildUI;
 using TerraTCG.Common.UI.GameFieldUI;
 using TerraTCG.Common.UI.NPCDuelChat;
 
@@ -21,6 +22,8 @@ namespace TerraTCG.Common.UI
 
         private NPCDuelChatState DuelChat { get; set; }
 
+        private DeckbuildState DeckbuildState { get; set; }
+
         public override void Load()
         {
             GameField = new();
@@ -29,8 +32,10 @@ namespace TerraTCG.Common.UI
             DuelChat = new();
             DuelChat.Activate();
 
+            DeckbuildState = new();
+            DeckbuildState.Activate();
+
             _userInterface = new();
-            _userInterface.SetState(DuelChat);
         }
 
         public override void UpdateUI(GameTime gameTime)
@@ -49,13 +54,43 @@ namespace TerraTCG.Common.UI
             IngameFancyUI.Close();
             Main.playerInventory = false;
         }
+        
+        public void StartNPCChat()
+        {
+            _userInterface.SetState(DuelChat);
+        }
+
+        public void StopNPCChat()
+        {
+            _userInterface.SetState(null);
+        }
+
+        public void StartDeckbuild()
+        {
+            _userInterface.SetState(DeckbuildState);
+            // IngameFancyUI.OpenUIState(DeckbuildState);
+        }
+        public void StopDeckbuild()
+        {
+            _userInterface.SetState(null);
+        }
 
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
         {
             int mouseTextIdx = layers.FindIndex(layer => layer.Name.Equals("Vanilla: NPC / Sign Dialog"));
-            if(mouseTextIdx != -1 && Main.npcChatText != "")
+            if(mouseTextIdx != -1 && _userInterface?.CurrentState == DuelChat)
             {
                 layers.Insert(mouseTextIdx+1, new LegacyGameInterfaceLayer("TerraTCG: Duel Dialog", delegate
+                {
+                    if(_userInterface?.CurrentState != null)
+                    {
+                        _userInterface.Draw(Main.spriteBatch, new GameTime());
+                    }
+                    return true;
+                }, InterfaceScaleType.UI));
+            } else if (_userInterface?.CurrentState == DeckbuildState)
+            {
+                layers.Insert(mouseTextIdx+1, new LegacyGameInterfaceLayer("TerraTCG: Deckbuilder", delegate
                 {
                     if(_userInterface?.CurrentState != null)
                     {
