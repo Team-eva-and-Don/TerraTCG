@@ -14,7 +14,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
         private static readonly Random random = new Random();
         public static Card CreateCard<T>() where T : BaseCardTemplate, ICardTemplate
         {
-            return ModContent.GetInstance<T>().Card;
+            return ModContent.GetInstance<T>().CreateCard();
         }
         
         public static CardCollection GetDeck(int deckIdx = -1)
@@ -175,8 +175,8 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     CreateCard<Guide>(), 
                     CreateCard<LostGirl>(), 
                     CreateCard<LostGirl>(), 
-                    CreateCard<ThornsPotion>(), 
-                    CreateCard<ThornsPotion>(), 
+                    CreateCard<ThrowingKnife>(), 
+                    CreateCard<ThrowingKnife>(), 
                     CreateCard<Mimic>(), 
                     CreateCard<Mimic>(), 
                     CreateCard<Tim>(), 

@@ -22,7 +22,7 @@ namespace TerraTCG.Common.GameSystem.CardData
                     .Where(t => t.ActivePlayer == sourceZone.Owner)
                     .Select(t => t.UsedItemCount)
                     .Sum();
-                attack.Damage += currentItemCount;
+                attack.Damage += currentItemCount - startingItemCount;
             }
             public void ModifyCardEntrance(Zone sourceZone) 
             {

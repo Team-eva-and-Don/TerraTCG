@@ -15,6 +15,9 @@ namespace TerraTCG.Common.GameSystem.CardData
 {
     internal class SwiftnessPotion: BaseCardTemplate, ICardTemplate
     {
+        public static bool ShouldUseUnpauseItem(Zone zone) =>
+            zone.PlacedCard is PlacedCard card && card.IsExerted &&
+            card.GetAttackWithModifiers(zone, null).Cost < zone.Owner.Resources.Mana;
         public override Card CreateCard() => new ()
         {
             Name = "SwiftnessPotion",
@@ -22,7 +25,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             SubTypes = [CardSubtype.CONSUMABLE, CardSubtype.ITEM],
             SelectInHandAction = (card, player) => new ApplySkillAction(card, player),
             Role = ZoneRole.OFFENSE,
-            ShouldTarget = (Zone zone) => zone.PlacedCard?.IsExerted ?? false,
+            ShouldTarget = ShouldUseUnpauseItem,
             Skills = [ // TODO this is wonky, but item texts are drawn using the skill template
                 new() { 
                     Cost = 1,

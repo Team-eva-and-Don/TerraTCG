@@ -47,7 +47,7 @@ namespace TerraTCG.Common.GameSystem.GameState
         public Card MouseoverCard { get; internal set; }
         public Zone MouseoverZone { get; internal set; }
 
-        public static Card CreateCard<T>() where T : BaseCardTemplate, ICardTemplate
+        public static Card GetCard<T>() where T : BaseCardTemplate, ICardTemplate
         {
             return ModContent.GetInstance<T>().Card;
         }

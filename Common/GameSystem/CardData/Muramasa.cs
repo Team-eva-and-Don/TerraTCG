@@ -20,6 +20,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             CardType = CardType.ITEM,
             SubTypes = [CardSubtype.EQUIPMENT, CardSubtype.ITEM],
             SelectInHandAction = (card, player) => new ApplyModifierAction(card, player),
+            ShouldTarget = z => true,
             Skills = [
                 new() { Cost = 2 }
             ],

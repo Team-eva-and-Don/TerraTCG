@@ -24,8 +24,8 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             if(cardToUse.Role == ZoneRole.OFFENSE)
             {
                 return GamePlayer.Field.Zones.Where(z => !z.IsEmpty())
+                    .Where(z => z.Role == ZoneRole.OFFENSE)
                     .Where(z => cardToUse.ShouldTarget(z))
-                    .Where(z => !cardToUse.SubTypes.Contains(CardSubtype.CONSUMABLE) || !z.PlacedCard.IsExerted)
                     .OrderByDescending(z => z.PlacedCard.GetAttackWithModifiers(z, null).Damage)
                     .FirstOrDefault();
             } else
@@ -74,7 +74,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             {
                 return false;
             }
-            var dryadCard = GamePlayer.CreateCard<Dryad>().CardName;
+            var dryadCard = GamePlayer.GetCard<Dryad>().CardName;
             var cardInHand = GamePlayer.Hand.Cards.Where(c => c.CardName == dryadCard).FirstOrDefault();
             if(cardInHand == null)
             {
@@ -123,8 +123,8 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             }
             // Handlers with their own logic
             List<string> customHandlers = [
-                GamePlayer.CreateCard<Dryad>().CardName,
-                GamePlayer.CreateCard<OldMan>().CardName,
+                GamePlayer.GetCard<Dryad>().CardName,
+                GamePlayer.GetCard<OldMan>().CardName,
             ];
 
             // TODO priority ordering of townsfolk cards
@@ -150,7 +150,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             {
                 return false;
             }
-            var oldManCard = GamePlayer.CreateCard<OldMan>().CardName;
+            var oldManCard = GamePlayer.GetCard<OldMan>().CardName;
             var cardInHand = GamePlayer.Hand.Cards.Where(c => c.CardName == oldManCard).FirstOrDefault();
             var possibleDamage = PossibleDamage;
 
@@ -187,7 +187,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
 
             var bestTargetZone = GamePlayer.Field.Zones
                 .Where(z => new DeployCreatureAction(bestCardInHand, GamePlayer).CanAcceptZone(z))
-                .Where(z => z.Role == (bestCardInHand?.Role ?? ZoneRole.OFFENSE))
+                .OrderByDescending(z => z.Role == (bestCardInHand?.Role ?? ZoneRole.OFFENSE))
                 .FirstOrDefault();
 
             if(bestCardInHand != null && bestTargetZone != null)
@@ -203,6 +203,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
         {
             var bestCardInHand = GamePlayer.Hand.Cards.Where(c => c.CardType == CardType.ITEM)
                 .Where(c => c.Skills[0].Cost <= AvailableMana)
+                .Where(c => GetBestBuffTarget(c) != null)
                 .OrderByDescending(c => c.Priority)
                 .FirstOrDefault();
 
