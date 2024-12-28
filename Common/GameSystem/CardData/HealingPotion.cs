@@ -13,9 +13,9 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class HealingPotion: ModSystem, ICardTemplate
+    internal class HealingPotion: BaseCardTemplate, ICardTemplate
     {
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "LesserHealingPotion",
             CardType = CardType.ITEM,

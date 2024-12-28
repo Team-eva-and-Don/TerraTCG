@@ -12,7 +12,7 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class MotherSlime : ModSystem, ICardTemplate
+    internal class MotherSlime : BaseCardTemplate, ICardTemplate
     {
         private class SlimeAttackModifier : ICardModifier
         {
@@ -26,7 +26,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             }
         }
 
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "MotherSlime",
             MaxHealth = 8,

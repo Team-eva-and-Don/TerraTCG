@@ -12,7 +12,7 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class GiantTortoise: ModSystem, ICardTemplate
+    internal class GiantTortoise: BaseCardTemplate, ICardTemplate
     {
         private class TortoiseMustAttackModifier : ICardModifier
         {
@@ -45,7 +45,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             }
         }
 
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "GiantTortoise",
             MaxHealth = 12,

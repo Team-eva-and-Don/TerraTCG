@@ -10,7 +10,7 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class GoblinWarlock : ModSystem, ICardTemplate
+    internal class GoblinWarlock : BaseCardTemplate, ICardTemplate
     {
         internal class DamageModifier : ICardModifier
         {
@@ -33,7 +33,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             }
         }
 
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "GoblinWarlock",
             MaxHealth = 10,

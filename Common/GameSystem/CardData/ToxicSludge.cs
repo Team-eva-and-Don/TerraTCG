@@ -11,7 +11,7 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class ToxicSludge : ModSystem, ICardTemplate
+    internal class ToxicSludge : BaseCardTemplate, ICardTemplate
     {
         private void SludgeAttack(Attack attack, Zone sourceZone, Zone targetZone)
         {
@@ -28,7 +28,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             Attack.DefaultAttack(attack, sourceZone, targetZone);
         }
 
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "ToxicSludge",
             MaxHealth = 7,

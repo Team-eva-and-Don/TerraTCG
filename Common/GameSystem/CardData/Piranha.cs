@@ -12,9 +12,9 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class Piranha : ModSystem, ICardTemplate
+    internal class Piranha : BaseCardTemplate, ICardTemplate
     {
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "Piranha",
             MaxHealth = 6,

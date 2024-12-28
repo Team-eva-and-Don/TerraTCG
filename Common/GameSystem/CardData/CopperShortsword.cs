@@ -12,9 +12,9 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class CopperShortsword : ModSystem, ICardTemplate
+    internal class CopperShortsword : BaseCardTemplate, ICardTemplate
     {
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "CopperShortsword",
             CardType = CardType.ITEM,

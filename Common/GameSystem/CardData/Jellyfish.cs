@@ -10,9 +10,9 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class Jellyfish : ModSystem, ICardTemplate
+    internal class Jellyfish : BaseCardTemplate, ICardTemplate
     {
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "Jellyfish",
             MaxHealth = 7,

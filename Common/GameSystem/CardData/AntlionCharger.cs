@@ -10,9 +10,9 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class AntlionCharger : ModSystem, ICardTemplate
+    internal class AntlionCharger : BaseCardTemplate, ICardTemplate
     {
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "AntlionCharger",
             MaxHealth = 7,

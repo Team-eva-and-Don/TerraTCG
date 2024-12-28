@@ -11,9 +11,9 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class Dolphin : ModSystem, ICardTemplate
+    internal class Dolphin : BaseCardTemplate, ICardTemplate
     {
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "Dolphin",
             MaxHealth = 5,

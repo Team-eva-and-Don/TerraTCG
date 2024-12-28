@@ -11,9 +11,9 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class ArmsDealer : ModSystem, ICardTemplate
+    internal class ArmsDealer : BaseCardTemplate, ICardTemplate
     {
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "ArmsDealer",
             CardType = CardType.TOWNSFOLK,

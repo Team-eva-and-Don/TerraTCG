@@ -10,7 +10,7 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class GoblinThief : ModSystem, ICardTemplate
+    internal class GoblinThief : BaseCardTemplate, ICardTemplate
     {
         // TODO This is a bit of an odd implementation, modifier to make the skill
         // unusably expensive if an item has not been used this turn
@@ -23,7 +23,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             }
         }
 
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "GoblinThief",
             MaxHealth = 5,

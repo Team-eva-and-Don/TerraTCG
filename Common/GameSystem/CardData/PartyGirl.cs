@@ -11,9 +11,9 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class PartyGirl : ModSystem, ICardTemplate
+    internal class PartyGirl : BaseCardTemplate, ICardTemplate
     {
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "PartyGirl",
             CardType = CardType.TOWNSFOLK,

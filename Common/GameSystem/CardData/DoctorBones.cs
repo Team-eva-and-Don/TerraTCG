@@ -10,7 +10,7 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class DoctorBones : ModSystem, ICardTemplate
+    internal class DoctorBones : BaseCardTemplate, ICardTemplate
     {
         private class ControlsCritterModifier : ICardModifier
         {
@@ -26,7 +26,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             }
         }
 
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "DoctorBones",
             MaxHealth = 9,

@@ -12,9 +12,9 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class IronskinPotion: ModSystem, ICardTemplate
+    internal class IronskinPotion: BaseCardTemplate, ICardTemplate
     {
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "IronskinPotion",
             CardType = CardType.ITEM,

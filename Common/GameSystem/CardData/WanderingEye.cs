@@ -10,7 +10,7 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class WanderingEye: ModSystem, ICardTemplate
+    internal class WanderingEye: BaseCardTemplate, ICardTemplate
     {
         private class HalfHealthDamageBoostModifier : ICardModifier
         {
@@ -22,7 +22,7 @@ namespace TerraTCG.Common.GameSystem.CardData
                 }
             }
         }
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "WanderingEye",
             MaxHealth = 10,

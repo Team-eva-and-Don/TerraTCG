@@ -12,9 +12,9 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class Muramasa: ModSystem, ICardTemplate
+    internal class Muramasa: BaseCardTemplate, ICardTemplate
     {
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "Muramasa",
             CardType = CardType.ITEM,

@@ -10,7 +10,7 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class CursedSkull : ModSystem, ICardTemplate
+    internal class CursedSkull : BaseCardTemplate, ICardTemplate
     {
         // TODO This is a bit of an odd implementation, modifier to make the skill
         // unusably expensive if an item has not been used this turn
@@ -24,7 +24,7 @@ namespace TerraTCG.Common.GameSystem.CardData
                 eventInfo.IsMyTurn && eventInfo.Event == GameEvent.END_TURN; 
         }
 
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "CursedSkull",
             MaxHealth = 6,

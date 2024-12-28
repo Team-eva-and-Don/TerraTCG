@@ -11,9 +11,9 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class Wizard : ModSystem, ICardTemplate
+    internal class Wizard : BaseCardTemplate, ICardTemplate
     {
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "Wizard",
             CardType = CardType.TOWNSFOLK,

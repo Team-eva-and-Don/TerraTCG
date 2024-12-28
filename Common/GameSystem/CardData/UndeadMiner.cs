@@ -10,7 +10,7 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class UndeadMiner : ModSystem, ICardTemplate
+    internal class UndeadMiner : BaseCardTemplate, ICardTemplate
     {
         internal class EquipCostModifier : ICardModifier
         {
@@ -22,7 +22,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             }
         }
 
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "UndeadMiner",
             MaxHealth = 8,

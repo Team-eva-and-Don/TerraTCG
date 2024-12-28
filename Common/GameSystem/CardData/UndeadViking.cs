@@ -10,7 +10,7 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class UndeadViking : ModSystem, ICardTemplate
+    internal class UndeadViking : BaseCardTemplate, ICardTemplate
     {
         private class DamageModifier : ICardModifier
         {
@@ -25,7 +25,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             }
         }
 
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "UndeadViking",
             MaxHealth = 8,

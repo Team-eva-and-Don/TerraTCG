@@ -12,7 +12,7 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class KingSlime : ModSystem, ICardTemplate
+    internal class KingSlime : BaseCardTemplate, ICardTemplate
     {
         private class KingSlimeDamageBoost : ICardModifier
         {
@@ -26,7 +26,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             public bool ShouldRemove(GameEventInfo eventInfo) => eventInfo.Event == GameEvent.END_TURN; 
         }
 
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "KingSlime",
             MaxHealth = 14,

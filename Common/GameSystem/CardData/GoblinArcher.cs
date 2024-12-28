@@ -10,10 +10,10 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class GoblinArcher : ModSystem, ICardTemplate
+    internal class GoblinArcher : BaseCardTemplate, ICardTemplate
     {
 
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "GoblinArcher",
             MaxHealth = 7,

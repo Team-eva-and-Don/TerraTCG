@@ -12,7 +12,7 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class JungleTurtle : ModSystem, ICardTemplate
+    internal class JungleTurtle : BaseCardTemplate, ICardTemplate
     {
         private class TurtleMustAttackModifier(Zone turtleZone) : ICardModifier
         {
@@ -28,7 +28,7 @@ namespace TerraTCG.Common.GameSystem.CardData
                 gameEvent.Event == GameEvent.END_TURN && !gameEvent.IsMyTurn;
         }
 
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "JungleTurtle",
             MaxHealth = 9,

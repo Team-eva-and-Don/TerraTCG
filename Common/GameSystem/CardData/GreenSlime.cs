@@ -11,9 +11,9 @@ using TerraTCG.Common.GameSystem.GameState;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class GreenSlime : ModSystem, ICardTemplate
+    internal class GreenSlime : BaseCardTemplate, ICardTemplate
     {
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "GreenSlime",
             MaxHealth = 5,

@@ -10,7 +10,7 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class AnomuraFungus : ModSystem, ICardTemplate
+    internal class AnomuraFungus : BaseCardTemplate, ICardTemplate
     {
         // Creatures that attack the target gain lifesteal this turn
         private class LifestealOnAttackModifier: ICardModifier
@@ -22,7 +22,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             public bool ShouldRemove(GameEventInfo eventInfo) => eventInfo.Event == GameEvent.END_TURN;
         }
 
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "AnomuraFungus",
             MaxHealth = 10,

@@ -11,14 +11,14 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class Goldfish: ModSystem, ICardTemplate
+    internal class Goldfish: BaseCardTemplate, ICardTemplate
     {
         private void PondHealing(GamePlayer player, Zone zone, Zone targetZone)
         {
             targetZone.PlacedCard.Heal(2);
         }
 
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "Goldfish",
             MaxHealth = 6,

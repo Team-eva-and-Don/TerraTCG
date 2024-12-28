@@ -11,7 +11,7 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class Mimic : ModSystem, ICardTemplate
+    internal class Mimic : BaseCardTemplate, ICardTemplate
     {
         private class EquipCostModifier : ICardModifier
         {
@@ -25,7 +25,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             }
         }
 
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "Mimic",
             MaxHealth = 8,

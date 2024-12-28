@@ -12,9 +12,9 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class AngelStatue : ModSystem, ICardTemplate
+    internal class AngelStatue : BaseCardTemplate, ICardTemplate
     {
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "AngelStatue",
             CardType = CardType.ITEM,

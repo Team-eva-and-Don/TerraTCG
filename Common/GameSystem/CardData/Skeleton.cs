@@ -9,9 +9,9 @@ using TerraTCG.Common.GameSystem.GameState;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class Skeleton : ModSystem, ICardTemplate
+    internal class Skeleton : BaseCardTemplate, ICardTemplate
     {
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "Skeleton",
             MaxHealth = 8,

@@ -9,9 +9,9 @@ using TerraTCG.Common.GameSystem.GameState;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class Zombie : ModSystem, ICardTemplate
+    internal class Zombie : BaseCardTemplate, ICardTemplate
     {
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "Zombie",
             MaxHealth = 7,

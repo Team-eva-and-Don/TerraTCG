@@ -11,14 +11,14 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class Squirrel : ModSystem, ICardTemplate
+    internal class Squirrel : BaseCardTemplate, ICardTemplate
     {
         private void ForestCheer(GamePlayer player, Zone zone, Zone targetZone)
         {
             targetZone.PlacedCard.AddModifiers([new FlatDamageModifier(1, [GameEvent.AFTER_ATTACK, GameEvent.END_TURN])]);
         }
 
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "Squirrel",
             MaxHealth = 5,

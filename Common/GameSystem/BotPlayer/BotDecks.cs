@@ -12,9 +12,9 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
     internal class BotDecks
     {
         private static readonly Random random = new Random();
-        public static Card CreateCard<T>() where T : ModSystem, ICardTemplate
+        public static Card CreateCard<T>() where T : BaseCardTemplate, ICardTemplate
         {
-            return ModContent.GetInstance<T>().CreateCard();
+            return ModContent.GetInstance<T>().Card;
         }
         
         public static CardCollection GetDeck(int deckIdx = -1)

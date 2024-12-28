@@ -9,9 +9,9 @@ using TerraTCG.Common.GameSystem.GameState;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class Bunny : ModSystem, ICardTemplate
+    internal class Bunny : BaseCardTemplate, ICardTemplate
     {
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "Bunny",
             MaxHealth = 5,

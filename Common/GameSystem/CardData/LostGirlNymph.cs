@@ -11,7 +11,7 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class LostGirl : ModSystem, ICardTemplate
+    internal class LostGirl : BaseCardTemplate, ICardTemplate
     {
         private class TransformLostGirlModifier : ICardModifier
         {
@@ -27,7 +27,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             }
         }
 
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "LostGirl",
             MaxHealth = 6,
@@ -48,9 +48,9 @@ namespace TerraTCG.Common.GameSystem.CardData
         };
     }
 
-    internal class Nymph : ModSystem, ICardTemplate
+    internal class Nymph : BaseCardTemplate, ICardTemplate
     {
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "Nymph",
             MaxHealth = 8,

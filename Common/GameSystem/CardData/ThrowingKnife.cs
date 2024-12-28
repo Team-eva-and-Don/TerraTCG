@@ -12,9 +12,9 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class ThrowingKnife : ModSystem, ICardTemplate
+    internal class ThrowingKnife : BaseCardTemplate, ICardTemplate
     {
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "ThrowingKnife",
             CardType = CardType.ITEM,

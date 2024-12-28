@@ -12,7 +12,7 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class Harpy : ModSystem, ICardTemplate
+    internal class Harpy : BaseCardTemplate, ICardTemplate
     {
         private class HarpyDefenseBreakModifier(Zone targetZone) : ICardModifier
         {
@@ -26,7 +26,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             public bool ShouldRemove(GameEventInfo gameEvent) => gameEvent.Event == GameEvent.END_TURN;
         }
 
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "Harpy",
             MaxHealth = 7,

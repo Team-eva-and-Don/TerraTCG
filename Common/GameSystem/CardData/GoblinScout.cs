@@ -10,7 +10,7 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class GoblinScout : ModSystem, ICardTemplate
+    internal class GoblinScout : BaseCardTemplate, ICardTemplate
     {
         internal class DamageModifier : ICardModifier
         {
@@ -21,7 +21,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             }
         }
 
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "GoblinScout",
             MaxHealth = 7,

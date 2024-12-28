@@ -12,7 +12,7 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class Pinky : ModSystem, ICardTemplate
+    internal class Pinky : BaseCardTemplate, ICardTemplate
     {
         private class SlimeCostModifier : ICardModifier
         {
@@ -26,7 +26,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             }
         }
 
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "Pinky",
             MaxHealth = 8,

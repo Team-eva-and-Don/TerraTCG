@@ -13,9 +13,9 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class SwiftnessPotion: ModSystem, ICardTemplate
+    internal class SwiftnessPotion: BaseCardTemplate, ICardTemplate
     {
-        public Card CreateCard() => new ()
+        public override Card CreateCard() => new ()
         {
             Name = "SwiftnessPotion",
             CardType = CardType.ITEM,
