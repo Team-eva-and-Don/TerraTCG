@@ -22,7 +22,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
         {
             base.Update(gameTime);
             var isClicked = IsClicked();
-            var localPlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>();
+            var localPlayer = TCGPlayer.LocalPlayer;
             var gamePlayer = localPlayer.GamePlayer;
             if (!(gamePlayer?.IsMyTurn ?? false))
             {
@@ -52,7 +52,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
             var origin = new Vector2(bgTexture.Width, bgTexture.Height) / 2;
             spriteBatch.Draw(bgTexture, Position, bgTexture.Bounds, Color.White, 0, origin, 1f, SpriteEffects.None, 0);
 
-            var buttonText = Language.GetTextValue($"Mods.TerraTCG.Cards.GameActions.EndTurn");
+            var buttonText = Language.GetTextValue($"Mods.TerraTCG.Cards.Common.EndTurn");
             CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, buttonText, Position, centered: true);
         }
     }

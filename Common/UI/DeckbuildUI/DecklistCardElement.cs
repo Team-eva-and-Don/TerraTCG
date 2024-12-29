@@ -5,9 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
+using Terraria.Localization;
 using Terraria.UI;
+using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState;
 
@@ -24,6 +27,15 @@ namespace TerraTCG.Common.UI.DeckbuildUI
 
         const float CARD_SCALE = 0.8f;
         private static Rectangle CARD_PICTURE_BOUNDS = new(18, 24, 102, 54);
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+            if(ContainsPoint(Main.MouseScreen))
+            {
+                TCGPlayer.LocalPlayer.MouseoverCard = SourceCard;
+            }
+        }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
@@ -62,6 +74,12 @@ namespace TerraTCG.Common.UI.DeckbuildUI
 
             var countPos = new Vector2(0, CARD_PICTURE_BOUNDS.Height - textBounds.Y);
             CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, $"{Count}", Position + paddingOffset + countPos, scale: scale, font: font.Value);
+
+            if(ContainsPoint(Main.MouseScreen))
+            {
+                var tooltipText = Language.GetTextValue("Mods.TerraTCG.Cards.Common.RemoveFromDeck").Replace("%%", SourceCard.CardName);
+                DeckbuildState.SetTooltip(tooltipText);
+            }
         }
     }
 }

@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
 using Terraria.ModLoader;
+using Terraria.ModLoader.UI;
 using Terraria.UI;
 using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.UI.GameFieldUI;
@@ -22,6 +23,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         private PlayerDeckList playerDeckList;
         private DeckSelector deckSelector;
         private CardListFilter cardListFilter;
+        private CardPreviewElement cardPreview;
 
         const int DECKBUILD_WIDTH = 616;
         const int DECKLIST_WIDTH = 304;
@@ -72,6 +74,10 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             {
                 OnClickAction = ()=>ModContent.GetInstance<UserInterfaces>().StopDeckbuild()
             };
+
+
+            cardPreview = new(); 
+
             Append(cancelButton);
 
             Append(deckbuildCardList);
@@ -81,6 +87,8 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             Append(deckSelector);
 
             Append(cardListFilter);
+
+            Append(cardPreview);
 
         }
 
@@ -111,8 +119,18 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             GameFieldState.SetRectangle(cardListFilter,
                 deckbuildCardList.Left.Pixels, deckbuildCardList.Top.Pixels - 68, DECKBUILD_WIDTH, 64);
 
+            GameFieldState.SetRectangle(cardPreview,
+                deckbuildCardList.Left.Pixels - 186, deckbuildCardList.Top.Pixels + windowHeight/2 - 120, 180, 240);
+
             GameFieldState.SetRectangle(cancelButton, 16, Main.screenHeight - 16 - 48, 38, 48);
             base.Update(gameTime);
+        }
+
+        public static void SetTooltip(string tooltip)
+        {
+            Main.LocalPlayer.cursorItemIconEnabled = false;
+            Main.ItemIconCacheUpdate(0);
+            UICommon.TooltipMouseText(tooltip);
         }
     }
 }

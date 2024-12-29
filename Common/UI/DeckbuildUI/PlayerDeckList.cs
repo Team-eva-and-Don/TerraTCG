@@ -56,7 +56,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
 
         private void UpdateCardPositions()
         {
-            var cardList = Main.LocalPlayer.GetModPlayer<TCGPlayer>().Deck.Cards;
+            var cardList = TCGPlayer.LocalPlayer.Deck.Cards;
 
             var cardCounts = cardList.GroupBy(g => g.Name).Select(y => (y.First(), y.Count())).ToList();
 

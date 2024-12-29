@@ -914,6 +914,11 @@ Cards: {
 		SPIKED: Attackers take damage
 	}
 
-	Common.Turn: Turn
-	GameActions.EndTurn: Pass
+	Common: {
+		Turn: Turn
+		EndTurn: Pass
+		AddToDeck: Add 1 %% to deck
+		RemoveFromDeck: Remove 1 %% from deck
+		UseDeck: Use Deck %%
+	}
 }

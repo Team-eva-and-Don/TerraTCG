@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
+using Terraria.Localization;
 using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.Drawing;
 
@@ -28,7 +29,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            BackgroundColor = Main.LocalPlayer.GetModPlayer<TCGPlayer>().ActiveDeck == DeckIdx ? 
+            BackgroundColor = TCGPlayer.LocalPlayer.ActiveDeck == DeckIdx ? 
                 Color.Goldenrod * 0.75f : new Color(73, 94, 171, 180);
         }
 
@@ -45,6 +46,12 @@ namespace TerraTCG.Common.UI.DeckbuildUI
 
             var font = FontAssets.MouseText.Value;
             CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, Label, center + 4 * Vector2.UnitY, centered: true, font: font);
+
+            if(ContainsPoint(Main.MouseScreen))
+            {
+                var tooltipText = Language.GetTextValue("Mods.TerraTCG.Cards.Common.UseDeck").Replace("%%", Label);
+                DeckbuildState.SetTooltip(tooltipText);
+            }
 
         }
     }

@@ -24,7 +24,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
 
         public override void Update(GameTime gameTime)
         {
-            var localPlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>();
+            var localPlayer = TCGPlayer.LocalPlayer;
             localPlayer.GameFieldPosition = Position;
 
             var gamePlayer = localPlayer.GamePlayer;
@@ -51,8 +51,8 @@ namespace TerraTCG.Common.UI.GameFieldUI
                     Main.LocalPlayer.mouseInterface = true;
                     if(zone.HasPlacedCard())
                     {
-                        gamePlayer.MouseoverZone = zone;
-                        gamePlayer.MouseoverCard = zone.PlacedCard.Template;
+                        localPlayer.MouseoverZone = zone;
+                        localPlayer.MouseoverCard = zone.PlacedCard.Template;
                     }
                     if(IsClicked())
                     {

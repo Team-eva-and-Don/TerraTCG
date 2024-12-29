@@ -66,6 +66,9 @@ namespace TerraTCG.Common.GameSystem
             new CardCollection(),
         ];
 
+        public Card MouseoverCard { get; set; }
+        public Zone MouseoverZone { get; set; }
+
         public CardCollection Deck { get => SavedDecks[ActiveDeck]; set { } }
 
         // TODO this is not the correct place to cache this info, but is the easiest
@@ -90,6 +93,8 @@ namespace TerraTCG.Common.GameSystem
         public void EndGame()
         {
             GamePlayer = null;
+            MouseoverCard = null;
+            MouseoverZone = null;
             ModContent.GetInstance<UserInterfaces>().EndGame();
         }
     }

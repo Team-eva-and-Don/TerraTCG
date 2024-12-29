@@ -19,7 +19,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
         {
             base.Update(gameTime);
             var isClicked = IsClicked();
-            var localPlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>();
+            var localPlayer = TCGPlayer.LocalPlayer;
             var gamePlayer = localPlayer.GamePlayer;
             if (!(gamePlayer?.InProgressAction?.CanAcceptActionButton() ?? false))
             {

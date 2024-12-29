@@ -25,7 +25,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
         {
             get
             {
-                var localPlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>();
+                var localPlayer = TCGPlayer.LocalPlayer;
                 var gamePlayer = localPlayer.GamePlayer;
                 var yLerpPoint = gamePlayer.Owns(targetZone) ? 0.3f : 0.8f;
                 var placement = ProjectedFieldUtils.Instance.WorldSpaceToScreenSpace(gamePlayer, targetZone, new(0.5f, yLerpPoint));

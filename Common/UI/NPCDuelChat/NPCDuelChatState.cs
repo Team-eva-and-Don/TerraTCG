@@ -30,7 +30,7 @@ namespace TerraTCG.Common.UI.NPCDuelChat
 
         private void OnClickChatButton(UIMouseEvent evt, UIElement listeningElement)
         {
-            var myPlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>();
+            var myPlayer = TCGPlayer.LocalPlayer;
             var opponent = new SimpleBotPlayer();
 
             myPlayer.Deck = BotDecks.GetDeck();

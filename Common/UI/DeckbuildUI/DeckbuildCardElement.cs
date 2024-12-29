@@ -5,7 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria;
+using Terraria.Localization;
 using Terraria.UI;
+using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState;
 
@@ -20,6 +23,15 @@ namespace TerraTCG.Common.UI.DeckbuildUI
 
         internal const int CARD_HEIGHT = 180;
         internal const int CARD_WIDTH = 135;
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+            if(ContainsPoint(Main.MouseScreen))
+            {
+                TCGPlayer.LocalPlayer.MouseoverCard = sourceCard;
+            }
+        }
 
         private bool GetBounds(out Rectangle bounds)
         {
@@ -48,6 +60,12 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             var texture = sourceCard.Texture;
             spriteBatch.Draw(texture.Value, Position, bounds, Color.White, 0, default, CARD_SCALE, SpriteEffects.None, 0f);
             CardTextRenderer.Instance.DrawCardText(spriteBatch, sourceCard, Position, CARD_SCALE);
+
+            if(ContainsPoint(Main.MouseScreen))
+            {
+                var tooltipText = Language.GetTextValue("Mods.TerraTCG.Cards.Common.AddToDeck").Replace("%%", sourceCard.CardName);
+                DeckbuildState.SetTooltip(tooltipText);
+            }
         }
     }
 }

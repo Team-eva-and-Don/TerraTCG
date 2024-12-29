@@ -23,7 +23,7 @@ namespace TerraTCG.Common.Commands
         {
             if(caller.Player.whoAmI == Main.myPlayer)
             {
-                var myPlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>();
+                var myPlayer = TCGPlayer.LocalPlayer;
                 var opponent = new SimpleBotPlayer();
 
                 myPlayer.Deck = BotDecks.GetDeck(args.Length > 0 ? int.Parse(args[0]) : -1);

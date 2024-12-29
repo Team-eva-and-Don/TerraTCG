@@ -44,9 +44,6 @@ namespace TerraTCG.Common.GameSystem.GameState
         // TODO real implementation
         internal bool IsMyTurn => Game.CurrentTurn.ActivePlayer == this;
 
-        public Card MouseoverCard { get; internal set; }
-        public Zone MouseoverZone { get; internal set; }
-
         public static Card GetCard<T>() where T : BaseCardTemplate, ICardTemplate
         {
             return ModContent.GetInstance<T>().Card;

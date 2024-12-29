@@ -27,6 +27,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
 
         public override void Update(GameTime gameTime)
         {
+            var localPlayer = TCGPlayer.LocalPlayer;
             var gamePlayer = TCGPlayer.LocalGamePlayer;
             if (gamePlayer == null || gamePlayer.Hand?.Cards?.Count == 0)
             {
@@ -45,7 +46,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
 
                 if(scaledBounds.Contains((int)Main.MouseScreen.X, (int)Main.MouseScreen.Y)) {
                     Main.LocalPlayer.mouseInterface = true;
-                    gamePlayer.MouseoverCard = card;
+                    localPlayer.MouseoverCard = card;
                     if(IsClicked())
                     {
                         gamePlayer.SelectCardInHand(card);

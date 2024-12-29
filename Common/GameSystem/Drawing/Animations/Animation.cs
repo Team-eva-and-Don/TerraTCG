@@ -104,7 +104,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
 
             var font = FontAssets.ItemStack.Value;
 
-            var localPlayer = Main.LocalPlayer.GetModPlayer<TCGPlayer>();
+            var localPlayer = TCGPlayer.LocalPlayer;
             var gamePlayer = localPlayer.GamePlayer;
             // right-justify health above the NPC
             {

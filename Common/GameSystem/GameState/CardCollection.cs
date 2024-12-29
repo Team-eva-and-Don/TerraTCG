@@ -9,7 +9,7 @@ namespace TerraTCG.Common.GameSystem.GameState
     // Class representing an ordered collection of cards - eg. a hand, deck, or graveyard
     internal class CardCollection
     {
-        internal List<Card> Cards { get; set; } = new List<Card>();
+        internal List<Card> Cards { get; set; } = [];
         private readonly Random random = new();
 
 
@@ -39,6 +39,14 @@ namespace TerraTCG.Common.GameSystem.GameState
         public bool Empty()
         {
             return Cards.Count == 0;
+        }
+
+        public CardCollection Copy()
+        {
+            return new CardCollection()
+            {
+                Cards = new List<Card>(Cards)
+            };
         }
     }
 }

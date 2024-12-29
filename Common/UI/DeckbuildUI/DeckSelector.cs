@@ -31,7 +31,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
                 };
                 btn.Top.Percent = 0.5f;
                 btn.Left.Percent = i / (float)DECK_COUNT;
-                btn.OnLeftClick += (evt, elem) => Main.LocalPlayer.GetModPlayer<TCGPlayer>().ActiveDeck = localI;
+                btn.OnLeftClick += (evt, elem) => TCGPlayer.LocalPlayer.ActiveDeck = localI;
 
                 Append(btn);
                 buttonList.Add(btn);
