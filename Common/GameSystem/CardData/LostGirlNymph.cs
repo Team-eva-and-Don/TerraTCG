@@ -58,6 +58,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             NPCID = NPCID.Nymph,
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.CAVERN, CardSubtype.CASTER],
+            IsCollectable = false,
             Modifiers = [
                 new EvasiveModifier(),
             ],

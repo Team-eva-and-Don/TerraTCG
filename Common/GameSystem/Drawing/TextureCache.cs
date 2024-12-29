@@ -41,6 +41,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
         public Asset<Texture2D> LightRay { get; private set; }
         public Asset<Texture2D> MapBG { get; private set; }
         public Asset<Texture2D> CancelButton { get; private set; }
+        public Asset<Texture2D> CardPreviewFrame { get; private set; }
         public Asset<Texture2D> KingSlimeCrown { get; private set; }
         internal Dictionary<int, Asset<Texture2D>> NPCTextureCache { get; private set; }
         internal Dictionary<int, Asset<Texture2D>> ItemTextureCache { get; private set; }
@@ -68,6 +69,8 @@ namespace TerraTCG.Common.GameSystem.Drawing
             LightRay = Main.Assets.Request<Texture2D>("Images/Projectile_" + ProjectileID.MedusaHeadRay);
             MapBG = Main.Assets.Request<Texture2D>("Images/MapBG1");
             CancelButton = Mod.Assets.Request<Texture2D>("Assets/FieldElements/CancelGame");
+            CardPreviewFrame = Mod.Assets.Request<Texture2D>("Assets/FieldElements/CardPreviewFrame");
+
             KingSlimeCrown = Main.Assets.Request<Texture2D>("Images/Extra_" + ExtrasID.KingSlimeCrown);
             NPCTextureCache = [];
             ItemTextureCache = [];

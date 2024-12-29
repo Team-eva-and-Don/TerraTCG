@@ -54,7 +54,7 @@ namespace TerraTCG.Common.GameSystem
 
         public GamePlayer GamePlayer { get; set; }
 
-        public CardCollection Deck { get; set; }
+        public CardCollection Deck { get; set; } = BotDecks.GetGoblinDeck();
 
         // TODO this is not the correct place to cache this info, but is the easiest
         // Place within UI coordinates that the bottom center of the player's

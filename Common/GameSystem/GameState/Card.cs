@@ -81,6 +81,9 @@ namespace TerraTCG.Common.GameSystem.GameState
         // Points awarded on defeating this card
         internal int Points { get; set; } = 1;
 
+        // Used for cards that can only be created by other cards (eg. Nymph)
+        internal bool IsCollectable { get; set; } = true;
+
         internal SelectInHandAction SelectInHandAction { get; set; }
             = (zone, player) => new DeployCreatureAction(zone, player);
         internal SelectOnFieldAction SelectOnFieldAction { get; set; }
