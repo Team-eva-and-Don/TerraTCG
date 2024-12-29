@@ -23,12 +23,12 @@ namespace TerraTCG.Common.GameSystem.CardData
             Attacks = [
                 new() {
                     Damage = 2,
-                    Cost = 1,
+                    Cost = 2,
                 }
             ],
             Modifiers = [
                 new ZealousModifier(),
-                new FlatDamageModifier(1, removeOn: [GameEvent.END_TURN]),
+                new EvasiveModifier(),
             ]
         };
     }

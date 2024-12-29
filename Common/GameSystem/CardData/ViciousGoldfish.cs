@@ -10,25 +10,25 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class AntlionSwarmer : BaseCardTemplate, ICardTemplate
+    internal class ViciousGoldfish : BaseCardTemplate, ICardTemplate
     {
         public override Card CreateCard() => new ()
         {
-            Name = "AntlionSwarmer",
+            Name = "ViciousGoldfish",
             MaxHealth = 5,
             MoveCost = 1,
             CardType = CardType.CREATURE,
-            NPCID = NPCID.FlyingAntlion,
-            SubTypes = [CardSubtype.DESERT, CardSubtype.SCOUT],
+            NPCID = NPCID.CrimsonGoldfish,
+            SubTypes = [CardSubtype.BLOOD_MOON, CardSubtype.SCOUT],
             Attacks = [
                 new() {
                     Damage = 2,
-                    Cost = 2,
+                    Cost = 1,
                 }
             ],
             Modifiers = [
                 new ZealousModifier(),
-                new EvasiveModifier(),
+                new FlatDamageModifier(1, removeOn: [GameEvent.END_TURN]),
             ]
         };
     }

@@ -208,22 +208,22 @@ Cards: {
 			'''
 	}
 
-	AntlionSwarmer: {
-		Name: Antlion Swarmer
-		Attack.Name: Mandible Swarm
+	WanderingEyeFish: {
+		Name: Eye Fish
+		Attack.Name: Bloody Gaze
 		Modifier.Description: Zealous, Evasive
 	}
 
-	AntlionCharger: {
-		Name: Antlion Charger
-		Attack.Name: Mandible Charge
+	ZombieMerman: {
+		Name: Zombie Merman
+		Attack.Name: Drag Down
 	}
 
-	WanderingEyeFish: {
-		Name: Eye Fish
+	ViciousGoldfish: {
+		Name: Vicious Goldfish
 
 		Attack: {
-			Name: Bloody Gaze
+			Name: Bloody Scales
 			Description:
 				'''
 				+1 dmg the turn 
@@ -236,6 +236,21 @@ Cards: {
 			Zealous: This card may
 			act the turn it enters
 			'''
+	}
+
+	ViciousBunny: {
+		Name: Vicious Bunny
+		Attack.Name: Bloody Kick
+
+		Skill: {
+			Name: Skill: Blood Cheer
+			Description:
+				'''
+				Target ally deals +1 dmg 
+				this turn, and gains
+				Bleed (takes +1 dmg)
+				'''
+		}
 	}
 
 	BloodZombie: {

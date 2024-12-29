@@ -10,19 +10,19 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class AntlionCharger : BaseCardTemplate, ICardTemplate
+    internal class ZombieMerman : BaseCardTemplate, ICardTemplate
     {
         public override Card CreateCard() => new ()
         {
-            Name = "AntlionCharger",
-            MaxHealth = 7,
+            Name = "ZombieMerman",
+            MaxHealth = 6,
             MoveCost = 1,
             CardType = CardType.CREATURE,
-            NPCID = NPCID.WalkingAntlion,
-            SubTypes = [CardSubtype.DESERT, CardSubtype.SCOUT],
+            NPCID = NPCID.ZombieMerman,
+            SubTypes = [CardSubtype.BLOOD_MOON, CardSubtype.SCOUT],
             Attacks = [
                 new() {
-                    Damage = 2,
+                    Damage = 3,
                     Cost = 1,
                 }
             ],
