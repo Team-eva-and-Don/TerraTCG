@@ -56,11 +56,14 @@ namespace TerraTCG.Common.GameSystem
 
         public int ActiveDeck { get; set; } = 0;
         public List<CardCollection> SavedDecks { get; set; } = [
-             BotDecks.GetForestDeck(),
-             BotDecks.GetGoblinDeck(),
-             BotDecks.GetCrabDeck(),
-             BotDecks.GetMimicDeck(),
-             BotDecks.GetMushroomDeck(),
+            BotDecks.GetForestDeck(),
+            BotDecks.GetGoblinDeck(),
+            BotDecks.GetCrabDeck(),
+            BotDecks.GetMimicDeck(),
+            BotDecks.GetMushroomDeck(),
+            new CardCollection(),
+            new CardCollection(),
+            new CardCollection(),
         ];
 
         public CardCollection Deck { get => SavedDecks[ActiveDeck]; set { } }

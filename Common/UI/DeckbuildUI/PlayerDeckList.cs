@@ -19,11 +19,13 @@ namespace TerraTCG.Common.UI.DeckbuildUI
 
         private UIScrollbar scrollBar;
 
+        private const int MAX_SLOTS = 30;
+
         public override void OnInitialize()
         {
             deckList = [];
 
-            for (int _ = 0; _ < 20; _++)
+            for (int _ = 0; _ < MAX_SLOTS; _++)
             {
 
                 deckList.Add(new DecklistCardElement()
@@ -85,6 +87,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         }
         public override void Update(GameTime gameTime)
         {
+            Main.LocalPlayer.mouseInterface = true;
             UpdateCardPositions();
             base.Update(gameTime);
         }
