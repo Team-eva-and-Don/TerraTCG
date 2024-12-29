@@ -21,8 +21,8 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         private DeckbuildCardList deckbuildCardList;
         private PlayerDeckList playerDeckList;
 
-        const int DECKBUILD_WIDTH = 640;
-        const int DECKLIST_WIDTH = 276;
+        const int DECKBUILD_WIDTH = 616;
+        const int DECKLIST_WIDTH = 304;
         const int MIN_Y_MARGIN = 32;
         const int PADDING_Y = 16;
         public override void OnInitialize()
