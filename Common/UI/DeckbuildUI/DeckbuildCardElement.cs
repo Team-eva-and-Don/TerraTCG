@@ -34,7 +34,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         {
             var activeDeck = TCGPlayer.LocalPlayer.Deck;
             var cardCount = activeDeck.Cards.Where(c => c.Name == sourceCard.Name).Count();
-            if(cardCount < 2)
+            if(cardCount < 2 && activeDeck.Cards.Count < 20)
             {
                 activeDeck.Cards.Add(sourceCard);
             }

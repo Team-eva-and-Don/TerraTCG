@@ -30,12 +30,6 @@ namespace TerraTCG.Common.GameSystem.GameState
         // Biomes
         FOREST,
         CAVERN,
-        // Duplicate CardTypes (for text rendering)
-        TOWNSFOLK,
-        ITEM,
-        // Item Subtypes
-        EQUIPMENT,
-        CONSUMABLE,
         // Creature Supertypes
         EXPERT,
         BOSS,
@@ -55,6 +49,14 @@ namespace TerraTCG.Common.GameSystem.GameState
         OCEAN,
         GOBLIN_ARMY,
         MUSHROOM,
+
+        // Item Subtypes
+        EQUIPMENT,
+        CONSUMABLE,
+
+        // Duplicate CardTypes (for text rendering)
+        TOWNSFOLK,
+        ITEM,
     }
 
     // Bot helper function, apply additional
@@ -73,6 +75,9 @@ namespace TerraTCG.Common.GameSystem.GameState
         internal CardType CardType { get; set; }
 
         internal List<CardSubtype> SubTypes { get; set; }
+
+        internal CardSubtype SortType => 
+            (SubTypes[0] == CardSubtype.EXPERT || SubTypes[0] == CardSubtype.BOSS) ? SubTypes[1] : SubTypes[0];
 
         internal int MaxHealth { get; set; }
 

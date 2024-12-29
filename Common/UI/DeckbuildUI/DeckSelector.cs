@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
+using Terraria.Localization;
 using Terraria.UI;
 using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.Drawing;
@@ -49,7 +50,17 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             base.Draw(spriteBatch);
             var textPos = new Vector2(GetInnerDimensions().X, GetInnerDimensions().Y);
             var font = FontAssets.MouseText.Value;
-            CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, "Deck Selector:", textPos, font: font);
+            var text = Language.GetTextValue("Mods.TerraTCG.Cards.Common.DeckEdit").Replace("%%", $"{TCGPlayer.LocalPlayer.ActiveDeck + 1}");
+            CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, text, textPos, font: font);
+
+            var deckCountLabel = Language.GetTextValue("Mods.TerraTCG.Cards.Common.DeckCount");
+
+            var deckCountText = $"{deckCountLabel}: {TCGPlayer.LocalPlayer.Deck.Cards.Count}/20";
+
+            var deckCountWidth = font.MeasureString(deckCountText).X;
+            var deckCountPos = textPos + new Vector2(GetInnerDimensions().Width - deckCountWidth, 0);
+            CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, deckCountText, deckCountPos, font: font);
+
         }
     }
 }

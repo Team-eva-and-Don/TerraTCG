@@ -25,9 +25,10 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             cards = Assembly.GetAssembly(typeof(BaseCardTemplate))
                 .GetTypes()
                 .Where(t => t.IsSubclassOf(typeof(BaseCardTemplate)))
-                .OrderBy(t => t.Name)
                 .Select(t => ((BaseCardTemplate)Activator.CreateInstance(t)).CreateCard())
                 .Where(c=>c.IsCollectable)
+                .OrderBy(t => t.SortType)
+                .ThenBy(t => t.Name)
                 .Select(c => new DeckbuildCardElement(c))
                 .ToList();
 

@@ -37,6 +37,25 @@ Cards: {
 		}
 	}
 
+	SlimedZombie: {
+		Name: Slimed Zombie
+
+		Attack: {
+			Name: Slime Bite
+			Description:
+				'''
+				Deals +1 dmg if you
+				control a slime.
+				'''
+		}
+
+		Modifier.Description:
+			'''
+			Takes -1 dmg if you 
+			control a slime.
+			'''
+	}
+
 	Pinky: {
 		Name: Pinky
 
@@ -920,5 +939,7 @@ Cards: {
 		AddToDeck: Add 1 %% to deck
 		RemoveFromDeck: Remove 1 %% from deck
 		UseDeck: Use Deck %%
+		DeckEdit: Edit Deck %%
+		DeckCount: Cards
 	}
 }

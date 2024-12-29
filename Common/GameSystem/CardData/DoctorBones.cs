@@ -33,7 +33,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             MoveCost = 2,
             NPCID = NPCID.DoctorBones,
             CardType = CardType.CREATURE,
-            SubTypes = [CardSubtype.CAVERN, CardSubtype.FIGHTER],
+            SubTypes = [CardSubtype.JUNGLE, CardSubtype.FIGHTER],
             Modifiers = [
                 new ControlsCritterModifier()
             ],
