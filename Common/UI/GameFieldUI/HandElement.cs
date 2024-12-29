@@ -49,7 +49,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
                     localPlayer.MouseoverCard = card;
                     if(IsClicked())
                     {
-                        gamePlayer.SelectCardInHand(card);
+                        gamePlayer.SelectCardInHand(i);
                         break;
                     }
                 }
@@ -57,9 +57,8 @@ namespace TerraTCG.Common.UI.GameFieldUI
             base.Update(gameTime);
         }
 
-        internal Vector2 GetCardPosition(Card card)
+        internal Vector2 GetCardPosition(int cardIdx)
         {
-            var cardIdx = TCGPlayer.LocalGamePlayer.Hand.Cards.IndexOf(card);
             return CardPosition0 + Vector2.UnitX * cardIdx * (CARD_WIDTH + CARD_MARGIN);
 
         }
@@ -71,12 +70,13 @@ namespace TerraTCG.Common.UI.GameFieldUI
             {
                 return;
             }
-            foreach (var card in gamePlayer.Hand.Cards)
+            for (int i = 0; i < gamePlayer.Hand.Cards.Count; i++)
             {
-                Vector2 currentPos = GetCardPosition(card);
+                var card = gamePlayer.Hand.Cards[i];
+                Vector2 currentPos = GetCardPosition(i);
                 var texture = card.Texture;
                 spriteBatch.Draw(texture.Value, currentPos, texture.Value.Bounds, Color.White, 0, default, CARD_SCALE, SpriteEffects.None, 0f);
-                if (card == gamePlayer.SelectedHandCard)
+                if (i == gamePlayer.SelectedHandIdx)
                 {
                     // Draw a highlight over the card
                     var highlightTexture = TextureCache.Instance.ZoneHighlighted;

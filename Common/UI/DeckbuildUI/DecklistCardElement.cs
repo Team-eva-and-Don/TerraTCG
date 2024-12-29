@@ -28,6 +28,12 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         const float CARD_SCALE = 0.8f;
         private static Rectangle CARD_PICTURE_BOUNDS = new(18, 24, 102, 54);
 
+        public override void OnInitialize()
+        {
+            base.OnInitialize();
+            OnLeftClick += OnClickDecklistCard;
+        }
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
@@ -35,6 +41,13 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             {
                 TCGPlayer.LocalPlayer.MouseoverCard = SourceCard;
             }
+        }
+
+        private void OnClickDecklistCard(UIMouseEvent evt, UIElement listeningElement)
+        {
+            var activeDeck = TCGPlayer.LocalPlayer.Deck;
+            var toRemove = activeDeck.Cards.Where(c => c.Name == SourceCard.Name).First();
+            activeDeck.Cards.Remove(toRemove);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

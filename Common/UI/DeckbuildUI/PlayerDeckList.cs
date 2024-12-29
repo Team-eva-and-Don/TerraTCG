@@ -58,7 +58,10 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         {
             var cardList = TCGPlayer.LocalPlayer.Deck.Cards;
 
-            var cardCounts = cardList.GroupBy(g => g.Name).Select(y => (y.First(), y.Count())).ToList();
+            var cardCounts = cardList.GroupBy(g => g.Name)
+                .Select(group => (group.First(), group.Count()))
+                .OrderBy(pair=>pair.Item1.CardName)
+                .ToList();
 
             var scrollOffset = scrollBar.ViewPosition / 19f; // empirically determined to be [0->20)
             var totalRowCount = cardCounts.Count;

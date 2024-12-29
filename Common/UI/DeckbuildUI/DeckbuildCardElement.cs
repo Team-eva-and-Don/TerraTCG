@@ -24,6 +24,22 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         internal const int CARD_HEIGHT = 180;
         internal const int CARD_WIDTH = 135;
 
+        public override void OnInitialize()
+        {
+            base.OnInitialize();
+            OnLeftClick += OnClickDeckbuildCard;
+        }
+
+        private void OnClickDeckbuildCard(UIMouseEvent evt, UIElement listeningElement)
+        {
+            var activeDeck = TCGPlayer.LocalPlayer.Deck;
+            var cardCount = activeDeck.Cards.Where(c => c.Name == sourceCard.Name).Count();
+            if(cardCount < 2)
+            {
+                activeDeck.Cards.Add(sourceCard);
+            }
+        }
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);

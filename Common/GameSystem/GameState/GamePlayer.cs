@@ -34,6 +34,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal Field Field { get; set; }
 
+        internal int SelectedHandIdx { get; set; }
         internal Card SelectedHandCard { get; set; }
 
         internal Zone SelectedFieldZone { get; set; }
@@ -77,6 +78,7 @@ namespace TerraTCG.Common.GameSystem.GameState
         public void SelectZone(Zone zone)
         {
             SelectedHandCard = null;
+            SelectedHandIdx = -1;
             // TODO determine action start based on click more elegantly
             if(IsMyTurn && (InProgressAction?.CanAcceptZone(zone) ?? false))
             {
@@ -98,16 +100,17 @@ namespace TerraTCG.Common.GameSystem.GameState
             }
         }
 
-        public void SelectCardInHand(Card card)
+        public void SelectCardInHand(int handIdx)
         {
             SelectedFieldZone = null;
 
-            SelectedHandCard = card;
+            SelectedHandIdx = handIdx;
+            SelectedHandCard = Hand.Cards[handIdx];
             if(IsMyTurn)
             {
                 // Cancel the previous action
                 InProgressAction?.Cancel();
-                InProgressAction = card?.SelectInHandAction(card, this);
+                InProgressAction = SelectedHandCard?.SelectInHandAction(SelectedHandCard, this);
             }
         }
 
