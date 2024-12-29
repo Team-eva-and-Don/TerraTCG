@@ -20,7 +20,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             NPCID = NPCID.Crab,
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.OCEAN, CardSubtype.FIGHTER],
-            Modifiers = [
+            Modifiers = () => [
                 new RelentlessModifier(),
             ],
             Attacks = [

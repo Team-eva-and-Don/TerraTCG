@@ -24,7 +24,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             Skills = [
                 new() { Cost = 2 }
             ],
-            Modifiers = [
+            Modifiers = () => [
                 new AttackCostReductionModifier(2)  {
                     Texture = TextureCache.Instance.GetItemTexture(ItemID.Muramasa),
                     Source = CardSubtype.EQUIPMENT,

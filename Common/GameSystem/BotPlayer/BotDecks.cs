@@ -33,6 +33,60 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             return allDecks[deckIdx == -1 ? randIdx : deckIdx].Invoke();
         }
 
+        public static CardCollection GetStarterDeck() =>
+            new()
+            {
+                Cards = [
+                    CreateCard<Guide>(), 
+                    CreateCard<Guide>(), 
+                    CreateCard<Bunny>(), 
+                    CreateCard<Bunny>(), 
+                    CreateCard<Squirrel>(), 
+                    CreateCard<Squirrel>(), 
+                    CreateCard<CopperShortsword>(), 
+                    CreateCard<CopperShortsword>(), 
+                    CreateCard<Shackle>(), 
+                    CreateCard<Shackle>(), 
+                    CreateCard<Zombie>(), 
+                    CreateCard<Zombie>(), 
+                    CreateCard<SlimedZombie>(), 
+                    CreateCard<SlimedZombie>(), 
+                    CreateCard<BlueSlime>(), 
+                    CreateCard<BlueSlime>(), 
+                    CreateCard<DemonEye>(), 
+                    CreateCard<DemonEye>(), 
+                    CreateCard<HealingPotion>(), 
+                    CreateCard<HealingPotion>(), 
+                ]
+            };
+
+        public static CardCollection GetStarterJungleDeck() =>
+            new ()
+            {
+                Cards = [
+                    CreateCard<Bunny>(), 
+                    CreateCard<Bunny>(), 
+                    CreateCard<Dryad>(), 
+                    CreateCard<Goldfish>(), 
+                    CreateCard<Guide>(),
+                    CreateCard<Guide>(),
+                    CreateCard<JungleTurtle>(), 
+                    CreateCard<JungleTurtle>(), 
+                    CreateCard<GiantTortoise>(),
+                    CreateCard<GiantTortoise>(),
+                    CreateCard<Wizard>(),
+                    CreateCard<Piranha>(),
+                    CreateCard<SpikedJungleSlime>(),
+                    CreateCard<SpikedJungleSlime>(),
+                    CreateCard<HealingPotion>(), 
+                    CreateCard<HealingPotion>(), 
+                    CreateCard<CobaltShield>(), 
+                    CreateCard<Shackle>(), 
+                    CreateCard<Skeleton>(), 
+                    CreateCard<Skeleton>(), 
+                ]
+            };
+
         public static CardCollection GetJungleDeck() =>
             new ()
             {
@@ -59,7 +113,8 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     CreateCard<CobaltShield>(), 
                 ]
             };
-        public static CardCollection GetBloodMoonDeck() =>
+
+        public static CardCollection GetStarterBloodMoonDeck() =>
             new()
             {
                 Cards = [
@@ -68,8 +123,35 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     CreateCard<Dryad>(), 
                     CreateCard<Dryad>(), 
                     CreateCard<Wizard>(), 
+                    CreateCard<CopperShortsword>(), 
+                    CreateCard<ArmsDealer>(), 
+                    CreateCard<SwiftnessPotion>(), 
+                    CreateCard<BloodZombie>(), 
+                    CreateCard<BloodZombie>(), 
+                    CreateCard<ZombieMerman>(), 
+                    CreateCard<ZombieMerman>(), 
+                    CreateCard<RagePotion>(), 
+                    CreateCard<RagePotion>(), 
+                    CreateCard<DemonEye>(), 
+                    CreateCard<DemonEye>(), 
+                    CreateCard<Drippler>(), 
+                    CreateCard<Drippler>(), 
+                    CreateCard<WanderingEyeFish>(), 
+                    CreateCard<WanderingEyeFish>(), 
+                ]
+            };
+
+        public static CardCollection GetBloodMoonDeck() =>
+            new()
+            {
+                Cards = [
+                    CreateCard<Guide>(), 
+                    CreateCard<Guide>(), 
+                    CreateCard<Dryad>(), 
+                    CreateCard<Dryad>(), 
                     CreateCard<ArmsDealer>(), 
                     CreateCard<ArmsDealer>(), 
+                    CreateCard<SwiftnessPotion>(), 
                     CreateCard<SwiftnessPotion>(), 
                     CreateCard<ViciousGoldfish>(), 
                     CreateCard<ViciousGoldfish>(), 
@@ -85,6 +167,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     CreateCard<WanderingEyeFish>(), 
                 ]
             };
+
         public static CardCollection GetForestDeck() =>
             new()
             {
@@ -92,23 +175,50 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     CreateCard<Guide>(), 
                     CreateCard<Guide>(), 
                     CreateCard<Wizard>(), 
-                    CreateCard<OldMan>(), 
+                    CreateCard<Wizard>(), 
                     CreateCard<Bunny>(), 
                     CreateCard<Bunny>(), 
-                    CreateCard<Squirrel>(), 
-                    CreateCard<CopperShortsword>(), 
-                    CreateCard<CopperShortsword>(), 
+                    CreateCard<PlatinumBroadsword>(), 
+                    CreateCard<PlatinumBroadsword>(), 
                     CreateCard<Zombie>(), 
                     CreateCard<Zombie>(), 
+                    CreateCard<SlimedZombie>(), 
+                    CreateCard<SlimedZombie>(), 
                     CreateCard<BlueSlime>(), 
-                    CreateCard<GreenSlime>(), 
-                    CreateCard<DemonEye>(), 
-                    CreateCard<DemonEye>(), 
+                    CreateCard<BlueSlime>(), 
                     CreateCard<HealingPotion>(), 
-                    CreateCard<FledglingWings>(), 
+                    CreateCard<HealingPotion>(), 
+                    CreateCard<PosessedArmor>(), 
                     CreateCard<PosessedArmor>(), 
                     CreateCard<Wraith>(), 
-                    CreateCard<WanderingEye>(), 
+                    CreateCard<Wraith>(), 
+                ]
+            };
+
+        public static CardCollection GetStarterSkeletonDeck() =>
+            new()
+            {
+                Cards = [
+                    CreateCard<Guide>(), 
+                    CreateCard<Guide>(), 
+                    CreateCard<Shackle>(), 
+                    CreateCard<Shackle>(), 
+                    CreateCard<FledglingWings>(), 
+                    CreateCard<CopperShortsword>(), 
+                    CreateCard<CopperShortsword>(), 
+                    CreateCard<PlatinumBroadsword>(), 
+                    CreateCard<CobaltShield>(), 
+                    CreateCard<CobaltShield>(), 
+                    CreateCard<FeralClaws>(), 
+                    CreateCard<AngryBones>(), 
+                    CreateCard<Muramasa>(), 
+                    CreateCard<UndeadMiner>(), 
+                    CreateCard<UndeadMiner>(), 
+                    CreateCard<Skeleton>(), 
+                    CreateCard<Skeleton>(), 
+                    CreateCard<UndeadViking>(), 
+                    CreateCard<UndeadViking>(), 
+                    CreateCard<HealingPotion>(), 
                 ]
             };
 
@@ -138,6 +248,34 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     CreateCard<HealingPotion>(), 
                 ]
             };
+
+        public static CardCollection GetStarterGoblinDeck() =>
+            new()
+            {
+                Cards = [
+                    CreateCard<Guide>(), 
+                    CreateCard<Guide>(), 
+                    CreateCard<GoblinThief>(), 
+                    CreateCard<GoblinThief>(), 
+                    CreateCard<ThrowingKnife>(), 
+                    CreateCard<ThrowingKnife>(), 
+                    CreateCard<WanderingEyeFish>(), 
+                    CreateCard<WanderingEyeFish>(), 
+                    CreateCard<GoblinArcher>(), 
+                    CreateCard<GoblinArcher>(), 
+                    CreateCard<GoblinScout>(), 
+                    CreateCard<GoblinScout>(), 
+                    CreateCard<HealingPotion>(), 
+                    CreateCard<HealingPotion>(), 
+                    CreateCard<RagePotion>(), 
+                    CreateCard<RagePotion>(), 
+                    CreateCard<Shackle>(), 
+                    CreateCard<IronskinPotion>(), 
+                    CreateCard<ThornsPotion>(), 
+                    CreateCard<SwiftnessPotion>(), 
+                ]
+            };
+
         public static CardCollection GetGoblinDeck() =>
             new()
             {
@@ -191,6 +329,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     CreateCard<SwiftnessPotion>(), 
                 ]
             };
+
         public static CardCollection GetCrabDeck() =>
             new()
             {
@@ -268,6 +407,33 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     CreateCard<IronskinPotion>(),
                     CreateCard<GiantTortoise>(),
                     CreateCard<GiantTortoise>(),
+                ]
+            };
+
+        public static CardCollection GetStarterSlimeDeck() =>
+            new ()
+            {
+                Cards = [
+                    CreateCard<BlueSlime>(), 
+                    CreateCard<BlueSlime>(), 
+                    CreateCard<Guide>(),
+                    CreateCard<Guide>(),
+                    CreateCard<GreenSlime>(), 
+                    CreateCard<GreenSlime>(),
+                    CreateCard<Wizard>(),
+                    CreateCard<Wizard>(),
+                    CreateCard<ToxicSludge>(),
+                    CreateCard<ToxicSludge>(),
+                    CreateCard<SpikedJungleSlime>(),
+                    CreateCard<SpikedJungleSlime>(),
+                    CreateCard<HealingPotion>(), 
+                    CreateCard<HealingPotion>(), 
+                    CreateCard<Pinky>(), 
+                    CreateCard<Pinky>(), 
+                    CreateCard<SlimedZombie>(),
+                    CreateCard<SlimedZombie>(),
+                    CreateCard<MotherSlime>(),
+                    CreateCard<MotherSlime>(),
                 ]
             };
 

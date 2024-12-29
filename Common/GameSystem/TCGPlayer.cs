@@ -124,6 +124,10 @@ namespace TerraTCG.Common.GameSystem
             {
                 for(int i = 0; i < SavedDecks.Count; i++)
                 {
+                    if(!tag.ContainsKey($"deck_{i}"))
+                    {
+                        continue;
+                    }
                     try
                     {
                         var deckList = tag.GetList<string>($"deck_{i}").ToList();

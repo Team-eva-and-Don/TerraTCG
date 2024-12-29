@@ -32,7 +32,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             NPCID = NPCID.CursedSkull,
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.CAVERN, CardSubtype.CASTER],
-            Modifiers = [
+            Modifiers = () => [
                 new EvasiveModifier(),
             ],
             Attacks = [

@@ -30,7 +30,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             NPCID = NPCID.AnomuraFungus,
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.EXPERT, CardSubtype.MUSHROOM, CardSubtype.FIGHTER],
-            Modifiers = [
+            Modifiers = () => [
                 new LifestealModifier(1),
             ],
             Attacks = [

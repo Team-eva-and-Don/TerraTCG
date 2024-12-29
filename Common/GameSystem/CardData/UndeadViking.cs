@@ -33,7 +33,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             NPCID = NPCID.UndeadViking,
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.CAVERN, CardSubtype.FIGHTER],
-            Modifiers = [
+            Modifiers = () => [
                 new DamageModifier()
             ],
             Attacks = [

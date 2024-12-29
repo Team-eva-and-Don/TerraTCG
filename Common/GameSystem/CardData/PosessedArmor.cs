@@ -20,7 +20,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             NPCID = NPCID.PossessedArmor,
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.EXPERT, CardSubtype.FOREST, CardSubtype.FIGHTER],
-            Modifiers = [
+            Modifiers = () => [
                 new ReduceDamageModifier(1),
             ],
             Attacks = [

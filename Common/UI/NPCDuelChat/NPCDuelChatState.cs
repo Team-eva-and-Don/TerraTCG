@@ -18,7 +18,11 @@ namespace TerraTCG.Common.UI.NPCDuelChat
 {
     internal class NPCDuelChatState : UIState
     {
+        // Button that attaches itself to the "real" NPC chat that allows starting a game
         private NPCDuelChatButton chatButton;
+
+        // Menu replicating NPC dialog that appears after the NPC is done talking
+        // private NPCDuelChatDialog dialog;
 
         public override void OnInitialize()
         {

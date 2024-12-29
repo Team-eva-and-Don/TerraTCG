@@ -34,7 +34,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             NPCID = NPCID.Tim,
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.CAVERN, CardSubtype.CASTER],
-            Modifiers = [new MagicMissileModifier()],
+            Modifiers = () => [new MagicMissileModifier()],
             Attacks = [
                 new() {
                     Name = "Magic Missile",

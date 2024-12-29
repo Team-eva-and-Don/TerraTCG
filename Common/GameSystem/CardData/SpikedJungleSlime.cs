@@ -28,7 +28,7 @@ namespace TerraTCG.Common.GameSystem.CardData
                     Cost = 3,
                 }
             ],
-            Modifiers = [
+            Modifiers = () => [
                 new SpikedModifier(2)
             ]
         };

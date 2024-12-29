@@ -32,10 +32,11 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
                 player.Game.CurrentTurn.UsedItemCount += 1;
             }
 
+            var modifiers = card.Modifiers.Invoke();
             zone.QueueAnimation(new IdleAnimation(zone.PlacedCard, duration: duration));
-            zone.QueueAnimation(new ApplyModifierAnimation(zone.PlacedCard, card.Modifiers[0].Texture));
+            zone.QueueAnimation(new ApplyModifierAnimation(zone.PlacedCard, modifiers[0].Texture));
 
-            zone.PlacedCard.CardModifiers.AddRange(card.Modifiers);
+            zone.PlacedCard.CardModifiers.AddRange(modifiers);
             player.Resources = player.Resources.UseResource(mana: skill.Cost);
             player.Hand.Remove(card);
         }

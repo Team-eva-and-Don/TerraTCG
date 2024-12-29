@@ -31,7 +31,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             NPCID = NPCID.AngryBones,
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.CAVERN, CardSubtype.FIGHTER],
-            Modifiers = [
+            Modifiers = () => [
                 new EquipCostModifier()
             ],
             Attacks = [

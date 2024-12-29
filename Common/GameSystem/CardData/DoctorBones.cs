@@ -34,7 +34,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             NPCID = NPCID.DoctorBones,
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.JUNGLE, CardSubtype.FIGHTER],
-            Modifiers = [
+            Modifiers = () => [
                 new ControlsCritterModifier()
             ],
             Attacks = [

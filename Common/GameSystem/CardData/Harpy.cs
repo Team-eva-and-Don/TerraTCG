@@ -41,7 +41,7 @@ namespace TerraTCG.Common.GameSystem.CardData
                     TargetModifiers = t=>[new HarpyDefenseBreakModifier(t)],
                 }
             ],
-            Modifiers = [
+            Modifiers = () => [
                 new EvasiveModifier(),
             ]
         };

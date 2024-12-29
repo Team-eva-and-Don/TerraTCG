@@ -20,7 +20,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             NPCID = NPCID.ArmoredSkeleton,
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.EXPERT, CardSubtype.CAVERN, CardSubtype.FIGHTER],
-            Modifiers = [
+            Modifiers = () => [
                 new UndeadMiner.EquipCostModifier(),
                 new AngryBones.EquipCostModifier(),
             ],

@@ -49,7 +49,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             NPCID = NPCID.SlimedZombie,
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.FOREST, CardSubtype.FIGHTER],
-            Modifiers = [
+            Modifiers = () => [
                 new SlimeArmorModifier(),
             ],
             Attacks = [

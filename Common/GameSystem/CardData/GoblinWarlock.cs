@@ -41,7 +41,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             NPCID = NPCID.GoblinSummoner,
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.EXPERT, CardSubtype.GOBLIN_ARMY, CardSubtype.SCOUT],
-            Modifiers = [
+            Modifiers = () => [
                 new DamageModifier(),
             ],
             Attacks = [

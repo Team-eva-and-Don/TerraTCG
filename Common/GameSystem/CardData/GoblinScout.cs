@@ -29,7 +29,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             NPCID = NPCID.GoblinScout,
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.GOBLIN_ARMY, CardSubtype.SCOUT],
-            Modifiers = [
+            Modifiers = () => [
                 new ZealousModifier(),
                 new DamageModifier(),
             ],

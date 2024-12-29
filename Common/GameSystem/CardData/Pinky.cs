@@ -35,7 +35,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.FOREST, CardSubtype.SLIME, CardSubtype.FIGHTER],
             DrawZoneNPC = CardOverlayRenderer.Instance.DrawSlimeNPC(0.5f, new Color(250, 30, 90, 180)),
-            Modifiers = [
+            Modifiers = () => [
                 new SlimeCostModifier(),
             ],
             Attacks = [

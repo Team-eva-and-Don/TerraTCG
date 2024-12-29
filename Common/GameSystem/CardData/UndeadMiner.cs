@@ -30,7 +30,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             NPCID = NPCID.UndeadMiner,
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.CAVERN, CardSubtype.FIGHTER],
-            Modifiers = [
+            Modifiers = () => [
                 new EquipCostModifier()
             ],
             Attacks = [

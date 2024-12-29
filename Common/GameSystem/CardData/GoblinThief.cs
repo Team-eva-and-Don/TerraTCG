@@ -42,7 +42,7 @@ namespace TerraTCG.Common.GameSystem.CardData
                     },
                 }
             ],
-            Modifiers = [
+            Modifiers = () => [
                 new SkillCostModifier(),
             ],
             Attacks = [

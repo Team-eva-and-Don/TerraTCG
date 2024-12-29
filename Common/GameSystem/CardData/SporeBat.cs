@@ -20,7 +20,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             NPCID = NPCID.SporeBat,
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.MUSHROOM, CardSubtype.SCOUT],
-            Modifiers = [
+            Modifiers = () => [
                 new EvasiveModifier(),
                 new LifestealModifier(1),
             ],

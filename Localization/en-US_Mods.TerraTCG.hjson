@@ -957,4 +957,6 @@ Cards: {
 		DeckEdit: Edit Deck %%
 		DeckCount: Cards
 	}
+
+	Dialogue.DeckSelect: Which deck would you like to face?
 }

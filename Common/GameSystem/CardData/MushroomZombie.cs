@@ -20,7 +20,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             NPCID = NPCID.ZombieMushroomHat,
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.MUSHROOM, CardSubtype.FIGHTER],
-            Modifiers = [
+            Modifiers = () => [
                 new LifestealModifier(1),
             ],
             Attacks = [

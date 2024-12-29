@@ -40,7 +40,7 @@ namespace TerraTCG.Common.GameSystem.GameState
             {
                 IsExerted = true,
                 PlaceTime = TCGPlayer.TotalGameTime,
-                CardModifiers = [.. card.Modifiers ?? []]
+                CardModifiers = [.. card.Modifiers?.Invoke() ?? []]
             };
 
             foreach (var modifier in PlacedCard.CardModifiers.Concat(Owner.Field.CardModifiers))

@@ -23,7 +23,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             Skills = [ // TODO this is wonky, but item texts are drawn using the skill template
                 new() { Cost = 1 }
             ],
-            Modifiers = [
+            Modifiers = () => [
                 new FlatDamageModifier(1, [GameEvent.AFTER_ATTACK])  {
                     Texture = TextureCache.Instance.GetItemTexture(ItemID.ThrowingKnife),
                     Source = CardSubtype.CONSUMABLE,

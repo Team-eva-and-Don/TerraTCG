@@ -19,7 +19,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             CardType = CardType.TOWNSFOLK,
             SubTypes = [CardSubtype.TOWNSFOLK],
             SelectInHandAction = (card, player) => new MoveCardAction(card, player, player.Opponent),
-            Modifiers = [
+            Modifiers = () => [
                 new  NoOpModifier(),
             ]
         };

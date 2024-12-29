@@ -20,7 +20,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             NPCID = NPCID.Wraith,
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.EXPERT, CardSubtype.FOREST, CardSubtype.FIGHTER],
-            Modifiers = [
+            Modifiers = () => [
                 new EvasiveModifier(),
             ],
             Attacks = [

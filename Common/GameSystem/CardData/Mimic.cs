@@ -34,7 +34,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.CAVERN, CardSubtype.DEFENDER],
             DrawZoneNPC = CardOverlayRenderer.Instance.DrawMimicNPC,
-            Modifiers = [
+            Modifiers = () => [
                 new EquipCostModifier(),
                 new ReduceDamageModifier(1),
             ],

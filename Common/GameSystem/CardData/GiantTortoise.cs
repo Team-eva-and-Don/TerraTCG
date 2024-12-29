@@ -53,7 +53,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             CardType = CardType.CREATURE,
             NPCID = NPCID.GiantTortoise,
             SubTypes = [CardSubtype.EXPERT, CardSubtype.JUNGLE, CardSubtype.DEFENDER],
-            Modifiers = [
+            Modifiers = () => [
                 new TortoiseMustAttackModifier(),
                 new SpikedModifier(2),
             ],

@@ -25,7 +25,7 @@ namespace TerraTCG.Common.UI.NPCDuelChat
         public override void Draw(SpriteBatch spriteBatch)
         {
             var font = FontAssets.MouseText;
-            var chatColor = new Color(225, 204, 112);
+            var chatColor = new Color(244, 222, 122) * (Main.mouseTextColor / 255f);
             var buttonText = Language.GetTextValue("Mods.TerraTCG.Common.DuelChat");
             var bgColor = ContainsPoint(Main.MouseScreen) ? new Color(165, 42, 42) : Color.Black;
             var center = Position + new Vector2(Width.Pixels, Height.Pixels) / 2;

@@ -35,7 +35,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             NPCID = NPCID.LostGirl,
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.CAVERN, CardSubtype.CASTER],
-            Modifiers = [
+            Modifiers = () => [
                 new TransformLostGirlModifier(),
             ],
             Attacks = [
@@ -59,7 +59,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.CAVERN, CardSubtype.CASTER],
             IsCollectable = false,
-            Modifiers = [
+            Modifiers = () => [
                 new EvasiveModifier(),
             ],
             Attacks = [

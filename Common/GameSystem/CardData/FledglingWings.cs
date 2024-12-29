@@ -25,7 +25,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             ],
             // TODO probably want a flag for this instead of type introspection
             ShouldTarget = (Zone zone) => !(zone.PlacedCard?.CardModifiers.Where(m=> m is EvasiveModifier).Any() ?? false),
-            Modifiers = [
+            Modifiers = () => [
                 new EvasiveModifier() { 
                     Texture = TextureCache.Instance.GetItemTexture(4978),
                     Source = CardSubtype.EQUIPMENT,

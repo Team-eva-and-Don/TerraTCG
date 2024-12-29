@@ -35,7 +35,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.CAVERN, CardSubtype.SLIME, CardSubtype.FIGHTER],
             DrawZoneNPC = CardOverlayRenderer.Instance.DrawSlimeNPC(1f, Color.White * 0.8f),
-            Modifiers = [
+            Modifiers = () => [
                 new SlimeAttackModifier(),
             ],
             Attacks = [

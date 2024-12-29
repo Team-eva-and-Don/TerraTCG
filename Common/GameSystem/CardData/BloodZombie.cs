@@ -26,7 +26,7 @@ namespace TerraTCG.Common.GameSystem.CardData
                     Cost = 3,
                 }
             ],
-            Modifiers = [
+            Modifiers = () => [
                 new ZealousModifier(),
                 new FlatDamageModifier(1, removeOn: [GameEvent.END_TURN]),
             ]

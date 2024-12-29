@@ -26,7 +26,7 @@ namespace TerraTCG.Common.GameSystem.CardData
                     Cost = 2,
                 }
             ],
-            Modifiers = [
+            Modifiers = () => [
                 new ZealousModifier(),
                 new EvasiveModifier(),
             ]

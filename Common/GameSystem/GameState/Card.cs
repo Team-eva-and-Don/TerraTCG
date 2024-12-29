@@ -100,7 +100,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal List<Attack> Attacks { get; set; }
 
-        internal List<ICardModifier> Modifiers { get; set; }
+        internal Func<List<ICardModifier>> Modifiers { get; set; }
 
         // Tags to help bot players decide what to do with cards
 

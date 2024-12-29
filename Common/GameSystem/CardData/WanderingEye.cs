@@ -30,7 +30,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             NPCID = NPCID.WanderingEye,
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.EXPERT, CardSubtype.FOREST, CardSubtype.SCOUT],
-            Modifiers = [
+            Modifiers = () => [
                 new EvasiveModifier(),
                 new HalfHealthDamageBoostModifier(),
             ],

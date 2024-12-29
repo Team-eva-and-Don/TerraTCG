@@ -24,7 +24,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             Skills = [ 
                 new() { Cost = 2 }
             ],
-            Modifiers = [
+            Modifiers = () => [
                 new RelentlessModifier()  {
                     Texture = TextureCache.Instance.GetItemTexture(ItemID.FeralClaws),
                     Source = CardSubtype.EQUIPMENT,
