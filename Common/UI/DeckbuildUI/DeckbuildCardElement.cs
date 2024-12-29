@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria.UI;
+using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState;
 
 namespace TerraTCG.Common.UI.DeckbuildUI
@@ -35,12 +36,9 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             }
 
             var bottomClip = parentInner.Y + parentInner.Height - (Position.Y + height);
-            if(bottomClip < 0)
-            {
-                bounds.Height = bounds.Height + (int)(bottomClip/CARD_SCALE);
-            }
-            return true;
+            return bottomClip >= 0;
         }
+
         public override void Draw(SpriteBatch spriteBatch)
         {
             if(!GetBounds(out var bounds))
@@ -49,6 +47,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             }
             var texture = sourceCard.Texture;
             spriteBatch.Draw(texture.Value, Position, bounds, Color.White, 0, default, CARD_SCALE, SpriteEffects.None, 0f);
+            CardTextRenderer.Instance.DrawCardText(spriteBatch, sourceCard, Position, CARD_SCALE);
         }
     }
 }
