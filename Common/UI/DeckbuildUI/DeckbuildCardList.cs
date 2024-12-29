@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent.UI.Elements;
+using Terraria.ModLoader;
 using Terraria.UI;
 using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.UI.GameFieldUI;
@@ -22,11 +23,9 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         public override void OnInitialize()
         {
             base.OnInitialize();
-            cards = Assembly.GetAssembly(typeof(BaseCardTemplate))
-                .GetTypes()
-                .Where(t => t.IsSubclassOf(typeof(BaseCardTemplate)))
-                .Select(t => ((BaseCardTemplate)Activator.CreateInstance(t)).CreateCard())
-                .Where(c=>c.IsCollectable)
+            cards = ModContent.GetContent<BaseCardTemplate>()
+                .Select(t=>t.Card)
+                .Where(c => c.IsCollectable)
                 .OrderBy(t => t.SortType)
                 .ThenBy(t => t.Name)
                 .Select(c => new DeckbuildCardElement(c))

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
 using TerraTCG.Common.GameSystem.BotPlayer;
 using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState;
@@ -25,6 +26,7 @@ namespace TerraTCG.Common.GameSystem
 
     internal class TCGPlayer : ModPlayer, IGamePlayerController
     {
+        private const string SAVE_VERSION = "1"; // TagCompound format for save data
 
         internal static TCGPlayer LocalPlayer => Main.LocalPlayer.GetModPlayer<TCGPlayer>();
         internal static GamePlayer LocalGamePlayer => LocalPlayer.GamePlayer;
@@ -57,10 +59,10 @@ namespace TerraTCG.Common.GameSystem
         public int ActiveDeck { get; set; } = 0;
         public List<CardCollection> SavedDecks { get; set; } = [
             BotDecks.GetForestDeck(),
-            BotDecks.GetGoblinDeck(),
-            BotDecks.GetCrabDeck(),
-            BotDecks.GetMimicDeck(),
-            BotDecks.GetMushroomDeck(),
+            new CardCollection(),
+            new CardCollection(),
+            new CardCollection(),
+            new CardCollection(),
             new CardCollection(),
             new CardCollection(),
             new CardCollection(),
@@ -96,6 +98,43 @@ namespace TerraTCG.Common.GameSystem
             MouseoverCard = null;
             MouseoverZone = null;
             ModContent.GetInstance<UserInterfaces>().EndGame();
+        }
+
+        public override void SaveData(TagCompound tag)
+        {
+            base.SaveData(tag);
+            tag["version"] = SAVE_VERSION;
+            for(int i = 0; i < SavedDecks.Count; i++)
+            {
+                try
+                {
+                    tag.Add($"deck_{i}", SavedDecks[i].Serialize());
+                }
+                catch (Exception e)
+                {
+                    Mod.Logger.ErrorFormat("An error occurred while saving player decks: {0}", e.StackTrace);
+                }
+            }
+        }
+
+        public override void LoadData(TagCompound tag)
+        {
+            base.LoadData(tag);
+            if (tag.ContainsKey("version") && tag.GetString("version") == SAVE_VERSION)
+            {
+                for(int i = 0; i < SavedDecks.Count; i++)
+                {
+                    try
+                    {
+                        var deckList = tag.GetList<string>($"deck_{i}").ToList();
+                        SavedDecks[i].DeSerialize(deckList);
+                    }
+                    catch (Exception e)
+                    {
+                        Mod.Logger.ErrorFormat("An error occurred while loading player decks: {0}", e.StackTrace);
+                    }
+                }
+            }
         }
     }
 }

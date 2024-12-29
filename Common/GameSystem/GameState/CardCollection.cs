@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria.ModLoader;
+using Terraria.ModLoader.IO;
+using TerraTCG.Common.GameSystem.CardData;
 
 namespace TerraTCG.Common.GameSystem.GameState
 {
@@ -47,6 +50,25 @@ namespace TerraTCG.Common.GameSystem.GameState
             {
                 Cards = new List<Card>(Cards)
             };
+        }
+
+        public List<string> Serialize()
+        {
+            return Cards.Select(c => c.Name).ToList();
+
+        }
+
+        public void DeSerialize(List<string> cardNames)
+        {
+            var allCards = ModContent.GetContent<BaseCardTemplate>()
+                .Select(t => t.Card)
+                .ToDictionary(c => c.Name, c => c);
+
+            // TODO handle errors rather than silently discarding
+            Cards = cardNames
+                .Where(allCards.ContainsKey)
+                .Select(c => allCards[c])
+                .ToList();
         }
     }
 }
