@@ -54,7 +54,16 @@ namespace TerraTCG.Common.GameSystem
 
         public GamePlayer GamePlayer { get; set; }
 
-        public CardCollection Deck { get; set; } = BotDecks.GetForestDeck();
+        public int ActiveDeck { get; set; } = 0;
+        public List<CardCollection> SavedDecks { get; set; } = [
+             BotDecks.GetForestDeck(),
+             BotDecks.GetGoblinDeck(),
+             BotDecks.GetCrabDeck(),
+             BotDecks.GetMimicDeck(),
+             BotDecks.GetMushroomDeck(),
+        ];
+
+        public CardCollection Deck { get => SavedDecks[ActiveDeck]; set { } }
 
         // TODO this is not the correct place to cache this info, but is the easiest
         // Place within UI coordinates that the bottom center of the player's

@@ -20,10 +20,13 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         internal CancelResumeGameButton cancelButton;
         private DeckbuildCardList deckbuildCardList;
         private PlayerDeckList playerDeckList;
+        private DeckSelector deckSelector;
+        private CardListFilter cardListFilter;
 
         const int DECKBUILD_WIDTH = 616;
         const int DECKLIST_WIDTH = 304;
-        const int MIN_Y_MARGIN = 32;
+        const int MIN_TOP_MARGIN = 140;
+        const int MIN_BOTTOM_MARGIN = 16;
         const int PADDING_Y = 16;
         public override void OnInitialize()
         {
@@ -47,6 +50,24 @@ namespace TerraTCG.Common.UI.DeckbuildUI
                 PaddingBottom = PADDING_Y,
             };
 
+            deckSelector = new()
+            {
+                BackgroundColor = bgColor,
+                PaddingLeft = 8f,
+                PaddingRight = 8f,
+                PaddingTop = 8f,
+                PaddingBottom = 8f,
+            };
+
+            cardListFilter = new()
+            {
+                BackgroundColor = bgColor,
+                PaddingLeft = 8f,
+                PaddingRight = 8f,
+                PaddingTop = 8f,
+                PaddingBottom = 8f,
+            };
+
             cancelButton = new()
             {
                 OnClickAction = ()=>ModContent.GetInstance<UserInterfaces>().StopDeckbuild()
@@ -57,6 +78,10 @@ namespace TerraTCG.Common.UI.DeckbuildUI
 
             Append(playerDeckList);
 
+            Append(deckSelector);
+
+            Append(cardListFilter);
+
         }
 
 
@@ -64,7 +89,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         internal static (int, int) GetWindowHeight()
         {
             var heightPerCard = (int)(CARD_HEIGHT * CARD_SCALE + CARD_MARGIN);
-            var maxWindowHeight = Main.screenHeight - 2 * MIN_Y_MARGIN - 2* PADDING_Y;
+            var maxWindowHeight = Main.screenHeight - MIN_TOP_MARGIN - MIN_BOTTOM_MARGIN - 2* PADDING_Y;
             int maxRowCount = maxWindowHeight / heightPerCard;
             return (maxRowCount, maxRowCount * heightPerCard + 2 * PADDING_Y);
         }
@@ -73,11 +98,19 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         {
             var windowHeight = GetWindowHeight().Item2;
             GameFieldState.SetRectangle(deckbuildCardList, 
-                (Main.screenWidth - DECKBUILD_WIDTH) / 2, 
-                (Main.screenHeight - windowHeight) / 2, DECKBUILD_WIDTH, windowHeight);
+                (Main.screenWidth - DECKBUILD_WIDTH - DECKLIST_WIDTH) / 2, 
+                MIN_TOP_MARGIN, DECKBUILD_WIDTH, windowHeight);
+
             GameFieldState.SetRectangle(playerDeckList,
                 deckbuildCardList.Left.Pixels + deckbuildCardList.Width.Pixels + PADDING_Y,
-                 (Main.screenHeight - windowHeight) / 2, DECKLIST_WIDTH, windowHeight);
+                MIN_TOP_MARGIN, DECKLIST_WIDTH, windowHeight);
+            
+            GameFieldState.SetRectangle(deckSelector,
+                playerDeckList.Left.Pixels, playerDeckList.Top.Pixels - 68, DECKLIST_WIDTH, 64);
+
+            GameFieldState.SetRectangle(cardListFilter,
+                deckbuildCardList.Left.Pixels, deckbuildCardList.Top.Pixels - 68, DECKBUILD_WIDTH, 64);
+
             GameFieldState.SetRectangle(cancelButton, 16, Main.screenHeight - 16 - 48, 38, 48);
             base.Update(gameTime);
         }
