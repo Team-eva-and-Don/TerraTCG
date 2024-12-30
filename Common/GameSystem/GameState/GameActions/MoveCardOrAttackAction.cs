@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
 using TerraTCG.Common.GameSystem.Drawing.Animations;
 using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
@@ -84,6 +86,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             startZone.QueueAnimation(new RemoveCardAnimation(endZone.PlacedCard));
             endZone.QueueAnimation(new PlaceCardAnimation(endZone.PlacedCard));
             player.Resources = player.Resources.UseResource(mana: endZone.PlacedCard.Template.MoveCost);
+            GameSounds.PlaySound(GameAction.PLACE_CARD);
         }
 
         private void DoAttack()
@@ -118,6 +121,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
                 startZone.Owner.Resources = startZone.Owner.Resources.UseResource(health: startZone.PlacedCard.Template.Points);
                 startZone.PlacedCard = null;
             }
+            GameSounds.PlaySound(GameAction.ATTACK);
         }
 
         private void DoSkill()
@@ -128,6 +132,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             skill.DoSkill(player, startZone, endZone);
             startZone.QueueAnimation(new ActionAnimation(startZone.PlacedCard));
             endZone?.QueueAnimation(new ActionAnimation(endZone.PlacedCard));
+            GameSounds.PlaySound(GameAction.USE_SKILL);
         }
 
         public void Complete()

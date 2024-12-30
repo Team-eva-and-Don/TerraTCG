@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.BotPlayer;
 using TerraTCG.Common.GameSystem.CardData;
@@ -65,6 +67,7 @@ namespace TerraTCG.Common.GameSystem.GameState
             CurrentTurn.Start();
 
             StartTime = Main._drawInterfaceGameTime.TotalGameTime;
+            SoundEngine.PlaySound(SoundID.MenuOpen);
         }
 
         // Start game wrap-up animations
@@ -73,6 +76,7 @@ namespace TerraTCG.Common.GameSystem.GameState
             if(EndTime == default)
             {
                 EndTime = Main._drawInterfaceGameTime.TotalGameTime;
+                SoundEngine.PlaySound(SoundID.MenuClose);
             }
         }
 

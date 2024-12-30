@@ -23,6 +23,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
         {
             base.Complete();
             Player.ManaPerTurn += amount;
+            GameSounds.PlaySound(GameAction.USE_SKILL);
         }
     }
 }

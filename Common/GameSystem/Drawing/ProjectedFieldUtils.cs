@@ -8,7 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Schema;
 using Terraria;
+using Terraria.Audio;
 using Terraria.GameContent.ObjectInteractions;
+using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.GameState;
 
@@ -182,6 +184,17 @@ namespace TerraTCG.Common.GameSystem.Drawing
 
             float screenDistance = (screenPos0 - screenPos1).Length();
             return screenDistance / FieldRenderer.CARD_WIDTH;
+        }
+
+        public void PlayTickIfMouseEntered(GamePlayer player, Zone zone, Vector2 mousePos, Vector2 prevMousePos)
+        {
+            var doesContainMouse = ZoneContainsScreenVector(player, zone, mousePos);
+            var didContainMouse = ZoneContainsScreenVector(player, zone, prevMousePos);
+
+            if(doesContainMouse && !didContainMouse)
+            {
+                SoundEngine.PlaySound(SoundID.MenuTick);
+            }
         }
     }
 }

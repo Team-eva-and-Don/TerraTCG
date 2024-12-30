@@ -27,6 +27,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             {
                 Player.Hand.Add(Player.Deck.Draw());
             }
+            GameSounds.PlaySound(GameAction.USE_SKILL);
         }
     }
 }

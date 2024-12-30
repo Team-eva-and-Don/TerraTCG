@@ -17,8 +17,16 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
         internal TimeSpan Duration { get; } = TimeSpan.FromSeconds(0.5f);
         private TimeSpan ElapsedTime => TCGPlayer.TotalGameTime - StartTime;
 
+        // TODO playing sounds from inside an animation is not good
+        private bool hasPlayedSound = false;
+
         public void DrawZone(SpriteBatch spriteBatch, Vector2 basePosition, float rotation)
         {
+            if(!hasPlayedSound)
+            {
+                hasPlayedSound = true;
+                GameSounds.PlaySound(GameAction.TAKE_DAMAGE);
+            }
             var zoneColor = IdleAnimation.ZoneColor(placedCard);
             AnimationUtils.DrawZoneCard(spriteBatch, placedCard, basePosition, rotation, zoneColor);
         }

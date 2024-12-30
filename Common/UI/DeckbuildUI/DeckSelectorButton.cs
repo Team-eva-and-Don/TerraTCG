@@ -6,8 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
+using Terraria.ID;
 using Terraria.Localization;
 using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.Drawing;
@@ -24,6 +26,9 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             SetPadding(4);
             Width.Pixels = 24;
             Height.Pixels = 24;
+
+            OnMouseOver += (evt, elem) => SoundEngine.PlaySound(SoundID.MenuTick);
+            OnMouseOut += (evt, elem) => SoundEngine.PlaySound(SoundID.MenuTick);
         }
 
         public override void Update(GameTime gameTime)

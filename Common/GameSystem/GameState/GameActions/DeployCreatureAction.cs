@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
 using TerraTCG.Common.GameSystem.Drawing.Animations;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
@@ -49,6 +51,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
                 zone.QueueAnimation(new PlaceCardAnimation(zone.PlacedCard));
             }
             player.Hand.Remove(card);
+            GameSounds.PlaySound(GameAction.PLACE_CARD);
         }
 
         public void Cancel()

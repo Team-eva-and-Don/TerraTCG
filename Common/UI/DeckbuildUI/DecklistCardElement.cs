@@ -6,8 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
+using Terraria.ID;
 using Terraria.Localization;
 using Terraria.UI;
 using TerraTCG.Common.GameSystem;
@@ -51,6 +53,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             {
                 activeDeck.Cards.Remove(toRemove);
             }
+            SoundEngine.PlaySound(SoundID.MenuTick);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

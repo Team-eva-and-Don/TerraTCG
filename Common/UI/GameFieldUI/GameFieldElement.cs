@@ -24,6 +24,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
 
         public override void Update(GameTime gameTime)
         {
+            Main.LocalPlayer.mouseInterface = true;
             var localPlayer = TCGPlayer.LocalPlayer;
             localPlayer.GameFieldPosition = Position;
 
@@ -42,13 +43,13 @@ namespace TerraTCG.Common.UI.GameFieldUI
                 zone.UpdateAnimationQueue();
             }
             var mouseField = Main.MouseScreen - Position;
+            var prevMouseField = new Vector2(Main.lastMouseX, Main.lastMouseY) - Position;
 
             // Check both players' fields
             foreach (var zone in gamePlayer.Game.AllZones())
             {
                 if (ProjectedFieldUtils.Instance.ZoneContainsScreenVector(gamePlayer, zone, mouseField))
                 {
-                    Main.LocalPlayer.mouseInterface = true;
                     if(zone.HasPlacedCard())
                     {
                         localPlayer.MouseoverZone = zone;
@@ -59,6 +60,10 @@ namespace TerraTCG.Common.UI.GameFieldUI
                         gamePlayer.SelectZone(zone);
                         break;
                     }
+                }
+                if(gamePlayer.InProgressAction?.CanAcceptZone(zone) ?? zone.HasPlacedCard())
+                {
+                    ProjectedFieldUtils.Instance.PlayTickIfMouseEntered(gamePlayer, zone, mouseField, prevMouseField);
                 }
             }
         }

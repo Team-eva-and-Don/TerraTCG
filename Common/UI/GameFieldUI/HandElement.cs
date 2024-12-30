@@ -44,6 +44,8 @@ namespace TerraTCG.Common.UI.GameFieldUI
                     (int)(bounds.Width * CARD_SCALE),
                     (int)(bounds.Height * CARD_SCALE));
 
+                PlayTickIfMouseEntered(scaledBounds);
+
                 if(scaledBounds.Contains((int)Main.MouseScreen.X, (int)Main.MouseScreen.Y)) {
                     Main.LocalPlayer.mouseInterface = true;
                     localPlayer.MouseoverCard = card;

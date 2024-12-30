@@ -25,6 +25,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
             {
                 return;
             }
+            PlayTickIfMouseEntered(Position, CLICK_RADIUS);
             // Move to the button to the middle of the two game fields, above the player's deck zone
             if(gamePlayer.SelectedFieldZone != null)
             {

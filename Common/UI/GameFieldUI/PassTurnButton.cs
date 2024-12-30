@@ -29,6 +29,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
                 return;
             }
 
+            PlayTickIfMouseEntered(Position, CLICK_RADIUS);
             if (ContainsMouse)
             {
                 Main.LocalPlayer.mouseInterface = true;

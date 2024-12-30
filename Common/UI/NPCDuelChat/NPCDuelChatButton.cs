@@ -6,7 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.Audio;
 using Terraria.GameContent;
+using Terraria.ID;
 using Terraria.Localization;
 using Terraria.UI;
 using TerraTCG.Common.GameSystem.Drawing;
@@ -19,6 +21,14 @@ namespace TerraTCG.Common.UI.NPCDuelChat
         public float TextScale => ContainsPoint(Main.MouseScreen) ? 1f : 0.9f;
 
         public LocalizedText Text { get; set; }
+
+        public override void OnInitialize()
+        {
+            base.OnInitialize();
+            OnMouseOver += (evt, elem) => SoundEngine.PlaySound(SoundID.MenuTick);
+            OnMouseOut += (evt, elem) => SoundEngine.PlaySound(SoundID.MenuTick);
+        }
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);

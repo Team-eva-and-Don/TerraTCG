@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
 using TerraTCG.Common.GameSystem.Drawing.Animations;
 using TerraTCG.Common.GameSystem.Drawing.Animations.FieldAnimations;
 
@@ -48,6 +50,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
             destZone.QueueAnimation(new NoOpAnimation(duration));
             destZone.QueueAnimation(new PlaceCardAnimation(movedCard));
+            GameSounds.PlaySound(GameAction.PLACE_CARD);
         }
     }
 }

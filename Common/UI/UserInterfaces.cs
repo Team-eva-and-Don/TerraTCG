@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.UI;
 using TerraTCG.Common.GameSystem;
@@ -68,7 +70,6 @@ namespace TerraTCG.Common.UI
         public void EndGame()
         {
             IngameFancyUI.Close();
-            Main.playerInventory = false;
         }
         
         public void StartNPCChat()
@@ -84,11 +85,16 @@ namespace TerraTCG.Common.UI
 
         public void StartDeckbuild()
         {
-            _userInterface.SetState(DeckbuildState);
+            if(_userInterface.CurrentState != DeckbuildState)
+            {
+                SoundEngine.PlaySound(SoundID.MenuOpen);
+                _userInterface.SetState(DeckbuildState);
+            }
             // IngameFancyUI.OpenUIState(DeckbuildState);
         }
         public void StopDeckbuild()
         {
+            SoundEngine.PlaySound(SoundID.MenuClose);
             _userInterface.SetState(null);
         }
 

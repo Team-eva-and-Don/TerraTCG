@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
 using Terraria.Localization;
 using Terraria.UI;
 using TerraTCG.Common.GameSystem;
@@ -39,7 +41,9 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             if(cardCount < 2 && activeDeck.Cards.Count < 20)
             {
                 activeDeck.Cards.Add(sourceCard);
+
             }
+            SoundEngine.PlaySound(SoundID.MenuTick);
         }
 
         public override void Update(GameTime gameTime)

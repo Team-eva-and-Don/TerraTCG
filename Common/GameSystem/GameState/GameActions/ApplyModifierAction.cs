@@ -39,6 +39,13 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             zone.PlacedCard.CardModifiers.AddRange(modifiers);
             player.Resources = player.Resources.UseResource(mana: skill.Cost);
             player.Hand.Remove(card);
+            if(card.SubTypes.Contains(CardSubtype.EQUIPMENT))
+            {
+                GameSounds.PlaySound(GameAction.USE_EQUIPMENT);
+            } else
+            {
+                GameSounds.PlaySound(GameAction.USE_CONSUMABLE);
+            }
         }
     }
 }

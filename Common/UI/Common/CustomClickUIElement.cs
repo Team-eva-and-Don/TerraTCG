@@ -3,8 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
 using Terraria.UI;
 
 namespace TerraTCG.Common.UI.Common
@@ -41,6 +44,27 @@ namespace TerraTCG.Common.UI.Common
             {
                 clickStarted = false;
                 return false;
+            }
+        }
+
+        internal static void PlayTickIfMouseEntered(Rectangle bounds)
+        {
+            var didEnter = bounds.Contains(Main.mouseX, Main.mouseY) && !bounds.Contains(Main.lastMouseX, Main.lastMouseY);
+
+            if(didEnter)
+            {
+                SoundEngine.PlaySound(SoundID.MenuTick);
+            }
+        }
+
+        internal static void PlayTickIfMouseEntered(Vector2 point, float radius)
+        {
+            var didEnter = Vector2.DistanceSquared(point, Main.MouseScreen) <= radius * radius &&
+                Vector2.DistanceSquared(point, new Vector2(Main.lastMouseX, Main.lastMouseY)) >= radius * radius;
+
+            if(didEnter)
+            {
+                SoundEngine.PlaySound(SoundID.MenuTick);
             }
         }
     }

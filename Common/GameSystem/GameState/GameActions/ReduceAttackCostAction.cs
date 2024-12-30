@@ -34,7 +34,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
             zone.QueueAnimation(new IdleAnimation(zone.PlacedCard, duration));
             zone.QueueAnimation(new ActionAnimation(zone.PlacedCard));
-            base.Complete();
+            GameSounds.PlaySound(GameAction.USE_SKILL);
         }
     }
 }

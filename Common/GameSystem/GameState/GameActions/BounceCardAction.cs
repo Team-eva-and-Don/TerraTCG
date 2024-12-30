@@ -36,6 +36,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             zone.QueueAnimation(new RemoveCardAnimation(leavingCard));
 
             Player.Hand.Add(leavingCard.Template);
+            GameSounds.PlaySound(GameAction.BOUNCE_CARD);
         }
     }
 }

@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
 using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.Drawing.Animations;
 using TerraTCG.Common.GameSystem.GameState.Modifiers;
@@ -70,6 +72,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 
             QueueAnimation(new RemoveCardAnimation(leavingCard));
             QueueAnimation(new PlaceCardAnimation(PlacedCard));
+            GameSounds.PlaySound(GameAction.PROMOTE_CARD);
         }
 
         public bool HasPlacedCard() => PlacedCard != null;
