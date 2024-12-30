@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 using Terraria.UI;
+using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.UI.DeckbuildUI;
 using TerraTCG.Common.UI.GameFieldUI;
 using TerraTCG.Common.UI.NPCDuelChat;
@@ -42,6 +43,21 @@ namespace TerraTCG.Common.UI
         {
             base.UpdateUI(gameTime);
             _userInterface.Update(gameTime);
+
+            // TODO is this the correct place to put this?
+            // Close out all interfaces if ESC is pressed
+            if(Main.LocalPlayer.controlInv)
+            {
+                TCGPlayer.LocalGamePlayer?.Surrender();
+                if(_userInterface.CurrentState == DuelChat)
+                {
+                    StopNPCChat();
+                }
+                if(_userInterface.CurrentState == DeckbuildState)
+                {
+                    StopDeckbuild();
+                }
+            }
         }
 
         public void StartGame()
@@ -62,6 +78,7 @@ namespace TerraTCG.Common.UI
 
         public void StopNPCChat()
         {
+            DuelChat.ResetState();
             _userInterface.SetState(null);
         }
 

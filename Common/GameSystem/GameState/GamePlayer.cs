@@ -137,6 +137,11 @@ namespace TerraTCG.Common.GameSystem.GameState
             }
         }
 
+        public void Surrender()
+        {
+            Resources = Resources.UseResource(health: Resources.Health);
+        }
+
         internal bool Owns(Zone zone) => Field.Zones.Contains(zone);
     }
 }

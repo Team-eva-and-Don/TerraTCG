@@ -23,42 +23,79 @@ namespace TerraTCG.Common.UI.NPCDuelChat
         private NPCDuelChatButton chatButton;
 
         // Menu replicating NPC dialog that appears after the NPC is done talking
-        // private NPCDuelChatDialog dialog;
+        private NPCDeckSelectDialogue dialog;
+
 
         public override void OnInitialize()
         {
             base.OnInitialize();
-            chatButton = new NPCDuelChatButton();
+            chatButton = new NPCDuelChatButton()
+            {
+                Text = Language.GetText("Mods.TerraTCG.Cards.Common.DuelChat")
+            };
             chatButton.OnLeftClick += OnClickChatButton;
+
+            var bgColor = new Color(54, 53, 131, 210);
+
+            var borderColor = new Color(8, 8, 31, 210);
+            dialog = new NPCDeckSelectDialogue()
+            {
+                BackgroundColor = bgColor,
+                BorderColor = borderColor,
+            };
+            dialog.SetPadding(16);
+
+            Append(dialog);
             Append(chatButton);
         }
 
         private void OnClickChatButton(UIMouseEvent evt, UIElement listeningElement)
         {
-            var myPlayer = TCGPlayer.LocalPlayer;
-            var opponent = new SimpleBotPlayer()
-            {
-                Deck = ModContent.GetInstance<NPCDeckMap>().NPCDecklists[Main.LocalPlayer.TalkNPC.netID]
-            };
-
+            dialog.NPCID = Main.LocalPlayer.TalkNPC.netID;
             Main.CloseNPCChatOrSign();
-            ModContent.GetInstance<UserInterfaces>().StopNPCChat();
-            ModContent.GetInstance<GameModSystem>().StartGame(myPlayer, opponent);
+        }
+
+        private void UpdateDuelStartButtonPosition()
+        {
+            if(dialog.NPCID != 0)
+            {
+                GameFieldState.SetRectangle(chatButton, Main.screenWidth + 20, 0);
+                return;
+            }
+            // Compute the height of the NPC's dialogue
+            var font = FontAssets.MouseText.Value;
+            var lines = Utils.WordwrapString(Main.npcChatText, font, 460, 10, out var lineCount);
+            var yOffset = lines.Where(l=>l != null).Select(l => font.MeasureString(l).Y).Sum();
+
+            var height = chatButton.Height.Pixels;
+            var width = chatButton.Width.Pixels;
+
+            // TODO there are probably a number of factors that prevent this
+            // from aligning the text correctly in all scenarios.
+            GameFieldState.SetRectangle(chatButton, Main.screenWidth / 2 + 184 - width, 134 + yOffset, width, height);
         }
 
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            var font = FontAssets.MouseText.Value;
-            var lines = Utils.WordwrapString(Main.npcChatText, font, 460, 10, out var lineCount);
-            var yOffset = lines.Where(l=>l != null).Select(l => font.MeasureString(l).Y).Sum();
-            var buttonText = Language.GetTextValue("Mods.TerraTCG.Common.DuelChat");
-            var buttonSize = font.MeasureString(buttonText);
-            var xOffset = buttonSize.X;
+            if((Main.npcChatText?.Length ?? 0) > 0)
+            {
+                dialog.NPCID = 0; // Reset duel start progress if we talk to another NPC
+            }
 
-            // TODO there are probably a number of factors that prevent this
-            // from aligning the text correctly in all scenarios.
-            GameFieldState.SetRectangle(chatButton, Main.screenWidth / 2 + 184 - xOffset, 134 + yOffset, buttonSize.X, buttonSize.Y);
+            if(dialog.NPCID == 0)
+            {
+                GameFieldState.SetRectangle(dialog, 2 * Main.screenWidth, 120, 460, 120);
+            } else
+            {
+                GameFieldState.SetRectangle(dialog, (Main.screenWidth - 500)/2 , 100, 500, 120);
+            }
+            UpdateDuelStartButtonPosition();
+        }
+
+        internal void ResetState()
+        {
+            dialog.NPCID = 0;
         }
     }
 }

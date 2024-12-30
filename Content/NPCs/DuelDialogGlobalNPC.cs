@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.BotPlayer;
 using TerraTCG.Common.GameSystem.GameState;
@@ -12,13 +13,61 @@ using TerraTCG.Common.UI;
 
 namespace TerraTCG.Content.NPCs
 {
+    internal struct NamedNPCDeck(LocalizedText name, CardCollection deckList)
+    {
+
+        public NamedNPCDeck(string nameKey, CardCollection deckList) : 
+            this(Language.GetText($"Mods.TerraTCG.Cards.DeckNames.{nameKey}"), deckList)
+        {
+
+        }
+        public LocalizedText Name { get; } = name;
+        public CardCollection DeckList { get; } = deckList;
+    }
     internal class NPCDeckMap : ModSystem
     {
-        internal Dictionary<int, CardCollection> NPCDecklists = new ()
+        internal Dictionary<int, List<NamedNPCDeck>> NPCDecklists = new ()
         {
-            [NPCID.Guide] = BotDecks.GetStarterDeck(),
-            [NPCID.TownSlimeBlue] = BotDecks.GetStarterSlimeDeck(),
-            [NPCID.Truffle] = BotDecks.GetMushroomDeck(),
+            [NPCID.Guide] = [
+                new("ForestBeginner", BotDecks.GetStarterDeck()),
+                new("Forest", BotDecks.GetForestDeck())    
+            ],
+            [NPCID.TownSlimeBlue] = [
+                new("SlimeBeginner", BotDecks.GetStarterSlimeDeck()),
+                new("Slime", BotDecks.GetSlimeDeck())
+            ],
+            [NPCID.WitchDoctor] = [
+                new("JungleBeginner", BotDecks.GetStarterJungleDeck()),
+                new("Jungle", BotDecks.GetJungleDeck()),
+            ],
+            [NPCID.ArmsDealer] = [
+                new("BloodMoonBeginner", BotDecks.GetStarterBloodMoonDeck()),
+                new("BloodMoon", BotDecks.GetBloodMoonDeck()),
+            ],
+            [NPCID.Merchant] = [
+                new("SkeletonsBeginner", BotDecks.GetStarterSkeletonDeck()),
+                new("Skeletons", BotDecks.GetSkeletonDeck()),
+            ],
+            [NPCID.Clothier] = [
+                new("Curse", BotDecks.GetCurseDeck()),
+            ],
+            [NPCID.TravellingMerchant] = [
+                new("Treasure", BotDecks.GetMimicDeck()),
+            ],
+            [NPCID.Nurse] = [
+                new("MushroomBeginner", BotDecks.GetStarterMushroomDeck()),
+            ],
+            [NPCID.Truffle] = [
+                new("Mushroom", BotDecks.GetMushroomDeck()),
+            ],
+            [NPCID.GoblinTinkerer] = [
+                new("GoblinsBeginner", BotDecks.GetStarterGoblinDeck()),
+                new("Goblins", BotDecks.GetGoblinDeck()),
+            ],
+            [NPCID.Angler] = [
+                new("CrabsBeginner", BotDecks.GetStarterCrabDeck()),
+                new("Crabs", BotDecks.GetCrabDeck()),
+            ]
         };
     }
     internal class DuelDialogGlobalNPC : GlobalNPC

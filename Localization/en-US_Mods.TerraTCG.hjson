@@ -5,8 +5,6 @@ Items: {
 	}
 }
 
-Common.DuelChat: Let's Duel!
-
 Cards: {
 	Zombie: {
 		Name: Zombie
@@ -958,7 +956,27 @@ Cards: {
 		DeckCount: Cards
 		FilterCards: Filter Cards
 		ShowCards: Show %% Cards
+		DuelChat: Let's Duel!
+		AskDeck: Which deck would you like to face?
+		YouWin: You win!
+		YouLose: You lose...
 	}
 
-	Dialogue.DeckSelect: Which deck would you like to face?
+	DeckNames: {
+		ForestBeginner: Forest (Beginner)
+		Forest: Forest (Intermediate)
+		SlimesBeginner: Slimes (Beginner)
+		Slimes: Slimes (Advanced)
+		JungleBeginner: Jungle (Beginner)
+		Jungle: Jungle (Advanced)
+		Treasure: Treasures (Advanced)
+		MushroomBeginner: Mushrooms (Beginner)
+		Mushroom: Mushrooms (Intermediate)
+		SkeletonsBeginner: Skeletons (Beginner)
+		Skeletons: Skeletons (Intermediate)
+		Curse: Dungeon (Intermediate)
+		GoblinsBeginner: Goblins (Intermediate)
+		Goblins: Goblins (Advanced)
+		Crabs: Crabs (Advanced)
+	}
 }

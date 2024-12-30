@@ -330,6 +330,33 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                 ]
             };
 
+        public static CardCollection GetStarterCrabDeck() =>
+            new()
+            {
+                Cards = [
+                    CreateCard<Guide>(), 
+                    CreateCard<Guide>(), 
+                    CreateCard<Squirrel>(), 
+                    CreateCard<Squirrel>(), 
+                    CreateCard<CopperShortsword>(), 
+                    CreateCard<CopperShortsword>(), 
+                    CreateCard<ThrowingKnife>(), 
+                    CreateCard<RagePotion>(), 
+                    CreateCard<RagePotion>(), 
+                    CreateCard<Dolphin>(), 
+                    CreateCard<Dolphin>(), 
+                    CreateCard<Crab>(), 
+                    CreateCard<Crab>(), 
+                    CreateCard<Jellyfish>(), 
+                    CreateCard<Jellyfish>(), 
+                    CreateCard<UndeadViking>(), 
+                    CreateCard<UndeadViking>(), 
+                    CreateCard<FeralClaws>(), 
+                    CreateCard<FeralClaws>(), 
+                    CreateCard<HealingPotion>(), 
+                ]
+            };
+
         public static CardCollection GetCrabDeck() =>
             new()
             {
@@ -356,6 +383,33 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     CreateCard<HealingPotion>(), 
                 ]
             };
+        public static CardCollection GetStarterMushroomDeck() =>
+            new ()
+            {
+                Cards = [
+                    CreateCard<GlowingSnail>(), 
+                    CreateCard<GlowingSnail>(), 
+                    CreateCard<Guide>(),
+                    CreateCard<Guide>(),
+                    CreateCard<MushroomZombie>(), 
+                    CreateCard<MushroomZombie>(), 
+                    CreateCard<Bunny>(),
+                    CreateCard<Bunny>(),
+                    CreateCard<Wizard>(),
+                    CreateCard<Wizard>(),
+                    CreateCard<SporeSkeleton>(),
+                    CreateCard<SporeSkeleton>(),
+                    CreateCard<SporeBat>(),
+                    CreateCard<SporeBat>(),
+                    CreateCard<HealingPotion>(), 
+                    CreateCard<HealingPotion>(), 
+                    CreateCard<Shackle>(), 
+                    CreateCard<Shackle>(), 
+                    CreateCard<CopperShortsword>(),
+                    CreateCard<PlatinumBroadsword>(),
+                ]
+            };
+
         public static CardCollection GetMushroomDeck() =>
             new ()
             {
@@ -372,8 +426,8 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     CreateCard<Wizard>(),
                     CreateCard<SporeSkeleton>(),
                     CreateCard<SporeSkeleton>(),
-                    CreateCard<SporeBat>(),
-                    CreateCard<SporeBat>(),
+                    CreateCard<DarkCaster>(),
+                    CreateCard<DarkCaster>(),
                     CreateCard<HealingPotion>(), 
                     CreateCard<HealingPotion>(), 
                     CreateCard<CobaltShield>(), 
