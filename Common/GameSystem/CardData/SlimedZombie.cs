@@ -30,8 +30,12 @@ namespace TerraTCG.Common.GameSystem.CardData
 
             public void ModifyIncomingAttack(ref Attack attack, Zone sourceZone, Zone destZone) 
             {
-                var anySlimes = sourceZone.Siblings
-                    .Where(z=>z != sourceZone)
+                if(destZone == null)
+                {
+                    return;
+                }
+                var anySlimes = destZone.Siblings
+                    .Where(z=>z != destZone)
                     .Where(z=>z.PlacedCard?.Template.SubTypes.Contains(CardSubtype.SLIME) ?? false)
                     .Any();
                 if(anySlimes)

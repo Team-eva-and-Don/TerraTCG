@@ -13,6 +13,7 @@ using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.BotPlayer;
 using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.UI.GameFieldUI;
+using TerraTCG.Content.NPCs;
 
 namespace TerraTCG.Common.UI.NPCDuelChat
 {
@@ -35,10 +36,11 @@ namespace TerraTCG.Common.UI.NPCDuelChat
         private void OnClickChatButton(UIMouseEvent evt, UIElement listeningElement)
         {
             var myPlayer = TCGPlayer.LocalPlayer;
-            var opponent = new SimpleBotPlayer();
+            var opponent = new SimpleBotPlayer()
+            {
+                Deck = ModContent.GetInstance<NPCDeckMap>().NPCDecklists[Main.LocalPlayer.TalkNPC.netID]
+            };
 
-            myPlayer.Deck = BotDecks.GetDeck();
-            opponent.Deck = BotDecks.GetDeck();
             Main.CloseNPCChatOrSign();
             ModContent.GetInstance<UserInterfaces>().StopNPCChat();
             ModContent.GetInstance<GameModSystem>().StartGame(myPlayer, opponent);

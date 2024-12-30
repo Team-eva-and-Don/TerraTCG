@@ -29,7 +29,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         public override Card CreateCard() => new ()
         {
             Name = "Pinky",
-            MaxHealth = 8,
+            MaxHealth = 7,
             MoveCost = 2,
             NPCID = NPCID.BlueSlime,
             CardType = CardType.CREATURE,
@@ -41,7 +41,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             Attacks = [
                 new() {
                     Damage = 4,
-                    Cost = 5,
+                    Cost = 6,
                 }
             ]
         };

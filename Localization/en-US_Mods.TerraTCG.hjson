@@ -1,7 +1,7 @@
 Items: {
-	SampleItem: {
-		DisplayName: Sample Item
-		Tooltip: ""
+	TerraTCGDeckbox: {
+		DisplayName: TerraTCG Deckbox
+		Tooltip: Open the TerraTCG Deck Editor
 	}
 }
 
