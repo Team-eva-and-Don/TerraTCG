@@ -11,6 +11,7 @@ using Terraria.ModLoader;
 using Terraria.ModLoader.UI;
 using Terraria.UI;
 using TerraTCG.Common.GameSystem.CardData;
+using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.UI.GameFieldUI;
 using static TerraTCG.Common.UI.DeckbuildUI.DeckbuildCardElement;
 
@@ -91,6 +92,8 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             Append(cardPreview);
 
         }
+
+        internal List<CardSubtype> VisibleCardTypes => cardListFilter.VisibleTypes;
 
 
         // For ease of calculating scroll, make the window height an integer number of cards

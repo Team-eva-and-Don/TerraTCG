@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.Drawing
@@ -43,11 +45,15 @@ namespace TerraTCG.Common.GameSystem.Drawing
         public Asset<Texture2D> CancelButton { get; private set; }
         public Asset<Texture2D> CardPreviewFrame { get; private set; }
         public Asset<Texture2D> BiomeIcons { get; private set; }
+        public Asset<Texture2D> EmoteIcons { get; private set; }
         public Asset<Texture2D> KingSlimeCrown { get; private set; }
         internal Dictionary<int, Asset<Texture2D>> NPCTextureCache { get; private set; }
         internal Dictionary<int, Asset<Texture2D>> ItemTextureCache { get; private set; }
 
         internal Dictionary<ModifierType, Asset<Texture2D>> ModifierIconTextures { get; private set; }
+
+        internal Dictionary<CardSubtype, Rectangle> BiomeIconBounds { get; private set; }
+        internal Dictionary<CardSubtype, Rectangle> CardTypeEmoteBounds { get; private set; }
         public override void Load()
         {
             base.Load();
@@ -72,6 +78,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
             CancelButton = Mod.Assets.Request<Texture2D>("Assets/FieldElements/CancelGame");
             CardPreviewFrame = Mod.Assets.Request<Texture2D>("Assets/FieldElements/CardPreviewFrame");
             BiomeIcons = Main.Assets.Request<Texture2D>("Images/UI/Bestiary/Icon_Tags_Shadow");
+            EmoteIcons = Main.Assets.Request<Texture2D>("Images/Extra_"+ExtrasID.EmoteBubble);
 
             KingSlimeCrown = Main.Assets.Request<Texture2D>("Images/Extra_" + ExtrasID.KingSlimeCrown);
             NPCTextureCache = [];
@@ -84,6 +91,23 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 [ModifierType.RELENTLESS] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Relentless_Icon"),
                 [ModifierType.BLEEDING] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Bleed_Icon"),
                 [ModifierType.LIFESTEAL] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Lifesteal_Icon"),
+            };
+
+            BiomeIconBounds = new Dictionary<CardSubtype, Rectangle>
+            {
+                [CardSubtype.FOREST] = new Rectangle(0, 0, 30, 30),
+                [CardSubtype.CAVERN] = new Rectangle(60, 0, 30, 30),
+                [CardSubtype.JUNGLE] = new Rectangle(180, 30, 30, 30),
+                [CardSubtype.GOBLIN_ARMY] = new Rectangle(30, 90, 30, 30),
+                [CardSubtype.BLOOD_MOON] = new Rectangle(180, 60, 30, 30),
+                [CardSubtype.OCEAN] = new Rectangle(360, 30, 30, 30),
+                [CardSubtype.MUSHROOM] = new Rectangle(240, 30, 30, 30),
+            };
+            CardTypeEmoteBounds = new Dictionary<CardSubtype, Rectangle>
+            {
+                [CardSubtype.EQUIPMENT] = new Rectangle(137, 557, 30, 30),
+                [CardSubtype.CONSUMABLE] = new Rectangle(103, 527, 30, 30),
+                [CardSubtype.TOWNSFOLK] = new Rectangle(69, 753, 30, 30)
             };
         }
 

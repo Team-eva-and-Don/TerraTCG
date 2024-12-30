@@ -27,9 +27,6 @@ namespace TerraTCG.Common.GameSystem.GameState
     {
         // Empty value
         NONE,
-        // Biomes
-        FOREST,
-        CAVERN,
         // Creature Supertypes
         EXPERT,
         BOSS,
@@ -42,10 +39,10 @@ namespace TerraTCG.Common.GameSystem.GameState
         CASTER,
 
         // Biomes
+        FOREST,
+        CAVERN,
         JUNGLE,
-        SKY,
         BLOOD_MOON,
-        DESERT,
         OCEAN,
         GOBLIN_ARMY,
         MUSHROOM,

@@ -33,7 +33,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             MoveCost = 2,
             CardType = CardType.CREATURE,
             NPCID = NPCID.Harpy,
-            SubTypes = [CardSubtype.SKY, CardSubtype.SCOUT],
+            SubTypes = [CardSubtype.FOREST, CardSubtype.SCOUT],
             Attacks = [
                 new() {
                     Damage = 2,

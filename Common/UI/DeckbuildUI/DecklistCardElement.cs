@@ -46,8 +46,11 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         private void OnClickDecklistCard(UIMouseEvent evt, UIElement listeningElement)
         {
             var activeDeck = TCGPlayer.LocalPlayer.Deck;
-            var toRemove = activeDeck.Cards.Where(c => c.Name == SourceCard.Name).First();
-            activeDeck.Cards.Remove(toRemove);
+            var toRemove = activeDeck.Cards.Where(c => c.Name == SourceCard.Name).FirstOrDefault();
+            if(toRemove != null)
+            {
+                activeDeck.Cards.Remove(toRemove);
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)

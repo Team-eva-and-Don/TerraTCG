@@ -16,6 +16,8 @@ namespace TerraTCG.Common.UI.DeckbuildUI
 {
     internal class DeckbuildCardElement(Card sourceCard) : UIElement
     {
+
+        internal Card SourceCard => sourceCard;
         internal Vector2 Position => new(Parent.GetInnerDimensions().X + Left.Pixels, Parent.GetInnerDimensions().Y + Top.Pixels);
 
         internal const float CARD_SCALE = 0.8f;

@@ -10,6 +10,7 @@ using Terraria.GameContent.UI.Elements;
 using Terraria.ModLoader;
 using Terraria.UI;
 using TerraTCG.Common.GameSystem.CardData;
+using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.UI.GameFieldUI;
 using static TerraTCG.Common.UI.DeckbuildUI.DeckbuildCardElement;
 
@@ -42,6 +43,19 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             scrollBar.Height.Percent = 1f;
             Append(scrollBar);
         }
+
+        private List<DeckbuildCardElement> GetVisibleCards()
+        {
+            // TODO is this the best way to pass data between sibling elements
+            var cardFilter = ((DeckbuildState)Parent).VisibleCardTypes;
+            if(cardFilter.Count == 0)
+            {
+                return cards;
+            } else
+            {
+                return cards.Where(c => cardFilter.Contains(c.SourceCard.SortType)).ToList();
+            }
+        }
         private void CalculateCardPositions()
         {
             int CARDS_PER_ROW = 5;
@@ -58,16 +72,25 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             var topRow = (int)MathHelper.Lerp(0, maxScroll, scrollOffset);
             var yOffset = topRow * (int)(CARD_HEIGHT * CARD_SCALE + CARD_MARGIN);
 
-            for(int i = 0; i < cards.Count; i++)
+            var visibleCards = GetVisibleCards();
+            for(int i = 0; i < visibleCards.Count; i++)
             {
                 int row = i / CARDS_PER_ROW;
                 int col = i % CARDS_PER_ROW;
-                GameFieldState.SetRectangle(cards[i],
+                GameFieldState.SetRectangle(visibleCards[i],
                     col * (CARD_WIDTH * CARD_SCALE + CARD_MARGIN),
                     row * (CARD_HEIGHT * CARD_SCALE + CARD_MARGIN) - yOffset,
                     CARD_WIDTH * CARD_SCALE,
                     CARD_HEIGHT * CARD_SCALE);
             }
+            var invisibleCards = cards.Except(visibleCards);
+            // Push the non-visible cards off the bottom of the screen
+            // so that their own bounds-checking code hides them
+            foreach(var card in invisibleCards)
+            {
+                GameFieldState.SetRectangle(card, 0, Height.Pixels + 5);
+            }
+
         }
 
         public override void Update(GameTime gameTime)
