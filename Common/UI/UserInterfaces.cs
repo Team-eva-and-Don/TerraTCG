@@ -82,14 +82,11 @@ namespace TerraTCG.Common.UI
         
         public void StartPackOpening()
         {
-            CardWithTextRenderer.Instance.ToRender = [
-                ModContent.GetInstance<Dryad>().Card,
-                ModContent.GetInstance<KingSlime>().Card,
-                ModContent.GetInstance<WanderingEye>().Card,
-            ];
             PackState.StartTime = TCGPlayer.TotalGameTime;
             _userInterface.SetState(PackState);
         }
+
+        public bool IsPackOpening() => _userInterface.CurrentState == PackState;
 
         public void StopPackOpening()
         {

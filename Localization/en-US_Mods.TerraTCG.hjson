@@ -8,6 +8,11 @@ Items: {
 		DisplayName: Terra T C G Debug Deckbox
 		Tooltip: ""
 	}
+
+	TerraTCGBoosterPack: {
+		DisplayName: Terra T C G Booster Pack
+		Tooltip: ""
+	}
 }
 
 Cards: {

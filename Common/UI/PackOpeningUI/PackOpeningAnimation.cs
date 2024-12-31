@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.UI;
 using TerraTCG.Common.GameSystem;
@@ -21,6 +23,8 @@ namespace TerraTCG.Common.UI.PackOpeningUI
     {
         internal Card Card { get; set; }
 
+        internal float DrawScale { get; set; }
+
         internal Vector2 SourcePosition { get; set; }
 
         internal float Angle { get; set; }
@@ -29,13 +33,15 @@ namespace TerraTCG.Common.UI.PackOpeningUI
 
         internal TimeSpan CompleteTime { get; set; }
 
-        internal Vector2 DestPosition => SourcePosition + new Vector2(360, 0).RotatedBy(Angle);
+        internal Vector2 DestPosition => SourcePosition + new Vector2(268, 0).RotatedBy(Angle);
 
         internal Vector2 Position { get; set; }
 
         internal float FlipAmount { get; set; }
 
         internal float Scale { get; set; }
+
+        private bool hasPlayedSound;
 
         private readonly TimeSpan TravelTime = TimeSpan.FromSeconds(0.25f);
 
@@ -54,6 +60,11 @@ namespace TerraTCG.Common.UI.PackOpeningUI
                 UpdateIdle1(elapsedTime - TravelTime);
             } else if (elapsedTime < FlipTime)
             {
+                if(!hasPlayedSound)
+                {
+                    SoundEngine.PlaySound(SoundID.Item1);
+                    hasPlayedSound = true;
+                }
                 UpdateFlip(elapsedTime - WaitTime);
             } else if (CompleteTime == default) 
             {
@@ -65,7 +76,10 @@ namespace TerraTCG.Common.UI.PackOpeningUI
         }
 
         public bool IsRevealed(TimeSpan elapsedTime)
-            => elapsedTime - StartTime >= FlipTime;
+            => elapsedTime - StartTime >= FlipTime + TimeSpan.FromSeconds(0.5f);
+
+        public bool IsComplete(TimeSpan elapsedTime)
+            => CompleteTime != default && elapsedTime - CompleteTime > TimeSpan.FromSeconds(0.25f);
 
         private void UpdateTravelFromPlayer(TimeSpan elapsedTime)
         {
@@ -77,8 +91,9 @@ namespace TerraTCG.Common.UI.PackOpeningUI
 
         private void UpdateReturnToPlayer(TimeSpan elapsedTime)
         {
-            var lerpPoint = Math.Max(0, 1 - 4 * (float)elapsedTime.TotalSeconds);
-            Position = Vector2.Lerp(SourcePosition, DestPosition, lerpPoint);
+            var lerpPoint = Math.Max(0, 0.98f - 4 * (float)elapsedTime.TotalSeconds);
+            var targetPosition = Vector2.Lerp(SourcePosition, DestPosition, lerpPoint);
+            Position = Vector2.Lerp(Position, targetPosition, 0.5f);
             Scale = lerpPoint;
             FlipAmount = 1;
         }
@@ -165,8 +180,15 @@ namespace TerraTCG.Common.UI.PackOpeningUI
             {
                 foreach(var card in AnimationCards)
                 {
-                    card.CompleteTime = ElapsedTime;
+                    if(card.CompleteTime == default)
+                    {
+                        card.CompleteTime = ElapsedTime;
+                    }
                 }
+            }
+            if(AnimationCards.All(c=>c.IsComplete(ElapsedTime)))
+            {
+                ModContent.GetInstance<UserInterfaces>().StopPackOpening();
             }
         }
 

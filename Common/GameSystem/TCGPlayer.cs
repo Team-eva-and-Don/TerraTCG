@@ -8,6 +8,7 @@ using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using TerraTCG.Common.GameSystem.BotPlayer;
+using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.UI;
@@ -186,6 +187,25 @@ namespace TerraTCG.Common.GameSystem
                     }
                 }
             }
+        }
+
+        internal void OpenPackAndAddToCollection()
+        {
+            var starterCards = BotDecks.GetStarterDeck();
+            var allPackCards = ModContent.GetContent<BaseCardTemplate>()
+                .Select(t => t.Card)
+                // .Where(c=>!starterCards.Cards.Any(c2=>c.Name == c2.Name)) // Don't re-give starter set cards
+                .ToList();
+
+            var cardsInPack = new List<Card>();
+            for(int _ = 0; _ < 3; _++) 
+            {
+                cardsInPack.Add(allPackCards[Main.rand.Next(allPackCards.Count)]);
+            }
+            AddCardsToCollection(cardsInPack);
+
+            CardWithTextRenderer.Instance.ToRender = cardsInPack;
+            ModContent.GetInstance<UserInterfaces>().StartPackOpening();
         }
     }
 }
