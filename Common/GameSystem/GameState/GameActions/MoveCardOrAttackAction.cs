@@ -24,6 +24,9 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public bool CanAcceptCardInHand(Card card) => false;
 
+        private string _logMessage;
+        public string GetLogMessage() => _logMessage;
+
         public bool CanAcceptZone(Zone zone) 
         { 
             if(startZone?.PlacedCard?.IsExerted ?? true)
@@ -87,6 +90,9 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             endZone.QueueAnimation(new PlaceCardAnimation(endZone.PlacedCard));
             player.Resources = player.Resources.UseResource(mana: endZone.PlacedCard.Template.MoveCost);
             GameSounds.PlaySound(GameAction.PLACE_CARD);
+
+            var startCard = startZone.PlacedCard.Template;
+            _logMessage = $"moved {startCard.CardName}.";
         }
 
         private void DoAttack()
@@ -106,12 +112,16 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             player.Field.ClearModifiers(player, startZone, GameEvent.AFTER_ATTACK);
             player.Opponent.Field.ClearModifiers(player, endZone, GameEvent.AFTER_RECEIVE_ATTACK);
 
+            var startCard = startZone.PlacedCard.Template;
+            var endCard = endZone.PlacedCard.Template;
+            _logMessage = $"attacked {endCard.CardName} with {startCard.CardName} for {attack.Damage}";
 
             if(endZone.PlacedCard.CurrentHealth <= 0)
             {
                 endZone.QueueAnimation(new RemoveCardAnimation(endZone.PlacedCard));
                 endZone.Owner.Resources = endZone.Owner.Resources.UseResource(health: endZone.PlacedCard.Template.Points);
                 endZone.PlacedCard = null;
+                _logMessage += $"\n{endCard.CardName} died.";
             }
 
             // both cards can die during an attack exchange
@@ -120,6 +130,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
                 startZone.QueueAnimation(new RemoveCardAnimation(startZone.PlacedCard));
                 startZone.Owner.Resources = startZone.Owner.Resources.UseResource(health: startZone.PlacedCard.Template.Points);
                 startZone.PlacedCard = null;
+                _logMessage += $"\n{startCard.CardName} died.";
             }
             GameSounds.PlaySound(GameAction.ATTACK);
         }
@@ -133,6 +144,13 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             startZone.QueueAnimation(new ActionAnimation(startZone.PlacedCard));
             endZone?.QueueAnimation(new ActionAnimation(endZone.PlacedCard));
             GameSounds.PlaySound(GameAction.USE_SKILL);
+
+            var startCard = startZone.PlacedCard.Template;
+            _logMessage = $"used {startCard.CardName}'s skill";
+            if(endZone?.PlacedCard?.Template is Card endCard)
+            {
+                _logMessage += $"\non {endCard.CardName}";
+            }
         }
 
         public void Complete()

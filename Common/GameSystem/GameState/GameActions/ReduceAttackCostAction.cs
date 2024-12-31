@@ -14,6 +14,8 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
     {
         private Zone zone;
 
+        public override string GetLogMessage() => $"reduced {zone.PlacedCard.Template.CardName}'s attack cost with {Card.CardName}";
+
         public override bool CanAcceptZone(Zone zone) => base.CanAcceptZone(zone) && Player.Owns(zone) && !zone.IsEmpty();
 
         public override bool AcceptZone(Zone zone)

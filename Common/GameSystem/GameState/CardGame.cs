@@ -13,6 +13,7 @@ using TerraTCG.Common.GameSystem.BotPlayer;
 using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.GameSystem.Drawing.Animations;
 using TerraTCG.Common.GameSystem.Drawing.Animations.FieldAnimations;
+using TerraTCG.Common.GameSystem.GameState.GameActions;
 
 namespace TerraTCG.Common.GameSystem.GameState
 {
@@ -132,6 +133,14 @@ namespace TerraTCG.Common.GameSystem.GameState
                 }
             }
         }
+
+        public void LogAndCompleteAction(IGameAction action)
+        {
+            action.Complete();
+            var player = CurrentTurn.ActivePlayer == TCGPlayer.LocalGamePlayer ?
+                "You " : "Opponent ";
+            CurrentTurn.ActionLog.Add(player + action.GetLogMessage());
+        }
     }
 
     internal class GameModSystem : ModSystem
@@ -166,5 +175,6 @@ namespace TerraTCG.Common.GameSystem.GameState
             // games end via state check, prune them
             ActiveGames = ActiveGames.Where(g => g.IsActive).ToList();
         }
+
     }
 }

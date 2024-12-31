@@ -81,13 +81,12 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             }
         }
 
-
         private void DoMoveOrAttack(Zone sourceZone, Zone destZone)
         {
             var action = new MoveCardOrAttackAction(sourceZone, GamePlayer);
             GamePlayer.InProgressAction = action;
             action.AcceptZone(destZone);
-            action.Complete();
+            Game.LogAndCompleteAction(action);
         }
 
         private void DoUseSkill(Zone sourceZone)
@@ -95,7 +94,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             var action = new MoveCardOrAttackAction(sourceZone, GamePlayer);
             GamePlayer.InProgressAction = action;
             action.AcceptActionButton();
-            action.Complete();
+            Game.LogAndCompleteAction(action);
         }
 
         private void DoUseTargetedSkill(Zone sourceZone, Zone destZone)
@@ -104,7 +103,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             GamePlayer.InProgressAction = action;
             action.AcceptActionButton();
             action.AcceptZone(destZone);
-            action.Complete();
+            Game.LogAndCompleteAction(action);
         }
 
         private void PlaceCreature(Card sourceCard, Zone destZone)
@@ -112,7 +111,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             var action = new DeployCreatureAction(sourceCard, GamePlayer);
             GamePlayer.InProgressAction = action;
             action.AcceptZone(destZone);
-            action.Complete();
+            Game.LogAndCompleteAction(action);
         }
 
         private void UseItem(Card sourceCard, Zone destZone)
@@ -120,7 +119,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             var action = sourceCard.SelectInHandAction(sourceCard, GamePlayer);
             GamePlayer.InProgressAction = action;
             action.AcceptZone(destZone);
-            action.Complete();
+            Game.LogAndCompleteAction(action);
         }
 
         private void UseTownsfolk(Card sourceCard)
@@ -128,7 +127,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             var action = sourceCard.SelectInHandAction(sourceCard, GamePlayer);
             GamePlayer.InProgressAction = action;
             action.AcceptActionButton();
-            action.Complete();
+            Game.LogAndCompleteAction(action);
         }
 
         private void UseTownsfolk(Card sourceCard, Zone destZone)
@@ -136,7 +135,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             var action = sourceCard.SelectInHandAction(sourceCard, GamePlayer);
             GamePlayer.InProgressAction = action;
             action.AcceptZone(destZone);
-            action.Complete();
+            Game.LogAndCompleteAction(action);
         }
 
         private void UseTownsfolk(Card sourceCard, Zone destZone1, Zone destZone2)
@@ -145,7 +144,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             GamePlayer.InProgressAction = action;
             action.AcceptZone(destZone1);
             action.AcceptZone(destZone2);
-            action.Complete();
+            Game.LogAndCompleteAction(action);
         }
 
         public void Update()

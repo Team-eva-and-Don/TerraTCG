@@ -14,6 +14,11 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
     {
         private Zone zone;
 
+        public string GetLogMessage() =>
+            card.SubTypes.Contains(CardSubtype.EXPERT) ?
+            $"promoted {card.CardName}." : $"played {card.CardName}.";
+
+
         public bool CanAcceptZone(Zone zone)
         {
             if(card.SubTypes.Contains(CardSubtype.BOSS))

@@ -11,6 +11,8 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
     internal class RampAction(Card card, GamePlayer player, int amount=1) : TownsfolkAction(card, player), IGameAction
     {
+        public override string GetLogMessage() => $"Added a Mana crystal with {Card.CardName}";
+
         public override bool AcceptZone(Zone zone) => false;
 
         public override Zone TargetZone() => null;

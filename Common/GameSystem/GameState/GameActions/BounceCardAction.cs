@@ -12,6 +12,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
     internal class BounceCardAction(Card card, GamePlayer player) : TownsfolkAction(card, player)
     {
         private Zone zone;
+        public override string GetLogMessage() => $"Returned a card to the hand with {Card.CardName}";
 
         public override bool CanAcceptZone(Zone zone) => base.CanAcceptZone(zone) 
             && Player.Owns(zone) && !zone.IsEmpty() && !zone.PlacedCard.Template.SubTypes.Contains(CardSubtype.EXPERT);

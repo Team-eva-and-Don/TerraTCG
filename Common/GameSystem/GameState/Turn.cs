@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Terraria;
 using TerraTCG.Common.GameSystem.Drawing.Animations;
 using TerraTCG.Common.GameSystem.Drawing.Animations.FieldAnimations;
+using TerraTCG.Common.GameSystem.GameState.GameActions;
 using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.GameState
@@ -19,6 +20,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         // Certain cards care about item usage count
         internal int UsedItemCount { get; set; }
+        public List<string> ActionLog { get; internal set; } = [];
 
         public void Start()
         {
@@ -55,6 +57,8 @@ namespace TerraTCG.Common.GameSystem.GameState
 
             TCGPlayer.LocalGamePlayer.Game.FieldAnimation =
                 new TurnChangeAnimation(TCGPlayer.TotalGameTime, this);
+
+            ActionLog = [$"Start of Turn {TurnCount}."];
         }
 
         public void End()

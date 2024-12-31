@@ -29,6 +29,8 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public void Complete();
 
+        public string GetLogMessage();
+
         public Color HighlightColor(Zone zone)
         {
             return TCGPlayer.LocalGamePlayer.Owns(zone) ? Color.LightSkyBlue : Color.LightCoral;

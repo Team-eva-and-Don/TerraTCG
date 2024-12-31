@@ -51,6 +51,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
                 if(scaledBounds.Contains((int)Main.MouseScreen.X, (int)Main.MouseScreen.Y)) {
                     Main.LocalPlayer.mouseInterface = true;
                     localPlayer.MouseoverCard = card;
+                    localPlayer.MouseoverZone = null;
                     if(IsClicked())
                     {
                         SoundEngine.PlaySound(SoundID.MenuTick);

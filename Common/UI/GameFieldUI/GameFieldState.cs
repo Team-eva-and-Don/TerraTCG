@@ -21,6 +21,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
         internal PassTurnButton passTurnButton;
         internal CardPreviewElement previewElement;
         internal CancelResumeGameButton cancelButton;
+        internal ActionLogElement actionLog;
 
         // TODO "hiding" the field by sliding it off the bottom of the screen is a bit iffy
         internal static int UI_MAX_HEIGHT => Main.screenHeight - (Main.screenHeight - FieldRenderer.FIELD_HEIGHT + 16) / 2;
@@ -52,6 +53,9 @@ namespace TerraTCG.Common.UI.GameFieldUI
             };
             Append(cancelButton);
 
+            actionLog = new();
+            Append(actionLog);
+
             SetRectangles(0);
         }
         public static void SetRectangle(UIElement uiElement, float left, float top, float width = 1, float height = 1)
@@ -76,6 +80,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
             SetRectangle(handElement, Main.screenWidth / 2, yOffset + Main.screenHeight - HandElement.CARD_HEIGHT);
             SetRectangle(oppHandElement, Main.screenWidth / 2, yOffset + gameField.Position.Y);
             SetRectangle(passTurnButton, Main.screenWidth / 2 + 3 * FieldRenderer.FIELD_WIDTH / 8, yOffset + Main.screenHeight / 2);
+            SetRectangle(actionLog, 16, previewElement.Left.Pixels + previewElement.Width.Pixels, previewElement.Top.Pixels + previewElement.Width.Pixels);
             SetRectangle(cancelButton, 16, Main.screenHeight - 16 - 48, 38, 48);
         }
 

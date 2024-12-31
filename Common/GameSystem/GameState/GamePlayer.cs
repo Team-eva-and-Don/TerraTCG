@@ -86,7 +86,7 @@ namespace TerraTCG.Common.GameSystem.GameState
                 var done = InProgressAction.AcceptZone(zone);
                 if(done)
                 {
-                    InProgressAction.Complete();
+                    Game.LogAndCompleteAction(InProgressAction);
                     InProgressAction = null;
                     SelectedFieldZone = null;
                 }
@@ -121,7 +121,7 @@ namespace TerraTCG.Common.GameSystem.GameState
                 var done = InProgressAction.AcceptActionButton();
                 if(done)
                 {
-                    InProgressAction.Complete();
+                    Game.LogAndCompleteAction(InProgressAction);
                     SelectedFieldZone = null;
                     InProgressAction = null;
                 }

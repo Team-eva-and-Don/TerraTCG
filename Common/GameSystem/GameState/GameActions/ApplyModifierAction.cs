@@ -21,6 +21,8 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             return true;
         }
 
+        public string GetLogMessage() => $"used {card.CardName} on {zone?.PlacedCard?.Template?.CardName ?? ""}";
+
         public void Complete()
         {
             var showAnimation = new ShowCardAnimation(TCGPlayer.TotalGameTime, card, zone);

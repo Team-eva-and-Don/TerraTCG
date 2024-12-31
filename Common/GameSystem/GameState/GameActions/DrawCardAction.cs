@@ -11,6 +11,8 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
     internal class DrawCardAction(Card card, GamePlayer player, int drawCount=1) : TownsfolkAction(card, player), IGameAction
     {
+        public override string GetLogMessage() => $"drew {drawCount} cards with {Card.CardName}";
+
         public override bool AcceptZone(Zone zone) => false;
 
         public override Zone TargetZone() => null;
