@@ -96,6 +96,7 @@ namespace TerraTCG.Common.GameSystem
             if(Player.whoAmI == Main.myPlayer)
             {
                 ModContent.GetInstance<FieldRenderer>().OnEnterWorld();
+                ModContent.GetInstance<CardWithTextRenderer>().OnEnterWorld();
             }
         }
 

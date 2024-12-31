@@ -41,13 +41,20 @@ namespace TerraTCG.Common.GameSystem.Drawing
         public const int FIELD_WIDTH = 5 * CARD_WIDTH + 4 * CARD_MARGIN + 2 * FIELD_MARGIN;
         public const int FIELD_HEIGHT = 4 * CARD_HEIGHT + 4 * CARD_MARGIN + FIELD_GAP + 2 * FIELD_MARGIN;
 
+        // Render the tiny map background onto a "full screen" to scale it up
         private const int LARGE_MAP_WIDTH = 1920;
         private const int LARGE_MAP_HEIGHT = 1080;
 
 
-        // need to run this on the main thread
+        // need to run this on the main thread, cannot find a ModSystem method
+        // that guarantees it so call externally
         public void OnEnterWorld()
         {
+            if(fieldRenderTarget != null)
+            {
+                return;
+            }
+
             fieldRenderTarget = new RenderTarget2D(
                 Main.graphics.GraphicsDevice,
                 FIELD_WIDTH,
@@ -57,6 +64,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 DepthFormat.None,
                 0,
                 RenderTargetUsage.PreserveContents);
+
             PerspectiveRenderTarget = new RenderTarget2D(
                 Main.graphics.GraphicsDevice,
                 FIELD_WIDTH,
