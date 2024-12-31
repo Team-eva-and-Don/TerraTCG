@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
 using Terraria.UI;
 using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.Drawing;
@@ -44,13 +46,14 @@ namespace TerraTCG.Common.UI.GameFieldUI
                     (int)(bounds.Width * CARD_SCALE),
                     (int)(bounds.Height * CARD_SCALE));
 
-                PlayTickIfMouseEntered(scaledBounds);
+                // PlayTickIfMouseEntered(scaledBounds);
 
                 if(scaledBounds.Contains((int)Main.MouseScreen.X, (int)Main.MouseScreen.Y)) {
                     Main.LocalPlayer.mouseInterface = true;
                     localPlayer.MouseoverCard = card;
                     if(IsClicked())
                     {
+                        SoundEngine.PlaySound(SoundID.MenuTick);
                         gamePlayer.SelectCardInHand(i);
                         break;
                     }

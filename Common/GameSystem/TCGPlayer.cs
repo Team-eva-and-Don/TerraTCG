@@ -43,7 +43,14 @@ namespace TerraTCG.Common.GameSystem
                     if(game.EndTime != default) 
                     {
                         var timeSinceGameEnd = TotalGameTime - game.EndTime;
-                        lerpPoint = 1 - Math.Min(1, 2f * (float)timeSinceGameEnd.TotalSeconds);
+                        var fadeOutTime = timeSinceGameEnd.TotalSeconds - 1.5f;
+                        if(fadeOutTime < 0)
+                        {
+                            lerpPoint = 1f;
+                        } else
+                        {
+                            lerpPoint = 1 - Math.Min(1, 2f * (float)fadeOutTime);
+                        }
                     } else
                     {
                         var timeSinceGameStart = TotalGameTime - game.StartTime;
@@ -73,10 +80,16 @@ namespace TerraTCG.Common.GameSystem
 
         public CardCollection Deck { get => SavedDecks[ActiveDeck]; set { } }
 
+        public CardCollection Collection { get; set; } = BotDecks.GetStarterDeck();
+
         // TODO this is not the correct place to cache this info, but is the easiest
         // Place within UI coordinates that the bottom center of the player's
         // back-center game zone is drawn
         internal Vector2 GameFieldPosition { get; set; }
+
+        // Flag for whether the player is allowed to deckbuild with cards
+        // from outside their collection. Default false
+        public bool DebugDeckbuildMode { get; internal set; } = false;
 
         public override void OnEnterWorld()
         {
@@ -100,10 +113,30 @@ namespace TerraTCG.Common.GameSystem
             ModContent.GetInstance<UserInterfaces>().EndGame();
         }
 
+        public void AddCardsToCollection(List<Card> cards)
+        {
+            foreach(var card in cards)
+            {
+                if(!Collection.Cards.Contains(card))
+                {
+                    Collection.Cards.Add(card);
+                }
+            }
+        }
+
         public override void SaveData(TagCompound tag)
         {
             base.SaveData(tag);
             tag["version"] = SAVE_VERSION;
+            try
+            {
+                tag.Add("collection", Collection.Serialize());
+            }
+            catch (Exception e)
+            {
+                Mod.Logger.ErrorFormat("An error occurred while saving player collection: {0}", e.StackTrace);
+            }
+
             for(int i = 0; i < SavedDecks.Count; i++)
             {
                 try
@@ -122,6 +155,19 @@ namespace TerraTCG.Common.GameSystem
             base.LoadData(tag);
             if (tag.ContainsKey("version") && tag.GetString("version") == SAVE_VERSION)
             {
+                try
+                {
+                    if(tag.ContainsKey("collection"))
+                    {
+                        var collection = tag.GetList<string>("collection").ToList();
+                        Collection.DeSerialize(collection);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Mod.Logger.ErrorFormat("An error occurred while loading player collection: {0}", e.StackTrace);
+                }
+
                 for(int i = 0; i < SavedDecks.Count; i++)
                 {
                     if(!tag.ContainsKey($"deck_{i}"))

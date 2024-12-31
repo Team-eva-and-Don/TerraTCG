@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.UI;
 
 namespace TerraTCG.Content.Items
@@ -23,6 +24,27 @@ namespace TerraTCG.Content.Items
         {
             if(player.whoAmI == Main.myPlayer)
             {
+                TCGPlayer.LocalPlayer.DebugDeckbuildMode = false;
+                ModContent.GetInstance<UserInterfaces>().StartDeckbuild();
+            }
+            return default;
+        }
+    }
+
+    internal class TerraTCGDebugDeckbox : ModItem
+    {
+        public override string Texture => "Terraria/Images/Item_" + ItemID.WaterBolt;
+
+        public override void SetDefaults()
+        {
+            Item.useStyle = ItemUseStyleID.HoldUp;
+        }
+
+        public override bool? UseItem(Player player)
+        {
+            if(player.whoAmI == Main.myPlayer)
+            {
+                TCGPlayer.LocalPlayer.DebugDeckbuildMode = true;
                 ModContent.GetInstance<UserInterfaces>().StartDeckbuild();
             }
             return default;

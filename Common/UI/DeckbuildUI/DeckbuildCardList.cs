@@ -9,6 +9,7 @@ using Terraria;
 using Terraria.GameContent.UI.Elements;
 using Terraria.ModLoader;
 using Terraria.UI;
+using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.UI.GameFieldUI;
@@ -47,13 +48,16 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         private List<DeckbuildCardElement> GetVisibleCards()
         {
             // TODO is this the best way to pass data between sibling elements
+            var localPlayer = TCGPlayer.LocalPlayer;
+            var cardList = localPlayer.DebugDeckbuildMode ? cards :
+                cards.Where(c => localPlayer.Collection.Cards.Any(c2 => c2.Name == c.SourceCard.Name));
             var cardFilter = ((DeckbuildState)Parent).VisibleCardTypes;
             if(cardFilter.Count == 0)
             {
-                return cards;
+                return cardList.ToList();
             } else
             {
-                return cards.Where(c => cardFilter.Contains(c.SourceCard.SortType)).ToList();
+                return cardList.Where(c => cardFilter.Contains(c.SourceCard.SortType)).ToList();
             }
         }
         private void CalculateCardPositions()

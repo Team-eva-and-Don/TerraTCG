@@ -28,10 +28,11 @@ namespace TerraTCG.Common.GameSystem.GameState
         internal TimeSpan StartTime { get; private set; }
         internal TimeSpan EndTime { get; private set; }
 
-        internal TimeSpan FadeOutTime { get; } = TimeSpan.FromSeconds(0.5f);
+        internal TimeSpan FadeOutTime { get; } = TimeSpan.FromSeconds(2f);
 
         private readonly Random random = new ();
 
+        internal GamePlayer Winner { get; set; }
         internal Turn CurrentTurn
         {
             get => Turns.Last();
@@ -75,8 +76,9 @@ namespace TerraTCG.Common.GameSystem.GameState
         {
             if(EndTime == default)
             {
+                FieldAnimation =
+                    new GameResultAnimation(TCGPlayer.TotalGameTime, Winner == TCGPlayer.LocalGamePlayer);
                 EndTime = Main._drawInterfaceGameTime.TotalGameTime;
-                SoundEngine.PlaySound(SoundID.MenuClose);
             }
         }
 
@@ -123,6 +125,7 @@ namespace TerraTCG.Common.GameSystem.GameState
             {
                 if(player.Resources.Health <= 0)
                 {
+                    Winner = player.Opponent;
                     MarkGameComplete();
                     break;
                 }

@@ -3,6 +3,11 @@ Items: {
 		DisplayName: TerraTCG Deckbox
 		Tooltip: Open the TerraTCG Deck Editor
 	}
+
+	TerraTCGDebugDeckbox: {
+		DisplayName: Terra T C G Debug Deckbox
+		Tooltip: ""
+	}
 }
 
 Cards: {

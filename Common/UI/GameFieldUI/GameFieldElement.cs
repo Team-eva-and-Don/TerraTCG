@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.Audio;
+using Terraria.ID;
 using Terraria.UI;
 using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.Drawing;
@@ -57,14 +59,15 @@ namespace TerraTCG.Common.UI.GameFieldUI
                     }
                     if(IsClicked())
                     {
+                        SoundEngine.PlaySound(SoundID.MenuTick);
                         gamePlayer.SelectZone(zone);
                         break;
                     }
                 }
-                if(gamePlayer.InProgressAction?.CanAcceptZone(zone) ?? zone.HasPlacedCard())
-                {
-                    ProjectedFieldUtils.Instance.PlayTickIfMouseEntered(gamePlayer, zone, mouseField, prevMouseField);
-                }
+                //if(gamePlayer.InProgressAction?.CanAcceptZone(zone) ?? zone.HasPlacedCard())
+                //{
+                //    ProjectedFieldUtils.Instance.PlayTickIfMouseEntered(gamePlayer, zone, mouseField, prevMouseField);
+                //}
             }
         }
 
