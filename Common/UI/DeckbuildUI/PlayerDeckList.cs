@@ -44,6 +44,19 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             };
             scrollBar.Height.Percent = 1f;
             Append(scrollBar);
+
+            OnScrollWheel += PlayerDeckList_OnScrollWheel;
+        }
+
+        private void PlayerDeckList_OnScrollWheel(Terraria.UI.UIScrollWheelEvent evt, Terraria.UI.UIElement listeningElement)
+        {
+            if(evt.ScrollWheelValue > 0)
+            {
+                scrollBar.ViewPosition = Math.Max(0, scrollBar.ViewPosition - 0.5f);
+            } else
+            {
+                scrollBar.ViewPosition = Math.Min(19, scrollBar.ViewPosition + 0.5f);
+            }
         }
 
         internal int GetMaxRows()

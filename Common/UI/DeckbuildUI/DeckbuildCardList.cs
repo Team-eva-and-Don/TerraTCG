@@ -43,6 +43,19 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             };
             scrollBar.Height.Percent = 1f;
             Append(scrollBar);
+
+            OnScrollWheel += DeckbuildCardList_OnScrollWheel;
+        }
+
+        private void DeckbuildCardList_OnScrollWheel(UIScrollWheelEvent evt, UIElement listeningElement)
+        {
+            if(evt.ScrollWheelValue > 0)
+            {
+                scrollBar.ViewPosition = Math.Max(0, scrollBar.ViewPosition - 0.5f);
+            } else
+            {
+                scrollBar.ViewPosition = Math.Min(19, scrollBar.ViewPosition + 0.5f);
+            }
         }
 
         private List<DeckbuildCardElement> GetVisibleCards()
