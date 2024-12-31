@@ -13,8 +13,6 @@ namespace TerraTCG.Content.Items
 {
     internal class TerraTCGBoosterPack : ModItem
     {
-        public override string Texture => "TerraTCG/Assets/FieldElements/PackIcon";
-
         public override void SetDefaults()
         {
             Item.consumable = true;

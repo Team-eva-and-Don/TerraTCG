@@ -210,7 +210,7 @@ namespace TerraTCG.Common.GameSystem
             var cardsInPack = new List<Card>
             {
                 allPackCards[Main.rand.Next(allPackCards.Count)],
-                incompleteCards[Main.rand.Next(allPackCards.Count)],
+                incompleteCards[Main.rand.Next(incompleteCards.Count)],
                 allPackCards[Main.rand.Next(allPackCards.Count)]
             };
             AddCardsToCollection(cardsInPack);

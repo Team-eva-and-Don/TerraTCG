@@ -13,13 +13,12 @@ namespace TerraTCG.Content.Items
 {
     internal class TerraTCGDeckbox : ModItem
     {
-        public override string Texture => "Terraria/Images/Item_" + ItemID.Book;
-
         public override void SetDefaults()
         {
             Item.useStyle = ItemUseStyleID.HoldUp;
             Item.useAnimation = 60;
             Item.useTime = 60;
+            Item.rare = ItemRarityID.Blue;
         }
 
         public override bool? UseItem(Player player)

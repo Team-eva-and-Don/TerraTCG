@@ -586,7 +586,7 @@ Cards: {
 			Description:
 				'''
 				Equipped creature takes
-				-2 dmg from attacks.
+				-1 dmg from attacks.
 				'''
 		}
 	}
