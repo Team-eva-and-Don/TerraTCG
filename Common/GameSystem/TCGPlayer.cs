@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using TerraTCG.Common.GameSystem.BotPlayer;
@@ -112,7 +113,10 @@ namespace TerraTCG.Common.GameSystem
         {
             if(GamePlayer.Game.Winner == GamePlayer)
             {
-                Player.QuickSpawnItem(Player.GetSource_GiftOrReward("TerraTCG: Won Game"), ModContent.ItemType<TerraTCGBoosterPack>(), 3);
+                Player.QuickSpawnItem(
+                    Player.GetSource_GiftOrReward("TerraTCG: Won Game"), 
+                    ModContent.ItemType<TerraTCGBoosterPack>(), 
+                    Main.rand.Next(2, 6));
             }
             GamePlayer = null;
             MouseoverCard = null;
@@ -122,13 +126,19 @@ namespace TerraTCG.Common.GameSystem
 
         public void AddCardsToCollection(List<Card> cards)
         {
+            var duplicateCount = 0;
             foreach(var card in cards)
             {
                 if(Collection.Cards.Where(c=>c.Name == card.Name).Count() < 2)
                 {
                     Collection.Cards.Add(card);
+                } else
+                {
+                    duplicateCount += 1;
                 }
             }
+            // Give player a bit of money for duplicates
+            Player.QuickSpawnItem(Player.GetSource_GiftOrReward("TerraTCG: Duplicate card"), ItemID.SilverCoin, 10 * duplicateCount);
         }
 
         public override void SaveData(TagCompound tag)
@@ -138,6 +148,7 @@ namespace TerraTCG.Common.GameSystem
             try
             {
                 tag.Add("collection", Collection.Serialize());
+                tag.Add("activeDeck", ActiveDeck);
             }
             catch (Exception e)
             {
@@ -169,6 +180,10 @@ namespace TerraTCG.Common.GameSystem
                         var collection = tag.GetList<uint>("collection").ToList();
                         Collection.DeSerialize(collection);
                     }
+                    if(tag.ContainsKey("activeDeck"))
+                    {
+                        ActiveDeck = tag.GetInt("activeDeck");
+                    }
                 }
                 catch (Exception e)
                 {
@@ -194,6 +209,18 @@ namespace TerraTCG.Common.GameSystem
             }
         }
 
+        private Card SelectCardFromPools(params List<Card>[] pools)
+        {
+            foreach (var pool in pools)
+            {
+                if(pool.Count > 0)
+                {
+                    return pool[Main.rand.Next(0, pool.Count)];
+                }
+            }
+            return null;
+        }
+
         internal void OpenPackAndAddToCollection()
         {
             var starterCards = BotDecks.GetStarterDeck();
@@ -207,11 +234,15 @@ namespace TerraTCG.Common.GameSystem
                 .Where(c => Collection.Cards.Where(c2 => c.Name == c2.Name).Count() < 2)
                 .ToList(); // Guarantee at least one new card per pack
 
+            var unownedCards = allPackCards
+                .Where(c => !Collection.Cards.Where(c2 => c.Name == c2.Name).Any())
+                .ToList(); // Guarantee at least one new card per pack
+
             var cardsInPack = new List<Card>
             {
-                allPackCards[Main.rand.Next(allPackCards.Count)],
-                incompleteCards[Main.rand.Next(incompleteCards.Count)],
-                allPackCards[Main.rand.Next(allPackCards.Count)]
+                SelectCardFromPools(unownedCards, incompleteCards, allPackCards),
+                SelectCardFromPools(incompleteCards, allPackCards),
+                SelectCardFromPools(allPackCards),
             };
             AddCardsToCollection(cardsInPack);
 
