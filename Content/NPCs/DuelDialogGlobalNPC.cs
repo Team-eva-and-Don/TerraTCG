@@ -56,8 +56,6 @@ namespace TerraTCG.Content.NPCs
             ],
             [NPCID.Nurse] = [
                 new("MushroomBeginner", BotDecks.GetStarterMushroomDeck()),
-            ],
-            [NPCID.Truffle] = [
                 new("Mushroom", BotDecks.GetMushroomDeck()),
             ],
             [NPCID.GoblinTinkerer] = [
@@ -82,6 +80,5 @@ namespace TerraTCG.Content.NPCs
                 ModContent.GetInstance<UserInterfaces>().StartNPCChat();
             }
         }
-
     }
 }

@@ -13,6 +13,7 @@ using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState.GameActions;
 using TerraTCG.Common.GameSystem.GameState.Modifiers;
+using TerraTCG.Common.Util;
 
 namespace TerraTCG.Common.GameSystem.GameState
 {
@@ -64,6 +65,8 @@ namespace TerraTCG.Common.GameSystem.GameState
     internal class Card
     {
         internal string Name { get; set; }
+
+        internal uint ID => StringHash.StableStringHash(Name);
 
         internal int NPCID { get; set; }
 

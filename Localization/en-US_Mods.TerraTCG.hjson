@@ -1,17 +1,31 @@
 Items: {
 	TerraTCGDeckbox: {
 		DisplayName: TerraTCG Deckbox
-		Tooltip: Open the TerraTCG Deck Editor
+		Tooltip:
+			'''
+			A TerraTCG Deckbox! Open it to edit
+			your decks. Challenge NPCs by to a 
+			game of TerraTCG by talking to them.
+			'''
 	}
 
 	TerraTCGDebugDeckbox: {
-		DisplayName: Terra T C G Debug Deckbox
-		Tooltip: ""
+		DisplayName: Terra TCG Debug Deckbox
+		Tooltip:
+			'''
+			Open the TerraTCG Deck Editor with access
+			to every card.
+			'''
 	}
 
 	TerraTCGBoosterPack: {
-		DisplayName: Terra T C G Booster Pack
-		Tooltip: ""
+		DisplayName: Terra TCG Booster Pack
+		Tooltip:
+			'''
+			A TerrTCG booster pack! Open it to
+			get 3 random cards! Build your deck
+			with the TerraTCG Deckbox.
+			'''
 	}
 }
 
@@ -975,8 +989,8 @@ Cards: {
 	DeckNames: {
 		ForestBeginner: Forest (Beginner)
 		Forest: Forest (Intermediate)
-		SlimesBeginner: Slimes (Beginner)
-		Slimes: Slimes (Advanced)
+		SlimeBeginner: Slimes (Beginner)
+		Slime: Slimes (Advanced)
 		JungleBeginner: Jungle (Beginner)
 		Jungle: Jungle (Advanced)
 		Treasure: Treasures (Advanced)

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.UI;
@@ -20,6 +21,9 @@ namespace TerraTCG.Common.UI.DeckbuildUI
     {
 
         internal Card SourceCard => sourceCard;
+        internal int Count => TCGPlayer.LocalPlayer.DebugDeckbuildMode ? 2 :
+            TCGPlayer.LocalPlayer.Collection.Cards.Where(c => c.Name == sourceCard.Name).Count();
+
         internal Vector2 Position => new(Parent.GetInnerDimensions().X + Left.Pixels, Parent.GetInnerDimensions().Y + Top.Pixels);
 
         internal const float CARD_SCALE = 0.8f;
@@ -38,12 +42,11 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         {
             var activeDeck = TCGPlayer.LocalPlayer.Deck;
             var cardCount = activeDeck.Cards.Where(c => c.Name == sourceCard.Name).Count();
-            if(cardCount < 2 && activeDeck.Cards.Count < 20)
+            if(cardCount < Math.Min(2, Count) && activeDeck.Cards.Count < 20)
             {
                 activeDeck.Cards.Add(sourceCard);
-
+                SoundEngine.PlaySound(SoundID.MenuTick);
             }
-            SoundEngine.PlaySound(SoundID.MenuTick);
         }
 
         public override void Update(GameTime gameTime)
@@ -82,6 +85,11 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             var texture = sourceCard.Texture;
             spriteBatch.Draw(texture.Value, Position, bounds, Color.White, 0, default, CARD_SCALE, SpriteEffects.None, 0f);
             CardTextRenderer.Instance.DrawCardText(spriteBatch, sourceCard, Position, CARD_SCALE);
+
+            var font = FontAssets.MouseText.Value;
+            var countText = $"{Count}";
+            var countPos = Position + new Vector2(4, CARD_HEIGHT * CARD_SCALE - font.MeasureString(countText).Y + 4);
+            CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, countText, countPos, font: font);
 
             if(ContainsPoint(Main.MouseScreen))
             {

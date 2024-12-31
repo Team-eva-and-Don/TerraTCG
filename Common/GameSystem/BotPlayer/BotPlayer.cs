@@ -1,4 +1,5 @@
-﻿using rail;
+﻿using Microsoft.Xna.Framework;
+using rail;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +26,8 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             Players = [];
         }
 
-        public override void PreUpdatePlayers()
+        // Games happen at the UI layer, run bot updates on each UI tick
+        public override void UpdateUI(GameTime gameTime)
         {
             foreach(var player in Players)
             {

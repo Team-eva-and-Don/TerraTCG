@@ -18,6 +18,8 @@ namespace TerraTCG.Content.Items
         public override void SetDefaults()
         {
             Item.useStyle = ItemUseStyleID.HoldUp;
+            Item.useAnimation = 60;
+            Item.useTime = 60;
         }
 
         public override bool? UseItem(Player player)
@@ -29,6 +31,12 @@ namespace TerraTCG.Content.Items
             }
             return default;
         }
+
+        public override void AddRecipes() => 
+            CreateRecipe()
+                .AddIngredient(ItemID.Wood, 5)
+                .AddTile(TileID.WorkBenches)
+                .Register();
     }
 
     internal class TerraTCGDebugDeckbox : ModItem

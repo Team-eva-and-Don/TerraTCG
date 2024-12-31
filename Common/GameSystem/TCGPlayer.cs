@@ -12,6 +12,7 @@ using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.UI;
+using TerraTCG.Content.Items;
 
 namespace TerraTCG.Common.GameSystem
 {
@@ -66,7 +67,7 @@ namespace TerraTCG.Common.GameSystem
 
         public int ActiveDeck { get; set; } = 0;
         public List<CardCollection> SavedDecks { get; set; } = [
-            BotDecks.GetForestDeck(),
+            BotDecks.GetStarterDeck(),
             new CardCollection(),
             new CardCollection(),
             new CardCollection(),
@@ -109,6 +110,10 @@ namespace TerraTCG.Common.GameSystem
 
         public void EndGame()
         {
+            if(GamePlayer.Game.Winner == GamePlayer)
+            {
+                Player.QuickSpawnItem(Player.GetSource_GiftOrReward("TerraTCG: Won Game"), ModContent.ItemType<TerraTCGBoosterPack>(), 3);
+            }
             GamePlayer = null;
             MouseoverCard = null;
             MouseoverZone = null;
@@ -119,7 +124,7 @@ namespace TerraTCG.Common.GameSystem
         {
             foreach(var card in cards)
             {
-                if(!Collection.Cards.Contains(card))
+                if(Collection.Cards.Where(c=>c.Name == card.Name).Count() < 2)
                 {
                     Collection.Cards.Add(card);
                 }
@@ -161,7 +166,7 @@ namespace TerraTCG.Common.GameSystem
                 {
                     if(tag.ContainsKey("collection"))
                     {
-                        var collection = tag.GetList<string>("collection").ToList();
+                        var collection = tag.GetList<uint>("collection").ToList();
                         Collection.DeSerialize(collection);
                     }
                 }
@@ -178,7 +183,7 @@ namespace TerraTCG.Common.GameSystem
                     }
                     try
                     {
-                        var deckList = tag.GetList<string>($"deck_{i}").ToList();
+                        var deckList = tag.GetList<uint>($"deck_{i}").ToList();
                         SavedDecks[i].DeSerialize(deckList);
                     }
                     catch (Exception e)
@@ -194,14 +199,20 @@ namespace TerraTCG.Common.GameSystem
             var starterCards = BotDecks.GetStarterDeck();
             var allPackCards = ModContent.GetContent<BaseCardTemplate>()
                 .Select(t => t.Card)
-                // .Where(c=>!starterCards.Cards.Any(c2=>c.Name == c2.Name)) // Don't re-give starter set cards
+                .Where(c => c.IsCollectable)
+                .Where(c=>!starterCards.Cards.Any(c2=>c.Name == c2.Name)) // Don't re-give starter set cards
                 .ToList();
 
-            var cardsInPack = new List<Card>();
-            for(int _ = 0; _ < 3; _++) 
+            var incompleteCards = allPackCards
+                .Where(c => Collection.Cards.Where(c2 => c.Name == c2.Name).Count() < 2)
+                .ToList(); // Guarantee at least one new card per pack
+
+            var cardsInPack = new List<Card>
             {
-                cardsInPack.Add(allPackCards[Main.rand.Next(allPackCards.Count)]);
-            }
+                allPackCards[Main.rand.Next(allPackCards.Count)],
+                incompleteCards[Main.rand.Next(allPackCards.Count)],
+                allPackCards[Main.rand.Next(allPackCards.Count)]
+            };
             AddCardsToCollection(cardsInPack);
 
             CardWithTextRenderer.Instance.ToRender = cardsInPack;

@@ -52,23 +52,32 @@ namespace TerraTCG.Common.GameSystem.GameState
             };
         }
 
-        public List<string> Serialize()
+        public List<uint> Serialize()
         {
-            return Cards.Select(c => c.Name).ToList();
+            return Cards.GroupBy(c => c.ID)
+                .SelectMany(groups => new List<uint>() { groups.First().ID, (uint)groups.Count() })
+                .ToList();
 
         }
 
-        public void DeSerialize(List<string> cardNames)
+        public void DeSerialize(List<uint> cardCounts)
         {
             var allCards = ModContent.GetContent<BaseCardTemplate>()
                 .Select(t => t.Card)
-                .ToDictionary(c => c.Name, c => c);
+                .ToDictionary(c => c.ID, c => c);
 
-            // TODO handle errors rather than silently discarding
-            Cards = cardNames
-                .Where(allCards.ContainsKey)
-                .Select(c => allCards[c])
-                .ToList();
+            // TODO handle errors
+            Cards = [];
+            for(int i = 0; i < cardCounts.Count; i+=2)
+            {
+                uint cardId = cardCounts[i];
+                uint count = cardCounts[i + 1];
+                var card = allCards[cardId];
+                for(int _ = 0; _ < count; _++)
+                {
+                    Cards.Add(card);
+                }
+            }
         }
     }
 }

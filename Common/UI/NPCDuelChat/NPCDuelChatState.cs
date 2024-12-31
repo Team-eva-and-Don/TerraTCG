@@ -81,6 +81,11 @@ namespace TerraTCG.Common.UI.NPCDuelChat
             if((Main.npcChatText?.Length ?? 0) > 0)
             {
                 dialog.NPCID = 0; // Reset duel start progress if we talk to another NPC
+            } else if ((Main.npcChatText?.Length ?? 0) == 0 && dialog.NPCID == 0)
+            {
+                // Chat closed before launching the duel dialog, exit out of this UI state
+                ModContent.GetInstance<UserInterfaces>().StopNPCChat();
+                return;
             }
 
             if(dialog.NPCID == 0)

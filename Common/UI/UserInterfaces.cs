@@ -78,6 +78,7 @@ namespace TerraTCG.Common.UI
         public void EndGame()
         {
             IngameFancyUI.Close();
+            Main.playerInventory = false;
         }
         
         public void StartPackOpening()

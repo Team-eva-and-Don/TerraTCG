@@ -1,4 +1,5 @@
-﻿using Steamworks;
+﻿using Microsoft.Xna.Framework;
+using Steamworks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -151,7 +152,8 @@ namespace TerraTCG.Common.GameSystem.GameState
             return game;
         }
 
-        public override void PreUpdatePlayers()
+        // Games are played at the UI layer, check the game state at each UI tick.
+        public override void UpdateUI(GameTime gameTime)
         {
             foreach (var game in ActiveGames)
             {
@@ -164,6 +166,5 @@ namespace TerraTCG.Common.GameSystem.GameState
             // games end via state check, prune them
             ActiveGames = ActiveGames.Where(g => g.IsActive).ToList();
         }
-
     }
 }
