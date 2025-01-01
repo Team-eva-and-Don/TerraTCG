@@ -12,6 +12,12 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
     internal delegate IGameAction SelectOnFieldAction(Zone zone, GamePlayer gamePlayer);
 
+    internal readonly struct ActionLogInfo(Card card, string message)
+    {
+        public Card Card { get; } = card;
+        public string Message { get; } = message;
+    }
+
     // Interface for a state machine that accepts player input until
     // enough info has been gathered to perform an action
     internal interface IGameAction
@@ -29,7 +35,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public void Complete();
 
-        public string GetLogMessage();
+        public ActionLogInfo GetLogMessage();
 
         public Color HighlightColor(Zone zone)
         {

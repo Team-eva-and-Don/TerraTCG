@@ -20,7 +20,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         // Certain cards care about item usage count
         internal int UsedItemCount { get; set; }
-        public List<string> ActionLog { get; internal set; } = [];
+        public List<ActionLogInfo> ActionLog { get; internal set; } = [];
 
         public void Start()
         {
@@ -58,7 +58,7 @@ namespace TerraTCG.Common.GameSystem.GameState
             TCGPlayer.LocalGamePlayer.Game.FieldAnimation =
                 new TurnChangeAnimation(TCGPlayer.TotalGameTime, this);
 
-            ActionLog = [$"Start of Turn {TurnCount}."];
+            ActionLog = [new(null, $"Start of Turn {TurnCount}")];
         }
 
         public void End()

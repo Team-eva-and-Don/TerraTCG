@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -80,7 +81,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
             SetRectangle(handElement, Main.screenWidth / 2, yOffset + Main.screenHeight - HandElement.CARD_HEIGHT);
             SetRectangle(oppHandElement, Main.screenWidth / 2, yOffset + gameField.Position.Y);
             SetRectangle(passTurnButton, Main.screenWidth / 2 + 3 * FieldRenderer.FIELD_WIDTH / 8, yOffset + Main.screenHeight / 2);
-            SetRectangle(actionLog, 16, previewElement.Left.Pixels + previewElement.Width.Pixels, previewElement.Top.Pixels + previewElement.Width.Pixels);
+            SetRectangle(actionLog, (Main.screenWidth + FieldRenderer.FIELD_WIDTH) / 2 + 22, yOffset + (Main.screenHeight + FieldRenderer.FIELD_HEIGHT)/2 - 104);
             SetRectangle(cancelButton, 16, Main.screenHeight - 16 - 48, 38, 48);
         }
 
@@ -88,6 +89,13 @@ namespace TerraTCG.Common.UI.GameFieldUI
         {
             SetRectangles();
             base.Update(gameTime);
+        }
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            Main.hoverItemName = ""; // suppress any tooltips from the main game state
+            Main.HoveringOverAnNPC = false;
+            base.Draw(spriteBatch);
         }
     }
 }

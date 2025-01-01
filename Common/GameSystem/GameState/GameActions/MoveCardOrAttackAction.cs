@@ -25,7 +25,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
         public bool CanAcceptCardInHand(Card card) => false;
 
         private string _logMessage;
-        public string GetLogMessage() => _logMessage;
+        public ActionLogInfo GetLogMessage() => new(startZone.PlacedCard.Template, _logMessage);
 
         public bool CanAcceptZone(Zone zone) 
         { 
@@ -92,7 +92,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             GameSounds.PlaySound(GameAction.PLACE_CARD);
 
             var startCard = startZone.PlacedCard.Template;
-            _logMessage = $"moved {startCard.CardName}.";
+            _logMessage = $"moved {startCard.CardName}";
         }
 
         private void DoAttack()
@@ -121,7 +121,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
                 endZone.QueueAnimation(new RemoveCardAnimation(endZone.PlacedCard));
                 endZone.Owner.Resources = endZone.Owner.Resources.UseResource(health: endZone.PlacedCard.Template.Points);
                 endZone.PlacedCard = null;
-                _logMessage += $"\n{endCard.CardName} died.";
+                _logMessage += $"\n{endCard.CardName} died";
             }
 
             // both cards can die during an attack exchange
@@ -130,7 +130,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
                 startZone.QueueAnimation(new RemoveCardAnimation(startZone.PlacedCard));
                 startZone.Owner.Resources = startZone.Owner.Resources.UseResource(health: startZone.PlacedCard.Template.Points);
                 startZone.PlacedCard = null;
-                _logMessage += $"\n{startCard.CardName} died.";
+                _logMessage += $"\n{startCard.CardName} died";
             }
             GameSounds.PlaySound(GameAction.ATTACK);
         }
@@ -149,7 +149,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             _logMessage = $"used {startCard.CardName}'s skill";
             if(endZone?.PlacedCard?.Template is Card endCard)
             {
-                _logMessage += $"\non {endCard.CardName}";
+                _logMessage += $" on {endCard.CardName}";
             }
         }
 

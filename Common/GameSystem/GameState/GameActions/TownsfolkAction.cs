@@ -14,7 +14,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
         public virtual bool CanAcceptZone(Zone zone) => Player.Resources.TownsfolkMana > 0;
         public abstract bool AcceptZone(Zone zone);
 
-        public abstract string GetLogMessage();
+        public abstract ActionLogInfo GetLogMessage();
 
         public virtual Zone TargetZone() => null;
 

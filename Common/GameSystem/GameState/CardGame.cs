@@ -139,7 +139,9 @@ namespace TerraTCG.Common.GameSystem.GameState
             action.Complete();
             var player = CurrentTurn.ActivePlayer == TCGPlayer.LocalGamePlayer ?
                 "You " : "Opponent ";
-            CurrentTurn.ActionLog.Add(player + action.GetLogMessage());
+            var info = action.GetLogMessage();
+            var toLog = new ActionLogInfo(info.Card, player + info.Message);
+            CurrentTurn.ActionLog.Add(toLog);
         }
     }
 
