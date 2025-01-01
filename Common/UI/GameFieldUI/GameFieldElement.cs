@@ -24,6 +24,11 @@ namespace TerraTCG.Common.UI.GameFieldUI
 
         internal override bool IsClicked() => !((GameFieldState)Parent).actionButtons.ContainsMouse && base.IsClicked();
 
+        public override bool ContainsPoint(Vector2 point)
+        {
+            return true; // Element occupies the whole screen
+        }
+
         public override void Update(GameTime gameTime)
         {
             Main.LocalPlayer.mouseInterface = true;

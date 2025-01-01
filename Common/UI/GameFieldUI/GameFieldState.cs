@@ -76,7 +76,11 @@ namespace TerraTCG.Common.UI.GameFieldUI
         private void SetRectangles(float? lerpPoint = null)
         {
             var yOffset = MathHelper.Lerp(UI_MAX_HEIGHT, 0, lerpPoint ?? TCGPlayer.FieldTransitionPoint);
-            SetRectangle(gameField, (Main.screenWidth - FieldRenderer.FIELD_WIDTH + 48) / 2, yOffset + (Main.screenHeight - FieldRenderer.FIELD_HEIGHT) / 2 - 32);
+            SetRectangle(gameField, 
+                (Main.screenWidth - FieldRenderer.FIELD_WIDTH + 48) / 2, 
+                yOffset + (Main.screenHeight - FieldRenderer.FIELD_HEIGHT) / 2 - 32,
+                FieldRenderer.FIELD_WIDTH,
+                FieldRenderer.FIELD_HEIGHT);
             SetRectangle(previewElement, gameField.Position.X - 150, gameField.Position.Y + 205, 180, 240);
             SetRectangle(handElement, Main.screenWidth / 2, yOffset + Main.screenHeight - HandElement.CARD_HEIGHT);
             SetRectangle(oppHandElement, Main.screenWidth / 2, yOffset + gameField.Position.Y);

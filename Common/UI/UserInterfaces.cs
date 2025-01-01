@@ -134,11 +134,14 @@ namespace TerraTCG.Common.UI
 
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
         {
-            int mouseTextIdx = layers.FindIndex(layer => layer.Name.Equals("Vanilla: NPC / Sign Dialog"));
-            if(mouseTextIdx != -1 && _userInterface?.CurrentState != null)
+            // Hide the mouse text layer while the game UI is active, otherwise eg.
+            // NPC names will show up above the dialogue
+
+            int dialogueIdx = layers.FindIndex(layer => layer.Name.Equals("Vanilla: NPC / Sign Dialog"));
+            if(dialogueIdx != -1 && _userInterface?.CurrentState != null)
             {
                 var layerName = $"TerraTCG: {_userInterface.CurrentState}";
-                layers.Insert(mouseTextIdx+1, new LegacyGameInterfaceLayer(layerName, delegate
+                layers.Insert(dialogueIdx+1, new LegacyGameInterfaceLayer(layerName, delegate
                 {
                     if(_userInterface?.CurrentState != null)
                     {
