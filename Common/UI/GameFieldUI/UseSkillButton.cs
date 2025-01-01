@@ -23,6 +23,8 @@ namespace TerraTCG.Common.UI.GameFieldUI
             var gamePlayer = localPlayer.GamePlayer;
             if (!(gamePlayer?.InProgressAction?.CanAcceptActionButton() ?? false))
             {
+                Left.Set(Main.screenWidth, 0f);
+                Top.Set(Main.screenHeight, 0f);
                 return;
             }
             PlayTickIfMouseEntered(Position, CLICK_RADIUS);

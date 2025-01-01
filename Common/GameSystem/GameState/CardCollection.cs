@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using TerraTCG.Common.GameSystem.CardData;
@@ -13,13 +14,11 @@ namespace TerraTCG.Common.GameSystem.GameState
     internal class CardCollection
     {
         internal List<Card> Cards { get; set; } = [];
-        private readonly Random random = new();
-
 
         public void Shuffle()
         {
             // TODO
-            Cards = [.. Cards.OrderBy(c => random.NextInt64())];
+            Cards = [.. Cards.OrderBy(c => Main.rand.Next())];
         }
 
         public Card Draw()

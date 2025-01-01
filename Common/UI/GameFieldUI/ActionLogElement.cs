@@ -7,6 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent;
+using Terraria.ModLoader;
+using Terraria.ModLoader.Config;
+using TerraTCG.Common.Configs;
 using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState;
@@ -24,6 +27,11 @@ namespace TerraTCG.Common.UI.GameFieldUI
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            if(!ModContent.GetInstance<ClientConfig>().ShowActionLog)
+            {
+                VisibleLogs = [];
+                return;
+            }
             var font = FontAssets.ItemStack.Value;
             var gamePlayer = TCGPlayer.LocalGamePlayer;
             VisibleLogs = gamePlayer.Game.Turns

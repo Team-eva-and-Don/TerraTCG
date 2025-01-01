@@ -1003,4 +1003,36 @@ Cards: {
 		Goblins: Goblins (Advanced)
 		Crabs: Crabs (Advanced)
 	}
+
+	ActionText: {
+		You: you
+		Opponent: opponent
+		Moved: moved
+		Used: used
+		Attacked: attacked
+		With: with
+		For: for
+		On: on
+		Died: died
+		Ownership: "'s"
+		Skill: skill
+		Bounced: returned a card to the hand
+		AddedMana: added a Mana crystal
+		Promoted: promoted
+		Played: played
+		Drew: drew
+		Cards: cards
+	}
+}
+
+Configs: {
+	ClientConfig: {
+		DisplayName: Client Config
+		Headers.GameUI: Game UI
+
+		ShowActionLog: {
+			Label: Show Action Log
+			Tooltip: Show a scrolling log of all TerraTCG game actions.
+		}
+	}
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria.Localization;
 using Terraria.ModLoader;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
@@ -46,5 +47,8 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
         {
             // No-op
         }
+
+        public static string ActionText(string key)
+            => Language.GetTextValue($"Mods.TerraTCG.Cards.ActionText.{key}");
     }
 }

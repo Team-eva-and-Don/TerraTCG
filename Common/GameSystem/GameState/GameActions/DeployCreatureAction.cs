@@ -7,6 +7,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using TerraTCG.Common.GameSystem.Drawing.Animations;
+using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
@@ -14,9 +15,8 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
     {
         private Zone zone;
 
-        public ActionLogInfo GetLogMessage() => new(card, 
-            card.SubTypes.Contains(CardSubtype.EXPERT) ?
-            $"promoted {card.CardName}" : $"played {card.CardName}");
+        public ActionLogInfo GetLogMessage() => new(card,
+            ActionText(card.SubTypes.Contains(CardSubtype.EXPERT) ? "Promoted" : "Played") + " " + card.CardName);
 
 
         public bool CanAcceptZone(Zone zone)

@@ -9,6 +9,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using TerraTCG.Common.GameSystem.Drawing.Animations;
 using TerraTCG.Common.GameSystem.GameState.Modifiers;
+using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
@@ -92,7 +93,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             GameSounds.PlaySound(GameAction.PLACE_CARD);
 
             var startCard = startZone.PlacedCard.Template;
-            _logMessage = $"moved {startCard.CardName}";
+            _logMessage = $"{ActionText("Moved")} {startCard.CardName}";
         }
 
         private void DoAttack()
@@ -114,14 +115,14 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
             var startCard = startZone.PlacedCard.Template;
             var endCard = endZone.PlacedCard.Template;
-            _logMessage = $"attacked {endCard.CardName} with {startCard.CardName} for {attack.Damage}";
+            _logMessage = $"{ActionText("Attacked")} {endCard.CardName} {ActionText("With")} {startCard.CardName} {ActionText("For")} {attack.Damage}";
 
             if(endZone.PlacedCard.CurrentHealth <= 0)
             {
                 endZone.QueueAnimation(new RemoveCardAnimation(endZone.PlacedCard));
                 endZone.Owner.Resources = endZone.Owner.Resources.UseResource(health: endZone.PlacedCard.Template.Points);
                 endZone.PlacedCard = null;
-                _logMessage += $"\n{endCard.CardName} died";
+                _logMessage += $"\n{endCard.CardName} {ActionText("Died")}";
             }
 
             // both cards can die during an attack exchange
@@ -130,7 +131,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
                 startZone.QueueAnimation(new RemoveCardAnimation(startZone.PlacedCard));
                 startZone.Owner.Resources = startZone.Owner.Resources.UseResource(health: startZone.PlacedCard.Template.Points);
                 startZone.PlacedCard = null;
-                _logMessage += $"\n{startCard.CardName} died";
+                _logMessage += $"\n{startCard.CardName} {ActionText("Died")}";
             }
             GameSounds.PlaySound(GameAction.ATTACK);
         }
@@ -146,10 +147,10 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             GameSounds.PlaySound(GameAction.USE_SKILL);
 
             var startCard = startZone.PlacedCard.Template;
-            _logMessage = $"used {startCard.CardName}'s skill";
+            _logMessage = $"{ActionText("Used")} {startCard.CardName}{ActionText("Ownership")} {ActionText("Skill")}";
             if(endZone?.PlacedCard?.Template is Card endCard)
             {
-                _logMessage += $" on {endCard.CardName}";
+                _logMessage += $" {ActionText("On")} {endCard.CardName}";
             }
         }
 

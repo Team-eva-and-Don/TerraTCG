@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.GameSystem.GameState;
@@ -11,7 +12,6 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
 {
     internal class BotDecks
     {
-        private static readonly Random random = new Random();
         public static Card CreateCard<T>() where T : BaseCardTemplate, ICardTemplate
             => ModContent.GetInstance<T>().Card;
         
@@ -29,7 +29,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                 GetCurseDeck,
                 GetSlimeDeck,
             };
-            var randIdx = Math.Abs((int)random.NextInt64()) % allDecks.Count;
+            var randIdx = Main.rand.Next(allDecks.Count);
             return allDecks[deckIdx == -1 ? randIdx : deckIdx].Invoke();
         }
 

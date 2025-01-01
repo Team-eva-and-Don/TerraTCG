@@ -7,6 +7,7 @@ using Terraria;
 using TerraTCG.Common.GameSystem.Drawing.Animations;
 using TerraTCG.Common.GameSystem.Drawing.Animations.FieldAnimations;
 using TerraTCG.Common.GameSystem.GameState.Modifiers;
+using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
@@ -14,7 +15,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
     {
         private Zone zone;
 
-        public override ActionLogInfo GetLogMessage() => new(card, $"unpaused {zone.PlacedCard.Template.CardName} with {Card.CardName}");
+        public override ActionLogInfo GetLogMessage() => new(card, $"{ActionText("Used")} {Card.CardName} {ActionText("On")} {zone.PlacedCard.Template.CardName}");
 
         public override bool CanAcceptZone(Zone zone) => base.CanAcceptZone(zone)
             && Player.Owns(zone) && !zone.IsEmpty();

@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using Terraria;
 using TerraTCG.Common.GameSystem.Drawing.Animations;
 using TerraTCG.Common.GameSystem.Drawing.Animations.FieldAnimations;
+using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
     internal class BounceCardAction(Card card, GamePlayer player) : TownsfolkAction(card, player)
     {
         private Zone zone;
-        public override ActionLogInfo GetLogMessage() => new(Card, $"Returned a card to the hand with {Card.CardName}");
+        public override ActionLogInfo GetLogMessage() => new(Card, $"{ActionText("Bounced")} {ActionText("With")} {Card.CardName}");
 
         public override bool CanAcceptZone(Zone zone) => base.CanAcceptZone(zone) 
             && Player.Owns(zone) && !zone.IsEmpty() && !zone.PlacedCard.Template.SubTypes.Contains(CardSubtype.EXPERT);

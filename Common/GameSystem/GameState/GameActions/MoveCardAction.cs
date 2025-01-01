@@ -8,6 +8,7 @@ using Terraria.Audio;
 using Terraria.ID;
 using TerraTCG.Common.GameSystem.Drawing.Animations;
 using TerraTCG.Common.GameSystem.Drawing.Animations.FieldAnimations;
+using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
@@ -16,7 +17,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
         private Zone sourceZone;
         private Zone destZone;
 
-        public override ActionLogInfo GetLogMessage() => new(Card, $"moved {destZone.PlacedCard.Template.CardName}");
+        public override ActionLogInfo GetLogMessage() => new(Card, $"{ActionText("Moved")} {destZone.PlacedCard.Template.CardName}");
 
         private int Step => sourceZone == null ? 0 : 1;
 

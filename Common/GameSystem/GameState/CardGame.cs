@@ -14,6 +14,7 @@ using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.GameSystem.Drawing.Animations;
 using TerraTCG.Common.GameSystem.Drawing.Animations.FieldAnimations;
 using TerraTCG.Common.GameSystem.GameState.GameActions;
+using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState
 {
@@ -31,8 +32,6 @@ namespace TerraTCG.Common.GameSystem.GameState
         internal TimeSpan EndTime { get; private set; }
 
         internal TimeSpan FadeOutTime { get; } = TimeSpan.FromSeconds(2f);
-
-        private readonly Random random = new ();
 
         internal GamePlayer Winner { get; set; }
         internal Turn CurrentTurn
@@ -63,7 +62,7 @@ namespace TerraTCG.Common.GameSystem.GameState
             CurrentTurn = new()
             {
                 Game = this,
-                ActivePlayer = GamePlayers[Math.Abs((int)random.NextInt64()) % 2],
+                ActivePlayer = GamePlayers[Main.rand.Next(2)],
                 TurnCount = 1
             };
             CurrentTurn.ActivePlayer.Opponent.ManaPerTurn += 1;
@@ -138,9 +137,9 @@ namespace TerraTCG.Common.GameSystem.GameState
         {
             action.Complete();
             var player = CurrentTurn.ActivePlayer == TCGPlayer.LocalGamePlayer ?
-                "You " : "Opponent ";
+                ActionText("You") : ActionText("Opponent");
             var info = action.GetLogMessage();
-            var toLog = new ActionLogInfo(info.Card, player + info.Message);
+            var toLog = new ActionLogInfo(info.Card, player + " " + info.Message);
             CurrentTurn.ActionLog.Add(toLog);
         }
     }

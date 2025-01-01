@@ -6,12 +6,15 @@ using System.Threading.Tasks;
 using Terraria;
 using TerraTCG.Common.GameSystem.Drawing.Animations;
 using TerraTCG.Common.GameSystem.Drawing.Animations.FieldAnimations;
+using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
     internal class RampAction(Card card, GamePlayer player, int amount=1) : TownsfolkAction(card, player), IGameAction
     {
-        public override ActionLogInfo GetLogMessage() => new(card, $"added a Mana crystal with {Card.CardName}");
+        public override ActionLogInfo GetLogMessage() => new(card, $"{ActionText("AddedMana")} {ActionText("With")} {Card.CardName}");
+
+        public override bool CanAcceptZone(Zone zone) => false;
 
         public override bool AcceptZone(Zone zone) => false;
 

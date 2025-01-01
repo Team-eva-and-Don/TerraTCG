@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Terraria;
 using TerraTCG.Common.GameSystem.Drawing.Animations;
 using TerraTCG.Common.GameSystem.Drawing.Animations.FieldAnimations;
+using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
@@ -21,7 +22,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             return true;
         }
 
-        public ActionLogInfo GetLogMessage() => new(card, $"used {card.CardName} on {zone?.PlacedCard?.Template?.CardName ?? ""}");
+        public ActionLogInfo GetLogMessage() => new(card, $"{ActionText("Used")} {card.CardName} {ActionText("On")} {zone?.PlacedCard?.Template?.CardName ?? ""}");
 
         public void Complete()
         {
