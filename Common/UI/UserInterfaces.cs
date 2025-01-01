@@ -32,6 +32,8 @@ namespace TerraTCG.Common.UI
 
         private PackOpeningState PackState { get; set; }
 
+        private bool? CachedAutoPause;
+
         public override void Load()
         {
             GameField = new();
@@ -59,6 +61,11 @@ namespace TerraTCG.Common.UI
             if(Main.LocalPlayer.controlInv)
             {
                 TCGPlayer.LocalGamePlayer?.Surrender();
+                if(CachedAutoPause is bool cachedAutoPause)
+                {
+                    Main.autoPause = cachedAutoPause;
+                }
+
                 if(_userInterface.CurrentState == DuelChat)
                 {
                     StopNPCChat();
@@ -72,15 +79,21 @@ namespace TerraTCG.Common.UI
 
         public void StartGame()
         {
+            CachedAutoPause = Main.autoPause;
+            Main.autoPause = true;
             IngameFancyUI.OpenUIState(GameField);
         }
 
         public void EndGame()
         {
             IngameFancyUI.Close();
+            if(CachedAutoPause is bool cachedAutoPause)
+            {
+                Main.autoPause = cachedAutoPause;
+            }
             Main.playerInventory = false;
         }
-        
+
         public void StartPackOpening()
         {
             PackState.StartTime = TCGPlayer.TotalGameTime;
@@ -135,5 +148,6 @@ namespace TerraTCG.Common.UI
                 }, InterfaceScaleType.UI));
             }         
         }
+
     }
 }

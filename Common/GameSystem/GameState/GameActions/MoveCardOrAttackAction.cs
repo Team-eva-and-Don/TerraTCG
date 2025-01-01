@@ -92,8 +92,8 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             player.Resources = player.Resources.UseResource(mana: endZone.PlacedCard.Template.MoveCost);
             GameSounds.PlaySound(GameAction.PLACE_CARD);
 
-            var startCard = startZone.PlacedCard.Template;
-            _logMessage = $"{ActionText("Moved")} {startCard.CardName}";
+            var movedCard = endZone.PlacedCard.Template;
+            _logMessage = $"{ActionText("Moved")} {movedCard.CardName}";
         }
 
         private void DoAttack()

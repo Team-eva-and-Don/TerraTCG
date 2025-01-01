@@ -76,12 +76,12 @@ namespace TerraTCG.Common.UI.GameFieldUI
         private void SetRectangles(float? lerpPoint = null)
         {
             var yOffset = MathHelper.Lerp(UI_MAX_HEIGHT, 0, lerpPoint ?? TCGPlayer.FieldTransitionPoint);
-            SetRectangle(gameField, (Main.screenWidth - FieldRenderer.FIELD_WIDTH + 48) / 2, yOffset + (Main.screenHeight - FieldRenderer.FIELD_HEIGHT) / 2, 1, 1);
+            SetRectangle(gameField, (Main.screenWidth - FieldRenderer.FIELD_WIDTH + 48) / 2, yOffset + (Main.screenHeight - FieldRenderer.FIELD_HEIGHT) / 2 - 32);
             SetRectangle(previewElement, gameField.Position.X - 150, gameField.Position.Y + 205, 180, 240);
             SetRectangle(handElement, Main.screenWidth / 2, yOffset + Main.screenHeight - HandElement.CARD_HEIGHT);
             SetRectangle(oppHandElement, Main.screenWidth / 2, yOffset + gameField.Position.Y);
-            SetRectangle(passTurnButton, Main.screenWidth / 2 + 3 * FieldRenderer.FIELD_WIDTH / 8, yOffset + Main.screenHeight / 2);
-            SetRectangle(actionLog, (Main.screenWidth + FieldRenderer.FIELD_WIDTH) / 2 + 22, yOffset + (Main.screenHeight + FieldRenderer.FIELD_HEIGHT)/2 - 104);
+            SetRectangle(passTurnButton, Main.screenWidth / 2 + 3 * FieldRenderer.FIELD_WIDTH / 8, yOffset + Main.screenHeight / 2 - 32);
+            SetRectangle(actionLog, (Main.screenWidth + FieldRenderer.FIELD_WIDTH) / 2 + 22, yOffset + (Main.screenHeight + FieldRenderer.FIELD_HEIGHT)/2 - 136);
             SetRectangle(cancelButton, 16, Main.screenHeight - 16 - 48, 38, 48);
         }
 

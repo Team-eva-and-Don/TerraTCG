@@ -32,7 +32,6 @@ namespace TerraTCG.Common.UI.NPCDuelChat
             Buttons = [
                 new(),
                 new(),
-                new(),
             ];
             for(int i = 0; i < Buttons.Count; i++)
             {
