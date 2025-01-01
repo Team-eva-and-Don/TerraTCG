@@ -22,7 +22,12 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             return true;
         }
 
-        public ActionLogInfo GetLogMessage() => new(card, $"{ActionText("Used")} {card.CardName} {ActionText("On")} {zone?.PlacedCard?.Template?.CardName ?? ""}");
+        public ActionLogInfo GetLogMessage() => new(card, $"{ActionText("Used")} {card.CardName} {ActionText("On")} {zone.CardName}");
+
+        public string GetZoneTooltip(Zone zone)
+        {
+            return $"{ActionText("Use")} {card.CardName} {ActionText("On")} {zone.CardName}";
+        }
 
         public void Complete()
         {

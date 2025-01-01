@@ -38,6 +38,10 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public ActionLogInfo GetLogMessage();
 
+        public string GetZoneTooltip(Zone zone) => "";
+
+        public string GetActionButtonTooltip() => "";
+
         public Color HighlightColor(Zone zone)
         {
             return TCGPlayer.LocalGamePlayer.Owns(zone) ? Color.LightSkyBlue : Color.LightCoral;

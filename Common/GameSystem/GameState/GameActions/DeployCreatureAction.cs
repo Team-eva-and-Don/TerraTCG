@@ -18,6 +18,11 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
         public ActionLogInfo GetLogMessage() => new(card,
             ActionText(card.SubTypes.Contains(CardSubtype.EXPERT) ? "Promoted" : "Played") + " " + card.CardName);
 
+        public string GetZoneTooltip(Zone zone)
+        {
+            return ActionText(card.SubTypes.Contains(CardSubtype.EXPERT) ? "Promote" : "Play") + " " + card.CardName;
+        }
+
 
         public bool CanAcceptZone(Zone zone)
         {

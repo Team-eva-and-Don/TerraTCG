@@ -8,11 +8,15 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
+using Terraria.ModLoader;
 using Terraria.UI;
+using TerraTCG.Common.Configs;
 using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.Drawing.Animations;
 using TerraTCG.Common.UI.Common;
+using TerraTCG.Common.UI.DeckbuildUI;
+using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.UI.GameFieldUI
 {
@@ -23,6 +27,8 @@ namespace TerraTCG.Common.UI.GameFieldUI
             Position.Y + FieldRenderer.FIELD_HEIGHT);
 
         internal override bool IsClicked() => !((GameFieldState)Parent).actionButtons.ContainsMouse && base.IsClicked();
+
+        private string zoneTooltip;
 
         public override bool ContainsPoint(Vector2 point)
         {
@@ -35,6 +41,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
             var localPlayer = TCGPlayer.LocalPlayer;
             localPlayer.GameFieldPosition = Position;
 
+            zoneTooltip = "";
             var gamePlayer = localPlayer.GamePlayer;
             if (gamePlayer == null || gamePlayer.Field?.Zones == null)
             {
@@ -57,6 +64,10 @@ namespace TerraTCG.Common.UI.GameFieldUI
             {
                 if (ProjectedFieldUtils.Instance.ZoneContainsScreenVector(gamePlayer, zone, mouseField))
                 {
+                    if((localPlayer.GamePlayer?.InProgressAction?.CanAcceptZone(zone) ?? false) && gamePlayer.IsMyTurn)
+                    {
+                        zoneTooltip = localPlayer.GamePlayer.InProgressAction.GetZoneTooltip(zone);
+                    } 
                     if(zone.HasPlacedCard())
                     {
                         localPlayer.MouseoverZone = zone;
@@ -66,8 +77,8 @@ namespace TerraTCG.Common.UI.GameFieldUI
                     {
                         SoundEngine.PlaySound(SoundID.MenuTick);
                         gamePlayer.SelectZone(zone);
-                        break;
                     }
+                    break;
                 }
             }
         }
@@ -138,6 +149,11 @@ namespace TerraTCG.Common.UI.GameFieldUI
                 DrawZoneNPCs(spriteBatch);
                 DrawPlayerStats(spriteBatch);
                 DrawFieldOverlays(spriteBatch);
+
+                if(zoneTooltip != "" && zoneTooltip != "" && ModContent.GetInstance<ClientConfig>().ShowTooltips)
+                {
+                    DeckbuildState.SetTooltip(zoneTooltip);
+                }
             }
         }
     }

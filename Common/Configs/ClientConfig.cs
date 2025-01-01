@@ -16,5 +16,8 @@ namespace TerraTCG.Common.Configs
         [DefaultValue(true)]
         public bool ShowActionLog;
 
+        [DefaultValue(true)]
+        public bool ShowTooltips;
+
     }
 }

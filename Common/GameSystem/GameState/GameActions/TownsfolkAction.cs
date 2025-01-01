@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TerraTCG.Common.GameSystem.Drawing.Animations.FieldAnimations;
+using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
@@ -20,6 +21,16 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public TimeSpan GetAnimationStartDelay() => ShowCardAnimation.DURATION;
             // Player == TCGPlayer.LocalGamePlayer ? TimeSpan.FromSeconds(0f) : ShowCardAnimation.DURATION;
+
+        public string GetActionButtonTooltip()
+        {
+            return $"{ActionText("Use")} {Card.CardName}";
+        }
+
+        public string GetZoneTooltip(Zone zone)
+        {
+            return $"{ActionText("Use")} {Card.CardName} {ActionText("On")} {zone.CardName}";
+        }
 
         public virtual void Complete()
         {

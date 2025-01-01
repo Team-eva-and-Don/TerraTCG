@@ -6,10 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.ModLoader;
+using TerraTCG.Common.Configs;
 using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState.GameActions;
 using TerraTCG.Common.UI.Common;
+using TerraTCG.Common.UI.DeckbuildUI;
 
 namespace TerraTCG.Common.UI.GameFieldUI
 {
@@ -75,6 +78,11 @@ namespace TerraTCG.Common.UI.GameFieldUI
             spriteBatch.Draw(bgTexture, Position, bgTexture.Bounds, Color.White, 0, origin, 1f, SpriteEffects.None, 0);
             spriteBatch.Draw(highlightTexture, Position, bgTexture.Bounds, Color.White * brightness, 0, origin, 1f, SpriteEffects.None, 0);
             spriteBatch.Draw(fgTexture, Position, fgTexture.Bounds, Color.White, 0, starOrigin, 1f, SpriteEffects.None, 0);
+
+            if(ContainsMouse && ModContent.GetInstance<ClientConfig>().ShowTooltips)
+            {
+                DeckbuildState.SetTooltip(gamePlayer.InProgressAction.GetActionButtonTooltip());
+            }
         }
     }
 }

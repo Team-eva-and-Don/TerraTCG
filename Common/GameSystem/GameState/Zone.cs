@@ -113,6 +113,9 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         public List<Zone> Siblings => Owner.Field.Zones;
 
+        // Helper to get the name of the card that is (or isn't) placed in the zone
+        public string CardName => PlacedCard?.Template.CardName;
+
         private void DrawOffenseIcon(SpriteBatch spriteBatch, Vector2 position, float rotation)
         {
             var texture = TextureCache.Instance.OffenseIcon;

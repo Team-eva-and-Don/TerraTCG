@@ -51,6 +51,29 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             }
         }
 
+        public string GetZoneTooltip(Zone zone)
+        {
+
+            if(actionType == ActionType.DEFAULT && player.Owns(zone) && zone.IsEmpty())
+            {
+                return $"{ActionText("Move")} {startZone.CardName}";
+            } else if (actionType == ActionType.DEFAULT && !player.Owns(zone) && !zone.IsEmpty())
+            {
+                return $"{ActionText("Attack")} {zone.CardName} {ActionText("With")} {startZone.CardName}";
+            } else if (actionType == ActionType.TARGET_ALLY && player.Owns(zone) && !zone.IsEmpty())
+            {
+                return $"{ActionText("Use")} {startZone.CardName}{ActionText("Ownership")} {ActionText("Skill")} {ActionText("On")}";
+            } else
+            {
+                return "";
+            }
+        }
+
+        public string GetActionButtonTooltip()
+        {
+            return $"{ActionText("Use")} {startZone.CardName}{ActionText("Ownership")} {ActionText("Skill")}";
+        }
+
         private bool CanAttackZone(Zone zone)
         {
             return startZone.HasPlacedCard() && startZone.PlacedCard.GetAttackWithModifiers(startZone, zone).Cost <= player.Resources.Mana &&

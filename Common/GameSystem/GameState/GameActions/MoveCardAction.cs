@@ -17,7 +17,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
         private Zone sourceZone;
         private Zone destZone;
 
-        public override ActionLogInfo GetLogMessage() => new(Card, $"{ActionText("Moved")} {destZone.PlacedCard.Template.CardName}");
+        public override ActionLogInfo GetLogMessage() => new(Card, $"{ActionText("Moved")} {destZone.CardName}");
 
         private int Step => sourceZone == null ? 0 : 1;
 

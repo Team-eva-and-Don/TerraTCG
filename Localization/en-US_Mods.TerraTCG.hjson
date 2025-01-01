@@ -1007,9 +1007,16 @@ Cards: {
 	ActionText: {
 		You: you
 		Opponent: opponent
+		Move: Move
+		Use: Use
+		Attack: Attack
+		Promote: Promote
+		Play: Play
 		Moved: moved
 		Used: used
 		Attacked: attacked
+		Promoted: promoted
+		Played: played
 		With: with
 		For: for
 		On: on
@@ -1018,8 +1025,6 @@ Cards: {
 		Skill: skill
 		Bounced: returned a card to the hand
 		AddedMana: added a Mana crystal
-		Promoted: promoted
-		Played: played
 		Drew: drew
 		Cards: cards
 	}
@@ -1033,6 +1038,11 @@ Configs: {
 		ShowActionLog: {
 			Label: Show Action Log
 			Tooltip: Show a scrolling log of all TerraTCG game actions.
+		}
+
+		ShowTooltips: {
+			Label: Show Tooltips
+			Tooltip: ""
 		}
 	}
 }
