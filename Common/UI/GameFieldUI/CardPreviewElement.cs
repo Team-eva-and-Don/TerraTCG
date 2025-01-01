@@ -24,6 +24,13 @@ namespace TerraTCG.Common.UI.GameFieldUI
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            var localPlayer = TCGPlayer.LocalPlayer;
+            var modifiers = localPlayer.MouseoverZone?.PlacedCard?.GetKeywordModifiers() ?? [];
+            var tooltipTexts = modifiers
+                .OrderBy(kv => kv.Key)
+                .Select(kv => Language.GetTextValue($"Mods.TerraTCG.Cards.Modifiers.{kv.Key}").Replace("%%", $"{kv.Value}"));
+
+            BuffIconTooltip = string.Join("\n", tooltipTexts);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -53,19 +60,12 @@ namespace TerraTCG.Common.UI.GameFieldUI
                 }
             }
 
-            //if(BuffIconTooltip != null)
-            //{
-            //    var buffIconPos = Main.MouseScreen + new Vector2(16, 16);
-            //    var font = FontAssets.MouseText.Value;
-            //    CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, BuffIconTooltip, buffIconPos, font: font);
-            //}
-
             // This elem is used in both the fancy and normal UI, regular "ContainsPoint"
             // does not appear to work in fancy UI
             var bounds = new Rectangle((int)Left.Pixels, (int)Top.Pixels, (int)Width.Pixels, (int)Height.Pixels);
-            if(bounds.Contains(Main.mouseX, Main.mouseY))
+            if(bounds.Contains(Main.mouseX, Main.mouseY) && BuffIconTooltip != "")
             {
-                DeckbuildState.SetTooltip("Hovering card!");
+                DeckbuildState.SetTooltip(BuffIconTooltip);
             }
         }
     }

@@ -963,11 +963,11 @@ Cards: {
 	}
 
 	Modifiers: {
-		DEFENSE_BOOST: Defense is increased
-		BLEEDING: Takes increased damage
-		RELENTLESS: May attack multiple times
-		EVASIVE: May attack blocked opponents
-		SPIKED: Attackers take damage
+		DEFENSE_BOOST: Sturdy: Takes %% less damage
+		BLEEDING: Bleeding: Takes %% more damage
+		RELENTLESS: Relentless: May attack %% extra times
+		EVASIVE: Evasive: May attack blocked opponents
+		SPIKED: Spiked: Attackers take %% damage
 	}
 
 	Common: {

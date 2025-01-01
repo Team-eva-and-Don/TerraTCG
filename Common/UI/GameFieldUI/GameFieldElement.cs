@@ -69,10 +69,6 @@ namespace TerraTCG.Common.UI.GameFieldUI
                         break;
                     }
                 }
-                //if(gamePlayer.InProgressAction?.CanAcceptZone(zone) ?? zone.HasPlacedCard())
-                //{
-                //    ProjectedFieldUtils.Instance.PlayTickIfMouseEntered(gamePlayer, zone, mouseField, prevMouseField);
-                //}
             }
         }
 
