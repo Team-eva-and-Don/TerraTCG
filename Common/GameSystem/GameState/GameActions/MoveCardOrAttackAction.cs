@@ -39,7 +39,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             {
                 return startZone.PlacedCard.Template.MoveCost <= player.Resources.Mana;
 
-            } else if (actionType == ActionType.DEFAULT && !player.Owns(zone) && !zone.IsEmpty())
+            } else if (actionType == ActionType.DEFAULT && !player.Owns(zone) && !zone.IsEmpty() && startZone.Role == ZoneRole.OFFENSE)
             {
                 return CanAttackZone(zone);
             } else if (actionType == ActionType.TARGET_ALLY && player.Owns(zone) && !zone.IsEmpty())

@@ -179,7 +179,7 @@ Cards: {
 	}
 
 	PosessedArmor: {
-		Name: PosessedArmor
+		Name: Posessed Armor
 		Attack.Name: Cursed Steel
 		Modifier.Description:
 			'''
@@ -1005,8 +1005,8 @@ Cards: {
 	}
 
 	ActionText: {
-		You: you
-		Opponent: opponent
+		You: You
+		Opponent: Opponent
 		Move: Move
 		Use: Use
 		Attack: Attack

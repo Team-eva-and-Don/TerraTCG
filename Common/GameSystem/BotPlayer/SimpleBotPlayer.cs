@@ -28,7 +28,13 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
         // certain decisions (eg. whether to force-promote a weakened unit)
         private int PossibleDamage;
 
-        private struct AttackDamageAndCostInfo(int possibleDmg, int totalCost, int highestCost)
+        // Prevent the bot from playing out its whole hand turn 0
+        // and overwhelming the player (there is not much strategic
+        // advantage to doing this anyways)
+        private int CreaturesPlayed = 0;
+        private const int MaxCreaturesPlayed = 3;
+
+        private readonly struct AttackDamageAndCostInfo(int possibleDmg, int totalCost, int highestCost)
         {
             internal int PossibleDmg { get; } = possibleDmg;
             internal int TotalCost { get; } = totalCost;
@@ -161,7 +167,11 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
 
             if(DecideMoveOpponent(ZoneRole.DEFENSE, ZoneRole.OFFENSE)) return;
 
-            if(DecidePlayCreature()) return;
+            if(CreaturesPlayed < MaxCreaturesPlayed && DecidePlayCreature())
+            {
+                CreaturesPlayed++;
+                return;
+            }
 
             if(DecideUseNonTargetingTownsfolk()) return;
 
@@ -188,6 +198,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
         {
             PossibleDamage = 0;
             ReservedAttackMana = 0;
+            CreaturesPlayed = 0;
             GamePlayer.PassTurn();
         }
 
