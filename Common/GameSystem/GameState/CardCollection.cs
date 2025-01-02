@@ -51,6 +51,11 @@ namespace TerraTCG.Common.GameSystem.GameState
             };
         }
 
+        public bool ValidateDeck()
+        {
+            return Cards.Count == 20 && Cards.Where(c => c.CardType == CardType.CREATURE && !c.SubTypes.Contains(CardSubtype.EXPERT)).Any();
+        }
+
         public List<uint> Serialize()
         {
             return Cards.GroupBy(c => c.ID)

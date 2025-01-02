@@ -21,12 +21,18 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
     {
         private Zone endZone;
 
+
         private ActionType actionType = ActionType.DEFAULT;
 
-        public bool CanAcceptCardInHand(Card card) => false;
 
         private string _logMessage;
-        public ActionLogInfo GetLogMessage() => new(startZone.PlacedCard.Template, _logMessage);
+
+        // Action might or might not result in an empty startZone, be sure to track the
+        // card that the action occurred on.
+        private Card actionCard;
+        public ActionLogInfo GetLogMessage() => new(actionCard, _logMessage);
+
+        public bool CanAcceptCardInHand(Card card) => false;
 
         public bool CanAcceptZone(Zone zone) 
         { 
@@ -179,6 +185,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public void Complete()
         {
+            actionCard = startZone.PlacedCard.Template;
             if(actionType != ActionType.DEFAULT)
             {
                 DoSkill();

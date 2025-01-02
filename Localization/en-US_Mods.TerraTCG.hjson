@@ -984,6 +984,7 @@ Cards: {
 		AskDeck: Which deck would you like to face?
 		YouWin: You win!
 		YouLose: You lose...
+		DeckNotValid: Your deck must be exactly 20 cards, and contain at least one non-expert creature.
 	}
 
 	DeckNames: {
@@ -994,6 +995,8 @@ Cards: {
 		JungleBeginner: Jungle (Beginner)
 		Jungle: Jungle (Advanced)
 		Treasure: Treasures (Advanced)
+		BloodMoonBeginner: Blood Moon (Beginner)
+		BloodMoon: Blood Moon (Intermediate)
 		MushroomBeginner: Mushrooms (Beginner)
 		Mushroom: Mushrooms (Intermediate)
 		SkeletonsBeginner: Skeletons (Beginner)
@@ -1001,6 +1004,7 @@ Cards: {
 		Curse: Dungeon (Intermediate)
 		GoblinsBeginner: Goblins (Intermediate)
 		Goblins: Goblins (Advanced)
+		CrabsBeginner: Crabs (Beginner)
 		Crabs: Crabs (Advanced)
 	}
 
