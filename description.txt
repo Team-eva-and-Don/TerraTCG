@@ -1,1 +1,3 @@
-Modify this file with a description of your mod.
+TerraTCG is a Terraria-themed Trading Card Game! To start your
+TerraTCG journey, craft a deck box with 5 wood at a Workbench,
+then talk to the Guide for a tutorial!
