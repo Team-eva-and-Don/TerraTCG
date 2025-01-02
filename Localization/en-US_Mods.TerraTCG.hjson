@@ -1082,9 +1082,10 @@ Cards: {
 			'''
 		Slide7:
 			'''
-			Critters are a special type of creature that support other creatures in combat.
-			They are vulnerable to attacks from enemies, but can be protected by placing
-			them in the same column as another friendly creature.
+			Critters creatures lack combat prowess, but have powerful skills that 
+			support other creatures in combat.  They are vulnerable to attacks from 
+			enemies, but can be protected by placing them in the same column as 
+			another friendly creature.
 			'''
 		Slide8:
 			'''
@@ -1107,11 +1108,12 @@ Cards: {
 		Slide11:
 			'''
 			Your opponent plays their own creatures, items, and townsfolk during their
-			turn. Once they pass back to you, your creatures will Unpause and can act! 
+			turn. Once they pass back to you, your creatures will Unpause and be able
+			to act! 
 			'''
 		Slide12:
 			'''
-			Expert Creatures are another special creature type that can be placed on top
+			Expert Creatures are a special creature type that can be placed on top
 			of an Unpaused creature with the same Biome and Combat Role. Both the 
 			Wraith and Zombie are Forest Fighters, so the Zombie can be Promoted!
 			'''

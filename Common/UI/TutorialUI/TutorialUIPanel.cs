@@ -30,6 +30,14 @@ namespace TerraTCG.Common.UI.TutorialUI
             base.OnInitialize();
         }
 
+        public override void Update(GameTime gameTime)
+        {
+            if(ContainsPoint(Main.MouseScreen))
+            {
+                Main.LocalPlayer.mouseInterface = true;
+            }
+        }
+
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
@@ -43,7 +51,7 @@ namespace TerraTCG.Common.UI.TutorialUI
             var scale = TutorialUIState.TUTORIAL_IMG_SCALE;
             var origin = new Vector2(Texture.Value.Width / 2, 0);
 
-            var lerpPoint = (float)(TCGPlayer.TotalGameTime - textureChangeTime).TotalSeconds / 2f;
+            var lerpPoint = 2f * (float)(TCGPlayer.TotalGameTime - textureChangeTime).TotalSeconds ;
             var color = Color.White;
             if(lerpPoint < 1 && _prevTexture != null)
             {

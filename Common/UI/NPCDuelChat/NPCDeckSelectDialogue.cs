@@ -48,13 +48,19 @@ namespace TerraTCG.Common.UI.NPCDuelChat
         {
             if(ModContent.GetInstance<NPCDeckMap>().NPCDecklists.TryGetValue(NPCID, out var lists))
             {
+                ModContent.GetInstance<UserInterfaces>().StopNPCChat();
+                if (lists[deckIdx].IsTutorial)
+                {
+                    ModContent.GetInstance<UserInterfaces>().StartTutorial();
+                    return;
+                }
+
                 var myPlayer = TCGPlayer.LocalPlayer;
                 var opponent = new SimpleBotPlayer()
                 {
                     Deck = lists[deckIdx].DeckList,
                 };
 
-                ModContent.GetInstance<UserInterfaces>().StopNPCChat();
                 ModContent.GetInstance<GameModSystem>().StartGame(myPlayer, opponent);
             }
             ModContent.GetInstance<UserInterfaces>().StopNPCChat();

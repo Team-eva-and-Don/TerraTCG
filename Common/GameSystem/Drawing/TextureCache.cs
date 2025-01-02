@@ -51,7 +51,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
         internal Dictionary<int, Asset<Texture2D>> ItemTextureCache { get; private set; }
 
         internal Dictionary<ModifierType, Asset<Texture2D>> ModifierIconTextures { get; private set; }
-
+        public Dictionary<CardSubtype, Asset<Texture2D>> BiomeMapBackgrounds { get; private set; }
         internal Dictionary<CardSubtype, Rectangle> BiomeIconBounds { get; private set; }
         internal Dictionary<CardSubtype, Rectangle> CardTypeEmoteBounds { get; private set; }
 
@@ -79,7 +79,6 @@ namespace TerraTCG.Common.GameSystem.Drawing
             PlayerStatsZone = Mod.Assets.Request<Texture2D>("Assets/FieldElements/PlayerStats");
             AttackIcon = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Attack_Icon");
             LightRay = Main.Assets.Request<Texture2D>("Images/Projectile_" + ProjectileID.MedusaHeadRay);
-            MapBG = Main.Assets.Request<Texture2D>("Images/MapBG1");
             CancelButton = Mod.Assets.Request<Texture2D>("Assets/FieldElements/CancelGame");
             CardPreviewFrame = Mod.Assets.Request<Texture2D>("Assets/FieldElements/CardPreviewFrame");
             BiomeIcons = Main.Assets.Request<Texture2D>("Images/UI/Bestiary/Icon_Tags_Shadow");
@@ -98,6 +97,17 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 [ModifierType.LIFESTEAL] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Lifesteal_Icon"),
             };
 
+            BiomeMapBackgrounds = new Dictionary<CardSubtype, Asset<Texture2D>>
+            {
+                [CardSubtype.FOREST] = Main.Assets.Request<Texture2D>("Images/MapBG1"),
+                [CardSubtype.CAVERN] = Main.Assets.Request<Texture2D>("Images/MapBG2"),
+                [CardSubtype.JUNGLE] = Main.Assets.Request<Texture2D>("Images/MapBG9"),
+                [CardSubtype.GOBLIN_ARMY] = Main.Assets.Request<Texture2D>("Images/MapBG1"),
+                [CardSubtype.BLOOD_MOON] = Main.Assets.Request<Texture2D>("Images/MapBG26"),
+                [CardSubtype.OCEAN] = Main.Assets.Request<Texture2D>("Images/MapBG11"),
+                [CardSubtype.MUSHROOM] = Main.Assets.Request<Texture2D>("Images/MapBG20"),
+            };
+
             BiomeIconBounds = new Dictionary<CardSubtype, Rectangle>
             {
                 [CardSubtype.FOREST] = new Rectangle(0, 0, 30, 30),
@@ -108,6 +118,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 [CardSubtype.OCEAN] = new Rectangle(360, 30, 30, 30),
                 [CardSubtype.MUSHROOM] = new Rectangle(240, 30, 30, 30),
             };
+
             CardTypeEmoteBounds = new Dictionary<CardSubtype, Rectangle>
             {
                 [CardSubtype.EQUIPMENT] = new Rectangle(137, 557, 30, 30),

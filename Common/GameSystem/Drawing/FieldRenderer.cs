@@ -144,6 +144,23 @@ namespace TerraTCG.Common.GameSystem.Drawing
             player.Opponent.Field.Draw(Main.spriteBatch, opponentFieldPos, MathF.PI);
         }
 
+        // Draw the map background that corresponds to the most populous biome in the player's active deck
+        private void DrawMapBG()
+        {
+            var localDeck = TCGPlayer.LocalPlayer.Deck;
+            var dominantBiome = localDeck.Cards
+                .Where(c => c.CardType == CardType.CREATURE)
+                .GroupBy(c => c.SortType)
+                .Select(c => (c.First(), c.Count()))
+                .OrderBy(pair => pair.Item2)
+                .Select(pair => pair.Item1.SortType)
+                .FirstOrDefault();
+            if(TextureCache.Instance.BiomeMapBackgrounds.TryGetValue(dominantBiome, out var texture))
+            {
+                Main.spriteBatch.Draw(texture.Value, new Rectangle(0, 0, LARGE_MAP_WIDTH, LARGE_MAP_HEIGHT), Color.White);
+            }
+        }
+
 
         private void OnPreDraw(GameTime gameTime)
         {
@@ -160,7 +177,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
             Main.spriteBatch.Begin(
                 SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise);
 
-            Main.spriteBatch.Draw(TextureCache.Instance.MapBG.Value, new Rectangle(0, 0, LARGE_MAP_WIDTH, LARGE_MAP_HEIGHT), Color.White);
+            DrawMapBG();
 
             Main.spriteBatch.End();
 
