@@ -13,22 +13,24 @@ using TerraTCG.Common.UI;
 
 namespace TerraTCG.Content.NPCs
 {
-    internal struct NamedNPCDeck(LocalizedText name, CardCollection deckList)
+    internal struct NamedNPCDeck(LocalizedText name, CardCollection deckList, bool isTutorial)
     {
 
-        public NamedNPCDeck(string nameKey, CardCollection deckList) : 
-            this(Language.GetText($"Mods.TerraTCG.Cards.DeckNames.{nameKey}"), deckList)
+        public NamedNPCDeck(string nameKey, CardCollection deckList, bool isTutorial = false) : 
+            this(Language.GetText($"Mods.TerraTCG.Cards.DeckNames.{nameKey}"), deckList, isTutorial)
         {
 
         }
         public LocalizedText Name { get; } = name;
         public CardCollection DeckList { get; } = deckList;
+        public bool IsTutorial { get; } = isTutorial;
     }
     internal class NPCDeckMap : ModSystem
     {
         internal Dictionary<int, List<NamedNPCDeck>> NPCDecklists = new ()
         {
             [NPCID.Guide] = [
+                new("Tutorial", BotDecks.GetStarterDeck(), isTutorial: true),
                 new("ForestBeginner", BotDecks.GetStarterDeck()),
                 new("Forest", BotDecks.GetForestDeck())    
             ],

@@ -985,9 +985,13 @@ Cards: {
 		YouWin: You win!
 		YouLose: You lose...
 		DeckNotValid: Your deck must be exactly 20 cards, and contain at least one non-expert creature.
+		Prev: Back
+		Next: Next
+		Close: Close
 	}
 
 	DeckNames: {
+		Tutorial: Tutorial
 		ForestBeginner: Forest (Beginner)
 		Forest: Forest (Intermediate)
 		SlimeBeginner: Slimes (Beginner)
@@ -1032,6 +1036,115 @@ Cards: {
 		Drew: drew
 		Cards: cards
 	}
+
+	Tutorial: {
+		Slide0:
+			'''
+			Welcome to TerraTCG, the Terraria Trading Card Game! To start a game,
+			try talking to an NPC and selecting "Let's Duel!". Not every NPC is
+			currently supported, but more will be added in the future.
+			'''
+		Slide1:
+			'''
+			TerraTCG is a card game played between two players. Each player begins by 
+			shuffling their deck and drawing 5 cards. One player is then selected
+			randomly to go first.
+			'''
+		Slide2:
+			'''
+			Each player has a pool of 3 resource types, used in different ways:
+			- 3 hearts, which are lost whenever a creature the player controls dies.
+			- 1 Mana Crystal, used to attack and play items, and grows by 1 per turn.
+			- 1 Townsfolk Emblem, used to play Townsfolk, which refreshes every turn.
+			'''
+		Slide3:
+			'''
+			Players must play creatures, spend Mana Crystals to defeat their opponents'
+			creatures, and win the game when all 3 hearts are depleted!
+			'''
+		Slide4:
+			'''
+			There are 3 types of Card in TerraTCG:
+			- Creatures, which are placed onto the battlefield for combat
+			- Items, which provide temporary or permanent buffs to creatures
+			- Townsfolk, which provide powerful single-use effects like card draw.
+			'''
+		Slide5:
+			'''
+			Creatures are the core of gameplay. They can be placed onto the battlefield
+			from the hand for no cost. To play a creature, click on that creature in hand,
+			then on an appropriate empty zone on your battlefield.
+			'''
+		Slide6:
+			'''
+			Fighter creatures are meant for combat, and should be placed in the Offense 
+			row. Creatures enter the battlefield Paused, and must wait a turn to act. 
+			'''
+		Slide7:
+			'''
+			Critters are a special type of creature that support other creatures in combat.
+			They are vulnerable to attacks from enemies, but can be protected by placing
+			them in the same column as another friendly creature.
+			'''
+		Slide8:
+			'''
+			Items can be attached to creatures and provide bonuses to their stats. It 
+			costs Mana Crystals to play Items from the hand. Here, the Shackle can be 
+			attached to a Zombe for one Mana Crystal to reduce the damage that it 
+			takes from the next attack against it.
+			'''
+		Slide9:
+			'''
+			Hover over a creature's card preview to see which item buffs are currently
+			affecting it!
+			'''
+		Slide10:
+			'''
+			Townsfolk are a special card type that provide powerful sources of advantage,
+			like card draw and extra mana crystals. You can only use one Townsfolk per 
+			turn, which consumes your single Townsfolk Emblem.
+			'''
+		Slide11:
+			'''
+			Your opponent plays their own creatures, items, and townsfolk during their
+			turn. Once they pass back to you, your creatures will Unpause and can act! 
+			'''
+		Slide12:
+			'''
+			Expert Creatures are another special creature type that can be placed on top
+			of an Unpaused creature with the same Biome and Combat Role. Both the 
+			Wraith and Zombie are Forest Fighters, so the Zombie can be Promoted!
+			'''
+		Slide13:
+			'''
+			Critters have skills that support your other creature. Click on an Unpaused 
+			Critter to use its skill. Here, the Bunny grants you an extra Mana Crystal!
+			'''
+		Slide14:
+			'''
+			Now, you're ready to attack. Your Wraith can attack the opposing bunny
+			directly using its Evasive modifier. Attacking with the Wraith will cost 
+			2 Mana Crystals and deal 4 damage.
+			'''
+		Slide15:
+			'''
+			The opposing Bunny takes 4 damage from the attack. Once all its life is
+			depleted, it will die, and the opponent will lose 1 Life Point. Repeat this 
+			process 3 times to win the game!
+			'''
+		Slide16:
+			'''
+			Winning a game of TerraTCG grants you several TerraTCG booster packs. 
+			Open them to obtain new cards for your collection!
+			'''
+		Slide17:
+			'''
+			A TerraTCG Deckbox, crafted with 5 wood at a workbench, can be used to
+			edit your decks. Experiment with the cards you get from booster packs, and 
+			challenge more difficult opponents!
+			'''
+		Slide18: That's all for this tutorial. Talk to me again to challenge me to a game!
+	}
 }
 
 Configs: {
@@ -1046,7 +1159,7 @@ Configs: {
 
 		ShowTooltips: {
 			Label: Show Tooltips
-			Tooltip: ""
+			Tooltip: Show action tooltips during TerraTCG Games.
 		}
 	}
 }

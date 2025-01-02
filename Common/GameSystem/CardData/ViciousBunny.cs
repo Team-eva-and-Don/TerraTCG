@@ -15,7 +15,7 @@ namespace TerraTCG.Common.GameSystem.CardData
     {
         private void BloodyCheer(GamePlayer player, Zone zone, Zone targetZone)
         {
-            targetZone.PlacedCard.AddModifiers([new FlatDamageModifier(1, [GameEvent.AFTER_ATTACK, GameEvent.END_TURN])]);
+            targetZone.PlacedCard.AddModifiers([new FlatDamageModifier(1, [GameEvent.END_TURN])]);
             targetZone.PlacedCard.AddModifiers([new BleedModifier(1)]);
         }
 

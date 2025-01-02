@@ -16,6 +16,7 @@ using TerraTCG.Common.UI.DeckbuildUI;
 using TerraTCG.Common.UI.GameFieldUI;
 using TerraTCG.Common.UI.NPCDuelChat;
 using TerraTCG.Common.UI.PackOpeningUI;
+using TerraTCG.Common.UI.TutorialUI;
 
 namespace TerraTCG.Common.UI
 {
@@ -32,6 +33,8 @@ namespace TerraTCG.Common.UI
 
         private PackOpeningState PackState { get; set; }
 
+        private TutorialUIState TutorialState { get; set; }
+
         private bool? CachedAutoPause;
 
         public override void Load()
@@ -47,6 +50,9 @@ namespace TerraTCG.Common.UI
 
             PackState = new();
             PackState.Activate();
+
+            TutorialState = new();
+            TutorialState.Activate();
 
             _userInterface = new();
         }
@@ -73,6 +79,10 @@ namespace TerraTCG.Common.UI
                 if(_userInterface.CurrentState == DeckbuildState)
                 {
                     StopDeckbuild();
+                }
+                if(_userInterface.CurrentState == TutorialState)
+                {
+                    StopTutorial();
                 }
             }
         }
@@ -115,6 +125,18 @@ namespace TerraTCG.Common.UI
         public void StopNPCChat()
         {
             DuelChat.ResetState();
+            _userInterface.SetState(null);
+        }
+
+        public void StartTutorial()
+        {
+            TextureCache.Instance.LoadTutorial();
+            _userInterface.SetState(TutorialState);
+        }
+
+        public void StopTutorial()
+        {
+            TutorialState.ResetState();
             _userInterface.SetState(null);
         }
 

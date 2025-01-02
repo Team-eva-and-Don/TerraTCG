@@ -54,6 +54,11 @@ namespace TerraTCG.Common.GameSystem.Drawing
 
         internal Dictionary<CardSubtype, Rectangle> BiomeIconBounds { get; private set; }
         internal Dictionary<CardSubtype, Rectangle> CardTypeEmoteBounds { get; private set; }
+
+        internal const int TUTORIAL_SLIDE_COUNT = 18;
+
+        public Asset<Texture2D> TutorialFrame { get; private set; }
+        internal List<Asset<Texture2D>> TutorialSlides { get; private set; }
         public override void Load()
         {
             base.Load();
@@ -128,6 +133,18 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 ItemTextureCache[itemId] = asset;
             }             
             return asset;
+        }
+
+        // Tutorial images are large, don't load them if we don't need to
+        public void LoadTutorial()
+        {
+            TutorialFrame = Mod.Assets.Request<Texture2D>($"Assets/Tutorial/TutorialFrame");
+            TutorialSlides = [];
+            for(int i = 0; i < TUTORIAL_SLIDE_COUNT; i++)
+            {
+                TutorialSlides.Add(
+                    Mod.Assets.Request<Texture2D>($"Assets/Tutorial/Tutorial{i}"));
+            }
         }
     }
 }

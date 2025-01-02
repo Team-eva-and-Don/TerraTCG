@@ -32,12 +32,12 @@ namespace TerraTCG.Common.UI.NPCDuelChat
             Buttons = [
                 new(),
                 new(),
+                new(),
             ];
             for(int i = 0; i < Buttons.Count; i++)
             {
                 var localI = i;
                 Buttons[i].Top.Percent = 0.75f;
-                Buttons[i].Left.Percent = i / (float)Buttons.Count;
                 Buttons[i].OnLeftClick += (evt, elem) => SelectNPCDeck(evt, elem, localI);
                 Append(Buttons[i]);
             }
@@ -75,6 +75,7 @@ namespace TerraTCG.Common.UI.NPCDuelChat
             for(int i = 0; i < deckLists.Count; i++)
             {
                 Buttons[i].Text = deckLists[i].Name;
+                Buttons[i].Left.Percent = i / (float)deckLists.Count;
             }
             for(int i = deckLists.Count; i < Buttons.Count;i++)
             {
