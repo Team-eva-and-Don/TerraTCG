@@ -36,6 +36,7 @@ namespace TerraTCG.Common.UI.TutorialUI
             {
                 Main.LocalPlayer.mouseInterface = true;
             }
+            base.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
