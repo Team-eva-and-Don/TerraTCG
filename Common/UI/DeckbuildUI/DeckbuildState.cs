@@ -34,7 +34,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         public override void OnInitialize()
         {
             base.OnInitialize();
-            var bgColor = new Color(73, 94, 171, 180);
+            var bgColor = new Color(54, 53, 131, 210);
             deckbuildCardList = new()
             {
                 BackgroundColor = bgColor,
