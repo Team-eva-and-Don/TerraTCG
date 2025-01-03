@@ -146,12 +146,14 @@ namespace TerraTCG.Common.UI
             {
                 SoundEngine.PlaySound(SoundID.MenuOpen);
                 _userInterface.SetState(DeckbuildState);
+                Main.playerInventory = false;
             }
         }
         public void StopDeckbuild()
         {
             SoundEngine.PlaySound(SoundID.MenuClose);
             _userInterface.SetState(null);
+            Main.playerInventory = false;
         }
 
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)

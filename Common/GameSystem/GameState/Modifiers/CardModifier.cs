@@ -25,12 +25,13 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
     internal enum ModifierType
     {
         NONE,
+        PAUSED,
         DEFENSE_BOOST,
         BLEEDING,
         RELENTLESS,
         EVASIVE,
         SPIKED,
-        LIFESTEAL
+        LIFESTEAL,
     }
 
     internal struct GameEventInfo

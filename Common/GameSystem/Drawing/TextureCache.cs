@@ -89,6 +89,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
             ItemTextureCache = [];
             ModifierIconTextures = new Dictionary<ModifierType, Asset<Texture2D>>
             {
+                [ModifierType.PAUSED] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/PausedIcon"),
                 [ModifierType.SPIKED] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Spiked_Icon"),
                 [ModifierType.DEFENSE_BOOST] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Defense_Icon"),
                 [ModifierType.EVASIVE] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Evasive_Icon"),

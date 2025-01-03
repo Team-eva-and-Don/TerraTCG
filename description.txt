@@ -1,3 +1,13 @@
 TerraTCG is a Terraria-themed Trading Card Game! To start your
 TerraTCG journey, craft a deck box with 5 wood at a Workbench,
 then talk to the Guide for a tutorial!
+Currently, TerraTCG can be played with the following NPCs:
+- the Guide
+- the Merchant
+- the Nurse
+- the Arms Dealer
+- the Goblin Tinkerer
+- the Party Girl
+- the Traveling Merchant
+- the Clothier
+- the Nerdy Slime

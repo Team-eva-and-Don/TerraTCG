@@ -33,6 +33,10 @@ namespace TerraTCG.Common.GameSystem.GameState
         internal Dictionary<ModifierType, int> GetKeywordModifiers()
         {
             var modifierMap = new Dictionary<ModifierType, int>();
+            if(IsExerted)
+            {
+                modifierMap[ModifierType.PAUSED] = 1;
+            }
             foreach(var modifier in CardModifiers.Where(m=>m.Category != ModifierType.NONE))
             {
                 if (!modifierMap.TryGetValue(modifier.Category, out int currentAmount))
