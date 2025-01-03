@@ -48,7 +48,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         private void OnClickDecklistCard(UIMouseEvent evt, UIElement listeningElement)
         {
             var activeDeck = TCGPlayer.LocalPlayer.Deck;
-            var toRemove = activeDeck.Cards.Where(c => c.Name == SourceCard.Name).FirstOrDefault();
+            var toRemove = activeDeck.Cards.Where(c => c.Name == SourceCard?.Name).FirstOrDefault();
             if(toRemove != null)
             {
                 activeDeck.Cards.Remove(toRemove);
@@ -96,7 +96,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
 
             if(ContainsPoint(Main.MouseScreen))
             {
-                var tooltipText = Language.GetTextValue("Mods.TerraTCG.Cards.Common.RemoveFromDeck").Replace("%%", SourceCard.CardName);
+                var tooltipText = Language.GetTextValue("Mods.TerraTCG.Cards.Common.RemoveFromDeck").Replace("%%", SourceCard?.CardName);
                 DeckbuildState.SetTooltip(tooltipText);
             }
         }
