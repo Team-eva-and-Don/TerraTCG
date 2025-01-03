@@ -963,7 +963,6 @@ Cards: {
 	}
 
 	Modifiers: {
-		PAUSED: Paused: Cannot act until next turn
 		DEFENSE_BOOST: Sturdy: Takes %% less damage
 		BLEEDING: Bleeding: Takes %% more damage
 		RELENTLESS: Relentless: May attack %% extra times
@@ -1054,120 +1053,86 @@ Cards: {
 		Slide2:
 			'''
 			Each player has a pool of 3 resource types, used in different ways:
-			- 3 Hearts
-			- 8 Mana Crystals
-			- 1 Townsfolk Emblem
+			- 3 hearts, which are lost whenever a creature the player controls dies.
+			- 1 Mana Crystal, used to attack and play items, and grows by 1 per turn.
+			- 1 Townsfolk Emblem, used to play Townsfolk, which refreshes every turn.
 			'''
 		Slide3:
 			'''
-			Life, the 3 Heart icons at the top of a player's resources,
-			indicate the number of creatures under the player's control that have
-			died this game. One heart is lost for each defeated creature. Defeat
-			3 creatures to deplete all 3 of your opponent's hearts and win the game!
+			Players must play creatures, spend Mana Crystals to defeat their opponents'
+			creatures, and win the game when all 3 hearts are depleted!
+			'''
+		Slide4:
+			'''
+			There are 3 types of Card in TerraTCG:
+			- Creatures, which are placed onto the battlefield for combat
+			- Items, which provide temporary or permanent buffs to creatures
+			- Townsfolk, which provide powerful single-use effects like card draw.
 			'''
 		Slide5:
 			'''
-			Mana Crystals, the 8 Star icons at the bottom of a player's resources,
-			indicate the number of actions the player can take during a turn. Mana
-			crystals start at 1 and grow by 1 per turn, up to a total of 8 per turn.
+			Creatures are the core of gameplay. They can be placed onto the battlefield
+			from the hand for no cost. To play a creature, click on that creature in hand,
+			then on an appropriate empty zone on your battlefield.
 			'''
 		Slide6:
 			'''
-			Most game actions, such as attacking with a creature or playing an item,
-			cost Mana Crystals. Budgeting your Mana Crystals carefully each turn is 
-			a key to success!
+			Fighter creatures are meant for combat, and should be placed in the Offense 
+			row. Creatures enter the battlefield Paused, and must wait a turn to act. 
 			'''
 		Slide7:
 			'''
-			Finally, each player has a Townsfolk Emblem, used to play powerful
-			Townsfolk cards. Only a single Townsfolk can be played per turn.
+			Critters creatures lack combat prowess, but have powerful skills that 
+			support other creatures in combat.  They are vulnerable to attacks from 
+			enemies, but can be protected by placing them in the same column as 
+			another friendly creature.
 			'''
 		Slide8:
 			'''
-			Now that we've covered resources, let's go over card types.  There are 
-			3 types of Card in TerraTCG: Creatures, Items, and Townsfolk.
+			Items can be attached to creatures and provide bonuses to their stats. It 
+			costs Mana Crystals to play Items from the hand. Here, the Shackle can be 
+			attached to a Zombe for one Mana Crystal to reduce the damage that it 
+			takes from the next attack against it.
 			'''
 		Slide9:
 			'''
-			Creatures are the core of gameplay. They can be placed onto the battlefield
-			from the hand for no cost.
+			Hover over a creature's card preview to see which item buffs are currently
+			affecting it!
 			'''
 		Slide10:
 			'''
-			To play a creature, click on that creature in hand,
-			then on an appropriate empty zone on your battlefield.
+			Townsfolk are a special card type that provide powerful sources of advantage,
+			like card draw and extra mana crystals. You can only use one Townsfolk per 
+			turn, which consumes your single Townsfolk Emblem.
 			'''
 		Slide11:
 			'''
-			Creatures can be placed into one of two rows. The Offense Row (Sword zones)
-			allows placed creatures to attack opponents, and should be used for your
-			combat-focused creatures. Combat focused creatures typically have the
-			'Fighter' or 'Scout' Creature Type.
+			Your opponent plays their own creatures, items, and townsfolk during their
+			turn. Once they pass back to you, your creatures will Unpause and be able
+			to act! 
 			'''
 		Slide12:
-			'''
-			All creatures enter the field Paused, meaning they can't attack or take
-			other actions. The Paused state clears at the end of each turn.
-			'''
-		Slide13:
-			'''
-			The Defense Row (Shield Zone) allows creatures to avoid damage so long as
-			another creature is placed in the corresponding Offense Zone. Put your
-			support creatures in the Defense Row to protect them from harm! Support
-			creatures typically have the 'Critter' Creature Type.
-			'''
-		Slide14:
 			'''
 			Expert Creatures are a special creature type that can be placed on top
 			of an Unpaused creature with the same Biome and Combat Role. Both the 
 			Wraith and Zombie are Forest Fighters, so the Zombie can be Promoted!
 			'''
+		Slide13:
+			'''
+			Critters have skills that support your other creature. Click on an Unpaused 
+			Critter to use its skill. Here, the Bunny grants you an extra Mana Crystal!
+			'''
 		Slide14:
 			'''
-			Creature combat is the core of advancing your TerraTCG game state.
-			To initiate combat, click on a creature in your Offense Row, then
-			a creature in your opponent's Offense Row or unblocked Defense Row.
-			'''
-		Slide14:
-			'''
-			During combat, the attacking creature first consumes Mana Crystals from 
-			its owners pool equal to its attack cost.
+			Now, you're ready to attack. Your Wraith can attack the opposing bunny
+			directly using its Evasive modifier. Attacking with the Wraith will cost 
+			2 Mana Crystals and deal 4 damage.
 			'''
 		Slide15:
-			''' 
-			Then, it deals damage to the opposing creature's health equal to its attack
-			damage.
 			'''
-		Slide16:
-			''' 
-			Once a creature's entire health pool has been depleted, it leaves
-			the battlefield and its owner loses one Heart. If a player loses all 3
-			hearts, they lose the game!
-			'''
-		Slide17:
-			'''
-			Items are the second card type. Items provide buffs to creatures, and cost
-			Mana Crystals to play from the hand. 
-			'''
-		Slide18:
-			'''
-			To play an Item, click its card in hand, then click a creature on the board.
-			'''
-		Slide19:
-			'''
-			Hover over a creature's card preview to see which Item buffs are currently
-			affecting it!
-			'''
-		Slide20:
-			'''
-			Townsfolk are a the final card type, and provide powerful one-time sources
-			of advantage. Townsfolk may draw you cards, fully heal your creatures,
-			or grant you extra Mana Crystals. 
-			'''
-		Slide21:
-			'''
-			You can only use one Townsfolk per turn, which consumes your single 
-			Townsfolk Emblem.
+			The opposing Bunny takes 4 damage from the attack. Once all its life is
+			depleted, it will die, and the opponent will lose 1 Life Point. Repeat this 
+			process 3 times to win the game!
 			'''
 		Slide16:
 			'''
