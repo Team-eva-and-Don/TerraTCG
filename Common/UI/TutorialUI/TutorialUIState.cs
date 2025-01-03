@@ -12,6 +12,7 @@ using Terraria.GameContent.UI.Elements;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
+using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.UI.GameFieldUI;
 using TerraTCG.Common.UI.NPCDuelChat;
@@ -35,8 +36,11 @@ namespace TerraTCG.Common.UI.TutorialUI
         private NPCDuelChatButton prevButton;
         private NPCDuelChatButton nextButton;
 
+        private TimeSpan clickDebounceTime;
+
         static int WindowWidth => (int)(TUTORIAL_IMG_SCALE * TUTORIAL_IMG_WIDTH) + 2 * PADDING;
         static int WindowHeight => (int)(TUTORIAL_IMG_SCALE * TUTORIAL_IMG_HEIGHT) + 2 * PADDING + 148;
+
 
         public List<TutorialSlide> Slides = [
             new(0, 0),
@@ -92,6 +96,11 @@ namespace TerraTCG.Common.UI.TutorialUI
 
         private void NextButton_OnLeftClick(UIMouseEvent evt, UIElement listeningElement)
         {
+            if(TCGPlayer.TotalGameTime - clickDebounceTime < TimeSpan.FromSeconds(0.25f))
+            {
+                return;
+            }
+            clickDebounceTime = TCGPlayer.TotalGameTime;
             if(SlideIdx == Slides.Count - 1)
             {
                 ModContent.GetInstance<UserInterfaces>().StopTutorial();
@@ -104,6 +113,11 @@ namespace TerraTCG.Common.UI.TutorialUI
 
         private void PrevButton_OnLeftClick(UIMouseEvent evt, UIElement listeningElement)
         {
+            if(TCGPlayer.TotalGameTime - clickDebounceTime < TimeSpan.FromSeconds(0.25f))
+            {
+                return;
+            }
+            clickDebounceTime = TCGPlayer.TotalGameTime;
             if(SlideIdx == 0)
             {
                 ModContent.GetInstance<UserInterfaces>().StopTutorial();

@@ -153,7 +153,8 @@ namespace TerraTCG.Common.UI
         {
             SoundEngine.PlaySound(SoundID.MenuClose);
             _userInterface.SetState(null);
-            Main.playerInventory = false;
+            // TODO this behaves very funky
+            // Main.playerInventory = false;
         }
 
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)

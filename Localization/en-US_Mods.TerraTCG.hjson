@@ -963,6 +963,7 @@ Cards: {
 	}
 
 	Modifiers: {
+		PAUSED: Paused: Cannot act until next turn
 		DEFENSE_BOOST: Sturdy: Takes %% less damage
 		BLEEDING: Bleeding: Takes %% more damage
 		RELENTLESS: Relentless: May attack %% extra times
@@ -1054,7 +1055,7 @@ Cards: {
 			'''
 			Each player has a pool of 3 resource types, used in different ways:
 			- 3 hearts, which are lost whenever a creature the player controls dies.
-			- 1 Mana Crystal, used to attack and play items, and grows by 1 per turn.
+			- 8 Mana Crystals, used to attack and play items, and grows by 1 per turn.
 			- 1 Townsfolk Emblem, used to play Townsfolk, which refreshes every turn.
 			'''
 		Slide3:
@@ -1078,14 +1079,15 @@ Cards: {
 		Slide6:
 			'''
 			Fighter creatures are meant for combat, and should be placed in the Offense 
-			row. Creatures enter the battlefield Paused, and must wait a turn to act. 
+			row. Only creatures in the Offense Row (Sword Icons) may attack.
+			Creatures enter the battlefield Paused, and must wait a turn to act. 
 			'''
 		Slide7:
 			'''
 			Critters creatures lack combat prowess, but have powerful skills that 
-			support other creatures in combat.  They are vulnerable to attacks from 
-			enemies, but can be protected by placing them in the same column as 
-			another friendly creature.
+			support other creatures in combat. They are vulnerable to attacks from 
+			enemies, but can be protected by placing them in the Defense Row (Shield
+			Icon) in the same column as another friendly creature.
 			'''
 		Slide8:
 			'''
@@ -1125,8 +1127,9 @@ Cards: {
 		Slide14:
 			'''
 			Now, you're ready to attack. Your Wraith can attack the opposing bunny
-			directly using its Evasive modifier. Attacking with the Wraith will cost 
-			2 Mana Crystals and deal 4 damage.
+			directly using its Evasive modifier. To declare on an attack, click on the
+			Wraith first, and then the opponent's Bunny. Attacking with the Wraith will 
+			cost 2 Mana Crystals and deal 4 damage.
 			'''
 		Slide15:
 			'''
