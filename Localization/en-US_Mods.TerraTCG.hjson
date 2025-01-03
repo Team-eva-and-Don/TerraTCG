@@ -969,6 +969,7 @@ Cards: {
 		RELENTLESS: Relentless: May attack %% extra times
 		EVASIVE: Evasive: May attack blocked opponents
 		SPIKED: Spiked: Attackers take %% damage
+		LIFESTEAL: Lifesteal: Regains %% HP on attack
 	}
 
 	Common: {
