@@ -17,7 +17,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         public override Card CreateCard() => new ()
         {
             Name = "SpikedJungleSlime",
-            MaxHealth = 9,
+            MaxHealth = 8,
             MoveCost = 3,
             CardType = CardType.CREATURE,
             NPCID = NPCID.SpikedJungleSlime,

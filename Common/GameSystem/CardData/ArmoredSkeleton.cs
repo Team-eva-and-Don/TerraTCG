@@ -27,7 +27,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             Attacks = [
                 new() {
                     Name = "Mighty Swing",
-                    Damage = 5,
+                    Damage = 4,
                     Cost = 4,
                 }
             ]

@@ -22,7 +22,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             SelectInHandAction = (card, player) => new ApplySkillAction(card, player),
             Skills = [ 
                 new() { 
-                    Cost = 0,
+                    Cost = 1,
                     DoSkill = (GamePlayer player, Zone cardZone, Zone endZone) => { },
                     Texture = TextureCache.Instance.GetItemTexture(ItemID.AngelStatue),
                 }

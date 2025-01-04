@@ -29,7 +29,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         public override Card CreateCard() => new ()
         {
             Name = "KingSlime",
-            MaxHealth = 14,
+            MaxHealth = 10,
             MoveCost = 2,
             Points = 2,
             NPCID = NPCID.KingSlime,
@@ -52,7 +52,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             ],
             Attacks = [
                 new() {
-                    Damage = 5,
+                    Damage = 4,
                     Cost = 4,
                 }
             ]

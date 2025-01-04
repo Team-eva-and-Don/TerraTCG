@@ -48,7 +48,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         public override Card CreateCard() => new ()
         {
             Name = "GiantTortoise",
-            MaxHealth = 12,
+            MaxHealth = 10,
             MoveCost = 3,
             CardType = CardType.CREATURE,
             NPCID = NPCID.GiantTortoise,

@@ -28,7 +28,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         public override Card CreateCard() => new ()
         {
             Name = "UndeadViking",
-            MaxHealth = 8,
+            MaxHealth = 7,
             MoveCost = 2,
             NPCID = NPCID.UndeadViking,
             CardType = CardType.CREATURE,

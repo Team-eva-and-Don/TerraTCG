@@ -26,7 +26,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             Attacks = [
                 new() {
                     Name = "Cursed Steel",
-                    Damage = 4,
+                    Damage = 3,
                     Cost = 2,
                 }
             ]

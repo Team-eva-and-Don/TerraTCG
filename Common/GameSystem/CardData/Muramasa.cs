@@ -22,7 +22,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             SelectInHandAction = (card, player) => new ApplyModifierAction(card, player),
             ShouldTarget = z => true,
             Skills = [
-                new() { Cost = 2 }
+                new() { Cost = 3 }
             ],
             Modifiers = () => [
                 new AttackCostReductionModifier(1)  {

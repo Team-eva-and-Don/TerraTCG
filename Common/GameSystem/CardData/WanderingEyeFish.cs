@@ -15,7 +15,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         public override Card CreateCard() => new ()
         {
             Name = "WanderingEyeFish",
-            MaxHealth = 5,
+            MaxHealth = 4,
             MoveCost = 2,
             CardType = CardType.CREATURE,
             NPCID = NPCID.EyeballFlyingFish,

@@ -27,7 +27,7 @@ namespace TerraTCG.Common.GameSystem.CardData
                 new() {
                     Name = "Chomp",
                     Damage = 4,
-                    Cost = 3,
+                    Cost = 4,
                 }
             ]
         };

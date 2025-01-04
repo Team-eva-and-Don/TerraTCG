@@ -27,7 +27,7 @@ namespace TerraTCG.Common.GameSystem.CardData
                 new() {
                     Name = "Haunt",
                     Damage = 4,
-                    Cost = 2,
+                    Cost = 3,
                 }
             ]
         };

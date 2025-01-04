@@ -91,10 +91,6 @@ namespace TerraTCG.Common.GameSystem.Drawing
             var font = FontAssets.ItemStack.Value;
             var bounds = card.Texture.Value.Bounds;
 
-            // Top left: Name
-            var nameOffset = new Vector2(MARGIN_L, MARGIN_S);
-            DrawStringWithBorder(spriteBatch, card.CardName, position + nameOffset, scale: scale * BaseTextScale);
-
             // Top Right: Max HP
             if(card.MaxHealth > 0) // non-creature cards have 0 health
             {
@@ -108,6 +104,12 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 spriteBatch.Draw(hpIcon, position + hpIconOffset * scale, hpIcon.Bounds, Color.White, 0, default, scale * HPIconScale, SpriteEffects.None, 0);
                 DrawStringWithBorder(spriteBatch, $"{card.MaxHealth}", position + hpOffset * scale, scale: scale * BaseTextScale);
             }
+
+            // Top left: Name
+            // certain names overflow the box by default, squish them a bit
+            var nameOffset = new Vector2(MARGIN_L, MARGIN_S);
+            DrawStringWithBorder(spriteBatch, card.CardName, position + nameOffset, scale: scale * BaseTextScale);
+
 
             // Beneath Portrait: Type line
             var typelineRowHeight = 88;
