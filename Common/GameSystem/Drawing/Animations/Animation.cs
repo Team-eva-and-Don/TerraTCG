@@ -142,10 +142,16 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
                 var zoneOffset = new Vector2(0f, 0.85f);
                 var placement = ProjectedFieldUtils.Instance.WorldSpaceToScreenSpace(gamePlayer, zone, zoneOffset);
                 var center = localPlayer.GameFieldPosition + placement;
-                foreach(var modifier in card.GetKeywordModifiers().Keys.Order())
+                foreach(var (modifier, stack) in card.GetKeywordModifiers().OrderBy(kv=>kv.Key))
                 {
+                    var count = Math.Max(1, stack);
+                    var basePos = center + new Vector2(2, -2) * (count - 1);
                     var iconTexture = TextureCache.Instance.ModifierIconTextures[modifier].Value;
-                    spriteBatch.Draw(iconTexture, center, iconTexture.Bounds, Color.White * transparency, 0, default, 1, SpriteEffects.None, 0);
+                    for(int i = count - 1; i >= 0; i--)
+                    {
+                        spriteBatch.Draw(iconTexture, basePos, iconTexture.Bounds, Color.White * transparency, 0, default, 1, SpriteEffects.None, 0);
+                        basePos -= new Vector2(2, -2);
+                    }
                     center.X += iconTexture.Width;
                 }
             }
