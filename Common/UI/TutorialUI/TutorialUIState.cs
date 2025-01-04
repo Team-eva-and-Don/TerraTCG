@@ -19,10 +19,12 @@ using TerraTCG.Common.UI.NPCDuelChat;
 
 namespace TerraTCG.Common.UI.TutorialUI
 {
-    internal struct TutorialSlide(int imageIdx, int textIdx)
+    internal struct TutorialSlide(int imageIdx, int textIdx, int overlayIdx=-1)
     {
         public readonly LocalizedText Text => Language.GetText($"Mods.TerraTCG.Cards.Tutorial.Slide{textIdx}");
         public readonly Asset<Texture2D> Texture => TextureCache.Instance.TutorialSlides[imageIdx];
+        public readonly Asset<Texture2D> HighlightTexture => overlayIdx == -1 ? null :
+            TextureCache.Instance.TutorialOverlays[overlayIdx];
 
     }
     internal class TutorialUIState : UIState
@@ -45,23 +47,33 @@ namespace TerraTCG.Common.UI.TutorialUI
         public List<TutorialSlide> Slides = [
             new(0, 0),
             new(1, 1),
-            new(1, 2),
-            new(14, 3),
-            new(1, 4),
-            new(2, 5),
-            new(3, 6),
-            new(4, 7),
-            new(6, 8),
-            new(8, 9),
-            new(9, 10),
-            new(11, 11),
-            new(12, 12),
-            new(13, 13),
-            new(14, 14),
-            new(15, 15),
-            new(16, 16),
-            new(17, 17),
-            new(0, 18),
+            new(1, 2, 0),
+            new(1, 3, 1),
+            new(1, 4, 2),
+            new(1, 5, 3),
+            new(1, 6, 14),
+            new(2, 7),
+            new(2, 8, 4),
+            new(3, 9, 5),
+            new(3, 10),
+            new(4, 11),
+            new(5, 12, 6),
+            new(6, 13),
+            new(6, 14, 7),
+            new(8, 15),
+            new(9, 16),
+            new(10, 17, 15),
+            new(11, 18),
+            new(12, 19, 8),
+            new(12, 20, 9),
+            new(13, 21),
+            new(14, 22, 10),
+            new(14, 23, 11),
+            new(15, 24, 12),
+            new(15, 25, 13),
+            new(16, 26),
+            new(17, 27),
+            new(0, 28),
         ];
         public int SlideIdx { get; set; }
 
@@ -85,7 +97,7 @@ namespace TerraTCG.Common.UI.TutorialUI
             prevButton.Top.Percent = 1;
             prevButton.Left.Percent = 0;
             nextButton.Top.Percent = 1;
-            nextButton.Left.Percent = 0.95f;
+            nextButton.Left.Percent = 0.93f;
 
             tutorialPanel.Append(prevButton);
             tutorialPanel.Append(nextButton);
@@ -107,6 +119,7 @@ namespace TerraTCG.Common.UI.TutorialUI
             } else
             {
                 tutorialPanel.PrevTexture = CurrentSlide.Texture;
+                tutorialPanel.PrevHighlightTexture = CurrentSlide.HighlightTexture;
                 SlideIdx += 1;
             }
         }
@@ -124,6 +137,7 @@ namespace TerraTCG.Common.UI.TutorialUI
             } else
             {
                 tutorialPanel.PrevTexture = CurrentSlide.Texture;
+                tutorialPanel.PrevHighlightTexture = CurrentSlide.HighlightTexture;
                 SlideIdx -= 1;
             }
         }
@@ -132,6 +146,7 @@ namespace TerraTCG.Common.UI.TutorialUI
         {
             base.Update(gameTime);
             tutorialPanel.Texture = CurrentSlide.Texture;
+            tutorialPanel.HighlightTexture = CurrentSlide.HighlightTexture;
             tutorialPanel.Text = CurrentSlide.Text.Value;
 
             prevButton.Text = Language.GetText($"Mods.TerraTCG.Cards.Common.{(SlideIdx == 0 ? "Close": "Prev")}");

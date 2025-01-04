@@ -59,6 +59,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
 
         public Asset<Texture2D> TutorialFrame { get; private set; }
         internal List<Asset<Texture2D>> TutorialSlides { get; private set; }
+        internal List<Asset<Texture2D>> TutorialOverlays { get; private set; }
         public override void Load()
         {
             base.Load();
@@ -152,10 +153,16 @@ namespace TerraTCG.Common.GameSystem.Drawing
         {
             TutorialFrame = Mod.Assets.Request<Texture2D>($"Assets/Tutorial/TutorialFrame");
             TutorialSlides = [];
+            TutorialOverlays = [];
             for(int i = 0; i < TUTORIAL_SLIDE_COUNT; i++)
             {
                 TutorialSlides.Add(
                     Mod.Assets.Request<Texture2D>($"Assets/Tutorial/Tutorial{i}"));
+            }
+            for(int i = 0; i < 16; i++)
+            {
+                TutorialOverlays.Add(
+                    Mod.Assets.Request<Texture2D>($"Assets/Tutorial/TutorialOverlay{i}"));
             }
         }
     }

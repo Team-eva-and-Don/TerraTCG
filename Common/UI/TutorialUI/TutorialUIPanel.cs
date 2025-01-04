@@ -21,8 +21,11 @@ namespace TerraTCG.Common.UI.TutorialUI
         private Asset<Texture2D> _prevTexture;
 
         public Asset<Texture2D> PrevTexture { get => _prevTexture; set { _prevTexture = value; textureChangeTime = TCGPlayer.TotalGameTime; } }
+        public Asset<Texture2D> PrevHighlightTexture { get; set; }
 
         public Asset<Texture2D> Texture { get; set; }
+
+        public Asset<Texture2D> HighlightTexture { get; set; }
         public string Text { get; set; }
 
         public override void OnInitialize()
@@ -61,6 +64,16 @@ namespace TerraTCG.Common.UI.TutorialUI
             }
 
             spriteBatch.Draw(Texture.Value, topCenter, Texture.Value.Bounds, color, 0, origin, scale, SpriteEffects.None, 0);
+            if(HighlightTexture != null)
+            {
+                spriteBatch.Draw(HighlightTexture.Value, topCenter, Texture.Value.Bounds, color, 0, origin, scale, SpriteEffects.None, 0);
+            }
+            if(PrevHighlightTexture != null && lerpPoint < 1)
+            {
+                var prevHighlightColor = Color.White * (1 - lerpPoint);
+                spriteBatch.Draw(PrevHighlightTexture.Value, topCenter, Texture.Value.Bounds, prevHighlightColor, 0, origin, scale, SpriteEffects.None, 0);
+            }
+
             var frameTexture = TextureCache.Instance.TutorialFrame;
             origin = new Vector2(frameTexture.Value.Width / 2, 0);
             spriteBatch.Draw(frameTexture.Value, topCenter, frameTexture.Value.Bounds, Color.White, 0, origin, 1f, SpriteEffects.None, 0);
