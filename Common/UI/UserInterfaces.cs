@@ -37,6 +37,10 @@ namespace TerraTCG.Common.UI
 
         private bool? CachedAutoPause;
 
+        // For DialogueTweaks support, this can be checked by UIState code
+        // to see whether vanilla UI is currently being suppressed
+        public bool VanillaDialogueLayerActive { get; private set; }
+
         public override void Load()
         {
             GameField = new();
@@ -176,6 +180,11 @@ namespace TerraTCG.Common.UI
             Main.playerInventory = false;
         }
 
+        internal void AdvanceChat()
+        {
+            DuelChat.AdvanceToDeckSelectDialogue();
+        }
+
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
         {
             // Hide the mouse text layer while the game UI is active, otherwise eg.
@@ -188,8 +197,9 @@ namespace TerraTCG.Common.UI
                     layers.RemoveAt(mouseoverIdx);
                 }
             }
-
             int dialogueIdx = layers.FindIndex(layer => layer.Name.Equals("Vanilla: NPC / Sign Dialog"));
+            VanillaDialogueLayerActive = dialogueIdx > -1 && layers[dialogueIdx].Active;
+
             if(dialogueIdx != -1 && _userInterface?.CurrentState != null)
             {
                 var layerName = $"TerraTCG: {_userInterface.CurrentState}";
@@ -203,6 +213,5 @@ namespace TerraTCG.Common.UI
                 }, InterfaceScaleType.UI));
             }         
         }
-
     }
 }

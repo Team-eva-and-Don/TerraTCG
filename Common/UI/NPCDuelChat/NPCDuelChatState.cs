@@ -52,6 +52,11 @@ namespace TerraTCG.Common.UI.NPCDuelChat
 
         private void OnClickChatButton(UIMouseEvent evt, UIElement listeningElement)
         {
+            AdvanceToDeckSelectDialogue();
+        }
+
+        public void AdvanceToDeckSelectDialogue()
+        {
             if(!TCGPlayer.LocalPlayer.Deck.ValidateDeck())
             {
                 Main.NewText(Language.GetTextValue("Mods.TerraTCG.Cards.Common.DeckNotValid"), Color.Red);
@@ -65,7 +70,7 @@ namespace TerraTCG.Common.UI.NPCDuelChat
 
         private void UpdateDuelStartButtonPosition()
         {
-            if(dialog.NPCID != 0)
+            if(dialog.NPCID != 0 || !ModContent.GetInstance<UserInterfaces>().VanillaDialogueLayerActive)
             {
                 GameFieldState.SetRectangle(chatButton, Main.screenWidth + 20, 0);
                 return;
