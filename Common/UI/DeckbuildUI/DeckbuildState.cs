@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -95,6 +96,9 @@ namespace TerraTCG.Common.UI.DeckbuildUI
 
         internal List<CardSubtype> VisibleCardTypes => cardListFilter.VisibleTypes;
 
+        // Flag to prevent Draw() from running before element dims are calculated in Update()
+        public bool IsOpen { get; internal set; }
+
 
         // For ease of calculating scroll, make the window height an integer number of cards
         internal static (int, int) GetWindowHeight()
@@ -105,6 +109,13 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             return (maxRowCount, maxRowCount * heightPerCard + 2 * PADDING_Y);
         }
 
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            if(IsOpen)
+            {
+                base.Draw(spriteBatch);
+            }
+        }
         public override void Update(GameTime gameTime)
         {
             var windowHeight = GetWindowHeight().Item2;
@@ -126,6 +137,8 @@ namespace TerraTCG.Common.UI.DeckbuildUI
                 deckbuildCardList.Left.Pixels - 186, deckbuildCardList.Top.Pixels + windowHeight/2 - 120, 180, 240);
 
             GameFieldState.SetRectangle(cancelButton, 16, Main.screenHeight - 16 - 48, 38, 48);
+
+            IsOpen = true;
             base.Update(gameTime);
         }
 

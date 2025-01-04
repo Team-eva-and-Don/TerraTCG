@@ -25,6 +25,7 @@ namespace TerraTCG.Common.UI.NPCDuelChat
         // Menu replicating NPC dialog that appears after the NPC is done talking
         private NPCDeckSelectDialogue dialog;
 
+        private int talkNPCIdx = -1;
 
         public override void OnInitialize()
         {
@@ -58,6 +59,7 @@ namespace TerraTCG.Common.UI.NPCDuelChat
                 return;
             }
             dialog.NPCID = Main.LocalPlayer.TalkNPC.netID;
+            talkNPCIdx = Main.LocalPlayer.talkNPC;
             Main.CloseNPCChatOrSign();
         }
 
@@ -84,6 +86,11 @@ namespace TerraTCG.Common.UI.NPCDuelChat
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            if(talkNPCIdx != -1)
+            {
+                Main.LocalPlayer.SetTalkNPC(talkNPCIdx);
+            }
+
             if((Main.npcChatText?.Length ?? 0) > 0)
             {
                 dialog.NPCID = 0; // Reset duel start progress if we talk to another NPC
@@ -107,6 +114,7 @@ namespace TerraTCG.Common.UI.NPCDuelChat
         internal bool InDeckSelect => dialog.NPCID > 0;
         internal void ResetState()
         {
+            talkNPCIdx = -1;
             dialog.NPCID = 0;
         }
     }

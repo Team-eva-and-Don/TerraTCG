@@ -120,7 +120,6 @@ namespace TerraTCG.Common.UI
                 Main.autoPause = cachedAutoPause;
             }
             Main.playerInventory = false;
-            Main.LocalPlayer.releaseInventory = false;
         }
 
         public void StartPackOpening()
@@ -166,22 +165,29 @@ namespace TerraTCG.Common.UI
                 SoundEngine.PlaySound(SoundID.MenuOpen);
                 _userInterface.SetState(DeckbuildState);
                 Main.playerInventory = false;
-                Main.LocalPlayer.releaseInventory = false;
             }
         }
         public void StopDeckbuild()
         {
+            DeckbuildState.IsOpen = false;
             SoundEngine.PlaySound(SoundID.MenuClose);
             _userInterface.SetState(null);
 
             Main.playerInventory = false;
-            Main.LocalPlayer.releaseInventory = false;
         }
 
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)
         {
             // Hide the mouse text layer while the game UI is active, otherwise eg.
             // NPC names will show up above the dialogue
+            if(_userInterface?.CurrentState == TutorialState)
+            {
+                var mouseoverIdx = layers.FindIndex(layer => layer.Name.Equals("Vanilla: Mouse Over"));
+                if(mouseoverIdx != -1)
+                {
+                    layers.RemoveAt(mouseoverIdx);
+                }
+            }
 
             int dialogueIdx = layers.FindIndex(layer => layer.Name.Equals("Vanilla: NPC / Sign Dialog"));
             if(dialogueIdx != -1 && _userInterface?.CurrentState != null)
