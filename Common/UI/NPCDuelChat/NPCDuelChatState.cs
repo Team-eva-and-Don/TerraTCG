@@ -114,6 +114,12 @@ namespace TerraTCG.Common.UI.NPCDuelChat
         internal bool InDeckSelect => dialog.NPCID > 0;
         internal void ResetState()
         {
+            // This can sometimes lead to a state where an NPC is stuck talking to
+            // a player after all dialogues are closed, attempt to clear that
+            if(talkNPCIdx != -1 && (Main.npcChatText?.Length ?? 0) == 0)
+            {
+                Main.LocalPlayer.SetTalkNPC(-1);
+            }
             talkNPCIdx = -1;
             dialog.NPCID = 0;
         }
