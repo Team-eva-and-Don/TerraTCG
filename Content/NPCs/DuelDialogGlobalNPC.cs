@@ -72,12 +72,9 @@ namespace TerraTCG.Content.NPCs
     }
     internal class DuelDialogGlobalNPC : GlobalNPC
     {
-
-        // Hook to check whether the NPC being talked to can be dueled
         public override void GetChat(NPC npc, ref string chat)
         {
-            base.GetChat(npc, ref chat);
-            if(ModContent.GetInstance<NPCDeckMap>().NPCDecklists.ContainsKey(npc.netID))
+            if (ModContent.GetInstance<NPCDeckMap>().NPCDecklists.ContainsKey(npc.netID))
             {
                 ModContent.GetInstance<UserInterfaces>().StartNPCChat();
             }

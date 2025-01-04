@@ -16,14 +16,15 @@ namespace TerraTCG.Content.Items
         public override void SetDefaults()
         {
             Item.useStyle = ItemUseStyleID.HoldUp;
-            Item.useAnimation = 60;
-            Item.useTime = 60;
+            Item.useAnimation = 15;
+            Item.useTime = 15;
             Item.rare = ItemRarityID.Blue;
         }
 
         public override bool? UseItem(Player player)
         {
-            if(player.whoAmI == Main.myPlayer)
+            // TODO this seems to get called every frame, is that intended?
+            if(player.whoAmI == Main.myPlayer && player.itemAnimation == Item.useAnimation - 1)
             {
                 TCGPlayer.LocalPlayer.DebugDeckbuildMode = false;
                 ModContent.GetInstance<UserInterfaces>().StartDeckbuild();
@@ -45,11 +46,13 @@ namespace TerraTCG.Content.Items
         public override void SetDefaults()
         {
             Item.useStyle = ItemUseStyleID.HoldUp;
+            Item.useAnimation = 15;
+            Item.useTime = 15;
         }
 
         public override bool? UseItem(Player player)
         {
-            if(player.whoAmI == Main.myPlayer)
+            if(player.whoAmI == Main.myPlayer && player.itemAnimation == Item.useAnimation - 1)
             {
                 TCGPlayer.LocalPlayer.DebugDeckbuildMode = true;
                 ModContent.GetInstance<UserInterfaces>().StartDeckbuild();

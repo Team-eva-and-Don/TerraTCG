@@ -55,6 +55,22 @@ namespace TerraTCG.Common.UI
             TutorialState.Activate();
 
             _userInterface = new();
+            On_Player.OpenInventory += On_Player_OpenInventory;
+        }
+
+        private void On_Player_OpenInventory(On_Player.orig_OpenInventory orig)
+        {
+            // Stop the player from opening in the inventory while 
+            // the deckbuilder is open (or in the process of clothing
+            if(_userInterface.CurrentState != DeckbuildState)
+            {
+                orig.Invoke();
+            }
+        }
+
+        public override void PreUpdatePlayers()
+        {
+            base.PreUpdatePlayers();
         }
 
         public override void UpdateUI(GameTime gameTime)
@@ -72,7 +88,7 @@ namespace TerraTCG.Common.UI
                     Main.autoPause = cachedAutoPause;
                 }
 
-                if(_userInterface.CurrentState == DuelChat)
+                if(_userInterface.CurrentState == DuelChat && DuelChat.InDeckSelect)
                 {
                     StopNPCChat();
                 }
@@ -102,6 +118,7 @@ namespace TerraTCG.Common.UI
                 Main.autoPause = cachedAutoPause;
             }
             Main.playerInventory = false;
+            Main.LocalPlayer.releaseInventory = false;
         }
 
         public void StartPackOpening()
@@ -147,14 +164,16 @@ namespace TerraTCG.Common.UI
                 SoundEngine.PlaySound(SoundID.MenuOpen);
                 _userInterface.SetState(DeckbuildState);
                 Main.playerInventory = false;
+                Main.LocalPlayer.releaseInventory = false;
             }
         }
         public void StopDeckbuild()
         {
             SoundEngine.PlaySound(SoundID.MenuClose);
             _userInterface.SetState(null);
-            // TODO this behaves very funky
-            // Main.playerInventory = false;
+
+            Main.playerInventory = false;
+            Main.LocalPlayer.releaseInventory = false;
         }
 
         public override void ModifyInterfaceLayers(List<GameInterfaceLayer> layers)

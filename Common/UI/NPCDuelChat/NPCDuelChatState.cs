@@ -104,6 +104,7 @@ namespace TerraTCG.Common.UI.NPCDuelChat
             UpdateDuelStartButtonPosition();
         }
 
+        internal bool InDeckSelect => dialog.NPCID > 0;
         internal void ResetState()
         {
             dialog.NPCID = 0;
