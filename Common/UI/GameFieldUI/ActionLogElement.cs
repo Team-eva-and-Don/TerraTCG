@@ -24,6 +24,23 @@ namespace TerraTCG.Common.UI.GameFieldUI
 
         internal IEnumerable<(Turn, ActionLogInfo)> VisibleLogs { get; set; } = [];
 
+        private IEnumerable<(Turn, ActionLogInfo, string)> IterateLogMessageLines()
+        {
+            var maxLineWidth = Main.screenWidth - (int)Position.X;
+            var font = FontAssets.ItemStack.Value;
+            foreach(var (turn, action) in VisibleLogs)
+            {
+                foreach (var actionLine in action.Message.Split('\n').Reverse())
+                {
+                    var lines = Utils.WordwrapString(actionLine, font, maxLineWidth, 10, out var lineCount);
+                    foreach (var line in lines.Where(l=>l != null).Reverse())
+                    {
+                        yield return (turn, action, line);
+                    }
+                }
+            }
+        }
+
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
@@ -36,25 +53,21 @@ namespace TerraTCG.Common.UI.GameFieldUI
             var gamePlayer = TCGPlayer.LocalGamePlayer;
             VisibleLogs = gamePlayer.Game.Turns
                 .Select(t => t.ActionLog.Select(al => (t, al)))
-                .SelectMany(a=>a)
-                .Reverse()
-                .Take(MAX_ACTION_LINES);
+                .SelectMany(a => a)
+                .Reverse();
 
             var boundsCheckPos = Position;
-            foreach(var (turn, action) in VisibleLogs)
+            foreach(var (turn, action, line) in IterateLogMessageLines().Take(MAX_ACTION_LINES))
             {
-                foreach (var actionLine in action.Message.Split('\n').Reverse())
+                var bbox = font.MeasureString(line);
+                var logBounds = new Rectangle((int)boundsCheckPos.X, (int)boundsCheckPos.Y, (int)bbox.X, (int)bbox.Y);
+                PlayTickIfMouseEntered(logBounds);
+                if(logBounds.Contains(Main.mouseX, Main.mouseY))
                 {
-                    var bbox = font.MeasureString(actionLine);
-                    var logBounds = new Rectangle((int)boundsCheckPos.X, (int)boundsCheckPos.Y, (int)bbox.X, (int)bbox.Y);
-                    PlayTickIfMouseEntered(logBounds);
-                    if(logBounds.Contains(Main.mouseX, Main.mouseY))
-                    {
-                        TCGPlayer.LocalPlayer.MouseoverCard = action.Card;
-                        TCGPlayer.LocalPlayer.MouseoverZone = null;
-                    }
-                    boundsCheckPos.Y -= bbox.Y;
+                    TCGPlayer.LocalPlayer.MouseoverCard = action.Card;
+                    TCGPlayer.LocalPlayer.MouseoverZone = null;
                 }
+                boundsCheckPos.Y -= bbox.Y;
             }
 
         }
@@ -64,16 +77,13 @@ namespace TerraTCG.Common.UI.GameFieldUI
             var drawPos = Position;
             var font = FontAssets.ItemStack.Value;
             var gamePlayer = TCGPlayer.LocalGamePlayer;
-            foreach (var (turn, action) in VisibleLogs)
+            foreach(var (turn, _, line) in IterateLogMessageLines().Take(MAX_ACTION_LINES))
             {
                 var color = turn.ActivePlayer == gamePlayer ? Color.SkyBlue : Color.Coral;
                 color *= Main.mouseTextColor / 255f;
-                foreach (var actionLine in action.Message.Split('\n').Reverse())
-                {
-                    var height = font.MeasureString(actionLine).Y;
-                    CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, actionLine, drawPos, color, font: font);
-                    drawPos.Y -= height;
-                }
+                var height = font.MeasureString(line).Y;
+                CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, line, drawPos, color, font: font);
+                drawPos.Y -= height;
             }
         }
     }

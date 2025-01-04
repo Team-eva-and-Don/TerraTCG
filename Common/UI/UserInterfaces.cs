@@ -60,8 +60,10 @@ namespace TerraTCG.Common.UI
 
         private void On_Player_OpenInventory(On_Player.orig_OpenInventory orig)
         {
-            // Stop the player from opening in the inventory while 
-            // the deckbuilder is open (or in the process of clothing
+            // Stop the player from opening the inventory while 
+            // the deckbuilder is open (or in the process of clothing)
+            // TODO it feels a bit high-risk to conditionally turn off vanilla
+            // inventory opening
             if(_userInterface.CurrentState != DeckbuildState)
             {
                 orig.Invoke();
