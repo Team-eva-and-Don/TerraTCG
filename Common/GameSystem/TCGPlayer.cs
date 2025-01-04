@@ -221,6 +221,31 @@ namespace TerraTCG.Common.GameSystem
             return null;
         }
 
+        // Set of hacks to stop the player from accidentally dying while playing
+        // unpaused in multiplayer
+        public override void PreUpdateMovement()
+        {
+            // Set velocity to zero so you can't accidentally run off while mid-game
+            if(GamePlayer != null)
+            {
+                Player.velocity = default;
+            }
+            base.PreUpdateMovement();
+        }
+
+        public override bool CanBeHitByNPC(NPC npc, ref int cooldownSlot)
+        {
+            // Prevent getting hit while in game
+            return GamePlayer == null;
+        }
+
+        public override bool CanBeHitByProjectile(Projectile proj)
+        {
+            // Prevent getting hit while in game
+            return GamePlayer == null;
+        }
+
+
         internal void OpenPackAndAddToCollection()
         {
             var starterCards = BotDecks.GetStarterDeck();
