@@ -37,7 +37,7 @@ namespace TerraTCG.Common.UI.NPCDuelChat
             for(int i = 0; i < Buttons.Count; i++)
             {
                 var localI = i;
-                Buttons[i].Top.Percent = 0.75f;
+                Buttons[i].Top.Percent = 0.85f;
                 Buttons[i].OnLeftClick += (evt, elem) => SelectNPCDeck(evt, elem, localI);
                 Append(Buttons[i]);
             }
@@ -52,6 +52,14 @@ namespace TerraTCG.Common.UI.NPCDuelChat
                 if (lists[deckIdx].IsTutorial)
                 {
                     ModContent.GetInstance<UserInterfaces>().StartTutorial();
+                    return;
+                }
+                
+                // Exit out of the duel dialogue if the player does not have a valid decklist
+                if(!TCGPlayer.LocalPlayer.Deck.ValidateDeck())
+                {
+                    Main.NewText(Language.GetTextValue("Mods.TerraTCG.Cards.Common.DeckNotValid"), Color.Red);
+                    ModContent.GetInstance<UserInterfaces>().StopNPCChat();
                     return;
                 }
 

@@ -57,12 +57,6 @@ namespace TerraTCG.Common.UI.NPCDuelChat
 
         public void AdvanceToDeckSelectDialogue()
         {
-            if(!TCGPlayer.LocalPlayer.Deck.ValidateDeck())
-            {
-                Main.NewText(Language.GetTextValue("Mods.TerraTCG.Cards.Common.DeckNotValid"), Color.Red);
-                ModContent.GetInstance<UserInterfaces>().StopNPCChat();
-                return;
-            }
             dialog.NPCID = Main.LocalPlayer.TalkNPC.netID;
             talkNPCIdx = Main.LocalPlayer.talkNPC;
             Main.CloseNPCChatOrSign();

@@ -205,7 +205,7 @@ namespace TerraTCG.Common.UI.PackOpeningUI
                         card.CompleteTime = ElapsedTime;
                     }
                 }
-            } else if(didReleaseMouseLeft && lastMouseLeft && Main.mouseLeftRelease)
+            } else if(didReleaseMouseLeft && lastMouseLeft && Main.mouseLeftRelease && (Main.mouseItem?.IsAir ?? true))
             {
                 foreach(var card in AnimationCards)
                 {
