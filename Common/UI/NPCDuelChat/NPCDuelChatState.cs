@@ -93,6 +93,17 @@ namespace TerraTCG.Common.UI.NPCDuelChat
             base.Update(gameTime);
             if(talkNPCIdx != -1)
             {
+                var localPlayer = Main.LocalPlayer;
+                if (Main.npc[talkNPCIdx] is NPC npc && npc.active)
+                {
+                    var interactRect = Utils.CenteredRectangle(localPlayer.Center, new Vector2(Player.tileRangeX, Player.tileRangeY) * 32);
+                    // TODO the logic for canceling this UI is getting a bit convoluted
+                    if(!interactRect.Intersects(npc.Hitbox))
+                    {
+                        ModContent.GetInstance<UserInterfaces>().StopNPCChat();
+                        return;
+                    }
+                }
                 Main.LocalPlayer.SetTalkNPC(talkNPCIdx);
             }
 

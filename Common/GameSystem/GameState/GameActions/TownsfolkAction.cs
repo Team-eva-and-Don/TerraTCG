@@ -12,7 +12,9 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
     {
         internal Card Card { get; } = card;
         internal GamePlayer Player { get; } = player;
-        public virtual bool CanAcceptZone(Zone zone) => Player.Resources.TownsfolkMana > 0;
+
+        private bool checkingValidZone = false;
+        public virtual bool CanAcceptZone(Zone zone) => checkingValidZone || Player.Resources.TownsfolkMana > 0;
         public abstract bool AcceptZone(Zone zone);
 
         public abstract ActionLogInfo GetLogMessage();
@@ -20,7 +22,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
         public virtual Zone TargetZone() => null;
 
         public TimeSpan GetAnimationStartDelay() => ShowCardAnimation.DURATION;
-            // Player == TCGPlayer.LocalGamePlayer ? TimeSpan.FromSeconds(0f) : ShowCardAnimation.DURATION;
+        // Player == TCGPlayer.LocalGamePlayer ? TimeSpan.FromSeconds(0f) : ShowCardAnimation.DURATION;
 
         public string GetActionButtonTooltip()
         {
@@ -30,6 +32,23 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
         public string GetZoneTooltip(Zone zone)
         {
             return $"{ActionText("Use")} {Card.CardName} {ActionText("On")} {zone.CardName}";
+        }
+
+        // TODO this is hacky, check whether not having a townsfolk emblem
+        // is the reason that the zone can't be selected
+        public string GetCantAcceptZoneTooltip(Zone zone) {
+            if(Player.Resources.TownsfolkMana == 0)
+            {
+                // TODO this is hacky
+                checkingValidZone = true;
+                var couldUseIfHadMana = CanAcceptZone(zone);
+                checkingValidZone = false;
+                if (couldUseIfHadMana)
+                {
+                    return ActionText("NotEnoughTownsfolk");
+                }
+            }
+            return null;
         }
 
         public virtual void Complete()

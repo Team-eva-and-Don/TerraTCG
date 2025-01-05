@@ -14,6 +14,7 @@ using Terraria.UI;
 using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.UI.GameFieldUI;
+using static System.Net.Mime.MediaTypeNames;
 using static TerraTCG.Common.UI.DeckbuildUI.DeckbuildCardElement;
 
 namespace TerraTCG.Common.UI.DeckbuildUI
@@ -142,11 +143,28 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             base.Update(gameTime);
         }
 
-        public static void SetTooltip(string tooltip)
+        public static void SetTooltip(string tooltip, int rare = 0)
         {
             Main.LocalPlayer.cursorItemIconEnabled = false;
             Main.ItemIconCacheUpdate(0);
-            UICommon.TooltipMouseText(tooltip);
+            // via tModloader, need to set Rare as well
+            if (Main.SettingsEnabled_OpaqueBoxBehindTooltips)
+            {
+                Item fakeItem = new ();
+                fakeItem.SetDefaults(0, noMatCheck: true);
+                fakeItem.SetNameOverride(tooltip);
+                fakeItem.type = 1;
+                fakeItem.scale = 0f;
+                fakeItem.rare = rare;
+                fakeItem.value = -1;
+                Main.HoverItem = fakeItem;
+                Main.instance.MouseText("");
+                Main.mouseText = true;
+            }
+            else
+            {
+                Main.instance.MouseText(tooltip, rare);
+            }
         }
     }
 }

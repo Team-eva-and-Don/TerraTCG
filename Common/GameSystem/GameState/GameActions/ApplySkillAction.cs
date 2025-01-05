@@ -29,6 +29,9 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             return $"{ActionText("Use")} {card.CardName} {ActionText("On")} {zone.CardName}";
         }
 
+        public string GetCantAcceptZoneTooltip(Zone zone) => player.Owns(zone) && !zone.IsEmpty() ? 
+            $"{ActionText("NotEnoughMana")} {ActionText("To")} {ActionText("Use")}" : "";
+
         public void Complete()
         {
             var showAnimation = new ShowCardAnimation(TCGPlayer.TotalGameTime, card, zone);

@@ -1037,6 +1037,9 @@ Cards: {
 		AddedMana: added a Mana crystal
 		Drew: drew
 		Cards: cards
+		To: to
+		NotEnoughMana: Not enough Mana
+		NotEnoughTownsfolk: No Townsfolk Emblem available
 	}
 
 	Tutorial: {

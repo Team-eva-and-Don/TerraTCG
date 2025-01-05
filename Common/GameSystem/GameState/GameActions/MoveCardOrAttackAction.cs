@@ -34,8 +34,14 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public bool CanAcceptCardInHand(Card card) => false;
 
+        // State var for calculations to determine whether the inability to
+        // perform an action is due to lack of available MP.
+        private string InsufficientManaFor = "";
+
         public bool CanAcceptZone(Zone zone) 
-        { 
+        {
+            InsufficientManaFor = "";
+
             if(startZone?.PlacedCard?.IsExerted ?? true)
             {
                 return false;
@@ -43,7 +49,9 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
             if(actionType == ActionType.DEFAULT && player.Owns(zone) && zone.IsEmpty())
             {
-                return startZone.PlacedCard.Template.MoveCost <= player.Resources.Mana;
+                var hasEnoughMana = startZone.PlacedCard.Template.MoveCost <= player.Resources.Mana;
+                InsufficientManaFor = hasEnoughMana ? "" : ActionText("Move");
+                return hasEnoughMana;
 
             } else if (actionType == ActionType.DEFAULT && !player.Owns(zone) && !zone.IsEmpty() && startZone.Role == ZoneRole.OFFENSE)
             {
@@ -56,6 +64,10 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
                 return false;
             }
         }
+
+
+        public string GetCantAcceptZoneTooltip(Zone zone) => InsufficientManaFor == "" ? null :
+            $"{ActionText("NotEnoughMana")} {ActionText("To")} {InsufficientManaFor}"; 
 
         public string GetZoneTooltip(Zone zone)
         {
@@ -82,7 +94,9 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         private bool CanAttackZone(Zone zone)
         {
-            return startZone.HasPlacedCard() && startZone.PlacedCard.GetAttackWithModifiers(startZone, zone).Cost <= player.Resources.Mana &&
+            bool hasEnoughMana = startZone.PlacedCard.GetAttackWithModifiers(startZone, zone).Cost <= player.Resources.Mana;
+            InsufficientManaFor = hasEnoughMana ? "": ActionText("Attack");
+            return startZone.HasPlacedCard() && hasEnoughMana &&
                 startZone.PlacedCard.GetValidAttackZones(startZone, zone).Contains(zone);
         }
 

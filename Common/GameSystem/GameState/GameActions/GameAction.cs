@@ -40,6 +40,8 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public string GetZoneTooltip(Zone zone) => "";
 
+        public string GetCantAcceptZoneTooltip(Zone zone) => null;
+
         public string GetActionButtonTooltip() => "";
 
         public Color HighlightColor(Zone zone)

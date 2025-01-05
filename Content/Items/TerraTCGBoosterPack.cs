@@ -22,7 +22,7 @@ namespace TerraTCG.Content.Items
             Item.autoReuse = true;
             Item.maxStack = 9999;
             Item.rare = ItemRarityID.Orange;
-            Item.value = Item.sellPrice(silver: 50);
+            Item.value = Item.sellPrice(silver: 10);
             Item.UseSound = SoundID.Item156;
         }
 

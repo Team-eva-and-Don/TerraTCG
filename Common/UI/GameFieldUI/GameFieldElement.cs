@@ -29,6 +29,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
         internal override bool IsClicked() => !((GameFieldState)Parent).actionButtons.ContainsMouse && base.IsClicked();
 
         private string zoneTooltip;
+        private int zoneRare;
 
         public override bool ContainsPoint(Vector2 point)
         {
@@ -42,6 +43,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
             localPlayer.GameFieldPosition = Position;
 
             zoneTooltip = "";
+            zoneRare = 0;
             var gamePlayer = localPlayer.GamePlayer;
             if (gamePlayer == null || gamePlayer.Field?.Zones == null)
             {
@@ -58,16 +60,22 @@ namespace TerraTCG.Common.UI.GameFieldUI
             }
             var mouseField = Main.MouseScreen - Position;
             var prevMouseField = new Vector2(Main.lastMouseX, Main.lastMouseY) - Position;
+            // Check if mouse-over-ing stats and set tooltip
 
             // Check both players' fields
             foreach (var zone in gamePlayer.Game.AllZones())
             {
                 if (ProjectedFieldUtils.Instance.ZoneContainsScreenVector(gamePlayer, zone, mouseField))
                 {
-                    if((localPlayer.GamePlayer?.InProgressAction?.CanAcceptZone(zone) ?? false) && gamePlayer.IsMyTurn)
+                    var inProgressAction = localPlayer.GamePlayer?.InProgressAction;
+                    if((inProgressAction?.CanAcceptZone(zone) ?? false) && gamePlayer.IsMyTurn)
                     {
                         zoneTooltip = localPlayer.GamePlayer.InProgressAction.GetZoneTooltip(zone);
-                    } 
+                    } else if (inProgressAction?.GetCantAcceptZoneTooltip(zone) is string tooltip && gamePlayer.IsMyTurn)
+                    {
+                        zoneTooltip = tooltip;
+                        zoneRare = ItemRarityID.Red;
+                    }
                     if(zone.HasPlacedCard())
                     {
                         localPlayer.MouseoverZone = zone;
@@ -152,7 +160,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
 
                 if(zoneTooltip != "" && zoneTooltip != "" && ModContent.GetInstance<ClientConfig>().ShowTooltips)
                 {
-                    DeckbuildState.SetTooltip(zoneTooltip);
+                    DeckbuildState.SetTooltip(zoneTooltip, zoneRare);
                 }
             }
         }
