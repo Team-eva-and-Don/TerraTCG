@@ -994,6 +994,7 @@ Cards: {
 		Hearts: Hearts
 		Mana: Mana Crystals
 		Townsfolk: Townsfolk Emblem
+		Search: Search
 	}
 
 	DeckNames: {

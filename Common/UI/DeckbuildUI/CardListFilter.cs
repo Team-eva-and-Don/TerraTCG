@@ -12,6 +12,7 @@ using Terraria.Localization;
 using Terraria.UI;
 using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState;
+using TerraTCG.Common.UI.Common;
 
 namespace TerraTCG.Common.UI.DeckbuildUI
 {
@@ -34,11 +35,25 @@ namespace TerraTCG.Common.UI.DeckbuildUI
 
         private List<CardlistFilterButton> filterButtons;
 
+        private UIBetterTextBox searchTextBox;
         internal List<CardSubtype> VisibleTypes = [];
+
+        public string FilterString { get; private set; }
 
         public override void OnInitialize()
         {
             filterButtons = [];
+            searchTextBox = new(Language.GetText("Mods.TerraTCG.Cards.Common.Search"))
+            {
+                BackgroundColor = Color.White,
+                Top = {Percent = 0.45f},
+                Left = {Percent = 0f}, 
+                Width = {Pixels=120f},
+                Height = {Pixels=30f},
+            };
+            searchTextBox.OnTextChanged += SearchTextBox_OnTextChanged;
+            Append(searchTextBox);
+
             for(int i = 0; i < FilterTypes.Count; i++)
             {
                 var filterType = FilterTypes[i];
@@ -47,12 +62,17 @@ namespace TerraTCG.Common.UI.DeckbuildUI
                     CardSubtype = filterType,
                 };
                 btn.Top.Percent = 0.5f;
-                btn.Left.Percent = i / (float)FilterTypes.Count;
+                btn.Left.Percent = 0.21f + 0.8f * (i / (float)FilterTypes.Count);
                 btn.OnLeftClick += (evt, elem) => ToggleVisibility(evt, elem, filterType);
 
                 Append(btn);
                 filterButtons.Add(btn);
             }
+        }
+
+        private void SearchTextBox_OnTextChanged()
+        {
+            FilterString = searchTextBox.currentString;
         }
 
         private void ToggleVisibility(UIMouseEvent evt, UIElement listeningElement, CardSubtype filterType)

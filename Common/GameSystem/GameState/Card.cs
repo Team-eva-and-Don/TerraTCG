@@ -137,5 +137,38 @@ namespace TerraTCG.Common.GameSystem.GameState
             SubTypes.Select(t => Language.GetTextValue($"Mods.TerraTCG.Cards.Types.{t}")));
 
         internal DrawZoneNPC DrawZoneNPC { get; set; } = CardOverlayRenderer.Instance.DefaultDrawZoneNPC;
+
+        // Do a search of whether any text on the card contains the search term
+        internal bool MatchesTextFilter(string textFilter)
+        {
+            var allMyText = new StringBuilder();
+            // All cards have a name and typeline
+            allMyText.Append(CardName);
+            allMyText.Append(TypeLine);
+
+            // Cards variably have attacks, skills, and static modifiers
+            if(HasAttackText)
+            {
+                allMyText.Append(AttackName);
+            }
+            if(HasAttackDescription)
+            {
+                allMyText.Append(AttackDescription);
+            }
+            if(HasSkill)
+            {
+                allMyText.Append(SkillName);
+            }
+            if (HasSkillDescription)
+            {
+                allMyText.Append(SkillDescription);
+            }
+            if(HasModifierText)
+            {
+                allMyText.Append(ModifierDescription);
+            }
+
+            return allMyText.ToString().Contains(textFilter, StringComparison.CurrentCultureIgnoreCase);
+        }
     }
 }

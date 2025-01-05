@@ -96,6 +96,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         }
 
         internal List<CardSubtype> VisibleCardTypes => cardListFilter.VisibleTypes;
+        internal string FilterString => cardListFilter.FilterString;
 
         // Flag to prevent Draw() from running before element dims are calculated in Update()
         public bool IsOpen { get; internal set; }

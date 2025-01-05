@@ -70,13 +70,11 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             var cardList = localPlayer.DebugDeckbuildMode ? cards :
                 cards.Where(c => localPlayer.Collection.Cards.Any(c2 => c2.Name == c.SourceCard.Name));
             var cardFilter = ((DeckbuildState)Parent).VisibleCardTypes;
-            if(cardFilter.Count == 0)
-            {
-                return cardList.ToList();
-            } else
-            {
-                return cardList.Where(c => cardFilter.Contains(c.SourceCard.SortType)).ToList();
-            }
+            var textFilter = ((DeckbuildState)Parent).FilterString;
+            return cardList
+                .Where(c => cardFilter.Count == 0 || cardFilter.Contains(c.SourceCard.SortType))
+                .Where(c => textFilter == null || textFilter == "" || c.SourceCard.MatchesTextFilter(textFilter))
+                .ToList();
         }
         private void CalculateCardPositions()
         {
