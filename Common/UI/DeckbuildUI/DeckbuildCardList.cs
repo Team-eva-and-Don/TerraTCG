@@ -82,19 +82,19 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         {
             int CARDS_PER_ROW = 5;
             var scrollOffset = scrollBar.ViewPosition / 19f; // empirically determined to be [0->20)
-            var totalRowCount = (cards.Count / CARDS_PER_ROW);
+            var visibleCards = GetVisibleCards();
+            var totalRowCount = (visibleCards.Count / CARDS_PER_ROW);
             if(cards.Count % CARDS_PER_ROW != 0)
             {
                 totalRowCount += 1;
             }
 
             var visibleRows = DeckbuildState.GetWindowHeight().Item1;
-            var maxScroll = totalRowCount - visibleRows;
+            var maxScroll = Math.Max(0, totalRowCount - visibleRows);
 
             var topRow = (int)MathHelper.Lerp(0, maxScroll, scrollOffset);
             var yOffset = topRow * (int)(CARD_HEIGHT * CARD_SCALE + CARD_MARGIN);
 
-            var visibleCards = GetVisibleCards();
             for(int i = 0; i < visibleCards.Count; i++)
             {
                 int row = i / CARDS_PER_ROW;

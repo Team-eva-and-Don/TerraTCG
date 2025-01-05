@@ -81,7 +81,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             var totalRowCount = cardCounts.Count;
 
             var visibleRows = GetMaxRows();
-            var maxScroll = totalRowCount - visibleRows;
+            var maxScroll = Math.Max(0, totalRowCount - visibleRows);
 
             var topRow = (int)MathHelper.Lerp(0, maxScroll, scrollOffset);
             var yOffset = topRow * DecklistCardElement.PANEL_HEIGHT;

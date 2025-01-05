@@ -3,6 +3,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using TerraTCG.Common.UI;
 using TerraTCG.Common.UI.NPCDuelChat;
+using TerraTCG.Content.Items;
 using TerraTCG.Content.NPCs;
 using TerraTCG.CrossMod;
 
@@ -19,7 +20,7 @@ namespace TerraTCG
                 DialogueTweakHelper.AddButton(
                     duelableNPC,
                     ()=> Language.GetTextValue("Mods.TerraTCG.Cards.Common.DuelChat"),
-                    () => null,
+                    () => "TerraTCG/Assets/FieldElements/TerraTCGBoosterPack_Small",
                     () =>
                     {
                         if (Main.mouseLeft && Main.mouseLeftRelease)

@@ -15,9 +15,10 @@ namespace TerraTCG.Content.Items
     {
         public override void SetDefaults()
         {
-            Item.useStyle = ItemUseStyleID.HoldUp;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.useAnimation = 15;
             Item.useTime = 15;
+            Item.noUseGraphic = true;
             Item.rare = ItemRarityID.Blue;
         }
 
@@ -45,8 +46,9 @@ namespace TerraTCG.Content.Items
 
         public override void SetDefaults()
         {
-            Item.useStyle = ItemUseStyleID.HoldUp;
+            Item.useStyle = ItemUseStyleID.Swing;
             Item.useAnimation = 15;
+            Item.noUseGraphic = true;
             Item.useTime = 15;
         }
 

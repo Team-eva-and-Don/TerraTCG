@@ -63,10 +63,11 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             var deckCountLabel = Language.GetTextValue("Mods.TerraTCG.Cards.Common.DeckCount");
 
             var deckCountText = $"{deckCountLabel}: {TCGPlayer.LocalPlayer.Deck.Cards.Count}/20";
+            var deckCountColor = TCGPlayer.LocalPlayer.Deck.Cards.Count == 20 ? Color.White : Color.LightCoral;
 
             var deckCountWidth = font.MeasureString(deckCountText).X;
             var deckCountPos = textPos + new Vector2(GetInnerDimensions().Width - deckCountWidth, 0);
-            CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, deckCountText, deckCountPos, font: font);
+            CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, deckCountText, deckCountPos, color: deckCountColor, font: font);
 
         }
     }
