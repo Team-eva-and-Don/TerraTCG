@@ -1,0 +1,93 @@
+﻿﻿[b]== TerraTCG: the Terraria Collectible Card Game ==[/b]
+
+TerraTCG is a Collectible Card Game built inside of Terraria! Challenge your
+Town NPCs to intense games of 1v1 card-based combat, grow your collection
+with booster packs, and experiment with exciting new strategies! The initial
+set of TerraTCG contains over 70 cards, with 15 NPC decks to duel against.
+
+[b]== Getting Started ==[/b]
+
+To begin playing TerraTCG in-game, craft a TerraTCG Deckbox at a workbench using
+5 wood. The Deckbox gives access to the Deck Editor user interface. You'll only 
+start with a few cards, but more can be gained by defeating any town NPC in a duel!
+Talk to the Guide first for both a good first opponent, and the option to view an
+illustrated in-game tutorial! Beyond the guide, the following NPCs can all be
+challenged to a game:
+
+[list]
+[*] the Guide
+[*] the Merchant
+[*] the Nurse
+[*] the Arms Dealer
+[*] the Goblin Tinkerer
+[*] the Party Girl
+[*] the Traveling Merchant
+[*] the Clothier
+[*] the Nerdy Slime
+[/list]
+
+
+[b]== How to Play ==[/b]
+
+For a full illustrated gameplay tutorial, talk to the Guide in-game
+and ask to duel!
+
+[b]=== Initial Setup ===[/b]
+
+TerraTCG is a card game played between two players. Each player begins by 
+shuffling their deck and drawing 5 cards. One player is then selected
+randomly to go first.
+
+Each player has 3 resource types:
+[list]
+[*] Hearts: The player's life total. Each player starts with 3 hearts, 
+losing one whenever a Creature they control dies. If a player loses all 
+3 hearts, their opponent wins the game!
+
+[*] Mana Crystals: Spent to perform most actions in the game, such as 
+attacking with Creatures or equipping Items. Start at 1 per turn,
+then regenerate at a growing rate throughout the game.
+
+[*] Townsfolk Emblem: Used to cast Townsfolk, powerful one-off cards that
+can turn the tide of the game. Only 1 is generated per turn.
+[/list]
+
+[b]=== Card Types ===[/b]
+
+There are 3 types of Card in TerraTCG:
+[list]
+[*] Creatures, which are placed onto the battlefield for combat
+[*] Items, which provide temporary or permanent buffs to creatures
+[*] Townsfolk, which provide powerful single-use effects like card draw.
+[/list]
+
+Creature Cards are the core of gameplay. They can be placed onto the battlefield
+from the hand for no cost. At any point in your turn, you may declare an attack 
+with a creature in your Offense Row. Attacking with a creature consumes Mana 
+Crystals equal to that creature's attack cost. Dealing damage to opponents'
+creatures via attacks is key to victory, since you need to reduce 3 opposing
+creatures' health to zero to win the game!
+
+
+Item Cards can be attached to creatures, and provide bonuses to their stats. It 
+costs Mana Crystals to play Items from the hand. Items provide effects such as
+[list]
+[*] Increasing a creature's attack damage
+[*] Reducing a creature's attack cost
+[*] Restoring a creature's health
+[/list]
+
+Carefully balancing your Mana Crystal usage between buffing creatures with items 
+and dealing damage will allow you to gain advantage over your opponent over the
+course of a game!
+
+
+Townsfolk are a special card type that provide powerful sources of advantage,
+such as:
+[list]
+[*] Drawing cards
+[*] Gaining extra mana crystals
+[*] Buffing your creatures without spending Mana Crystals
+[/list]
+
+You can only use one Townsfolk per turn, which consumes your single Townsfolk Emblem.
