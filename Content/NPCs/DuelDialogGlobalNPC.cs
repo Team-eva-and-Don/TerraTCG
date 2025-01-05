@@ -13,7 +13,7 @@ using TerraTCG.Common.UI;
 
 namespace TerraTCG.Content.NPCs
 {
-    internal struct NamedNPCDeck(LocalizedText name, CardCollection deckList, bool isTutorial)
+    internal readonly struct NamedNPCDeck(LocalizedText name, CardCollection deckList, bool isTutorial)
     {
 
         public NamedNPCDeck(string nameKey, CardCollection deckList, bool isTutorial = false) : 

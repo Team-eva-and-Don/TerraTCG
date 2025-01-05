@@ -78,14 +78,14 @@ namespace TerraTCG.Common.UI.NPCDuelChat
             // Compute the height of the NPC's dialogue
             var font = FontAssets.MouseText.Value;
             var lines = Utils.WordwrapString(Main.npcChatText, font, 460, 10, out var lineCount);
-            var yOffset = lines.Where(l=>l != null).Select(l => font.MeasureString(l).Y).Sum();
+            var yOffset = 30 * lines.Where(l => l != null).Count();
 
             var height = chatButton.Height.Pixels;
             var width = chatButton.Width.Pixels;
 
             // TODO there are probably a number of factors that prevent this
             // from aligning the text correctly in all scenarios.
-            GameFieldState.SetRectangle(chatButton, Main.screenWidth / 2 + 184 - width, 134 + yOffset, width, height);
+            GameFieldState.SetRectangle(chatButton, Main.screenWidth / 2 + 184 - width, 130 + yOffset, width, height);
         }
 
         public override void Update(GameTime gameTime)
@@ -97,6 +97,7 @@ namespace TerraTCG.Common.UI.NPCDuelChat
                 if (Main.npc[talkNPCIdx] is NPC npc && npc.active)
                 {
                     var interactRect = Utils.CenteredRectangle(localPlayer.Center, new Vector2(Player.tileRangeX, Player.tileRangeY) * 32);
+                    // Player moved away from NPC, exit out of this UI state
                     // TODO the logic for canceling this UI is getting a bit convoluted
                     if(!interactRect.Intersects(npc.Hitbox))
                     {
