@@ -33,7 +33,21 @@ namespace TerraTCG.Common.UI.PackOpeningUI
 
         internal TimeSpan CompleteTime { get; set; }
 
-        internal Vector2 DestPosition => SourcePosition + new Vector2(268, 0).RotatedBy(Angle);
+        internal float MaxTravelDistance
+        {
+            get
+            {
+                // Calculate the max offset between the card above the player's head
+                // and the top of the screen
+                var screenHeight = Main.screenHeight / 2;
+                var maxTravelDistance = 1.1f; // Card travels at most 1.1x Travel Dist from player
+                var maxCardOffset = Card.Texture.Value.Height / 2 * 1.25f;
+
+                return Math.Min(320, (screenHeight - maxCardOffset) / maxTravelDistance);
+            }
+        }
+
+        internal Vector2 DestPosition => SourcePosition + new Vector2(MaxTravelDistance, 0).RotatedBy(Angle);
 
         internal Vector2 Position { get; set; }
 
