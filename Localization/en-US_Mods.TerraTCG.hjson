@@ -1215,5 +1215,10 @@ Configs: {
 			Label: Show Tooltips
 			Tooltip: Show action tooltips during TerraTCG Games.
 		}
+
+		ShowCardPreview: {
+			Label: Show Card Previews
+			Tooltip: Show a large image of the moused-over card during TerraTCG games.
+		}
 	}
 }

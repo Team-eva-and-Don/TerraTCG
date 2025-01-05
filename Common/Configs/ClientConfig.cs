@@ -19,5 +19,8 @@ namespace TerraTCG.Common.Configs
         [DefaultValue(true)]
         public bool ShowTooltips;
 
+        [DefaultValue(true)]
+        public bool ShowCardPreview;
+
     }
 }

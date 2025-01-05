@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.Localization;
+using Terraria.ModLoader;
+using TerraTCG.Common.Configs;
 using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState.GameActions;
@@ -36,7 +38,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
         public override void Draw(SpriteBatch spriteBatch)
         {
             var localPlayer = TCGPlayer.LocalPlayer;
-            if (localPlayer == null || localPlayer.MouseoverCard == null)
+            if (localPlayer == null || localPlayer.MouseoverCard == null || !ModContent.GetInstance<ClientConfig>().ShowCardPreview)
             {
                 return;
             }
