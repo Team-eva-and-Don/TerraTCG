@@ -34,10 +34,10 @@ namespace TerraTCG.Content.Items
         {
             if(player.whoAmI == Main.myPlayer && !ModContent.GetInstance<UserInterfaces>().IsPackOpening())
             {
-                Item.stack -= 1;
                 TCGPlayer.LocalPlayer.OpenPackAndAddToCollection();
+                return true;
             }
-            return default;
+            return false;
         }
     }
 }

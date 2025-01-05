@@ -72,32 +72,45 @@ namespace TerraTCG.Common.UI.GameFieldUI
                 fieldTooltip = GetTooltipForResources(gamePlayer.Opponent);
             }
 
+            bool wasClicked = IsClicked();
+            bool clickedValidZone = false;
+
             // Check both players' fields
             foreach (var zone in gamePlayer.Game.AllZones())
             {
                 if (ProjectedFieldUtils.Instance.ZoneContainsScreenVector(gamePlayer, zone, mouseField))
                 {
-                    var inProgressAction = localPlayer.GamePlayer?.InProgressAction;
+                    var inProgressAction = gamePlayer?.InProgressAction;
                     if((inProgressAction?.CanAcceptZone(zone) ?? false) && gamePlayer.IsMyTurn)
                     {
-                        fieldTooltip = localPlayer.GamePlayer.InProgressAction.GetZoneTooltip(zone);
+                        fieldTooltip = gamePlayer.InProgressAction.GetZoneTooltip(zone);
                     } else if (inProgressAction?.GetCantAcceptZoneTooltip(zone) is string tooltip && gamePlayer.IsMyTurn)
                     {
                         fieldTooltip = tooltip;
                         fieldRare = ItemRarityID.Red;
                     }
+
                     if(zone.HasPlacedCard())
                     {
                         localPlayer.MouseoverZone = zone;
                         localPlayer.MouseoverCard = zone.PlacedCard.Template;
                     }
-                    if(IsClicked())
+                    if(wasClicked)
                     {
                         SoundEngine.PlaySound(SoundID.MenuTick);
                         gamePlayer.SelectZone(zone);
+                        clickedValidZone = true;
                     }
                     break;
                 }
+            }
+
+            // Unset the selected field zone if the player clicks away from
+            // the field
+            if(wasClicked && !clickedValidZone)
+            {
+                gamePlayer.SelectedFieldZone = null;
+                gamePlayer.InProgressAction = null;
             }
         }
 

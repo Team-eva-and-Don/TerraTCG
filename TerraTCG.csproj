@@ -29,6 +29,7 @@
 	  <None Remove="Assets\Tutorial\Tutorial8.png" />
 	  <None Remove="Assets\Tutorial\Tutorial9.png" />
 	  <None Remove="Content\Items\TerraTCGBoosterPack.png" />
+	  <None Remove="description_workshop.txt" />
 	</ItemGroup>
 
 	<!-- References -->
