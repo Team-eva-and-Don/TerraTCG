@@ -48,6 +48,11 @@ namespace TerraTCG.Common.UI.NPCDuelChat
         {
             if(ModContent.GetInstance<NPCDeckMap>().NPCDecklists.TryGetValue(NPCID, out var lists))
             {
+                if(deckIdx >= lists.Count)
+                {
+                    return;
+                }
+
                 ModContent.GetInstance<UserInterfaces>().StopNPCChat();
                 if (lists[deckIdx].IsTutorial)
                 {

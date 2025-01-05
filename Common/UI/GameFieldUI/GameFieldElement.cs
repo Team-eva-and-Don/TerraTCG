@@ -110,6 +110,8 @@ namespace TerraTCG.Common.UI.GameFieldUI
             if(wasClicked && !clickedValidZone)
             {
                 gamePlayer.SelectedFieldZone = null;
+                gamePlayer.SelectedHandCard = null;
+                gamePlayer.SelectedHandIdx = -1;
                 gamePlayer.InProgressAction = null;
             }
         }
