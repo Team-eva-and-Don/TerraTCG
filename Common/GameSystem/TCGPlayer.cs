@@ -148,6 +148,7 @@ namespace TerraTCG.Common.GameSystem
             try
             {
                 tag.Add("collection", Collection.Serialize());
+                tag.Add("collection_mods", Collection.SerializeProvenance());
                 tag.Add("activeDeck", ActiveDeck);
             }
             catch (Exception e)
@@ -160,6 +161,7 @@ namespace TerraTCG.Common.GameSystem
                 try
                 {
                     tag.Add($"deck_{i}", SavedDecks[i].Serialize());
+                    tag.Add($"deck_mods_{i}", SavedDecks[i].SerializeProvenance());
                 }
                 catch (Exception e)
                 {
@@ -175,21 +177,18 @@ namespace TerraTCG.Common.GameSystem
             {
                 try
                 {
-                    if(tag.ContainsKey("collection"))
-                    {
-                        var collection = tag.GetList<uint>("collection").ToList();
-                        Collection.DeSerialize(collection);
-                    }
-                    if(tag.ContainsKey("activeDeck"))
-                    {
-                        ActiveDeck = tag.GetInt("activeDeck");
-                    }
-                }
-                catch (Exception e)
+                    var collection = tag.GetList<uint>("collection").ToList();
+                    var collectionMods = tag.GetList<string>("collection_mods").ToList();
+                    Collection.DeSerialize(collection, collectionMods);
+                } catch (Exception e)
                 {
                     Mod.Logger.ErrorFormat("An error occurred while loading player collection: {0}", e.StackTrace);
+                    Collection = BotDecks.GetStarterDeck();
                 }
-
+                if(tag.ContainsKey("activeDeck"))
+                {
+                    ActiveDeck = tag.GetInt("activeDeck");
+                }
                 for(int i = 0; i < SavedDecks.Count; i++)
                 {
                     if(!tag.ContainsKey($"deck_{i}"))
@@ -199,17 +198,17 @@ namespace TerraTCG.Common.GameSystem
                     try
                     {
                         var deckList = tag.GetList<uint>($"deck_{i}").ToList();
-                        SavedDecks[i].DeSerialize(deckList);
-                    }
-                    catch (Exception e)
+                        var deckMods = tag.GetList<string>($"deck_mods_{i}").ToList();
+                        SavedDecks[i].DeSerialize(deckList, deckMods);
+                    } catch (Exception e)
                     {
-                        Mod.Logger.ErrorFormat("An error occurred while loading player decks: {0}", e.StackTrace);
+                        Mod.Logger.ErrorFormat("An error occurred while loading player decklists: {0}", e.StackTrace);
                     }
                 }
             }
         }
 
-        private Card SelectCardFromPools(params List<Card>[] pools)
+        private static Card SelectCardFromPools(params List<Card>[] pools)
         {
             foreach (var pool in pools)
             {

@@ -59,24 +59,31 @@ namespace TerraTCG.Common.GameSystem.GameState
         public List<uint> Serialize()
         {
             return Cards.GroupBy(c => c.ID)
+                .OrderBy(groups => groups.First().CardName)
                 .SelectMany(groups => new List<uint>() { groups.First().ID, (uint)groups.Count() })
                 .ToList();
-
+        }
+        public List<string> SerializeProvenance()
+        {
+            return Cards.GroupBy(c => c.ID)
+                .OrderBy(groups => groups.First().CardName)
+                .Select(g=>g.First().Mod)
+                .ToList();
         }
 
-        public void DeSerialize(List<uint> cardCounts)
+        public void DeSerialize(List<uint> cardCounts, List<string> modSources)
         {
             var allCards = ModContent.GetContent<BaseCardTemplate>()
-                .Select(t => t.Card)
-                .ToDictionary(c => c.ID, c => c);
+                .Select(t => t.Card);
 
             // TODO handle errors
             Cards = [];
             for(int i = 0; i < cardCounts.Count; i+=2)
             {
+                var mod = modSources[i / 2]; // TODO what to do with this?
                 uint cardId = cardCounts[i];
                 uint count = cardCounts[i + 1];
-                var card = allCards[cardId];
+                var card = allCards.Where(c => c.ID == cardId && c.Mod == mod).FirstOrDefault();
                 for(int _ = 0; _ < count; _++)
                 {
                     Cards.Add(card);

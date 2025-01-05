@@ -68,6 +68,9 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal uint ID => StringHash.StableStringHash(Name);
 
+        // The mod that originated this card
+        internal string Mod { get; set; } = "TerraTCG";
+
         internal int NPCID { get; set; }
 
         internal Asset<Texture2D> Texture => ModContent.GetInstance<TerraTCG>().Assets.Request<Texture2D>($"Assets/Cards/{Name}");

@@ -20,7 +20,7 @@ namespace TerraTCG.Content.Items
             Item.useTime = 15;
             Item.useAnimation = 15;
             Item.autoReuse = true;
-            Item.maxStack = 999;
+            Item.maxStack = 9999;
             Item.rare = ItemRarityID.Orange;
             Item.value = Item.sellPrice(silver: 50);
             Item.UseSound = SoundID.Item156;
