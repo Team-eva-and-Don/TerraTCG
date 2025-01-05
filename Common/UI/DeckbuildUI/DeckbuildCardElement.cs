@@ -24,6 +24,9 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         internal int Count => TCGPlayer.LocalPlayer.DebugDeckbuildMode ? 2 :
             TCGPlayer.LocalPlayer.Collection.Cards.Where(c => c.Name == sourceCard.Name).Count();
 
+        internal int UsedCount => TCGPlayer.LocalPlayer.Deck?.Cards
+            .Where(c => c.Name == sourceCard.Name).Count() ?? 0;
+
         internal Vector2 Position => new(Parent.GetInnerDimensions().X + Left.Pixels, Parent.GetInnerDimensions().Y + Top.Pixels);
 
         internal const float CARD_SCALE = 0.8f;
@@ -87,7 +90,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             CardTextRenderer.Instance.DrawCardText(spriteBatch, sourceCard, Position, CARD_SCALE);
 
             var font = FontAssets.MouseText.Value;
-            var countText = $"{Count}";
+            var countText = $"{Count - UsedCount}/{Count}";
             var countPos = Position + new Vector2(4, CARD_HEIGHT * CARD_SCALE - font.MeasureString(countText).Y + 4);
             CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, countText, countPos, font: font);
 
