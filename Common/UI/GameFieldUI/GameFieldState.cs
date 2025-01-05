@@ -54,6 +54,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
 
             cancelButton = new()
             {
+                RequireDoubleClick = true,
                 OnClickAction = SurrenderGame
             };
             Append(cancelButton);

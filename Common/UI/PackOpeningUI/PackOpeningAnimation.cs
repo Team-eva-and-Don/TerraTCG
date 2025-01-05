@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Steamworks;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -60,7 +61,7 @@ namespace TerraTCG.Common.UI.PackOpeningUI
         private readonly TimeSpan TravelTime = TimeSpan.FromSeconds(0.25f);
 
         private TimeSpan WaitTime => TravelTime + TimeSpan.FromSeconds(0.25f);
-        private TimeSpan FlipTime => WaitTime + TimeSpan.FromSeconds(0.25f);
+        internal TimeSpan FlipTime => WaitTime + TimeSpan.FromSeconds(0.25f);
 
         public void Update(TimeSpan elapsedTime)
         {
@@ -160,12 +161,17 @@ namespace TerraTCG.Common.UI.PackOpeningUI
 
         private List<OpeningAnimationCard> ActiveCards => AnimationCards.Where(c => c.StartTime <= ElapsedTime).ToList();
 
+        private bool lastMouseLeft = false;
+        private bool didReleaseMouseLeft = false;
+
         public override void OnInitialize()
         {
         }
 
         public void Reset()
         {
+            didReleaseMouseLeft = false;
+            lastMouseLeft = false;
             AnimationCards = [ ];
             var cards = CardWithTextRenderer.Instance.ToRender;
             for(int i = 0; i < cards.Count; i++)
@@ -189,7 +195,7 @@ namespace TerraTCG.Common.UI.PackOpeningUI
                 card.SourcePosition = new Vector2(Left.Pixels, Top.Pixels);
                 card.Update(ElapsedTime);
             }
-            
+
             if(Main.mouseLeft && AnimationCards.All(c=>c.IsRevealed(ElapsedTime)))
             {
                 foreach(var card in AnimationCards)
@@ -199,7 +205,16 @@ namespace TerraTCG.Common.UI.PackOpeningUI
                         card.CompleteTime = ElapsedTime;
                     }
                 }
+            } else if(didReleaseMouseLeft && lastMouseLeft && Main.mouseLeftRelease)
+            {
+                foreach(var card in AnimationCards)
+                {
+                    card.StartTime = ElapsedTime - card.FlipTime - TimeSpan.FromSeconds(0.5f);
+                }
             }
+
+            lastMouseLeft = Main.mouseLeft;
+            didReleaseMouseLeft |= Main.mouseLeftRelease;
             if(AnimationCards.All(c=>c.IsComplete(ElapsedTime)))
             {
                 ModContent.GetInstance<UserInterfaces>().StopPackOpening();

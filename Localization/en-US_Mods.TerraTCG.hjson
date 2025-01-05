@@ -990,6 +990,10 @@ Cards: {
 		Prev: Back
 		Next: Next
 		Close: Close
+		DoubleClickToClose: Double Click to Exit
+		Hearts: Hearts
+		Mana: Mana Crystals
+		Townsfolk: Townsfolk Emblem
 	}
 
 	DeckNames: {

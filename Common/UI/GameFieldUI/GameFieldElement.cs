@@ -8,12 +8,14 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
 using TerraTCG.Common.Configs;
 using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.Drawing.Animations;
+using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.UI.Common;
 using TerraTCG.Common.UI.DeckbuildUI;
 using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
@@ -28,8 +30,8 @@ namespace TerraTCG.Common.UI.GameFieldUI
 
         internal override bool IsClicked() => !((GameFieldState)Parent).actionButtons.ContainsMouse && base.IsClicked();
 
-        private string zoneTooltip;
-        private int zoneRare;
+        private string fieldTooltip;
+        private int fieldRare;
 
         public override bool ContainsPoint(Vector2 point)
         {
@@ -42,8 +44,8 @@ namespace TerraTCG.Common.UI.GameFieldUI
             var localPlayer = TCGPlayer.LocalPlayer;
             localPlayer.GameFieldPosition = Position;
 
-            zoneTooltip = "";
-            zoneRare = 0;
+            fieldTooltip = "";
+            fieldRare = 0;
             var gamePlayer = localPlayer.GamePlayer;
             if (gamePlayer == null || gamePlayer.Field?.Zones == null)
             {
@@ -61,6 +63,14 @@ namespace TerraTCG.Common.UI.GameFieldUI
             var mouseField = Main.MouseScreen - Position;
             var prevMouseField = new Vector2(Main.lastMouseX, Main.lastMouseY) - Position;
             // Check if mouse-over-ing stats and set tooltip
+            var (myBounds, oppBounds, _, _) = GetPlayerStatsBoundsAndScale();
+            if(myBounds.Contains(Main.mouseX, Main.mouseY))
+            {
+                fieldTooltip = GetTooltipForResources(gamePlayer);
+            } else if(oppBounds.Contains(Main.mouseX, Main.mouseY))
+            {
+                fieldTooltip = GetTooltipForResources(gamePlayer.Opponent);
+            }
 
             // Check both players' fields
             foreach (var zone in gamePlayer.Game.AllZones())
@@ -70,11 +80,11 @@ namespace TerraTCG.Common.UI.GameFieldUI
                     var inProgressAction = localPlayer.GamePlayer?.InProgressAction;
                     if((inProgressAction?.CanAcceptZone(zone) ?? false) && gamePlayer.IsMyTurn)
                     {
-                        zoneTooltip = localPlayer.GamePlayer.InProgressAction.GetZoneTooltip(zone);
+                        fieldTooltip = localPlayer.GamePlayer.InProgressAction.GetZoneTooltip(zone);
                     } else if (inProgressAction?.GetCantAcceptZoneTooltip(zone) is string tooltip && gamePlayer.IsMyTurn)
                     {
-                        zoneTooltip = tooltip;
-                        zoneRare = ItemRarityID.Red;
+                        fieldTooltip = tooltip;
+                        fieldRare = ItemRarityID.Red;
                     }
                     if(zone.HasPlacedCard())
                     {
@@ -91,6 +101,15 @@ namespace TerraTCG.Common.UI.GameFieldUI
             }
         }
 
+        private string GetTooltipForResources(GamePlayer player)
+        {
+            var resources = player.Resources;
+            return
+                $"{Language.GetText("Mods.TerraTCG.Cards.Common.Hearts")}: {resources.Health}/3\n" +
+                $"{Language.GetText("Mods.TerraTCG.Cards.Common.Mana")}: {resources.Mana}/{player.ManaPerTurn}\n" +
+                $"{Language.GetText("Mods.TerraTCG.Cards.Common.Townsfolk")}: {resources.TownsfolkMana}/1\n";
+        }
+
         private void DrawZoneNPCs(SpriteBatch spriteBatch)
         {
             var gamePlayer = TCGPlayer.LocalGamePlayer;
@@ -104,7 +123,8 @@ namespace TerraTCG.Common.UI.GameFieldUI
             }
         }
 
-        private void DrawPlayerStats(SpriteBatch spriteBatch)
+        // TODO struct for this
+        private (Rectangle, Rectangle, float, float) GetPlayerStatsBoundsAndScale()
         {
             var texture = TextureCache.Instance.PlayerStatsZone;
             // My player
@@ -115,7 +135,10 @@ namespace TerraTCG.Common.UI.GameFieldUI
             var pos = Position + new Vector2(
                 anchorZonePos.X - texture.Width(),
                 anchorZonePos.Y - texture.Height());
-            PlayerStatRenderer.Instance.DrawPlayerStats(spriteBatch, pos, gamePlayer, 1f);
+
+            var friendlyBounds = new Rectangle(
+                (int)pos.X, (int)pos.Y,
+                texture.Width(), texture.Height());
 
             // Opposing player
             var opponent = gamePlayer.Opponent;
@@ -125,7 +148,25 @@ namespace TerraTCG.Common.UI.GameFieldUI
             var oppPos = Position + new Vector2(
                 anchorZonePos.X + FieldRenderer.CARD_MARGIN,
                 anchorZonePos.Y);
-            PlayerStatRenderer.Instance.DrawPlayerStats(spriteBatch, oppPos, opponent, scale);
+            var oppBounds = new Rectangle(
+                (int)oppPos.X, (int)oppPos.Y,
+                (int)(scale * texture.Width()), (int)(scale * texture.Height()));
+
+            return (friendlyBounds, oppBounds, 1f, scale);
+
+        }
+
+
+        private void DrawPlayerStats(SpriteBatch spriteBatch)
+        {
+            var (myBounds, oppBounds, myScale, oppScale) = GetPlayerStatsBoundsAndScale();
+            // My player
+            var gamePlayer = TCGPlayer.LocalGamePlayer;
+            PlayerStatRenderer.Instance.DrawPlayerStats(spriteBatch, new(myBounds.X, myBounds.Y), gamePlayer, myScale);
+
+            // Opposing player
+            var opponent = gamePlayer.Opponent;
+            PlayerStatRenderer.Instance.DrawPlayerStats(spriteBatch, new(oppBounds.X, oppBounds.Y), opponent, oppScale);
         }
 
         private void DrawFieldOverlays(SpriteBatch spriteBatch)
@@ -158,9 +199,9 @@ namespace TerraTCG.Common.UI.GameFieldUI
                 DrawPlayerStats(spriteBatch);
                 DrawFieldOverlays(spriteBatch);
 
-                if(zoneTooltip != "" && zoneTooltip != "" && ModContent.GetInstance<ClientConfig>().ShowTooltips)
+                if(fieldTooltip != "" && fieldTooltip != "" && ModContent.GetInstance<ClientConfig>().ShowTooltips)
                 {
-                    DeckbuildState.SetTooltip(zoneTooltip, zoneRare);
+                    DeckbuildState.SetTooltip(fieldTooltip, fieldRare);
                 }
             }
         }
