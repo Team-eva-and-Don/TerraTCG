@@ -66,10 +66,10 @@ namespace TerraTCG.Common.GameSystem.GameState
     {
         internal string Name { get; set; }
 
-        internal uint ID => StringHash.StableStringHash(Name);
-
         // The mod that originated this card
         internal string Mod { get; set; } = ModContent.GetInstance<TerraTCG>().Name;
+
+        internal string FullName => $"{Mod}/{Name}";
 
         internal int NPCID { get; set; }
 

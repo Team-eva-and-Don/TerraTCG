@@ -58,6 +58,11 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             }
         }
 
+        public void ResetScroll()
+        {
+            scrollBar.ViewPosition = 0f;
+        }
+
         private List<DeckbuildCardElement> GetVisibleCards()
         {
             // TODO is this the best way to pass data between sibling elements
@@ -113,8 +118,9 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            if(ContainsPoint(Main.MouseScreen))
+            if (IsMouseHovering)
             {
+                Terraria.GameInput.PlayerInput.LockVanillaMouseScroll("TerraTCG");
                 Main.LocalPlayer.mouseInterface = true;
             }
             CalculateCardPositions();

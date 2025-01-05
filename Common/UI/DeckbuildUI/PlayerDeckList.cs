@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -101,9 +102,19 @@ namespace TerraTCG.Common.UI.DeckbuildUI
                 GameFieldState.SetRectangle(card, 0, DecklistCardElement.PANEL_HEIGHT * i - yOffset, 260, 56);
             }
         }
+
+        public void ResetScroll()
+        {
+            scrollBar.ViewPosition = 0f;
+        }
+
         public override void Update(GameTime gameTime)
         {
-            Main.LocalPlayer.mouseInterface = true;
+            if (IsMouseHovering)
+            {
+                Terraria.GameInput.PlayerInput.LockVanillaMouseScroll("TerraTCG");
+                Main.LocalPlayer.mouseInterface = true;
+            }
             UpdateCardPositions();
             base.Update(gameTime);
         }

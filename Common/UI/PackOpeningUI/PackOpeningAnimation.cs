@@ -209,12 +209,15 @@ namespace TerraTCG.Common.UI.PackOpeningUI
             {
                 foreach(var card in AnimationCards)
                 {
-                    if(ElapsedTime > card.FlipTime && card.CompleteTime == default)
+                    if(AnimationCards.All(c=>ElapsedTime > c.FlipTime + c.StartTime))
                     {
-                        card.CompleteTime = ElapsedTime;
+                        if(card.CompleteTime == default)
+                        {
+                            card.CompleteTime = ElapsedTime;
+                        }
                     } else
                     {
-                        card.StartTime = ElapsedTime - card.FlipTime - TimeSpan.FromSeconds(0.5f);
+                        card.StartTime = ElapsedTime - card.FlipTime - TimeSpan.FromSeconds(0.5f) - card.StartTime;
                     }
                 }
             }

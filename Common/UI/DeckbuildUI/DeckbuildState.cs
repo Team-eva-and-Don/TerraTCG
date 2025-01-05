@@ -23,7 +23,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
     {
         internal CancelResumeGameButton cancelButton;
         private DeckbuildCardList deckbuildCardList;
-        private PlayerDeckList playerDeckList;
+        internal PlayerDeckList playerDeckList;
         private DeckSelector deckSelector;
         private CardListFilter cardListFilter;
         private CardPreviewElement cardPreview;
@@ -165,6 +165,12 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             {
                 Main.instance.MouseText(tooltip, rare);
             }
+        }
+
+        public void ResetState()
+        {
+            deckbuildCardList.ResetScroll();
+            playerDeckList.ResetScroll();
         }
     }
 }

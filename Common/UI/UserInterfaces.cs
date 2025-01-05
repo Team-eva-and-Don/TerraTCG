@@ -174,6 +174,7 @@ namespace TerraTCG.Common.UI
         public void StopDeckbuild()
         {
             DeckbuildState.IsOpen = false;
+            DeckbuildState.ResetState();
             SoundEngine.PlaySound(SoundID.MenuClose);
             _userInterface.SetState(null);
 

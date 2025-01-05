@@ -32,11 +32,18 @@ namespace TerraTCG.Common.UI.DeckbuildUI
                 };
                 btn.Top.Percent = 0.5f;
                 btn.Left.Percent = i / (float)DECK_COUNT;
-                btn.OnLeftClick += (evt, elem) => TCGPlayer.LocalPlayer.ActiveDeck = localI;
+                btn.OnLeftClick += (evt, elem) => OnClickButton(localI);
 
                 Append(btn);
                 buttonList.Add(btn);
             }
+        }
+
+        private void OnClickButton(int deckIdx)
+        {
+            // TODO referencing sibling elements like this is not the preferred approach
+            ((DeckbuildState)Parent).playerDeckList.ResetScroll();
+            TCGPlayer.LocalPlayer.ActiveDeck = deckIdx;
         }
 
         public override void Update(GameTime gameTime)

@@ -148,7 +148,6 @@ namespace TerraTCG.Common.GameSystem
             try
             {
                 tag.Add("collection", Collection.Serialize());
-                tag.Add("collection_mods", Collection.SerializeProvenance());
                 tag.Add("activeDeck", ActiveDeck);
             }
             catch (Exception e)
@@ -161,7 +160,6 @@ namespace TerraTCG.Common.GameSystem
                 try
                 {
                     tag.Add($"deck_{i}", SavedDecks[i].Serialize());
-                    tag.Add($"deck_mods_{i}", SavedDecks[i].SerializeProvenance());
                 }
                 catch (Exception e)
                 {
@@ -177,9 +175,8 @@ namespace TerraTCG.Common.GameSystem
             {
                 try
                 {
-                    var collection = tag.GetList<uint>("collection").ToList();
-                    var collectionMods = tag.GetList<string>("collection_mods").ToList();
-                    Collection.DeSerialize(collection, collectionMods);
+                    var collection = tag.GetList<string>("collection").ToList();
+                    Collection.DeSerialize(collection);
                 } catch (Exception e)
                 {
                     Mod.Logger.ErrorFormat("An error occurred while loading player collection: {0}", e.StackTrace);
@@ -197,9 +194,8 @@ namespace TerraTCG.Common.GameSystem
                     }
                     try
                     {
-                        var deckList = tag.GetList<uint>($"deck_{i}").ToList();
-                        var deckMods = tag.GetList<string>($"deck_mods_{i}").ToList();
-                        SavedDecks[i].DeSerialize(deckList, deckMods);
+                        var deckList = tag.GetList<string>($"deck_{i}").ToList();
+                        SavedDecks[i].DeSerialize(deckList);
                     } catch (Exception e)
                     {
                         Mod.Logger.ErrorFormat("An error occurred while loading player decklists: {0}", e.StackTrace);
