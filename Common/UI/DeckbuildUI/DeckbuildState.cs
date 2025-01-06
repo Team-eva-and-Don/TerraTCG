@@ -19,6 +19,7 @@ using static TerraTCG.Common.UI.DeckbuildUI.DeckbuildCardElement;
 
 namespace TerraTCG.Common.UI.DeckbuildUI
 {
+
     internal class DeckbuildState : UIState
     {
         internal CancelResumeGameButton cancelButton;
@@ -95,8 +96,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
 
         }
 
-        internal List<CardSubtype> VisibleCardTypes => cardListFilter.VisibleTypes;
-        internal string FilterString => cardListFilter.FilterString;
+        internal IEnumerable<T> FilterCards<T>(IEnumerable<T> cardList) where T : IHasCard => cardListFilter.FilterCardContainer(cardList);
 
         // Flag to prevent Draw() from running before element dims are calculated in Update()
         public bool IsOpen { get; internal set; }

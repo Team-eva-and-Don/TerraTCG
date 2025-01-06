@@ -17,10 +17,10 @@ using TerraTCG.Common.GameSystem.GameState;
 
 namespace TerraTCG.Common.UI.DeckbuildUI
 {
-    internal class DeckbuildCardElement(Card sourceCard) : UIElement
+    internal class DeckbuildCardElement(Card sourceCard) : UIElement, IHasCard
     {
 
-        internal Card SourceCard => sourceCard;
+        public Card Card => sourceCard;
         internal int Count => TCGPlayer.LocalPlayer.DebugDeckbuildMode ? 2 :
             TCGPlayer.LocalPlayer.Collection.Cards.Where(c => c.Name == sourceCard.Name).Count();
 

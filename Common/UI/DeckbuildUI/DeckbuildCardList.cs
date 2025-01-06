@@ -68,13 +68,8 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             // TODO is this the best way to pass data between sibling elements
             var localPlayer = TCGPlayer.LocalPlayer;
             var cardList = localPlayer.DebugDeckbuildMode ? cards :
-                cards.Where(c => localPlayer.Collection.Cards.Any(c2 => c2.Name == c.SourceCard.Name));
-            var cardFilter = ((DeckbuildState)Parent).VisibleCardTypes;
-            var textFilter = ((DeckbuildState)Parent).FilterString;
-            return cardList
-                .Where(c => cardFilter.Count == 0 || cardFilter.Contains(c.SourceCard.SortType))
-                .Where(c => textFilter == null || textFilter == "" || c.SourceCard.MatchesTextFilter(textFilter))
-                .ToList();
+                cards.Where(c => localPlayer.Collection.Cards.Any(c2 => c2.Name == c.Card.Name));
+            return ((DeckbuildState)Parent).FilterCards(cardList).ToList();
         }
         private void CalculateCardPositions()
         {

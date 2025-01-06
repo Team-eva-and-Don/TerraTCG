@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.GameState;
 
@@ -115,6 +116,12 @@ namespace TerraTCG.Common.GameSystem.Drawing
             var typelineRowHeight = 88;
             var typelineOffset = new Vector2(MARGIN_L, typelineRowHeight);
             DrawStringWithBorder(spriteBatch, card.TypeLine, position + typelineOffset * scale, scale: scale * SmallTextScale);
+            // Highlight if a card is expert
+            if (card.SubTypes[0] == CardSubtype.EXPERT)
+            {
+                var expertText = card.TypeLine.Split(" ").First();
+                DrawStringWithBorder(spriteBatch, expertText, position + typelineOffset * scale, color: Color.SkyBlue, scale: scale * SmallTextScale);
+            }
         }
 
         private BodyHeightInfo GetBodyTextHeight(Card card)

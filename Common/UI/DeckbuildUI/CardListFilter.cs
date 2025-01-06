@@ -9,13 +9,22 @@ using Terraria;
 using Terraria.GameContent;
 using Terraria.GameContent.UI.Elements;
 using Terraria.Localization;
+using Terraria.ModLoader;
 using Terraria.UI;
+using TerraTCG.Common.GameSystem;
+using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.UI.Common;
 
 namespace TerraTCG.Common.UI.DeckbuildUI
 {
+
+    internal interface IHasCard
+    {
+        public Card Card { get; }
+    }
+
     internal class CardListFilter : UIPanel
     {
         private List<CardSubtype> FilterTypes = [
@@ -40,8 +49,18 @@ namespace TerraTCG.Common.UI.DeckbuildUI
 
         public string FilterString { get; private set; }
 
+        private List<Card> allCards;
+
+        private int visibleCount;
+        private int totalCount;
+
         public override void OnInitialize()
         {
+            allCards = ModContent.GetContent<BaseCardTemplate>()
+                .Select(t=>t.Card)
+                .Where(c => c.IsCollectable)
+                .ToList();
+
             filterButtons = [];
             searchTextBox = new(Language.GetText("Mods.TerraTCG.Cards.Common.Search"))
             {
@@ -75,6 +94,20 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             FilterString = searchTextBox.currentString;
         }
 
+        internal IEnumerable<T> FilterCardContainer<T>(IEnumerable<T> cardList) where T: IHasCard
+        {
+            return cardList
+                .Where(c => VisibleTypes.Count == 0 || VisibleTypes.Contains(c.Card.SortType))
+                .Where(c => FilterString == null || FilterString == "" || c.Card.MatchesTextFilter(FilterString));
+        }
+
+        internal IEnumerable<Card> FilterCards(List<Card> cardList)
+        {
+            return cardList
+                .Where(c => VisibleTypes.Count == 0 || VisibleTypes.Contains(c.SortType))
+                .Where(c => FilterString == null || FilterString == "" || c.MatchesTextFilter(FilterString));
+        }
+
         private void ToggleVisibility(UIMouseEvent evt, UIElement listeningElement, CardSubtype filterType)
         {
             if (FilterTypeEnabled(filterType))
@@ -92,15 +125,22 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         public override void Update(GameTime gameTime)
         {
             Main.LocalPlayer.mouseInterface = true;
+            totalCount = 2 * FilterCards(allCards).Count();
+            visibleCount = FilterCards(TCGPlayer.LocalPlayer.Collection.Cards).Count();
             base.Update(gameTime);
         }
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
-            var textPos = new Vector2(GetInnerDimensions().X, GetInnerDimensions().Y);
+            var textPosLeft = new Vector2(GetInnerDimensions().X, GetInnerDimensions().Y);
             var font = FontAssets.MouseText.Value;
             var text = Language.GetTextValue("Mods.TerraTCG.Cards.Common.FilterCards");
-            CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, text, textPos, font: font);
+            CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, text, textPosLeft, font: font);
+
+            var textPosRight = textPosLeft + new Vector2(GetInnerDimensions().Width, 0);
+            var countText = $"{visibleCount}/{totalCount}";
+            var countWidth = font.MeasureString(countText).X;
+            CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, countText, textPosRight - new Vector2(countWidth, 0), font: font);
         }
     }
 }
