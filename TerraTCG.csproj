@@ -8,28 +8,6 @@
 		
 	</PropertyGroup>
 	<ItemGroup>
-	  <None Remove="Assets\Cards\Bunny.png" />
-	  <None Remove="Assets\Cards\DemonEye.png" />
-	  <None Remove="Assets\Cards\Dryad.png" />
-	  <None Remove="Assets\Cards\Zombie.png" />
-	  <None Remove="Assets\FieldElements\Boots_Icon.png" />
-	  <None Remove="Assets\Tutorial\Tutorial1.png" />
-	  <None Remove="Assets\Tutorial\Tutorial10.png" />
-	  <None Remove="Assets\Tutorial\Tutorial11.png" />
-	  <None Remove="Assets\Tutorial\Tutorial12.png" />
-	  <None Remove="Assets\Tutorial\Tutorial13.png" />
-	  <None Remove="Assets\Tutorial\Tutorial14.png" />
-	  <None Remove="Assets\Tutorial\Tutorial15.png" />
-	  <None Remove="Assets\Tutorial\Tutorial2.png" />
-	  <None Remove="Assets\Tutorial\Tutorial3.png" />
-	  <None Remove="Assets\Tutorial\Tutorial4.png" />
-	  <None Remove="Assets\Tutorial\Tutorial5.png" />
-	  <None Remove="Assets\Tutorial\Tutorial6.png" />
-	  <None Remove="Assets\Tutorial\Tutorial7.png" />
-	  <None Remove="Assets\Tutorial\Tutorial8.png" />
-	  <None Remove="Assets\Tutorial\Tutorial9.png" />
-	  <None Remove="Content\Items\TerraTCGBoosterPack.png" />
-	  <None Remove="description_workshop.txt" />
 	</ItemGroup>
 
 	<!-- References -->

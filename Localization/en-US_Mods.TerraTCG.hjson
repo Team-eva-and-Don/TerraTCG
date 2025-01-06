@@ -31,22 +31,22 @@ Items: {
 
 Cards: {
 	Zombie: {
-		Name: Zombie
+		Name: "{$NPCName.Zombie}"
 		Attack.Name: Zombie Bite
 	}
 
 	GreenSlime: {
-		Name: Green Slime
+		Name: "{$NPCName.GreenSlime}"
 		Attack.Name: Slime Ball
 	}
 
 	BlueSlime: {
-		Name: Blue Slime
+		Name: "{$NPCName.BlueSlime}"
 		Attack.Name: Slime Slap
 	}
 
 	MotherSlime: {
-		Name: Mother Slime
+		Name: "{$NPCName.MotherSlime}"
 
 		Attack: {
 			Name: Slime Brood
@@ -79,7 +79,7 @@ Cards: {
 	}
 
 	Pinky: {
-		Name: Pinky
+		Name: "{$NPCName.Pinky}"
 
 		Attack: {
 			Name: Pink Slime
@@ -93,7 +93,7 @@ Cards: {
 	}
 
 	KingSlime: {
-		Name: King Slime
+		Name: "{$NPCName.KingSlime}"
 
 		Skill: {
 			Name: Royal Decree
@@ -109,7 +109,7 @@ Cards: {
 	}
 
 	MushroomZombie: {
-		Name: Mushroom Zombie
+		Name: "{$NPCName.ZombieMushroom}"
 		Attack.Name: Spore Bite
 		Modifier.Description:
 			'''
@@ -119,7 +119,7 @@ Cards: {
 	}
 
 	SporeSkeleton: {
-		Name: Spore Skeleton
+		Name: "{$NPCName.SporeSkeleton}"
 		Attack.Name: Fungal Bone
 		Modifier.Description:
 			'''
@@ -129,13 +129,13 @@ Cards: {
 	}
 
 	SporeBat: {
-		Name: Spore Bat
+		Name: "{$NPCName.SporeBat}"
 		Attack.Name: Spore Bite
 		Modifier.Description: Lifesteal, Evasive
 	}
 
 	GlowingSnail: {
-		Name: Glowing Snail
+		Name: "{$NPCName.GlowingSnail}"
 		Attack.Name: Glowing Shell
 
 		Skill: {
@@ -150,7 +150,7 @@ Cards: {
 	}
 
 	AnomuraFungus: {
-		Name: Anomura Fungus
+		Name: "{$NPCName.AnomuraFungus}"
 
 		Attack: {
 			Name: Infect
@@ -169,7 +169,7 @@ Cards: {
 	}
 
 	Wraith: {
-		Name: Wraith
+		Name: "{$NPCName.Wraith}"
 		Attack.Name: Haunt
 		Modifier.Description:
 			'''
@@ -179,7 +179,7 @@ Cards: {
 	}
 
 	PosessedArmor: {
-		Name: Posessed Armor
+		Name: "{$NPCName.PossessedArmor}"
 		Attack.Name: Cursed Steel
 		Modifier.Description:
 			'''
@@ -189,7 +189,7 @@ Cards: {
 	}
 
 	WanderingEye: {
-		Name: Wandering Eye
+		Name: "{$NPCName.WanderingEye}"
 
 		Attack: {
 			Name: Eyebite
@@ -202,7 +202,7 @@ Cards: {
 	}
 
 	DemonEye: {
-		Name: Demon Eye
+		Name: "{$NPCName.DemonEye}"
 		Attack.Name: Harsh Gaze
 		Modifier.Description:
 			'''
@@ -212,7 +212,7 @@ Cards: {
 	}
 
 	Drippler: {
-		Name: Drippler
+		Name: "{$NPCName.Drippler}"
 
 		Attack: {
 			Name: Blood Drip
@@ -237,12 +237,12 @@ Cards: {
 	}
 
 	ZombieMerman: {
-		Name: Zombie Merman
+		Name: "{$NPCName.ZombieMerman}"
 		Attack.Name: Drag Down
 	}
 
 	ViciousGoldfish: {
-		Name: Vicious Goldfish
+		Name: "{$NPCName.CrimsonGoldfish}"
 
 		Attack: {
 			Name: Bloody Scales
@@ -261,7 +261,7 @@ Cards: {
 	}
 
 	ViciousBunny: {
-		Name: Vicious Bunny
+		Name: "{$NPCName.CrimsonBunny}"
 		Attack.Name: Bloody Kick
 
 		Skill: {
@@ -276,7 +276,7 @@ Cards: {
 	}
 
 	BloodZombie: {
-		Name: Blood Zombie
+		Name: "{$NPCName.BloodZombie}"
 
 		Attack: {
 			Name: Vicious Tear
@@ -295,7 +295,7 @@ Cards: {
 	}
 
 	Harpy: {
-		Name: Harpy
+		Name: "{$NPCName.Harpy}"
 
 		Attack: {
 			Name: Dive-bomb
@@ -314,7 +314,7 @@ Cards: {
 	}
 
 	JungleTurtle: {
-		Name: Jungle Turtle
+		Name: "{$NPCName.TurtleJungle}"
 		Attack.Name: Hard Shell
 
 		Skill: {
@@ -328,7 +328,7 @@ Cards: {
 	}
 
 	GiantTortoise: {
-		Name: Giant Tortoise
+		Name: "{$NPCName.GiantTortoise}"
 		Attack.Name: Shell Smash
 		Modifier.Description:
 			'''
@@ -340,7 +340,7 @@ Cards: {
 	}
 
 	Piranha: {
-		Name: Piranha
+		Name: "{$NPCName.Piranha}"
 
 		Attack: {
 			Name: Lethal Bite
@@ -354,7 +354,7 @@ Cards: {
 	}
 
 	SpikedJungleSlime: {
-		Name: Jungle Slime
+		Name: "{$NPCName.JungleSlime}"
 		Attack.Name: Toxic Ooze
 		Modifier.Description:
 			'''
@@ -365,7 +365,7 @@ Cards: {
 	}
 
 	DoctorBones: {
-		Name: Doctor Bones
+		Name: "{$NPCName.DoctorBones}"
 
 		Attack: {
 			Name: Find Fauna
@@ -378,7 +378,7 @@ Cards: {
 	}
 
 	Crab: {
-		Name: Crab
+		Name: "{$NPCName.Crab}"
 		Attack.Name: Pinch
 		Modifier.Description:
 			'''
@@ -400,7 +400,7 @@ Cards: {
 	}
 
 	Shark: {
-		Name: Shark
+		Name: "{$NPCName.Shark}"
 		Attack.Name: Jaws
 		Modifier.Description:
 			'''
@@ -411,7 +411,7 @@ Cards: {
 	}
 
 	FeralClaws: {
-		Name: Feral Claws
+		Name: "{$ItemName.FeralClaws}"
 
 		Skill: {
 			Name: Equip
@@ -426,7 +426,7 @@ Cards: {
 	}
 
 	Tim: {
-		Name: Tim
+		Name: "{$NPCName.Tim}"
 
 		Attack: {
 			Name: Magic Missile
@@ -440,7 +440,7 @@ Cards: {
 	}
 
 	LostGirl: {
-		Name: Lost Girl
+		Name: "{$NPCName.LostGirl}"
 		Attack.Name: Fake Tears
 		Modifier.Description:
 			'''
@@ -451,7 +451,7 @@ Cards: {
 	}
 
 	Nymph: {
-		Name: Nymph
+		Name: "{$NPCName.Nymph}"
 		Attack.Name: Ensnare
 		Modifier.Description:
 			'''
@@ -460,22 +460,8 @@ Cards: {
 			'''
 	}
 
-	RuneWizard: {
-		Name: Rune Wizard
-
-		Attack: {
-			Name: Magic Missile
-			Description:
-				'''
-				Use all remaining MP, 
-				then deal 1 dmg for 
-				each MP spent.
-				'''
-		}
-	}
-
 	Dryad: {
-		Name: Dryad's Ward
+		Name: "{$NPCName.Dryad}'s Ward"
 		Modifier.Description:
 			'''
 			Return target allied
@@ -485,7 +471,7 @@ Cards: {
 	}
 
 	PartyGirl: {
-		Name: Party Girl's Favor
+		Name: "{$NPCName.PartyGirl}'s Favor"
 		Modifier.Description:
 			'''
 			Target ally's attack
@@ -495,7 +481,7 @@ Cards: {
 	}
 
 	ArmsDealer: {
-		Name: Arms Dealer's Aim
+		Name: "{$NPCName.ArmsDealer}'s Aim"
 		Modifier.Description:
 			'''
 			Unpause target allied
@@ -505,17 +491,17 @@ Cards: {
 	}
 
 	Guide: {
-		Name: Guide's Guidance
+		Name: "{$NPCName.Guide}'s Guidance"
 		Modifier.Description: Draw 2 cards.
 	}
 
 	Wizard: {
-		Name: Wizard's Wisdom
+		Name: "{$NPCName.Wizard}'s Wisdom"
 		Modifier.Description: Add 1 Mana Crystal
 	}
 
 	OldMan: {
-		Name: Old Man's Curse
+		Name: "{$NPCName.OldMan}'s Curse"
 		Modifier.Description:
 			'''
 			Move target enemy to
@@ -524,7 +510,7 @@ Cards: {
 	}
 
 	CopperShortsword: {
-		Name: Copper Short Sword
+		Name: "{$ItemName.CopperShortsword}"
 
 		Skill: {
 			Name: Equip
@@ -537,7 +523,7 @@ Cards: {
 	}
 
 	PlatinumBroadsword: {
-		Name: Platinum Broadsword
+		Name: "{$ItemName.PlatinumBroadsword}"
 
 		Skill: {
 			Name: Equip
@@ -550,7 +536,7 @@ Cards: {
 	}
 
 	Muramasa: {
-		Name: Muramasa
+		Name: "{$ItemName.Muramasa}"
 
 		Skill: {
 			Name: Equip
@@ -564,7 +550,7 @@ Cards: {
 	}
 
 	Shackle: {
-		Name: Shackle
+		Name: "{$ItemName.Shackle}"
 
 		Skill: {
 			Name: Equip
@@ -579,7 +565,7 @@ Cards: {
 	}
 
 	CobaltShield: {
-		Name: Cobalt Shield
+		Name: "{$ItemName.CobaltShield}"
 
 		Skill: {
 			Name: Equip
@@ -592,7 +578,7 @@ Cards: {
 	}
 
 	SwiftnessPotion: {
-		Name: Swiftness Potion
+		Name: "{$ItemName.SwiftnessPotion}"
 
 		Skill: {
 			Name: Use
@@ -601,7 +587,7 @@ Cards: {
 	}
 
 	ThornsPotion: {
-		Name: Thorns Potion
+		Name: "{$ItemName.ThornsPotion}"
 
 		Skill: {
 			Name: Use
@@ -615,7 +601,7 @@ Cards: {
 	}
 
 	IronskinPotion: {
-		Name: Ironskin Potion
+		Name: "{$ItemName.IronskinPotion}"
 
 		Skill: {
 			Name: Use
@@ -629,7 +615,7 @@ Cards: {
 	}
 
 	LesserHealingPotion: {
-		Name: Healing Potion
+		Name: "{$ItemName.HealingPotion}"
 
 		Skill: {
 			Name: Use
@@ -638,7 +624,7 @@ Cards: {
 	}
 
 	AngelStatue: {
-		Name: Angel Statue
+		Name: "{$ItemName.AngelStatue}"
 
 		Skill: {
 			Name: Use
@@ -651,7 +637,7 @@ Cards: {
 	}
 
 	RagePotion: {
-		Name: Rage Potion
+		Name: "{$ItemName.RagePotion}"
 
 		Skill: {
 			Name: Use
@@ -664,7 +650,7 @@ Cards: {
 	}
 
 	ThrowingKnife: {
-		Name: Throwing Knife
+		Name: "{$ItemName.ThrowingKnife}"
 
 		Skill: {
 			Name: Use
@@ -691,7 +677,7 @@ Cards: {
 	}
 
 	GoblinThief: {
-		Name: Goblin Thief
+		Name: "{$NPCName.GoblinThief}"
 		Attack.Name: Shank
 
 		Skill: {
@@ -706,7 +692,7 @@ Cards: {
 	}
 
 	GoblinScout: {
-		Name: Goblin Scout
+		Name: "{$NPCName.GoblinScout}"
 
 		Attack: {
 			Name: Scout
@@ -725,7 +711,7 @@ Cards: {
 	}
 
 	GoblinArcher: {
-		Name: Goblin Archer
+		Name: "{$NPCName.GoblinArcher}"
 
 		Attack: {
 			Name: Sharpshoot
@@ -744,7 +730,7 @@ Cards: {
 	}
 
 	GoblinWarlock: {
-		Name: Goblin Warlock
+		Name: "{$NPCName.GoblinSummoner}"
 
 		Attack: {
 			Name: Shadowflame
@@ -758,7 +744,7 @@ Cards: {
 	}
 
 	Mimic: {
-		Name: Mimic
+		Name: "{$NPCName.Mimic}"
 
 		Attack: {
 			Name: Lure
@@ -777,7 +763,7 @@ Cards: {
 	}
 
 	Bunny: {
-		Name: Bunny
+		Name: "{$NPCName.Bunny}"
 		Attack.Name: Bunny Kick
 
 		Skill: {
@@ -787,7 +773,7 @@ Cards: {
 	}
 
 	Dolphin: {
-		Name: Dolphin
+		Name: "{$NPCName.Dolphin}"
 		Attack.Name: Nose Boop
 
 		Skill: {
@@ -802,7 +788,7 @@ Cards: {
 	}
 
 	Squirrel: {
-		Name: Squirrel
+		Name: "{$NPCName.Squirrel}"
 		Attack.Name: Acorn Toss
 
 		Skill: {
@@ -816,7 +802,7 @@ Cards: {
 	}
 
 	Goldfish: {
-		Name: Goldfish
+		Name: "{$NPCName.Goldfish}"
 		Attack.Name: Fin Slap
 
 		Skill: {
@@ -826,7 +812,7 @@ Cards: {
 	}
 
 	Bat: {
-		Name: Cave Bat
+		Name: "{$NPCName.CaveBat}"
 		Attack.Name: Swoop
 		Modifier.Description:
 			'''
@@ -836,12 +822,12 @@ Cards: {
 	}
 
 	Skeleton: {
-		Name: Skeleton
+		Name: "{$NPCName.Skeleton}"
 		Attack.Name: Bone Break
 	}
 
 	UndeadMiner: {
-		Name: Undead Miner
+		Name: "{$NPCName.UndeadMiner}"
 
 		Attack: {
 			Name: Pickaxe Swing
@@ -855,7 +841,7 @@ Cards: {
 	}
 
 	UndeadViking: {
-		Name: Undead Viking
+		Name: "{$NPCName.UndeadViking}"
 
 		Attack: {
 			Name: Frozen Axe
@@ -868,7 +854,7 @@ Cards: {
 	}
 
 	AngryBones: {
-		Name: Angry Bones
+		Name: "{$NPCName.AngryBones}"
 		Modifier.Description:
 			'''
 			Equipping this crea-
@@ -896,7 +882,7 @@ Cards: {
 	}
 
 	ToxicSludge: {
-		Name: Toxic Sludge
+		Name: "{$NPCName.ToxicSludge}"
 
 		Attack: {
 			Name: Corrode
@@ -910,7 +896,7 @@ Cards: {
 	}
 
 	DarkCaster: {
-		Name: Dark Caster
+		Name: "{$NPCName.DarkCaster}"
 
 		Attack: {
 			Name: Hex
@@ -923,7 +909,7 @@ Cards: {
 	}
 
 	CursedSkull: {
-		Name: Cursed Skull
+		Name: "{$NPCName.CursedSkull}"
 
 		Attack: {
 			Name: Curse
