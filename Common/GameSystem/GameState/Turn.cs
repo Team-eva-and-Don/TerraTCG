@@ -55,6 +55,17 @@ namespace TerraTCG.Common.GameSystem.GameState
                 zone.Owner.Field.ClearModifiers(ActivePlayer, zone, GameEvent.START_TURN);
             }
 
+			foreach(var zone in ActivePlayer.Game.AllZones())
+			{
+				var fieldModifiers = zone.PlacedCard?.Template.FieldModifiers?.Invoke();
+				if(fieldModifiers?.Count > 0)
+				{
+					zone.Owner.Field.CardModifiers.AddRange(fieldModifiers);
+				}
+			}
+
+			// Re-apply field zones
+
             TCGPlayer.LocalGamePlayer.Game.FieldAnimation =
                 new TurnChangeAnimation(TCGPlayer.TotalGameTime, this);
 

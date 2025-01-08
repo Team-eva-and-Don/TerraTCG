@@ -103,7 +103,15 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal List<Attack> Attacks { get; set; }
 
+		// List of the modifiers that the card applies to itself upon entering
+		// the battlefield
         internal Func<List<ICardModifier>> Modifiers { get; set; }
+
+		// List of the modifiers that the card continually applies to the field
+		// while this card is alive
+		// These are re-applied every turn, and *should* return true on
+		// ShouldRemove(GameEvent.START_TURN)
+        internal Func<List<ICardModifier>> FieldModifiers { get; set; }
 
         // Tags to help bot players decide what to do with cards
 

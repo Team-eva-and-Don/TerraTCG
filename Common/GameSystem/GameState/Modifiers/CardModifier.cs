@@ -32,7 +32,8 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
         EVASIVE,
         SPIKED,
         LIFESTEAL,
-    }
+		POISON,
+	}
 
     internal struct GameEventInfo
     {

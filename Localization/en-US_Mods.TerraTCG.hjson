@@ -30,6 +30,51 @@ Items: {
 }
 
 Cards: {
+	GiantShelly: {
+		Name: "{$NPCName.GiantShelly}"
+		Attack.Name: Spiked Shell
+
+		Skill: {
+			Name: Skill: Solid Shell
+			Description:
+				'''
+				Your Salamander & 
+				Crawdad take 1 less 
+				dmg this turn.
+				'''
+		}
+	}
+
+	Crawdad: {
+		Name: "{$NPCName.Crawdad}"
+		Attack.Name: Crush Claw
+
+		Skill: {
+			Name: Skill: Claw Cheer
+			Description:
+				'''
+				Your Salamander & 
+				Shelly deal +1 dmg 
+				this turn.
+				'''
+		}
+	}
+
+	Salamander: {
+		Name: "{$NPCName.Salamander}"
+		Attack.Name: Acid Spit
+
+		Skill: {
+			Name: Skill: Silky Scales
+			Description:
+				'''
+				Your Crawdad & Shelly 
+				attack for 1 less MP 
+				this turn.
+				'''
+		}
+	}
+
 	Zombie: {
 		Name: "{$NPCName.Zombie}"
 		Attack.Name: Zombie Bite
@@ -349,6 +394,35 @@ Cards: {
 				Attack target takes
 				+1 dmg from future
 				attacks.
+				'''
+		}
+	}
+
+	Hornet: {
+		Name: "{$NPCName.Hornet}"
+
+		Attack: {
+			Name: Sting
+			Description:
+				'''
+				Poison target enemy
+				(it takes 1 dmg each
+				turn)
+				'''
+		}
+	}
+
+	Bee: {
+		Name: "{$NPCName.Bee}"
+		Attack.Name: Sting
+
+		Skill: {
+			Name: Skill: Toxic Honey
+			Description:
+				'''
+				Target ally Poisons 
+				enemies this turn 
+				(they take 1 dmg/turn)
 				'''
 		}
 	}
@@ -821,6 +895,16 @@ Cards: {
 			'''
 	}
 
+	JungleBat: {
+		Name: "{$NPCName.JungleBat}"
+		Attack.Name: Jungle Swoop
+		Modifier.Description:
+			'''
+			Evasive: May target any 
+			enemy for attacks
+			'''
+	}
+
 	Skeleton: {
 		Name: "{$NPCName.Skeleton}"
 		Attack.Name: Bone Break
@@ -952,6 +1036,7 @@ Cards: {
 		PAUSED: Paused: Cannot act until next turn
 		DEFENSE_BOOST: Sturdy: Takes %% less damage
 		BLEEDING: Bleeding: Takes %% more damage
+		POISON: Poisoned: Takes 1 damage per turn
 		RELENTLESS: Relentless: May attack %% extra times
 		EVASIVE: Evasive: May attack blocked opponents
 		SPIKED: Spiked: Attackers take %% damage
