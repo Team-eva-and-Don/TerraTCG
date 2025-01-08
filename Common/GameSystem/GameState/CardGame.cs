@@ -122,6 +122,18 @@ namespace TerraTCG.Common.GameSystem.GameState
                 // allow animations to finish before updating game state
                 return; 
             }
+			// Check whether any creatures on board are currently dead
+			foreach (var zone in AllZones())
+			{
+				if(zone.PlacedCard?.CurrentHealth <= 0)
+				{
+					CurrentTurn.ActionLog.Add(new(null, $"{zone.PlacedCard.Template.CardName} {ActionText("Died")}"));
+					zone.QueueAnimation(new RemoveCardAnimation(zone.PlacedCard));
+					zone.Owner.Resources = zone.Owner.Resources.UseResource(health: zone.PlacedCard.Template.Points);
+					zone.PlacedCard = null;
+				}
+			}
+
             foreach(var player in GamePlayers)
             {
                 if(player.Resources.Health <= 0)

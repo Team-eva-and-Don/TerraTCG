@@ -159,23 +159,6 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             var startCard = startZone.PlacedCard.Template;
             var endCard = endZone.PlacedCard.Template;
             _logMessage = $"{ActionText("Attacked")} {endCard.CardName} {ActionText("With")} {startCard.CardName} {ActionText("For")} {attack.Damage}";
-
-            if(endZone.PlacedCard.CurrentHealth <= 0)
-            {
-                endZone.QueueAnimation(new RemoveCardAnimation(endZone.PlacedCard));
-                endZone.Owner.Resources = endZone.Owner.Resources.UseResource(health: endZone.PlacedCard.Template.Points);
-                endZone.PlacedCard = null;
-                _logMessage += $"\n{endCard.CardName} {ActionText("Died")}";
-            }
-
-            // both cards can die during an attack exchange
-            if(startZone.PlacedCard.CurrentHealth <= 0)
-            {
-                startZone.QueueAnimation(new RemoveCardAnimation(startZone.PlacedCard));
-                startZone.Owner.Resources = startZone.Owner.Resources.UseResource(health: startZone.PlacedCard.Template.Points);
-                startZone.PlacedCard = null;
-                _logMessage += $"\n{startCard.CardName} {ActionText("Died")}";
-            }
             GameSounds.PlaySound(GameAction.ATTACK);
         }
 
