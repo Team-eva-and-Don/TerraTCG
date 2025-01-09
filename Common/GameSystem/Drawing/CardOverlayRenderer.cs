@@ -56,5 +56,13 @@ namespace TerraTCG.Common.GameSystem.Drawing
             var origin = new Vector2(bounds.Width / 2, bounds.Height);
             spriteBatch.Draw(texture.Value, position - Vector2.UnitY * npcBounds.Height * 0.75f * scale, bounds, color ?? Color.White, 0, origin, scale, effects, 0);
         }
+
+        public void DrawQueenBeeNPC(
+            SpriteBatch spriteBatch, Card card, Vector2 position, int frame, Color? color, float scale, SpriteEffects effects)
+        {
+            scale *= 0.5f;
+			frame %= 6;
+            DefaultDrawZoneNPC(spriteBatch, card, position, frame, color, scale, effects);
+        }
     }
 }

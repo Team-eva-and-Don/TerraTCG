@@ -16,7 +16,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         public override Card CreateCard() => new ()
         {
             Name = "Crawdad",
-            MaxHealth = 8,
+            MaxHealth = 7,
             MoveCost = 2,
             CardType = CardType.CREATURE,
             NPCID = NPCID.Crawdad,
@@ -31,7 +31,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             Skills = [
                 new() {
                     Name = "Skill: Sharp Claws",
-                    Cost = 0,
+                    Cost = 1,
                     DoSkill = (GamePlayer player, Zone zone, Zone targetZone) => {
 						foreach (var sibling in zone.Siblings) {
 							if(sibling.PlacedCard?.Template is Card card && (card.Name == "Salamander" || card.Name == "GiantShelly")) {

@@ -137,6 +137,17 @@ Cards: {
 		}
 	}
 
+	QueenBee: {
+		Name: "{$NPCName.QueenBee}"
+		Modifier.Description:
+			'''
+			Royal Honey: Enemies
+			take double poison
+			damage.
+			'''
+		Attack.Name: Regal Buzz
+	}
+
 	KingSlime: {
 		Name: "{$NPCName.KingSlime}"
 
@@ -398,6 +409,20 @@ Cards: {
 		}
 	}
 
+	MossHornet: {
+		Name: "{$NPCName.MossHornet}"
+
+		Attack: {
+			Name: Mossy Sting
+			Description:
+				'''
+				Poison target enemy
+				(it takes 1 dmg each
+				turn)
+				'''
+		}
+	}
+
 	Hornet: {
 		Name: "{$NPCName.Hornet}"
 
@@ -581,6 +606,65 @@ Cards: {
 			Move target enemy to
 			an unoccupied zone
 			'''
+	}
+
+	Shuriken: {
+		Name: "{$ItemName.Shuriken}"
+
+		Skill: {
+			Name: Use
+			Description:
+				'''
+				Target creature
+				inflicts Bleed this
+				turn (Enemies take
+				+1 dmg)
+				'''
+		}
+	}
+
+	BloodButcherer: {
+		Name: "{$ItemName.BloodButcherer}"
+
+		Skill: {
+			Name: Equip
+			Description:
+				'''
+				Target creature
+				inflicts Bleed 
+				(Enemies take +1 dmg)
+				'''
+		}
+	}
+
+	PoisonedKnife: {
+		Name: "{$ItemName.PoisonedKnife}"
+
+		Skill: {
+			Name: Use
+			Description:
+				'''
+				Target creature
+				inflicts Poison this
+				turn (Enemies take
+				1 dmg per turn)
+				'''
+		}
+	}
+
+	BladeOfGrass: {
+		Name: "{$ItemName.BladeofGrass}"
+
+		Skill: {
+			Name: Use
+			Description:
+				'''
+				Equipped creature
+				inflicts Poison 
+				(Enemies take
+				1 dmg per turn)
+				'''
+		}
 	}
 
 	CopperShortsword: {

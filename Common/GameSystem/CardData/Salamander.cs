@@ -16,7 +16,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         public override Card CreateCard() => new ()
         {
             Name = "Salamander",
-            MaxHealth = 8,
+            MaxHealth = 7,
             MoveCost = 2,
             CardType = CardType.CREATURE,
             NPCID = NPCID.Salamander,

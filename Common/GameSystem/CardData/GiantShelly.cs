@@ -24,14 +24,14 @@ namespace TerraTCG.Common.GameSystem.CardData
             Role = ZoneRole.OFFENSE,
             Attacks = [
                 new() {
-                    Damage = 3,
+                    Damage = 2,
                     Cost = 2,
                 }
             ],
             Skills = [
                 new() {
                     Name = "Skill: Hard Shell",
-                    Cost = 0,
+                    Cost = 1,
                     DoSkill = (GamePlayer player, Zone zone, Zone targetZone) => {
 						foreach (var sibling in zone.Siblings) {
 							if(sibling.PlacedCard?.Template is Card card && (card.Name == "Crawdad" || card.Name == "Salamander")) {

@@ -47,7 +47,7 @@ namespace TerraTCG.Common.GameSystem.CardData
                     Cost = 1,
                     SkillType = ActionType.TARGET_ALLY,
                     DoSkill = (GamePlayer player, Zone zone, Zone targetZone) => {
-						targetZone.PlacedCard.AddModifiers([new ApplyPoisonThisTurnModifier()]);
+						targetZone.PlacedCard.AddModifiers([new AddAttackTargetModifierModifier(new PoisonModifier(), [GameEvent.END_TURN])]);
 					}
                 }
             ]
