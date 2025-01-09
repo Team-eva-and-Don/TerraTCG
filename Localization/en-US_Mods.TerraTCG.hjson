@@ -27,6 +27,61 @@ Items: {
 			with the TerraTCG Deckbox.
 			'''
 	}
+
+	CavernPack: {
+		DisplayName: Cavern Pack
+		Tooltip: ""
+	}
+
+	DungeonPack: {
+		DisplayName: Dungeon Pack
+		Tooltip: ""
+	}
+
+	EvilPack: {
+		DisplayName: Evil Pack
+		Tooltip: ""
+	}
+
+	ForestPack: {
+		DisplayName: Forest Pack
+		Tooltip: ""
+	}
+
+	GoblinPack: {
+		DisplayName: Goblin Pack
+		Tooltip: ""
+	}
+
+	JunglePack: {
+		DisplayName: Jungle Pack
+		Tooltip: ""
+	}
+
+	KingSlimePack: {
+		DisplayName: King Slime Pack
+		Tooltip: ""
+	}
+
+	MushroomPack: {
+		DisplayName: Mushroom Pack
+		Tooltip: ""
+	}
+
+	OceanPack: {
+		DisplayName: Ocean Pack
+		Tooltip: ""
+	}
+
+	QueenBeePack: {
+		DisplayName: Queen Bee Pack
+		Tooltip: ""
+	}
+
+	SlimePack: {
+		DisplayName: Slime Pack
+		Tooltip: ""
+	}
 }
 
 Cards: {

@@ -22,7 +22,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             SelectInHandAction = (card, player) => new ApplyModifierAction(card, player),
             ShouldTarget = z => true,
             Skills = [ // TODO this is wonky, but item texts are drawn using the skill template
-                new() { Cost = 3 }
+                new() { Cost = 2 }
             ],
             Modifiers = () => [
 				new AddAttackTargetModifierModifier(new BleedModifier(1)) {

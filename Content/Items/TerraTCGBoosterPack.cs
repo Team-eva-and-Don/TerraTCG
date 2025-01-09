@@ -7,12 +7,14 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem;
+using TerraTCG.Common.GameSystem.PackOpening;
 using TerraTCG.Common.UI;
 
 namespace TerraTCG.Content.Items
 {
-    internal class TerraTCGBoosterPack : ModItem
+    internal abstract class TerraTCGBoosterPack : ModItem
     {
+		internal abstract Pack Pack { get; }
         public override void SetDefaults()
         {
             Item.consumable = true;
@@ -34,10 +36,60 @@ namespace TerraTCG.Content.Items
         {
             if(player.whoAmI == Main.myPlayer && !ModContent.GetInstance<UserInterfaces>().IsPackOpening())
             {
-                TCGPlayer.LocalPlayer.OpenPackAndAddToCollection();
+				Pack.OpenPack(TCGPlayer.LocalPlayer);
                 return true;
             }
             return false;
         }
     }
+
+	internal class ForestPack: TerraTCGBoosterPack
+	{
+		internal override Pack Pack => PackDefinitions.ForestPack;
+	}
+
+	internal class CavernPack: TerraTCGBoosterPack
+	{
+		internal override Pack Pack => PackDefinitions.CavernPack;
+	}
+
+	internal class DungeonPack: TerraTCGBoosterPack
+	{
+		internal override Pack Pack => PackDefinitions.DungeonPack;
+	}
+
+	internal class EvilPack: TerraTCGBoosterPack
+	{
+		internal override Pack Pack => PackDefinitions.EvilPack;
+	}
+	internal class GoblinPack: TerraTCGBoosterPack
+	{
+		internal override Pack Pack => PackDefinitions.GoblinPack;
+	}
+	internal class JunglePack: TerraTCGBoosterPack
+	{
+		internal override Pack Pack => PackDefinitions.JunglePack;
+	}
+
+	internal class KingSlimePack: TerraTCGBoosterPack
+	{
+		internal override Pack Pack => PackDefinitions.KingSlimePack;
+	}
+	internal class MushroomPack: TerraTCGBoosterPack
+	{
+		internal override Pack Pack => PackDefinitions.MushroomPack;
+	}
+
+	internal class OceanPack: TerraTCGBoosterPack
+	{
+		internal override Pack Pack => PackDefinitions.OceanPack;
+	}
+	internal class QueenBeePack: TerraTCGBoosterPack
+	{
+		internal override Pack Pack => PackDefinitions.QueenBeePack;
+	}
+	internal class SlimePack: TerraTCGBoosterPack
+	{
+		internal override Pack Pack => PackDefinitions.SlimePack;
+	}
 }

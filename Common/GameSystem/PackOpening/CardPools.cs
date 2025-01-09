@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.GameSystem.GameState;
 using static TerraTCG.Common.GameSystem.BotPlayer.BotDecks;
@@ -14,6 +15,14 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 	internal class CardPools
 	{
 		// Cards that can appear in any pack, generally, "not good" cards
+		public static CardCollection AllCards => new()
+		{
+			Cards = ModContent.GetContent<BaseCardTemplate>()
+				.Select(t => t.Card)
+				.Where(c=>c.IsCollectable && c.SubTypes[0] != CardSubtype.BOSS)
+				.ToList()
+		};
+
 		public static CardCollection CommonCards => new()
 		{
 			Cards = [
@@ -33,7 +42,6 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 				GetCard<ThrowingKnife>(), 
 				GetCard<Shuriken>(), 
 				GetCard<PoisonedKnife>(), 
-				GetCard<AngelStatue>(), 
 				GetCard<CopperShortsword>(), 
 				GetCard<FledglingWings>(), 
 				GetCard<PlatinumBroadsword>(), 
@@ -105,8 +113,6 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 				GetCard<ViciousGoldfish>(),
 				GetCard<WanderingEyeFish>(),
 				GetCard<ZombieMerman>(),
-				GetCard<RagePotion>(),
-				GetCard<ThrowingKnife>(),
 			]
 		};
 
@@ -128,7 +134,6 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 				GetCard<FaceMonster>(),
 				GetCard<ViciousBunny>(),
 				GetCard<ViciousGoldfish>(),
-				GetCard<Shuriken>(),
 				GetCard<BloodButcherer>(),
 			]
 		};
@@ -141,6 +146,16 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 				GetCard<Jellyfish>(),
 				GetCard<Shark>(),
 				GetCard<FeralClaws>(),
+			]
+		};
+
+		public static CardCollection GoblinCards => new()
+		{
+			Cards = [
+				GetCard<GoblinArcher>(),
+				GetCard<GoblinScout>(),
+				GetCard<GoblinThief>(),
+				GetCard<GoblinWarlock>(),
 			]
 		};
 
@@ -186,7 +201,7 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 			]
 		};
 
-		public static CardCollection KingSlimePromoPack => new()
+		public static CardCollection KingSlimePromoCards => new()
 		{
 			Cards = [
 				GetCard<KingSlime>(),
