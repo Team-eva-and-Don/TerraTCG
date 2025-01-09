@@ -197,6 +197,17 @@ Cards: {
 		Attack.Name: Regal Buzz
 	}
 
+	SpikedSlime: {
+		Name: "{$NPCName.SlimeSpiked}"
+		Modifier.Description:
+			'''
+			Boss' Helper: Your
+			King Slime has Spiked.
+			This has Spiked.
+			'''
+		Attack.Name: Royal Helper
+	}
+
 	KingSlime: {
 		Name: "{$NPCName.KingSlime}"
 

@@ -43,7 +43,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 
             foreach(var zone in ActivePlayer.Field.Zones.Where(z=>!z.IsEmpty()))
             {
-                if(zone.PlacedCard.IsExerted)
+                if(zone.PlacedCard.IsExerted && (zone.Animation?.IsDefault() ?? true))
                 {
                     zone.QueueAnimation(new BecomeActiveAnimation(zone.PlacedCard));
                 }
