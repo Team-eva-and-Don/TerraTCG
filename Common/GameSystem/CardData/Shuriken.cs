@@ -18,7 +18,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         {
             Name = "Shuriken",
             CardType = CardType.ITEM,
-            SubTypes = [CardSubtype.EQUIPMENT, CardSubtype.ITEM],
+            SubTypes = [CardSubtype.CONSUMABLE, CardSubtype.ITEM],
             SelectInHandAction = (card, player) => new ApplyModifierAction(card, player),
             ShouldTarget = z => true,
             Skills = [ // TODO this is wonky, but item texts are drawn using the skill template

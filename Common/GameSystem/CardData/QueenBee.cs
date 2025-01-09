@@ -14,7 +14,7 @@ namespace TerraTCG.Common.GameSystem.CardData
 {
     internal class QueenBee : BaseCardTemplate, ICardTemplate
     {
-        private class QueenSlimePoisonBoost : ICardModifier
+        private class QueenBeePoisonBoost : ICardModifier
         {
 			private bool didApplyThisTurn = false;
             public bool ShouldRemove(GameEventInfo eventInfo)
@@ -48,10 +48,9 @@ namespace TerraTCG.Common.GameSystem.CardData
             Points = 2,
             NPCID = NPCID.QueenBee,
             CardType = CardType.CREATURE,
-            Role = ZoneRole.DEFENSE,
             SubTypes = [CardSubtype.BOSS, CardSubtype.JUNGLE, CardSubtype.FIGHTER],
             DrawZoneNPC = CardOverlayRenderer.Instance.DrawQueenBeeNPC,
-			FieldModifiers = () => [new QueenSlimePoisonBoost()],
+			FieldModifiers = () => [new QueenBeePoisonBoost()],
             Attacks = [
                 new() {
                     Damage = 4,

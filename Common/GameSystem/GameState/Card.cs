@@ -55,7 +55,8 @@ namespace TerraTCG.Common.GameSystem.GameState
         // Duplicate CardTypes (for text rendering)
         TOWNSFOLK,
         ITEM,
-    }
+		CRIMSON,
+	}
 
     // Bot helper function, apply additional
     // logic for whether the bot should use

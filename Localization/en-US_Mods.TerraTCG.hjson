@@ -137,6 +137,55 @@ Cards: {
 		}
 	}
 
+	FaceMonster: {
+		Name: "{$NPCName.FaceMonster}"
+
+		Attack: {
+			Name: Gaping Jaw
+			Description:
+				'''
+				Attack target gains
+				Bleeding (takes +1
+				dmg from attacks.)
+				'''
+		}
+	}
+
+	Crimera: {
+		Name: "{$NPCName.Crimera}"
+
+		Attack: {
+			Name: Blood Suck
+			Description:
+				'''
+				Attack target gains
+				Bleeding (takes +1
+				dmg from attacks.)
+				'''
+		}
+	}
+
+	Creeper: {
+		Name: "{$NPCName.Creeper}"
+		Modifier.Description:
+			'''
+			Boss' Helper: Your
+			Brain of Cthulhu's 
+			attacks cause bleed.
+			'''
+		Attack.Name: Evil Gaze
+	}
+
+	BrainOfCthulhu: {
+		Name: "{$NPCName.BrainofCthulhu}"
+		Modifier.Description:
+			'''
+			Bloodlust: Deals +2 dmg 
+			to Bleeding enemies.
+			'''
+		Attack.Name: Headache
+	}
+
 	QueenBee: {
 		Name: "{$NPCName.QueenBee}"
 		Modifier.Description:
@@ -402,9 +451,9 @@ Cards: {
 			Name: Lethal Bite
 			Description:
 				'''
-				Attack target takes
-				+1 dmg from future
-				attacks.
+				Attack target gains
+				Bleeding (takes +1
+				dmg from attacks.)
 				'''
 		}
 	}
@@ -1106,6 +1155,7 @@ Cards: {
 		CASTER: Caster
 		SLIME: Slime
 		JUNGLE: Jungle
+		CRIMSON: Crimson
 		SKY: Sky
 		BLOOD_MOON: Blood Moon
 		DESERT: Desert

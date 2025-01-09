@@ -109,6 +109,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 [CardSubtype.BLOOD_MOON] = Main.Assets.Request<Texture2D>("Images/MapBG26"),
                 [CardSubtype.OCEAN] = Main.Assets.Request<Texture2D>("Images/MapBG11"),
                 [CardSubtype.MUSHROOM] = Main.Assets.Request<Texture2D>("Images/MapBG20"),
+                [CardSubtype.CRIMSON] = Main.Assets.Request<Texture2D>("Images/MapBG26"),
             };
 
             BiomeIconBounds = new Dictionary<CardSubtype, Rectangle>
@@ -120,6 +121,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 [CardSubtype.BLOOD_MOON] = new Rectangle(180, 60, 30, 30),
                 [CardSubtype.OCEAN] = new Rectangle(360, 30, 30, 30),
                 [CardSubtype.MUSHROOM] = new Rectangle(240, 30, 30, 30),
+                [CardSubtype.CRIMSON] = new Rectangle(360, 0, 30, 30),
             };
 
             CardTypeEmoteBounds = new Dictionary<CardSubtype, Rectangle>

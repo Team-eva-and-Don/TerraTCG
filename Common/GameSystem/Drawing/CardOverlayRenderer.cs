@@ -61,8 +61,23 @@ namespace TerraTCG.Common.GameSystem.Drawing
             SpriteBatch spriteBatch, Card card, Vector2 position, int frame, Color? color, float scale, SpriteEffects effects)
         {
             scale *= 0.5f;
-			frame %= 6;
+			frame = (frame % 8) + 4;
             DefaultDrawZoneNPC(spriteBatch, card, position, frame, color, scale, effects);
         }
-    }
+
+        public void DrawBrainOfCthulhuNPC(
+            SpriteBatch spriteBatch, Card card, Vector2 position, int frame, Color? color, float scale, SpriteEffects effects)
+        {
+            scale *= 0.5f;
+			frame = (frame %6) + 6;
+            DefaultDrawZoneNPC(spriteBatch, card, position, frame, color, scale, effects);
+        }
+
+		internal void DrawBOCNPC(SpriteBatch spriteBatch, Card card, Vector2 position, int frame, Color? color, float scale, SpriteEffects effects)
+		{
+            scale *= 0.5f;
+			frame = (frame %4) + 4;
+            DefaultDrawZoneNPC(spriteBatch, card, position, frame, color, scale, effects);
+		}
+	}
 }
