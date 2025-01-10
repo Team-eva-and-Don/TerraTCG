@@ -46,12 +46,16 @@ namespace TerraTCG.Common.GameSystem.Drawing
         public Asset<Texture2D> CardPreviewFrame { get; private set; }
         public Asset<Texture2D> BiomeIcons { get; private set; }
         public Asset<Texture2D> EmoteIcons { get; private set; }
-        public Asset<Texture2D> KingSlimeCrown { get; private set; }
+		public Asset<Texture2D> Foiling { get; private set; }
+		public Asset<Texture2D> Sparkles { get; private set; }
+		public Asset<Texture2D> Sparkles2 { get; private set; }
+		public Asset<Texture2D> KingSlimeCrown { get; private set; }
         internal Dictionary<int, Asset<Texture2D>> NPCTextureCache { get; private set; }
         internal Dictionary<int, Asset<Texture2D>> ItemTextureCache { get; private set; }
 
         internal Dictionary<ModifierType, Asset<Texture2D>> ModifierIconTextures { get; private set; }
-        public Dictionary<CardSubtype, Asset<Texture2D>> BiomeMapBackgrounds { get; private set; }
+		public Dictionary<CardSubtype, Asset<Texture2D>> FoilMasks { get; private set; }
+		public Dictionary<CardSubtype, Asset<Texture2D>> BiomeMapBackgrounds { get; private set; }
         internal Dictionary<CardSubtype, Rectangle> BiomeIconBounds { get; private set; }
         internal Dictionary<CardSubtype, Rectangle> CardTypeEmoteBounds { get; private set; }
 
@@ -84,6 +88,9 @@ namespace TerraTCG.Common.GameSystem.Drawing
             CardPreviewFrame = Mod.Assets.Request<Texture2D>("Assets/FieldElements/CardPreviewFrame");
             BiomeIcons = Main.Assets.Request<Texture2D>("Images/UI/Bestiary/Icon_Tags_Shadow");
             EmoteIcons = Main.Assets.Request<Texture2D>("Images/Extra_"+ExtrasID.EmoteBubble);
+            Foiling = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/Foil");
+            Sparkles = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/Sparkles");
+            Sparkles2 = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/Sparkles2");
 
             KingSlimeCrown = Main.Assets.Request<Texture2D>("Images/Extra_" + ExtrasID.KingSlimeCrown);
             NPCTextureCache = [];
@@ -98,6 +105,21 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 [ModifierType.BLEEDING] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Bleed_Icon"),
                 [ModifierType.POISON] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Poison_Icon"),
                 [ModifierType.LIFESTEAL] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Lifesteal_Icon"),
+            };
+
+            FoilMasks = new Dictionary<CardSubtype, Asset<Texture2D>>
+            {
+                [CardSubtype.FOREST] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/FOREST"),
+                [CardSubtype.CAVERN] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/CAVERN"),
+                [CardSubtype.JUNGLE] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/JUNGLE"),
+                [CardSubtype.GOBLIN_ARMY] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/GOBLIN_ARMY"),
+                [CardSubtype.BLOOD_MOON] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/BLOOD_MOON"),
+                [CardSubtype.OCEAN] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/OCEAN"),
+                [CardSubtype.MUSHROOM] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/MUSHROOM"),
+                [CardSubtype.CRIMSON] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/CRIMSON"),
+                [CardSubtype.CONSUMABLE] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/ITEM"),
+                [CardSubtype.EQUIPMENT] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/ITEM"),
+                [CardSubtype.TOWNSFOLK] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/TOWNSFOLK"),
             };
 
             BiomeMapBackgrounds = new Dictionary<CardSubtype, Asset<Texture2D>>

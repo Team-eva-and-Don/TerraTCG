@@ -87,7 +87,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
         }
 
         
-        private void DrawCardTopLine(SpriteBatch spriteBatch, Card card, Vector2 position, float scale = 1f)
+        private void DrawCardTopLine(SpriteBatch spriteBatch, Card card, Vector2 position, float scale = 1f, Color nameColor = default)
         {
             var font = FontAssets.ItemStack.Value;
             var bounds = card.Texture.Value.Bounds;
@@ -103,19 +103,20 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 var hpOffset = new Vector2(hpIconOffset.X - hpBounds.X - MARGIN_S, MARGIN_S);
 
                 spriteBatch.Draw(hpIcon, position + hpIconOffset * scale, hpIcon.Bounds, Color.White, 0, default, scale * HPIconScale, SpriteEffects.None, 0);
-                DrawStringWithBorder(spriteBatch, $"{card.MaxHealth}", position + hpOffset * scale, scale: scale * BaseTextScale);
+                DrawStringWithBorder(spriteBatch, $"{card.MaxHealth}", position + hpOffset * scale, color: nameColor, scale: scale * BaseTextScale);
             }
 
-            // Top left: Name
-            // certain names overflow the box by default, squish them a bit
+			// Top left: Name
+			// certain names overflow the box by default, squish them a bit
+
             var nameOffset = new Vector2(MARGIN_L, MARGIN_S);
-            DrawStringWithBorder(spriteBatch, card.CardName, position + nameOffset, scale: scale * BaseTextScale);
+            DrawStringWithBorder(spriteBatch, card.CardName, position + nameOffset, color: nameColor, scale: scale * BaseTextScale);
 
 
             // Beneath Portrait: Type line
             var typelineRowHeight = 88;
             var typelineOffset = new Vector2(MARGIN_L, typelineRowHeight);
-            DrawStringWithBorder(spriteBatch, card.TypeLine, position + typelineOffset * scale, scale: scale * SmallTextScale);
+            DrawStringWithBorder(spriteBatch, card.TypeLine, position + typelineOffset * scale, color: nameColor, scale: scale * SmallTextScale);
             // Highlight if a card is expert
             if (card.SubTypes[0] == CardSubtype.EXPERT)
             {
@@ -279,12 +280,13 @@ namespace TerraTCG.Common.GameSystem.Drawing
             Vector2 position, 
             float scale = 1f, 
             bool details = true,
+			Color? textColor = null,
             Attack? attackOverride = null)
         {
             var font = FontAssets.ItemStack.Value;
             BaseTextHeight = font.MeasureString(" ").Y * BaseTextScale * 0.8f;
             SmallTextHeight = font.MeasureString(" ").Y * SmallTextScale * 0.8f;
-            DrawCardTopLine(spriteBatch, card, position, scale);
+            DrawCardTopLine(spriteBatch, card, position, scale, textColor ?? Color.White);
 
             if(details)
             {
