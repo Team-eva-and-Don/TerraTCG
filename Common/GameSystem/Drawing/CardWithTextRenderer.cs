@@ -75,40 +75,6 @@ namespace TerraTCG.Common.GameSystem.Drawing
             Main.OnPreDraw -= OnPreDraw;
         }
 
-		private void DrawCardWithFoiling(Card card, Vector2 pos)
-		{
-			var textureCache = TextureCache.Instance;
-			// Draw the back of the card
-			Main.spriteBatch.Draw(card.Texture.Value, pos, card.Texture.Value.Bounds, Color.White, 0, default, CARD_SCALE, SpriteEffects.None, 0);
-
-			var rotation = (float)TCGPlayer.TotalGameTime.TotalSeconds/2f + pos.Y;
-			// Draw sparkles onto the card
-			var sparkleBrightness = 0.05f + 0.05f * MathF.Sin(MathF.PI * rotation);
-			var sparkle2Brightness = 0.05f + 0.05f * MathF.Sin(MathF.PI * rotation + MathF.PI);
-			Main.spriteBatch.Draw(textureCache.Sparkles.Value, pos, card.Texture.Value.Bounds, Color.White * sparkleBrightness, 0, default, CARD_SCALE, SpriteEffects.None, 0);
-			Main.spriteBatch.Draw(textureCache.Sparkles2.Value, pos, card.Texture.Value.Bounds, Color.White * sparkle2Brightness, 0, default, CARD_SCALE, SpriteEffects.None, 0);
-
-			// Draw foiling over the card
-			var foilOrigin = 128f * new Vector2(MathF.Cos(rotation), 0.5f * Math.Abs(MathF.Sin(rotation)));
-			var foilPos = new Vector2(textureCache.Foiling.Width(), textureCache.Foiling.Height()) / 2 + foilOrigin;
-			var foilBounds = card.Texture.Value.Bounds;
-			foilBounds.Location += new Point((int)foilPos.X, (int)foilPos.Y);
-			Main.spriteBatch.Draw(textureCache.Foiling.Value, pos, foilBounds, Color.White * 0.35f, 0, default, CARD_SCALE, SpriteEffects.None, 0);
-
-			// Draw the non-foiled parts of the card
-			if (textureCache.FoilMasks.TryGetValue(card.SortType, out var mask))
-			{
-				Main.spriteBatch.Draw(mask.Value, pos, card.Texture.Value.Bounds, Color.White, 0, default, CARD_SCALE, SpriteEffects.None, 0);
-			}
-
-			var nameBrightness = (255 - Main.mouseTextColor) / 255f;
-			var disco = Main.DiscoColor * nameBrightness;
-			var nameColor = new Color(
-				Main.mouseTextColor + disco.R, Main.mouseTextColor + disco.G, Main.mouseTextColor + disco.B);
-			// Draw the card text
-			CardTextRenderer.Instance.DrawCardText(Main.spriteBatch, card, pos, CARD_SCALE, textColor: nameColor);
-		}
-
         private void OnPreDraw(GameTime gameTime)
         {
             //if (!shouldUpdate)
@@ -125,17 +91,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
             {
                 var card = ToRender[i];
                 var pos = new Vector2(0, i * (CARD_HEIGHT + CARD_MARGIN));
-				if(i == 1)
-				{
-					DrawCardWithFoiling(card, pos);
-				} else
-				{
-					// Draw the back of the card
-					Main.spriteBatch.Draw(card.Texture.Value, pos, card.Texture.Value.Bounds, Color.White, 0, default, CARD_SCALE, SpriteEffects.None, 0);
-
-					// Draw the card text
-					CardTextRenderer.Instance.DrawCardText(Main.spriteBatch, card, pos, CARD_SCALE);
-				}
+				FoilCardRenderer.DrawCard(Main.spriteBatch, card, pos, Color.White, CARD_SCALE, 0);
             }
 
             Main.spriteBatch.End();

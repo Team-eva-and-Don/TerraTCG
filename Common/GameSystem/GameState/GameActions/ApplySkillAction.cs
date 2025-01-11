@@ -34,7 +34,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public void Complete()
         {
-            var showAnimation = new ShowCardAnimation(TCGPlayer.TotalGameTime, card, zone);
+            var showAnimation = new ShowCardAnimation(TCGPlayer.TotalGameTime, card, zone, player == TCGPlayer.LocalGamePlayer);
             var skill = zone.PlacedCard.ModifyIncomingSkill(card);
             player.Game.FieldAnimation = showAnimation;
             if(card.CardType == CardType.ITEM)

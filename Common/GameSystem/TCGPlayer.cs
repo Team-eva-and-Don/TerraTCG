@@ -85,6 +85,11 @@ namespace TerraTCG.Common.GameSystem
 
         public CardCollection Collection { get; set; } = BotDecks.GetStarterDeck();
 
+		
+		// Cards are immutable so we can't track whether an individual card is foil,
+		// Instead keep a separate list of the cards that a player has that are foil
+        public CardCollection FoilCollection { get; set; } = BotDecks.GetStarterDeck();
+
         // TODO this is not the correct place to cache this info, but is the easiest
         // Place within UI coordinates that the bottom center of the player's
         // back-center game zone is drawn
@@ -238,36 +243,6 @@ namespace TerraTCG.Common.GameSystem
         {
             // Prevent getting hit while in game
             return GamePlayer == null;
-        }
-
-
-        internal void OpenPackAndAddToCollection()
-        {
-            var starterCards = BotDecks.GetStarterDeck();
-            var allPackCards = ModContent.GetContent<BaseCardTemplate>()
-                .Select(t => t.Card)
-                .Where(c => c.IsCollectable)
-                .Where(c=>!starterCards.Cards.Any(c2=>c.Name == c2.Name)) // Don't re-give starter set cards
-                .ToList();
-
-            var incompleteCards = allPackCards
-                .Where(c => Collection.Cards.Where(c2 => c.Name == c2.Name).Count() < 2)
-                .ToList(); // Guarantee at least one new card per pack
-
-            var unownedCards = allPackCards
-                .Where(c => !Collection.Cards.Where(c2 => c.Name == c2.Name).Any())
-                .ToList(); // Guarantee at least one new card per pack
-
-            var cardsInPack = new List<Card>
-            {
-                SelectCardFromPools(unownedCards, incompleteCards, allPackCards),
-                SelectCardFromPools(incompleteCards, allPackCards),
-                SelectCardFromPools(allPackCards),
-            };
-            AddCardsToCollection(cardsInPack);
-
-            CardWithTextRenderer.Instance.ToRender = cardsInPack;
-            ModContent.GetInstance<UserInterfaces>().StartPackOpening();
         }
     }
 }

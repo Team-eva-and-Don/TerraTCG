@@ -85,9 +85,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             {
                 return;
             }
-            var texture = sourceCard.Texture;
-            spriteBatch.Draw(texture.Value, Position, bounds, Color.White, 0, default, CARD_SCALE, SpriteEffects.None, 0f);
-            CardTextRenderer.Instance.DrawCardText(spriteBatch, sourceCard, Position, CARD_SCALE);
+			FoilCardRenderer.DrawCard(spriteBatch, Card, Position, Color.White, CARD_SCALE, 0);
 
             var font = FontAssets.MouseText.Value;
             var countText = $"{Count - UsedCount}/{Count}";

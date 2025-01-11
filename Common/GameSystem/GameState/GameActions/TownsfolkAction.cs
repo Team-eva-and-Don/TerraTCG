@@ -55,10 +55,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
         {
             Player.Resources = Player.Resources.UseResource(townsfolkMana: 1);
             Player.Hand.Remove(Card);
-            // if(Player != TCGPlayer.LocalGamePlayer)
-            {
-                Player.Game.FieldAnimation = new ShowCardAnimation(TCGPlayer.TotalGameTime, Card, TargetZone());
-            }
+			Player.Game.FieldAnimation = new ShowCardAnimation(TCGPlayer.TotalGameTime, Card, TargetZone(), Player == TCGPlayer.LocalGamePlayer);
         }
     }
 }

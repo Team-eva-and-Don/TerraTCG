@@ -60,16 +60,8 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             }
 
             var bounds = texture.Value.Bounds;
-            var origin = new Vector2(bounds.Width, bounds.Height) / 2;
 
-            spriteBatch.Draw(
-                texture.Value, position + origin * Zone.CARD_DRAW_SCALE, bounds, color ?? Color.White, rotation, origin, Zone.CARD_DRAW_SCALE, SpriteEffects.None, 0);
-
-            if(rotation == 0)
-            {
-                // If the card is rotated towards the player, draw its text
-                CardTextRenderer.Instance.DrawCardText(spriteBatch, card.Template, position, Zone.CARD_DRAW_SCALE, details: false);
-            } 
+			FoilCardRenderer.DrawCard(spriteBatch, card.Template, position, color ?? Color.White, Zone.CARD_DRAW_SCALE, rotation, rotation == 0, false);
         }
 
         private static Color GetNPCHealthColor(int currentHealth, int maxHealth)

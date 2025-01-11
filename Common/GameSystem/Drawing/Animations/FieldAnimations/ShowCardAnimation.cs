@@ -14,7 +14,7 @@ using TerraTCG.Common.UI.GameFieldUI;
 
 namespace TerraTCG.Common.GameSystem.Drawing.Animations.FieldAnimations
 {
-    internal class ShowCardAnimation(TimeSpan startTime, Card card, Zone targetZone = null) : IFieldAnimation
+    internal class ShowCardAnimation(TimeSpan startTime, Card card, Zone targetZone = null, bool playerOwns = false) : IFieldAnimation
     {
         public static readonly TimeSpan DURATION = TimeSpan.FromSeconds(1.25f);
 
@@ -51,8 +51,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations.FieldAnimations
 
             var position = basePosition + cardCenter - new Vector2(texture.Width(), texture.Height()) / 2 * scale;
 
-            spriteBatch.Draw(texture.Value, position, texture.Value.Bounds, Color.White, 0, default, scale, SpriteEffects.None, 0f);
-            CardTextRenderer.Instance.DrawCardText(spriteBatch, card, position, scale);
+			FoilCardRenderer.DrawCard(spriteBatch, card, position, Color.White, scale, 0, playerOwns, posShift: false);
         }
 
         public bool IsComplete() => ElapsedTime > Duration;
