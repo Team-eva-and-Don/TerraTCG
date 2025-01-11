@@ -85,10 +85,10 @@ namespace TerraTCG.Common.GameSystem
 
         public CardCollection Collection { get; set; } = BotDecks.GetStarterDeck();
 
-		
+
 		// Cards are immutable so we can't track whether an individual card is foil,
 		// Instead keep a separate list of the cards that a player has that are foil
-        public CardCollection FoilCollection { get; set; } = BotDecks.GetStarterDeck();
+		public CardCollection FoilCollection { get; set; } = new();
 
         // TODO this is not the correct place to cache this info, but is the easiest
         // Place within UI coordinates that the bottom center of the player's
@@ -142,9 +142,15 @@ namespace TerraTCG.Common.GameSystem
                     duplicateCount += 1;
                 }
             }
-            // Give player a bit of money for duplicates
-            Player.QuickSpawnItem(Player.GetSource_GiftOrReward("TerraTCG: Duplicate card"), ItemID.SilverCoin, 10 * duplicateCount);
         }
+
+		internal void AddCardToFoilCollection(Card card)
+		{
+			if(!FoilCollection.Cards.Where(c=>c.Name == card.Name).Any())
+			{
+				FoilCollection.Cards.Add(card);
+			} 
+		}
 
         public override void SaveData(TagCompound tag)
         {
@@ -153,6 +159,7 @@ namespace TerraTCG.Common.GameSystem
             try
             {
                 tag.Add("collection", Collection.Serialize());
+                tag.Add("foil_collection", FoilCollection.Serialize());
                 tag.Add("activeDeck", ActiveDeck);
             }
             catch (Exception e)
@@ -187,6 +194,18 @@ namespace TerraTCG.Common.GameSystem
                     Mod.Logger.ErrorFormat("An error occurred while loading player collection: {0}", e.StackTrace);
                     Collection = BotDecks.GetStarterDeck();
                 }
+                if(tag.ContainsKey("foil_collection"))
+				{
+					try
+					{
+						var collection = tag.GetList<string>("foil_collection").ToList();
+						FoilCollection.DeSerialize(collection);
+					} catch (Exception e)
+					{
+						Mod.Logger.ErrorFormat("An error occurred while loading player foil collection: {0}", e.StackTrace);
+						FoilCollection = new();
+					}
+				}
                 if(tag.ContainsKey("activeDeck"))
                 {
                     ActiveDeck = tag.GetInt("activeDeck");
@@ -244,5 +263,6 @@ namespace TerraTCG.Common.GameSystem
             // Prevent getting hit while in game
             return GamePlayer == null;
         }
-    }
+
+	}
 }

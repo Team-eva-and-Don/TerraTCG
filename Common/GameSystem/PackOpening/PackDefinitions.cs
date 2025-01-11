@@ -45,10 +45,23 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 			// Shuffle the card order so it's not obvious the first card
 			// is from the first pool
 			var shuffledCards = packCards.OrderBy(p => Main.rand.Next()).ToList();
+			var allowFoils = new List<bool>(new bool[shuffledCards.Count]);
+			for(int i = 0; i < shuffledCards.Count; i++)
+			{
+				var card = shuffledCards[i];
+				// Give a small chance of turning the card foil if the player already
+				// has two
+				if(recipient.Collection.Cards.Count(c=>c==card) >= 2 && Main.rand.NextBool(20))
+				{
+					recipient.AddCardToFoilCollection(card);
+					allowFoils[i] = true;
+				}
+			}
 
             recipient.AddCardsToCollection(shuffledCards);
 
             CardWithTextRenderer.Instance.ToRender = shuffledCards;
+            CardWithTextRenderer.Instance.AllowRenderFoil = allowFoils;
             ModContent.GetInstance<UserInterfaces>().StartPackOpening();
 		}
 	}

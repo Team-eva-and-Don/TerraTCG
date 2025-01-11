@@ -44,6 +44,11 @@ namespace TerraTCG.Common.GameSystem.Drawing
             }
         }
 
+		// Whether to allow rendering in foil
+		// Used to suppress the behavior of always rendering an owned foil card
+		// as foil in pack openings
+		public List<bool> AllowRenderFoil = [];
+
         public Rectangle CardBounds(Card card)
         {
             var idx = _toRender.FindIndex(c => c.Name == card.Name);
@@ -90,8 +95,9 @@ namespace TerraTCG.Common.GameSystem.Drawing
             for(int i = 0; i < Math.Min(ToRender.Count, MAX_CARDS); i++)
             {
                 var card = ToRender[i];
+				var allowFoil = AllowRenderFoil[i];
                 var pos = new Vector2(0, i * (CARD_HEIGHT + CARD_MARGIN));
-				FoilCardRenderer.DrawCard(Main.spriteBatch, card, pos, Color.White, CARD_SCALE, 0);
+				FoilCardRenderer.DrawCard(Main.spriteBatch, card, pos, Color.White, CARD_SCALE, 0, playerOwned: allowFoil);
             }
 
             Main.spriteBatch.End();
