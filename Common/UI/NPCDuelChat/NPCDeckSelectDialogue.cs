@@ -93,12 +93,13 @@ namespace TerraTCG.Common.UI.NPCDuelChat
             {
                 return;
             }
-            for(int i = 0; i < deckLists.Count; i++)
+			var unlockedLists = deckLists.Where(d => d.IsUnlocked(TCGPlayer.LocalPlayer));
+            for(int i = 0; i < unlockedLists.Count(); i++)
             {
                 Buttons[i].Text = deckLists[i].Name;
                 Buttons[i].Left.Percent = i / (float)deckLists.Count;
             }
-            for(int i = deckLists.Count; i < Buttons.Count;i++)
+            for(int i = unlockedLists.Count(); i < Buttons.Count;i++)
             {
                 Buttons[i].Text = null;
             }

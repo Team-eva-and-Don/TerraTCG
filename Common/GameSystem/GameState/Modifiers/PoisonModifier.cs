@@ -34,7 +34,7 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
 			{
 				didApplyThisTurn = false;
 			} else if (eventInfo.Event == GameEvent.END_TURN && !didApplyThisTurn 
-				&& eventInfo.Zone.PlacedCard is PlacedCard card)
+				&& eventInfo.Zone.PlacedCard is PlacedCard card && eventInfo.Zone.Owner == eventInfo.TurnPlayer)
 			{
 				didApplyThisTurn = true;
 				card.CurrentHealth -= 1;
