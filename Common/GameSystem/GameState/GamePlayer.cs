@@ -9,6 +9,7 @@ using TerraTCG.Common.GameSystem.BotPlayer;
 using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.GameSystem.Drawing.Animations;
 using TerraTCG.Common.GameSystem.GameState.GameActions;
+using TerraTCG.Content.NPCs;
 
 namespace TerraTCG.Common.GameSystem.GameState
 {
@@ -19,6 +20,10 @@ namespace TerraTCG.Common.GameSystem.GameState
         internal CardGame Game { get; set; } // back reference to the game this player belongs to
         internal CardCollection Hand { get; set; }
         internal CardCollection Deck { get; set; }
+
+		// TODO this is a little bit outside the game, would prefer to store this data elsewhere
+		internal NPCDuelReward Reward { get; set; }
+
         internal int ManaPerTurn { get; set; } = 0;
 
         public PlayerResources _resources = new(3, 0, 0);

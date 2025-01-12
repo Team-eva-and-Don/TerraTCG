@@ -82,6 +82,16 @@ Items: {
 		DisplayName: Slime Pack
 		Tooltip: ""
 	}
+
+	BloodMoonPack: {
+		DisplayName: Blood Moon Pack
+		Tooltip: ""
+	}
+
+	MimicPack: {
+		DisplayName: Mimic Pack
+		Tooltip: ""
+	}
 }
 
 Cards: {

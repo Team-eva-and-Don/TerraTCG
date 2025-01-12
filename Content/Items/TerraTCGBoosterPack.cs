@@ -58,6 +58,11 @@ namespace TerraTCG.Content.Items
 		internal override Pack Pack => PackDefinitions.DungeonPack;
 	}
 
+	internal class MimicPack : TerraTCGBoosterPack
+	{
+		internal override Pack Pack => PackDefinitions.MimicPack;
+	}
+
 	internal class EvilPack: TerraTCGBoosterPack
 	{
 		internal override Pack Pack => PackDefinitions.EvilPack;
@@ -69,6 +74,10 @@ namespace TerraTCG.Content.Items
 	internal class JunglePack: TerraTCGBoosterPack
 	{
 		internal override Pack Pack => PackDefinitions.JunglePack;
+	}
+	internal class BloodMoonPack: TerraTCGBoosterPack
+	{
+		internal override Pack Pack => PackDefinitions.BloodMoonPack;
 	}
 
 	internal class KingSlimePack: TerraTCGBoosterPack

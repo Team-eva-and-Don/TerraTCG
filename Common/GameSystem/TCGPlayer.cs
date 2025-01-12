@@ -118,10 +118,11 @@ namespace TerraTCG.Common.GameSystem
         {
             if(GamePlayer.Game.Winner == GamePlayer)
             {
+				var reward = GamePlayer.Opponent.Reward;
                 Player.QuickSpawnItem(
                     Player.GetSource_GiftOrReward("TerraTCG: Won Game"), 
-                    ModContent.ItemType<TerraTCGBoosterPack>(), 
-                    Main.rand.Next(2, 6));
+                    reward.ItemId, 
+                    reward.Count);
             }
             GamePlayer = null;
             MouseoverCard = null;
