@@ -21,8 +21,7 @@ namespace TerraTCG.Common.GameSystem.GameState
         internal CardCollection Hand { get; set; }
         internal CardCollection Deck { get; set; }
 
-		// TODO this is a little bit outside the game, would prefer to store this data elsewhere
-		internal NPCDuelReward Reward { get; set; }
+		internal IGamePlayerController Controller { get; set; }
 
         internal int ManaPerTurn { get; set; } = 0;
 
@@ -55,11 +54,14 @@ namespace TerraTCG.Common.GameSystem.GameState
             return ModContent.GetInstance<T>().Card;
         }
 
-        public GamePlayer(CardGame game, CardCollection deck)
+        public GamePlayer(CardGame game, CardCollection deck, IGamePlayerController controller)
         {
             Game = game;
 
             Deck = deck;
+
+			Controller = controller;
+
             Deck.Shuffle();
         
             // Auto-mulligan a 1+ creature hand for the player

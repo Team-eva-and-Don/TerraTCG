@@ -14,6 +14,7 @@ using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.UI;
 using TerraTCG.Content.Items;
+using TerraTCG.Content.NPCs;
 
 namespace TerraTCG.Common.GameSystem
 {
@@ -22,6 +23,11 @@ namespace TerraTCG.Common.GameSystem
         public GamePlayer GamePlayer {get; set;}
 
         public CardCollection Deck { get; set; }
+
+        public string DeckName { get; set; }
+
+		public NPCDuelReward Reward { get; set; }
+
         public void StartGame(GamePlayer player, CardGame game);
 
         public void EndGame();
@@ -85,6 +91,9 @@ namespace TerraTCG.Common.GameSystem
 
         public CardCollection Collection { get; set; } = BotDecks.GetStarterDeck();
 
+		// Used to track deck unlock progress
+		public List<string> DefeatedDecks { get; set; } = [];
+
 
 		// Cards are immutable so we can't track whether an individual card is foil,
 		// Instead keep a separate list of the cards that a player has that are foil
@@ -98,8 +107,10 @@ namespace TerraTCG.Common.GameSystem
         // Flag for whether the player is allowed to deckbuild with cards
         // from outside their collection. Default false
         public bool DebugDeckbuildMode { get; internal set; } = false;
+		public string DeckName { get; set; }
+		public NPCDuelReward Reward { get; set; }
 
-        public override void OnEnterWorld()
+		public override void OnEnterWorld()
         {
             if(Player.whoAmI == Main.myPlayer)
             {
@@ -118,7 +129,14 @@ namespace TerraTCG.Common.GameSystem
         {
             if(GamePlayer.Game.Winner == GamePlayer)
             {
-				var reward = GamePlayer.Opponent.Reward;
+				var opponentController = GamePlayer.Opponent.Controller;
+				var reward = opponentController.Reward;
+				if(!DefeatedDecks.Contains(opponentController.DeckName))
+				{
+					// Double reward the first time you beat an opponent
+					DefeatedDecks.Add(opponentController.DeckName);
+					reward = new(reward.ItemId, reward.Count * 2);
+				}
                 Player.QuickSpawnItem(
                     Player.GetSource_GiftOrReward("TerraTCG: Won Game"), 
                     reward.ItemId, 
@@ -162,6 +180,7 @@ namespace TerraTCG.Common.GameSystem
                 tag.Add("collection", Collection.Serialize());
                 tag.Add("foil_collection", FoilCollection.Serialize());
                 tag.Add("activeDeck", ActiveDeck);
+                tag.Add("defeatedDecks", DefeatedDecks);
             }
             catch (Exception e)
             {
@@ -207,6 +226,11 @@ namespace TerraTCG.Common.GameSystem
 						FoilCollection = new();
 					}
 				}
+                if(tag.ContainsKey("defeatedDecks"))
+                {
+					DefeatedDecks = [.. tag.GetList<string>("defeatedDecks")];
+                }
+
                 if(tag.ContainsKey("activeDeck"))
                 {
                     ActiveDeck = tag.GetInt("activeDeck");

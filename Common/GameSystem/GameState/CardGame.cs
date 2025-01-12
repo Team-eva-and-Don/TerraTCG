@@ -45,8 +45,8 @@ namespace TerraTCG.Common.GameSystem.GameState
         public void StartGame(IGamePlayerController player1, IGamePlayerController player2)
         {
             GamePlayers = [
-                new GamePlayer(this, player1.Deck.Copy()),
-                new GamePlayer(this, player2.Deck.Copy())
+                new GamePlayer(this, player1.Deck.Copy(), player1),
+                new GamePlayer(this, player2.Deck.Copy(), player2)
             ];
 
             GamePlayerControllers = [

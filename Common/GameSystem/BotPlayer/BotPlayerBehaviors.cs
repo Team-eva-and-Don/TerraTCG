@@ -55,7 +55,10 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
 
             var bestTargetZone = GamePlayer.Opponent.Field.Zones.Where(z => !z.IsEmpty())
                 .Where(action.CanAcceptZone)
-                .OrderBy(z => z.PlacedCard.CurrentHealth)
+				// Always attack bosses when present since they are worth more points
+                .OrderByDescending(z => z.PlacedCard.Template.SubTypes[0] == CardSubtype.BOSS)
+				// Then go for the "largest threat" card
+                .ThenByDescending(z => z.PlacedCard.GetAttackWithModifiers(z, null).Damage)
                 .FirstOrDefault();
 
             if(bestAttackZone != null && bestTargetZone != null)

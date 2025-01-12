@@ -8,6 +8,7 @@ using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.GameSystem.GameState.GameActions;
+using TerraTCG.Content.NPCs;
 
 namespace TerraTCG.Common.GameSystem.BotPlayer
 {
@@ -17,6 +18,9 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
         public GamePlayer GamePlayer { get; set; }
         public CardCollection Deck { get; set; }
 
+		public string DeckName { get; set; }
+		public NPCDuelReward Reward { get; set; }
+
         private readonly TimeSpan PauseBetweenActions = TimeSpan.FromSeconds(0.5f);
         private TimeSpan LastBusyTime = TimeSpan.FromSeconds(0f);
 
@@ -24,9 +28,9 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
 
         private int AvailableMana => GamePlayer.Resources.Mana - ReservedAttackMana;
 
-        // Pre-calculate all the damage we can do this turn, used for
-        // certain decisions (eg. whether to force-promote a weakened unit)
-        private int PossibleDamage;
+		// Pre-calculate all the damage we can do this turn, used for
+		// certain decisions (eg. whether to force-promote a weakened unit)
+		private int PossibleDamage;
 
         // Prevent the bot from playing out its whole hand turn 0
         // and overwhelming the player (there is not much strategic

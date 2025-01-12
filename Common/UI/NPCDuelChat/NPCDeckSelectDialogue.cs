@@ -72,11 +72,11 @@ namespace TerraTCG.Common.UI.NPCDuelChat
                 var opponent = new SimpleBotPlayer()
                 {
                     Deck = lists[deckIdx].DeckList,
+					Reward = lists[deckIdx].Reward,
+					DeckName = lists[deckIdx].Key,
                 };
 
-				// TODO pass this in directly somehow
-                var game = ModContent.GetInstance<GameModSystem>().StartGame(myPlayer, opponent);
-				game.GamePlayers[1].Reward = lists[deckIdx].Reward;
+                ModContent.GetInstance<GameModSystem>().StartGame(myPlayer, opponent);
             }
             ModContent.GetInstance<UserInterfaces>().StopNPCChat();
         }

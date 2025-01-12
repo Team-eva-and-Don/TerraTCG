@@ -34,7 +34,9 @@ namespace TerraTCG.Content.NPCs
         }
         public LocalizedText Name { get; } = name;
 
-		public string Key => Name.Key;
+		public string Mod { get; } = ModContent.GetInstance<TerraTCG>().Name;
+
+		public string Key => $"{Mod}/{Name.Key}";
         public CardCollection DeckList { get; } = deckList;
 		public NPCDuelReward Reward { get; } = reward;
 		public bool IsTutorial { get; } = isTutorial;
