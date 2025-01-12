@@ -7,6 +7,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.BotPlayer;
 using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.UI;
@@ -24,11 +25,16 @@ namespace TerraTCG.Content.NPCs
 			=> new(ModContent.ItemType<T>(), count);
 	}
 
-	internal readonly struct NamedNPCDeck(LocalizedText name, CardCollection deckList, NPCDuelReward reward, bool isTutorial)
+	internal readonly struct NamedNPCDeck(LocalizedText name, CardCollection deckList, NPCDuelReward reward, List<string> prerequisites, bool isTutorial)
     {
 
-        public NamedNPCDeck(string nameKey, CardCollection deckList, NPCDuelReward reward = default, bool isTutorial = false) : 
-            this(Language.GetText($"Mods.TerraTCG.Cards.DeckNames.{nameKey}"), deckList, reward, isTutorial)
+        public NamedNPCDeck(string nameKey, CardCollection deckList, NPCDuelReward reward = default, List<string> prerequisites = null, bool isTutorial = false) : 
+            this(
+				Language.GetText($"Mods.TerraTCG.Cards.DeckNames.{nameKey}"), 
+				deckList, 
+				reward, 
+				(prerequisites ?? []).Select(p=>$"TerraTCG/Mods.TerraTCG.Cards.DeckNames.{p}").ToList(), 
+				isTutorial)
         {
 
         }
@@ -40,7 +46,10 @@ namespace TerraTCG.Content.NPCs
         public CardCollection DeckList { get; } = deckList;
 		public NPCDuelReward Reward { get; } = reward;
 		public bool IsTutorial { get; } = isTutorial;
-    }
+
+		internal bool IsUnlocked(TCGPlayer player) =>
+			prerequisites.Count == 0 || prerequisites.All(player.DefeatedDecks.Contains);
+	}
     internal class NPCDeckMap : ModSystem
     {
         internal Dictionary<int, List<NamedNPCDeck>> NPCDecklists = new ()
@@ -48,23 +57,23 @@ namespace TerraTCG.Content.NPCs
             [NPCID.Guide] = [
                 new("Tutorial", BotDecks.GetStarterDeck(), isTutorial: true),
                 new("ForestBeginner", BotDecks.GetStarterDeck(), GetReward<ForestPack>(2)),
-                new("Forest", BotDecks.GetForestDeck(), GetReward<ForestPack>(3))    
+                new("Forest", BotDecks.GetForestDeck(), GetReward<ForestPack>(3), ["ForestBeginner"])
             ],
             [NPCID.TownSlimeBlue] = [
                 new("SlimeBeginner", BotDecks.GetStarterSlimeDeck(), GetReward<SlimePack>(2)),
-                new("Slime", BotDecks.GetSlimeDeck(), GetReward<SlimePack>(3))
+                new("Slime", BotDecks.GetSlimeDeck(), GetReward<SlimePack>(3), ["SlimeBeginner"])
             ],
             [NPCID.WitchDoctor] = [
                 new("JungleBeginner", BotDecks.GetStarterJungleDeck(), GetReward<JunglePack>(2)),
-                new("Jungle", BotDecks.GetJungleDeck(), GetReward<JunglePack>(3)),
+                new("Jungle", BotDecks.GetJungleDeck(), GetReward<JunglePack>(3), ["JungleBeginner"]),
             ],
             [NPCID.ArmsDealer] = [
                 new("BloodMoonBeginner", BotDecks.GetStarterBloodMoonDeck(), GetReward<BloodMoonPack>(2)),
-                new("BloodMoon", BotDecks.GetBloodMoonDeck(), GetReward<BloodMoonPack>(3)),
+                new("BloodMoon", BotDecks.GetBloodMoonDeck(), GetReward<BloodMoonPack>(3), ["BloodMoonBeginner"]),
             ],
             [NPCID.Merchant] = [
                 new("SkeletonsBeginner", BotDecks.GetStarterSkeletonDeck(), GetReward<CavernPack>(2)),
-                new("Skeletons", BotDecks.GetSkeletonDeck(), GetReward<CavernPack>(3)),
+                new("Skeletons", BotDecks.GetSkeletonDeck(), GetReward<CavernPack>(3), ["SkeletonsBeginner"]),
             ],
             [NPCID.Clothier] = [
                 new("Curse", BotDecks.GetCurseDeck(), GetReward<DungeonPack>(2)),
@@ -74,15 +83,15 @@ namespace TerraTCG.Content.NPCs
             ],
             [NPCID.Nurse] = [
                 new("MushroomBeginner", BotDecks.GetStarterMushroomDeck(), GetReward<MushroomPack>(2)),
-                new("Mushroom", BotDecks.GetMushroomDeck(), GetReward<MushroomPack>(3)),
+                new("Mushroom", BotDecks.GetMushroomDeck(), GetReward<MushroomPack>(3), ["MushroomBeginner"]),
             ],
             [NPCID.GoblinTinkerer] = [
                 new("GoblinsBeginner", BotDecks.GetStarterGoblinDeck(), GetReward<GoblinPack>(2)),
-                new("Goblins", BotDecks.GetGoblinDeck(), GetReward<GoblinPack>(3)),
+                new("Goblins", BotDecks.GetGoblinDeck(), GetReward<GoblinPack>(3), ["GoblinsBeginner"]),
             ],
             [NPCID.Angler] = [
                 new("CrabsBeginner", BotDecks.GetStarterCrabDeck(), GetReward<OceanPack>(2)),
-                new("Crabs", BotDecks.GetCrabDeck(), GetReward<OceanPack>(3)),
+                new("Crabs", BotDecks.GetCrabDeck(), GetReward<OceanPack>(3), ["CrabsBeginner"]),
             ]
         };
     }

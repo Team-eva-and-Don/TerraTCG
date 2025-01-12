@@ -80,13 +80,14 @@ namespace TerraTCG.Common.UI.GameFieldUI
             {
                 var card = gamePlayer.Hand.Cards[i];
                 Vector2 currentPos = GetCardPosition(i);
-				FoilCardRenderer.DrawCard(spriteBatch, card, currentPos, Color.White, CARD_SCALE, 0);
+				FoilCardRenderer.DrawCard(spriteBatch, card, currentPos, Color.White, CARD_SCALE, 0, details: false);
                 if (i == gamePlayer.SelectedHandIdx)
                 {
                     // Draw a highlight over the card
                     var highlightTexture = TextureCache.Instance.ZoneHighlighted;
                     spriteBatch.Draw(highlightTexture.Value, currentPos, highlightTexture.Value.Bounds, Color.White, 0, default, 1.5f, SpriteEffects.None, 0f);
                 }
+				CardTextRenderer.Instance.DrawCardText(spriteBatch, card, currentPos, CARD_SCALE);
             }
             base.Draw(spriteBatch);
         }

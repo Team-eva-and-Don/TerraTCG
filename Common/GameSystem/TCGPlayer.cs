@@ -125,6 +125,41 @@ namespace TerraTCG.Common.GameSystem
             ModContent.GetInstance<UserInterfaces>().StartGame();
         }
 
+		private IEnumerable<(int, NamedNPCDeck)> UnlockedDecks =>
+			ModContent.GetInstance<NPCDeckMap>().NPCDecklists
+				.SelectMany(kv => kv.Value.Select(v => (kv.Key, v)))
+				.Where(kv => kv.v.IsUnlocked(this));
+
+		private NPCDuelReward HandleFirstTimeDeckWin(IGamePlayerController opponent)
+		{
+			// Double reward the first time you beat an opponent
+			var unlockedLists = UnlockedDecks.ToList();
+			DefeatedDecks.Add(opponent.DeckName);
+			var newUnlockedLists = UnlockedDecks.ToList();
+			// if any new lists are unlocked, Main.NewText to alert the player
+			var npcsWithNewLists = newUnlockedLists
+				.Where(l=>!unlockedLists.Any(l2=>l2.Item1 == l.Item1 && l2.Item2.Key == l.Item2.Key))
+				.Select(c => c.Item1)
+				.Select(npcId =>
+				{
+					// TODO is there a more elegant way than this to get names?
+					var defeatedNPC = Main.npc.Where(npc => npc.active && npc.netID == npcId).FirstOrDefault();
+					if(defeatedNPC is NPC npc)
+					{
+						return $" for {npc.FullName}";
+					} else
+					{
+						return "";
+					}
+				});
+			foreach (var newNPC in npcsWithNewLists)
+			{
+				Main.NewText($"Unlocked a new deck{newNPC}!");
+			}
+
+			return new(opponent.Reward.ItemId, opponent.Reward.Count * 2);
+		}
+
         public void EndGame()
         {
             if(GamePlayer.Game.Winner == GamePlayer)
@@ -133,9 +168,7 @@ namespace TerraTCG.Common.GameSystem
 				var reward = opponentController.Reward;
 				if(!DefeatedDecks.Contains(opponentController.DeckName))
 				{
-					// Double reward the first time you beat an opponent
-					DefeatedDecks.Add(opponentController.DeckName);
-					reward = new(reward.ItemId, reward.Count * 2);
+					reward = HandleFirstTimeDeckWin(opponentController);
 				}
                 Player.QuickSpawnItem(
                     Player.GetSource_GiftOrReward("TerraTCG: Won Game"), 
@@ -228,7 +261,7 @@ namespace TerraTCG.Common.GameSystem
 				}
                 if(tag.ContainsKey("defeatedDecks"))
                 {
-					DefeatedDecks = [.. tag.GetList<string>("defeatedDecks")];
+					// DefeatedDecks = [.. tag.GetList<string>("defeatedDecks")];
                 }
 
                 if(tag.ContainsKey("activeDeck"))

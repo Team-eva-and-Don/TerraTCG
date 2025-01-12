@@ -1280,24 +1280,24 @@ Cards: {
 
 	DeckNames: {
 		Tutorial: Tutorial
-		ForestBeginner: Forest (Beginner)
-		Forest: Forest (Intermediate)
-		SlimeBeginner: Slimes (Beginner)
-		Slime: Slimes (Advanced)
-		JungleBeginner: Jungle (Beginner)
-		Jungle: Jungle (Advanced)
-		Treasure: Treasures (Advanced)
-		BloodMoonBeginner: Blood Moon (Beginner)
-		BloodMoon: Blood Moon (Intermediate)
-		MushroomBeginner: Mushrooms (Beginner)
-		Mushroom: Mushrooms (Intermediate)
-		SkeletonsBeginner: Skeletons (Beginner)
-		Skeletons: Skeletons (Intermediate)
-		Curse: Dungeon (Intermediate)
-		GoblinsBeginner: Goblins (Intermediate)
-		Goblins: Goblins (Advanced)
-		CrabsBeginner: Crabs (Beginner)
-		Crabs: Crabs (Advanced)
+		ForestBeginner: Forest 1
+		Forest: Forest 2
+		SlimeBeginner: Slimes 1
+		Slime: Slimes 2
+		JungleBeginner: Jungle 1
+		Jungle: Jungle 2
+		Treasure: Treasures 1
+		BloodMoonBeginner: Blood Moon 1
+		BloodMoon: Blood Moon 2
+		MushroomBeginner: Mushrooms 1
+		Mushroom: Mushrooms 2
+		SkeletonsBeginner: Skeletons 1
+		Skeletons: Skeletons 2
+		Curse: Dungeon 1
+		GoblinsBeginner: Goblins 1
+		Goblins: Goblins 2
+		CrabsBeginner: Ocean 1
+		Crabs: Ocean 2
 	}
 
 	ActionText: {
