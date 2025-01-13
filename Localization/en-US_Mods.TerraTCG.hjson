@@ -92,6 +92,16 @@ Items: {
 		DisplayName: Mimic Pack
 		Tooltip: ""
 	}
+
+	InvitationToDuel: {
+		DisplayName: Invitation To Duel
+		Tooltip: ""
+	}
+
+	BOCPack: {
+		DisplayName: B O C Pack
+		Tooltip: ""
+	}
 }
 
 Cards: {
@@ -1298,6 +1308,9 @@ Cards: {
 		Goblins: Goblins 2
 		CrabsBeginner: Ocean 1
 		Crabs: Ocean 2
+		QueenBee: Queen Bee
+		KingSlime: King Slime
+		BoC: Brain of Cthulhu
 	}
 
 	ActionText: {

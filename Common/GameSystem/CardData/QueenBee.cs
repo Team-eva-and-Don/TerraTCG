@@ -22,7 +22,7 @@ namespace TerraTCG.Common.GameSystem.CardData
 				if(eventInfo.Event == GameEvent.START_TURN)
 				{
 					return true;
-				} else if (eventInfo.Event == GameEvent.END_TURN && !didApplyThisTurn)
+				} else if (eventInfo.Event == GameEvent.END_TURN && !didApplyThisTurn && eventInfo.Zone.Owner == eventInfo.TurnPlayer)
 				{
 					didApplyThisTurn = true;
 					// Deal 1 damage to every poisoned enemy on the opponent's field
@@ -43,11 +43,12 @@ namespace TerraTCG.Common.GameSystem.CardData
         public override Card CreateCard() => new ()
         {
             Name = "QueenBee",
-            MaxHealth = 11,
+            MaxHealth = 9,
             MoveCost = 2,
             Points = 2,
             NPCID = NPCID.QueenBee,
             CardType = CardType.CREATURE,
+			Role = ZoneRole.DEFENSE,
             SubTypes = [CardSubtype.BOSS, CardSubtype.JUNGLE, CardSubtype.FIGHTER],
             DrawZoneNPC = CardOverlayRenderer.Instance.DrawQueenBeeNPC,
 			FieldModifiers = () => [new QueenBeePoisonBoost()],

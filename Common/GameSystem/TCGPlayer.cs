@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
@@ -160,8 +161,8 @@ namespace TerraTCG.Common.GameSystem
 			return new(opponent.Reward.ItemId, opponent.Reward.Count * 2);
 		}
 
-        public void EndGame()
-        {
+		private void HandleTownNPCDuelEnd()
+		{
             if(GamePlayer.Game.Winner == GamePlayer)
             {
 				var opponentController = GamePlayer.Opponent.Controller;
@@ -175,6 +176,52 @@ namespace TerraTCG.Common.GameSystem
                     reward.ItemId, 
                     reward.Count);
             }
+		}
+
+		private void HandleBossNPCDuelEnd(NPC dueledNPC)
+		{
+            if(GamePlayer.Game.Winner == GamePlayer)
+            {
+				var opponentController = GamePlayer.Opponent.Controller;
+				var reward = opponentController.Reward;
+				if(!DefeatedDecks.Contains(opponentController.DeckName))
+				{
+					reward = HandleFirstTimeDeckWin(opponentController);
+				}
+                Player.QuickSpawnItem(
+                    Player.GetSource_GiftOrReward("TerraTCG: Won Game"), 
+                    reward.ItemId, 
+                    reward.Count);
+
+				// TODO figure out why this is not recommended for multiplayer
+				dueledNPC.StrikeInstantKill();
+            } else
+			{
+				Player.KillMe(PlayerDeathReason.ByCustomReason($"{Player.name} forfeited their soul to {dueledNPC.FullName} in a card game!"), 9999, 0);
+			}
+		}
+
+
+        public void EndGame()
+        {
+			// check whether the game was with a boss
+			// TODO this is a bit clunky but I don't want to add more state variables
+			var dueledNPCType = ModContent.GetInstance<NPCDeckMap>().NPCDecklists
+				.Where(kv => kv.Value.Any(dl=>dl.Key == GamePlayer.Opponent.Controller.DeckName))
+				.Select(kv=>kv.Key)
+				.FirstOrDefault();
+
+			if(dueledNPCType is int npcType)
+			{
+				var dueledNPC = Main.npc.Where(npc => npc.active && npc.netID == npcType).FirstOrDefault();
+				if (dueledNPC.boss)
+				{
+					HandleBossNPCDuelEnd(dueledNPC);
+				} else
+				{
+					HandleTownNPCDuelEnd();
+				}
+			}
             GamePlayer = null;
             MouseoverCard = null;
             MouseoverZone = null;

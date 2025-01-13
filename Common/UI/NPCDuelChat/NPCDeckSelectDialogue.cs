@@ -75,7 +75,6 @@ namespace TerraTCG.Common.UI.NPCDuelChat
 					Reward = lists[deckIdx].Reward,
 					DeckName = lists[deckIdx].Key,
                 };
-
                 ModContent.GetInstance<GameModSystem>().StartGame(myPlayer, opponent);
             }
             ModContent.GetInstance<UserInterfaces>().StopNPCChat();

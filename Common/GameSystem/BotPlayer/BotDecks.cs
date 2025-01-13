@@ -517,5 +517,86 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     GetCard<MotherSlime>(),
                 ]
             };
-    }
+
+		public static CardCollection GetQueenBeeDeck() =>
+			new()
+			{
+				Cards = [
+					GetCard<QueenBee>(),
+					GetCard<QueenBee>(),
+					GetCard<Bee>(),
+					GetCard<Bee>(),
+					GetCard<Hornet>(),
+					GetCard<Hornet>(),
+					GetCard<MossHornet>(),
+					GetCard<MossHornet>(),
+					GetCard<JungleBat>(),
+					GetCard<JungleBat>(),
+					GetCard<SpikedJungleSlime>(),
+					GetCard<SpikedJungleSlime>(),
+					GetCard<Guide>(),
+					GetCard<Guide>(),
+					GetCard<HealingPotion>(),
+					GetCard<HealingPotion>(),
+					GetCard<Shackle>(),
+					GetCard<Shackle>(),
+					GetCard<IronskinPotion>(),
+					GetCard<IronskinPotion>(),
+				]
+			};
+
+		internal static CardCollection GetKingSlimeDeck() =>
+            new ()
+            {
+                Cards = [
+                    GetCard<KingSlime>(),
+                    GetCard<KingSlime>(),
+                    GetCard<BlueSlime>(), 
+                    GetCard<BlueSlime>(), 
+                    GetCard<Guide>(),
+                    GetCard<Guide>(),
+                    GetCard<SpikedSlime>(), 
+                    GetCard<SpikedSlime>(),
+                    GetCard<Shackle>(),
+                    GetCard<Shackle>(),
+                    GetCard<ToxicSludge>(),
+                    GetCard<ToxicSludge>(),
+                    GetCard<SpikedJungleSlime>(),
+                    GetCard<SpikedJungleSlime>(),
+                    GetCard<HealingPotion>(), 
+                    GetCard<HealingPotion>(), 
+                    GetCard<Pinky>(), 
+                    GetCard<Pinky>(), 
+                    GetCard<MotherSlime>(),
+                    GetCard<MotherSlime>(),
+                ]
+            };
+
+		internal static CardCollection GetBoCDeck() =>
+            new ()
+            {
+                Cards = [
+                    GetCard<BrainOfCthulhu>(), 
+                    GetCard<BrainOfCthulhu>(), 
+                    GetCard<Guide>(),
+                    GetCard<Guide>(),
+                    GetCard<Crimera>(), 
+                    GetCard<Crimera>(),
+                    GetCard<Shuriken>(),
+                    GetCard<Shuriken>(),
+                    GetCard<FaceMonster>(),
+                    GetCard<FaceMonster>(),
+                    GetCard<Crab>(),
+                    GetCard<Crab>(),
+                    GetCard<HealingPotion>(), 
+                    GetCard<HealingPotion>(), 
+                    GetCard<Creeper>(), 
+                    GetCard<Creeper>(), 
+                    GetCard<FeralClaws>(),
+                    GetCard<FeralClaws>(),
+                    GetCard<Shackle>(),
+                    GetCard<Shackle>(),
+                ]
+            };
+	}
 }

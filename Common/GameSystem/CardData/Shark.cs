@@ -26,8 +26,8 @@ namespace TerraTCG.Common.GameSystem.CardData
             Attacks = [
                 new() {
                     Name = "Chomp",
-                    Damage = 4,
-                    Cost = 4,
+                    Damage = 3,
+                    Cost = 3,
                 }
             ]
         };

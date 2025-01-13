@@ -28,7 +28,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         public override Card CreateCard() => new ()
         {
             Name = "BrainOfCthulhu",
-            MaxHealth = 9,
+            MaxHealth = 10,
             MoveCost = 2,
             Points = 2,
             NPCID = NPCID.BrainofCthulhu,

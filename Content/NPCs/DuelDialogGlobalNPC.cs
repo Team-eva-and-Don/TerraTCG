@@ -54,6 +54,7 @@ namespace TerraTCG.Content.NPCs
     {
         internal Dictionary<int, List<NamedNPCDeck>> NPCDecklists = new ()
         {
+			// Duel-able Town NPCs
             [NPCID.Guide] = [
                 new("Tutorial", BotDecks.GetStarterDeck(), isTutorial: true),
                 new("ForestBeginner", BotDecks.GetStarterDeck(), GetReward<ForestPack>(2)),
@@ -92,7 +93,17 @@ namespace TerraTCG.Content.NPCs
             [NPCID.Angler] = [
                 new("CrabsBeginner", BotDecks.GetStarterCrabDeck(), GetReward<OceanPack>(2)),
                 new("Crabs", BotDecks.GetCrabDeck(), GetReward<OceanPack>(3), ["CrabsBeginner"]),
-            ]
+            ],
+			// Bosses
+			[NPCID.QueenBee] = [
+				new("QueenBee", BotDecks.GetQueenBeeDeck(), GetReward<QueenBeePack>(1)),
+			],
+			[NPCID.KingSlime] = [
+				new("KingSlime", BotDecks.GetKingSlimeDeck(), GetReward<KingSlimePack>(1)),
+			],
+			[NPCID.BrainofCthulhu] = [
+				new("BoC", BotDecks.GetBoCDeck(), GetReward<BOCPack>(1)),
+			]
         };
     }
     internal class DuelDialogGlobalNPC : GlobalNPC
