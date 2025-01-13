@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
@@ -55,6 +56,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
 
         internal Dictionary<ModifierType, Asset<Texture2D>> ModifierIconTextures { get; private set; }
 		public Dictionary<CardSubtype, Asset<Texture2D>> FoilMasks { get; private set; }
+		public Dictionary<string, Asset<Texture2D>> CardFoilMasks { get; private set; }
 		public Dictionary<CardSubtype, Asset<Texture2D>> BiomeMapBackgrounds { get; private set; }
         internal Dictionary<CardSubtype, Rectangle> BiomeIconBounds { get; private set; }
         internal Dictionary<CardSubtype, Rectangle> CardTypeEmoteBounds { get; private set; }
@@ -121,6 +123,11 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 [CardSubtype.EQUIPMENT] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/ITEM"),
                 [CardSubtype.TOWNSFOLK] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/TOWNSFOLK"),
             };
+
+			CardFoilMasks = new Dictionary<string, Asset<Texture2D>>
+			{
+				[ModContent.GetInstance<KingSlime>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/KingSlime"),
+			};
 
             BiomeMapBackgrounds = new Dictionary<CardSubtype, Asset<Texture2D>>
             {

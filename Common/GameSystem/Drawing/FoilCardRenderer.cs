@@ -63,7 +63,8 @@ namespace TerraTCG.Common.GameSystem.Drawing
 			spriteBatch.Draw(textureCache.Foiling.Value, pos, foilBounds, Color.White * 0.35f, 0, default, scale, SpriteEffects.None, 0);
 
 			// Draw the non-foiled parts of the card
-			if (textureCache.FoilMasks.TryGetValue(card.SortType, out var mask))
+			if (textureCache.CardFoilMasks.TryGetValue(card.FullName, out var mask) || 
+				textureCache.FoilMasks.TryGetValue(card.SortType, out mask))
 			{
 				spriteBatch.Draw(mask.Value, pos, card.Texture.Value.Bounds, Color.White, 0, default, scale, SpriteEffects.None, 0);
 			}
