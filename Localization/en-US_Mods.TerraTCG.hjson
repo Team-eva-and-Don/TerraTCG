@@ -257,6 +257,7 @@ Cards: {
 			'''
 			Bloodlust: Deals +2 dmg 
 			to Bleeding enemies.
+			Zealous.
 			'''
 		Attack.Name: Headache
 	}

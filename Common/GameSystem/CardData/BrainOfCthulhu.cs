@@ -28,14 +28,14 @@ namespace TerraTCG.Common.GameSystem.CardData
         public override Card CreateCard() => new ()
         {
             Name = "BrainOfCthulhu",
-            MaxHealth = 10,
+            MaxHealth = 9,
             MoveCost = 2,
             Points = 2,
             NPCID = NPCID.BrainofCthulhu,
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.BOSS, CardSubtype.CRIMSON, CardSubtype.FIGHTER],
             DrawZoneNPC = CardOverlayRenderer.Instance.DrawBOCNPC,
-			Modifiers = () => [new BOCBloodBoost()],
+			Modifiers = () => [new BOCBloodBoost(), new ZealousModifier()],
             Attacks = [
                 new() {
                     Damage = 4,

@@ -594,8 +594,8 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     GetCard<Creeper>(), 
                     GetCard<FeralClaws>(),
                     GetCard<FeralClaws>(),
-                    GetCard<Shackle>(),
-                    GetCard<Shackle>(),
+                    GetCard<Dryad>(),
+                    GetCard<Dryad>(),
                 ]
             };
 	}

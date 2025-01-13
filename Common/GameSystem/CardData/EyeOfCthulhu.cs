@@ -10,35 +10,34 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class WanderingEye: BaseCardTemplate, ICardTemplate
+    internal class EyeOfCthulhu: BaseCardTemplate, ICardTemplate
     {
-        internal class HalfHealthDamageBoostModifier : ICardModifier
+        private class HalfHealthDamageBoostModifier : ICardModifier
         {
             public void ModifyAttack(ref Attack attack, Zone sourceZone, Zone destZone) 
             {
                 if(sourceZone.PlacedCard is PlacedCard card && card.CurrentHealth <= (card.Template.MaxHealth + 1) / 2)
                 {
-                    attack.Damage += 2;
+                    attack.Damage *= 2;
                 }
             }
         }
         public override Card CreateCard() => new ()
         {
-            Name = "WanderingEye",
-            MaxHealth = 8,
+            Name = "EyeOfCthulhu",
+            MaxHealth = 10,
             MoveCost = 2,
-            NPCID = NPCID.WanderingEye,
+            NPCID = NPCID.EyeofCthulhu,
             CardType = CardType.CREATURE,
-            SubTypes = [CardSubtype.EXPERT, CardSubtype.FOREST, CardSubtype.SCOUT],
+            SubTypes = [CardSubtype.BOSS, CardSubtype.FOREST, CardSubtype.SCOUT],
             Modifiers = () => [
                 new EvasiveModifier(),
                 new HalfHealthDamageBoostModifier(),
             ],
             Attacks = [
                 new() {
-                    Name = "Eye Bite",
-                    Damage = 3,
-                    Cost = 2,
+                    Damage = 4,
+                    Cost = 3,
                 }
             ]
         };

@@ -34,7 +34,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             MoveCost = 2,
             CardType = CardType.CREATURE,
             NPCID = NPCID.SlimeSpiked,
-            SubTypes = [CardSubtype.FOREST, CardSubtype.DEFENDER],
+            SubTypes = [CardSubtype.FOREST, CardSubtype.SLIME, CardSubtype.DEFENDER],
             Attacks = [
                 new() {
                     Damage = 3,
