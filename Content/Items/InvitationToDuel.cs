@@ -19,14 +19,12 @@ namespace TerraTCG.Content.Items
 	internal class InvitationToDuel : ModItem
 	{
 		const int MAX_BOSS_DIST_SQ = 1020 * 1020;
-		public override string Texture => "Terraria/Images/Item_" + ItemID.DiscountCard;
 
 		public override void SetDefaults()
 		{
-            Item.useStyle = ItemUseStyleID.Swing;
-            Item.useAnimation = 15;
-            Item.useTime = 15;
-            Item.noUseGraphic = true;
+            Item.useStyle = ItemUseStyleID.HoldUp;
+            Item.useAnimation = 60;
+            Item.useTime = 60;
             Item.rare = ItemRarityID.Blue;
 		}
 
@@ -45,36 +43,68 @@ namespace TerraTCG.Content.Items
 
 		private static void StartDuelWithNearestBoss(Player player)
 		{
-			foreach(var npc in Main.npc.Where(npc=>npc.active && npc.boss && 
-				Vector2.DistanceSquared(player.Center, npc.Center) < MAX_BOSS_DIST_SQ))
+			if(GetNearestDuelableBoss(player) is not NPC boss)
 			{
-				if(ModContent.GetInstance<NPCDeckMap>().NPCDecklists.TryGetValue(npc.netID, out var bossLists))
+				return;
+			}
+			var bossLists = ModContent.GetInstance<NPCDeckMap>().NPCDecklists[boss.netID];
+			// Exit out of the duel dialogue if the player does not have a valid decklist
+			if(!TCGPlayer.LocalPlayer.Deck.ValidateDeck())
+			{
+				Main.NewText(Language.GetTextValue("Mods.TerraTCG.Cards.Common.DeckNotValid"), Color.Red);
+				return;
+			}
+			var bossList = bossLists.First();
+			var myPlayer = TCGPlayer.LocalPlayer;
+			var opponent = new SimpleBotPlayer()
+			{
+				Deck = bossList.DeckList,
+				Reward = bossList.Reward,
+				DeckName = bossList.Key,
+			};
+			StartGameAndRigBossHand(myPlayer, opponent);
+		}
+
+		private static NPC GetNearestDuelableBoss(Player player) => Main.npc
+				.Where(npc => npc.active && npc.boss)
+				.Where(npc => Vector2.DistanceSquared(player.Center, npc.Center) < MAX_BOSS_DIST_SQ)
+				.Where(npc => ModContent.GetInstance<NPCDeckMap>().NPCDecklists.ContainsKey(npc.netID))
+				.FirstOrDefault();
+
+		// Via ExampleMagicMirror from ExampleMod
+		public override void UseStyle(Player player, Rectangle heldItemFrame)
+		{
+			if (Main.rand.NextBool())
+			{
+				Dust.NewDust(player.position, player.width, player.height, DustID.MagicMirror, 0f, 0f, 150, Color.White, 1.1f); // Makes dust from the player's position and copies the hitbox of which the dust may spawn. Change these arguments if needed.
+			}
+
+			// This sets up the itemTime correctly.
+			if (player.itemTime == 0)
+			{
+				player.ApplyItemTime(Item);
+				if(GetNearestDuelableBoss(player) is NPC boss)
 				{
-					// Exit out of the duel dialogue if the player does not have a valid decklist
-					if(!TCGPlayer.LocalPlayer.Deck.ValidateDeck())
-					{
-						Main.NewText(Language.GetTextValue("Mods.TerraTCG.Cards.Common.DeckNotValid"), Color.Red);
-						return;
-					}
-					var bossList = bossLists.First();
-					var myPlayer = TCGPlayer.LocalPlayer;
-					var opponent = new SimpleBotPlayer()
-					{
-						Deck = bossList.DeckList,
-						Reward = bossList.Reward,
-						DeckName = bossList.Key,
-					};
-					StartGameAndRigBossHand(myPlayer, opponent);
+					Main.NewText($"{boss.FullName} has accepted your invitation to duel!");
 				}
+			}
+			else if (player.itemTime == 10)
+			{
+				for (int d = 0; d < 70; d++)
+				{
+					Dust.NewDust(player.position, player.width, player.height, DustID.MagicMirror, player.velocity.X * 0.5f, player.velocity.Y * 0.5f, 150, default, 1.5f);
+				}
+			} else if (player.itemTime == 1)
+			{
+				StartDuelWithNearestBoss(player);
 			}
 		}
 
-        public override bool? UseItem(Player player)
+		public override bool? UseItem(Player player)
         {
             // TODO this seems to get called every frame, is that intended?
             if(player.whoAmI == Main.myPlayer && player.itemAnimation == Item.useAnimation - 1)
             {
-				StartDuelWithNearestBoss(player);
             }
             return default;
         }

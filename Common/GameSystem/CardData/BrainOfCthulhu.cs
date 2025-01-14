@@ -38,7 +38,7 @@ namespace TerraTCG.Common.GameSystem.CardData
 			Modifiers = () => [new BOCBloodBoost(), new ZealousModifier()],
             Attacks = [
                 new() {
-                    Damage = 4,
+                    Damage = 3,
                     Cost = 2,
                 }
             ]

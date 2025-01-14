@@ -14,6 +14,7 @@ using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.UI;
+using TerraTCG.Content.Gores;
 using TerraTCG.Content.Items;
 using TerraTCG.Content.NPCs;
 
@@ -180,6 +181,9 @@ namespace TerraTCG.Common.GameSystem
 
 		private void HandleBossNPCDuelEnd(NPC dueledNPC)
 		{
+			// TODO this is hacky, need game unpaused for gore to spawn
+			bool isPaused = Main.gamePaused;
+			Main.gamePaused = false;
             if(GamePlayer.Game.Winner == GamePlayer)
             {
 				var opponentController = GamePlayer.Opponent.Controller;
@@ -194,10 +198,22 @@ namespace TerraTCG.Common.GameSystem
                     reward.Count);
 
 				// TODO figure out why this is not recommended for multiplayer
+				SpawnCardExplosion(dueledNPC);
 				dueledNPC.StrikeInstantKill();
             } else
 			{
+				SpawnCardExplosion(Player);
 				Player.KillMe(PlayerDeathReason.ByCustomReason($"{Player.name} forfeited their soul to {dueledNPC.FullName} in a card game!"), 9999, 0);
+			}
+			Main.gamePaused = isPaused;
+		}
+
+		private void SpawnCardExplosion(Entity source)
+		{
+			for(int i = 0; i < 5; i++)
+			{
+				var launchVelocity = new Vector2(Main.rand.Next(-5, 5), Main.rand.Next(-6, -3));
+				Gore.NewGore(source.GetSource_Death(), source.position, source.velocity + launchVelocity, ModContent.GoreType<CardGore>());
 			}
 		}
 
