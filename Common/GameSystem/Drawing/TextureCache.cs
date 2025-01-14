@@ -127,6 +127,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
 			CardFoilMasks = new Dictionary<string, Asset<Texture2D>>
 			{
 				[ModContent.GetInstance<KingSlime>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/KingSlime"),
+				[ModContent.GetInstance<QueenBee>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/QueenBee"),
 			};
 
             BiomeMapBackgrounds = new Dictionary<CardSubtype, Asset<Texture2D>>
