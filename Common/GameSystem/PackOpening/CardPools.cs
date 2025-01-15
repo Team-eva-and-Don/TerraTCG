@@ -201,6 +201,14 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 			]
 		};
 
+		public static CardCollection EOCPromoCards => new()
+		{
+			Cards = [
+				GetCard<EyeOfCthulhu>(),
+				GetCard<ServantOfCthulhu>(),
+			]
+		};
+
 		public static CardCollection KingSlimePromoCards => new()
 		{
 			Cards = [

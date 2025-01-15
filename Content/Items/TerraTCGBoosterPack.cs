@@ -89,6 +89,12 @@ namespace TerraTCG.Content.Items
 	{
 		internal override Pack Pack => PackDefinitions.BOCPack;
 	}
+
+	internal class EOCPack: TerraTCGBoosterPack
+	{
+		internal override Pack Pack => PackDefinitions.EOCPack;
+	}
+
 	internal class MushroomPack: TerraTCGBoosterPack
 	{
 		internal override Pack Pack => PackDefinitions.MushroomPack;

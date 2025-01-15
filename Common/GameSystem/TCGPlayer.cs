@@ -22,7 +22,7 @@ namespace TerraTCG.Common.GameSystem
 {
     internal interface IGamePlayerController
     {
-        public GamePlayer GamePlayer {get; set;}
+        public GamePlayer GamePlayer { get; set; }
 
         public CardCollection Deck { get; set; }
 
@@ -327,7 +327,7 @@ namespace TerraTCG.Common.GameSystem
 				}
                 if(tag.ContainsKey("defeatedDecks"))
                 {
-					// DefeatedDecks = [.. tag.GetList<string>("defeatedDecks")];
+					DefeatedDecks = [.. tag.GetList<string>("defeatedDecks")];
                 }
 
                 if(tag.ContainsKey("activeDeck"))

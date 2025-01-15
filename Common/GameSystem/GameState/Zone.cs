@@ -136,6 +136,25 @@ namespace TerraTCG.Common.GameSystem.GameState
             spriteBatch.Draw(texture.Value, position, bounds, Color.White, rotation, origin, 1f, SpriteEffects.None, 0);
         }
 
+        internal Dictionary<ModifierType, int> GetKeywordModifiers()
+		{
+			// Easy - Get the modifiers that apply directly on the card
+			var modifierMap = PlacedCard?.GetKeywordModifiers() ?? [];
+
+			// More challenging - get field modifiers that also apply to the card
+			var fieldModifiersForCard = Owner.Field.CardModifiers.Where(m => m.AppliesToZone(this));
+
+			foreach(var modifier in fieldModifiersForCard.Where(m=>m.Category != ModifierType.NONE))
+			{
+                if (!modifierMap.TryGetValue(modifier.Category, out int currentAmount))
+                {
+                    currentAmount = 0;
+                }
+                modifierMap[modifier.Category] = currentAmount + modifier.Amount;
+            }
+            return modifierMap;
+		}
+
         internal bool IsEmpty() => PlacedCard == null;
 
         internal void Draw(SpriteBatch spriteBatch, Vector2 position, float rotation)

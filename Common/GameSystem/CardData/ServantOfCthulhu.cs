@@ -10,19 +10,21 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class SpikedSlime: BaseCardTemplate, ICardTemplate
+    internal class ServantOfCthulhu: BaseCardTemplate, ICardTemplate
     {
-		private class SpikedSlimeBossBuffModifier : ICardModifier
+		private class SOCBossBuffModifier : ICardModifier
 		{
-			public ModifierType Category => ModifierType.SPIKED;
-			public bool AppliesToZone(Zone zone) => zone.PlacedCard?.Template.Name == "KingSlime";
+			public ModifierType Category => ModifierType.DEFENSE_BOOST;
+
+			public bool AppliesToZone(Zone zone) => zone.PlacedCard?.Template.Name == "EyeOfCthulhu" &&
+				zone.PlacedCard.CurrentHealth <= (zone.PlacedCard.Template.MaxHealth + 1) /2;
 
 			public void ModifyIncomingAttack(ref Attack attack, Zone sourceZone, Zone destZone) 
 			{
 				// no-op
 				if(AppliesToZone(destZone))
 				{
-					attack.SelfDamage += 2;
+					attack.Damage -= 1;
 				}
 			}
 
@@ -32,20 +34,20 @@ namespace TerraTCG.Common.GameSystem.CardData
 
         public override Card CreateCard() => new ()
         {
-            Name = "SpikedSlime",
+            Name = "ServantOfCthulhu",
             MaxHealth = 6,
             MoveCost = 2,
             CardType = CardType.CREATURE,
-            NPCID = NPCID.SlimeSpiked,
-            SubTypes = [CardSubtype.FOREST, CardSubtype.SLIME, CardSubtype.DEFENDER],
+            NPCID = NPCID.ServantofCthulhu,
+            SubTypes = [CardSubtype.FOREST, CardSubtype.SCOUT],
             Attacks = [
                 new() {
-                    Damage = 3,
-                    Cost = 2,
+                    Damage = 1,
+                    Cost = 1,
                 }
             ],
-			Modifiers = () => [new SpikedModifier(2)],
-			FieldModifiers = () => [new SpikedSlimeBossBuffModifier()],
+			Modifiers = () => [new EvasiveModifier()],
+			FieldModifiers = () => [new SOCBossBuffModifier()],
         };
     }
 }

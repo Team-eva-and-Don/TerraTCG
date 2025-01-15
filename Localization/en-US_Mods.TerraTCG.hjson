@@ -102,6 +102,11 @@ Items: {
 		DisplayName: B O C Pack
 		Tooltip: ""
 	}
+
+	EOCPack: {
+		DisplayName: E O C Pack
+		Tooltip: ""
+	}
 }
 
 Cards: {
@@ -277,9 +282,9 @@ Cards: {
 		Name: "{$NPCName.SlimeSpiked}"
 		Modifier.Description:
 			'''
-			Boss' Helper: Your
-			King Slime has Spiked.
-			This has Spiked.
+			Boss' Helper: Spiked.
+			Your King Slime has 
+			Spiked.
 			'''
 		Attack.Name: Royal Helper
 	}
@@ -380,15 +385,49 @@ Cards: {
 			'''
 	}
 
-	WanderingEye: {
-		Name: "{$NPCName.WanderingEye}"
+	ServantOfCthulhu: {
+		Name: Servant of C.
+		Modifier.Description:
+			'''
+			Boss' Helper: Your Eye
+			of Cthulhu has Sturdy 
+			if under half HP.
+			'''
+		Attack.Name: Royal Helper
+	}
+
+	EyeOfCthulhu: {
+		Name: "{$NPCName.EyeofCthulhu}"
+		Modifier.Description:
+			'''
+			Evasive: May attack 
+			blocked enemies
+			'''
 
 		Attack: {
 			Name: Eyebite
 			Description:
 				'''
 				If under half HP,
-				deal double dmg.
+				deals double dmg.
+				'''
+		}
+	}
+
+	WanderingEye: {
+		Name: "{$NPCName.WanderingEye}"
+		Modifier.Description:
+			'''
+			Evasive: May attack 
+			blocked enemies
+			'''
+
+		Attack: {
+			Name: Eyebite
+			Description:
+				'''
+				If under half HP,
+				deal +2 dmg.
 				'''
 		}
 	}
@@ -1312,6 +1351,7 @@ Cards: {
 		QueenBee: Queen Bee
 		KingSlime: King Slime
 		BoC: Brain of Cthulhu
+		EoC: Eye of Cthulhu
 	}
 
 	ActionText: {

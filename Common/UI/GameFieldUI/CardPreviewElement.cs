@@ -27,7 +27,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
         {
             base.Update(gameTime);
             var localPlayer = TCGPlayer.LocalPlayer;
-            var modifiers = localPlayer.MouseoverZone?.PlacedCard?.GetKeywordModifiers() ?? [];
+            var modifiers = localPlayer.MouseoverZone?.GetKeywordModifiers() ?? [];
             var tooltipTexts = modifiers
                 .OrderBy(kv => kv.Key)
                 .Select(kv => Language.GetTextValue($"Mods.TerraTCG.Cards.Modifiers.{kv.Key}").Replace("%%", $"{kv.Value}"));
@@ -51,7 +51,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
             if(attackOverride != null)
             {
                 var center = Position + new Vector2(2, texture.Value.Height * CARD_SCALE);
-                foreach(var modifier in localPlayer.MouseoverZone.PlacedCard.GetKeywordModifiers().Keys.Order())
+                foreach(var modifier in localPlayer.MouseoverZone.GetKeywordModifiers().Keys.Order())
                 {
                     var iconTexture = TextureCache.Instance.ModifierIconTextures[modifier].Value;
                     var origin = new Vector2(0, iconTexture.Height);

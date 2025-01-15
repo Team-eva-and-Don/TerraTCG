@@ -81,6 +81,7 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 
 		public static Pack QueenBeePack => new(3, QueenBeePromoCards, JungleCards);
 		public static Pack BOCPack => new(3, BOCPromoCards, EvilCards);
+		public static Pack EOCPack => new(3, EOCPromoCards, ForestCards);
 		public static Pack KingSlimePack => new(3, KingSlimePromoCards, SlimeCards);
 		public static Pack MimicPack => new(3, MimicPromoCards, CavernCards);
 

@@ -98,5 +98,11 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
         public bool ShouldRemove(GameEventInfo eventInfo) {
             return false;
         }
-    }
+
+		public bool AppliesToZone(Zone zone)
+		{
+			// no-op
+			return true;
+		}
+	}
 }

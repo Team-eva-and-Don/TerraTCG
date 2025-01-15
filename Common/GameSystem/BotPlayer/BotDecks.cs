@@ -598,5 +598,32 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     GetCard<Dryad>(),
                 ]
             };
+
+		internal static CardCollection GetEoCDeck() =>
+            new ()
+            {
+                Cards = [
+                    GetCard<EyeOfCthulhu>(), 
+                    GetCard<EyeOfCthulhu>(), 
+                    GetCard<Guide>(),
+                    GetCard<Guide>(),
+                    GetCard<ServantOfCthulhu>(), 
+                    GetCard<ServantOfCthulhu>(),
+                    GetCard<IronskinPotion>(),
+                    GetCard<IronskinPotion>(),
+                    GetCard<WanderingEye>(),
+                    GetCard<WanderingEye>(),
+                    GetCard<DemonEye>(),
+                    GetCard<DemonEye>(),
+                    GetCard<HealingPotion>(), 
+                    GetCard<HealingPotion>(), 
+                    GetCard<Harpy>(), 
+                    GetCard<Harpy>(), 
+                    GetCard<Shackle>(),
+                    GetCard<Shackle>(),
+                    GetCard<CobaltShield>(),
+                    GetCard<CobaltShield>(),
+                ]
+            };
 	}
 }

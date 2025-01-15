@@ -134,7 +134,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
                 var zoneOffset = new Vector2(0f, 0.85f);
                 var placement = ProjectedFieldUtils.Instance.WorldSpaceToScreenSpace(gamePlayer, zone, zoneOffset);
                 var center = localPlayer.GameFieldPosition + placement;
-                foreach(var (modifier, stack) in card.GetKeywordModifiers().OrderBy(kv=>kv.Key))
+                foreach(var (modifier, stack) in zone.GetKeywordModifiers().OrderBy(kv=>kv.Key))
                 {
                     var count = Math.Max(1, stack);
                     var basePos = center + new Vector2(2, -2) * (count - 1);

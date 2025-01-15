@@ -114,6 +114,9 @@ namespace TerraTCG.Content.NPCs
 			],
 			[NPCID.BrainofCthulhu] = [
 				new("BoC", BotDecks.GetBoCDeck(), GetReward<BOCPack>(1)),
+			],
+			[NPCID.EyeofCthulhu] = [
+				new("EoC", BotDecks.GetEoCDeck(), GetReward<EOCPack>(1)),
 			]
         };
     }

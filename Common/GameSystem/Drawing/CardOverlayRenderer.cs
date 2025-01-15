@@ -16,13 +16,19 @@ namespace TerraTCG.Common.GameSystem.Drawing
     {
         public static CardOverlayRenderer Instance => ModContent.GetInstance<CardOverlayRenderer>();
 
-        public void DefaultDrawZoneNPC(
-            SpriteBatch spriteBatch, Card card, Vector2 position, int frame, Color? color, float scale, SpriteEffects effects)
-        {
+
+		private void DrawZoneNPC(
+			SpriteBatch spriteBatch, Card card, Vector2 position, int frame, Color? color, float rotation, float scale, SpriteEffects effects)
+		{
             var texture = TextureCache.Instance.GetNPCTexture(card.NPCID);
             var bounds = texture.Frame(1, Main.npcFrameCount[card.NPCID], 0, frame);
             var origin = new Vector2(bounds.Width / 2, bounds.Height);
-            spriteBatch.Draw(texture.Value, position, bounds, color ?? Color.White, 0, origin, scale, effects, 0);
+            spriteBatch.Draw(texture.Value, position, bounds, color ?? Color.White, rotation, origin, scale, effects, 0);
+		}
+        public void DefaultDrawZoneNPC(
+            SpriteBatch spriteBatch, Card card, Vector2 position, int frame, Color? color, float scale, SpriteEffects effects)
+        {
+			DrawZoneNPC(spriteBatch, card, position, frame, color, 0, scale,effects);
         }
 
         public DrawZoneNPC DrawSlimeNPC(float slimeScale, Color slimeColor)
@@ -78,6 +84,14 @@ namespace TerraTCG.Common.GameSystem.Drawing
             scale *= 0.5f;
 			frame = (frame %4) + 4;
             DefaultDrawZoneNPC(spriteBatch, card, position, frame, color, scale, effects);
+		}
+
+		internal void DrawEOCNPC(SpriteBatch spriteBatch, Card card, Vector2 position, int frame, Color? color, float scale, SpriteEffects effects)
+		{
+			// TODO we want to get the PlacedCard to do the "transform" animation
+            scale *= 0.75f;
+			frame %= 3;
+            DefaultDrawZoneNPC(spriteBatch, card, position, frame, color, scale, effects | SpriteEffects.FlipVertically);
 		}
 	}
 }

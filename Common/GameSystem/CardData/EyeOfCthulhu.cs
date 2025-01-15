@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria.ID;
 using Terraria.ModLoader;
+using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
@@ -25,9 +26,10 @@ namespace TerraTCG.Common.GameSystem.CardData
         public override Card CreateCard() => new ()
         {
             Name = "EyeOfCthulhu",
-            MaxHealth = 10,
+            MaxHealth = 11,
             MoveCost = 2,
             NPCID = NPCID.EyeofCthulhu,
+			DrawZoneNPC = CardOverlayRenderer.Instance.DrawEOCNPC,
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.BOSS, CardSubtype.FOREST, CardSubtype.SCOUT],
             Modifiers = () => [
@@ -36,8 +38,8 @@ namespace TerraTCG.Common.GameSystem.CardData
             ],
             Attacks = [
                 new() {
-                    Damage = 4,
-                    Cost = 3,
+                    Damage = 3,
+                    Cost = 2,
                 }
             ]
         };
