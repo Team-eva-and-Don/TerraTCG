@@ -57,7 +57,7 @@ namespace TerraTCG.Common.UI.NPCDuelChat
 
         public void AdvanceToDeckSelectDialogue()
         {
-            dialog.NPCID = Main.LocalPlayer.TalkNPC.netID;
+            dialog.NPCInfo = new(Main.LocalPlayer.TalkNPC);
             talkNPCIdx = Main.LocalPlayer.talkNPC;
             Main.CloseNPCChatOrSign();
         }
@@ -104,7 +104,7 @@ namespace TerraTCG.Common.UI.NPCDuelChat
 
             if((Main.npcChatText?.Length ?? 0) > 0)
             {
-                dialog.NPCID = 0; // Reset duel start progress if we talk to another NPC
+                dialog.NPCInfo = default; // Reset duel start progress if we talk to another NPC
             } else if ((Main.npcChatText?.Length ?? 0) == 0 && dialog.NPCID == 0)
             {
                 // Chat closed before launching the duel dialog, exit out of this UI state
@@ -132,7 +132,7 @@ namespace TerraTCG.Common.UI.NPCDuelChat
                 Main.LocalPlayer.SetTalkNPC(-1);
             }
             talkNPCIdx = -1;
-            dialog.NPCID = 0;
+			dialog.NPCInfo = default;
         }
     }
 }

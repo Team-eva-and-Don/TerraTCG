@@ -25,6 +25,17 @@ namespace TerraTCG.Content.NPCs
 			=> new(ModContent.ItemType<T>(), count);
 	}
 
+	// Cache for NPC fields used in determining duel outcome -
+	// used in case the NPC dies in multiplayer while the player is dueling it
+	internal readonly struct NPCInfoCache(NPC npc)
+	{
+		public int NpcId { get; } = npc.netID;
+
+		public string FullName { get; } = npc.FullName;
+
+		public bool IsBoss { get; } = npc.boss;
+	}
+
 	internal readonly struct NamedNPCDeck(LocalizedText name, CardCollection deckList, NPCDuelReward reward, List<string> prerequisites, bool isTutorial)
     {
 

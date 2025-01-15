@@ -23,8 +23,8 @@ namespace TerraTCG.Content.Items
 		public override void SetDefaults()
 		{
             Item.useStyle = ItemUseStyleID.HoldUp;
-            Item.useAnimation = 60;
-            Item.useTime = 60;
+            Item.useAnimation = 120;
+            Item.useTime = 120;
             Item.rare = ItemRarityID.Blue;
 		}
 
@@ -63,6 +63,7 @@ namespace TerraTCG.Content.Items
 				DeckName = bossList.Key,
 			};
 			StartGameAndRigBossHand(myPlayer, opponent);
+			myPlayer.NPCInfo = new(boss);
 		}
 
 		private static NPC GetNearestDuelableBoss(Player player) => Main.npc

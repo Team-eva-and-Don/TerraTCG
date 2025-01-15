@@ -23,7 +23,8 @@ namespace TerraTCG.Common.UI.NPCDuelChat
 {
     internal class NPCDeckSelectDialogue : UIPanel
     {
-        internal int NPCID { get; set; }
+        internal NPCInfoCache NPCInfo { get; set; }
+		internal int NPCID => NPCInfo.NpcId;
 
         internal List<NPCDuelChatButton> Buttons { get; set; }
         public override void OnInitialize()
@@ -76,6 +77,7 @@ namespace TerraTCG.Common.UI.NPCDuelChat
 					DeckName = lists[deckIdx].Key,
                 };
                 ModContent.GetInstance<GameModSystem>().StartGame(myPlayer, opponent);
+				myPlayer.NPCInfo = NPCInfo;
             }
             ModContent.GetInstance<UserInterfaces>().StopNPCChat();
         }

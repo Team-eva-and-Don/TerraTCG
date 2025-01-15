@@ -53,8 +53,8 @@ namespace TerraTCG.Content.Gores
 					return;
 				}
 				var card = Main.rand.NextFromList([.. deck.Cards]);
-				// Store the card to be drawn in the gore's alpha field
-				gore.alpha = AllCards.IndexOf(card);
+				// Store the card to be drawn in the gore's scale field
+				gore.scale = AllCards.IndexOf(card);
 			} 
 			base.OnSpawn(gore, source);
 		}
@@ -100,7 +100,7 @@ namespace TerraTCG.Content.Gores
 			{
 				return;
 			}
-			var texture = allCards[gore.alpha].Texture;
+			var texture = allCards[(int)gore.scale].Texture;
 
 			var origin = new Vector2(texture.Width(), texture.Height()) / 2;
 			var lightColor = Lighting.GetColor((int)gore.position.X / 16, (int)gore.position.Y / 16);

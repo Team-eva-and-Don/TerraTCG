@@ -112,6 +112,11 @@ namespace TerraTCG.Common.GameSystem
 		public string DeckName { get; set; }
 		public NPCDuelReward Reward { get; set; }
 
+		// Cache the info of the NPC that the player is currently fighting
+		// Used in case the NPC dies between the beginning and end of the
+		// fight in multiplayer
+		public NPCInfoCache NPCInfo { get; set; }
+
 		public override void OnEnterWorld()
         {
             if(Player.whoAmI == Main.myPlayer)
@@ -198,8 +203,11 @@ namespace TerraTCG.Common.GameSystem
                     reward.Count);
 
 				// TODO figure out why this is not recommended for multiplayer
-				SpawnCardExplosion(dueledNPC);
-				dueledNPC.StrikeInstantKill();
+				if(dueledNPC?.active ?? false)
+				{
+					SpawnCardExplosion(dueledNPC);
+					dueledNPC.StrikeInstantKill();
+				}
             } else
 			{
 				SpawnCardExplosion(Player);
@@ -222,25 +230,20 @@ namespace TerraTCG.Common.GameSystem
         {
 			// check whether the game was with a boss
 			// TODO this is a bit clunky but I don't want to add more state variables
-			var dueledNPCType = ModContent.GetInstance<NPCDeckMap>().NPCDecklists
-				.Where(kv => kv.Value.Any(dl=>dl.Key == GamePlayer.Opponent.Controller.DeckName))
-				.Select(kv=>kv.Key)
-				.FirstOrDefault();
 
-			if(dueledNPCType is int npcType)
+			if(NPCInfo.IsBoss)
 			{
-				var dueledNPC = Main.npc.Where(npc => npc.active && npc.netID == npcType).FirstOrDefault();
-				if (dueledNPC.boss)
-				{
-					HandleBossNPCDuelEnd(dueledNPC);
-				} else
-				{
-					HandleTownNPCDuelEnd();
-				}
+				var dueledNPC = Main.npc.Where(npc => npc.active && npc.netID == NPCInfo.NpcId).FirstOrDefault();
+				HandleBossNPCDuelEnd(dueledNPC);
+
+			} else
+			{
+				HandleTownNPCDuelEnd();
 			}
             GamePlayer = null;
             MouseoverCard = null;
             MouseoverZone = null;
+			NPCInfo = default;
             ModContent.GetInstance<UserInterfaces>().EndGame();
         }
 
