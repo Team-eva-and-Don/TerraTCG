@@ -86,7 +86,7 @@ namespace TerraTCG.Content.Items
 				player.ApplyItemTime(Item);
 				if(GetNearestDuelableBoss(player) is NPC boss)
 				{
-					Main.NewText($"{boss.FullName} has accepted your invitation to duel!");
+					Main.NewText($"{boss.FullName} {Language.GetTextValue("Mods.TerraTCG.Cards.Common.AcceptedInvitation")}");
 				}
 			}
 			else if (player.itemTime == 10)

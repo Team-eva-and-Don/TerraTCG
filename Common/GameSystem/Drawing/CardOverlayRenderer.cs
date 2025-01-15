@@ -91,7 +91,8 @@ namespace TerraTCG.Common.GameSystem.Drawing
 			// TODO we want to get the PlacedCard to do the "transform" animation
             scale *= 0.75f;
 			frame %= 3;
-            DefaultDrawZoneNPC(spriteBatch, card, position, frame, color, scale, effects | SpriteEffects.FlipVertically);
+			// TODO why do we need to shift position?
+            DefaultDrawZoneNPC(spriteBatch, card, position + new Vector2(0, 48 * scale), frame, color, scale, effects | SpriteEffects.FlipVertically);
 		}
 	}
 }

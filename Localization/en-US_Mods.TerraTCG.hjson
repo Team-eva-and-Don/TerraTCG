@@ -94,8 +94,14 @@ Items: {
 	}
 
 	InvitationToDuel: {
-		DisplayName: Invitation To Duel
-		Tooltip: ""
+		DisplayName: Invitation To Soul-Wager Game!
+		Tooltip: 
+			'''
+			Wager your soul for TerraTCG glory! Use
+			in the presence of any pre-hardmode boss
+			to start a game of TerraTCG. But be warned,
+			the consequences for losing are deadly!
+			'''
 	}
 
 	BOCPack: {
@@ -1321,11 +1327,14 @@ Cards: {
 		Prev: Back
 		Next: Next
 		Close: Close
-		DoubleClickToClose: Double Click to Exit
+		DoubleClickToClose: Double Click to Concede
 		Hearts: Hearts
 		Mana: Mana Crystals
 		Townsfolk: Townsfolk Emblem
 		Search: Search
+		For:for
+		UnlockedANewDeck: Unlocked a new deck
+		AcceptedInvitation: has accepted your invitation for a soul-wager game!
 	}
 
 	DeckNames: {

@@ -145,14 +145,18 @@ namespace TerraTCG.Common.GameSystem.Drawing
         }
 
         // Draw the map background that corresponds to the most populous biome in the player's active deck
-        private void DrawMapBG()
+        private static void DrawMapBG()
         {
-            var localDeck = TCGPlayer.LocalPlayer.Deck;
+			var localDeck = TCGPlayer.LocalGamePlayer?.Opponent?.Deck;
+			if(localDeck == null)
+			{
+				return;
+			}
             var dominantBiome = localDeck.Cards
                 .Where(c => c.CardType == CardType.CREATURE)
                 .GroupBy(c => c.SortType)
                 .Select(c => (c.First(), c.Count()))
-                .OrderBy(pair => pair.Item2)
+                .OrderByDescending(pair => pair.Item2)
                 .Select(pair => pair.Item1.SortType)
                 .FirstOrDefault();
             if(TextureCache.Instance.BiomeMapBackgrounds.TryGetValue(dominantBiome, out var texture))

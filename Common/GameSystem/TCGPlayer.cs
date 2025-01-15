@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using TerraTCG.Common.GameSystem.BotPlayer;
@@ -153,7 +154,7 @@ namespace TerraTCG.Common.GameSystem
 					var defeatedNPC = Main.npc.Where(npc => npc.active && npc.netID == npcId).FirstOrDefault();
 					if(defeatedNPC is NPC npc)
 					{
-						return $" for {npc.FullName}";
+						return $"{Language.GetTextValue("Mods.TerraTCG.Cards.Common.For")} {npc.FullName}";
 					} else
 					{
 						return "";
@@ -161,7 +162,7 @@ namespace TerraTCG.Common.GameSystem
 				});
 			foreach (var newNPC in npcsWithNewLists)
 			{
-				Main.NewText($"Unlocked a new deck{newNPC}!");
+				Main.NewText($"{Language.GetTextValue("Mods.TerraTCG.Cards.Common.UnlockedANewDeck")}{newNPC}!");
 			}
 
 			return new(opponent.Reward.ItemId, opponent.Reward.Count * 2);
