@@ -11,6 +11,12 @@ namespace TerraTCG
 {
 	public class TerraTCG : Mod
 	{
+        public TerraTCG()
+        {
+			// Manually load our gores
+			GoreAutoloadingEnabled = false;
+        }
+
         // Set up cross-mod API calls in Dialogue Tweaks for initiating a duel
         // with a duel-able NPC
         public override void PostSetupContent()

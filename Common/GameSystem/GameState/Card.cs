@@ -73,9 +73,14 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal string FullName => $"{Mod}/{Name}";
 
-        internal int NPCID { get; set; }
+		// Automatically loaded from its texture
+		internal int GoreType { get; set; }
 
-        internal Asset<Texture2D> Texture => ModContent.GetInstance<TerraTCG>().Assets.Request<Texture2D>($"Assets/Cards/{Name}");
+		internal int NPCID { get; set; }
+
+		internal string TexturePath => $"{Mod}/Assets/Cards/{Name}";
+
+		internal Asset<Texture2D> Texture => ModContent.Request<Texture2D>(TexturePath);
 
         internal CardType CardType { get; set; }
 

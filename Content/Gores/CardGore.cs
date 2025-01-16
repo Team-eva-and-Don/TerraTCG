@@ -24,53 +24,33 @@ namespace TerraTCG.Content.Gores
 	{
 		public List<Card> AllCards { get; set; }
 
-		internal int[] CardType { get; private set; }
+		private string _realTexture;
+		public string RealTexture => _realTexture;
 
-		public override void Load()
+		private string _name;
+		public override string Name => _name;
+
+		// Uses blank base texture of fixed size (square) for better collision, drawn manually
+		public override string Texture => $"TerraTCG/Content/Gores/{nameof(CardGore)}";
+
+		public CardGore(string name, string realTexture)
 		{
-			// TODO this is replicated many places
-			AllCards = ModContent.GetContent<BaseCardTemplate>().
-				Select(c => c.Card).ToList();
-			CardType = new int[Main.maxGore];
-
-			base.Load();
+			_name = name;
+			_realTexture = realTexture;
 		}
+
 		public override void SetStaticDefaults()
 		{
 			ChildSafety.SafeGore[Type] = true;
-		}
-
-		public override void OnSpawn(Gore gore, IEntitySource source)
-		{
-			if(source is EntitySource_Death deathSource)
-			{
-				CardCollection deck;
-				if(deathSource.Entity is Player player)
-				{
-					deck = player.GetModPlayer<TCGPlayer>().Deck;
-				} else if (deathSource.Entity is NPC npc && npc.boss)
-				{
-					deck = ModContent.GetInstance<NPCDeckMap>().NPCDecklists[npc.netID][0].DeckList;
-				} else
-				{
-					return;
-				}
-				var card = Main.rand.NextFromList([.. deck.Cards]);
-				var idx = Main.gore.ToList().IndexOf(gore);
-				CardType[idx] = AllCards.IndexOf(card);
-				// gore.scale = AllCards.IndexOf(card);
-			}
-			base.OnSpawn(gore, source);
 		}
 
 		public override bool Update(Gore gore)
 		{
 			return base.Update(gore);
 		}
-
 	}
 
-	// Custom draw code for the active card gores - use scale to pass data
+	// Custom draw code as ModGore does not have Draw hooks
 	internal class CardGoreSystem : ModSystem
 	{
 		public override void Load()
@@ -78,7 +58,7 @@ namespace TerraTCG.Content.Gores
 			On_Main.DrawGore += On_Main_DrawGore;
 		}
 
-		private void On_Main_DrawGore(On_Main.orig_DrawGore orig, Main self)
+		private static void On_Main_DrawGore(On_Main.orig_DrawGore orig, Main self)
 		{
 			orig.Invoke(self);
 			if(Main.dedServ)
@@ -86,11 +66,10 @@ namespace TerraTCG.Content.Gores
 				return;
 			}
 
-			var cardGoreType = ModContent.GoreType<CardGore>();
 			for(int i = 0; i < Main.maxGore; i++)
 			{
 				var gore = Main.gore[i];
-				if(gore.active && gore.type == cardGoreType)
+				if(gore.active && gore.ModGore is CardGore)
 				{
 					DrawCardGore(Main.spriteBatch, gore);
 				}
@@ -99,20 +78,15 @@ namespace TerraTCG.Content.Gores
 
 		private static void DrawCardGore(SpriteBatch spriteBatch, Gore gore)
 		{
-			var allCards = ModContent.GetInstance<CardGore>().AllCards;
-			if(gore.alpha < 0 || gore.alpha >= allCards.Count)
-			{
-				return;
-			}
-			var idx = Main.gore.ToList().IndexOf(gore);
-			var texture = allCards[(gore.ModGore as CardGore).CardType[idx]].Texture;
+			var texture = ModContent.Request<Texture2D>((gore.ModGore as CardGore).RealTexture).Value;
 
-			var origin = new Vector2(texture.Width(), texture.Height()) / 2;
+			var bounds = texture.Frame();
+			var origin = bounds.Size() / 2;
 			var lightColor = Lighting.GetColor((int)gore.position.X / 16, (int)gore.position.Y / 16);
 			// card textures are very large, scale them down
 			var scale = 0.2f;
-			spriteBatch.Draw(texture.Value, gore.position - Main.screenPosition, texture.Value.Bounds, lightColor, gore.rotation, origin, scale, SpriteEffects.None, 0f);
-
+			var opacity = (255 - gore.alpha) / 255f;
+			spriteBatch.Draw(texture, gore.position - Main.screenPosition, bounds, lightColor * opacity, gore.rotation, origin, scale, SpriteEffects.None, 0f);
 		}
 	}
 }
