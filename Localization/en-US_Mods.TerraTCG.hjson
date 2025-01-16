@@ -1101,6 +1101,16 @@ Cards: {
 			'''
 	}
 
+	EnchantedNightcrawler: {
+		Name: E. Nightcrawler
+		Attack.Name: Worm Wish
+		Modifier.Description:
+			'''
+			Morbid: If this dies, you 
+			gain 1 Mana Crystal.
+			'''
+	}
+
 	Bunny: {
 		Name: "{$NPCName.Bunny}"
 		Attack.Name: Bunny Kick

@@ -14,6 +14,7 @@ using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.GameSystem.Drawing.Animations;
 using TerraTCG.Common.GameSystem.Drawing.Animations.FieldAnimations;
 using TerraTCG.Common.GameSystem.GameState.GameActions;
+using TerraTCG.Common.GameSystem.GameState.Modifiers;
 using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState
@@ -127,9 +128,10 @@ namespace TerraTCG.Common.GameSystem.GameState
 			{
 				if(zone.PlacedCard?.CurrentHealth <= 0)
 				{
-					CurrentTurn.ActionLog.Add(new(null, $"{zone.PlacedCard.Template.CardName} {ActionText("Died")}"));
+					CurrentTurn.ActionLog.Add(new(zone.PlacedCard.Template, $"{zone.PlacedCard.Template.CardName} {ActionText("Died")}"));
 					zone.QueueAnimation(new RemoveCardAnimation(zone.PlacedCard));
 					zone.Owner.Resources = zone.Owner.Resources.UseResource(health: zone.PlacedCard.Template.Points);
+					zone.Owner.Field.ClearModifiers(CurrentTurn.ActivePlayer, zone, GameEvent.CREATURE_DIED);
 					zone.PlacedCard = null;
 				}
 			}

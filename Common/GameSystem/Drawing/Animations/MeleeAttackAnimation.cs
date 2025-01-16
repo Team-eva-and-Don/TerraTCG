@@ -12,7 +12,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
 {
     internal class MeleeAttackAnimation(PlacedCard placedCard, Zone targetZone) : IAnimation
     {
-        public TimeSpan StartTime { get; set;  } 
+        public TimeSpan StartTime { get; set; } 
         public Zone SourceZone { private get; set; }
 
         private TimeSpan Duration { get; } = TimeSpan.FromSeconds(1f);

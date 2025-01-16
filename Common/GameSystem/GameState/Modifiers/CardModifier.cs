@@ -20,7 +20,8 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
         // After receiving an attack
         AFTER_RECEIVE_ATTACK,
         START_TURN,
-    }
+		CREATURE_DIED,
+	}
 
     internal enum ModifierType
     {

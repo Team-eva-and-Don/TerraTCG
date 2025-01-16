@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria.ID;
 using Terraria.ModLoader;
+using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
@@ -40,6 +41,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             CardType = CardType.CREATURE,
             NPCID = NPCID.ServantofCthulhu,
             SubTypes = [CardSubtype.FOREST, CardSubtype.SCOUT],
+			DrawZoneNPC = CardOverlayRenderer.Instance.DrawFlippedZoneNPC,
             Attacks = [
                 new() {
                     Damage = 1,

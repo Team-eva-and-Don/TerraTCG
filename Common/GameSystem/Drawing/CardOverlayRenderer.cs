@@ -31,6 +31,12 @@ namespace TerraTCG.Common.GameSystem.Drawing
 			DrawZoneNPC(spriteBatch, card, position, frame, color, 0, scale,effects);
         }
 
+        public void DrawFlippedZoneNPC(
+            SpriteBatch spriteBatch, Card card, Vector2 position, int frame, Color? color, float scale, SpriteEffects effects)
+        {
+			DrawZoneNPC(spriteBatch, card, position, frame, color, 0, scale, effects | SpriteEffects.FlipVertically);
+        }
+
         public DrawZoneNPC DrawSlimeNPC(float slimeScale, Color slimeColor)
         {
             return (SpriteBatch spriteBatch, Card card, Vector2 position, int frame, Color? color, float scale, SpriteEffects effects) =>
