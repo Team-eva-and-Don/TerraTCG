@@ -592,8 +592,8 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     GetCard<HealingPotion>(), 
                     GetCard<Creeper>(), 
                     GetCard<Creeper>(), 
-                    GetCard<FeralClaws>(),
-                    GetCard<FeralClaws>(),
+                    GetCard<BloodButcherer>(),
+                    GetCard<BloodButcherer>(),
                     GetCard<Dryad>(),
                     GetCard<Dryad>(),
                 ]
@@ -619,6 +619,33 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     GetCard<HealingPotion>(), 
                     GetCard<Harpy>(), 
                     GetCard<Harpy>(), 
+                    GetCard<Shackle>(),
+                    GetCard<Shackle>(),
+                    GetCard<CobaltShield>(),
+                    GetCard<CobaltShield>(),
+                ]
+            };
+
+		internal static CardCollection GetEoWDeck() =>
+            new ()
+            {
+                Cards = [
+                    GetCard<EaterOfWorlds>(), 
+                    GetCard<EaterOfWorlds>(), 
+                    GetCard<Guide>(),
+                    GetCard<Guide>(),
+                    GetCard<Devourer>(), 
+                    GetCard<Devourer>(),
+                    GetCard<IronskinPotion>(),
+                    GetCard<IronskinPotion>(),
+                    GetCard<EaterOfSouls>(),
+                    GetCard<EaterOfSouls>(),
+                    GetCard<EnchantedNightcrawler>(),
+                    GetCard<EnchantedNightcrawler>(),
+                    GetCard<HealingPotion>(), 
+                    GetCard<HealingPotion>(), 
+                    GetCard<LightsBane>(), 
+                    GetCard<LightsBane>(), 
                     GetCard<Shackle>(),
                     GetCard<Shackle>(),
                     GetCard<CobaltShield>(),

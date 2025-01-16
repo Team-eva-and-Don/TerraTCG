@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.Drawing;
+using TerraTCG.Common.GameSystem.Drawing.Animations;
 using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
@@ -31,8 +32,9 @@ namespace TerraTCG.Common.GameSystem.CardData
 					if (firstEmptyZone is Zone zone)
 					{
 						zone.PlaceCard(ModContent.GetInstance<EaterSegment2>().CreateCard());
-						// Copy all equipment (this might be a little broken
+						// Copy all equipment (this might be a little unbalanced)
 						zone.PlacedCard.AddModifiers(eventInfo.Zone.PlacedCard.CardModifiers.Where(m => m.Source == CardSubtype.EQUIPMENT).ToList());
+						zone.QueueAnimation(new PlaceCardAnimation(zone.PlacedCard));
 					}
                 }
                 return false;

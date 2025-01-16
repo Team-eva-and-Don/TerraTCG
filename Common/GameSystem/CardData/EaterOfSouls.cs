@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria.ID;
 using Terraria.ModLoader;
+using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.Drawing.Animations;
 using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.GameSystem.GameState.Modifiers;
@@ -15,7 +16,8 @@ namespace TerraTCG.Common.GameSystem.CardData
     {
 		private class EaterOfSoulsMorbidModifier : ICardModifier
 		{
-			// Field modifier, refresh at start of turn
+			public ModifierType Category { get => ModifierType.MORBID; }
+
 			public bool ShouldRemove(GameEventInfo eventInfo)
 			{
 				if(eventInfo.Event == GameEvent.CREATURE_DIED)
@@ -38,6 +40,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             MoveCost = 1,
             CardType = CardType.CREATURE,
             NPCID = NPCID.EaterofSouls,
+			DrawZoneNPC = CardOverlayRenderer.Instance.DrawFlippedZoneNPC,
             SubTypes = [CardSubtype.CORRUPT, CardSubtype.FIGHTER],
             Attacks = [
                 new() {

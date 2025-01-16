@@ -15,7 +15,8 @@ namespace TerraTCG.Common.GameSystem.CardData
     {
 		private class EnchantedNightcrawlerMorbidModifier : ICardModifier
 		{
-			// Field modifier, refresh at start of turn
+			public ModifierType Category { get => ModifierType.MORBID; }
+
 			public bool ShouldRemove(GameEventInfo eventInfo)
 			{
 				if(eventInfo.Event == GameEvent.CREATURE_DIED)

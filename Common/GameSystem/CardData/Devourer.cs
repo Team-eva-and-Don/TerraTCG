@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,9 +16,13 @@ namespace TerraTCG.Common.GameSystem.CardData
 {
     internal class Devourer: BaseCardTemplate, ICardTemplate
     {
-		private class DevourerMorbidModifier : ICardModifier
+		internal class MorbidDamageBoostModifier : ICardModifier
 		{
-			// Field modifier, refresh at start of turn
+			public ModifierType Category { get => ModifierType.MORBID; }
+			public Asset<Texture2D> Texture { get; set; }
+
+			public CardSubtype Source { get; set; }
+
 			public bool ShouldRemove(GameEventInfo eventInfo)
 			{
 				if(eventInfo.Event == GameEvent.CREATURE_DIED)
@@ -47,7 +53,7 @@ namespace TerraTCG.Common.GameSystem.CardData
                     Cost = 2,
                 }
             ],
-			Modifiers = () => [new DevourerMorbidModifier()],
+			Modifiers = () => [new MorbidDamageBoostModifier()],
         };
     }
 }

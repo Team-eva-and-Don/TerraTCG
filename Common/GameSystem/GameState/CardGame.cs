@@ -128,7 +128,11 @@ namespace TerraTCG.Common.GameSystem.GameState
 			{
 				if(zone.PlacedCard?.CurrentHealth <= 0)
 				{
-					CurrentTurn.ActionLog.Add(new(zone.PlacedCard.Template, $"{zone.PlacedCard.Template.CardName} {ActionText("Died")}"));
+					var hasMorbid = zone.PlacedCard.CardModifiers.Any(m => m.Category == ModifierType.MORBID);
+					var messageText = hasMorbid ?
+						 $"{zone.PlacedCard.Template.CardName} {ActionText("Died")}. {ActionText("Morbid")}" :
+						 $"{zone.PlacedCard.Template.CardName} {ActionText("Died")}";
+					CurrentTurn.ActionLog.Add(new(zone.PlacedCard.Template, messageText));
 					zone.QueueAnimation(new RemoveCardAnimation(zone.PlacedCard));
 					zone.Owner.Resources = zone.Owner.Resources.UseResource(health: zone.PlacedCard.Template.Points);
 					zone.Owner.Field.ClearModifiers(CurrentTurn.ActivePlayer, zone, GameEvent.CREATURE_DIED);

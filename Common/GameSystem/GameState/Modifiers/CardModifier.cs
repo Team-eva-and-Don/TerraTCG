@@ -34,6 +34,7 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
         SPIKED,
         LIFESTEAL,
 		POISON,
+		MORBID,
 	}
 
     internal struct GameEventInfo

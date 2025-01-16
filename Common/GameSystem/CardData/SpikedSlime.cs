@@ -15,6 +15,7 @@ namespace TerraTCG.Common.GameSystem.CardData
 		private class SpikedSlimeBossBuffModifier : ICardModifier
 		{
 			public ModifierType Category => ModifierType.SPIKED;
+			public int Amount => 0;
 			public bool AppliesToZone(Zone zone) => zone.PlacedCard?.Template.Name == "KingSlime";
 
 			public void ModifyIncomingAttack(ref Attack attack, Zone sourceZone, Zone destZone) 

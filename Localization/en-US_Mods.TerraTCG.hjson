@@ -804,6 +804,20 @@ Cards: {
 		}
 	}
 
+	LightsBane: {
+		Name: "{$ItemName.LightsBane}"
+
+		Skill: {
+			Name: Equip
+			Description:
+				'''
+				If target creature dies,
+				your other creatures 
+				deal +1 dmg.
+				'''
+		}
+	}
+
 	BloodButcherer: {
 		Name: "{$ItemName.BloodButcherer}"
 
@@ -1363,6 +1377,7 @@ Cards: {
 		EVASIVE: Evasive: May attack blocked opponents
 		SPIKED: Spiked: Attackers take %% damage
 		LIFESTEAL: Lifesteal: Regains %% HP on attack
+		MORBID: Morbid: An effect triggers when this dies
 	}
 
 	Common: {
@@ -1445,6 +1460,7 @@ Cards: {
 		To: to
 		NotEnoughMana: Not enough Mana
 		NotEnoughTownsfolk: No Townsfolk Emblem available
+		Morbid: Its Morbid ability triggered.
 	}
 
 	Tutorial: {
