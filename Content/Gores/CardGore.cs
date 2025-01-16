@@ -24,11 +24,14 @@ namespace TerraTCG.Content.Gores
 	{
 		public List<Card> AllCards { get; set; }
 
+		internal int[] CardType { get; private set; }
+
 		public override void Load()
 		{
 			// TODO this is replicated many places
 			AllCards = ModContent.GetContent<BaseCardTemplate>().
 				Select(c => c.Card).ToList();
+			CardType = new int[Main.maxGore];
 
 			base.Load();
 		}
@@ -53,9 +56,10 @@ namespace TerraTCG.Content.Gores
 					return;
 				}
 				var card = Main.rand.NextFromList([.. deck.Cards]);
-				// Store the card to be drawn in the gore's scale field
-				gore.scale = AllCards.IndexOf(card);
-			} 
+				var idx = Main.gore.ToList().IndexOf(gore);
+				CardType[idx] = AllCards.IndexOf(card);
+				// gore.scale = AllCards.IndexOf(card);
+			}
 			base.OnSpawn(gore, source);
 		}
 
@@ -100,7 +104,8 @@ namespace TerraTCG.Content.Gores
 			{
 				return;
 			}
-			var texture = allCards[(int)gore.scale].Texture;
+			var idx = Main.gore.ToList().IndexOf(gore);
+			var texture = allCards[(gore.ModGore as CardGore).CardType[idx]].Texture;
 
 			var origin = new Vector2(texture.Width(), texture.Height()) / 2;
 			var lightColor = Lighting.GetColor((int)gore.position.X / 16, (int)gore.position.Y / 16);

@@ -95,7 +95,7 @@ Items: {
 
 	InvitationToDuel: {
 		DisplayName: Invitation To Soul-Wager Game!
-		Tooltip: 
+		Tooltip:
 			'''
 			Wager your soul for TerraTCG glory! Use
 			in the presence of any pre-hardmode boss
@@ -1332,7 +1332,7 @@ Cards: {
 		Mana: Mana Crystals
 		Townsfolk: Townsfolk Emblem
 		Search: Search
-		For:for
+		For: for
 		UnlockedANewDeck: Unlocked a new deck
 		AcceptedInvitation: has accepted your invitation for a soul-wager game!
 	}
