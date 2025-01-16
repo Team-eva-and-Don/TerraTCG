@@ -8,6 +8,8 @@
 		
 	</PropertyGroup>
 	<ItemGroup>
+	  <None Remove="Assets\Cards\EaterSegment1.png" />
+	  <None Remove="Assets\Cards\EaterSegment2.png" />
 	  <None Remove="Assets\FoilMasks\GOBLIN_ARMY.png" />
 	</ItemGroup>
 

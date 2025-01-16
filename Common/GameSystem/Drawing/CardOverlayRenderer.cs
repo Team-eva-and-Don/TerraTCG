@@ -25,6 +25,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
             var origin = new Vector2(bounds.Width / 2, bounds.Height);
             spriteBatch.Draw(texture.Value, position, bounds, color ?? Color.White, rotation, origin, scale, effects, 0);
 		}
+
         public void DefaultDrawZoneNPC(
             SpriteBatch spriteBatch, Card card, Vector2 position, int frame, Color? color, float scale, SpriteEffects effects)
         {
@@ -99,6 +100,15 @@ namespace TerraTCG.Common.GameSystem.Drawing
 			frame %= 3;
 			// TODO why do we need to shift position?
             DefaultDrawZoneNPC(spriteBatch, card, position + new Vector2(0, 48 * scale), frame, color, scale, effects | SpriteEffects.FlipVertically);
+		}
+
+		public void DrawBestiaryZoneNPC(
+			SpriteBatch spriteBatch, Card card, Vector2 position, int frame, Color? color, float scale, SpriteEffects effects)
+		{
+            var texture = TextureCache.Instance.GetBestiaryTexture(card.NPCID);
+            var bounds = texture.Frame(1, Main.npcFrameCount[card.NPCID], 0, frame);
+            var origin = new Vector2(bounds.Width / 2, bounds.Height);
+            spriteBatch.Draw(texture.Value, position, bounds, color ?? Color.White, 0, origin, scale, effects, 0);
 		}
 	}
 }

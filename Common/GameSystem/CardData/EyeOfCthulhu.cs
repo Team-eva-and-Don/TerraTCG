@@ -28,6 +28,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             Name = "EyeOfCthulhu",
             MaxHealth = 11,
             MoveCost = 2,
+			Points = 2,
             NPCID = NPCID.EyeofCthulhu,
 			DrawZoneNPC = CardOverlayRenderer.Instance.DrawEOCNPC,
             CardType = CardType.CREATURE,

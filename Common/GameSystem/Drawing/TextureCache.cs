@@ -51,6 +51,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
 		public Asset<Texture2D> Sparkles { get; private set; }
 		public Asset<Texture2D> Sparkles2 { get; private set; }
 		public Asset<Texture2D> KingSlimeCrown { get; private set; }
+        internal Dictionary<int, Asset<Texture2D>> BestiaryTextureCache { get; private set; }
         internal Dictionary<int, Asset<Texture2D>> NPCTextureCache { get; private set; }
         internal Dictionary<int, Asset<Texture2D>> ItemTextureCache { get; private set; }
 
@@ -96,6 +97,8 @@ namespace TerraTCG.Common.GameSystem.Drawing
 
             KingSlimeCrown = Main.Assets.Request<Texture2D>("Images/Extra_" + ExtrasID.KingSlimeCrown);
             NPCTextureCache = [];
+			NPCTextureCache[NPCID.EaterofWorldsHead] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/MiniEoW");
+            BestiaryTextureCache = [];
             ItemTextureCache = [];
             ModifierIconTextures = new Dictionary<ModifierType, Asset<Texture2D>>
             {
@@ -177,6 +180,16 @@ namespace TerraTCG.Common.GameSystem.Drawing
             {
                 asset = Main.Assets.Request<Texture2D>($"Images/Item_{itemId}");
                 ItemTextureCache[itemId] = asset;
+            }             
+            return asset;
+        }
+
+        public Asset<Texture2D> GetBestiaryTexture(int npcId)
+        {
+            if(!ItemTextureCache.TryGetValue(npcId, out var asset))
+            {
+                asset = Main.Assets.Request<Texture2D>($"Images/UI/Bestiary/NPCs/NPC_{npcId}");
+				BestiaryTextureCache[npcId] = asset;
             }             
             return asset;
         }

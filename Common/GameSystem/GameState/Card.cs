@@ -56,6 +56,7 @@ namespace TerraTCG.Common.GameSystem.GameState
         TOWNSFOLK,
         ITEM,
 		CRIMSON,
+		CORRUPT,
 	}
 
     // Bot helper function, apply additional

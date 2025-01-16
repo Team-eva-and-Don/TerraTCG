@@ -1101,6 +1101,51 @@ Cards: {
 			'''
 	}
 
+	EaterOfWorlds: {
+		Name: "{$NPCName.EaterofWorldsHead}"
+		Attack.Name: Worm's World
+		Modifier.Description:
+			'''
+			Sturdy. Lifesteal. If this
+			card reaches half health,
+			transform it.
+			'''
+	}
+
+	EaterSegment1: {
+		Name: Eater Segment
+		Attack.Name: Worm's World
+		Modifier.Description: Sturdy.
+	}
+
+	EaterSegment2: {
+		Name: Eater Segment
+		Attack.Name: Worm's World
+		Modifier.Description: Lifesteal.
+	}
+
+	EaterOfSouls: {
+		Name: "{$NPCName.EaterofSouls}"
+		Attack.Name: Soul Suck
+		Modifier.Description:
+			'''
+			Morbid: If this dies, 
+			your other creatures 
+			gain Sturdy.
+			'''
+	}
+
+	Devourer: {
+		Name: "{$NPCName.DevourerHead}"
+		Attack.Name: Worm Wiggle
+		Modifier.Description:
+			'''
+			Morbid: If this dies, 
+			your other creatures 
+			deal +1 dmg.
+			'''
+	}
+
 	EnchantedNightcrawler: {
 		Name: E. Nightcrawler
 		Attack.Name: Worm Wish
@@ -1298,6 +1343,7 @@ Cards: {
 		SLIME: Slime
 		JUNGLE: Jungle
 		CRIMSON: Crimson
+		CORRUPT: Corrupt
 		SKY: Sky
 		BLOOD_MOON: Blood Moon
 		DESERT: Desert
