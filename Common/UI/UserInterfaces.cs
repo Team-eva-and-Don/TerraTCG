@@ -41,7 +41,7 @@ namespace TerraTCG.Common.UI
         // to see whether vanilla UI is currently being suppressed
         public bool VanillaDialogueLayerActive { get; private set; }
 
-        public override void Load()
+        public override void OnModLoad()
         {
             GameField = new();
             GameField.Activate();

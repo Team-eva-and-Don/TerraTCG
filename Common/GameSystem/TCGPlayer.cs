@@ -189,43 +189,66 @@ namespace TerraTCG.Common.GameSystem
 		{
 			// TODO this is hacky, need game unpaused for gore to spawn
 			bool isPaused = Main.gamePaused;
-			Main.gamePaused = false;
-            if(GamePlayer.Game.Winner == GamePlayer)
-            {
-				var opponentController = GamePlayer.Opponent.Controller;
-				var reward = opponentController.Reward;
-				if(!DefeatedDecks.Contains(opponentController.DeckName))
-				{
-					reward = HandleFirstTimeDeckWin(opponentController);
-				}
-                Player.QuickSpawnItem(
-                    Player.GetSource_GiftOrReward("TerraTCG: Won Game"), 
-                    reward.ItemId, 
-                    reward.Count);
-
-				// TODO figure out why this is not recommended for multiplayer
-				if(dueledNPC?.active ?? false)
-				{
-					SpawnCardExplosion(dueledNPC);
-					dueledNPC.StrikeInstantKill();
-				}
-            } else
+            try
 			{
-				SpawnCardExplosion(Player);
-				Player.KillMe(PlayerDeathReason.ByCustomReason($"{Player.name} forfeited their soul to {dueledNPC.FullName} in a card game!"), 9999, 0);
+				Main.gamePaused = false;
+				if (GamePlayer.Game.Winner == GamePlayer)
+				{
+					var opponentController = GamePlayer.Opponent.Controller;
+					var reward = opponentController.Reward;
+					if (!DefeatedDecks.Contains(opponentController.DeckName))
+					{
+						reward = HandleFirstTimeDeckWin(opponentController);
+					}
+					Player.QuickSpawnItem(
+						Player.GetSource_GiftOrReward("TerraTCG: Won Game"),
+						reward.ItemId,
+						reward.Count);
+
+					// TODO figure out why this is not recommended for multiplayer
+					if (dueledNPC?.active ?? false)
+					{
+						SpawnCardExplosion(dueledNPC);
+						dueledNPC.StrikeInstantKill();
+					}
+				}
+				else
+				{
+					SpawnCardExplosion(Player);
+					//TODO localize
+					Player.KillMe(PlayerDeathReason.ByCustomReason($"{Player.name} forfeited their soul to {dueledNPC.FullName} in a card game!"), 9999, 0);
+				}
 			}
-			Main.gamePaused = isPaused;
+            finally
+			{
+				Main.gamePaused = isPaused;
+			}
 		}
 
 		private void SpawnCardExplosion(Entity source)
 		{
-			for(int i = 0; i < 5; i++)
+			CardCollection deck;
+			if (source is Player player)
 			{
+				deck = player.GetModPlayer<TCGPlayer>().Deck;
+			}
+			else if (source is NPC npc && (npc.boss || npc.type == NPCID.EaterofWorldsHead || npc.type == NPCID.EaterofWorldsBody || npc.type == NPCID.EaterofWorldsTail))
+			{
+				deck = ModContent.GetInstance<NPCDeckMap>().NPCDecklists[npc.netID][0].DeckList;
+			}
+			else
+			{
+				return;
+			}
+
+			for (int i = 0; i < 5; i++)
+			{
+				var card = Main.rand.NextFromList([..deck.Cards]);
+				int cardGore = card.GoreType;
 				var launchVelocity = new Vector2(Main.rand.Next(-5, 5), Main.rand.Next(-6, -3));
-				Gore.NewGore(source.GetSource_Death(), source.position, source.velocity + launchVelocity, ModContent.GoreType<CardGore>());
+				Gore.NewGore(source.GetSource_Death(), source.position, source.velocity + launchVelocity, cardGore);
 			}
 		}
-
 
         public void EndGame()
         {
