@@ -33,6 +33,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             Name = "Creeper",
             MaxHealth = 6,
             MoveCost = 2,
+			Priority = 10,
             CardType = CardType.CREATURE,
             NPCID = NPCID.Creeper,
             SubTypes = [CardSubtype.CRIMSON, CardSubtype.SCOUT],

@@ -7,6 +7,7 @@ using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
 using TerraTCG.Common.GameSystem.Drawing.Animations;
+using TerraTCG.Common.GameSystem.GameState.Modifiers;
 using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
@@ -59,6 +60,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             {
                 zone.PlaceCard(card);
                 zone.QueueAnimation(new PlaceCardAnimation(zone.PlacedCard));
+				zone.Owner.Field.ClearModifiers(zone.Owner, zone, GameEvent.CREATURE_ENTERED);
             }
             player.Hand.Remove(card);
             GameSounds.PlaySound(GameAction.PLACE_CARD);
