@@ -15,7 +15,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 {
     internal class GamePlayer
     {
-        internal const int MAX_HEALTH = 3;
+        internal const int MAX_HEALTH = 4;
         internal const int MAX_MANA = 8;
         internal CardGame Game { get; set; } // back reference to the game this player belongs to
         internal CardCollection Hand { get; set; }
@@ -25,7 +25,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal int ManaPerTurn { get; set; } = 0;
 
-        public PlayerResources _resources = new(3, 0, 0);
+        public PlayerResources _resources = new(MAX_HEALTH, 0, 0);
         public PlayerResources Resources { 
             get => _resources; 
             set

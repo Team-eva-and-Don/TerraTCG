@@ -59,7 +59,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
             // Townsfolk Mana
             {
                 float transparency = GetTransparency(0, player.Resources.TownsfolkMana, player.PrevResources.TownsfolkMana, lerpPoint);
-                var townsfolkOffset = new Vector2(84, 15);
+                var townsfolkOffset = new Vector2(106, 15);
                 var townsolkTexture = TextureCache.Instance.TownsfolkIcon.Value;
                 var townsfolkOrigin = new Vector2(townsolkTexture.Width, townsolkTexture.Height) / 2;
                 var townsfolkPos = position + townsfolkOffset * scale;
@@ -67,7 +67,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
             }
 
             // Mana
-            var mpOffsets = new Vector2[] { new(17, 43), new(17, 65), new(17, 87) };
+            var mpOffsets = new Vector2[] { new(27, 43), new(27, 65), new(27, 87) };
             var mpSpacing = new Vector2(22, 0);
             var mpTexture = TextureCache.Instance.ManaIcon.Value;
             var mpOrigin = new Vector2(mpTexture.Width, mpTexture.Height) / 2;
