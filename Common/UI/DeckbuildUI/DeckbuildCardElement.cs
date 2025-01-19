@@ -10,10 +10,13 @@ using Terraria.Audio;
 using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.Localization;
+using Terraria.ModLoader;
 using Terraria.UI;
 using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState;
+using TerraTCG.Common.GameSystem.PackOpening;
+using TerraTCG.Content.Items;
 
 namespace TerraTCG.Common.UI.DeckbuildUI
 {
@@ -79,12 +82,23 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             return bottomClip >= 0;
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            if(!GetBounds(out var bounds))
-            {
-                return;
-            }
+		private string GetContainingPackName()
+		{
+			if(CardPools.CommonCards.Cards.Contains(Card))
+			{
+				return Language.GetTextValue("Mods.TerraTCG.Cards.Common.AnyPack");
+			} else
+			{
+				return string.Join("\n", ModContent.GetContent<TerraTCGBoosterPack>().
+					Where(p => p.Pack.Contains(Card))
+					.Select(p =>p.DisplayName.Value));
+			}
+
+		}
+
+
+		private void DrawOwnedCard(SpriteBatch spriteBatch)
+		{
 			FoilCardRenderer.DrawCard(spriteBatch, Card, Position, Color.White, CARD_SCALE, 0);
 
             var font = FontAssets.MouseText.Value;
@@ -94,9 +108,41 @@ namespace TerraTCG.Common.UI.DeckbuildUI
 
             if(ContainsPoint(Main.MouseScreen))
             {
-                var tooltipText = Language.GetTextValue("Mods.TerraTCG.Cards.Common.AddToDeck").Replace("%%", sourceCard.CardName);
+                var tooltipText = 
+					Language.GetTextValue("Mods.TerraTCG.Cards.Common.AddToDeck").Replace("%%", sourceCard.CardName) +
+					"\n" + Language.GetTextValue("Mods.TerraTCG.Cards.Common.FoundIn") + "\n" + GetContainingPackName();
                 DeckbuildState.SetTooltip(tooltipText);
             }
+		}
+
+		private void DrawSeenCard(SpriteBatch spriteBatch)
+		{
+			FoilCardRenderer.DrawCard(spriteBatch, Card, Position, Color.DimGray, CARD_SCALE, 0, details: false);
+
+            var font = FontAssets.MouseText.Value;
+            var countText = $"{Count - UsedCount}/{Count}";
+            var countPos = Position + new Vector2(4, CARD_HEIGHT * CARD_SCALE - font.MeasureString(countText).Y + 4);
+            CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, countText, countPos, color: Color.Gray, font: font);
+            if(ContainsPoint(Main.MouseScreen))
+            {
+				var tooltipText = Language.GetTextValue("Mods.TerraTCG.Cards.Common.FoundIn") + "\n" + GetContainingPackName();
+                DeckbuildState.SetTooltip(tooltipText);
+            }
+		}
+
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            if(!GetBounds(out var bounds))
+            {
+                return;
+            }
+			if(TCGPlayer.LocalPlayer.DebugDeckbuildMode || TCGPlayer.LocalPlayer.Collection.Cards.Contains(Card))
+			{
+				DrawOwnedCard(spriteBatch);
+			} else
+			{
+				DrawSeenCard(spriteBatch);
+			}
         }
     }
 }

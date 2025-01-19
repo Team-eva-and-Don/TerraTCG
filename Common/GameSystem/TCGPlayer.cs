@@ -93,7 +93,12 @@ namespace TerraTCG.Common.GameSystem
 
         public CardCollection Deck { get => SavedDecks[ActiveDeck]; set { } }
 
+		// Cards owned by the player and available for use in deckbuilding
         public CardCollection Collection { get; set; } = BotDecks.GetStarterDeck();
+
+		// Cards seen by the player in at least one game - can be seen in the 
+		// deckbuilder but not used
+        public CardCollection SeenCollection { get; set; } = BotDecks.GetStarterDeck();
 
 		// Used to track deck unlock progress
 		public List<string> DefeatedDecks { get; set; } = [];
@@ -230,7 +235,7 @@ namespace TerraTCG.Common.GameSystem
 			}
 		}
 
-		private void KillAllEaterOfWorldsSegments(int headID)
+		private static void KillAllEaterOfWorldsSegments(int headID)
 		{
 			// If we beat the Eater of Worlds, kill all EoW segments
 			// TODO does this pose the risk of killing another instance of the EOW fight in the world?
@@ -241,7 +246,7 @@ namespace TerraTCG.Common.GameSystem
 			}
 		}
 
-		private void SpawnCardExplosion(Entity source)
+		private static void SpawnCardExplosion(Entity source)
 		{
 			CardCollection deck;
 			if (source is Player player)
@@ -280,6 +285,11 @@ namespace TerraTCG.Common.GameSystem
 			{
 				HandleTownNPCDuelEnd();
 			}
+			var allSeenCards = GamePlayer.Game.Turns
+				.SelectMany(t => t.ActionLog)
+				.Select(l => l.Card)
+				.Where(c => c != null);
+			AddCardsToSeenCollection(allSeenCards);
             GamePlayer = null;
             MouseoverCard = null;
             MouseoverZone = null;
@@ -310,6 +320,17 @@ namespace TerraTCG.Common.GameSystem
 			} 
 		}
 
+        public void AddCardsToSeenCollection(IEnumerable<Card> cards)
+        {
+            foreach(var card in cards)
+            {
+                if(!SeenCollection.Cards.Contains(card))
+                {
+                    SeenCollection.Cards.Add(card);
+                }             
+			}
+        }
+
         public override void SaveData(TagCompound tag)
         {
             base.SaveData(tag);
@@ -318,6 +339,7 @@ namespace TerraTCG.Common.GameSystem
             {
                 tag.Add("collection", Collection.Serialize());
                 tag.Add("foil_collection", FoilCollection.Serialize());
+                tag.Add("seen_collection", SeenCollection.Serialize());
                 tag.Add("activeDeck", ActiveDeck);
                 tag.Add("defeatedDecks", DefeatedDecks);
             }
@@ -339,32 +361,35 @@ namespace TerraTCG.Common.GameSystem
             }
         }
 
+		private void TryLoadCollection(TagCompound tag, string key, CardCollection destination, CardCollection backup = null)
+		{
+			if(tag.ContainsKey(key))
+			{
+				try
+				{
+					var collection = tag.GetList<string>(key).ToList();
+					destination.DeSerialize(collection);
+				} catch (Exception e)
+				{
+					Mod.Logger.ErrorFormat("An error occurred while loading a player collection: {0}", e.StackTrace);
+					destination.Cards = backup?.Cards ?? [];
+				}
+			}
+		}
+
         public override void LoadData(TagCompound tag)
         {
             base.LoadData(tag);
             if (tag.ContainsKey("version") && tag.GetString("version") == SAVE_VERSION)
             {
-                try
+				TryLoadCollection(tag, "collection", Collection, BotDecks.GetStarterDeck());
+				TryLoadCollection(tag, "foil_collection", FoilCollection);
+				TryLoadCollection(tag, "seen_collection", SeenCollection);
+                for(int i = 0; i < SavedDecks.Count; i++)
                 {
-                    var collection = tag.GetList<string>("collection").ToList();
-                    Collection.DeSerialize(collection);
-                } catch (Exception e)
-                {
-                    Mod.Logger.ErrorFormat("An error occurred while loading player collection: {0}", e.StackTrace);
-                    Collection = BotDecks.GetStarterDeck();
+					TryLoadCollection(tag, $"deck_{i}", SavedDecks[i]);
                 }
-                if(tag.ContainsKey("foil_collection"))
-				{
-					try
-					{
-						var collection = tag.GetList<string>("foil_collection").ToList();
-						FoilCollection.DeSerialize(collection);
-					} catch (Exception e)
-					{
-						Mod.Logger.ErrorFormat("An error occurred while loading player foil collection: {0}", e.StackTrace);
-						FoilCollection = new();
-					}
-				}
+
                 if(tag.ContainsKey("defeatedDecks"))
                 {
 					DefeatedDecks = [.. tag.GetList<string>("defeatedDecks")];
@@ -374,34 +399,7 @@ namespace TerraTCG.Common.GameSystem
                 {
                     ActiveDeck = tag.GetInt("activeDeck");
                 }
-                for(int i = 0; i < SavedDecks.Count; i++)
-                {
-                    if(!tag.ContainsKey($"deck_{i}"))
-                    {
-                        continue;
-                    }
-                    try
-                    {
-                        var deckList = tag.GetList<string>($"deck_{i}").ToList();
-                        SavedDecks[i].DeSerialize(deckList);
-                    } catch (Exception e)
-                    {
-                        Mod.Logger.ErrorFormat("An error occurred while loading player decklists: {0}", e.StackTrace);
-                    }
-                }
             }
-        }
-
-        private static Card SelectCardFromPools(params List<Card>[] pools)
-        {
-            foreach (var pool in pools)
-            {
-                if(pool.Count > 0)
-                {
-                    return pool[Main.rand.Next(0, pool.Count)];
-                }
-            }
-            return null;
         }
 
         // Set of hacks to stop the player from accidentally dying while playing

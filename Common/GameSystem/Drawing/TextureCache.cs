@@ -46,7 +46,8 @@ namespace TerraTCG.Common.GameSystem.Drawing
         public Asset<Texture2D> CancelButton { get; private set; }
         public Asset<Texture2D> CardPreviewFrame { get; private set; }
         public Asset<Texture2D> BiomeIcons { get; private set; }
-        public Asset<Texture2D> EmoteIcons { get; private set; }
+		public Asset<Texture2D> OwnedIcon { get; private set; }
+		public Asset<Texture2D> EmoteIcons { get; private set; }
 		public Asset<Texture2D> Foiling { get; private set; }
 		public Asset<Texture2D> Sparkles { get; private set; }
 		public Asset<Texture2D> Sparkles2 { get; private set; }
@@ -62,6 +63,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
 		public Dictionary<CardSubtype, Asset<Texture2D>> BiomeMapBackgrounds { get; private set; }
         internal Dictionary<CardSubtype, Rectangle> BiomeIconBounds { get; private set; }
         internal Dictionary<CardSubtype, Rectangle> CardTypeEmoteBounds { get; private set; }
+        internal Dictionary<CardSubtype, Asset<Texture2D>> SpecialCardSubtypes { get; private set; }
 
         internal const int TUTORIAL_SLIDE_COUNT = 18;
 
@@ -170,6 +172,11 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 [CardSubtype.MUSHROOM] = new Rectangle(240, 30, 30, 30),
                 [CardSubtype.EVIL] = new Rectangle(360, 0, 30, 30),
             };
+
+			SpecialCardSubtypes = new Dictionary<CardSubtype, Asset<Texture2D>>
+			{
+				[CardSubtype.OWNED] = Main.Assets.Request<Texture2D>("Images/UI/Bestiary/Icon_Rank_Light"),
+			};
 
             CardTypeEmoteBounds = new Dictionary<CardSubtype, Rectangle>
             {

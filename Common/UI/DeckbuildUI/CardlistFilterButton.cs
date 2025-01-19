@@ -45,12 +45,16 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             {
                 texture = textureCache.BiomeIcons.Value;
                 scale = 0.75f;
-            } else
+            } else if(textureCache.CardTypeEmoteBounds.TryGetValue(CardSubtype, out bounds))
             {
-                bounds = textureCache.CardTypeEmoteBounds[CardSubtype];
                 texture = textureCache.EmoteIcons.Value;
                 scale = 1f;
-            }
+            } else
+			{
+				texture = textureCache.SpecialCardSubtypes[CardSubtype].Value;
+				bounds = texture.Bounds;
+				scale = 1f;
+			}
 
             var innerDims = GetInnerDimensions();
             var center = new Vector2(innerDims.X, innerDims.Y) + new Vector2(innerDims.Width, innerDims.Height) / 2;

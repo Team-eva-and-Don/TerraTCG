@@ -36,7 +36,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
 				if(rotation == 0)
 				{
 					// If the card is rotated towards the player, draw its text
-					CardTextRenderer.Instance.DrawCardText(spriteBatch, card, pos, scale, details: details);
+					CardTextRenderer.Instance.DrawCardText(spriteBatch, card, pos, scale, textColor: color, details: details);
 				} 
 			}
 

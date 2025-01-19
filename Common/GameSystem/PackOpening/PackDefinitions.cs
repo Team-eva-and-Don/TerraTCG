@@ -17,6 +17,8 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 		List<CardCollection> Pools { get; } = [.. pools];
 		int Count { get; } = count;
 
+		public bool Contains(Card card) => Pools.Any(p => p.Cards.Contains(card));
+
         private static Card SelectCardFromPools(List<Card> current, List<CardCollection> pools)
 		{
 			int poolIdx = Main.rand.Next(pools.Count);

@@ -56,6 +56,7 @@ namespace TerraTCG.Common.GameSystem.GameState
         TOWNSFOLK,
         ITEM,
 		EVIL,
+		OWNED,
 	}
 
     // Bot helper function, apply additional

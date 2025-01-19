@@ -28,6 +28,8 @@ namespace TerraTCG.Common.UI.DeckbuildUI
     internal class CardListFilter : UIPanel
     {
         private List<CardSubtype> FilterTypes = [
+			// Special toggle for owned/unowned cards
+            CardSubtype.OWNED,
             // Biomes
             CardSubtype.FOREST,
             CardSubtype.CAVERN,
@@ -46,7 +48,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         private List<CardlistFilterButton> filterButtons;
 
         private UIBetterTextBox searchTextBox;
-        internal List<CardSubtype> VisibleTypes = [];
+        internal List<CardSubtype> VisibleTypes = [CardSubtype.OWNED];
 
         public string FilterString { get; private set; }
 
@@ -68,8 +70,8 @@ namespace TerraTCG.Common.UI.DeckbuildUI
                 BackgroundColor = Color.White,
                 Top = {Percent = 0.45f},
                 Left = {Percent = 0f}, 
-                Width = {Pixels=120f},
-                Height = {Pixels=30f},
+                Width = {Pixels = 120f},
+                Height = {Pixels = 30f},
             };
             searchTextBox.OnTextChanged += SearchTextBox_OnTextChanged;
             Append(searchTextBox);
@@ -82,7 +84,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
                     CardSubtype = filterType,
                 };
                 btn.Top.Percent = 0.5f;
-                btn.Left.Percent = 0.21f + 0.8f * (i / (float)FilterTypes.Count);
+                btn.Left.Percent = 0.21f + 0.8f * (i / (float)(FilterTypes.Count + 1));
                 btn.OnLeftClick += (evt, elem) => ToggleVisibility(evt, elem, filterType);
 
                 Append(btn);
@@ -95,17 +97,34 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             FilterString = searchTextBox.currentString;
         }
 
+		private bool EvaluateCardOwnershipVisibility(Card card)
+		{
+			var localPlayer = TCGPlayer.LocalPlayer;
+			if (localPlayer.DebugDeckbuildMode)
+			{
+				return true;
+			} else if (VisibleTypes.Contains(CardSubtype.OWNED))
+			{
+				return localPlayer.Collection.Cards.Contains(card);
+			} else
+			{
+				return localPlayer.Collection.Cards.Contains(card) || localPlayer.SeenCollection.Cards.Contains(card);
+			}
+		}
+
         internal IEnumerable<T> FilterCardContainer<T>(IEnumerable<T> cardList) where T: IHasCard
         {
             return cardList
-                .Where(c => VisibleTypes.Count == 0 || VisibleTypes.Contains(c.Card.SortType))
+				.Where(c=>EvaluateCardOwnershipVisibility(c.Card))
+                .Where(c => VisibleTypes.Count == 0 || (VisibleTypes.Count == 1 && VisibleTypes[0] == CardSubtype.OWNED) || VisibleTypes.Contains(c.Card.SortType))
                 .Where(c => FilterString == null || FilterString == "" || c.Card.MatchesTextFilter(FilterString));
         }
 
         internal IEnumerable<Card> FilterCards(List<Card> cardList)
         {
             return cardList
-                .Where(c => VisibleTypes.Count == 0 || VisibleTypes.Contains(c.SortType))
+				.Where(EvaluateCardOwnershipVisibility)
+                .Where(c => VisibleTypes.Count == 0 || (VisibleTypes.Count == 1 && VisibleTypes[0] == CardSubtype.OWNED) || VisibleTypes.Contains(c.SortType))
                 .Where(c => FilterString == null || FilterString == "" || c.MatchesTextFilter(FilterString));
         }
 

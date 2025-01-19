@@ -1429,6 +1429,7 @@ Cards: {
 		MUSHROOM: Mushroom
 		EXPERT: Expert
 		BOSS: Boss
+		OWNED: Only Owned
 	}
 
 	Modifiers: {
@@ -1469,6 +1470,8 @@ Cards: {
 		For: for
 		UnlockedANewDeck: Unlocked a new deck
 		AcceptedInvitation: has accepted your invitation for a soul-wager game!
+		FoundIn: Found In:
+		AnyPack: Any Pack
 	}
 
 	DeckNames: {

@@ -66,10 +66,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         private List<DeckbuildCardElement> GetVisibleCards()
         {
             // TODO is this the best way to pass data between sibling elements
-            var localPlayer = TCGPlayer.LocalPlayer;
-            var cardList = localPlayer.DebugDeckbuildMode ? cards :
-                cards.Where(c => localPlayer.Collection.Cards.Any(c2 => c2.Name == c.Card.Name));
-            return ((DeckbuildState)Parent).FilterCards(cardList).ToList();
+            return ((DeckbuildState)Parent).FilterCards(cards).ToList();
         }
         private void CalculateCardPositions()
         {
