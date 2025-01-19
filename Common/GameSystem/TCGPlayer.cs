@@ -8,6 +8,7 @@ using Terraria;
 using Terraria.DataStructures;
 using Terraria.ID;
 using Terraria.Localization;
+using Terraria.Map;
 using Terraria.ModLoader;
 using Terraria.ModLoader.IO;
 using TerraTCG.Common.GameSystem.BotPlayer;
@@ -205,11 +206,15 @@ namespace TerraTCG.Common.GameSystem
 						reward.ItemId,
 						reward.Count);
 
-					// TODO figure out why this is not recommended for multiplayer
 					if (dueledNPC?.active ?? false)
 					{
 						SpawnCardExplosion(dueledNPC);
 						dueledNPC.StrikeInstantKill();
+						if(dueledNPC.netID == NPCID.EaterofWorldsHead)
+						{
+							KillAllEaterOfWorldsSegments(dueledNPC.whoAmI);
+						}
+
 					}
 				}
 				else
@@ -223,6 +228,18 @@ namespace TerraTCG.Common.GameSystem
 			{
 				Main.gamePaused = isPaused;
 			}
+		}
+
+		private void KillAllEaterOfWorldsSegments(int headID)
+		{
+			// If we beat the Eater of Worlds, kill all EoW segments
+			// TODO does this pose the risk of killing another instance of the EOW fight in the world?
+			var eowTypes = new int[] { NPCID.EaterofWorldsHead, NPCID.EaterofWorldsBody, NPCID.EaterofWorldsTail };
+			foreach(var npc in Main.npc.Where(npc=>npc.active && eowTypes.Contains(npc.netID)))
+			{
+				npc.StrikeInstantKill();
+			}
+
 		}
 
 		private void SpawnCardExplosion(Entity source)
@@ -397,7 +414,6 @@ namespace TerraTCG.Common.GameSystem
             {
                 Player.velocity = default;
             }
-            base.PreUpdateMovement();
         }
 
         public override bool CanBeHitByNPC(NPC npc, ref int cooldownSlot)
@@ -411,6 +427,37 @@ namespace TerraTCG.Common.GameSystem
             // Prevent getting hit while in game
             return GamePlayer == null;
         }
+
+		public override void SetControls()
+		{
+			// Unset any directional controls while game is in progress to
+			// prevent rubberbanding in multiplayer
+			if(GamePlayer != null)
+			{
+				Player.controlUp = false;
+				Player.controlLeft = false;
+				Player.controlDown = false;
+				Player.controlRight = false;
+				Player.controlJump = false;
+				Player.controlUseItem = false;
+				Player.controlUseTile = false;
+				Player.controlThrow = false;
+				Player.controlInv = false;
+				Player.controlHook = false;
+				Player.controlTorch = false;
+				Player.controlSmart = false;
+				Player.controlMount = false;
+				Player.controlQuickHeal = false;
+				Player.controlQuickMana = false;
+				Player.controlCreativeMenu = false;
+				Player.mapStyle = false;
+				Player.mapAlphaDown = false;
+				Player.mapAlphaUp = false;
+				Player.mapFullScreen = false;
+				Player.mapZoomIn = false;
+				Player.mapZoomOut = false;
+			}
+		}
 
 	}
 }
