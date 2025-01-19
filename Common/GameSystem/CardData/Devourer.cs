@@ -46,7 +46,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             CardType = CardType.CREATURE,
             NPCID = NPCID.DevourerHead,
 			DrawZoneNPC = CardOverlayRenderer.Instance.DrawBestiaryZoneNPC,
-            SubTypes = [CardSubtype.CORRUPT, CardSubtype.FIGHTER],
+            SubTypes = [CardSubtype.EVIL, CardSubtype.FIGHTER],
             Attacks = [
                 new() {
                     Damage = 3,

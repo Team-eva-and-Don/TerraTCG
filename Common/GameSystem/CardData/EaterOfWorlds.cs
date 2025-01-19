@@ -20,7 +20,6 @@ namespace TerraTCG.Common.GameSystem.CardData
 			private bool didTransform;
 
             public bool ShouldRemove(GameEventInfo eventInfo) {
-				// check if the most recently drawn card is an item
 				bool atHalfHealth = eventInfo.Zone.PlacedCard is PlacedCard card && card.CurrentHealth <= (card.Template.MaxHealth + 1) / 2;
                 if(atHalfHealth && !didTransform)
                 {
@@ -49,7 +48,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             NPCID = NPCID.EaterofWorldsHead,
 			DrawZoneNPC = CardOverlayRenderer.Instance.DrawBestiaryZoneNPC,
             CardType = CardType.CREATURE,
-            SubTypes = [CardSubtype.BOSS, CardSubtype.CORRUPT, CardSubtype.FIGHTER],
+            SubTypes = [CardSubtype.BOSS, CardSubtype.EVIL, CardSubtype.FIGHTER],
             Modifiers = () => [
                 new LifestealModifier(1),
                 new ReduceDamageModifier(1),
@@ -72,7 +71,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             MoveCost = 2,
             NPCID = NPCID.EaterofWorldsHead,
             CardType = CardType.CREATURE,
-            SubTypes = [CardSubtype.CORRUPT, CardSubtype.SCOUT],
+            SubTypes = [CardSubtype.EVIL, CardSubtype.SCOUT],
             IsCollectable = false,
             Modifiers = () => [
                 new ReduceDamageModifier(1),
@@ -95,7 +94,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             MoveCost = 2,
             NPCID = NPCID.EaterofWorldsHead,
             CardType = CardType.CREATURE,
-            SubTypes = [CardSubtype.CORRUPT, CardSubtype.SCOUT],
+            SubTypes = [CardSubtype.EVIL, CardSubtype.SCOUT],
             IsCollectable = false,
             Modifiers = () => [
                 new LifestealModifier(1),

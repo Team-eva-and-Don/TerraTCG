@@ -50,6 +50,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
 		public Asset<Texture2D> Foiling { get; private set; }
 		public Asset<Texture2D> Sparkles { get; private set; }
 		public Asset<Texture2D> Sparkles2 { get; private set; }
+		public Asset<Texture2D> WoFBack { get; private set; }
 		public Asset<Texture2D> KingSlimeCrown { get; private set; }
         internal Dictionary<int, Asset<Texture2D>> BestiaryTextureCache { get; private set; }
         internal Dictionary<int, Asset<Texture2D>> NPCTextureCache { get; private set; }
@@ -94,6 +95,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
             Foiling = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/Foil");
             Sparkles = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/Sparkles");
             Sparkles2 = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/Sparkles2");
+			WoFBack = Main.Assets.Request<Texture2D>("Images/WallOfFlesh");
 
             KingSlimeCrown = Main.Assets.Request<Texture2D>("Images/Extra_" + ExtrasID.KingSlimeCrown);
             NPCTextureCache = [];
@@ -122,7 +124,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 [CardSubtype.BLOOD_MOON] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/BLOOD_MOON"),
                 [CardSubtype.OCEAN] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/OCEAN"),
                 [CardSubtype.MUSHROOM] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/MUSHROOM"),
-                [CardSubtype.CRIMSON] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/CRIMSON"),
+                [CardSubtype.EVIL] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/CRIMSON"),
                 [CardSubtype.CONSUMABLE] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/ITEM"),
                 [CardSubtype.EQUIPMENT] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/ITEM"),
                 [CardSubtype.TOWNSFOLK] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/TOWNSFOLK"),
@@ -136,6 +138,13 @@ namespace TerraTCG.Common.GameSystem.Drawing
 				[ModContent.GetInstance<EyeOfCthulhu>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/EyeOfCthulhu"),
 				[ModContent.GetInstance<EaterOfWorlds>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/EaterOfWorlds"),
 				[ModContent.GetInstance<BrainOfCthulhu>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/BrainOfCthulhu"),
+				// TODO this is a bit hacky, foil crimson and corrupt EVIL cards differently
+				[ModContent.GetInstance<FaceMonster>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/CRIMSON"),
+				[ModContent.GetInstance<Crimera>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/CRIMSON"),
+				[ModContent.GetInstance<Creeper>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/CRIMSON"),
+				[ModContent.GetInstance<EaterOfSouls>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/CORRUPTION"),
+				[ModContent.GetInstance<Devourer>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/CORRUPTION"),
+				[ModContent.GetInstance<Leech>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/BLOOD_MOON"),
 			};
 
             BiomeMapBackgrounds = new Dictionary<CardSubtype, Asset<Texture2D>>
@@ -147,7 +156,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 [CardSubtype.BLOOD_MOON] = Main.Assets.Request<Texture2D>("Images/MapBG26"),
                 [CardSubtype.OCEAN] = Main.Assets.Request<Texture2D>("Images/MapBG11"),
                 [CardSubtype.MUSHROOM] = Main.Assets.Request<Texture2D>("Images/MapBG20"),
-                [CardSubtype.CRIMSON] = Main.Assets.Request<Texture2D>("Images/MapBG26"),
+                [CardSubtype.EVIL] = Main.Assets.Request<Texture2D>("Images/MapBG26"),
             };
 
             BiomeIconBounds = new Dictionary<CardSubtype, Rectangle>
@@ -159,7 +168,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 [CardSubtype.BLOOD_MOON] = new Rectangle(180, 60, 30, 30),
                 [CardSubtype.OCEAN] = new Rectangle(360, 30, 30, 30),
                 [CardSubtype.MUSHROOM] = new Rectangle(240, 30, 30, 30),
-                [CardSubtype.CRIMSON] = new Rectangle(360, 0, 30, 30),
+                [CardSubtype.EVIL] = new Rectangle(360, 0, 30, 30),
             };
 
             CardTypeEmoteBounds = new Dictionary<CardSubtype, Rectangle>

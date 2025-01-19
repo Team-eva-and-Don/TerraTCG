@@ -1157,6 +1157,28 @@ Cards: {
 			'''
 	}
 
+	WallOfFlesh: {
+		Name: "{$NPCName.WallofFlesh}"
+		Attack.Name: Flesh Wall
+		Modifier.Description:
+			'''
+			Inevitable: Each turn,
+			this deals +1 dmg and
+			heals 1 HP.
+			'''
+	}
+
+	Leech: {
+		Name: "{$NPCName.LeechHead}"
+		Attack.Name: Blood Suck
+		Modifier.Description:
+			'''
+			Boss' Helper: Your Wall 
+			of Flesh's dmg & healing 
+			increases by 1 per turn
+			'''
+	}
+
 	EaterOfWorlds: {
 		Name: "{$NPCName.EaterofWorldsHead}"
 		Attack.Name: Worm's World
@@ -1398,8 +1420,7 @@ Cards: {
 		CASTER: Caster
 		SLIME: Slime
 		JUNGLE: Jungle
-		CRIMSON: Crimson
-		CORRUPT: Corrupt
+		EVIL: Evil
 		SKY: Sky
 		BLOOD_MOON: Blood Moon
 		DESERT: Desert

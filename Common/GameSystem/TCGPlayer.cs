@@ -239,7 +239,6 @@ namespace TerraTCG.Common.GameSystem
 			{
 				npc.StrikeInstantKill();
 			}
-
 		}
 
 		private void SpawnCardExplosion(Entity source)

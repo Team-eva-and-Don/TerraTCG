@@ -36,7 +36,7 @@ namespace TerraTCG.Common.GameSystem.CardData
 			Priority = 10,
             CardType = CardType.CREATURE,
             NPCID = NPCID.Creeper,
-            SubTypes = [CardSubtype.CRIMSON, CardSubtype.SCOUT],
+            SubTypes = [CardSubtype.EVIL, CardSubtype.SCOUT],
             Attacks = [
                 new() {
                     Damage = 3,

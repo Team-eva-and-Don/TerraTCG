@@ -41,7 +41,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             CardType = CardType.CREATURE,
             NPCID = NPCID.EaterofSouls,
 			DrawZoneNPC = CardOverlayRenderer.Instance.DrawFlippedZoneNPC,
-            SubTypes = [CardSubtype.CORRUPT, CardSubtype.FIGHTER],
+            SubTypes = [CardSubtype.EVIL, CardSubtype.FIGHTER],
             Attacks = [
                 new() {
                     Damage = 3,

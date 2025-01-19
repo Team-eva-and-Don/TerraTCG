@@ -85,7 +85,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         public override Card CreateCard() => new ()
         {
             Name = "SkeletronHandL",
-            MaxHealth = 5,
+            MaxHealth = 6,
             MoveCost = 1,
 			Priority = 10,
             NPCID = NPCID.SkeletronHand,
@@ -130,7 +130,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         public override Card CreateCard() => new ()
         {
             Name = "SkeletronHandR",
-            MaxHealth = 5,
+            MaxHealth = 6,
             MoveCost = 1,
             NPCID = NPCID.SkeletronHand,
 			DrawZoneNPC = CardOverlayRenderer.Instance.DrawFlippedZoneNPC,

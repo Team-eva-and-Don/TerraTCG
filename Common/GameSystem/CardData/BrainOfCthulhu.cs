@@ -33,7 +33,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             Points = 2,
             NPCID = NPCID.BrainofCthulhu,
             CardType = CardType.CREATURE,
-            SubTypes = [CardSubtype.BOSS, CardSubtype.CRIMSON, CardSubtype.FIGHTER],
+            SubTypes = [CardSubtype.BOSS, CardSubtype.EVIL, CardSubtype.FIGHTER],
             DrawZoneNPC = CardOverlayRenderer.Instance.DrawBOCNPC,
 			Modifiers = () => [new BOCBloodBoost(), new ZealousModifier()],
             Attacks = [

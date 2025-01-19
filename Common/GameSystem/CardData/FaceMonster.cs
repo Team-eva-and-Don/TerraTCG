@@ -21,7 +21,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             MoveCost = 2,
             CardType = CardType.CREATURE,
             NPCID = NPCID.FaceMonster,
-            SubTypes = [CardSubtype.CRIMSON, CardSubtype.FIGHTER],
+            SubTypes = [CardSubtype.EVIL, CardSubtype.FIGHTER],
             Attacks = [
                 new() {
                     Damage = 3,

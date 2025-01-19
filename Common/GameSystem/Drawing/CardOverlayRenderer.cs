@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.GameState;
 
@@ -105,6 +106,37 @@ namespace TerraTCG.Common.GameSystem.Drawing
 			frame %= 3;
 			// TODO why do we need to shift position?
             DefaultDrawZoneNPC(spriteBatch, card, position + new Vector2(0, 48 * scale), frame, color, scale, effects | SpriteEffects.FlipVertically);
+		}
+
+		internal void DrawWOFNPC(SpriteBatch spriteBatch, Card card, Vector2 position, int frame, Color? color, float scale, SpriteEffects effects)
+		{
+            scale *= 0.5f;
+			// Textures
+			var textureCache = TextureCache.Instance;
+			var mouthTexture = textureCache.GetNPCTexture(NPCID.WallofFlesh);
+			var eyeTexture = textureCache.GetNPCTexture(NPCID.WallofFleshEye);
+			var wallTexture = textureCache.WoFBack;
+
+			// Bounds
+			var mouthBounds = mouthTexture.Frame(1, Main.npcFrameCount[NPCID.WallofFlesh], 0, frame);
+			var eyeBounds = eyeTexture.Frame(1, Main.npcFrameCount[NPCID.WallofFleshEye], 0, frame % Main.npcFrameCount[NPCID.WallofFleshEye]);
+			var wallBounds = new Rectangle(0, 0, wallTexture.Width(), mouthBounds.Height + 2 * eyeBounds.Height + 24);
+
+			var xOffset = Vector2.UnitX * scale * wallBounds.Width / 8 * (effects == SpriteEffects.FlipHorizontally ? -1 : 1);
+
+			// Origins
+			var mouthOrigin = new Vector2(mouthBounds.Width, mouthBounds.Height) / 2;
+			var eyeOrigin = new Vector2(eyeBounds.Width, eyeBounds.Height) / 2;
+			var wallOrigin = new Vector2(wallBounds.Width, wallBounds.Height) / 2;
+
+			spriteBatch.Draw(wallTexture.Value, position + xOffset, wallBounds, color ?? Color.White, 0, wallOrigin, scale, effects, 0);
+			spriteBatch.Draw(mouthTexture.Value, position - xOffset, mouthBounds, color ?? Color.White, 0, mouthOrigin, scale, effects, 0);
+
+			for(int i = -1; i <= 1; i+=2)
+			{
+				var eyeOffset = new Vector2(0, i * scale * (mouthBounds.Height + eyeBounds.Height + 24) / 2);
+				spriteBatch.Draw(eyeTexture.Value, position + eyeOffset - xOffset, eyeBounds, color ?? Color.White, 0, eyeOrigin, scale, effects, 0);
+			}
 		}
 
 		public void DrawBestiaryZoneNPC(
