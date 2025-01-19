@@ -132,6 +132,10 @@ namespace TerraTCG.Common.GameSystem.Drawing
 			{
 				[ModContent.GetInstance<KingSlime>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/KingSlime"),
 				[ModContent.GetInstance<QueenBee>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/QueenBee"),
+				[ModContent.GetInstance<Skeletron>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/Skeletron"),
+				[ModContent.GetInstance<EyeOfCthulhu>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/EyeOfCthulhu"),
+				[ModContent.GetInstance<EaterOfWorlds>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/EaterOfWorlds"),
+				[ModContent.GetInstance<BrainOfCthulhu>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/BrainOfCthulhu"),
 			};
 
             BiomeMapBackgrounds = new Dictionary<CardSubtype, Asset<Texture2D>>

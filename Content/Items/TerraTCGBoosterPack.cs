@@ -108,6 +108,14 @@ namespace TerraTCG.Content.Items
 	{
 		internal override Pack Pack => PackDefinitions.QueenBeePack;
 	}
+	internal class EOWPack: TerraTCGBoosterPack
+	{
+		internal override Pack Pack => PackDefinitions.EOWPack;
+	}
+	internal class SkeletronPack: TerraTCGBoosterPack
+	{
+		internal override Pack Pack => PackDefinitions.SkeletronPack;
+	}
 	internal class SlimePack: TerraTCGBoosterPack
 	{
 		internal override Pack Pack => PackDefinitions.SlimePack;

@@ -51,7 +51,7 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 				var card = shuffledCards[i];
 				// Give a small chance of turning the card foil if the player already
 				// has two
-				if(recipient.Collection.Cards.Count(c=>c==card) >= 2 && Main.rand.NextBool(20))
+				if(recipient.Collection.Cards.Count(c=>c==card) >= 2 && Main.rand.NextBool(15))
 				{
 					recipient.AddCardToFoilCollection(card);
 					allowFoils[i] = true;
@@ -82,6 +82,8 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 		public static Pack QueenBeePack => new(3, QueenBeePromoCards, JungleCards);
 		public static Pack BOCPack => new(3, BOCPromoCards, EvilCards);
 		public static Pack EOCPack => new(3, EOCPromoCards, ForestCards);
+		public static Pack EOWPack => new(3, EOWPromoCards, EvilCards);
+		public static Pack SkeletronPack => new(3, SkeletronPromoCards, DungeonCards);
 		public static Pack KingSlimePack => new(3, KingSlimePromoCards, SlimeCards);
 		public static Pack MimicPack => new(3, MimicPromoCards, CavernCards);
 

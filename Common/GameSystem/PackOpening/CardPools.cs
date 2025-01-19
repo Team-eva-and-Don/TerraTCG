@@ -119,7 +119,6 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 		public static CardCollection DungeonCards => new()
 		{
 			Cards = [
-				GetCard<Muramasa>(),
 				GetCard<CobaltShield>(),
 				GetCard<AngryBones>(),
 				GetCard<CursedSkull>(),
@@ -135,6 +134,8 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 				GetCard<ViciousBunny>(),
 				GetCard<ViciousGoldfish>(),
 				GetCard<BloodButcherer>(),
+				GetCard<EaterOfSouls>(),
+				GetCard<Devourer>(),
 			]
 		};
 
@@ -206,6 +207,22 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 			Cards = [
 				GetCard<EyeOfCthulhu>(),
 				GetCard<ServantOfCthulhu>(),
+			]
+		};
+
+		public static CardCollection EOWPromoCards => new()
+		{
+			Cards = [
+				GetCard<EaterOfWorlds>(),
+				GetCard<LightsBane>(),
+			]
+		};
+
+		public static CardCollection SkeletronPromoCards => new()
+		{
+			Cards = [
+				GetCard<Skeletron>(),
+				GetCard<Muramasa>(),
 			]
 		};
 

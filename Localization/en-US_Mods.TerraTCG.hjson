@@ -113,6 +113,16 @@ Items: {
 		DisplayName: E O C Pack
 		Tooltip: ""
 	}
+
+	EOWPack: {
+		DisplayName: E O W Pack
+		Tooltip: ""
+	}
+
+	SkeletronPack: {
+		DisplayName: Skeletron Pack
+		Tooltip: ""
+	}
 }
 
 Cards: {
