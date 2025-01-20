@@ -19,7 +19,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
         public CardCollection Deck { get; set; }
 
 		public string DeckName { get; set; }
-		public NPCDuelReward Reward { get; set; }
+		public List<NPCDuelReward> Rewards { get; set; }
 
         private readonly TimeSpan PauseBetweenActions = TimeSpan.FromSeconds(0.5f);
         private TimeSpan LastBusyTime = TimeSpan.FromSeconds(0f);

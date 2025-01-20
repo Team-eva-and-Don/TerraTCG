@@ -114,6 +114,33 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                 ]
             };
 
+		public static CardCollection GetJungleAdvancedDeck() =>
+			new()
+			{
+				Cards = [
+					GetCard<QueenBee>(),
+					GetCard<QueenBee>(),
+					GetCard<Bunny>(),
+					GetCard<Wizard>(),
+					GetCard<Hornet>(),
+					GetCard<Hornet>(),
+					GetCard<MossHornet>(),
+					GetCard<MossHornet>(),
+					GetCard<JungleBat>(),
+					GetCard<SpikedJungleSlime>(),
+					GetCard<SpikedJungleSlime>(),
+					GetCard<JungleTurtle>(),
+					GetCard<JungleTurtle>(),
+                    GetCard<GiantTortoise>(),
+                    GetCard<GiantTortoise>(),
+					GetCard<Guide>(),
+					GetCard<Guide>(),
+					GetCard<HealingPotion>(),
+					GetCard<HealingPotion>(),
+					GetCard<Bee>(),
+				]
+			};
+
         public static CardCollection GetStarterBloodMoonDeck() =>
             new()
             {
@@ -167,6 +194,32 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     GetCard<WanderingEyeFish>(), 
                 ]
             };
+        public static CardCollection GetBloodMoonAdvancedDeck() =>
+            new()
+            {
+                Cards = [
+                    GetCard<Guide>(), 
+                    GetCard<Guide>(), 
+                    GetCard<Dryad>(), 
+                    GetCard<Dryad>(), 
+                    GetCard<ArmsDealer>(), 
+                    GetCard<ArmsDealer>(), 
+                    GetCard<Shuriken>(), 
+                    GetCard<Shuriken>(), 
+                    GetCard<BrainOfCthulhu>(), 
+                    GetCard<BrainOfCthulhu>(), 
+                    GetCard<ViciousBunny>(), 
+                    GetCard<ViciousBunny>(), 
+                    GetCard<RagePotion>(), 
+                    GetCard<RagePotion>(), 
+                    GetCard<BloodZombie>(), 
+                    GetCard<BloodZombie>(), 
+                    GetCard<Drippler>(), 
+                    GetCard<Drippler>(), 
+                    GetCard<WanderingEyeFish>(), 
+                    GetCard<WanderingEyeFish>(), 
+                ]
+            };
 
         public static CardCollection GetForestDeck() =>
             new()
@@ -192,6 +245,33 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     GetCard<PosessedArmor>(), 
                     GetCard<Wraith>(), 
                     GetCard<Wraith>(), 
+                ]
+            };
+
+		internal static CardCollection GetForestAdvancedDeck() =>
+            new ()
+            {
+                Cards = [
+                    GetCard<WallOfFlesh>(), 
+                    GetCard<WallOfFlesh>(), 
+                    GetCard<Leech>(), 
+                    GetCard<Leech>(),
+                    GetCard<Guide>(),
+                    GetCard<Guide>(),
+                    GetCard<IronskinPotion>(),
+                    GetCard<CobaltShield>(),
+                    GetCard<CobaltShield>(),
+                    GetCard<Nurse>(),
+                    GetCard<Nurse>(),
+                    GetCard<HealingPotion>(), 
+                    GetCard<HealingPotion>(), 
+                    GetCard<EnchantedNightcrawler>(), 
+                    GetCard<EnchantedNightcrawler>(), 
+                    GetCard<Shackle>(),
+                    GetCard<Shackle>(),
+                    GetCard<TorturedSoul>(),
+                    GetCard<TorturedSoul>(),
+                    GetCard<Wizard>(),
                 ]
             };
 
@@ -298,8 +378,8 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     GetCard<RagePotion>(), 
                     GetCard<AngelStatue>(), 
                     GetCard<AngelStatue>(), 
-                    GetCard<SwiftnessPotion>(), 
-                    GetCard<SwiftnessPotion>(), 
+                    GetCard<Shuriken>(), 
+                    GetCard<Shuriken>(), 
                 ]
             };
 
@@ -383,6 +463,33 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     GetCard<HealingPotion>(), 
                 ]
             };
+
+        public static CardCollection GetCrabAdvancedDeck() =>
+            new()
+            {
+                Cards = [
+                    GetCard<Guide>(), 
+                    GetCard<Guide>(), 
+                    GetCard<PartyGirl>(), 
+                    GetCard<PartyGirl>(), 
+                    GetCard<Shuriken>(), 
+                    GetCard<Shuriken>(), 
+                    GetCard<BloodButcherer>(), 
+                    GetCard<BloodButcherer>(), 
+                    GetCard<RagePotion>(), 
+                    GetCard<RagePotion>(), 
+                    GetCard<Dolphin>(), 
+                    GetCard<Dolphin>(), 
+                    GetCard<Crab>(), 
+                    GetCard<Crab>(), 
+                    GetCard<Jellyfish>(), 
+                    GetCard<Jellyfish>(), 
+                    GetCard<Shark>(), 
+                    GetCard<Shark>(), 
+                    GetCard<HealingPotion>(), 
+                    GetCard<FeralClaws>(), 
+                ]
+            };
         public static CardCollection GetStarterMushroomDeck() =>
             new ()
             {
@@ -422,8 +529,8 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     GetCard<MushroomZombie>(), 
                     GetCard<AnomuraFungus>(),
                     GetCard<AnomuraFungus>(),
-                    GetCard<Wizard>(),
-                    GetCard<Wizard>(),
+                    GetCard<Nurse>(),
+                    GetCard<Nurse>(),
                     GetCard<SporeSkeleton>(),
                     GetCard<SporeSkeleton>(),
                     GetCard<DarkCaster>(),
@@ -538,10 +645,117 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     GetCard<HealingPotion>(), 
                     GetCard<Pinky>(), 
                     GetCard<Pinky>(), 
-                    GetCard<KingSlime>(),
-                    GetCard<KingSlime>(),
+                    GetCard<SlimedZombie>(),
+                    GetCard<SlimedZombie>(),
                     GetCard<MotherSlime>(),
                     GetCard<MotherSlime>(),
+                ]
+            };
+		internal static CardCollection GetSlimeAdvancedDeck() =>
+            new ()
+            {
+                Cards = [
+                    GetCard<KingSlime>(),
+                    GetCard<KingSlime>(),
+                    GetCard<BlueSlime>(), 
+                    GetCard<BlueSlime>(), 
+                    GetCard<Guide>(),
+                    GetCard<Guide>(),
+                    GetCard<SpikedSlime>(), 
+                    GetCard<SpikedSlime>(),
+                    GetCard<Wizard>(),
+                    GetCard<TorturedSoul>(),
+                    GetCard<ToxicSludge>(),
+                    GetCard<ToxicSludge>(),
+                    GetCard<SpikedJungleSlime>(),
+                    GetCard<SpikedJungleSlime>(),
+                    GetCard<HealingPotion>(), 
+                    GetCard<HealingPotion>(), 
+                    GetCard<Pinky>(), 
+                    GetCard<Pinky>(), 
+                    GetCard<MotherSlime>(),
+                    GetCard<MotherSlime>(),
+                ]
+            };
+
+		internal static CardCollection GetStarterEvilDeck() =>
+            new ()
+            {
+                Cards = [
+                    GetCard<Crimera>(),
+                    GetCard<Crimera>(),
+                    GetCard<FaceMonster>(), 
+                    GetCard<FaceMonster>(), 
+                    GetCard<Guide>(),
+                    GetCard<Guide>(),
+                    GetCard<Crab>(), 
+                    GetCard<Crab>(),
+                    GetCard<Zombie>(),
+                    GetCard<Zombie>(),
+                    GetCard<ViciousBunny>(),
+                    GetCard<ViciousBunny>(),
+                    GetCard<FeralClaws>(),
+                    GetCard<FeralClaws>(),
+                    GetCard<HealingPotion>(), 
+                    GetCard<HealingPotion>(), 
+                    GetCard<Shackle>(), 
+                    GetCard<Shackle>(), 
+                    GetCard<CopperShortsword>(),
+                    GetCard<CopperShortsword>(),
+                ]
+            };
+
+		internal static CardCollection GetEvilDeck() =>
+            new ()
+            {
+                Cards = [
+                    GetCard<Skeleton>(), 
+                    GetCard<Skeleton>(), 
+                    GetCard<Guide>(),
+                    GetCard<Guide>(),
+                    GetCard<Devourer>(), 
+                    GetCard<Devourer>(),
+                    GetCard<IronskinPotion>(),
+                    GetCard<IronskinPotion>(),
+                    GetCard<EaterOfSouls>(),
+                    GetCard<EaterOfSouls>(),
+                    GetCard<EnchantedNightcrawler>(),
+                    GetCard<EnchantedNightcrawler>(),
+                    GetCard<HealingPotion>(), 
+                    GetCard<HealingPotion>(), 
+                    GetCard<LightsBane>(), 
+                    GetCard<LightsBane>(), 
+                    GetCard<Shackle>(),
+                    GetCard<Shackle>(),
+                    GetCard<CobaltShield>(),
+                    GetCard<CobaltShield>(),
+                ]
+            };
+
+		internal static CardCollection GetEvilAdvancedDeck() =>
+            new ()
+            {
+                Cards = [
+                    GetCard<EaterOfWorlds>(), 
+                    GetCard<EaterOfWorlds>(), 
+                    GetCard<Guide>(),
+                    GetCard<Guide>(),
+                    GetCard<Devourer>(), 
+                    GetCard<Devourer>(),
+                    GetCard<IronskinPotion>(),
+                    GetCard<IronskinPotion>(),
+                    GetCard<EaterOfSouls>(),
+                    GetCard<EaterOfSouls>(),
+                    GetCard<EnchantedNightcrawler>(),
+                    GetCard<EnchantedNightcrawler>(),
+                    GetCard<HealingPotion>(), 
+                    GetCard<HealingPotion>(), 
+                    GetCard<TorturedSoul>(), 
+                    GetCard<LightsBane>(), 
+                    GetCard<Shackle>(),
+                    GetCard<Shackle>(),
+                    GetCard<CobaltShield>(),
+                    GetCard<CobaltShield>(),
                 ]
             };
 
@@ -592,8 +806,8 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     GetCard<SpikedJungleSlime>(),
                     GetCard<HealingPotion>(), 
                     GetCard<HealingPotion>(), 
-                    GetCard<Pinky>(), 
-                    GetCard<Pinky>(), 
+                    GetCard<SlimedZombie>(), 
+                    GetCard<SlimedZombie>(), 
                     GetCard<MotherSlime>(),
                     GetCard<MotherSlime>(),
                 ]

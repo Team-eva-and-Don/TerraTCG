@@ -116,6 +116,12 @@ namespace TerraTCG.Content.Items
 	{
 		internal override Pack Pack => PackDefinitions.SkeletronPack;
 	}
+
+	internal class WOFPack: TerraTCGBoosterPack
+	{
+		internal override Pack Pack => PackDefinitions.WOFPack;
+	}
+
 	internal class SlimePack: TerraTCGBoosterPack
 	{
 		internal override Pack Pack => PackDefinitions.SlimePack;

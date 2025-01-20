@@ -124,6 +124,11 @@ Items: {
 		DisplayName: Skeletron Pack
 		Tooltip: ""
 	}
+
+	WOFPack: {
+		DisplayName: W O F Pack
+		Tooltip: ""
+	}
 }
 
 Cards: {
@@ -1501,23 +1506,32 @@ Cards: {
 		Tutorial: Tutorial
 		ForestBeginner: Forest 1
 		Forest: Forest 2
+		ForestAdvanced: Forest 3
 		SlimeBeginner: Slimes 1
 		Slime: Slimes 2
+		SlimeAdvanced: Slimes 3
 		JungleBeginner: Jungle 1
 		Jungle: Jungle 2
+		JungleAdvanced: Jungle 3
 		Treasure: Treasures
 		Salamander: Salamanders
 		BloodMoonBeginner: Blood Moon 1
 		BloodMoon: Blood Moon 2
+		BloodMoonAdvanced: Blood Moon 3
 		MushroomBeginner: Mushrooms 1
 		Mushroom: Mushrooms 2
 		SkeletonsBeginner: Skeletons 1
 		Skeletons: Skeletons 2
 		Curse: Dungeon 1
+		CurseAdvanced: Dungeon 2
 		GoblinsBeginner: Goblins 1
 		Goblins: Goblins 2
 		CrabsBeginner: Ocean 1
 		Crabs: Ocean 2
+		CrabsAdvanced: Ocean 3
+		EvilBeginner: Evil 1
+		Evil: Evil 2
+		EvilAdvanced: Evil 3
 		QueenBee: Queen Bee
 		KingSlime: King Slime
 		BoC: Brain of Cthulhu

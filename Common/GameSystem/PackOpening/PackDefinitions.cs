@@ -87,6 +87,7 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 		public static Pack EOCPack => new(3, EOCPromoCards, ForestCards);
 		public static Pack EOWPack => new(3, EOWPromoCards, EvilCards);
 		public static Pack SkeletronPack => new(3, SkeletronPromoCards, DungeonCards);
+		public static Pack WOFPack => new(3, WallOfFleshPromoCards, EvilCards);
 		public static Pack KingSlimePack => new(3, KingSlimePromoCards, SlimeCards);
 		public static Pack MimicPack => new(3, MimicPromoCards, CavernCards);
 

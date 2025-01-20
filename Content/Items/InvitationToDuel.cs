@@ -26,6 +26,7 @@ namespace TerraTCG.Content.Items
             Item.useAnimation = 120;
             Item.useTime = 120;
             Item.rare = ItemRarityID.Blue;
+			Item.consumable = true;
 		}
 
 		private static void StartGameAndRigBossHand(IGamePlayerController myPlayer, IGamePlayerController opponent)
@@ -59,7 +60,7 @@ namespace TerraTCG.Content.Items
 			var opponent = new SimpleBotPlayer()
 			{
 				Deck = bossList.DeckList,
-				Reward = bossList.Rewards[0],
+				Rewards = bossList.Rewards,
 				DeckName = bossList.Key,
 			};
 			StartGameAndRigBossHand(myPlayer, opponent);
@@ -99,6 +100,11 @@ namespace TerraTCG.Content.Items
 			{
 				StartDuelWithNearestBoss(player);
 			}
+		}
+
+		public override bool CanUseItem(Player player)
+		{
+			return GetNearestDuelableBoss(player) != null;
 		}
 
 		public override bool? UseItem(Player player)

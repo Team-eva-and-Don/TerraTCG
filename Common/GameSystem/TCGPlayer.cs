@@ -30,7 +30,7 @@ namespace TerraTCG.Common.GameSystem
 
         public string DeckName { get; set; }
 
-		public NPCDuelReward Reward { get; set; }
+		public List<NPCDuelReward> Rewards { get; set; }
 
         public void StartGame(GamePlayer player, CardGame game);
 
@@ -117,7 +117,7 @@ namespace TerraTCG.Common.GameSystem
         // from outside their collection. Default false
         public bool DebugDeckbuildMode { get; internal set; } = false;
 		public string DeckName { get; set; }
-		public NPCDuelReward Reward { get; set; }
+		public List<NPCDuelReward> Rewards { get; set; }
 
 		// Cache the info of the NPC that the player is currently fighting
 		// Used in case the NPC dies between the beginning and end of the
@@ -144,7 +144,7 @@ namespace TerraTCG.Common.GameSystem
 				.SelectMany(kv => kv.Value.Select(v => (kv.Key, v)))
 				.Where(kv => kv.v.IsUnlocked(this));
 
-		private NPCDuelReward HandleFirstTimeDeckWin(IGamePlayerController opponent)
+		private List<NPCDuelReward> HandleFirstTimeDeckWin(IGamePlayerController opponent)
 		{
 			// Double reward the first time you beat an opponent
 			var unlockedLists = UnlockedDecks.ToList();
@@ -171,7 +171,7 @@ namespace TerraTCG.Common.GameSystem
 				Main.NewText($"{Language.GetTextValue("Mods.TerraTCG.Cards.Common.UnlockedANewDeck")}{newNPC}!");
 			}
 
-			return new(opponent.Reward.ItemId, opponent.Reward.Count * 2);
+			return opponent.Rewards.Select(r => new NPCDuelReward(r.ItemId, r.Count * 2)).ToList();
 		}
 
 		private void HandleTownNPCDuelEnd()
@@ -179,15 +179,18 @@ namespace TerraTCG.Common.GameSystem
             if(GamePlayer.Game.Winner == GamePlayer)
             {
 				var opponentController = GamePlayer.Opponent.Controller;
-				var reward = opponentController.Reward;
+				var rewards = opponentController.Rewards;
 				if(!DefeatedDecks.Contains(opponentController.DeckName))
 				{
-					reward = HandleFirstTimeDeckWin(opponentController);
+					rewards = HandleFirstTimeDeckWin(opponentController);
 				}
-                Player.QuickSpawnItem(
-                    Player.GetSource_GiftOrReward("TerraTCG: Won Game"), 
-                    reward.ItemId, 
-                    reward.Count);
+				foreach (var reward in rewards)
+				{
+					Player.QuickSpawnItem(
+						Player.GetSource_GiftOrReward("TerraTCG: Won Game"),
+						reward.ItemId,
+						reward.Count);
+				}
             }
 		}
 
@@ -201,15 +204,18 @@ namespace TerraTCG.Common.GameSystem
 				if (GamePlayer.Game.Winner == GamePlayer)
 				{
 					var opponentController = GamePlayer.Opponent.Controller;
-					var reward = opponentController.Reward;
+					var rewards = opponentController.Rewards;
 					if (!DefeatedDecks.Contains(opponentController.DeckName))
 					{
-						reward = HandleFirstTimeDeckWin(opponentController);
+						HandleFirstTimeDeckWin(opponentController);
 					}
-					Player.QuickSpawnItem(
-						Player.GetSource_GiftOrReward("TerraTCG: Won Game"),
-						reward.ItemId,
-						reward.Count);
+					foreach (var reward in rewards)
+					{
+						Player.QuickSpawnItem(
+							Player.GetSource_GiftOrReward("TerraTCG: Won Game"),
+							reward.ItemId,
+							reward.Count);
+					}
 
 					if (dueledNPC?.active ?? false)
 					{
