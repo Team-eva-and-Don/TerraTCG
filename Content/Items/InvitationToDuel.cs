@@ -59,7 +59,7 @@ namespace TerraTCG.Content.Items
 			var opponent = new SimpleBotPlayer()
 			{
 				Deck = bossList.DeckList,
-				Reward = bossList.Reward,
+				Reward = bossList.Rewards[0],
 				DeckName = bossList.Key,
 			};
 			StartGameAndRigBossHand(myPlayer, opponent);

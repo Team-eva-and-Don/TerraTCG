@@ -464,6 +464,33 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                 ]
             };
 
+        public static CardCollection GetSalamanderDeck() =>
+            new ()
+            {
+                Cards = [
+                    GetCard<Salamander>(), 
+                    GetCard<Salamander>(), 
+                    GetCard<GiantShelly>(), 
+                    GetCard<GiantShelly>(),
+                    GetCard<Crawdad>(),
+                    GetCard<Crawdad>(),
+                    GetCard<Bunny>(),
+                    GetCard<Bunny>(),
+                    GetCard<Guide>(),
+                    GetCard<Guide>(),
+                    GetCard<Wizard>(),
+                    GetCard<Wizard>(),
+                    GetCard<HealingPotion>(), 
+                    GetCard<HealingPotion>(), 
+                    GetCard<CobaltShield>(), 
+                    GetCard<CobaltShield>(), 
+                    GetCard<IronskinPotion>(),
+                    GetCard<IronskinPotion>(),
+                    GetCard<LightsBane>(),
+                    GetCard<LightsBane>(),
+                ]
+            };
+
         public static CardCollection GetStarterSlimeDeck() =>
             new ()
             {
@@ -650,6 +677,60 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     GetCard<Shackle>(),
                     GetCard<CobaltShield>(),
                     GetCard<CobaltShield>(),
+                ]
+            };
+
+		internal static CardCollection GetSkeletronDeck() =>
+            new ()
+            {
+                Cards = [
+                    GetCard<Skeletron>(), 
+                    GetCard<Skeletron>(), 
+                    GetCard<Guide>(),
+                    GetCard<Guide>(),
+                    GetCard<Dryad>(), 
+                    GetCard<Dryad>(),
+                    GetCard<IronskinPotion>(),
+                    GetCard<IronskinPotion>(),
+                    GetCard<CobaltShield>(),
+                    GetCard<CobaltShield>(),
+                    GetCard<RagePotion>(),
+                    GetCard<RagePotion>(),
+                    GetCard<HealingPotion>(), 
+                    GetCard<HealingPotion>(), 
+                    GetCard<LightsBane>(), 
+                    GetCard<LightsBane>(), 
+                    GetCard<Shackle>(),
+                    GetCard<Shackle>(),
+                    GetCard<Nurse>(),
+                    GetCard<Wizard>(),
+                ]
+            };
+
+		internal static CardCollection GetWallOfFleshDeck() =>
+            new ()
+            {
+                Cards = [
+                    GetCard<WallOfFlesh>(), 
+                    GetCard<WallOfFlesh>(), 
+                    GetCard<Leech>(), 
+                    GetCard<Leech>(),
+                    GetCard<Guide>(),
+                    GetCard<Guide>(),
+                    GetCard<IronskinPotion>(),
+                    GetCard<IronskinPotion>(),
+                    GetCard<CobaltShield>(),
+                    GetCard<CobaltShield>(),
+                    GetCard<Nurse>(),
+                    GetCard<Nurse>(),
+                    GetCard<HealingPotion>(), 
+                    GetCard<HealingPotion>(), 
+                    GetCard<LightsBane>(), 
+                    GetCard<LightsBane>(), 
+                    GetCard<Shackle>(),
+                    GetCard<Shackle>(),
+                    GetCard<Wizard>(),
+                    GetCard<Wizard>(),
                 ]
             };
 	}

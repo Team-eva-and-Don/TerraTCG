@@ -30,10 +30,9 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 				GetCard<GreenSlime>(), 
 				GetCard<Goldfish>(), 
 				GetCard<Squirrel>(), 
+				GetCard<Bunny>(), 
 				GetCard<Skeleton>(), 
 				GetCard<Bat>(), 
-				GetCard<JungleBat>(), 
-				GetCard<SporeBat>(), 
 				GetCard<IronskinPotion>(), 
 				GetCard<HealingPotion>(), 
 				GetCard<RagePotion>(), 
@@ -120,6 +119,7 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 		{
 			Cards = [
 				GetCard<CobaltShield>(),
+				GetCard<Muramasa>(),
 				GetCard<AngryBones>(),
 				GetCard<CursedSkull>(),
 				GetCard<DarkCaster>(),
@@ -169,6 +169,7 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 				GetCard<MushroomZombie>(),
 				GetCard<SporeSkeleton>(),
 				GetCard<HealingPotion>(),
+				GetCard<Nurse>(),
 			]
 		};
 
@@ -222,7 +223,6 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 		{
 			Cards = [
 				GetCard<Skeletron>(),
-				GetCard<Muramasa>(),
 			]
 		};
 
@@ -234,6 +234,14 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 			]
 		};
 
+		public static CardCollection WallOfFleshPromoCards => new()
+		{
+			Cards = [
+				GetCard<WallOfFlesh>(),
+				GetCard<Leech>(),
+				GetCard<TorturedSoul>(),
+			]
+		};
 		public static CardCollection MimicPromoCards => new()
 		{
 			Cards = [

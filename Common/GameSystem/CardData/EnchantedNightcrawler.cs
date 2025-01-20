@@ -21,8 +21,13 @@ namespace TerraTCG.Common.GameSystem.CardData
 			{
 				if(eventInfo.Event == GameEvent.CREATURE_DIED)
 				{
+					var owner = eventInfo.Zone.Owner;
 					eventInfo.Zone.QueueAnimation(new MorbidAnimation());
-					eventInfo.Zone.Owner.ManaPerTurn += 1;
+					owner.ManaPerTurn += 1;
+					if(owner.Deck.Cards.Count > 0)
+					{
+						owner.Hand.Add(owner.Deck.Draw());
+					}
 					return true;
 				}
 				return false;
@@ -36,6 +41,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             MoveCost = 1,
             CardType = CardType.CREATURE,
             NPCID = NPCID.EnchantedNightcrawler,
+			Priority = -10, // NPCs should play around killing this
             SubTypes = [CardSubtype.FOREST, CardSubtype.SCOUT],
             Attacks = [
                 new() {

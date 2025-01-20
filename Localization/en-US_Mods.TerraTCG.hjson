@@ -94,13 +94,14 @@ Items: {
 	}
 
 	InvitationToDuel: {
-		DisplayName: Invitation To Soul-Wager Game!
+		DisplayName: Invitation To Duel!
 		Tooltip:
 			'''
 			Wager your soul for TerraTCG glory! Use
 			in the presence of any pre-hardmode boss
-			to start a game of TerraTCG. But be warned,
-			the consequences for losing are deadly!
+			to start a game of TerraTCG with your 
+			soul on the line. Be warned, the 
+			consequences for losing are deadly!
 			'''
 	}
 
@@ -764,9 +765,30 @@ Cards: {
 		Name: "{$NPCName.PartyGirl}'s Favor"
 		Modifier.Description:
 			'''
-			Target ally's attack
-			costs 1 MP less this
-			turn.
+			Unpause target Ally. Its
+			attack costs 1 MP less 
+			this turn.
+			'''
+	}
+
+	Nurse: {
+		Name: "{$NPCName.Nurse}'s Care"
+		Modifier.Description:
+			'''
+			Target ally heals 2 hp.
+			Remove all debuffs 
+			from it.
+			'''
+	}
+
+	TorturedSoul: {
+		Name: Tortured Soul
+		Modifier.Description:
+			'''
+			If you have less HP
+			than your opponent,
+			add a Boss from your
+			deck to the hand.
 			'''
 	}
 
@@ -1230,7 +1252,8 @@ Cards: {
 		Modifier.Description:
 			'''
 			Morbid: If this dies, you 
-			gain 1 Mana Crystal.
+			gain 1 Mana Crystal and 
+			draw 1 card.
 			'''
 	}
 
@@ -1482,7 +1505,8 @@ Cards: {
 		Slime: Slimes 2
 		JungleBeginner: Jungle 1
 		Jungle: Jungle 2
-		Treasure: Treasures 1
+		Treasure: Treasures
+		Salamander: Salamanders
 		BloodMoonBeginner: Blood Moon 1
 		BloodMoon: Blood Moon 2
 		MushroomBeginner: Mushrooms 1
@@ -1498,6 +1522,9 @@ Cards: {
 		KingSlime: King Slime
 		BoC: Brain of Cthulhu
 		EoC: Eye of Cthulhu
+		EoW: Eater of Worlds
+		Skeletron: Skeletron
+		WoF: Wall of Flesh
 	}
 
 	ActionText: {

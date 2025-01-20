@@ -89,9 +89,10 @@ namespace TerraTCG.Common.UI.DeckbuildUI
 				return Language.GetTextValue("Mods.TerraTCG.Cards.Common.AnyPack");
 			} else
 			{
-				return string.Join("\n", ModContent.GetContent<TerraTCGBoosterPack>().
-					Where(p => p.Pack.Contains(Card))
-					.Select(p =>p.DisplayName.Value));
+				return ModContent.GetContent<TerraTCGBoosterPack>().
+					Where(p => p.Pack.IsPrimaryPackFor(Card))
+					.Select(p =>p.DisplayName.Value)
+					.FirstOrDefault();
 			}
 
 		}
@@ -110,7 +111,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             {
                 var tooltipText = 
 					Language.GetTextValue("Mods.TerraTCG.Cards.Common.AddToDeck").Replace("%%", sourceCard.CardName) +
-					"\n" + Language.GetTextValue("Mods.TerraTCG.Cards.Common.FoundIn") + "\n" + GetContainingPackName();
+					"\n" + Language.GetTextValue("Mods.TerraTCG.Cards.Common.FoundIn") + " " + GetContainingPackName();
                 DeckbuildState.SetTooltip(tooltipText);
             }
 		}
@@ -125,7 +126,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, countText, countPos, color: Color.Gray, font: font);
             if(ContainsPoint(Main.MouseScreen))
             {
-				var tooltipText = Language.GetTextValue("Mods.TerraTCG.Cards.Common.FoundIn") + "\n" + GetContainingPackName();
+				var tooltipText = Language.GetTextValue("Mods.TerraTCG.Cards.Common.FoundIn") + " " + GetContainingPackName();
                 DeckbuildState.SetTooltip(tooltipText);
             }
 		}

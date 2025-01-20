@@ -145,8 +145,8 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         public override void Update(GameTime gameTime)
         {
             Main.LocalPlayer.mouseInterface = true;
-            totalCount = 2 * FilterCards(allCards).Count();
-            visibleCount = FilterCards(TCGPlayer.LocalPlayer.Collection.Cards).Count();
+            totalCount = 2 * allCards.Count;
+			visibleCount = TCGPlayer.LocalPlayer.Collection.Cards.Count;
             base.Update(gameTime);
         }
         public override void Draw(SpriteBatch spriteBatch)
