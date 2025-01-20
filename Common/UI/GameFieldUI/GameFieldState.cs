@@ -34,14 +34,15 @@ namespace TerraTCG.Common.UI.GameFieldUI
         public override void OnInitialize()
         {
             base.OnInitialize();
+
+            oppHandElement = new();
+            Append(oppHandElement);
+
             gameField = new();
             Append(gameField);
 
             handElement = new();
             Append(handElement);
-
-            oppHandElement = new();
-            Append(oppHandElement);
 
             previewElement = new();
             Append(previewElement);

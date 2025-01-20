@@ -6,8 +6,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.ModLoader;
 using Terraria.UI;
 using TerraTCG.Common.GameSystem;
+using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.UI.Common;
 
@@ -30,14 +32,38 @@ namespace TerraTCG.Common.UI.GameFieldUI
             // No - op, draw-only element for the opponent's hand
         }
 
+		private void DrawBossBehindHand(SpriteBatch spriteBatch, int bossId)
+		{
+			var bossCard = ModContent.GetContent<BaseCardTemplate>()
+				.Select(c => c.Card)
+				.Where(c => c.NPCID == bossId)
+				.FirstOrDefault();
+			// check the vertical clearance above the hand to see if there's enough
+			// space to actually render the boss
+			if (CardPosition0.Y < 64 || bossCard == null)
+			{
+				return;
+			}
+			var centerPos = new Vector2(Main.screenWidth / 2, CardPosition0.Y + CARD_HEIGHT / 2);
+			var floatOffset = Vector2.UnitY * 6 * MathF.Sin(MathF.PI * (float)TCGPlayer.TotalGameTime.TotalSeconds);
+			bossCard.DrawZoneNPC.Invoke(spriteBatch, bossCard, centerPos + floatOffset, 0, Color.White, 2f, SpriteEffects.None);
+		}
+
         public override void Draw(SpriteBatch spriteBatch)
         {
             var gamePlayer = TCGPlayer.LocalGamePlayer?.Opponent;
-            if (gamePlayer == null || gamePlayer.Hand?.Cards?.Count == 0)
+            if (gamePlayer == null)
             {
                 return;
             }
+			// TODO this is hacky, but this is the background-est object in the field
+			GameFieldElement.DrawMapBg(spriteBatch);
+
             Vector2 currentPos = CardPosition0;
+			if(TCGPlayer.LocalPlayer.NPCInfo.IsBoss)
+			{
+				DrawBossBehindHand(spriteBatch, TCGPlayer.LocalPlayer.NPCInfo.NpcId);
+			}
 
             var texture = TextureCache.Instance.CardBack;
             foreach (var card in gamePlayer.Hand.Cards)

@@ -17,6 +17,8 @@ namespace TerraTCG.Common.GameSystem.CardData
 		{
 			public ModifierType Category => ModifierType.DEFENSE_BOOST;
 
+			public int Amount => 1;
+
 			public bool AppliesToZone(Zone zone) => zone.PlacedCard?.Template.Name == "EyeOfCthulhu" &&
 				zone.PlacedCard.CurrentHealth <= (zone.PlacedCard.Template.MaxHealth + 1) /2;
 
@@ -25,7 +27,7 @@ namespace TerraTCG.Common.GameSystem.CardData
 				// no-op
 				if(AppliesToZone(destZone))
 				{
-					attack.Damage -= 1;
+					attack.Damage = Math.Max(1, attack.Damage - Amount);
 				}
 			}
 

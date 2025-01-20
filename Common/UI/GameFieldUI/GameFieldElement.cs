@@ -189,7 +189,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
             TCGPlayer.LocalGamePlayer.Game.FieldAnimation?.DrawFieldOverlay(spriteBatch, Position);
         }
 
-        private void DrawMapBg(SpriteBatch spriteBatch)
+        internal static void DrawMapBg(SpriteBatch spriteBatch)
         {
             var texture = FieldRenderer.Instance.MapBGRenderTarget;
             var mapScaleX = Main.screenWidth / (float)texture.Width;
@@ -206,8 +206,6 @@ namespace TerraTCG.Common.UI.GameFieldUI
             var texture = FieldRenderer.Instance.PerspectiveRenderTarget;
             if(texture != null && TCGPlayer.LocalGamePlayer != null)
             {
-                // draw the map background overlay
-                DrawMapBg(spriteBatch);
                 // draw the perspective-rendered game field
                 spriteBatch.Draw(texture, Position, Color.White);
                 DrawZoneNPCs(spriteBatch);

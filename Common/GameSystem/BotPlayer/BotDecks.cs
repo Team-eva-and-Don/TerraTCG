@@ -764,7 +764,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
 			{
 				Cards = [
 					GetCard<QueenBee>(),
-					GetCard<QueenBee>(),
+					GetCard<GiantTortoise>(),
 					GetCard<Bee>(),
 					GetCard<Bee>(),
 					GetCard<Hornet>(),
@@ -791,7 +791,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             {
                 Cards = [
                     GetCard<KingSlime>(),
-                    GetCard<KingSlime>(),
+                    GetCard<Pinky>(),
                     GetCard<BlueSlime>(), 
                     GetCard<BlueSlime>(), 
                     GetCard<Guide>(),
@@ -845,13 +845,13 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             {
                 Cards = [
                     GetCard<EyeOfCthulhu>(), 
-                    GetCard<EyeOfCthulhu>(), 
                     GetCard<Guide>(),
                     GetCard<Guide>(),
                     GetCard<ServantOfCthulhu>(), 
                     GetCard<ServantOfCthulhu>(),
                     GetCard<IronskinPotion>(),
                     GetCard<IronskinPotion>(),
+                    GetCard<ThornsPotion>(),
                     GetCard<WanderingEye>(),
                     GetCard<WanderingEye>(),
                     GetCard<DemonEye>(),
@@ -872,11 +872,11 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             {
                 Cards = [
                     GetCard<EaterOfWorlds>(), 
-                    GetCard<EaterOfWorlds>(), 
                     GetCard<Guide>(),
                     GetCard<Guide>(),
                     GetCard<Devourer>(), 
                     GetCard<Devourer>(),
+                    GetCard<ThornsPotion>(),
                     GetCard<IronskinPotion>(),
                     GetCard<IronskinPotion>(),
                     GetCard<EaterOfSouls>(),
@@ -899,7 +899,6 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             {
                 Cards = [
                     GetCard<Skeletron>(), 
-                    GetCard<Skeletron>(), 
                     GetCard<Guide>(),
                     GetCard<Guide>(),
                     GetCard<Dryad>(), 
@@ -918,6 +917,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     GetCard<Shackle>(),
                     GetCard<Nurse>(),
                     GetCard<Wizard>(),
+                    GetCard<PlatinumBroadsword>(), 
                 ]
             };
 
@@ -925,7 +925,6 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             new ()
             {
                 Cards = [
-                    GetCard<WallOfFlesh>(), 
                     GetCard<WallOfFlesh>(), 
                     GetCard<Leech>(), 
                     GetCard<Leech>(),
@@ -945,6 +944,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     GetCard<Shackle>(),
                     GetCard<Wizard>(),
                     GetCard<Wizard>(),
+                    GetCard<ThornsPotion>(), 
                 ]
             };
 	}

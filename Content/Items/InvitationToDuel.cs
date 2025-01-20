@@ -26,6 +26,7 @@ namespace TerraTCG.Content.Items
             Item.useAnimation = 120;
             Item.useTime = 120;
             Item.rare = ItemRarityID.Blue;
+			Item.maxStack = 9999;
 			Item.consumable = true;
 		}
 

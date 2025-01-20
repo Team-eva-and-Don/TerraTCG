@@ -61,6 +61,9 @@ namespace TerraTCG.Common.GameSystem.Drawing
 		public Dictionary<CardSubtype, Asset<Texture2D>> FoilMasks { get; private set; }
 		public Dictionary<string, Asset<Texture2D>> CardFoilMasks { get; private set; }
 		public Dictionary<CardSubtype, Asset<Texture2D>> BiomeMapBackgrounds { get; private set; }
+
+		public Dictionary<string, Asset<Texture2D>> OtherMapBackgrounds { get; private set; }
+
         internal Dictionary<CardSubtype, Rectangle> BiomeIconBounds { get; private set; }
         internal Dictionary<CardSubtype, Rectangle> CardTypeEmoteBounds { get; private set; }
         internal Dictionary<CardSubtype, Asset<Texture2D>> SpecialCardSubtypes { get; private set; }
@@ -158,8 +161,15 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 [CardSubtype.BLOOD_MOON] = Main.Assets.Request<Texture2D>("Images/MapBG26"),
                 [CardSubtype.OCEAN] = Main.Assets.Request<Texture2D>("Images/MapBG11"),
                 [CardSubtype.MUSHROOM] = Main.Assets.Request<Texture2D>("Images/MapBG20"),
-                [CardSubtype.EVIL] = Main.Assets.Request<Texture2D>("Images/MapBG26"),
             };
+			OtherMapBackgrounds = new Dictionary<string, Asset<Texture2D>>
+			{
+				["CRIMSON"] = Main.Assets.Request<Texture2D>("Images/MapBG7"),
+				["CORRUPTION"] = Main.Assets.Request<Texture2D>("Images/MapBG6"),
+				["Skeletron"] = Main.Assets.Request<Texture2D>("Images/MapBG5"),
+				["QueenBee"] = Main.Assets.Request<Texture2D>("Images/MapBG16"),
+				["WallOfFlesh"] = Main.Assets.Request<Texture2D>("Images/MapBG24"),
+			};
 
             BiomeIconBounds = new Dictionary<CardSubtype, Rectangle>
             {

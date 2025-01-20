@@ -41,9 +41,6 @@ namespace TerraTCG.Common.GameSystem.Drawing
         public const int FIELD_WIDTH = 5 * CARD_WIDTH + 4 * CARD_MARGIN + 2 * FIELD_MARGIN;
         public const int FIELD_HEIGHT = 4 * CARD_HEIGHT + 4 * CARD_MARGIN + FIELD_GAP + 2 * FIELD_MARGIN;
 
-        // Render the tiny map background onto a "full screen" to scale it up
-        private const int LARGE_MAP_WIDTH = 1920;
-        private const int LARGE_MAP_HEIGHT = 1080;
 
 
         // need to run this on the main thread, cannot find a ModSystem method
@@ -77,8 +74,8 @@ namespace TerraTCG.Common.GameSystem.Drawing
 
             MapBGRenderTarget = new RenderTarget2D(
                 Main.graphics.GraphicsDevice,
-                LARGE_MAP_WIDTH,
-                LARGE_MAP_HEIGHT,
+                MapBGRenderer.LARGE_MAP_WIDTH,
+                MapBGRenderer.LARGE_MAP_HEIGHT,
                 false,
                 SurfaceFormat.Color,
                 DepthFormat.None,
@@ -144,26 +141,6 @@ namespace TerraTCG.Common.GameSystem.Drawing
             player.Opponent.Field.Draw(Main.spriteBatch, opponentFieldPos, MathF.PI);
         }
 
-        // Draw the map background that corresponds to the most populous biome in the player's active deck
-        private static void DrawMapBG()
-        {
-			var localDeck = TCGPlayer.LocalGamePlayer?.Opponent?.Deck;
-			if(localDeck == null)
-			{
-				return;
-			}
-            var dominantBiome = localDeck.Cards
-                .Where(c => c.CardType == CardType.CREATURE)
-                .GroupBy(c => c.SortType)
-                .Select(c => (c.First(), c.Count()))
-                .OrderByDescending(pair => pair.Item2)
-                .Select(pair => pair.Item1.SortType)
-                .FirstOrDefault();
-            if(TextureCache.Instance.BiomeMapBackgrounds.TryGetValue(dominantBiome, out var texture))
-            {
-                Main.spriteBatch.Draw(texture.Value, new Rectangle(0, 0, LARGE_MAP_WIDTH, LARGE_MAP_HEIGHT), Color.White);
-            }
-        }
 
 
         private void OnPreDraw(GameTime gameTime)
@@ -181,7 +158,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
             Main.spriteBatch.Begin(
                 SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise);
 
-            DrawMapBG();
+            MapBGRenderer.DrawMapBG(Main.spriteBatch);
 
             Main.spriteBatch.End();
 

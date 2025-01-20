@@ -48,7 +48,6 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 				GetCard<Guide>(), 
 				GetCard<Dryad>(), 
 				GetCard<Wizard>(), 
-				GetCard<OldMan>(), 
 				GetCard<PartyGirl>(), 
 				GetCard<Wizard>(), 
 			]
@@ -59,6 +58,7 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 			Cards = [
 				GetCard<BlueSlime>(), 
 				GetCard<GreenSlime>(), 
+				GetCard<EnchantedNightcrawler>(), 
 				GetCard<DemonEye>(), 
 				GetCard<Goldfish>(), 
 				GetCard<Squirrel>(), 
@@ -123,6 +123,7 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 				GetCard<AngryBones>(),
 				GetCard<CursedSkull>(),
 				GetCard<DarkCaster>(),
+				GetCard<OldMan>(), 
 			]
 		};
 
