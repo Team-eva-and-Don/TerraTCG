@@ -42,6 +42,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
 			var skyColorList = ModContent.GetInstance<MapBGRenderer>().SkyColored;
 			var dominantBiome = deck.Cards
 				.Where(c => c.CardType == CardType.CREATURE)
+				.Where(c => bgMap.ContainsKey(c.SortType))
 				.GroupBy(c => c.SortType)
 				.Select(c => (c.First(), c.Count()))
 				.OrderByDescending(pair => pair.Item2)
@@ -53,7 +54,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
 		private BiomeBGInfo? GetSpecialBG(CardCollection deck, int regularBiomeCount)
 		{
 			var specialBGs = TextureCache.Instance.OtherMapBackgrounds;
-			foreach (var card in new Card[] {GetCard<Skeleton>(), GetCard<QueenBee>(), GetCard<WallOfFlesh>()})
+			foreach (var card in new Card[] {GetCard<Skeletron>(), GetCard<QueenBee>(), GetCard<WallOfFlesh>()})
 			{
 				if(deck.Cards.Contains(card))
 				{

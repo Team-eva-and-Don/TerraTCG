@@ -33,7 +33,7 @@ namespace TerraTCG.Content.NPCs
 
 		public string FullName { get; } = npc.FullName;
 
-		public bool IsBoss { get; } = npc.boss;
+		public bool IsBoss { get; } = npc.boss || npc.netID == NPCID.EaterofWorldsHead;
 	}
 
 	internal readonly struct NamedNPCDeck(LocalizedText name, CardCollection deckList, List<NPCDuelReward> rewards, List<string> prerequisites, bool isTutorial)
@@ -71,7 +71,7 @@ namespace TerraTCG.Content.NPCs
                 new("ForestBeginner", BotDecks.GetStarterDeck(), [GetReward<ForestPack>(2)]),
                 new("Forest", 
 					BotDecks.GetForestDeck(), 
-					[GetReward<ForestPack>(3), GetReward<InvitationToDuel>(1)], 
+					[GetReward<ForestPack>(3), GetReward<InvitationToDuel>(2)], 
 					["ForestBeginner"]),
                 new("ForestAdvanced", 
 					BotDecks.GetForestAdvancedDeck(), 
@@ -84,7 +84,7 @@ namespace TerraTCG.Content.NPCs
 
                 new("Slime", 
 					BotDecks.GetSlimeDeck(), 
-					[GetReward<SlimePack>(3), GetReward<InvitationToDuel>(1)], 
+					[GetReward<SlimePack>(3), GetReward<InvitationToDuel>(2)], 
 					["SlimeBeginner"]),
 
                 new("SlimeAdvanced", 
@@ -97,11 +97,11 @@ namespace TerraTCG.Content.NPCs
                 new("JungleBeginner", BotDecks.GetStarterJungleDeck(), [GetReward<JunglePack>(2)]),
                 new("Jungle", 
 					BotDecks.GetJungleDeck(), 
-					[GetReward<JunglePack>(3), GetReward<InvitationToDuel>(1)], 
+					[GetReward<JunglePack>(3), GetReward<InvitationToDuel>(2)], 
 					["JungleBeginner"]),
                 new("JungleAdvanced", 
 					BotDecks.GetJungleDeck(), 
-					[GetReward<JunglePack>(4), GetReward<InvitationToDuel>(1)], 
+					[GetReward<JunglePack>(4), GetReward<InvitationToDuel>(2)], 
 					["Jungle", "WoF"]),
             ],
             
@@ -109,7 +109,7 @@ namespace TerraTCG.Content.NPCs
                 new("BloodMoonBeginner", BotDecks.GetStarterBloodMoonDeck(), [GetReward<BloodMoonPack>(2)]),
                 new("BloodMoon", 
 					BotDecks.GetBloodMoonDeck(), 
-					[GetReward<BloodMoonPack>(3), GetReward<InvitationToDuel>(1)], 
+					[GetReward<BloodMoonPack>(3), GetReward<InvitationToDuel>(2)], 
 					["BloodMoonBeginner"]),
                 new("BloodMoonAdvanced", 
 					BotDecks.GetBloodMoonAdvancedDeck(), 
@@ -121,7 +121,7 @@ namespace TerraTCG.Content.NPCs
                 new("SkeletonsBeginner", BotDecks.GetStarterSkeletonDeck(), [GetReward<CavernPack>(2)]),
                 new("Skeletons", 
 					BotDecks.GetSkeletonDeck(), 
-					[GetReward<CavernPack>(3), GetReward<InvitationToDuel>(1)], 
+					[GetReward<CavernPack>(3), GetReward<InvitationToDuel>(2)], 
 					["SkeletonsBeginner"]),
             ],
             
@@ -137,7 +137,7 @@ namespace TerraTCG.Content.NPCs
                 new("EvilBeginner", BotDecks.GetStarterEvilDeck(), [GetReward<EvilPack>(2)]),
                 new("Evil", 
 					BotDecks.GetEvilDeck(), 
-					[GetReward<EvilPack>(3), GetReward<InvitationToDuel>(1)], 
+					[GetReward<EvilPack>(3), GetReward<InvitationToDuel>(2)], 
 					["EvilBeginner"]),
                 new("EvilAdvanced", 
 					BotDecks.GetEvilAdvancedDeck(), 
@@ -150,14 +150,14 @@ namespace TerraTCG.Content.NPCs
             ],
             
 			[NPCID.TravellingMerchant] = [
-                new("Treasure", BotDecks.GetMimicDeck(), [GetReward<MimicPack>(2), GetReward<InvitationToDuel>(1)]),
+                new("Treasure", BotDecks.GetMimicDeck(), [GetReward<MimicPack>(2), GetReward<InvitationToDuel>(2)]),
             ],
 
             [NPCID.Nurse] = [
                 new("MushroomBeginner", BotDecks.GetStarterMushroomDeck(), [GetReward<MushroomPack>(2)]),
                 new("Mushroom", 
 					BotDecks.GetMushroomDeck(), 
-					[GetReward<MushroomPack>(3), GetReward<InvitationToDuel>(1)], 
+					[GetReward<MushroomPack>(3), GetReward<InvitationToDuel>(2)], 
 					["MushroomBeginner"]),
             ],
 
@@ -165,7 +165,7 @@ namespace TerraTCG.Content.NPCs
                 new("GoblinsBeginner", BotDecks.GetStarterGoblinDeck(), [GetReward<GoblinPack>(2)]),
                 new("Goblins", 
 					BotDecks.GetGoblinDeck(), 
-					[GetReward<GoblinPack>(3), GetReward<InvitationToDuel>(1)], 
+					[GetReward<GoblinPack>(3), GetReward<InvitationToDuel>(2)], 
 					["GoblinsBeginner"]),
             ],
 
@@ -173,7 +173,7 @@ namespace TerraTCG.Content.NPCs
                 new("CrabsBeginner", BotDecks.GetStarterCrabDeck(), [GetReward<OceanPack>(2)]),
                 new("Crabs", 
 					BotDecks.GetCrabDeck(), 
-					[GetReward<OceanPack>(3), GetReward<InvitationToDuel>(1)], 
+					[GetReward<OceanPack>(3), GetReward<InvitationToDuel>(2)], 
 					["CrabsBeginner"]),
                 new("CrabsAdvanced", 
 					BotDecks.GetCrabAdvancedDeck(), 
@@ -182,25 +182,25 @@ namespace TerraTCG.Content.NPCs
             ],
 			// Bosses
 			[NPCID.QueenBee] = [
-				new("QueenBee", BotDecks.GetQueenBeeDeck(), [GetReward<QueenBeePack>(1), GetReward<InvitationToDuel>(2)]),
+				new("QueenBee", BotDecks.GetQueenBeeDeck(), [GetReward<QueenBeePack>(2), GetReward<InvitationToDuel>(2)]),
 			],
 			[NPCID.KingSlime] = [
-				new("KingSlime", BotDecks.GetKingSlimeDeck(), [GetReward<KingSlimePack>(1), GetReward<InvitationToDuel>(2)]),
+				new("KingSlime", BotDecks.GetKingSlimeDeck(), [GetReward<KingSlimePack>(2), GetReward<InvitationToDuel>(2)]),
 			],
 			[NPCID.BrainofCthulhu] = [
-				new("BoC", BotDecks.GetBoCDeck(), [GetReward<BOCPack>(1), GetReward<InvitationToDuel>(2)]),
+				new("BoC", BotDecks.GetBoCDeck(), [GetReward<BOCPack>(2), GetReward<InvitationToDuel>(2)]),
 			],
 			[NPCID.EyeofCthulhu] = [
-				new("EoC", BotDecks.GetEoCDeck(), [GetReward<EOCPack>(1), GetReward<InvitationToDuel>(2)]),
+				new("EoC", BotDecks.GetEoCDeck(), [GetReward<EOCPack>(2), GetReward<InvitationToDuel>(2)]),
 			],
 			[NPCID.EaterofWorldsHead] = [
-				new("EoW", BotDecks.GetEoCDeck(), [GetReward<EOWPack>(1), GetReward<InvitationToDuel>(2)]),
+				new("EoW", BotDecks.GetEoWDeck(), [GetReward<EOWPack>(2), GetReward<InvitationToDuel>(2)]),
 			],
 			[NPCID.SkeletronHead] = [
-				new("Skeletron", BotDecks.GetSkeletonDeck(), [GetReward<SkeletronPack>(1), GetReward<InvitationToDuel>(2)]),
+				new("Skeletron", BotDecks.GetSkeletronDeck(), [GetReward<SkeletronPack>(3), GetReward<InvitationToDuel>(2)]),
 			],
 			[NPCID.WallofFlesh] = [
-				new("WoF", BotDecks.GetWallOfFleshDeck(), [GetReward<WOFPack>(1), GetReward<InvitationToDuel>(2)]),
+				new("WoF", BotDecks.GetWallOfFleshDeck(), [GetReward<WOFPack>(3), GetReward<InvitationToDuel>(2)]),
 			]
         };
     }

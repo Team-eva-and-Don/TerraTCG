@@ -24,8 +24,8 @@ namespace TerraTCG.Common.GameSystem.CardData
             SubTypes = [CardSubtype.EVIL, CardSubtype.FIGHTER],
             Attacks = [
                 new() {
-                    Damage = 3,
-                    Cost = 3,
+                    Damage = 1,
+                    Cost = 2,
                     TargetModifiers = z =>[new BleedModifier(1)]
                 }
             ],

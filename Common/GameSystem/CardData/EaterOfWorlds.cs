@@ -51,12 +51,12 @@ namespace TerraTCG.Common.GameSystem.CardData
             SubTypes = [CardSubtype.BOSS, CardSubtype.EVIL, CardSubtype.FIGHTER],
             Modifiers = () => [
                 new LifestealModifier(1),
-                new ReduceDamageModifier(1),
+                new SpikedModifier(1),
                 new HalfHealthTransformModifier(),
             ],
             Attacks = [
                 new() {
-                    Damage = 3,
+                    Damage = 4,
                     Cost = 3,
                 }
             ]
@@ -64,6 +64,24 @@ namespace TerraTCG.Common.GameSystem.CardData
     }
     internal class EaterSegment1 : BaseCardTemplate, ICardTemplate
     {
+		private class EaterSegment1MorbidModifier : ICardModifier
+		{
+			public ModifierType Category { get => ModifierType.MORBID; }
+
+			public bool ShouldRemove(GameEventInfo eventInfo)
+			{
+				if(eventInfo.Event == GameEvent.CREATURE_DIED)
+				{
+					eventInfo.Zone.QueueAnimation(new MorbidAnimation());
+					foreach (var zone in eventInfo.Zone.Siblings.Where(z=>z.HasPlacedCard()))
+					{
+						zone.PlacedCard.AddModifiers([new SpikedModifier(2)]);
+					}
+					return true;
+				}
+				return false;
+			}
+		}
         public override Card CreateCard() => new ()
         {
             Name = "EaterSegment1",
@@ -74,7 +92,8 @@ namespace TerraTCG.Common.GameSystem.CardData
             SubTypes = [CardSubtype.EVIL, CardSubtype.SCOUT],
             IsCollectable = false,
             Modifiers = () => [
-                new ReduceDamageModifier(1),
+				new EaterSegment1MorbidModifier(),
+                new SpikedModifier(2),
             ],
             Attacks = [
                 new() {
@@ -87,6 +106,24 @@ namespace TerraTCG.Common.GameSystem.CardData
 
     internal class EaterSegment2 : BaseCardTemplate, ICardTemplate
     {
+		private class EaterSegment2MorbidModifier : ICardModifier
+		{
+			public ModifierType Category { get => ModifierType.MORBID; }
+
+			public bool ShouldRemove(GameEventInfo eventInfo)
+			{
+				if(eventInfo.Event == GameEvent.CREATURE_DIED)
+				{
+					eventInfo.Zone.QueueAnimation(new MorbidAnimation());
+					foreach (var zone in eventInfo.Zone.Siblings.Where(z=>z.HasPlacedCard()))
+					{
+						zone.PlacedCard.AddModifiers([new LifestealModifier(2)]);
+					}
+					return true;
+				}
+				return false;
+			}
+		}
         public override Card CreateCard() => new ()
         {
             Name = "EaterSegment2",
@@ -97,7 +134,8 @@ namespace TerraTCG.Common.GameSystem.CardData
             SubTypes = [CardSubtype.EVIL, CardSubtype.SCOUT],
             IsCollectable = false,
             Modifiers = () => [
-                new LifestealModifier(1),
+				new EaterSegment2MorbidModifier(),
+                new LifestealModifier(2),
             ],
             Attacks = [
                 new() {

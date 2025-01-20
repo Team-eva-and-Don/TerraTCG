@@ -16,27 +16,17 @@ namespace TerraTCG.Common.GameSystem.CardData
     {
         private class QueenBeePoisonBoost : ICardModifier
         {
-			private bool didApplyThisTurn = false;
+			public void ModifyIncomingAttack(ref Attack attack, Zone sourceZone, Zone destZone) 
+			{
+				if(!(sourceZone.PlacedCard?.CardModifiers.Any(m=>m.Category == ModifierType.POISON) ?? true)) {
+					var localAttack = attack;
+					attack.SourceModifiers = (zone) => [new PoisonModifier(), .. localAttack.SourceModifiers?.Invoke(zone) ?? []];
+				}
+			}
+
             public bool ShouldRemove(GameEventInfo eventInfo)
 			{
-				if(eventInfo.Event == GameEvent.START_TURN)
-				{
-					return true;
-				} else if (eventInfo.Event == GameEvent.END_TURN && !didApplyThisTurn && eventInfo.Zone.Owner == eventInfo.TurnPlayer)
-				{
-					didApplyThisTurn = true;
-					// Deal 1 damage to every poisoned enemy on the opponent's field
-					// (the buff applies to the owner's field, which is confusing)
-
-					var opponentZones = eventInfo.Zone.Owner.Opponent.Field.Zones
-						.Where(z => z.PlacedCard?.CardModifiers.Any(m => m.Category == ModifierType.POISON) ?? false);
-
-					foreach (var zone in opponentZones)
-					{
-						zone.PlacedCard.CurrentHealth -= 1;
-					}
-				}
-				return false;
+				return eventInfo.Event == GameEvent.START_TURN;
 			}
         }
 

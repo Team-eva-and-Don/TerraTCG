@@ -120,7 +120,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
 				Cards = [
 					GetCard<QueenBee>(),
 					GetCard<QueenBee>(),
-					GetCard<Bunny>(),
+					GetCard<Wizard>(),
 					GetCard<Wizard>(),
 					GetCard<Hornet>(),
 					GetCard<Hornet>(),
@@ -137,7 +137,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
 					GetCard<Guide>(),
 					GetCard<HealingPotion>(),
 					GetCard<HealingPotion>(),
-					GetCard<Bee>(),
+					GetCard<Nurse>(),
 				]
 			};
 
@@ -764,25 +764,25 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
 			{
 				Cards = [
 					GetCard<QueenBee>(),
+					GetCard<PoisonedKnife>(),
+					GetCard<Bee>(),
+					GetCard<Hornet>(),
+					GetCard<Hornet>(),
+					GetCard<MossHornet>(),
+					GetCard<MossHornet>(),
+					GetCard<JungleBat>(),
+					GetCard<JungleBat>(),
+					GetCard<SpikedJungleSlime>(),
+					GetCard<SpikedJungleSlime>(),
+					GetCard<Guide>(),
+					GetCard<Guide>(),
+					GetCard<HealingPotion>(),
+					GetCard<HealingPotion>(),
 					GetCard<GiantTortoise>(),
-					GetCard<Bee>(),
-					GetCard<Bee>(),
-					GetCard<Hornet>(),
-					GetCard<Hornet>(),
-					GetCard<MossHornet>(),
-					GetCard<MossHornet>(),
-					GetCard<JungleBat>(),
-					GetCard<JungleBat>(),
-					GetCard<SpikedJungleSlime>(),
-					GetCard<SpikedJungleSlime>(),
-					GetCard<Guide>(),
-					GetCard<Guide>(),
-					GetCard<HealingPotion>(),
-					GetCard<HealingPotion>(),
-					GetCard<Shackle>(),
-					GetCard<Shackle>(),
-					GetCard<IronskinPotion>(),
-					GetCard<IronskinPotion>(),
+					GetCard<GiantTortoise>(),
+					GetCard<JungleTurtle>(),
+					GetCard<Wizard>(),
+					GetCard<Wizard>(),
 				]
 			};
 
@@ -942,9 +942,9 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     GetCard<LightsBane>(), 
                     GetCard<Shackle>(),
                     GetCard<Shackle>(),
-                    GetCard<Wizard>(),
-                    GetCard<Wizard>(),
-                    GetCard<ThornsPotion>(), 
+                    GetCard<JungleTurtle>(),
+                    GetCard<JungleTurtle>(), 
+                    GetCard<Goldfish>(),
                 ]
             };
 	}

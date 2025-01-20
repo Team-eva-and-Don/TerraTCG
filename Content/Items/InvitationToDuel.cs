@@ -40,6 +40,8 @@ namespace TerraTCG.Content.Items
 				// TODO is it OK to just overwrite a card like this? Probably not too many
 				// practical ramifications
 				game.GamePlayers[1].Hand.Cards[0] = bossCard;
+				// Make sure the boss can't get a second copy during the duel
+				game.GamePlayers[1].Deck.Cards.Remove(bossCard);
 			}
 		}
 
@@ -69,7 +71,7 @@ namespace TerraTCG.Content.Items
 		}
 
 		private static NPC GetNearestDuelableBoss(Player player) => Main.npc
-				.Where(npc => npc.active && npc.boss)
+				.Where(npc => npc.active && npc.boss || (npc.netID == NPCID.EaterofWorldsHead))
 				.Where(npc => Vector2.DistanceSquared(player.Center, npc.Center) < MAX_BOSS_DIST_SQ)
 				.Where(npc => ModContent.GetInstance<NPCDeckMap>().NPCDecklists.ContainsKey(npc.netID))
 				.FirstOrDefault();

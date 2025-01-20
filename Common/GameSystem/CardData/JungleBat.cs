@@ -22,8 +22,8 @@ namespace TerraTCG.Common.GameSystem.CardData
             SubTypes = [CardSubtype.JUNGLE, CardSubtype.SCOUT],
             Attacks = [
                 new() {
-                    Damage = 3,
-                    Cost = 3,
+                    Damage = 2,
+                    Cost = 2,
                 }
             ],
             Modifiers = () => [

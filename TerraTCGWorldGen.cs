@@ -56,6 +56,7 @@ namespace TerraTCG
 					{
 						chest.item[i].SetDefaults(ItemType);
 						chest.item[i].stack = itemCount + (Main.rand.NextBool(3) ? 1 : 0);
+						break;
 					}
 				}
 			}
@@ -71,9 +72,24 @@ namespace TerraTCG
 			new(ChestFrame.RichMahogonyChest, ItemType<JunglePack>(), 3, 2),
 			new(ChestFrame.IvyChest, ItemType<JunglePack>(), 3, 2),
 		];
+
 		public override void PostWorldGen()
 		{
 			base.PostWorldGen();
+			for(int i = 0; i < Main.chest.Length; i++)
+			{
+				if (Main.chest[i] is Chest chest)
+				{
+					foreach(var lootEntry in LootTable)
+					{
+						if(lootEntry.ShouldPlaceInChest(chest))
+						{
+							lootEntry.PlaceItemInChest(chest);
+							break;
+						}
+					}
+				}
+			}
 		}
 	}
 }

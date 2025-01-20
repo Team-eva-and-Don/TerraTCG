@@ -294,8 +294,8 @@ Cards: {
 		Modifier.Description:
 			'''
 			Royal Honey: Enemies
-			take double poison
-			damage.
+			become Poisoned upon
+			attacking an ally.
 			'''
 		Attack.Name: Regal Buzz
 	}
@@ -1211,7 +1211,7 @@ Cards: {
 		Attack.Name: Worm's World
 		Modifier.Description:
 			'''
-			Sturdy. Lifesteal. If this
+			Spiked. Lifesteal. If this
 			card reaches half health,
 			transform it.
 			'''
@@ -1220,13 +1220,25 @@ Cards: {
 	EaterSegment1: {
 		Name: Eater Segment
 		Attack.Name: Worm's World
-		Modifier.Description: Sturdy.
+		Modifier.Description:
+			'''
+			Morbid: If this dies, 
+			your other creatures 
+			gain Spiked. This has
+			Spiked.
+			'''
 	}
 
 	EaterSegment2: {
 		Name: Eater Segment
 		Attack.Name: Worm's World
-		Modifier.Description: Lifesteal.
+		Modifier.Description:
+			'''
+			Morbid: If this dies, 
+			your other creatures 
+			gain Lifesteal. This has
+			Lifesteal.
+			'''
 	}
 
 	EaterOfSouls: {
@@ -1464,7 +1476,7 @@ Cards: {
 		PAUSED: Paused: Cannot act until next turn
 		DEFENSE_BOOST: Sturdy: Takes %% less damage
 		BLEEDING: Bleeding: Takes %% more damage
-		POISON: Poisoned: Takes 1 damage per turn
+		POISON: Poisoned: Takes %% damage per turn
 		RELENTLESS: Relentless: May attack %% extra times
 		EVASIVE: Evasive: May attack blocked opponents
 		SPIKED: Spiked: Attackers take %% damage
@@ -1495,7 +1507,7 @@ Cards: {
 		Mana: Mana Crystals
 		Townsfolk: Townsfolk Emblem
 		Search: Search
-		For: for
+		For: " for"
 		UnlockedANewDeck: Unlocked a new deck
 		AcceptedInvitation: has accepted your invitation for a soul-stakes game!
 		FoundIn: Found In:
@@ -1594,7 +1606,7 @@ Cards: {
 			'''
 			Hearts represent a player's remaining life total. One heart is lost
 			whenever a creature the player controls dies, and a player loses the
-			game when all 3 of their hearts are depleted.
+			game when all of their hearts are depleted.
 			'''
 		Slide4:
 			'''
@@ -1708,20 +1720,34 @@ Cards: {
 		Slide25:
 			'''
 			Once a creature's life is fully depleted, it will die, and the opponent will 
-			lose 1 Life Point. Repeat this process 3 times to win the game!
+			lose 1 Life Point. Repeat this process until the opponent's hearts are gone
+			to win the game!
 			'''
 		Slide26:
 			'''
 			Winning a game of TerraTCG grants you several TerraTCG booster packs. 
-			Open them to obtain new cards for your collection!
+			Open them to obtain new cards for your collection! Townsfolk will give
+			packs that contain cards themed to their decks.
 			'''
 		Slide27:
+			'''
+			Defeating an NPC once will unlock a second, more challenging deck for
+			that NPC. Defeat this second deck to earn an Invitation to Duel, a 
+			mystical item that allows you to challenge the Gods themselves to
+			a game of TerraTCG!
+			'''
+		Slide28:
+			'''
+			Defeat a boss in battle to earn rare promo cards! Do you have what it takes
+			to defeat every boss in a game of TerraTCG?
+			'''
+		Slide29:
 			'''
 			A TerraTCG Deckbox, crafted with 5 wood at a workbench, can be used to
 			edit your decks. Experiment with the cards you get from booster packs, and 
 			challenge more difficult opponents!
 			'''
-		Slide28: That's all for this tutorial. Talk to me again to challenge me to a game!
+		Slide30: That's all for this tutorial. Talk to me again to challenge me to a game!
 	}
 }
 
