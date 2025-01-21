@@ -124,6 +124,8 @@ namespace TerraTCG.Common.GameSystem.Drawing
 
 			var xOffset = Vector2.UnitX * scale * wallBounds.Width / 8 * (effects == SpriteEffects.FlipHorizontally ? -1 : 1);
 
+			// Center the bottom of the mouth on the top of the card
+			position.Y -= mouthBounds.Height / 2 * scale;
 			// Origins
 			var mouthOrigin = new Vector2(mouthBounds.Width, mouthBounds.Height) / 2;
 			var eyeOrigin = new Vector2(eyeBounds.Width, eyeBounds.Height) / 2;

@@ -1733,13 +1733,15 @@ Cards: {
 			'''
 			Defeating an NPC once will unlock a second, more challenging deck for
 			that NPC. Defeat this second deck to earn an Invitation to Duel, a 
-			mystical item that allows you to challenge the Gods themselves to
+			mystical item that allows you to challenge the Bosses themselves to
 			a game of TerraTCG!
 			'''
 		Slide28:
 			'''
 			Defeat a boss in battle to earn rare promo cards! Do you have what it takes
-			to defeat every boss in a game of TerraTCG?
+			to defeat every* boss in a game of TerraTCG?
+
+			*TerraTCG currently supports every Pre-Hardmode boss besides Deerclops.
 			'''
 		Slide29:
 			'''

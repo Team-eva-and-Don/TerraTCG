@@ -44,7 +44,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
 			{
 				return;
 			}
-			var centerPos = new Vector2(Main.screenWidth / 2, CardPosition0.Y + CARD_HEIGHT / 2);
+			var centerPos = new Vector2(Main.screenWidth / 2, CardPosition0.Y + CARD_HEIGHT / 3);
 			var floatOffset = Vector2.UnitY * 6 * MathF.Sin(MathF.PI * (float)TCGPlayer.TotalGameTime.TotalSeconds);
 			bossCard.DrawZoneNPC.Invoke(spriteBatch, bossCard, centerPos + floatOffset, 0, Color.White, 2f, SpriteEffects.None);
 		}
