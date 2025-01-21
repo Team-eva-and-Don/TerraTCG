@@ -30,7 +30,7 @@ Items: {
 
 	CavernPack: {
 		DisplayName: Cavern Pack
-		Tooltip: 
+		Tooltip:
 			'''
 			A TerraTCG booster pack! Contains
 			cavern-themed cards. Build your
@@ -50,7 +50,7 @@ Items: {
 
 	EvilPack: {
 		DisplayName: Evil Pack
-		Tooltip: 
+		Tooltip:
 			'''
 			A TerraTCG booster pack! Contains
 			world-evil-themed cards. Build your
@@ -60,7 +60,7 @@ Items: {
 
 	ForestPack: {
 		DisplayName: Forest Pack
-		Tooltip: 
+		Tooltip:
 			'''
 			A TerraTCG booster pack! Contains
 			forest-themed cards. Build your
@@ -120,7 +120,7 @@ Items: {
 
 	QueenBeePack: {
 		DisplayName: Queen Bee Promos
-		Tooltip: 
+		Tooltip:
 			'''
 			A TerraTCG Promo pack! Contains
 			rare Queen Bee cards! Build your
@@ -130,7 +130,7 @@ Items: {
 
 	SlimePack: {
 		DisplayName: Slime Pack
-		Tooltip: 
+		Tooltip:
 			'''
 			A TerraTCG booster pack! Contains
 			slime-themed cards. Build your
@@ -140,7 +140,7 @@ Items: {
 
 	BloodMoonPack: {
 		DisplayName: Blood Moon Pack
-		Tooltip: 
+		Tooltip:
 			'''
 			A TerraTCG booster pack! Contains
 			blood-moon-themed cards. Build your
@@ -182,7 +182,7 @@ Items: {
 
 	EOCPack: {
 		DisplayName: Eye of Cthulhu Promos
-		Tooltip: ""
+		Tooltip:
 			'''
 			A TerraTCG Promo pack! Contains
 			rare Eye of Cthulhu cards! Build your
@@ -192,7 +192,7 @@ Items: {
 
 	EOWPack: {
 		DisplayName: Eater of Worlds Promos
-		Tooltip: 
+		Tooltip:
 			'''
 			A TerraTCG Promo pack! Contains
 			rare Eater of Worlds cards! Build your
@@ -212,7 +212,7 @@ Items: {
 
 	WOFPack: {
 		DisplayName: Wll of Flesh Promos
-		Tooltip: 
+		Tooltip:
 			'''
 			A TerraTCG Promo pack! Contains
 			rare Wall of Flesh cards! Build your
