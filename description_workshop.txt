@@ -3,16 +3,16 @@
 TerraTCG is a Collectible Card Game built inside of Terraria! Challenge your
 Town NPCs to intense games of 1v1 card-based combat, grow your collection
 with booster packs, and experiment with exciting new strategies! The initial
-set of TerraTCG contains over 70 cards, with 15 NPC decks to duel against.
+set of TerraTCG contains 100 cards, with over 25 NPC decks to duel against!
 
 [b]== Getting Started ==[/b]
 
 To begin playing TerraTCG in-game, craft a TerraTCG Deckbox at a workbench using
-5 wood. The Deckbox gives access to the Deck Editor user interface. You'll only 
-start with a few cards, but more can be gained by defeating any town NPC in a duel!
-Talk to the Guide first for both a good first opponent, and the option to view an
-illustrated in-game tutorial! Beyond the guide, the following NPCs can all be
-challenged to a game:
+5 wood. The Deckbox gives access to the Deck Editor. You'll only start with a few cards, 
+but more can be gained by defeating any town NPC in a duel! To kickstart your collection,
+you can also find a small number of packs scattered in chests in any newly generated world.
+Talk to the Guide first for a good first opponent, and the option to view an in-game tutorial! 
+Beyond the guide, the following NPCs can all be challenged to a game:
 
 [list]
 [*] the Guide
@@ -23,9 +23,21 @@ challenged to a game:
 [*] the Party Girl
 [*] the Traveling Merchant
 [*] the Clothier
+[*] the Dryad
 [*] the Nerdy Slime
 [/list]
 
+[b]== Up the Stakes! ==[/b]
+
+Once you've gotten enough practice playing against your Townsfolk, you're ready to
+challenge the bosses themselves! Beating an NPC's second deck awards you with an
+"Invitation to Duel", an item that can be used in the presence of a boss to start
+a life-or-death game of TerraTCG! The loser of a boss game's soul is forfeit!
+
+[b]== Grow your Collection ==[/b]
+All 100 TerraTCG cards can be obtained by opening packs rewarded by beating NPCs or
+bosses in a game! Each pack has a 1-in-15 chance to upgrade a card to a rare foil
+variant!
 
 [b]== How to Play ==[/b]
 
@@ -40,9 +52,9 @@ randomly to go first.
 
 Each player has 3 resource types:
 [list]
-[*] Hearts: The player's life total. Each player starts with 3 hearts, 
+[*] Hearts: The player's life total. Each player starts with 4 hearts, 
 losing one whenever a Creature they control dies. If a player loses all 
-3 hearts, their opponent wins the game!
+4 hearts, their opponent wins the game!
 
 [*] Mana Crystals: Spent to perform most actions in the game, such as 
 attacking with Creatures or equipping Items. Start at 1 per turn,
