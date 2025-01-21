@@ -145,9 +145,10 @@ namespace TerraTCG.Content.NPCs
 					["Evil", "WoF"]),
             ],
             
-			[NPCID.SkeletonMerchant] = [
-                new("Salamander", BotDecks.GetSalamanderDeck(), [GetReward<MimicPack>(1)]),
-            ],
+			// TODO AI can't play this deck well
+			//[NPCID.SkeletonMerchant] = [
+   //             new("Salamander", BotDecks.GetSalamanderDeck(), [GetReward<MimicPack>(1)]),
+   //         ],
             
 			[NPCID.TravellingMerchant] = [
                 new("Treasure", BotDecks.GetMimicDeck(), [GetReward<MimicPack>(2), GetReward<InvitationToDuel>(2)]),
