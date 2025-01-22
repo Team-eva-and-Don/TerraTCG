@@ -90,7 +90,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
             }
 
             SetRectangle(gameField, 
-                (Main.screenWidth - FieldRenderer.FIELD_WIDTH + 48) / 2, 
+                (Main.screenWidth - FieldRenderer.FIELD_WIDTH) / 2, 
                 yOffset + (Main.screenHeight - FieldRenderer.FIELD_HEIGHT) / 2 - extraYOffset,
                 FieldRenderer.FIELD_WIDTH,
                 FieldRenderer.FIELD_HEIGHT);

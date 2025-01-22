@@ -120,7 +120,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
         {
             var resources = player.Resources;
             return
-                $"{Language.GetText("Mods.TerraTCG.Cards.Common.Hearts")}: {resources.Health}/3\n" +
+                $"{Language.GetText("Mods.TerraTCG.Cards.Common.Hearts")}: {resources.Health}/{GamePlayer.MAX_HEALTH}\n" +
                 $"{Language.GetText("Mods.TerraTCG.Cards.Common.Mana")}: {resources.Mana}/{player.ManaPerTurn}\n" +
                 $"{Language.GetText("Mods.TerraTCG.Cards.Common.Townsfolk")}: {resources.TownsfolkMana}/1\n";
         }
