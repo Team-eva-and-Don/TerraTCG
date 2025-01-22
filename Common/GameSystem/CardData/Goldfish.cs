@@ -15,7 +15,7 @@ namespace TerraTCG.Common.GameSystem.CardData
     {
         private void PondHealing(GamePlayer player, Zone zone, Zone targetZone)
         {
-            targetZone.PlacedCard.Heal(2);
+            targetZone.PlacedCard.Heal(1);
         }
 
         public override Card CreateCard() => new ()

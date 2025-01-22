@@ -59,8 +59,8 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                 .OrderByDescending(z => z.PlacedCard.Template.Priority)
 				// Always attack bosses when present since they are worth more points
                 .ThenByDescending(z => z.PlacedCard.Template.SubTypes[0] == CardSubtype.BOSS)
-				// Then go for the "largest threat" card
-                .ThenByDescending(z => z.PlacedCard.GetAttackWithModifiers(z, null).Damage)
+				// Then go for the card with the least health
+                .ThenBy(z => z.PlacedCard.CurrentHealth)
                 .FirstOrDefault();
 
             if(bestAttackZone != null && bestTargetZone != null)

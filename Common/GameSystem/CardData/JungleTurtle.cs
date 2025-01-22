@@ -31,7 +31,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         public override Card CreateCard() => new ()
         {
             Name = "JungleTurtle",
-            MaxHealth = 9,
+            MaxHealth = 6,
             MoveCost = 3,
             CardType = CardType.CREATURE,
             NPCID = NPCID.TurtleJungle,
