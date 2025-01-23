@@ -181,15 +181,12 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
 
             if(DecideUseTargetingTownsfolk()) return;
 
-            if(DecideRetreatCritter()) return;
-
             if(DecideUseItem()) return;
 
             if(DecideUseUtilitySkill()) return;
 
             if(DecideUseTargetedSkill()) return;
 
-            if(DecideAdvanceAttacker()) return;
 
             if(DecideAttack()) return;
 

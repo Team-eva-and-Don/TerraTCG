@@ -34,6 +34,7 @@ namespace TerraTCG.Common.UI.NPCDuelChat
                 new(),
                 new(),
                 new(),
+                new(),
             ];
             for(int i = 0; i < Buttons.Count; i++)
             {
@@ -94,15 +95,16 @@ namespace TerraTCG.Common.UI.NPCDuelChat
             {
                 return;
             }
-			var unlockedLists = deckLists.Where(d => d.IsUnlocked(TCGPlayer.LocalPlayer));
-            for(int i = 0; i < unlockedLists.Count(); i++)
+			var unlockedLists = deckLists.Where(d => d.IsUnlocked(TCGPlayer.LocalPlayer)).ToList();
+            for(int i = 0; i < unlockedLists.Count; i++)
             {
-                Buttons[i].Text = deckLists[i].Name;
-                Buttons[i].Left.Percent = i / (float)deckLists.Count;
+                Buttons[i].Text = unlockedLists[i].Name;
+                Buttons[i].Left.Percent = i / (float)unlockedLists.Count;
             }
-            for(int i = unlockedLists.Count(); i < Buttons.Count;i++)
+            for(int i = unlockedLists.Count; i < Buttons.Count;i++)
             {
                 Buttons[i].Text = null;
+				Buttons[i].Left.Pixels = Main.screenWidth; // Hide off of the right edge of the screen
             }
         }
 

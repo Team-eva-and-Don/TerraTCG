@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria;
 using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.GameSystem.GameState.GameActions;
@@ -61,6 +62,8 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                 .ThenByDescending(z => z.PlacedCard.Template.SubTypes[0] == CardSubtype.BOSS)
 				// Then go for the card with the least health
                 .ThenBy(z => z.PlacedCard.CurrentHealth)
+				// If multiple cards meet those conditions, choose a random one
+				.ThenBy(z=>Main.rand.Next())
                 .FirstOrDefault();
 
             if(bestAttackZone != null && bestTargetZone != null)
@@ -192,8 +195,8 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
 
             var bestTargetZone = GamePlayer.Field.Zones
                 .Where(z => new DeployCreatureAction(bestCardInHand, GamePlayer).CanAcceptZone(z))
-                .OrderByDescending(z => z.Role == (bestCardInHand?.Role ?? ZoneRole.OFFENSE))
-				.ThenByDescending(z=>z.Index % 3 == 1) // For aesthetic reasons, prefer the center row
+                .Where(z => z.Role == (bestCardInHand?.Role ?? ZoneRole.OFFENSE))
+				.OrderByDescending(z=>z.Index % 3 == 1) // For aesthetic reasons, prefer the center row
                 .FirstOrDefault();
 
             if(bestCardInHand != null && bestTargetZone != null)

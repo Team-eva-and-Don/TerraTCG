@@ -260,18 +260,6 @@ namespace TerraTCG.Common.GameSystem.Drawing
                     rowY += SmallTextHeight;
                 }
             }
-
-            // Move cost
-            if(card.HasAttackText)
-            {
-                var moveIcon = TextureCache.Instance.MoveIcon.Value;
-                var moveIconWidth = moveIcon.Bounds.Width * BaseTextScale;
-                var moveCostOffset = new Vector2(bounds.Width - MPIconSize.X - MARGIN_S, bounds.Height - MPIconSize.Y);
-                var moveIconOffset = moveCostOffset - Vector2.UnitX * moveIconWidth;
-                DrawManaCost(spriteBatch, card.MoveCost, position + moveCostOffset * scale, scale);
-                spriteBatch.Draw(
-                    moveIcon, position + moveIconOffset * scale, moveIcon.Bounds, Color.White, 0, default, scale * MPIconScale, SpriteEffects.None, 0);
-            }
         }
 
         public void DrawCardText(

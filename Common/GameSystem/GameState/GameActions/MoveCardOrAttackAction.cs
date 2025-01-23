@@ -49,9 +49,8 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
             if(actionType == ActionType.DEFAULT && player.Owns(zone) && zone.IsEmpty())
             {
-                var hasEnoughMana = startZone.PlacedCard.Template.MoveCost <= player.Resources.Mana;
-                InsufficientManaFor = hasEnoughMana ? "" : ActionText("Move");
-                return hasEnoughMana;
+				// This was previously used to check for movement, which has been removed as a mechanic
+                return false;
 
             } else if (actionType == ActionType.DEFAULT && !player.Owns(zone) && !zone.IsEmpty() && startZone.Role == ZoneRole.OFFENSE)
             {
