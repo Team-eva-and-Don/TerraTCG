@@ -157,7 +157,7 @@ namespace TerraTCG.Common.GameSystem
 				.Select(npcId =>
 				{
 					// TODO is there a more elegant way than this to get names?
-					var defeatedNPC = Main.npc.Where(npc => npc.active && npc.netID == npcId).FirstOrDefault();
+					var defeatedNPC = Main.npc.Where(npc => npc.active && npc.whoAmI < Main.maxNPCs && npc.netID == npcId).FirstOrDefault();
 					if(defeatedNPC is NPC npc)
 					{
 						return $"{Language.GetTextValue("Mods.TerraTCG.Cards.Common.For")} {npc.FullName}";
@@ -232,7 +232,8 @@ namespace TerraTCG.Common.GameSystem
 				{
 					SpawnCardExplosion(Player);
 					//TODO localize
-					Player.KillMe(PlayerDeathReason.ByCustomReason($"{Player.name} forfeited their soul to {dueledNPC.FullName} in a card game!"), 9999, 0);
+					var reasonText = Language.GetTextValue("Mods.TerraTCG.Cards.Common.Forfeited").Replace("%%", dueledNPC?.FullName ?? "a boss");
+					Player.KillMe(PlayerDeathReason.ByCustomReason($"{Player.name} {reasonText}"), 9999, 0);
 				}
 			}
             finally
@@ -284,7 +285,7 @@ namespace TerraTCG.Common.GameSystem
 
 			if(NPCInfo.IsBoss)
 			{
-				var dueledNPC = Main.npc.Where(npc => npc.active && npc.netID == NPCInfo.NpcId).FirstOrDefault();
+				var dueledNPC = Main.npc.Where(npc => npc.active && npc.whoAmI < Main.maxNPCs && npc.netID == NPCInfo.NpcId).FirstOrDefault();
 				HandleBossNPCDuelEnd(dueledNPC);
 
 			} else

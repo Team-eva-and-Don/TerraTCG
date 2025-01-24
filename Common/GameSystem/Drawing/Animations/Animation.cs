@@ -15,7 +15,8 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
 {
     internal interface IAnimation
     {
-        TimeSpan StartTime { get; set;  }
+        TimeSpan StartTime { get; set; }
+
         Zone SourceZone { set;  }
 
         // Draw the card within the zone itself, if applicable

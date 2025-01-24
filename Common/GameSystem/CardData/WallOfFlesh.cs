@@ -49,6 +49,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             Name = "WallOfFlesh",
             MaxHealth = 15,
             MoveCost = 2,
+			Points = 2,
             NPCID = NPCID.WallofFlesh,
 			DrawZoneNPC = CardOverlayRenderer.Instance.DrawWOFNPC,
             CardType = CardType.CREATURE,

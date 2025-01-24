@@ -1602,6 +1602,7 @@ Cards: {
 		AcceptedInvitation: has accepted your invitation for a soul-stakes game!
 		FoundIn: Found In:
 		AnyPack: Any Pack
+		Forfeited: forfeited their soul to %% in a card game!
 	}
 
 	DeckNames: {

@@ -49,6 +49,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             Name = "Skeletron",
             MaxHealth = 11,
             MoveCost = 2,
+			Points = 2,
             NPCID = NPCID.SkeletronHead,
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.BOSS, CardSubtype.CAVERN, CardSubtype.FIGHTER],

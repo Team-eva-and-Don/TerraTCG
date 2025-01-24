@@ -45,6 +45,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             Name = "EaterOfWorlds",
             MaxHealth = 11,
             MoveCost = 2,
+			Points = 2,
             NPCID = NPCID.EaterofWorldsHead,
 			DrawZoneNPC = CardOverlayRenderer.Instance.DrawBestiaryZoneNPC,
             CardType = CardType.CREATURE,

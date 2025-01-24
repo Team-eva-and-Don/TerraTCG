@@ -71,7 +71,7 @@ namespace TerraTCG.Content.Items
 		}
 
 		private static NPC GetNearestDuelableBoss(Player player) => Main.npc
-				.Where(npc => npc.active && npc.boss || (npc.netID == NPCID.EaterofWorldsHead))
+				.Where(npc => npc.active && npc.whoAmI < Main.maxNPCs && npc.boss || (npc.netID == NPCID.EaterofWorldsHead))
 				.Where(npc => Vector2.DistanceSquared(player.Center, npc.Center) < MAX_BOSS_DIST_SQ)
 				.Where(npc => ModContent.GetInstance<NPCDeckMap>().NPCDecklists.ContainsKey(npc.netID))
 				.FirstOrDefault();
@@ -79,6 +79,12 @@ namespace TerraTCG.Content.Items
 		// Via ExampleMagicMirror from ExampleMod
 		public override void UseStyle(Player player, Rectangle heldItemFrame)
 		{
+			// This is client side only
+			if(player.whoAmI != Main.myPlayer)
+			{
+				return;
+			}
+
 			if (Main.rand.NextBool())
 			{
 				Dust.NewDust(player.position, player.width, player.height, DustID.MagicMirror, 0f, 0f, 150, Color.White, 1.1f); // Makes dust from the player's position and copies the hitbox of which the dust may spawn. Change these arguments if needed.
