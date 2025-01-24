@@ -69,8 +69,8 @@ namespace TerraTCG.Common.GameSystem.Drawing
         {
             foreach(var offset in new Vector2[] { Vector2.UnitX, Vector2.UnitY })
             {
-                DrawString(spriteBatch, text, position + 2 * offset, bgColor ?? Color.Black, scale, centered, font);
-                DrawString(spriteBatch, text, position - 2 * offset, bgColor ?? Color.Black, scale, centered, font);
+                DrawString(spriteBatch, text, position + 2 * offset * scale, bgColor ?? Color.Black, scale, centered, font);
+                DrawString(spriteBatch, text, position - 2 * offset * scale, bgColor ?? Color.Black, scale, centered, font);
             }
             DrawString(spriteBatch, text, position, color, scale, centered, font);
         }

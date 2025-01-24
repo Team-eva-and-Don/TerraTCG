@@ -51,6 +51,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
 		public Asset<Texture2D> Foiling { get; private set; }
 		public Asset<Texture2D> Sparkles { get; private set; }
 		public Asset<Texture2D> Sparkles2 { get; private set; }
+		public Asset<Texture2D> Glint { get; private set; }
 		public Asset<Texture2D> WoFBack { get; private set; }
 		public Asset<Texture2D> KingSlimeCrown { get; private set; }
         internal Dictionary<int, Asset<Texture2D>> BestiaryTextureCache { get; private set; }
@@ -100,6 +101,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
             Foiling = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/Foil");
             Sparkles = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/Sparkles");
             Sparkles2 = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/Sparkles2");
+            Glint = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/Glint");
 			WoFBack = Main.Assets.Request<Texture2D>("Images/WallOfFlesh");
 
             KingSlimeCrown = Main.Assets.Request<Texture2D>("Images/Extra_" + ExtrasID.KingSlimeCrown);

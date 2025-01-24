@@ -1,11 +1,11 @@
-﻿﻿[b]== TerraTCG: the Terraria Collectible Card Game ==[/b]
+﻿﻿[h2] TerraTCG: the Terraria Collectible Card Game! [/h2]
 
 TerraTCG is a Collectible Card Game built inside of Terraria! Challenge your
 Town NPCs to intense games of 1v1 card-based combat, grow your collection
 with booster packs, and experiment with exciting new strategies! The initial
 set of TerraTCG contains 100 cards, with over 25 NPC decks to duel against!
 
-[b]== Getting Started ==[/b]
+[h2] Getting Started [/h2]
 
 To begin playing TerraTCG in-game, craft a TerraTCG Deckbox at a workbench using
 5 wood. The Deckbox gives access to the Deck Editor. You'll only start with a few cards, 
@@ -27,24 +27,26 @@ Beyond the guide, the following NPCs can all be challenged to a game:
 [*] the Nerdy Slime
 [/list]
 
-[b]== Up the Stakes! ==[/b]
+[h2] Up the Stakes! [/h2]
 
 Once you've gotten enough practice playing against your Townsfolk, you're ready to
-challenge the bosses themselves! Beating an NPC's second deck awards you with an
-"Invitation to Duel", an item that can be used in the presence of a boss to start
-a life-or-death game of TerraTCG! The loser of a boss game's soul is forfeit!
+challenge the bosses themselves! Beating an NPC's second deck awards you with a
+"Duel Invitation", an item that can be used in the presence of a boss to start
+a life-or-death game of TerraTCG! Defeating a boss in a game of TerraTCG will 
+slay the boss and unlock its progress in the world, but losing that game will
+result in death!
 
-[b]== Grow your Collection ==[/b]
+[h2] Grow your Collection [/h2]
 All 100 TerraTCG cards can be obtained by opening packs rewarded by beating NPCs or
 bosses in a game! Each pack has a 1-in-15 chance to upgrade a card to a rare foil
 variant!
 
-[b]== How to Play ==[/b]
+[h2] How to Play [/h2]
 
 For a full illustrated gameplay tutorial, talk to the Guide in-game
 and ask to duel!
 
-[b]=== Initial Setup ===[/b]
+[h3] Initial Setup [/h3]
 
 TerraTCG is a card game played between two players. Each player begins by 
 shuffling their deck and drawing 5 cards. One player is then selected
@@ -64,7 +66,7 @@ then regenerate at a growing rate throughout the game.
 can turn the tide of the game. Only 1 is generated per turn.
 [/list]
 
-[b]=== Card Types ===[/b]
+[h3] Card Types [/h3]
 
 There are 3 types of Card in TerraTCG:
 [list]
