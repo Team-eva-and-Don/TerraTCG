@@ -5,6 +5,7 @@ Town NPCs to intense games of 1v1 card-based combat, grow your collection
 with booster packs, and experiment with exciting new strategies! The initial
 set of TerraTCG contains 100 cards, with over 25 NPC decks to duel against!
 
+[img] https://raw.githubusercontent.com/westphallm1/TerraTCG/refs/heads/main/Assets/Workshop/Forest_Promo.png [/img]
 [h2] Getting Started [/h2]
 
 To begin playing TerraTCG in-game, craft a TerraTCG Deckbox at a workbench using
@@ -27,6 +28,13 @@ Beyond the guide, the following NPCs can all be challenged to a game:
 [*] the Nerdy Slime
 [/list]
 
+[h2] Grow your Collection [/h2]
+All 100 TerraTCG cards can be obtained by opening packs rewarded by beating NPCs or
+bosses in a game! Each pack has a 1-in-15 chance to upgrade a card to a rare foil
+variant!
+
+[img] https://raw.githubusercontent.com/westphallm1/TerraTCG/refs/heads/main/Assets/Workshop/Mimic_Promo.png [/img]
+
 [h2] Up the Stakes! [/h2]
 
 Once you've gotten enough practice playing against your Townsfolk, you're ready to
@@ -36,10 +44,7 @@ a life-or-death game of TerraTCG! Defeating a boss in a game of TerraTCG will
 slay the boss and unlock its progress in the world, but losing that game will
 result in death!
 
-[h2] Grow your Collection [/h2]
-All 100 TerraTCG cards can be obtained by opening packs rewarded by beating NPCs or
-bosses in a game! Each pack has a 1-in-15 chance to upgrade a card to a rare foil
-variant!
+[img] https://raw.githubusercontent.com/westphallm1/TerraTCG/refs/heads/main/Assets/Workshop/QueenBee_Promo.png [/img]
 
 [h2] How to Play [/h2]
 
