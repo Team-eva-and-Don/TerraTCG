@@ -68,44 +68,44 @@ namespace TerraTCG.Content.NPCs
 			// Duel-able Town NPCs
             [NPCID.Guide] = [
                 new("Tutorial", BotDecks.GetStarterDeck(), isTutorial: true),
-                new("ForestBeginner", BotDecks.GetStarterDeck(), [GetReward<ForestPack>(2)]),
+                new("ForestBeginner", BotDecks.GetStarterForestDeck(), [GetReward<ForestPack>(1)]),
                 new("Forest", 
 					BotDecks.GetForestDeck(), 
-					[GetReward<ForestPack>(3), GetReward<InvitationToDuel>(2)], 
+					[GetReward<ForestPack>(2), GetReward<InvitationToDuel>(2)], 
 					["ForestBeginner"]),
                 new("ForestAdvanced", 
 					BotDecks.GetForestAdvancedDeck(), 
-					[GetReward<ForestPack>(4), GetReward<InvitationToDuel>(2)], 
+					[GetReward<ForestPack>(3), GetReward<InvitationToDuel>(2)], 
 					["Forest", "WoF"])
             ],
             
 			[NPCID.TownSlimeBlue] = [
-                new("SlimeBeginner", BotDecks.GetStarterSlimeDeck(), [GetReward<SlimePack>(2)]),
+                new("SlimeBeginner", BotDecks.GetStarterSlimeDeck(), [GetReward<SlimePack>(1)]),
 
                 new("Slime", 
 					BotDecks.GetSlimeDeck(), 
-					[GetReward<SlimePack>(3), GetReward<InvitationToDuel>(2)], 
+					[GetReward<SlimePack>(2), GetReward<InvitationToDuel>(2)], 
 					["SlimeBeginner"]),
 
                 new("SlimeAdvanced", 
 					BotDecks.GetSlimeAdvancedDeck(), 
-					[GetReward<SlimePack>(4), GetReward<InvitationToDuel>(2)], 
+					[GetReward<SlimePack>(3), GetReward<InvitationToDuel>(2)], 
 					["Slime", "WoF"])
             ],
             
 			[NPCID.WitchDoctor] = [
-                new("JungleBeginner", BotDecks.GetStarterJungleDeck(), [GetReward<JunglePack>(2)]),
+                new("JungleBeginner", BotDecks.GetStarterJungleDeck(), [GetReward<JunglePack>(1)]),
                 new("Jungle", 
 					BotDecks.GetJungleDeck(), 
-					[GetReward<JunglePack>(3), GetReward<InvitationToDuel>(2)], 
+					[GetReward<JunglePack>(2), GetReward<InvitationToDuel>(2)], 
 					["JungleBeginner"]),
                 new("JungleAdvanced", 
 					BotDecks.GetJungleDeck(), 
-					[GetReward<JunglePack>(4), GetReward<InvitationToDuel>(2)], 
+					[GetReward<JunglePack>(3), GetReward<InvitationToDuel>(2)], 
 					["Jungle", "WoF"]),
             ],
             
-			[NPCID.ArmsDealer] = [
+			[NPCID.Nurse] = [
                 new("BloodMoonBeginner", BotDecks.GetStarterBloodMoonDeck(), [GetReward<BloodMoonPack>(2)]),
                 new("BloodMoon", 
 					BotDecks.GetBloodMoonDeck(), 
@@ -118,30 +118,30 @@ namespace TerraTCG.Content.NPCs
             ],
             
 			[NPCID.Merchant] = [
-                new("SkeletonsBeginner", BotDecks.GetStarterSkeletonDeck(), [GetReward<CavernPack>(2)]),
+                new("SkeletonsBeginner", BotDecks.GetStarterSkeletonDeck(), [GetReward<CavernPack>(1)]),
                 new("Skeletons", 
 					BotDecks.GetSkeletonDeck(), 
-					[GetReward<CavernPack>(3), GetReward<InvitationToDuel>(2)], 
+					[GetReward<CavernPack>(2), GetReward<InvitationToDuel>(2)], 
 					["SkeletonsBeginner"]),
             ],
             
 			[NPCID.Clothier] = [
-                new("Curse", BotDecks.GetCurseDeck(), [GetReward<DungeonPack>(2)]),
+                new("Curse", BotDecks.GetCurseDeck(), [GetReward<DungeonPack>(1)]),
                 new("CurseAdvanced", 
 					BotDecks.GetSkeletronDeck(), 
-					[GetReward<DungeonPack>(4), GetReward<InvitationToDuel>(2)],
+					[GetReward<DungeonPack>(3), GetReward<InvitationToDuel>(2)],
 					["Curse", "WoF"]),
             ],
 
 			[NPCID.Dryad] = [
-                new("EvilBeginner", BotDecks.GetStarterEvilDeck(), [GetReward<EvilPack>(2)]),
+                new("EvilBeginner", BotDecks.GetStarterEvilDeck(), [GetReward<EvilPack>(1)]),
                 new("Evil", 
 					BotDecks.GetEvilDeck(), 
-					[GetReward<EvilPack>(3), GetReward<InvitationToDuel>(2)], 
+					[GetReward<EvilPack>(2), GetReward<InvitationToDuel>(2)], 
 					["EvilBeginner"]),
                 new("EvilAdvanced", 
 					BotDecks.GetEvilAdvancedDeck(), 
-					[GetReward<EvilPack>(4), GetReward<InvitationToDuel>(2)], 
+					[GetReward<EvilPack>(3), GetReward<InvitationToDuel>(2)], 
 					["Evil", "WoF"]),
             ],
             
@@ -151,34 +151,34 @@ namespace TerraTCG.Content.NPCs
    //         ],
             
 			[NPCID.TravellingMerchant] = [
-                new("Treasure", BotDecks.GetMimicDeck(), [GetReward<MimicPack>(2), GetReward<InvitationToDuel>(2)]),
+                new("Treasure", BotDecks.GetMimicDeck(), [GetReward<MimicPack>(1), GetReward<InvitationToDuel>(2)]),
             ],
 
-            [NPCID.Nurse] = [
-                new("MushroomBeginner", BotDecks.GetStarterMushroomDeck(), [GetReward<MushroomPack>(2)]),
+            [NPCID.ArmsDealer] = [
+                new("MushroomBeginner", BotDecks.GetStarterMushroomDeck(), [GetReward<MushroomPack>(1)]),
                 new("Mushroom", 
 					BotDecks.GetMushroomDeck(), 
-					[GetReward<MushroomPack>(3), GetReward<InvitationToDuel>(2)], 
+					[GetReward<MushroomPack>(2), GetReward<InvitationToDuel>(2)], 
 					["MushroomBeginner"]),
             ],
 
             [NPCID.GoblinTinkerer] = [
-                new("GoblinsBeginner", BotDecks.GetStarterGoblinDeck(), [GetReward<GoblinPack>(2)]),
+                new("GoblinsBeginner", BotDecks.GetStarterGoblinDeck(), [GetReward<GoblinPack>(1)]),
                 new("Goblins", 
 					BotDecks.GetGoblinDeck(), 
-					[GetReward<GoblinPack>(3), GetReward<InvitationToDuel>(2)], 
+					[GetReward<GoblinPack>(2), GetReward<InvitationToDuel>(2)], 
 					["GoblinsBeginner"]),
             ],
 
             [NPCID.Angler] = [
-                new("CrabsBeginner", BotDecks.GetStarterCrabDeck(), [GetReward<OceanPack>(2)]),
+                new("CrabsBeginner", BotDecks.GetStarterCrabDeck(), [GetReward<OceanPack>(1)]),
                 new("Crabs", 
 					BotDecks.GetCrabDeck(), 
-					[GetReward<OceanPack>(3), GetReward<InvitationToDuel>(2)], 
+					[GetReward<OceanPack>(2), GetReward<InvitationToDuel>(2)], 
 					["CrabsBeginner"]),
                 new("CrabsAdvanced", 
 					BotDecks.GetCrabAdvancedDeck(), 
-					[GetReward<OceanPack>(4), GetReward<InvitationToDuel>(2)], 
+					[GetReward<OceanPack>(3), GetReward<InvitationToDuel>(2)], 
 					["Crabs", "WoF"]),
             ],
 			// Bosses

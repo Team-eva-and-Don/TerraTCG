@@ -22,5 +22,8 @@ namespace TerraTCG.Common.Configs
         [DefaultValue(true)]
         public bool ShowCardPreview;
 
+        [DefaultValue(true)]
+        public bool ShowFoils;
+
     }
 }

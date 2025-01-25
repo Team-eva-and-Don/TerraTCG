@@ -221,6 +221,33 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                 ]
             };
 
+        public static CardCollection GetStarterForestDeck() =>
+            new()
+            {
+                Cards = [
+                    GetCard<Guide>(), 
+                    GetCard<Guide>(), 
+                    GetCard<Bunny>(), 
+                    GetCard<Bunny>(), 
+                    GetCard<Squirrel>(), 
+                    GetCard<Squirrel>(), 
+                    GetCard<CopperShortsword>(), 
+                    GetCard<CopperShortsword>(), 
+                    GetCard<Shackle>(), 
+                    GetCard<Shackle>(), 
+                    GetCard<Zombie>(), 
+                    GetCard<Zombie>(), 
+                    GetCard<GreenSlime>(), 
+                    GetCard<GreenSlime>(), 
+                    GetCard<BlueSlime>(), 
+                    GetCard<BlueSlime>(), 
+                    GetCard<EnchantedNightcrawler>(), 
+                    GetCard<EnchantedNightcrawler>(), 
+                    GetCard<HealingPotion>(), 
+                    GetCard<HealingPotion>(), 
+                ]
+            };
+
         public static CardCollection GetForestDeck() =>
             new()
             {
@@ -350,8 +377,8 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     GetCard<RagePotion>(), 
                     GetCard<RagePotion>(), 
                     GetCard<Shackle>(), 
-                    GetCard<IronskinPotion>(), 
-                    GetCard<ThornsPotion>(), 
+                    GetCard<Squirrel>(), 
+                    GetCard<Squirrel>(), 
                     GetCard<SwiftnessPotion>(), 
                 ]
             };
@@ -501,9 +528,9 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     GetCard<MushroomZombie>(), 
                     GetCard<MushroomZombie>(), 
                     GetCard<Bunny>(),
-                    GetCard<Bunny>(),
-                    GetCard<Wizard>(),
-                    GetCard<Wizard>(),
+                    GetCard<Goldfish>(),
+                    GetCard<Nurse>(),
+                    GetCard<Nurse>(),
                     GetCard<SporeSkeleton>(),
                     GetCard<SporeSkeleton>(),
                     GetCard<SporeBat>(),
@@ -819,24 +846,24 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                 Cards = [
                     GetCard<BrainOfCthulhu>(), 
                     GetCard<BrainOfCthulhu>(), 
-                    GetCard<Guide>(),
-                    GetCard<Guide>(),
+                    GetCard<Guide>(), 
+                    GetCard<Guide>(), 
+                    GetCard<Dryad>(), 
+                    GetCard<Dryad>(), 
+                    GetCard<ArmsDealer>(), 
+                    GetCard<ArmsDealer>(), 
+                    GetCard<Shuriken>(), 
+                    GetCard<Shuriken>(), 
+                    GetCard<ViciousBunny>(), 
                     GetCard<Crimera>(), 
-                    GetCard<Crimera>(),
-                    GetCard<Shuriken>(),
-                    GetCard<Shuriken>(),
-                    GetCard<FaceMonster>(),
-                    GetCard<FaceMonster>(),
-                    GetCard<Crab>(),
-                    GetCard<Crab>(),
-                    GetCard<HealingPotion>(), 
-                    GetCard<HealingPotion>(), 
-                    GetCard<Creeper>(), 
-                    GetCard<Creeper>(), 
-                    GetCard<BloodButcherer>(),
-                    GetCard<BloodButcherer>(),
-                    GetCard<Dryad>(),
-                    GetCard<Dryad>(),
+                    GetCard<BloodButcherer>(), 
+                    GetCard<BloodButcherer>(), 
+                    GetCard<Crab>(), 
+                    GetCard<Crimera>(), 
+                    GetCard<Drippler>(), 
+                    GetCard<FaceMonster>(), 
+                    GetCard<ViciousGoldfish>(), 
+                    GetCard<WanderingEyeFish>(), 
                 ]
             };
 

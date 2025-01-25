@@ -85,6 +85,18 @@ namespace TerraTCG.Common.UI.NPCDuelChat
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+
+            if((Main.npcChatText?.Length ?? 0) > 0)
+            {
+                dialog.NPCInfo = default; // Reset duel start progress if we talk to another NPC
+				talkNPCIdx = -1;
+            } else if ((Main.npcChatText?.Length ?? 0) == 0 && dialog.NPCID == 0)
+            {
+                // Chat closed before launching the duel dialog, exit out of this UI state
+                ModContent.GetInstance<UserInterfaces>().StopNPCChat();
+                return;
+            }
+
             if(talkNPCIdx != -1)
             {
                 var localPlayer = Main.LocalPlayer;
@@ -100,16 +112,6 @@ namespace TerraTCG.Common.UI.NPCDuelChat
                     }
                 }
                 Main.LocalPlayer.SetTalkNPC(talkNPCIdx);
-            }
-
-            if((Main.npcChatText?.Length ?? 0) > 0)
-            {
-                dialog.NPCInfo = default; // Reset duel start progress if we talk to another NPC
-            } else if ((Main.npcChatText?.Length ?? 0) == 0 && dialog.NPCID == 0)
-            {
-                // Chat closed before launching the duel dialog, exit out of this UI state
-                ModContent.GetInstance<UserInterfaces>().StopNPCChat();
-                return;
             }
 
             if(dialog.NPCID == 0)

@@ -21,6 +21,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             CardType = CardType.ITEM,
             SubTypes = [CardSubtype.CONSUMABLE, CardSubtype.ITEM],
             SelectInHandAction = (card, player) => new ApplySkillAction(card, player),
+			ShouldTarget = zone => zone.PlacedCard is PlacedCard card && card.CurrentHealth <= card.Template.MaxHealth - 3,
             Role = ZoneRole.DEFENSE,
             Skills = [ // TODO this is wonky, but item texts are drawn using the skill template
                 new() { 

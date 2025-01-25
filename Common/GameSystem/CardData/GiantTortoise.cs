@@ -25,6 +25,7 @@ namespace TerraTCG.Common.GameSystem.CardData
                     var lowestHPNonTurtle = endZone.Siblings
                         .Where(z => z.HasPlacedCard() && z != turtleZone)
                         .Select(z => z.PlacedCard.CurrentHealth)
+						.DefaultIfEmpty()
                         .Min();
 
                     var newDestZones = destZones

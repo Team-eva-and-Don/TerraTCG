@@ -6,6 +6,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.ModLoader;
+using TerraTCG.Common.Configs;
 using TerraTCG.Common.GameSystem.GameState;
 
 namespace TerraTCG.Common.GameSystem.Drawing
@@ -16,7 +18,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
 			SpriteBatch spriteBatch, Card card, Vector2 pos, Color color, float scale, float rotation, bool playerOwned = true, bool details = true, bool posShift = true)
 		{
 			// If the player owns a foil copy of the card, draw it foil
-			if(playerOwned && TCGPlayer.LocalPlayer.FoilCollection.Cards.Contains(card))
+			if(playerOwned && TCGPlayer.LocalPlayer.FoilCollection.Cards.Contains(card) && ModContent.GetInstance<ClientConfig>().ShowFoils)
 			{
 				DrawCardWithFoiling(spriteBatch, card, pos, color, scale, details, posShift);
 			} else
@@ -48,10 +50,14 @@ namespace TerraTCG.Common.GameSystem.Drawing
 			// Draw the back of the card
 			spriteBatch.Draw(card.Texture.Value, pos, card.Texture.Value.Bounds, Color.White, 0, default, scale, SpriteEffects.None, 0);
 
+			// Draw a gold border over the regular border
+			var highlightTexture = TextureCache.Instance.ZoneHighlighted;
+			spriteBatch.Draw(highlightTexture.Value, pos, highlightTexture.Value.Bounds, Color.White, 0, default, scale * 1.5f, SpriteEffects.None, 0f);
+
 			var rotation = (float)TCGPlayer.TotalGameTime.TotalSeconds/2f + (posShift ? pos.Y + pos.X : 0);
 
 			// Draw foiling over the card
-			var foilOrigin = 128f * new Vector2(MathF.Cos(rotation), 0.5f * Math.Abs(MathF.Sin(rotation)));
+			var foilOrigin = 128f * new Vector2(MathF.Cos(rotation), 0.5f * MathF.Sin(rotation));
 			var foilPos = new Vector2(textureCache.Foiling.Width(), textureCache.Foiling.Height()) / 2 + foilOrigin;
 			var foilBounds = card.Texture.Value.Bounds;
 			foilBounds.Location += new Point((int)foilPos.X, (int)foilPos.Y);

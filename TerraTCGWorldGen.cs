@@ -63,14 +63,14 @@ namespace TerraTCG
 		}
 
 		private readonly List<ChestLootInfo> LootTable = [
-			new(ChestFrame.WoodenChest, ItemType<ForestPack>(), 3, 2),
-			new(ChestFrame.GoldChest, ItemType<CavernPack>(), 3, 2),
+			new(ChestFrame.WoodenChest, ItemType<ForestPack>(), 3, 1),
+			new(ChestFrame.GoldChest, ItemType<CavernPack>(), 3, 1),
 			new(ChestFrame.GoldChest, ItemType<MimicPack>(), 8, 1),
-			new(ChestFrame.MushroomChest, ItemType<MushroomPack>(), 3, 2),
-			new(ChestFrame.WaterChest, ItemType<OceanPack>(), 3, 2),
+			new(ChestFrame.MushroomChest, ItemType<MushroomPack>(), 3, 1),
+			new(ChestFrame.WaterChest, ItemType<OceanPack>(), 3, 1),
 			new(ChestFrame.LockedGoldChest, ItemType<DungeonPack>(), 2, 1),
-			new(ChestFrame.RichMahogonyChest, ItemType<JunglePack>(), 3, 2),
-			new(ChestFrame.IvyChest, ItemType<JunglePack>(), 3, 2),
+			new(ChestFrame.RichMahogonyChest, ItemType<JunglePack>(), 3, 1),
+			new(ChestFrame.IvyChest, ItemType<JunglePack>(), 3, 1),
 		];
 
 		public override void PostWorldGen()

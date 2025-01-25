@@ -159,7 +159,7 @@ Items: {
 	}
 
 	InvitationToDuel: {
-		DisplayName: Invitation To Duel!
+		DisplayName: Duel Invitation!
 		Tooltip:
 			'''
 			Wager your soul for TerraTCG glory! Use
@@ -211,7 +211,7 @@ Items: {
 	}
 
 	WOFPack: {
-		DisplayName: Wll of Flesh Promos
+		DisplayName: Wall of Flesh Promos
 		Tooltip:
 			'''
 			A TerraTCG Promo pack! Contains
@@ -892,8 +892,8 @@ Cards: {
 		Modifier.Description:
 			'''
 			Unpause target allied
-			creature. Its next attack
-			deals +2 dmg.
+			creature. It deals +2 
+			dmg this turn.
 			'''
 	}
 
@@ -978,7 +978,7 @@ Cards: {
 		Name: "{$ItemName.BladeofGrass}"
 
 		Skill: {
-			Name: Use
+			Name: Equip
 			Description:
 				'''
 				Equipped creature
@@ -1862,6 +1862,11 @@ Configs: {
 		ShowCardPreview: {
 			Label: Show Card Previews
 			Tooltip: Show a large image of the moused-over card during TerraTCG games.
+		}
+
+		ShowFoils: {
+			Label: Show Foils
+			Tooltip: ""
 		}
 	}
 }

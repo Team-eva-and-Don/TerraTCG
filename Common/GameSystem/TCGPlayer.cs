@@ -228,7 +228,7 @@ namespace TerraTCG.Common.GameSystem
 
 					}
 				}
-				else
+				else if(!Player.creativeGodMode) // don't kill the player if they're in god mode
 				{
 					SpawnCardExplosion(Player);
 					//TODO localize
@@ -285,7 +285,10 @@ namespace TerraTCG.Common.GameSystem
 
 			if(NPCInfo.IsBoss)
 			{
-				var dueledNPC = Main.npc.Where(npc => npc.active && npc.whoAmI < Main.maxNPCs && npc.netID == NPCInfo.NpcId).FirstOrDefault();
+				var dueledNPC = Main.npc
+					.Where(npc => npc.active && npc.whoAmI < Main.maxNPCs && npc.netID == NPCInfo.NpcId)
+					.OrderBy(npc=>Vector2.DistanceSquared(npc.Center, Player.Center))
+					.FirstOrDefault();
 				HandleBossNPCDuelEnd(dueledNPC);
 
 			} else
