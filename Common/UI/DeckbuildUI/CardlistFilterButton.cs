@@ -33,6 +33,8 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         {
             BackgroundColor = IsEnabled ? 
                 new Color(73, 94, 171, 180) : new Color(73, 94, 171, 180) * 0.25f;
+			BorderColor = IsEnabled ?
+				Color.Black : Color.Black * 0.5f;
         }
 
         public override void Draw(SpriteBatch spriteBatch)

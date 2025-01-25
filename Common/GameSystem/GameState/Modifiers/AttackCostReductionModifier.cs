@@ -11,7 +11,7 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
     internal class AttackCostReductionModifier(int modifier, List<GameEvent> removeOn = null) : ICardModifier
     {
         public Asset<Texture2D> Texture { get; set; }
-        public CardSubtype Source { get; set; }
+		public Card SourceCard { get; set; }
 
         public void ModifyAttack(ref Attack attack, Zone sourceZone, Zone destZone)
         {

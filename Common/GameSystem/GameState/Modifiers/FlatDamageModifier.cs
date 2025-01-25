@@ -13,7 +13,7 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
         public int Amount => amount;
 
         public Asset<Texture2D> Texture { get; set; }
-        public CardSubtype Source { get; set; }
+		public Card SourceCard { get; set; }
 
         public void ModifyAttack(ref Attack attack, Zone sourceZone, Zone destZone)
         {

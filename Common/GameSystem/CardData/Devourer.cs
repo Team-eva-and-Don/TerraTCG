@@ -21,7 +21,7 @@ namespace TerraTCG.Common.GameSystem.CardData
 			public ModifierType Category { get => ModifierType.MORBID; }
 			public Asset<Texture2D> Texture { get; set; }
 
-			public CardSubtype Source { get; set; }
+			public Card SourceCard { get; set; }
 
 			public bool ShouldRemove(GameEventInfo eventInfo)
 			{

@@ -26,7 +26,6 @@ namespace TerraTCG.Common.GameSystem.CardData
             Modifiers = () => [
                 new FlatDamageModifier(1, [GameEvent.AFTER_ATTACK])  {
                     Texture = TextureCache.Instance.GetItemTexture(ItemID.ThrowingKnife),
-                    Source = CardSubtype.CONSUMABLE,
                 }
             ]
         };

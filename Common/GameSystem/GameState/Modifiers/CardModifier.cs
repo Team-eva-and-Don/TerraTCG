@@ -50,7 +50,8 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
     {
         public Asset<Texture2D> Texture { get => null; }
 
-        public CardSubtype Source { get => CardSubtype.NONE; set { } }
+        public Card SourceCard { get => null ; set { } }
+        public CardSubtype Source { get => SourceCard?.SortType ?? CardSubtype.NONE; }
 
         public ModifierType Category { get => ModifierType.NONE; }
 

@@ -27,7 +27,6 @@ namespace TerraTCG.Common.GameSystem.CardData
             Modifiers = () => [
                 new SpikedModifier(2, [GameEvent.END_TURN])  {
                     Texture = TextureCache.Instance.GetItemTexture(ItemID.ThornsPotion),
-                    Source = CardSubtype.CONSUMABLE,
                 }
             ]
         };

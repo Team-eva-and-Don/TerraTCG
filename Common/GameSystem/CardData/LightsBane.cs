@@ -27,7 +27,6 @@ namespace TerraTCG.Common.GameSystem.CardData
             Modifiers = () => [
 				new Devourer.MorbidDamageBoostModifier() {
                     Texture = TextureCache.Instance.GetItemTexture(ItemID.LightsBane),
-					Source = CardSubtype.EQUIPMENT,
 				}
 			],
         };

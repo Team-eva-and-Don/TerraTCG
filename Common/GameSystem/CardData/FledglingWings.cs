@@ -28,7 +28,6 @@ namespace TerraTCG.Common.GameSystem.CardData
             Modifiers = () => [
                 new EvasiveModifier() { 
                     Texture = TextureCache.Instance.GetItemTexture(4978),
-                    Source = CardSubtype.EQUIPMENT,
                 }
                 
             ]

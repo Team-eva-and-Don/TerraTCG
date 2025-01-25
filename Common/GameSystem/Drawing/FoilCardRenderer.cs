@@ -48,11 +48,11 @@ namespace TerraTCG.Common.GameSystem.Drawing
 		{
 			var textureCache = TextureCache.Instance;
 			// Draw the back of the card
-			spriteBatch.Draw(card.Texture.Value, pos, card.Texture.Value.Bounds, Color.White, 0, default, scale, SpriteEffects.None, 0);
+			spriteBatch.Draw(card.Texture.Value, pos, card.Texture.Value.Bounds, color, 0, default, scale, SpriteEffects.None, 0);
 
 			// Draw a gold border over the regular border
 			var highlightTexture = TextureCache.Instance.ZoneHighlighted;
-			spriteBatch.Draw(highlightTexture.Value, pos, highlightTexture.Value.Bounds, Color.White, 0, default, scale * 1.5f, SpriteEffects.None, 0f);
+			spriteBatch.Draw(highlightTexture.Value, pos, highlightTexture.Value.Bounds, color, 0, default, scale * 1.5f, SpriteEffects.None, 0f);
 
 			var rotation = (float)TCGPlayer.TotalGameTime.TotalSeconds/2f + (posShift ? pos.Y + pos.X : 0);
 
@@ -61,16 +61,16 @@ namespace TerraTCG.Common.GameSystem.Drawing
 			var foilPos = new Vector2(textureCache.Foiling.Width(), textureCache.Foiling.Height()) / 2 + foilOrigin;
 			var foilBounds = card.Texture.Value.Bounds;
 			foilBounds.Location += new Point((int)foilPos.X, (int)foilPos.Y);
-			spriteBatch.Draw(textureCache.Foiling.Value, pos, foilBounds, Color.White * 0.5f, 0, default, scale, SpriteEffects.None, 0);
+			spriteBatch.Draw(textureCache.Foiling.Value, pos, foilBounds, color * 0.5f, 0, default, scale, SpriteEffects.None, 0);
 
 			// Draw the non-foiled parts of the card
 			if (textureCache.CardFoilMasks.TryGetValue(card.FullName, out var mask) || 
 				textureCache.FoilMasks.TryGetValue(card.SortType, out mask))
 			{
-				spriteBatch.Draw(mask.Value, pos, card.Texture.Value.Bounds, Color.White, 0, default, scale, SpriteEffects.None, 0);
+				spriteBatch.Draw(mask.Value, pos, card.Texture.Value.Bounds, color, 0, default, scale, SpriteEffects.None, 0);
 			}
 
-			CardTextRenderer.Instance.DrawCardText(spriteBatch, card, pos, scale, textColor: Color.White, details: details);
+			CardTextRenderer.Instance.DrawCardText(spriteBatch, card, pos, scale, textColor: color, details: details);
 		}
 	}
 }

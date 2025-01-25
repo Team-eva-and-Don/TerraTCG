@@ -27,7 +27,6 @@ namespace TerraTCG.Common.GameSystem.CardData
             Modifiers = () => [
 				new AddAttackTargetModifierModifier(new PoisonModifier()) {
                     Texture = TextureCache.Instance.GetItemTexture(ItemID.BladeofGrass),
-					Source = CardSubtype.EQUIPMENT,
 				}
 			],
         };

@@ -26,7 +26,6 @@ namespace TerraTCG.Common.GameSystem.CardData
             Modifiers = () => [
 				new AddAttackTargetModifierModifier(new PoisonModifier(), [GameEvent.END_TURN]) {
                     Texture = TextureCache.Instance.GetItemTexture(ItemID.PoisonedKnife),
-					Source = CardSubtype.CONSUMABLE,
 				}
 			],
         };

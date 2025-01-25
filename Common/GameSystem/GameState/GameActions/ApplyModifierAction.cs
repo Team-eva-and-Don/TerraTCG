@@ -44,6 +44,12 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             }
 
             var modifiers = card.Modifiers.Invoke();
+
+			foreach (var modifier in modifiers)
+			{
+				modifier.SourceCard = card;
+			}
+
             zone.QueueAnimation(new IdleAnimation(zone.PlacedCard, duration: duration));
             zone.QueueAnimation(new ApplyModifierAnimation(zone.PlacedCard, modifiers[0].Texture));
 

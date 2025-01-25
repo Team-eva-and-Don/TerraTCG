@@ -39,11 +39,9 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 			// first card in pack always comes from first
 			// card in pool
 			List<Card> packCards = [SelectCardFromPools([], [Pools[0]])];
-			// TODO this is an inefficient way to give a 1/11 chance at any card
-			List<CardCollection> wildcardPool = [.. Pools, .. Pools, .. Pools, .. Pools, .. Pools, AllCards];
 			for(int i = 1; i < Count; i++)
 			{
-				packCards.Add(SelectCardFromPools(packCards, wildcardPool));
+				packCards.Add(SelectCardFromPools(packCards, Pools));
 			}
 			// Shuffle the card order so it's not obvious the first card
 			// is from the first pool

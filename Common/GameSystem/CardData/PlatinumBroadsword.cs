@@ -27,7 +27,6 @@ namespace TerraTCG.Common.GameSystem.CardData
             Modifiers = () => [
                 new FlatDamageModifier(2)  {
                     Texture = TextureCache.Instance.GetItemTexture(ItemID.CopperShortsword),
-                    Source = CardSubtype.EQUIPMENT,
                 }
             ]
         };

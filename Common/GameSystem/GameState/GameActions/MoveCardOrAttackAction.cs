@@ -96,6 +96,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             bool hasEnoughMana = startZone.PlacedCard.GetAttackWithModifiers(startZone, zone).Cost <= player.Resources.Mana;
             InsufficientManaFor = hasEnoughMana ? "": ActionText("Attack");
             return startZone.HasPlacedCard() && hasEnoughMana &&
+				startZone.PlacedCard.CurrentHealth > 0 && 
                 startZone.PlacedCard.GetValidAttackZones(startZone, zone).Contains(zone);
         }
 

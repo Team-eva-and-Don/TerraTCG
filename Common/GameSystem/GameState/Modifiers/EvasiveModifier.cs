@@ -11,7 +11,7 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
     internal class EvasiveModifier : ICardModifier
     {
         public Asset<Texture2D> Texture { get; set; }
-        public CardSubtype Source { get; set; }
+		public Card SourceCard { get; set; }
 
         public ModifierType Category => ModifierType.EVASIVE;
 

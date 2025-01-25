@@ -12,6 +12,7 @@ using Terraria.ModLoader;
 using TerraTCG.Common.Configs;
 using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.Drawing;
+using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.GameSystem.GameState.GameActions;
 using TerraTCG.Common.UI.Common;
 using TerraTCG.Common.UI.DeckbuildUI;
@@ -32,7 +33,15 @@ namespace TerraTCG.Common.UI.GameFieldUI
                 .OrderBy(kv => kv.Key)
                 .Select(kv => Language.GetTextValue($"Mods.TerraTCG.Cards.Modifiers.{kv.Key}").Replace("%%", $"{kv.Value}"));
 
-            BuffIconTooltip = string.Join("\n", tooltipTexts);
+			var equipments = localPlayer.MouseoverZone?.PlacedCard?.CardModifiers.Where(m => m.Source == CardSubtype.EQUIPMENT)
+				.GroupBy(m => m.SourceCard)
+				.Select(group => $"  {group.Count()}x {group.First().SourceCard.CardName}") ?? [];
+
+			if(equipments.Any())
+			{
+				equipments = new string[] { $"{Language.GetTextValue("Mods.TerraTCG.Cards.Types.EQUIPMENT")}:" }.Concat(equipments);
+			}
+            BuffIconTooltip = string.Join("\n", tooltipTexts.Concat(equipments));
         }
 
         public override void Draw(SpriteBatch spriteBatch)

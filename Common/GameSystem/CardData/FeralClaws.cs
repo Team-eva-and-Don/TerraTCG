@@ -27,7 +27,6 @@ namespace TerraTCG.Common.GameSystem.CardData
             Modifiers = () => [
                 new RelentlessModifier()  {
                     Texture = TextureCache.Instance.GetItemTexture(ItemID.FeralClaws),
-                    Source = CardSubtype.EQUIPMENT,
                 }
             ]
         };

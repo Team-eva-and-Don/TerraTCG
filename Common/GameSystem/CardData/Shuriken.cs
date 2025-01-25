@@ -26,8 +26,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             ],
             Modifiers = () => [
 				new AddAttackTargetModifierModifier(new BleedModifier(1), [GameEvent.END_TURN]) {
-                    Texture = TextureCache.Instance.GetItemTexture(ItemID.Shuriken),
-					Source = CardSubtype.CONSUMABLE,
+					Texture = TextureCache.Instance.GetItemTexture(ItemID.Shuriken),
 				}
 			],
         };

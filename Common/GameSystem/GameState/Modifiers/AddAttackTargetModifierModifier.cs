@@ -12,7 +12,7 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
 	// card that this modifies
 	internal class AddAttackTargetModifierModifier(ICardModifier targetModifier, List<GameEvent> removeOn = null) : ICardModifier
 	{
-		public CardSubtype Source { get; set; }
+		public Card SourceCard { get; set; }
 
         public Asset<Texture2D> Texture { get; set; }
 

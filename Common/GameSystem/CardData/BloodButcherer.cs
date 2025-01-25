@@ -27,7 +27,6 @@ namespace TerraTCG.Common.GameSystem.CardData
             Modifiers = () => [
 				new AddAttackTargetModifierModifier(new BleedModifier(1)) {
                     Texture = TextureCache.Instance.GetItemTexture(ItemID.BloodButcherer),
-					Source = CardSubtype.EQUIPMENT,
 				}
 			],
         };

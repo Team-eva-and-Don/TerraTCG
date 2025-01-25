@@ -27,7 +27,6 @@ namespace TerraTCG.Common.GameSystem.CardData
             Modifiers = () => [
                 new ReduceDamageModifier(2, [GameEvent.END_TURN])  {
                     Texture = TextureCache.Instance.GetItemTexture(ItemID.IronskinPotion),
-                    Source = CardSubtype.CONSUMABLE
                 }
             ]
         };
