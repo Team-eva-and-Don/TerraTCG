@@ -18,7 +18,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             {
                 if(sourceCard.SubTypes.Contains(CardSubtype.EQUIPMENT))
                 {
-                    skill.Cost = Math.Max(1, skill.Cost - 1);
+                    skill.Cost = Math.Max(0, skill.Cost - 1);
                 }
             }
         }

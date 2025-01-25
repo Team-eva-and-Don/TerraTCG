@@ -115,6 +115,17 @@ namespace TerraTCG.Common.GameSystem.GameState
             return false;
         }
 
+		// Stop all ongoing animations, used to ensure game can clean up
+		internal void ClearAnimations()
+		{
+			FieldAnimation = null;
+			foreach(var zone in AllZones().Where(z=>!(z.Animation?.IsDefault() ?? true)))
+			{
+				zone.ClearAnimationQueue();
+			}
+
+		}
+
         // Check for state based actions, such as the game ending when a player has zero hp
         public void CheckStateActions()
         {
@@ -179,6 +190,11 @@ namespace TerraTCG.Common.GameSystem.GameState
             ActiveGames.Add(game);
             return game;
         }
+
+		public void RemoveGame(CardGame game)
+		{
+			ActiveGames.Remove(game);
+		}
 
         // Games are played at the UI layer, check the game state at each UI tick.
         public override void UpdateUI(GameTime gameTime)

@@ -19,7 +19,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             MaxHealth = 7,
             MoveCost = 2,
             CardType = CardType.CREATURE,
-            NPCID = NPCID.Salamander,
+            NPCID = NPCID.Salamander5,
             SubTypes = [CardSubtype.CAVERN, CardSubtype.SCOUT],
             Role = ZoneRole.OFFENSE,
             Attacks = [

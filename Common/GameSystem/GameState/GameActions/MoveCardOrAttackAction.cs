@@ -198,7 +198,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
         {
             if(actionType == ActionType.DEFAULT)
             {
-                return TCGPlayer.LocalGamePlayer.Owns(zone) ? Color.LightSkyBlue : Color.LightCoral;
+                return TCGPlayer.LocalGamePlayer.Owns(zone) ? Color.LightSkyBlue : Color.Crimson;
             } else
             {
                 return Color.Goldenrod;

@@ -168,7 +168,7 @@ namespace TerraTCG.Common.GameSystem
 				});
 			foreach (var newNPC in npcsWithNewLists)
 			{
-				Main.NewText($"{Language.GetTextValue("Mods.TerraTCG.Cards.Common.UnlockedANewDeck")}{newNPC}!");
+				Main.NewText($"{Language.GetTextValue("Mods.TerraTCG.Cards.Common.UnlockedANewDeck")}{newNPC}!", Color.DarkOrchid);
 			}
 
 			return opponent.Rewards.Select(r => new NPCDuelReward(r.ItemId, r.Count * 2)).ToList();
@@ -412,9 +412,15 @@ namespace TerraTCG.Common.GameSystem
             }
         }
 
-        // Set of hacks to stop the player from accidentally dying while playing
-        // unpaused in multiplayer
-        public override void PreUpdateMovement()
+		// Add a deckbox to the starting inventory
+		public override IEnumerable<Item> AddStartingItems(bool mediumCoreDeath)
+		{
+			return [new Item(ModContent.ItemType<TerraTCGDeckbox>())];
+		}
+
+		// Set of hacks to stop the player from accidentally dying while playing
+		// unpaused in multiplayer
+		public override void PreUpdateMovement()
         {
             // Set velocity to zero so you can't accidentally run off while mid-game
             if(GamePlayer != null)
@@ -434,6 +440,21 @@ namespace TerraTCG.Common.GameSystem
             // Prevent getting hit while in game
             return GamePlayer == null;
         }
+
+		public override void PreUpdate()
+		{
+			// Safety valve in case the "surrender and exit properly"
+			// hook gets missed somehow. This is important since all input is locked
+			// until the game state is cleared
+			if(GamePlayer != null && !Main.inFancyUI)
+			{
+				// Clean up logic depends on no animations being active
+				GamePlayer.Game.Winner = GamePlayer.Opponent;
+				ModContent.GetInstance<GameModSystem>().RemoveGame(GamePlayer.Game);
+				EndGame();
+			}
+
+		}
 
 		public override void SetControls()
 		{

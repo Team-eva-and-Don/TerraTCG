@@ -757,8 +757,8 @@ Cards: {
 			Name: Find Fauna
 			Description:
 				'''
-				Deals +1 dmg if you
-				control a Critter.
+				Deals +1 dmg for each
+				Critter you control.
 				'''
 		}
 	}

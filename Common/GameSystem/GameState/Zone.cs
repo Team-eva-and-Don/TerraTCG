@@ -199,5 +199,10 @@ namespace TerraTCG.Common.GameSystem.GameState
         {
             Animation?.DrawZoneOverlay(spriteBatch, position, scale);
         }
-    }
+
+		internal void ClearAnimationQueue()
+		{
+			animationQueue = [];
+		}
+	}
 }

@@ -46,7 +46,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public Color HighlightColor(Zone zone)
         {
-            return TCGPlayer.LocalGamePlayer.Owns(zone) ? Color.LightSkyBlue : Color.LightCoral;
+            return TCGPlayer.LocalGamePlayer.Owns(zone) ? Color.LightSkyBlue : Color.Crimson;
         }
 
         public void Cancel() 

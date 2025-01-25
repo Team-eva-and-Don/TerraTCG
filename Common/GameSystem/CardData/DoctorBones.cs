@@ -16,13 +16,10 @@ namespace TerraTCG.Common.GameSystem.CardData
         {
             public void ModifyAttack(ref Attack attack, Zone sourceZone, Zone destZone) 
             {
-                var hasCritter = sourceZone.Siblings
+                var critterCount = sourceZone.Siblings
                     .Where(z => z.PlacedCard?.Template?.SubTypes?.Contains(CardSubtype.CRITTER) ?? false)
-                    .Any();
-                if(hasCritter)
-                {
-                    attack.Damage += 1;
-                }
+                    .Count();
+				attack.Damage += critterCount;
             }
         }
 

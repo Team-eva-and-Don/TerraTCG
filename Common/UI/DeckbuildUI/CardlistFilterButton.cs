@@ -32,7 +32,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         public override void Update(GameTime gameTime)
         {
             BackgroundColor = IsEnabled ? 
-                new Color(73, 94, 171, 180) : new Color(73, 94, 171, 180) * 0.5f;
+                new Color(73, 94, 171, 180) : new Color(73, 94, 171, 180) * 0.25f;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -60,7 +60,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             var center = new Vector2(innerDims.X, innerDims.Y) + new Vector2(innerDims.Width, innerDims.Height) / 2;
             var origin = new Vector2(bounds.Width, bounds.Height) / 2;
 
-            var brightness = IsEnabled ? 1f : 0.5f;
+            var brightness = IsEnabled ? 1f : 0.25f;
             spriteBatch.Draw(texture, center, bounds, Color.White * brightness, 0, origin, scale, SpriteEffects.None, 0);
 
             if(ContainsPoint(Main.MouseScreen))
