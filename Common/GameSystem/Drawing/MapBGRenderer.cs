@@ -34,7 +34,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
 		internal List<Card> CrimsonCards = [GetCard<Crimera>(), GetCard<FaceMonster>(), GetCard<Creeper>(), GetCard<BrainOfCthulhu>()];
 		internal List<Card> CorruptionCards = [GetCard<EaterOfSouls>(), GetCard<Devourer>(), GetCard<EaterOfWorlds>()];
 
-		internal List<CardSubtype> SkyColored = [CardSubtype.FOREST, CardSubtype.JUNGLE, CardSubtype.OCEAN];
+		internal List<CardSubtype> SkyColored = [CardSubtype.FOREST, CardSubtype.GOBLIN_ARMY, CardSubtype.JUNGLE, CardSubtype.OCEAN];
 
 		private static BiomeBGInfo? GetDominantBiome(CardCollection deck)
 		{
