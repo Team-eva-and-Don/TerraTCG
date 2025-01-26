@@ -34,8 +34,12 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             var posOffset = IdleHoverPos(placedCard, baseScale);
             var zoneColor = OverlayColor(placedCard, exertedOverride);
             AnimationUtils.DrawZoneNPC(spriteBatch, SourceZone, placedCard, basePosition + new Vector2(0, posOffset), baseScale, zoneColor);
-            AnimationUtils.DrawZoneNPCStats(spriteBatch, SourceZone, placedCard, baseScale, health: healthOverride ?? placedCard.CurrentHealth);
         }
+
+		public void DrawZoneStats(SpriteBatch spriteBatch, Vector2 basePosition, float baseScale)
+		{
+            AnimationUtils.DrawZoneNPCStats(spriteBatch, SourceZone, placedCard, baseScale, health: healthOverride ?? placedCard.CurrentHealth);
+		}
 
         public bool IsComplete() => duration != default && ElapsedTime > duration;
         public bool IsDefault() => duration == default;

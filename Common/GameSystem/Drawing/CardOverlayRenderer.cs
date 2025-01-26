@@ -108,9 +108,13 @@ namespace TerraTCG.Common.GameSystem.Drawing
             DefaultDrawZoneNPC(spriteBatch, card, position + new Vector2(0, 48 * scale), frame, color, scale, effects | SpriteEffects.FlipVertically);
 		}
 
+		internal void DrawNoOpNPC(SpriteBatch spriteBatch, Card card, Vector2 position, int frame, Color? color, float scale, SpriteEffects effects)
+		{
+		}
+
 		internal void DrawWOFNPC(SpriteBatch spriteBatch, Card card, Vector2 position, int frame, Color? color, float scale, SpriteEffects effects)
 		{
-            scale *= 0.5f;
+            scale *= 0.75f;
 			// Textures
 			var textureCache = TextureCache.Instance;
 			var mouthTexture = textureCache.GetNPCTexture(NPCID.WallofFlesh);
@@ -120,9 +124,10 @@ namespace TerraTCG.Common.GameSystem.Drawing
 			// Bounds
 			var mouthBounds = mouthTexture.Frame(1, Main.npcFrameCount[NPCID.WallofFlesh], 0, frame);
 			var eyeBounds = eyeTexture.Frame(1, Main.npcFrameCount[NPCID.WallofFleshEye], 0, frame % Main.npcFrameCount[NPCID.WallofFleshEye]);
-			var wallBounds = new Rectangle(0, 0, wallTexture.Width(), mouthBounds.Height + 2 * eyeBounds.Height + 24);
+			var wallBounds = wallTexture.Value.Bounds;
 
-			var xOffset = Vector2.UnitX * scale * wallBounds.Width / 8 * (effects == SpriteEffects.FlipHorizontally ? -1 : 1);
+			var yOffset = Vector2.UnitY * scale * wallBounds.Width / 16 * (effects == SpriteEffects.FlipHorizontally ? 1 : -1);
+			var rotation = -MathF.PI / 2;
 
 			// Center the bottom of the mouth on the top of the card
 			position.Y -= mouthBounds.Height / 2 * scale;
@@ -131,13 +136,14 @@ namespace TerraTCG.Common.GameSystem.Drawing
 			var eyeOrigin = new Vector2(eyeBounds.Width, eyeBounds.Height) / 2;
 			var wallOrigin = new Vector2(wallBounds.Width, wallBounds.Height) / 2;
 
-			spriteBatch.Draw(wallTexture.Value, position + xOffset, wallBounds, color ?? Color.White, 0, wallOrigin, scale, effects, 0);
-			spriteBatch.Draw(mouthTexture.Value, position - xOffset, mouthBounds, color ?? Color.White, 0, mouthOrigin, scale, effects, 0);
+			spriteBatch.Draw(wallTexture.Value, position + yOffset, wallBounds, color ?? Color.White, rotation, wallOrigin, scale, effects, 0);
+			// spriteBatch.Draw(wallTexture.Value, position + xOffset, wallBounds, color ?? Color.White, MathF.PI/2, wallOrigin, scale, effects, 0);
+			spriteBatch.Draw(mouthTexture.Value, position - yOffset, mouthBounds, color ?? Color.White, rotation, mouthOrigin, scale, effects, 0);
 
 			for(int i = -1; i <= 1; i+=2)
 			{
-				var eyeOffset = new Vector2(0, i * scale * (mouthBounds.Height + eyeBounds.Height + 24) / 2);
-				spriteBatch.Draw(eyeTexture.Value, position + eyeOffset - xOffset, eyeBounds, color ?? Color.White, 0, eyeOrigin, scale, effects, 0);
+				var eyeOffset = new Vector2(i * scale * (wallBounds.Height - eyeBounds.Height) / 2, 0);
+				spriteBatch.Draw(eyeTexture.Value, position + eyeOffset - yOffset, eyeBounds, color ?? Color.White, rotation, eyeOrigin, scale, effects, 0);
 			}
 		}
 

@@ -965,12 +965,12 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     GetCard<Nurse>(),
                     GetCard<HealingPotion>(), 
                     GetCard<HealingPotion>(), 
-                    GetCard<LightsBane>(), 
-                    GetCard<LightsBane>(), 
                     GetCard<Shackle>(),
                     GetCard<Shackle>(),
-                    GetCard<JungleTurtle>(),
-                    GetCard<JungleTurtle>(), 
+                    GetCard<Wizard>(), 
+                    GetCard<Wizard>(),
+                    GetCard<PlatinumBroadsword>(), 
+                    GetCard<PlatinumBroadsword>(),
                     GetCard<Goldfish>(),
                 ]
             };

@@ -30,7 +30,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             MoveCost = 1,
             NPCID = NPCID.GoblinThief,
             CardType = CardType.CREATURE,
-            SubTypes = [CardSubtype.GOBLIN_ARMY, CardSubtype.SCOUT],
+            SubTypes = [CardSubtype.GOBLIN_ARMY, CardSubtype.CRITTER],
             Role = ZoneRole.DEFENSE,
             Skills = [
                 new() {

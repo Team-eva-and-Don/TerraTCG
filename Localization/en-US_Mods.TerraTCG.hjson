@@ -870,7 +870,7 @@ Cards: {
 		Name: "{$NPCName.Nurse}'s Care"
 		Modifier.Description:
 			'''
-			Target ally heals 2 hp.
+			Target ally heals 3 hp.
 			Remove all debuffs 
 			from it.
 			'''
@@ -1279,9 +1279,19 @@ Cards: {
 		Attack.Name: Flesh Wall
 		Modifier.Description:
 			'''
-			Inevitable: Each turn,
-			this deals +1 dmg and
-			heals 1 HP.
+			Inevitable: When this
+			enters, place two Eyes.
+			This heals 1 HP/turn.
+			'''
+	}
+
+	WallOfFleshEye: {
+		Name: "{$NPCName.WallofFlesh} Eye"
+		Modifier.Description:
+			'''
+			Sturdy. Can't attack. 
+			Your Wall of Flesh 
+			deals +1 dmg/turn.
 			'''
 	}
 

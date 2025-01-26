@@ -46,6 +46,12 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
                     origin, baseScale * lerpPoint, 0, 0);
             }
         }
+
+		public void DrawZoneStats(SpriteBatch spriteBatch, Vector2 basePosition, float baseScale)
+		{
+            AnimationUtils.DrawZoneNPCStats(spriteBatch, SourceZone, placedCard, baseScale);
+		}
+
         public bool IsComplete() => ElapsedTime > Duration;
     }
 }

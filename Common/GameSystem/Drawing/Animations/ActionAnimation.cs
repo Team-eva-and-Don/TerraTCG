@@ -25,9 +25,13 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             var posOffset = baseScale * (-5f + 5f * MathF.Cos(2*MathF.Tau * (float) (ElapsedTime.TotalSeconds / Duration.TotalSeconds)));
             var zoneColor = IdleAnimation.OverlayColor(placedCard);
             AnimationUtils.DrawZoneNPC(spriteBatch, SourceZone, placedCard, basePosition + new Vector2(0, posOffset), baseScale, zoneColor);
-            AnimationUtils.DrawZoneNPCStats(spriteBatch, SourceZone, placedCard, baseScale);
         }
 
-        public bool IsComplete() => ElapsedTime > Duration;
+		public void DrawZoneStats(SpriteBatch spriteBatch, Vector2 basePosition, float baseScale)
+		{
+            AnimationUtils.DrawZoneNPCStats(spriteBatch, SourceZone, placedCard, baseScale);
+		}
+
+		public bool IsComplete() => ElapsedTime > Duration;
     }
 }

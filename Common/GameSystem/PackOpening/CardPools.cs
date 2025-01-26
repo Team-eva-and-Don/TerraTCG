@@ -31,6 +31,7 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 				GetCard<Goldfish>(), 
 				GetCard<Squirrel>(), 
 				GetCard<Bunny>(), 
+				GetCard<ArmsDealer>(),
 				GetCard<Skeleton>(), 
 				GetCard<Bat>(), 
 				GetCard<IronskinPotion>(), 

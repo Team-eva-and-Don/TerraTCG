@@ -35,7 +35,6 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             var itemOffset = MathHelper.Lerp(48f, 0f, lerpPoint) + posOffset;
             DrawLightRays(spriteBatch, basePosition - Vector2.UnitY * itemOffset, baseScale * (1 - lerpPoint));
             AnimationUtils.DrawZoneNPC(spriteBatch, SourceZone, placedCard, basePosition + Vector2.UnitY * posOffset, baseScale, zoneColor);
-            AnimationUtils.DrawZoneNPCStats(spriteBatch, SourceZone, placedCard, baseScale);
 
             // Draw the item itself on top of everything
             if(modifierTexture?.Value is var texture)
@@ -47,6 +46,10 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
                     origin, baseScale * (1 - lerpPoint), 0, 0);
             }
         }
+		public void DrawZoneStats(SpriteBatch spriteBatch, Vector2 basePosition, float baseScale)
+		{
+            AnimationUtils.DrawZoneNPCStats(spriteBatch, SourceZone, placedCard, baseScale);
+		}
 
         // via AmuletOfManyMinions
         private void DrawLightRays(SpriteBatch spriteBatch, Vector2 position, float baseScale)

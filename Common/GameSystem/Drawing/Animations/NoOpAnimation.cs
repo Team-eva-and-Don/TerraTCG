@@ -27,6 +27,11 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             // No-op : Do nothing
         }
 
+		public void DrawZoneStats(SpriteBatch spriteBatch, Vector2 basePosition, float baseScale)
+		{
+            // No-op : Do nothing
+		}
+
         public bool IsComplete() => ElapsedTime > duration;
 
     }

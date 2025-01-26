@@ -25,6 +25,9 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
         // Draw additional items (such as an NPC sprite) on top of the zone
         void DrawZoneOverlay(SpriteBatch spriteBatch, Vector2 basePosition, float baseScale);
 
+        // Draw stats associated with the card active in the zone
+        void DrawZoneStats(SpriteBatch spriteBatch, Vector2 basePosition, float baseScale);
+
         bool IsDefault() => false;
         bool IsComplete();
     }
@@ -114,7 +117,8 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             }
 
             // left-justify attack damage above npc
-            {
+            if(card.Template.HasAttackText)
+			{
                 var zoneOffset = gamePlayer.Owns(zone) ? new Vector2(0.1f, 0.7f) : new Vector2(0.15f, 0.3f);
                 var placement = ProjectedFieldUtils.Instance.WorldSpaceToScreenSpace(gamePlayer, zone, zoneOffset);
                 var center = localPlayer.GameFieldPosition + placement;

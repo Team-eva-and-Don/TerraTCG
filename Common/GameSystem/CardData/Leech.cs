@@ -20,12 +20,13 @@ namespace TerraTCG.Common.GameSystem.CardData
             MoveCost = 2,
             CardType = CardType.CREATURE,
             NPCID = NPCID.LeechHead,
+			Role = ZoneRole.DEFENSE,
 			Priority = 10,
 			DrawZoneNPC = CardOverlayRenderer.Instance.DrawBestiaryZoneNPC,
-            SubTypes = [CardSubtype.EVIL, CardSubtype.SCOUT],
+            SubTypes = [CardSubtype.EVIL, CardSubtype.CRITTER],
             Attacks = [
                 new() {
-                    Damage = 3,
+                    Damage = 2,
                     Cost = 2,
                 }
             ],

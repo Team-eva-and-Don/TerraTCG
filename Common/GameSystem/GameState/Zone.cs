@@ -200,6 +200,11 @@ namespace TerraTCG.Common.GameSystem.GameState
             Animation?.DrawZoneOverlay(spriteBatch, position, scale);
         }
 
+        internal void DrawNPCStats(SpriteBatch spriteBatch, Vector2 position, float scale)
+        {
+            Animation?.DrawZoneStats(spriteBatch, position, scale);
+        }
+
 		internal void ClearAnimationQueue()
 		{
 			animationQueue = [];

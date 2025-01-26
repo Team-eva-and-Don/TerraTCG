@@ -185,7 +185,8 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
         {
             var bestCardInHand = GamePlayer.Hand.Cards.Where(c => c.CardType == CardType.CREATURE)
                 .Where(c => GamePlayer.Field.Zones.Any(z=>new DeployCreatureAction(c, GamePlayer).CanAcceptZone(z)))
-                .OrderByDescending(c => c.Attacks[0].Damage)
+                .OrderByDescending(c => c.SubTypes.Contains(CardSubtype.BOSS))
+                .ThenByDescending(c => c.Attacks[0].Damage)
                 .FirstOrDefault();
 
             if(bestCardInHand == null)
@@ -195,8 +196,8 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
 
             var bestTargetZone = GamePlayer.Field.Zones
                 .Where(z => new DeployCreatureAction(bestCardInHand, GamePlayer).CanAcceptZone(z))
-                .Where(z => z.Role == (bestCardInHand?.Role ?? ZoneRole.OFFENSE))
-				.OrderByDescending(z=>z.Index % 3 == 1) // For aesthetic reasons, prefer the center row
+                .OrderByDescending(z => z.Role == (bestCardInHand?.Role ?? ZoneRole.OFFENSE)) // Prefer playing cards in the correct role
+				.ThenByDescending(z=>z.Index % 3 == 1) // For aesthetic reasons, prefer the center row
                 .FirstOrDefault();
 
             if(bestCardInHand != null && bestTargetZone != null)

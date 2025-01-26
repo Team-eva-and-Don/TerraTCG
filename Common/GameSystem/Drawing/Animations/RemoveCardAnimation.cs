@@ -32,6 +32,11 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             var transparency = Math.Max(0, 1 - (float)(ElapsedTime.TotalSeconds/ Duration.TotalSeconds));
             AnimationUtils.DrawZoneNPC(
                 spriteBatch, SourceZone, leavingCard, basePosition, scale, Color.White * transparency);
+        }
+
+		public void DrawZoneStats(SpriteBatch spriteBatch, Vector2 basePosition, float baseScale)
+		{
+            var transparency = Math.Max(0, 1 - (float)(ElapsedTime.TotalSeconds/ Duration.TotalSeconds));
             AnimationUtils.DrawZoneNPCStats(
                 spriteBatch, 
                 SourceZone, 
@@ -39,7 +44,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
                 baseScale, 
                 transparency: transparency, 
                 health: leavingCard.CurrentHealth);
-        }
+		}
 
         public bool IsComplete() =>
             TCGPlayer.TotalGameTime > StartTime + Duration;

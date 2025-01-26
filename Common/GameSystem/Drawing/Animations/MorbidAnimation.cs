@@ -32,6 +32,10 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
 			var origin = new Vector2(tombstoneTexture.Width, tombstoneTexture.Height) / 2;
 			spriteBatch.Draw(tombstoneTexture, basePosition, tombstoneTexture.Bounds, Color.White, 0, origin, baseScale * (float)scale, SpriteEffects.None, 0);
 		}
+		public void DrawZoneStats(SpriteBatch spriteBatch, Vector2 basePosition, float baseScale)
+		{
+			// No stats - card is dead
+		}
 
 		public bool IsComplete() => ElapsedTime >= Duration;
 	}

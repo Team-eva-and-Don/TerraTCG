@@ -35,8 +35,11 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             var zoneColor = Color.Lerp(Color.Gray, Color.White, lerpPoint);
 
             AnimationUtils.DrawZoneNPC(spriteBatch, SourceZone, placedCard, basePosition + new Vector2(0, posOffset), baseScale, color: zoneColor);
-            AnimationUtils.DrawZoneNPCStats(spriteBatch, SourceZone, placedCard, baseScale);
         }
+		public void DrawZoneStats(SpriteBatch spriteBatch, Vector2 basePosition, float baseScale)
+		{
+            AnimationUtils.DrawZoneNPCStats(spriteBatch, SourceZone, placedCard, baseScale);
+		}
 
         public bool IsComplete() => ElapsedTime > Duration;
 

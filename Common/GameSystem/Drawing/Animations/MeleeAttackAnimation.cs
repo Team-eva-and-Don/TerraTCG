@@ -73,8 +73,11 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             var currentX = MathHelper.Lerp(basePosition.X, Destination.X, lerpPoint);
             var currentY = MathHelper.Lerp(basePosition.Y, Destination.Y, lerpPoint);
             AnimationUtils.DrawZoneNPC(spriteBatch, SourceZone, placedCard, new(currentX, currentY), baseScale, color: drawColor, frame: frame);
-            AnimationUtils.DrawZoneNPCStats(spriteBatch, SourceZone, placedCard, baseScale);
         }
+		public void DrawZoneStats(SpriteBatch spriteBatch, Vector2 basePosition, float baseScale)
+		{
+            AnimationUtils.DrawZoneNPCStats(spriteBatch, SourceZone, placedCard, baseScale);
+		}
 
         public bool IsComplete() =>
             TCGPlayer.TotalGameTime > StartTime + Duration;

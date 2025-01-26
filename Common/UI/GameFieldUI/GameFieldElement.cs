@@ -136,6 +136,15 @@ namespace TerraTCG.Common.UI.GameFieldUI
                 var scale = ProjectedFieldUtils.Instance.GetXScaleForZone(gamePlayer, zone, yLerpPoint);
                 zone.DrawNPC(spriteBatch, Position + placement, scale);
             }
+
+			// Draw stats on top of all NPCs since they can sometimes clip into the next zone
+            foreach (var zone in gamePlayer.Game.AllZones().Reverse())
+            {
+                var yLerpPoint = gamePlayer.Owns(zone) ? 0.3f : 0.8f;
+                var placement = ProjectedFieldUtils.Instance.WorldSpaceToScreenSpace(gamePlayer, zone, new(0.5f, yLerpPoint));
+                var scale = ProjectedFieldUtils.Instance.GetXScaleForZone(gamePlayer, zone, yLerpPoint);
+                zone.DrawNPCStats(spriteBatch, Position + placement, scale);
+            }
         }
 
         // TODO struct for this
