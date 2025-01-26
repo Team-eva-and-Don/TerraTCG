@@ -87,7 +87,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         public override Card CreateCard() => new ()
         {
             Name = "WallOfFlesh",
-            MaxHealth = 15,
+            MaxHealth = 14,
             MoveCost = 2,
 			Points = 2,
             NPCID = NPCID.WallofFlesh,
@@ -110,6 +110,25 @@ namespace TerraTCG.Common.GameSystem.CardData
 
     internal class WallOfFleshEye : BaseCardTemplate, ICardTemplate
 	{
+
+		private class SharedAttackDamageAnimationModifier : ICardModifier
+		{
+			public bool ShouldRemove(GameEventInfo eventInfo) {
+				if(eventInfo.Event == GameEvent.AFTER_RECEIVE_ATTACK)
+				{
+					var wofSibling = eventInfo.Zone.Siblings
+						.Where(z => z.PlacedCard?.Template.Name == "WallOfFlesh")
+						.FirstOrDefault();
+					if(wofSibling is Zone zone)
+					{
+
+						wofSibling.QueueAnimation(new IdleAnimation(wofSibling.PlacedCard, TimeSpan.FromSeconds(0.5f)));
+						wofSibling.QueueAnimation(new TakeDamageAnimation(wofSibling.PlacedCard, wofSibling.PlacedCard.CurrentHealth));
+					}
+				}
+				return false;
+			}
+		}
 
 		private class CantAttackModifier : ICardModifier
 		{
@@ -136,6 +155,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             SubTypes = [CardSubtype.BOSS, CardSubtype.EVIL, CardSubtype.DEFENDER],
             Modifiers = () => [
 				new CantAttackModifier(),
+				new SharedAttackDamageAnimationModifier(),
 				new ReduceDamageModifier(1),
             ],
             Attacks = [
