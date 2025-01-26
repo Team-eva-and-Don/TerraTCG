@@ -12,6 +12,7 @@ using Terraria.UI;
 using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.GameSystem.Drawing;
+using TerraTCG.Common.GameSystem.Drawing.Animations.FieldAnimations;
 using TerraTCG.Common.UI.DeckbuildUI;
 using TerraTCG.Common.UI.GameFieldUI;
 using TerraTCG.Common.UI.NPCDuelChat;
@@ -60,9 +61,30 @@ namespace TerraTCG.Common.UI
 
             _userInterface = new();
             On_Player.OpenInventory += On_Player_OpenInventory;
+
+			On_IngameFancyUI.Close += On_IngameFancyUI_Close;
         }
 
-        private void On_Player_OpenInventory(On_Player.orig_OpenInventory orig)
+		private void On_IngameFancyUI_Close(On_IngameFancyUI.orig_Close orig)
+		{
+			// Make the game go through the concede animation rather than suddenly
+			// disappearing when the player presses esc
+			if(TCGPlayer.LocalGamePlayer == null)
+			{
+				orig();
+				return;
+			}
+			if(TCGPlayer.LocalGamePlayer.Game.FieldAnimation is QuitNotificationAnimation)
+			{
+				TCGPlayer.LocalGamePlayer.Surrender();
+			} else
+			{
+				TCGPlayer.LocalGamePlayer.Game.FieldAnimation =
+					new QuitNotificationAnimation(TCGPlayer.TotalGameTime);
+			}
+		}
+
+		private void On_Player_OpenInventory(On_Player.orig_OpenInventory orig)
         {
             // Stop the player from opening the inventory while 
             // the deckbuilder is open (or in the process of clothing)
@@ -88,11 +110,11 @@ namespace TerraTCG.Common.UI
             // Close out all interfaces if ESC is pressed
             if(Main.LocalPlayer.controlInv)
             {
-                TCGPlayer.LocalGamePlayer?.Surrender();
-                if(CachedAutoPause is bool cachedAutoPause)
-                {
-                    Main.autoPause = cachedAutoPause;
-                }
+                // TCGPlayer.LocalGamePlayer?.Surrender();
+                //if(CachedAutoPause is bool cachedAutoPause)
+                //{
+                //    Main.autoPause = cachedAutoPause;
+                //}
 
                 if(_userInterface.CurrentState == DuelChat && DuelChat.InDeckSelect)
                 {

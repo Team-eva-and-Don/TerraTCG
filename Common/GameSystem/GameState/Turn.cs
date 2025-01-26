@@ -64,8 +64,6 @@ namespace TerraTCG.Common.GameSystem.GameState
 				}
 			}
 
-			// Re-apply field zones
-
             TCGPlayer.LocalGamePlayer.Game.FieldAnimation =
                 new TurnChangeAnimation(TCGPlayer.TotalGameTime, this);
 

@@ -56,7 +56,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
             cancelButton = new()
             {
                 RequireDoubleClick = true,
-                OnClickAction = SurrenderGame
+                OnClickAction = ()=>TCGPlayer.LocalGamePlayer?.Surrender()
             };
             Append(cancelButton);
 
@@ -71,12 +71,6 @@ namespace TerraTCG.Common.UI.GameFieldUI
             uiElement.Top.Set(top, 0f);
             uiElement.Width.Set(width, 0f);
             uiElement.Height.Set(height, 0f);
-        }
-        
-        private void SurrenderGame()
-        {
-            TCGPlayer.LocalGamePlayer.Resources =
-                TCGPlayer.LocalGamePlayer.Resources.UseResource(health: TCGPlayer.LocalGamePlayer.Resources.Health);
         }
 
         private void SetRectangles(float? lerpPoint = null)

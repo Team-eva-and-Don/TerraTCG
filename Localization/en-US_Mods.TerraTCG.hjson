@@ -1613,6 +1613,7 @@ Cards: {
 		FoundIn: Found In:
 		AnyPack: Any Pack
 		Forfeited: forfeited their soul to %% in a card game!
+		PressEscAgainToExit: Press ESC again to concede
 	}
 
 	DeckNames: {

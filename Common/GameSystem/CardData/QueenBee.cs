@@ -32,7 +32,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         public override Card CreateCard() => new ()
         {
             Name = "QueenBee",
-            MaxHealth = 9,
+            MaxHealth = 8,
             MoveCost = 2,
             Points = 2,
             NPCID = NPCID.QueenBee,
