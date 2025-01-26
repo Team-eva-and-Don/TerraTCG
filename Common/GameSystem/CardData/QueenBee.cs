@@ -24,10 +24,9 @@ namespace TerraTCG.Common.GameSystem.CardData
 				}
 			}
 
-            public bool ShouldRemove(GameEventInfo eventInfo)
-			{
-				return eventInfo.Event == GameEvent.START_TURN;
-			}
+			public bool ShouldRemove(GameEventInfo eventInfo) => 
+				eventInfo.Event == GameEvent.START_TURN || 
+				(eventInfo.Event == GameEvent.CREATURE_DIED && eventInfo.Zone.PlacedCard?.Template.Name == "QueenBee");
         }
 
         public override Card CreateCard() => new ()

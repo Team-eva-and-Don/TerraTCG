@@ -24,16 +24,14 @@ namespace TerraTCG.Common.UI.GameFieldUI
         internal const float CARD_SCALE = 4f / 3f;
         private string BuffIconTooltip;
 
-        public override void Update(GameTime gameTime)
-        {
-            base.Update(gameTime);
-            var localPlayer = TCGPlayer.LocalPlayer;
-            var modifiers = localPlayer.MouseoverZone?.GetKeywordModifiers() ?? [];
+		public static string GetCardDetailsToolTip(Zone zone)
+		{
+            var modifiers = zone.GetKeywordModifiers() ?? [];
             var tooltipTexts = modifiers
                 .OrderBy(kv => kv.Key)
                 .Select(kv => Language.GetTextValue($"Mods.TerraTCG.Cards.Modifiers.{kv.Key}").Replace("%%", $"{kv.Value}"));
 
-			var equipments = localPlayer.MouseoverZone?.PlacedCard?.CardModifiers.Where(m => m.Source == CardSubtype.EQUIPMENT)
+			var equipments = zone.PlacedCard?.CardModifiers.Where(m => m.Source == CardSubtype.EQUIPMENT)
 				.GroupBy(m => m.SourceCard)
 				.Select(group => $"  {group.Count()}x {group.First().SourceCard.CardName}") ?? [];
 
@@ -41,7 +39,14 @@ namespace TerraTCG.Common.UI.GameFieldUI
 			{
 				equipments = new string[] { $"{Language.GetTextValue("Mods.TerraTCG.Cards.Types.EQUIPMENT")}:" }.Concat(equipments);
 			}
-            BuffIconTooltip = string.Join("\n", tooltipTexts.Concat(equipments));
+            return string.Join("\n", tooltipTexts.Concat(equipments));
+		}
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+            var localPlayer = TCGPlayer.LocalPlayer;
+			BuffIconTooltip = localPlayer.MouseoverZone is Zone zone ? GetCardDetailsToolTip(zone) : "";
         }
 
         public override void Draw(SpriteBatch spriteBatch)

@@ -94,6 +94,10 @@ namespace TerraTCG.Common.UI.GameFieldUI
                     {
                         localPlayer.MouseoverZone = zone;
                         localPlayer.MouseoverCard = zone.PlacedCard.Template;
+						if(Main.keyState.PressingShift())
+						{
+							fieldTooltip = CardPreviewElement.GetCardDetailsToolTip(zone);
+						}
                     }
                     if(wasClicked)
                     {
