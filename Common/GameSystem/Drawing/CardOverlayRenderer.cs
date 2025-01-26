@@ -76,6 +76,13 @@ namespace TerraTCG.Common.GameSystem.Drawing
             spriteBatch.Draw(texture.Value, position - Vector2.UnitY * npcBounds.Height * 0.75f * scale, bounds, color ?? Color.White, 0, origin, scale, effects, 0);
         }
 
+        public void DrawGoblinArcherNPC(
+            SpriteBatch spriteBatch, Card card, Vector2 position, int frame, Color? color, float scale, SpriteEffects effects)
+        {
+			frame = (frame % 12) + 5;
+            DefaultDrawZoneNPC(spriteBatch, card, position, frame, color, scale, effects);
+        }
+
         public void DrawQueenBeeNPC(
             SpriteBatch spriteBatch, Card card, Vector2 position, int frame, Color? color, float scale, SpriteEffects effects)
         {

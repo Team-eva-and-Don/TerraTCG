@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria.ID;
 using Terraria.ModLoader;
+using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
@@ -21,6 +22,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             NPCID = NPCID.GoblinArcher,
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.GOBLIN_ARMY, CardSubtype.SCOUT],
+			DrawZoneNPC = CardOverlayRenderer.Instance.DrawGoblinArcherNPC,
             Modifiers = () => [
                 new EvasiveModifier(),
                 new GoblinScout.DamageModifier(),
