@@ -18,10 +18,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             Name = "OldMan",
             CardType = CardType.TOWNSFOLK,
             SubTypes = [CardSubtype.TOWNSFOLK],
-            SelectInHandAction = (card, player) => new MoveCardAction(card, player, player.Opponent),
-            Modifiers = () => [
-                new  NoOpModifier(),
-            ]
+            SelectInHandAction = (card, player) => new MoveCardAction(card, player),
         };
     }
 }

@@ -15,10 +15,12 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
         private Zone zone;
         public override ActionLogInfo GetLogMessage() => new(Card, $"{ActionText("Bounced")} {ActionText("With")} {Card.CardName}");
 
-        public override bool CanAcceptZone(Zone zone) => base.CanAcceptZone(zone) 
-            && Player.Owns(zone) && !zone.IsEmpty() && !zone.PlacedCard.Template.SubTypes.Contains(CardSubtype.EXPERT)
+        public override bool CanAcceptZone(Zone zone) => base.CanAcceptZone(zone) && 
+			Player.Owns(zone) && !zone.IsEmpty() && !zone.PlacedCard.Template.SubTypes.Contains(CardSubtype.EXPERT) &&
 			// Don't allow returning "tokens" to the hand
-			&& zone.PlacedCard.Template.IsCollectable;
+			zone.PlacedCard.Template.IsCollectable &&
+			// Don't allow returning cards that attacked this turn to the hand
+			!zone.PlacedCard.IsExerted;
 
         public override bool AcceptZone(Zone zone)
         {

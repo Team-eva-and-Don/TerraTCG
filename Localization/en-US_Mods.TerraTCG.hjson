@@ -850,9 +850,9 @@ Cards: {
 		Name: "{$NPCName.Dryad}'s Ward"
 		Modifier.Description:
 			'''
-			Return target allied
-			non-expert creature 
-			to the hand
+			Return target allied,
+			unpaused, non-expert 
+			creature to the hand
 			'''
 	}
 
@@ -911,8 +911,9 @@ Cards: {
 		Name: "{$NPCName.OldMan}'s Curse"
 		Modifier.Description:
 			'''
-			Move target enemy to
-			an unoccupied zone
+			Move target creature to
+			an unoccupied adjacent
+			column
 			'''
 	}
 

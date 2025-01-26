@@ -187,10 +187,9 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
 
             if(DecideUseTargetedSkill()) return;
 
+            if(DecideRetreatCreature()) return;
 
             if(DecideAttack()) return;
-
-            if(DecideRetreatCreature()) return;
 
             ResetStateAndPassTurn();
         }
