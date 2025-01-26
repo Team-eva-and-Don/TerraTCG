@@ -36,8 +36,8 @@ namespace TerraTCG.Common.GameSystem.CardData
             Attacks = [
                 new() {
                     Name = "Scout",
-                    Damage = 1,
-                    Cost = 1,
+                    Damage = 2,
+                    Cost = 2,
                 }
             ]
         };

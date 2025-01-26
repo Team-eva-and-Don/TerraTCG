@@ -282,9 +282,10 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     GetCard<WallOfFlesh>(), 
                     GetCard<WallOfFlesh>(), 
                     GetCard<Leech>(), 
-                    GetCard<Leech>(),
+                    GetCard<TorturedSoul>(),
                     GetCard<Guide>(),
                     GetCard<Guide>(),
+                    GetCard<IronskinPotion>(),
                     GetCard<IronskinPotion>(),
                     GetCard<CobaltShield>(),
                     GetCard<CobaltShield>(),
@@ -292,12 +293,11 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     GetCard<Nurse>(),
                     GetCard<HealingPotion>(), 
                     GetCard<HealingPotion>(), 
-                    GetCard<EnchantedNightcrawler>(), 
-                    GetCard<EnchantedNightcrawler>(), 
+                    GetCard<PlatinumBroadsword>(), 
+                    GetCard<PlatinumBroadsword>(), 
                     GetCard<Shackle>(),
                     GetCard<Shackle>(),
-                    GetCard<TorturedSoul>(),
-                    GetCard<TorturedSoul>(),
+                    GetCard<Wizard>(),
                     GetCard<Wizard>(),
                 ]
             };
@@ -971,7 +971,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     GetCard<Wizard>(),
                     GetCard<PlatinumBroadsword>(), 
                     GetCard<PlatinumBroadsword>(),
-                    GetCard<Goldfish>(),
+                    GetCard<CopperShortsword>(),
                 ]
             };
 	}

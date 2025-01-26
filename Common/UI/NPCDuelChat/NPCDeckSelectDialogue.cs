@@ -100,6 +100,7 @@ namespace TerraTCG.Common.UI.NPCDuelChat
             {
                 Buttons[i].Text = unlockedLists[i].Name;
                 Buttons[i].Left.Percent = i / (float)unlockedLists.Count;
+				Buttons[i].Left.Pixels = 0;
             }
             for(int i = unlockedLists.Count; i < Buttons.Count;i++)
             {

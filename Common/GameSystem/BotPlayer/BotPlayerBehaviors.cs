@@ -144,7 +144,8 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
 
             var bestBuffZone = GetBestBuffTarget(bestTownsfolk);
 
-            if(bestTownsfolk != null && bestBuffZone != null)
+            if(bestTownsfolk != null && bestBuffZone != null && 
+				bestTownsfolk.SelectInHandAction(bestTownsfolk, GamePlayer).CanAcceptZone(bestBuffZone))
             {
                 UseTownsfolk(bestTownsfolk, bestBuffZone);
                 return true;
