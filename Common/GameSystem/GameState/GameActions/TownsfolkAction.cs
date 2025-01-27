@@ -29,7 +29,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             return $"{ActionText("Use")} {Card.CardName}";
         }
 
-        public string GetZoneTooltip(Zone zone)
+        public virtual string GetZoneTooltip(Zone zone)
         {
             return $"{ActionText("Use")} {Card.CardName} {ActionText("On")} {zone.CardName}";
         }

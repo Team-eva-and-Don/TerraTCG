@@ -18,6 +18,8 @@ namespace TerraTCG.Content.Items
             Item.useStyle = ItemUseStyleID.Swing;
             Item.useAnimation = 15;
             Item.useTime = 15;
+			Item.width = 32;
+			Item.height = 32;
             Item.noUseGraphic = true;
             Item.rare = ItemRarityID.Blue;
         }

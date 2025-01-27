@@ -27,7 +27,10 @@ namespace TerraTCG.Content.Items
             Item.useTime = 120;
             Item.rare = ItemRarityID.Blue;
 			Item.maxStack = 9999;
+			Item.width = 32;
+			Item.height = 32;
 			Item.consumable = true;
+            Item.UseSound = SoundID.Item156;
 		}
 
 		private static void StartGameAndRigBossHand(IGamePlayerController myPlayer, IGamePlayerController opponent)

@@ -26,6 +26,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 			!zone.IsEmpty()  && zone.Siblings.Any(z=>z.IsEmpty() && z.Index / 3 == zone.Index / 3):
 			zone.Owner == sourceZone.Owner && zone.IsEmpty() && zone.Index / 3 == sourceZone.Index / 3;
 
+
         public override bool AcceptZone(Zone zone)
         {
             if(Step == 0)
@@ -38,7 +39,11 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             return sourceZone != null && destZone != null;
         }
 
-        public override Zone TargetZone() => sourceZone;
+		public override string GetZoneTooltip(Zone zone)
+		{
+			return base.GetZoneTooltip(Step == 0 ? zone : sourceZone);
+		}
+		public override Zone TargetZone() => sourceZone;
 
         public override void Complete()
         {

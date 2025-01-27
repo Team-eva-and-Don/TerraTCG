@@ -58,7 +58,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
-            if(ContainsPoint(Main.MouseScreen))
+            if(GetBounds(out var _) && ContainsPoint(Main.MouseScreen))
             {
                 TCGPlayer.LocalPlayer.MouseoverCard = sourceCard;
             }

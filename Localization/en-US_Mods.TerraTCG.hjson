@@ -912,8 +912,7 @@ Cards: {
 		Modifier.Description:
 			'''
 			Move target creature to
-			an unoccupied adjacent
-			column
+			an unoccupied column
 			'''
 	}
 
