@@ -17,7 +17,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         public override Card CreateCard() => new ()
         {
             Name = "Hornet",
-            MaxHealth = 6,
+            MaxHealth = 7,
             MoveCost = 2,
             CardType = CardType.CREATURE,
             NPCID = NPCID.Hornet,

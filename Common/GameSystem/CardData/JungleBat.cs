@@ -15,15 +15,15 @@ namespace TerraTCG.Common.GameSystem.CardData
         public override Card CreateCard() => new ()
         {
             Name = "JungleBat",
-            MaxHealth = 5,
+            MaxHealth = 7,
             MoveCost = 1,
             CardType = CardType.CREATURE,
             NPCID = NPCID.JungleBat,
             SubTypes = [CardSubtype.JUNGLE, CardSubtype.SCOUT],
             Attacks = [
                 new() {
-                    Damage = 2,
-                    Cost = 2,
+                    Damage = 3,
+                    Cost = 3,
                 }
             ],
             Modifiers = () => [

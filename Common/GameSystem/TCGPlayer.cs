@@ -232,7 +232,7 @@ namespace TerraTCG.Common.GameSystem
 				{
 					SpawnCardExplosion(Player);
 					//TODO localize
-					var reasonText = Language.GetTextValue("Mods.TerraTCG.Cards.Common.Forfeited").Replace("%%", dueledNPC?.FullName ?? "a boss");
+					var reasonText = Language.GetText("Mods.TerraTCG.Cards.Common.Forfeited").Format(dueledNPC?.FullName ?? "a boss");
 					Player.KillMe(PlayerDeathReason.ByCustomReason($"{Player.name} {reasonText}"), 9999, 0);
 				}
 			}

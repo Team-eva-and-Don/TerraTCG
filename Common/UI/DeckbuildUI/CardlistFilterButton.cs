@@ -68,7 +68,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             if(ContainsPoint(Main.MouseScreen))
             {
                 var cardCategory = Language.GetTextValue($"Mods.TerraTCG.Cards.Types.{CardSubtype}");
-                var tooltipText = Language.GetTextValue("Mods.TerraTCG.Cards.Common.ShowCards").Replace("%%", cardCategory);
+                var tooltipText = Language.GetText("Mods.TerraTCG.Cards.Common.ShowCards").Format(cardCategory);
                 DeckbuildState.SetTooltip(tooltipText);
             }
 

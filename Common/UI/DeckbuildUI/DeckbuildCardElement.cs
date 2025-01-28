@@ -110,7 +110,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             if(ContainsPoint(Main.MouseScreen))
             {
                 var tooltipText = 
-					Language.GetTextValue("Mods.TerraTCG.Cards.Common.AddToDeck").Replace("%%", sourceCard.CardName) +
+					Language.GetText("Mods.TerraTCG.Cards.Common.AddToDeck").Format(sourceCard.CardName) +
 					"\n" + Language.GetTextValue("Mods.TerraTCG.Cards.Common.FoundIn") + " " + GetContainingPackName();
                 DeckbuildState.SetTooltip(tooltipText);
             }

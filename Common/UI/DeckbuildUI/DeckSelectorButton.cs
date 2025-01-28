@@ -54,7 +54,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
 
             if(ContainsPoint(Main.MouseScreen))
             {
-                var tooltipText = Language.GetTextValue("Mods.TerraTCG.Cards.Common.UseDeck").Replace("%%", Label);
+                var tooltipText = Language.GetText("Mods.TerraTCG.Cards.Common.UseDeck").Format(Label);
                 DeckbuildState.SetTooltip(tooltipText);
             }
 

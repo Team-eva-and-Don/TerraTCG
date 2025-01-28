@@ -29,7 +29,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
             var modifiers = zone.GetKeywordModifiers() ?? [];
             var tooltipTexts = modifiers
                 .OrderBy(kv => kv.Key)
-                .Select(kv => Language.GetTextValue($"Mods.TerraTCG.Cards.Modifiers.{kv.Key}").Replace("%%", $"{kv.Value}"));
+                .Select(kv => Language.GetText($"Mods.TerraTCG.Cards.Modifiers.{kv.Key}").Format($"{kv.Value}"));
 
 			var equipments = zone.PlacedCard?.CardModifiers.Where(m => m.Source == CardSubtype.EQUIPMENT)
 				.GroupBy(m => m.SourceCard)

@@ -791,7 +791,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
 			{
 				Cards = [
 					GetCard<QueenBee>(),
-					GetCard<PoisonedKnife>(),
+					GetCard<Bee>(),
 					GetCard<Bee>(),
 					GetCard<Hornet>(),
 					GetCard<Hornet>(),
@@ -808,8 +808,8 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
 					GetCard<GiantTortoise>(),
 					GetCard<GiantTortoise>(),
 					GetCard<JungleTurtle>(),
-					GetCard<Wizard>(),
-					GetCard<Wizard>(),
+					GetCard<Shackle>(),
+					GetCard<Shackle>(),
 				]
 			};
 

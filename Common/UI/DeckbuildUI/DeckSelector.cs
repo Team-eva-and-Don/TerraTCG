@@ -57,7 +57,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             base.Draw(spriteBatch);
             var textPos = new Vector2(GetInnerDimensions().X, GetInnerDimensions().Y);
             var font = FontAssets.MouseText.Value;
-            var text = Language.GetTextValue("Mods.TerraTCG.Cards.Common.DeckEdit").Replace("%%", $"{TCGPlayer.LocalPlayer.ActiveDeck + 1}");
+            var text = Language.GetText("Mods.TerraTCG.Cards.Common.DeckEdit").Format($"{TCGPlayer.LocalPlayer.ActiveDeck + 1}");
             CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, text, textPos, font: font);
 
             var deckCountLabel = Language.GetTextValue("Mods.TerraTCG.Cards.Common.DeckCount");
