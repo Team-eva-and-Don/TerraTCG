@@ -21,7 +21,6 @@ Beyond the guide, the following NPCs can all be challenged to a game:
 [*] the Nurse
 [*] the Arms Dealer
 [*] the Goblin Tinkerer
-[*] the Party Girl
 [*] the Traveling Merchant
 [*] the Clothier
 [*] the Dryad

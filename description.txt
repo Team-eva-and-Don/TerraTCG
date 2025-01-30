@@ -18,7 +18,6 @@ following NPCs:
 - the Nurse
 - the Arms Dealer
 - the Goblin Tinkerer
-- the Party Girl
 - the Traveling Merchant
 - the Dryad
 - the Clothier
