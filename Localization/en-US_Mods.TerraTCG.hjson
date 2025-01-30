@@ -1610,7 +1610,7 @@ Cards: {
 		AskDeck: Which deck would you like to face?
 		YouWin: You win!
 		YouLose: You lose...
-		DeckNotValid: Your deck must be exactly 20 cards, and contain at least one non-expert creature.
+		DeckNotValid: Your deck must be exactly 20 cards, and contain at least one non-expert, non-critter creature.
 		Prev: Back
 		Next: Next
 		Close: Close

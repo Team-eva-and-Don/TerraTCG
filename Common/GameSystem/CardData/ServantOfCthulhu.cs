@@ -45,7 +45,7 @@ namespace TerraTCG.Common.GameSystem.CardData
 			Priority = 10,
             CardType = CardType.CREATURE,
             NPCID = NPCID.ServantofCthulhu,
-            SubTypes = [CardSubtype.FOREST, CardSubtype.SCOUT],
+            SubTypes = [CardSubtype.FOREST, CardSubtype.CRITTER],
 			DrawZoneNPC = CardOverlayRenderer.Instance.DrawFlippedZoneNPC,
             Attacks = [
                 new() {

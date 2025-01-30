@@ -53,7 +53,9 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         public bool ValidateDeck()
         {
-            return Cards.Count == 20 && Cards.Where(c => c.CardType == CardType.CREATURE && !c.SubTypes.Contains(CardSubtype.EXPERT)).Any();
+            return Cards.Count == 20 && Cards.Where(
+				c => c.CardType == CardType.CREATURE && !c.SubTypes.Contains(CardSubtype.EXPERT) && !c.SubTypes.Contains(CardSubtype.CRITTER)
+			).Any();
         }
 
         public List<string> Serialize()
