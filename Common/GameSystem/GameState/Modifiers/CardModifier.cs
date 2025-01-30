@@ -24,6 +24,7 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
 		CREATURE_ENTERED,
 	}
 
+	// Keyworded modifier types
     internal enum ModifierType
     {
         NONE,
@@ -36,6 +37,7 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
         LIFESTEAL,
 		POISON,
 		MORBID,
+		ZEALOUS
 	}
 
     internal struct GameEventInfo

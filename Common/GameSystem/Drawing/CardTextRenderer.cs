@@ -5,12 +5,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent;
 using Terraria.Localization;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.GameState;
+using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.Drawing
 {
@@ -50,6 +52,19 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 return new Vector2(texture.Width, texture.Height) * MPIconScale;
             } 
         }
+
+		private List<string> _keywordModifiers;
+		private List<string> KeywordModifiers
+		{
+			get
+			{
+				_keywordModifiers ??= Enum.GetNames(typeof(ModifierType))
+					.Where(m => Language.Exists($"Mods.TerraTCG.Cards.ModifierNames.{m}"))
+					.Select(m => Language.GetTextValue($"Mods.TerraTCG.Cards.ModifierNames.{m}"))
+					.ToList();
+				return _keywordModifiers;
+			}
+		}
 
         public void DrawString(
             SpriteBatch spriteBatch, string text, Vector2 position, Color? color = null, float scale = 1f, bool centered = false, DynamicSpriteFont font = null)
@@ -167,6 +182,37 @@ namespace TerraTCG.Common.GameSystem.Drawing
 
             return heightInfo;
         }
+
+		// Draw a multiline string of text, highlighting keyworded game mechanics
+		// where they appear
+		private void DrawRulesText(SpriteBatch spriteBatch, float startY, string text, Vector2 position, float scale)
+		{
+            var font = FontAssets.ItemStack.Value;
+			var rowY = startY;
+			var modifierLines = text.Split("\n");
+			foreach (var line in modifierLines)
+			{
+				var posOffset = new Vector2(1.5f * MARGIN_L, rowY);
+				DrawString(spriteBatch, line, position + posOffset * scale, Color.Black, SmallTextScale * scale);
+				if(line == modifierLines[0] && line.Contains(':'))
+				{
+					var keyword = line.Split(":")[0];
+					DrawStringWithBorder(
+						spriteBatch, keyword, position + posOffset * scale, Color.SkyBlue, SmallTextScale * scale);
+				}
+				foreach (var keyword in KeywordModifiers)
+				{
+					foreach (Match match in Regex.Matches(line, $"{keyword}[a-z,.:]*"))
+					{
+						var xOffset = font.MeasureString(line[..match.Index]).X * SmallTextScale * scale;
+						DrawStringWithBorder(
+							spriteBatch, match.Value, position + posOffset * scale + Vector2.UnitX * xOffset, Color.SkyBlue, SmallTextScale * scale);
+					}
+				}
+				rowY += SmallTextHeight;
+			}
+		}
+
         private void DrawBodyText(SpriteBatch spriteBatch, Card card, Vector2 position, float scale = 1f, Attack? attackOverride = null)
         {
             var font = FontAssets.ItemStack.Value;
@@ -181,20 +227,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
             // Modifier
             if(card.HasModifierText)
             {
-                var rowY = startY + heightInfo.modifierHeight;
-                var modifierLines = card.ModifierDescription.Split("\n");
-                foreach (var line in modifierLines)
-                {
-                    var posOffset = new Vector2(1.5f * MARGIN_L, rowY);
-                    DrawString(spriteBatch, line, position + posOffset * scale, Color.Black, SmallTextScale * scale);
-                    if(line == modifierLines[0] && line.Contains(':'))
-                    {
-                        var keyword = line.Split(":")[0];
-                        DrawStringWithBorder(
-                            spriteBatch, keyword, position + posOffset * scale, Color.SkyBlue, SmallTextScale * scale);
-                    }
-                    rowY += SmallTextHeight;
-                }
+				DrawRulesText(spriteBatch, startY + heightInfo.modifierHeight, card.ModifierDescription, position, scale);
             }
             // Skill 
             if(card.HasSkillText)
@@ -212,14 +245,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
             // Skill Description
             if(card.HasSkillDescription)
             {
-                var rowY = startY + heightInfo.skillDescriptionHeight;
-                var skillLines = card.SkillDescription.Split("\n");
-                foreach (var line in skillLines)
-                {
-                    var posOffset = new Vector2(1.5f * MARGIN_L, rowY);
-                    DrawString(spriteBatch, line, position + posOffset * scale, Color.Black, SmallTextScale * scale);
-                    rowY += SmallTextHeight;
-                }
+				DrawRulesText(spriteBatch, startY + heightInfo.skillDescriptionHeight, card.SkillDescription, position, scale);
             }
 
             // Attack
@@ -251,14 +277,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
             // Attack Description
             if(card.HasAttackDescription)
             {
-                var rowY = startY + heightInfo.attackDescriptionHeight;
-                var attackLines = card.AttackDescription.Split("\n");
-                foreach (var line in attackLines)
-                {
-                    var posOffset = new Vector2(1.5f * MARGIN_L, rowY);
-                    DrawString(spriteBatch, line, position + posOffset * scale, Color.Black, SmallTextScale * scale);
-                    rowY += SmallTextHeight;
-                }
+				DrawRulesText(spriteBatch, startY + heightInfo.attackDescriptionHeight, card.AttackDescription, position, scale);
             }
         }
 

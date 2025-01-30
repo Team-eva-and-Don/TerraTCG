@@ -41,7 +41,6 @@ namespace TerraTCG.Common.GameSystem.CardData
             MoveCost = 1,
             CardType = CardType.CREATURE,
             NPCID = NPCID.EnchantedNightcrawler,
-			Priority = -10, // NPCs should play around killing this
             SubTypes = [CardSubtype.FOREST, CardSubtype.SCOUT],
             Attacks = [
                 new() {

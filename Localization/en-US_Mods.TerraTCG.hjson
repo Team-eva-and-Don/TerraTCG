@@ -363,7 +363,7 @@ Cards: {
 			'''
 			Boss' Helper: Your
 			Brain of Cthulhu's 
-			attacks cause bleed.
+			attacks cause Bleeding.
 			'''
 		Attack.Name: Evil Gaze
 	}
@@ -613,7 +613,7 @@ Cards: {
 				'''
 				Target ally deals +1 dmg 
 				this turn, and gains
-				Bleed (takes +1 dmg)
+				Bleeding (takes +1 dmg)
 				'''
 		}
 	}
@@ -924,7 +924,7 @@ Cards: {
 			Description:
 				'''
 				Target creature
-				inflicts Bleed this
+				inflicts Bleeding this
 				turn (Enemies take
 				+1 dmg)
 				'''
@@ -953,7 +953,7 @@ Cards: {
 			Description:
 				'''
 				Target creature
-				inflicts Bleed 
+				inflicts Bleeding
 				(Enemies take +1 dmg)
 				'''
 		}
@@ -1582,6 +1582,18 @@ Cards: {
 		SPIKED: Spiked: Attackers take {0} damage
 		LIFESTEAL: Lifesteal: Regains {0} HP on attack
 		MORBID: Morbid: An effect triggers when this dies
+	}
+
+	ModifierNames: {
+		DEFENSE_BOOST: Sturdy
+		BLEEDING: Bleeding
+		POISON: Poison
+		RELENTLESS: Relentless
+		EVASIVE: Evasive
+		ZEALOUS: Zealous
+		SPIKED: Spiked
+		LIFESTEAL: Lifesteal
+		MORBID: Morbid
 	}
 
 	Common: {
