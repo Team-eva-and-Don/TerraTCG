@@ -88,8 +88,14 @@ namespace TerraTCG.Common.GameSystem
             new CardCollection(),
         ];
 
+		// The card that the player is mousing over, either in the deckbuilder or on the game field
         public Card MouseoverCard { get; set; }
+
+		// The zone on the field that the player last moused over
         public Zone MouseoverZone { get; set; }
+
+		// If the player's mouse is actively in a zone
+		public Zone ActiveMouseoverZone { get; internal set; }
 
         public CardCollection Deck { get => SavedDecks[ActiveDeck]; set { } }
 

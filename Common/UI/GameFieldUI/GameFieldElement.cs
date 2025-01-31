@@ -75,6 +75,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
             bool wasClicked = IsClicked();
             bool clickedValidZone = false;
 
+			localPlayer.ActiveMouseoverZone = null;
             // Check both players' fields
             foreach (var zone in gamePlayer.Game.AllZones())
             {
@@ -92,6 +93,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
 
                     if(zone.HasPlacedCard())
                     {
+                        localPlayer.ActiveMouseoverZone = zone;
                         localPlayer.MouseoverZone = zone;
                         localPlayer.MouseoverCard = zone.PlacedCard.Template;
 						if(Main.keyState.PressingShift())

@@ -10,6 +10,7 @@ using Terraria;
 using Terraria.GameContent;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.GameState;
+using TerraTCG.Common.GameSystem.GameState.GameActions;
 
 namespace TerraTCG.Common.GameSystem.Drawing.Animations
 {
@@ -97,6 +98,26 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
 
             health ??= card.CurrentHealth;
             var attack = card.GetAttackWithModifiers(zone, null); // TODO don't explicitly pass null
+			var attackColor = Color.White;
+
+			// If this is an allied zone and the player is mousing over an enemy zone,
+			// draw the actual attack damage that would occur in that attack
+			if(zone.Owner == TCGPlayer.LocalGamePlayer && 
+				TCGPlayer.LocalPlayer.ActiveMouseoverZone is Zone mouseZone && 
+				TCGPlayer.LocalGamePlayer.InProgressAction is MoveCardOrAttackAction action &&
+				zone == action.StartZone &&
+				mouseZone.HasPlacedCard() && mouseZone.Owner != zone.Owner)
+			{
+				var attackOnCreature = card.GetAttackWithModifiers(zone, mouseZone);
+				if(attackOnCreature.Damage > attack.Damage)
+				{
+					attackColor = Color.LimeGreen;
+				} else if (attackOnCreature.Damage < attack.Damage)
+				{
+					attackColor = Color.Crimson;
+				}
+				attack = attackOnCreature;
+			}
 
             var font = FontAssets.ItemStack.Value;
 
@@ -124,7 +145,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
                 var center = localPlayer.GameFieldPosition + placement;
                 var textOffset = font.MeasureString($"{attack.Damage}");
                 var textPos = center - textOffset;
-                CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, $"{attack.Damage}", textPos, Color.White * transparency, fontScale);
+                CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, $"{attack.Damage}", textPos, attackColor * transparency, fontScale);
                 var swordPos = textPos + new Vector2(textOffset.X, 0);
                 var swordTexture = TextureCache.Instance.AttackIcon.Value;
                 spriteBatch.Draw(swordTexture, swordPos, swordTexture.Bounds, Color.White * transparency, 0, default, fontScale, SpriteEffects.None, 0);

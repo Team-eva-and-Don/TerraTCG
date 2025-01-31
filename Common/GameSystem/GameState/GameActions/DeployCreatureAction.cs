@@ -31,6 +31,14 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
         {
             return ActionText(card.SubTypes.Contains(CardSubtype.EXPERT) ? "Promote" : "Play") + " " + card.CardName;
         }
+        public string GetCantAcceptZoneTooltip(Zone zone)
+		{
+			if(card.SubTypes.Contains(CardSubtype.BOSS) && zone.Siblings.Any(z => z.PlacedCard?.Template.SubTypes.Contains(CardSubtype.BOSS) ?? false))
+			{
+				return ActionText("OnlyOneBoss");
+			}
+			return null;
+		}
 
 
         public bool CanAcceptZone(Zone zone)

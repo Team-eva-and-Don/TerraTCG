@@ -34,6 +34,8 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public bool CanAcceptCardInHand(Card card) => false;
 
+		public Zone StartZone => startZone;
+
         // State var for calculations to determine whether the inability to
         // perform an action is due to lack of available MP.
         private string InsufficientManaFor = "";
@@ -76,7 +78,8 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
                 return $"{ActionText("Move")} {startZone.CardName}";
             } else if (actionType == ActionType.DEFAULT && !player.Owns(zone) && !zone.IsEmpty())
             {
-                return $"{ActionText("Attack")} {zone.CardName} {ActionText("With")} {startZone.CardName}";
+				var attackDmg = startZone.PlacedCard.GetAttackWithModifiers(startZone, zone).Damage;
+                return $"{ActionText("Attack")} {zone.CardName} {ActionText("With")} {startZone.CardName} {ActionText("For")} {attackDmg}";
             } else if (actionType == ActionType.TARGET_ALLY && player.Owns(zone) && !zone.IsEmpty())
             {
                 return $"{ActionText("Use")} {startZone.CardName}{ActionText("Ownership")} {ActionText("Skill")} {ActionText("On")}";
