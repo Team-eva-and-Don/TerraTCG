@@ -63,7 +63,19 @@ namespace TerraTCG.Common.UI
             On_Player.OpenInventory += On_Player_OpenInventory;
 
 			On_IngameFancyUI.Close += On_IngameFancyUI_Close;
+
+			On_Main.GUIBarsDraw += On_Main_GUIBarsDraw;
         }
+
+		private void On_Main_GUIBarsDraw(On_Main.orig_GUIBarsDraw orig, Main self)
+		{
+			// Don't draw the player health/breath bards while in-game
+			if(TCGPlayer.LocalGamePlayer == null)
+			{
+				orig.Invoke(self);
+				return;
+			}
+		}
 
 		private void On_IngameFancyUI_Close(On_IngameFancyUI.orig_Close orig)
 		{

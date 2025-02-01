@@ -677,7 +677,7 @@ Cards: {
 			'''
 			Spiked Shell: Spiked.
 			Enemies can't attack 
-			ally(s) with the lowest
+			allies with the lowest
 			HP.
 			'''
 	}
@@ -952,7 +952,7 @@ Cards: {
 			Name: Equip
 			Description:
 				'''
-				Target creature
+				Equipped creature
 				inflicts Bleeding
 				(Enemies take +1 dmg)
 				'''
@@ -1300,7 +1300,7 @@ Cards: {
 		Attack.Name: Blood Suck
 		Modifier.Description:
 			'''
-			Boss' Helper: Your Wall 
+			Boss' Helper: Your Wall
 			of Flesh's healing 
 			increases by 1 per turn
 			'''

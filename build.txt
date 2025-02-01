@@ -1,4 +1,4 @@
 displayName = TerraTCG
 author = billybobmcbo
-version = 0.1
+version = 1.0.0
 sortAfter = DialogueTweak

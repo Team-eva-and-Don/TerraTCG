@@ -82,6 +82,10 @@ namespace TerraTCG.Common.GameSystem.Drawing
         public void DrawStringWithBorder(
             SpriteBatch spriteBatch, string text, Vector2 position, Color? color = null, float scale = 1f, bool centered = false, DynamicSpriteFont font = null, Color? bgColor = null)
         {
+			if(bgColor == null && color is Color c && c.A != 255)
+			{
+				bgColor = Color.Black * (c.A / 255f);
+			}
             foreach(var offset in new Vector2[] { Vector2.UnitX, Vector2.UnitY })
             {
                 DrawString(spriteBatch, text, position + 2 * offset * scale, bgColor ?? Color.Black, scale, centered, font);

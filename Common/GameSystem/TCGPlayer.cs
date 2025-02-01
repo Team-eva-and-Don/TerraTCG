@@ -142,6 +142,8 @@ namespace TerraTCG.Common.GameSystem
         public void StartGame(GamePlayer player, CardGame game)
         {
             GamePlayer = player;
+			MouseoverCard = null;
+			MouseoverZone = null;
             ModContent.GetInstance<UserInterfaces>().StartGame();
         }
 

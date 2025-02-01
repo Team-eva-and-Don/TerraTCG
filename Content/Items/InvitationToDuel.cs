@@ -24,7 +24,7 @@ namespace TerraTCG.Content.Items
 		{
             Item.useStyle = ItemUseStyleID.HoldUp;
             Item.useAnimation = 120;
-            Item.useTime = 120;
+            Item.useTime = 90;
             Item.rare = ItemRarityID.Blue;
 			Item.maxStack = 9999;
 			Item.width = 32;

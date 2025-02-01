@@ -183,7 +183,7 @@ namespace TerraTCG.Common.GameSystem.GameState
                 allMyText.Append(ModifierDescription);
             }
 
-            return allMyText.ToString().Contains(textFilter, StringComparison.CurrentCultureIgnoreCase);
+            return allMyText.ToString().Replace("\n"," ").Contains(textFilter, StringComparison.CurrentCultureIgnoreCase);
         }
     }
 }

@@ -99,24 +99,17 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             health ??= card.CurrentHealth;
             var attack = card.GetAttackWithModifiers(zone, null); // TODO don't explicitly pass null
 			var attackColor = Color.White;
+			int expectedDmg = 0;
 
 			// If this is an allied zone and the player is mousing over an enemy zone,
 			// draw the actual attack damage that would occur in that attack
-			if(zone.Owner == TCGPlayer.LocalGamePlayer && 
-				TCGPlayer.LocalPlayer.ActiveMouseoverZone is Zone mouseZone && 
+			if(zone.Owner == TCGPlayer.LocalGamePlayer.Opponent && 
+				TCGPlayer.LocalPlayer.ActiveMouseoverZone == zone && 
 				TCGPlayer.LocalGamePlayer.InProgressAction is MoveCardOrAttackAction action &&
-				zone == action.StartZone &&
-				mouseZone.HasPlacedCard() && mouseZone.Owner != zone.Owner)
+				action.CanAcceptZone(zone) && zone.HasPlacedCard())
 			{
-				var attackOnCreature = card.GetAttackWithModifiers(zone, mouseZone);
-				if(attackOnCreature.Damage > attack.Damage)
-				{
-					attackColor = Color.LimeGreen;
-				} else if (attackOnCreature.Damage < attack.Damage)
-				{
-					attackColor = Color.Crimson;
-				}
-				attack = attackOnCreature;
+				var attackOnCreature = action.StartZone.PlacedCard.GetAttackWithModifiers(action.StartZone, zone);
+				expectedDmg = attackOnCreature.Damage;
 			}
 
             var font = FontAssets.ItemStack.Value;
@@ -135,6 +128,13 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
                 var heartPos = center - new Vector2(-4, textOffset.Y);
                 var heartTexture = TextureCache.Instance.HeartIcon.Value;
                 spriteBatch.Draw(heartTexture, heartPos, heartTexture.Bounds, Color.White * transparency, 0, default, 0.75f * fontScale, SpriteEffects.None, 0);
+
+				// if in-progress attack action is being performed, draw the expected damage of the attack
+				if(expectedDmg > 0)
+				{
+					var dmgPos = textPos - Vector2.UnitY * textOffset.Y * fontScale * 0.75f;
+					CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, $"-{expectedDmg}", dmgPos, Color.Red * transparency, fontScale);
+				}
             }
 
             // left-justify attack damage above npc

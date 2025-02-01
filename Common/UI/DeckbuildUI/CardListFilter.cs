@@ -57,6 +57,14 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         private int visibleCount;
         private int totalCount;
 
+		private readonly Dictionary<string, LocalizedText> SearchAliases = new()
+		{
+			["eoc"] = Language.GetText("NPCName.EyeofCthulhu"),
+			["eow"] = Language.GetText("NPCName.EaterofWorldsHead"),
+			["boc"] = Language.GetText("NPCName.BrainofCthulhu"),
+			["wof"] = Language.GetText("NPCName.WallofFlesh"),
+		};
+
         public override void OnInitialize()
         {
             allCards = ModContent.GetContent<BaseCardTemplate>()
@@ -95,6 +103,10 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         private void SearchTextBox_OnTextChanged()
         {
             FilterString = searchTextBox.currentString;
+			if(SearchAliases.TryGetValue(FilterString, out var text))
+			{
+				FilterString = text.Value;
+			}
         }
 
 		private bool EvaluateCardOwnershipVisibility(Card card)
