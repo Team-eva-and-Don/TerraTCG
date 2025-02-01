@@ -45,10 +45,14 @@ result in death!
 
 [img] https://raw.githubusercontent.com/westphallm1/TerraTCG/refs/heads/main/Assets/Workshop/QueenBee_Promo.png [/img]
 
-[h2] Disclaimer [/h2]
+[h3] Disclaimers [/h3]
 
-While the PvE mode of this mod is fully supported in Multiplayer, there is currently no support for
+[list]
+[*] While the PvE mode of this mod is fully supported in Multiplayer, there is currently no support for
 PvP games. Stay tuned for a future update!
+[*] The mod is known to have a couple compatibility issues with High FPS Support
+mod, but should still be playable while it is installed.
+[/list]
 
 [h2] How to Play [/h2]
 

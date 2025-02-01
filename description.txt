@@ -38,7 +38,9 @@ challenge the bosses themselves! Beating an NPC's second deck awards you with an
 "Duel Invitation", an item that can be used in the presence of a boss to start
 a life-or-death game of TerraTCG! The loser of a boss game's soul is forfeit!
 
-Disclaimer
-----------
-While the PvE mode of this mod is fully supported in Multiplayer, there is currently 
-no support for PvP games. Stay tuned for a future update!
+Disclaimers
+-----------
+- While the PvE mode of this mod is fully supported in Multiplayer, there is 
+  currently no support for PvP games. Stay tuned for a future update!
+- The mod is known to have a couple compatibility issues with High FPS Support
+  mod, but should still be playable while it is installed

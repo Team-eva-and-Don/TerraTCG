@@ -70,10 +70,10 @@ namespace TerraTCG.Common.GameSystem.GameState
             var myPlayer = TCGPlayer.LocalGamePlayer;
             var player = rotation == 0 ? myPlayer : myPlayer.Opponent;
             int deckCount = player.Deck.Cards.Count;
-            for(int i = 0; i < (deckCount + 1) / 2; i++)
+            for(int i = 0; i < deckCount / 2; i++)
             {
                 deckPosition += rotation == 0 ? new Vector2(2, -2) : new Vector2(-2, -2);
-                texture = (i % 2 == 1 || i == deckCount / 2) ? TextureCache.Instance.CardBack : TextureCache.Instance.ZoneHighlighted;
+                texture = (i % 2 == 0 || i == deckCount/2 - 1) ? TextureCache.Instance.CardBack : TextureCache.Instance.ZoneHighlighted;
                 spriteBatch.Draw(texture.Value, deckPosition + origin, bounds, Color.White, rotation, origin, 1f, SpriteEffects.None, 0);
             }
         }
