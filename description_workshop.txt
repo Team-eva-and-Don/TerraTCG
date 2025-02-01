@@ -118,3 +118,8 @@ such as:
 [/list]
 
 You can only use one Townsfolk per turn, which consumes your single Townsfolk Emblem.
+
+[h2]Credits[/h2]
+
+Development: Billybobmcbo, Direwolf420
+Playtesting: Direwolf420, Harblesnargits

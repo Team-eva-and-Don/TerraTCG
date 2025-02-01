@@ -44,3 +44,10 @@ Disclaimers
   currently no support for PvP games. Stay tuned for a future update!
 - The mod is known to have a couple compatibility issues with High FPS Support
   mod, but should still be playable while it is installed
+
+
+Credits
+-------
+
+Development: Billybobmcbo, Direwolf420
+Playtesting: Direwolf420, Harblesnargits
