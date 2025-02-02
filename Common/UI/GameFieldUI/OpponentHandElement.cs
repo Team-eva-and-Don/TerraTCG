@@ -11,6 +11,7 @@ using Terraria.UI;
 using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.GameSystem.Drawing;
+using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.UI.Common;
 
 namespace TerraTCG.Common.UI.GameFieldUI
@@ -46,7 +47,8 @@ namespace TerraTCG.Common.UI.GameFieldUI
 			}
 			var centerPos = new Vector2(Main.screenWidth / 2, CardPosition0.Y + CARD_HEIGHT / 3);
 			var floatOffset = Vector2.UnitY * 6 * MathF.Sin(MathF.PI * (float)TCGPlayer.TotalGameTime.TotalSeconds);
-			bossCard.DrawZoneNPC.Invoke(spriteBatch, bossCard, centerPos + floatOffset, 0, Color.White, 2f, SpriteEffects.None);
+			var dummyPlacedCard = new PlacedCard(bossCard);
+			bossCard.DrawZoneNPC.Invoke(spriteBatch, dummyPlacedCard, centerPos + floatOffset, 0, Color.White, 2f, SpriteEffects.None);
 		}
 
         public override void Draw(SpriteBatch spriteBatch)

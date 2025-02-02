@@ -52,7 +52,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
             var gamePlayer = TCGPlayer.LocalGamePlayer;
 
             var effects = gamePlayer.Owns(zone) ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
-            card.Template.DrawZoneNPC(spriteBatch, card.Template, position, frame, color ?? Color.White, scale, effects);
+            card.Template.DrawZoneNPC(spriteBatch, card, position, frame, color ?? Color.White, scale, effects);
         }
 
         public static void DrawZoneCard(
