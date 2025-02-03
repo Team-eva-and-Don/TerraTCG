@@ -37,7 +37,8 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
         LIFESTEAL,
 		POISON,
 		MORBID,
-		ZEALOUS
+		ZEALOUS,
+		CURSED
 	}
 
     internal struct GameEventInfo

@@ -315,8 +315,8 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             {
                 bestTargetZone = GamePlayer.Field.Zones.Where(z => !z.IsEmpty() && !z.PlacedCard.IsExerted)
                     .Where(action.CanAcceptZone)
-                    .OrderByDescending(z => z.Role == ZoneRole.OFFENSE)
-                    .ThenByDescending(z => z.PlacedCard.GetAttackWithModifiers(z, null).Damage)
+                    .Where(z => z.Role == ZoneRole.OFFENSE)
+                    .OrderByDescending(z => z.PlacedCard.GetAttackWithModifiers(z, null).Damage)
                     .FirstOrDefault();
             } else
             {

@@ -82,6 +82,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
                 Height = {Pixels = 30f},
             };
             searchTextBox.OnTextChanged += SearchTextBox_OnTextChanged;
+			searchTextBox.OnRightClick += SearchTextBox_OnRightClick;
             Append(searchTextBox);
 
             for(int i = 0; i < FilterTypes.Count; i++)
@@ -100,7 +101,13 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             }
         }
 
-        private void SearchTextBox_OnTextChanged()
+		private void SearchTextBox_OnRightClick(UIMouseEvent evt, UIElement listeningElement)
+		{
+			// Clear out filter string on search text box right click
+			FilterString = "";
+		}
+
+		private void SearchTextBox_OnTextChanged()
         {
             FilterString = searchTextBox.currentString;
 			if(SearchAliases.TryGetValue(FilterString, out var text))

@@ -16,6 +16,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         // unusably expensive if an item has not been used this turn
         internal class SkillCostModifier : ICardModifier
         {
+			public ModifierType Category => ModifierType.CURSED;
             public void ModifySkill(ref Skill skill, Zone sourceZone, Zone destZone) 
             {
                 skill.Cost = 999;

@@ -120,6 +120,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 [ModifierType.POISON] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Poison_Icon"),
                 [ModifierType.MORBID] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Morbid_Icon"),
                 [ModifierType.LIFESTEAL] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Lifesteal_Icon"),
+                [ModifierType.CURSED] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/CursedIcon"),
             };
 
             FoilMasks = new Dictionary<CardSubtype, Asset<Texture2D>>

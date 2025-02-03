@@ -1582,6 +1582,7 @@ Cards: {
 		SPIKED: Spiked: Attackers take {0} damage
 		LIFESTEAL: Lifesteal: Regains {0} HP on attack
 		MORBID: Morbid: An effect triggers when this dies
+		CURSED: Cursed: Cannot use skills
 	}
 
 	ModifierNames: {
@@ -1594,6 +1595,7 @@ Cards: {
 		SPIKED: Spiked
 		LIFESTEAL: Lifesteal
 		MORBID: Morbid
+		CURSED: Cursed
 	}
 
 	Common: {
@@ -1687,7 +1689,7 @@ Cards: {
 		Ownership: "'s"
 		Skill: skill
 		Bounced: returned a card to the hand
-		AddedMana: added a Mana crystal
+		AddedMana: added a Mana Crystal
 		Drew: drew
 		Cards: cards
 		To: to
@@ -1725,7 +1727,7 @@ Cards: {
 			'''
 		Slide4:
 			'''
-			Mana crystals are consumed when performing most game actions, such as
+			Mana Crystals are consumed when performing most game actions, such as
 			attacking with a creature or playing an item. Players start with a single
 			crystal on turn 1, then gain an additional crystal per turn up to 8 on
 			turn 8. 

@@ -60,7 +60,8 @@ namespace TerraTCG.Common.UI.GameFieldUI
             var card = localPlayer.MouseoverCard;
             var texture = card.Texture;
             var attackOverride = localPlayer.MouseoverZone?.PlacedCard?.GetAttackWithModifiers(localPlayer.MouseoverZone, null);
-			FoilCardRenderer.DrawCard(spriteBatch, card, Position, Color.White * fadePoint, CARD_SCALE, 0);
+			var playerOwned = localPlayer.MouseoverZone == null || localPlayer.MouseoverZone.Owner == localPlayer.GamePlayer;
+			FoilCardRenderer.DrawCard(spriteBatch, card, Position, Color.White * fadePoint, CARD_SCALE, 0, playerOwned: playerOwned);
 
             if(attackOverride != null)
             {
