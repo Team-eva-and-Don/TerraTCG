@@ -26,13 +26,12 @@ namespace TerraTCG.Content.Items
 
         public override bool? UseItem(Player player)
         {
-            // TODO this seems to get called every frame, is that intended?
-            if(player.whoAmI == Main.myPlayer && player.itemAnimation == Item.useAnimation - 1)
-            {
-                TCGPlayer.LocalPlayer.DebugDeckbuildMode = false;
-                ModContent.GetInstance<UserInterfaces>().StartDeckbuild();
-            }
-            return default;
+			if (player.whoAmI == Main.myPlayer)
+			{
+				TCGPlayer.LocalPlayer.DebugDeckbuildMode = false;
+				ModContent.GetInstance<UserInterfaces>().StartDeckbuild();
+			}
+            return true;
         }
 
         public override void AddRecipes() => 
@@ -56,7 +55,7 @@ namespace TerraTCG.Content.Items
 
         public override bool? UseItem(Player player)
         {
-            if(player.whoAmI == Main.myPlayer && player.itemAnimation == Item.useAnimation - 1)
+            if(player.whoAmI == Main.myPlayer)
             {
                 TCGPlayer.LocalPlayer.DebugDeckbuildMode = true;
                 ModContent.GetInstance<UserInterfaces>().StartDeckbuild();

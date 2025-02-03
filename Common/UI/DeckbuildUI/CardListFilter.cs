@@ -105,6 +105,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
 		{
 			// Clear out filter string on search text box right click
 			FilterString = "";
+			searchTextBox.currentString = "";
 		}
 
 		private void SearchTextBox_OnTextChanged()

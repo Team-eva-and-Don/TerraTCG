@@ -118,14 +118,5 @@ namespace TerraTCG.Content.Items
 		{
 			return GetNearestDuelableBoss(player) != null;
 		}
-
-		public override bool? UseItem(Player player)
-        {
-            // TODO this seems to get called every frame, is that intended?
-            if(player.whoAmI == Main.myPlayer && player.itemAnimation == Item.useAnimation - 1)
-            {
-            }
-            return default;
-        }
 	}
 }
