@@ -1,4 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +33,8 @@ namespace TerraTCG.Common.GameSystem
         public string DeckName { get; set; }
 
 		public List<NPCDuelReward> Rewards { get; set; }
+
+        public Asset<Texture2D> Sleeve { get; }
 
         public void StartGame(GamePlayer player, CardGame game);
 
@@ -129,6 +133,9 @@ namespace TerraTCG.Common.GameSystem
 		// Used in case the NPC dies between the beginning and end of the
 		// fight in multiplayer
 		public NPCInfoCache NPCInfo { get; set; }
+
+		// Texture to use for the player's card backs
+		public Asset<Texture2D> Sleeve => TextureCache.Instance.CardSleeves[CardSleeve.FOREST];
 
 		public override void OnEnterWorld()
         {

@@ -67,7 +67,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
 				DrawBossBehindHand(spriteBatch, TCGPlayer.LocalPlayer.NPCInfo.NpcId);
 			}
 
-            var texture = TextureCache.Instance.CardBack;
+			var texture = TCGPlayer.LocalGamePlayer.Opponent.Controller.Sleeve;
             foreach (var card in gamePlayer.Hand.Cards)
             {
                 // texture = card.Texture;

@@ -13,6 +13,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 {
     internal class Field
     {
+		internal CardGame Game { get; set; }
         internal List<Zone> Zones { get; set; }
 
         internal List<ICardModifier> CardModifiers { get; private set; } = [];
@@ -73,7 +74,7 @@ namespace TerraTCG.Common.GameSystem.GameState
             for(int i = 0; i < (deckCount + 1) / 2; i++)
             {
                 deckPosition += rotation == 0 ? new Vector2(2, -2) : new Vector2(-2, -2);
-                texture = (i % 2 == 0 || i == (deckCount + 1) / 2 - 1) ? TextureCache.Instance.CardBack : TextureCache.Instance.ZoneHighlighted;
+                texture = (i % 2 == 0 || i == (deckCount + 1) / 2 - 1) ? player.Controller.Sleeve : TextureCache.Instance.ZoneHighlighted;
                 spriteBatch.Draw(texture.Value, deckPosition + origin, bounds, Color.White, rotation, origin, 1f, SpriteEffects.None, 0);
             }
         }

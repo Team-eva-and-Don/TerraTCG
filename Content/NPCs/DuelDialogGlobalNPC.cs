@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +11,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.BotPlayer;
+using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.UI;
 using TerraTCG.Content.Items;
@@ -16,6 +19,20 @@ using static TerraTCG.Content.NPCs.NPCDuelReward;
 
 namespace TerraTCG.Content.NPCs
 {
+	// TODO is this the correct location for this?
+	internal enum CardSleeve
+	{
+		FOREST,
+		CORRUPT,
+		CRIMSON,
+		DUNGEON,
+		EOC,
+		JUNGLE,
+		SLIME,
+		SNOW,
+		WOF
+	}
+
 	internal readonly struct NPCDuelReward(int itemId, int count)
 	{
 		public int ItemId { get; } = itemId;
@@ -36,15 +53,22 @@ namespace TerraTCG.Content.NPCs
 		public bool IsBoss { get; } = npc.boss || npc.netID == NPCID.EaterofWorldsHead;
 	}
 
-	internal readonly struct NamedNPCDeck(LocalizedText name, CardCollection deckList, List<NPCDuelReward> rewards, List<string> prerequisites, bool isTutorial)
+	internal readonly struct NamedNPCDeck(LocalizedText name, CardCollection deckList, List<NPCDuelReward> rewards, List<string> prerequisites, CardSleeve sleeve, bool isTutorial)
     {
 
-        public NamedNPCDeck(string nameKey, CardCollection deckList, List<NPCDuelReward> rewards = null, List<string> prerequisites = null, bool isTutorial = false) : 
+        public NamedNPCDeck(
+			string nameKey, 
+			CardCollection deckList, 
+			List<NPCDuelReward> rewards = null, 
+			List<string> prerequisites = null, 
+			CardSleeve sleeve = CardSleeve.FOREST, 
+			bool isTutorial = false) : 
             this(
 				Language.GetText($"Mods.TerraTCG.Cards.DeckNames.{nameKey}"), 
 				deckList, 
 				rewards, 
 				(prerequisites ?? []).Select(p=>$"TerraTCG/Mods.TerraTCG.Cards.DeckNames.{p}").ToList(), 
+				sleeve,
 				isTutorial)
         {
 
@@ -57,6 +81,8 @@ namespace TerraTCG.Content.NPCs
         public CardCollection DeckList { get; } = deckList;
 		public List<NPCDuelReward> Rewards { get; } = rewards;
 		public bool IsTutorial { get; } = isTutorial;
+
+		internal Asset<Texture2D> Sleeve => TextureCache.Instance.CardSleeves[sleeve];
 
 		internal bool IsUnlocked(TCGPlayer player) =>
 			prerequisites.Count == 0 || prerequisites.All(player.DefeatedDecks.Contains);
@@ -183,25 +209,25 @@ namespace TerraTCG.Content.NPCs
             ],
 			// Bosses
 			[NPCID.QueenBee] = [
-				new("QueenBee", BotDecks.GetQueenBeeDeck(), [GetReward<QueenBeePack>(2), GetReward<InvitationToDuel>(2)]),
+				new("QueenBee", BotDecks.GetQueenBeeDeck(), [GetReward<QueenBeePack>(2), GetReward<InvitationToDuel>(2)], sleeve: CardSleeve.JUNGLE),
 			],
 			[NPCID.KingSlime] = [
-				new("KingSlime", BotDecks.GetKingSlimeDeck(), [GetReward<KingSlimePack>(2), GetReward<InvitationToDuel>(2)]),
+				new("KingSlime", BotDecks.GetKingSlimeDeck(), [GetReward<KingSlimePack>(2), GetReward<InvitationToDuel>(2)], sleeve: CardSleeve.SLIME),
 			],
 			[NPCID.BrainofCthulhu] = [
-				new("BoC", BotDecks.GetBoCDeck(), [GetReward<BOCPack>(2), GetReward<InvitationToDuel>(2)]),
+				new("BoC", BotDecks.GetBoCDeck(), [GetReward<BOCPack>(2), GetReward<InvitationToDuel>(2)], sleeve: CardSleeve.CRIMSON),
 			],
 			[NPCID.EyeofCthulhu] = [
-				new("EoC", BotDecks.GetEoCDeck(), [GetReward<EOCPack>(2), GetReward<InvitationToDuel>(2)]),
+				new("EoC", BotDecks.GetEoCDeck(), [GetReward<EOCPack>(2), GetReward<InvitationToDuel>(2)], sleeve: CardSleeve.EOC),
 			],
 			[NPCID.EaterofWorldsHead] = [
-				new("EoW", BotDecks.GetEoWDeck(), [GetReward<EOWPack>(2), GetReward<InvitationToDuel>(2)]),
+				new("EoW", BotDecks.GetEoWDeck(), [GetReward<EOWPack>(2), GetReward<InvitationToDuel>(2)], sleeve: CardSleeve.CORRUPT),
 			],
 			[NPCID.SkeletronHead] = [
-				new("Skeletron", BotDecks.GetSkeletronDeck(), [GetReward<SkeletronPack>(3), GetReward<InvitationToDuel>(2)]),
+				new("Skeletron", BotDecks.GetSkeletronDeck(), [GetReward<SkeletronPack>(3), GetReward<InvitationToDuel>(2)], sleeve: CardSleeve.DUNGEON),
 			],
 			[NPCID.WallofFlesh] = [
-				new("WoF", BotDecks.GetWallOfFleshDeck(), [GetReward<WOFPack>(3), GetReward<InvitationToDuel>(2)]),
+				new("WoF", BotDecks.GetWallOfFleshDeck(), [GetReward<WOFPack>(3), GetReward<InvitationToDuel>(2)], sleeve: CardSleeve.WOF),
 			]
         };
     }

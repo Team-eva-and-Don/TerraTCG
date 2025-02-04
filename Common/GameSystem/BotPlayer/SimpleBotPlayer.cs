@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,7 +19,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
         public CardGame Game { get; private set; }
         public GamePlayer GamePlayer { get; set; }
         public CardCollection Deck { get; set; }
-
+		public Asset<Texture2D> Sleeve { get; set; }
 		public string DeckName { get; set; }
 		public List<NPCDuelReward> Rewards { get; set; }
 

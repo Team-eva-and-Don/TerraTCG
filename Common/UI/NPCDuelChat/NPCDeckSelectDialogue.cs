@@ -76,6 +76,7 @@ namespace TerraTCG.Common.UI.NPCDuelChat
                     Deck = lists[deckIdx].DeckList,
 					Rewards = lists[deckIdx].Rewards,
 					DeckName = lists[deckIdx].Key,
+					Sleeve = lists[deckIdx].Sleeve,
                 };
                 ModContent.GetInstance<GameModSystem>().StartGame(myPlayer, opponent);
 				myPlayer.NPCInfo = NPCInfo;

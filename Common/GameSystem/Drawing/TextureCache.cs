@@ -13,6 +13,7 @@ using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.GameSystem.GameState.Modifiers;
+using TerraTCG.Content.NPCs;
 
 namespace TerraTCG.Common.GameSystem.Drawing
 {
@@ -61,6 +62,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
         internal Dictionary<ModifierType, Asset<Texture2D>> ModifierIconTextures { get; private set; }
 		public Dictionary<CardSubtype, Asset<Texture2D>> FoilMasks { get; private set; }
 		public Dictionary<string, Asset<Texture2D>> CardFoilMasks { get; private set; }
+		public Dictionary<CardSleeve, Asset<Texture2D>> CardSleeves { get; private set; }
 		public Dictionary<CardSubtype, Asset<Texture2D>> BiomeMapBackgrounds { get; private set; }
 
 		public Dictionary<string, Asset<Texture2D>> OtherMapBackgrounds { get; private set; }
@@ -153,6 +155,19 @@ namespace TerraTCG.Common.GameSystem.Drawing
 				[ModContent.GetInstance<EaterOfSouls>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/CORRUPTION"),
 				[ModContent.GetInstance<Devourer>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/CORRUPTION"),
 				[ModContent.GetInstance<Leech>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/BLOOD_MOON"),
+			};
+
+			CardSleeves = new Dictionary<CardSleeve, Asset<Texture2D>>
+			{
+				[CardSleeve.FOREST] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Card_Back"),
+				[CardSleeve.CORRUPT] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Card_Back_Corrupt"),
+				[CardSleeve.CRIMSON] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Card_Back_Crimson"),
+				[CardSleeve.DUNGEON] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Card_Back_Dungeon"),
+				[CardSleeve.EOC] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Card_Back_EoC"),
+				[CardSleeve.JUNGLE] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Card_Back_Jungle"),
+				[CardSleeve.SLIME] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Card_Back_Slime"),
+				[CardSleeve.SNOW] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Card_Back_Snow"),
+				[CardSleeve.WOF] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Card_Back_WoF"),
 			};
 
             BiomeMapBackgrounds = new Dictionary<CardSubtype, Asset<Texture2D>>

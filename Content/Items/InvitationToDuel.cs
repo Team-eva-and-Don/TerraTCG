@@ -68,6 +68,7 @@ namespace TerraTCG.Content.Items
 				Deck = bossList.DeckList,
 				Rewards = bossList.Rewards,
 				DeckName = bossList.Key,
+				Sleeve = bossList.Sleeve,
 			};
 			StartGameAndRigBossHand(myPlayer, opponent);
 			myPlayer.NPCInfo = new(boss);
