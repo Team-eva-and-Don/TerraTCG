@@ -57,6 +57,7 @@ namespace TerraTCG.Common.GameSystem.GameState
         ITEM,
 		EVIL,
 		OWNED,
+		SNOW,
 	}
 
     // Bot helper function, apply additional

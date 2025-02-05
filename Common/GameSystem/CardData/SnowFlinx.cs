@@ -10,31 +10,32 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class DarkCaster : BaseCardTemplate, ICardTemplate
+    internal class SnowFlinx : BaseCardTemplate, ICardTemplate
     {
         internal class AttackCostModifier : ICardModifier
         {
             public void ModifyAttack(ref Attack attack, Zone sourceZone, Zone destZone) 
             {
-                attack.Cost += 2;
+                attack.Cost += 1;
             }
+
             public bool ShouldRemove(GameEventInfo eventInfo) => 
-                eventInfo.IsMyTurn && eventInfo.Event == GameEvent.END_TURN; 
+                eventInfo.Event == GameEvent.AFTER_ATTACK; 
         }
 
         public override Card CreateCard() => new ()
         {
-            Name = "DarkCaster",
+            Name = "SnowFlinx",
             MaxHealth = 6,
             MoveCost = 2,
-            NPCID = NPCID.DarkCaster,
+            NPCID = NPCID.SnowFlinx,
             CardType = CardType.CREATURE,
-            SubTypes = [CardSubtype.CAVERN, CardSubtype.CASTER],
+            SubTypes = [CardSubtype.SNOW, CardSubtype.SCOUT],
             Attacks = [
                 new() {
                     Name = "Hex",
-                    Damage = 2,
-                    Cost = 2,
+                    Damage = 1,
+                    Cost = 1,
                     TargetModifiers = t=>[new AttackCostModifier()],
                 }
             ]

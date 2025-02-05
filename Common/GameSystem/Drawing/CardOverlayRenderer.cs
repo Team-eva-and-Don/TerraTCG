@@ -168,5 +168,15 @@ namespace TerraTCG.Common.GameSystem.Drawing
             var origin = new Vector2(bounds.Width / 2, bounds.Height);
             spriteBatch.Draw(texture.Value, position, bounds, color ?? Color.White, 0, origin, scale, effects, 0);
 		}
+
+		internal void DrawDeerclopsNPC(SpriteBatch spriteBatch, PlacedCard card, Vector2 position, int frame, Color? color, float scale, SpriteEffects effects)
+		{
+            scale *= 0.75f;
+			frame %= 10;
+            var texture = TextureCache.Instance.GetNPCTexture(card.Template.NPCID);
+            var bounds = texture.Frame(5, 5, frame / 5, frame % 5);
+            var origin = new Vector2(bounds.Width / 2, bounds.Height);
+            spriteBatch.Draw(texture.Value, position, bounds, color ?? Color.White, 0, origin, scale, effects, 0);
+		}
 	}
 }

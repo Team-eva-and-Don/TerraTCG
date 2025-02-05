@@ -38,7 +38,8 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
 		POISON,
 		MORBID,
 		ZEALOUS,
-		CURSED
+		CURSED,
+		FREEZING
 	}
 
     internal struct GameEventInfo

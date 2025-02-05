@@ -123,6 +123,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 [ModifierType.MORBID] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Morbid_Icon"),
                 [ModifierType.LIFESTEAL] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Lifesteal_Icon"),
                 [ModifierType.CURSED] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/CursedIcon"),
+                [ModifierType.FREEZING] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Freezing_Icon"),
             };
 
             FoilMasks = new Dictionary<CardSubtype, Asset<Texture2D>>
@@ -134,6 +135,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 [CardSubtype.BLOOD_MOON] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/BLOOD_MOON"),
                 [CardSubtype.OCEAN] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/OCEAN"),
                 [CardSubtype.MUSHROOM] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/MUSHROOM"),
+                [CardSubtype.SNOW] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/SNOW"),
                 [CardSubtype.EVIL] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/CRIMSON"),
                 [CardSubtype.CONSUMABLE] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/ITEM"),
                 [CardSubtype.EQUIPMENT] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/ITEM"),
@@ -155,6 +157,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
 				[ModContent.GetInstance<EaterOfSouls>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/CORRUPTION"),
 				[ModContent.GetInstance<Devourer>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/CORRUPTION"),
 				[ModContent.GetInstance<Leech>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/BLOOD_MOON"),
+				[ModContent.GetInstance<Deerclops>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/Deerclops"),
 			};
 
 			CardSleeves = new Dictionary<CardSleeve, Asset<Texture2D>>
@@ -179,6 +182,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 [CardSubtype.BLOOD_MOON] = Main.Assets.Request<Texture2D>("Images/MapBG26"),
                 [CardSubtype.OCEAN] = Main.Assets.Request<Texture2D>("Images/MapBG11"),
                 [CardSubtype.MUSHROOM] = Main.Assets.Request<Texture2D>("Images/MapBG20"),
+                [CardSubtype.SNOW] = Main.Assets.Request<Texture2D>("Images/MapBG12"),
             };
 			OtherMapBackgrounds = new Dictionary<string, Asset<Texture2D>>
 			{

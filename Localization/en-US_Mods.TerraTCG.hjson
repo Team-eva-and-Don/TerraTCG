@@ -231,7 +231,7 @@ Cards: {
 			Description:
 				'''
 				Your Salamander & 
-				Crawdad take 1 less 
+				Crawdad take -1
 				dmg this turn.
 				'''
 		}
@@ -261,7 +261,7 @@ Cards: {
 			Description:
 				'''
 				Your Crawdad & Shelly 
-				attack for 1 less MP 
+				attack for -1 MP 
 				this turn.
 				'''
 		}
@@ -325,6 +325,55 @@ Cards: {
 				Costs 1 MP less for
 				each slime you 
 				control.
+				'''
+		}
+	}
+
+	FrozenZombie: {
+		Name: Frozen Zombie
+		Attack.Name: Icy Bite
+		Modifier.Description:
+			'''
+			Freezing: Enemies' next 
+			attack costs +1 MP
+			'''
+	}
+
+	IceBat: {
+		Name: "{$NPCName.IceBat}"
+		Attack.Name: Snow Swoop
+		Modifier.Description:
+			'''
+			Freezing: Enemies' next 
+			attack costs +1 MP.
+			Evasive.
+			'''
+	}
+
+	SnowFlinx: {
+		Name: "{$NPCName.SnowFlinx}"
+
+		Attack: {
+			Name: Deep Snow
+			Description:
+				'''
+				Target enemy's next
+				attack costs +1 MP.
+				'''
+		}
+	}
+
+	Penguin: {
+		Name: "{$NPCName.Penguin}"
+		Attack.Name: Waddle
+
+		Skill: {
+			Name: Skill: Snow Song
+			Description:
+				'''
+				Target ally gains 
+				Freezing (Enemies' 
+				attacks cost +1)
 				'''
 		}
 	}
@@ -492,8 +541,8 @@ Cards: {
 		Attack.Name: Cursed Steel
 		Modifier.Description:
 			'''
-			Sturdy: Takes 1 less
-			dmg from attacks.
+			Sturdy: Takes -1 dmg 
+			from attacks.
 			'''
 	}
 
@@ -1051,8 +1100,9 @@ Cards: {
 			Name: Equip
 			Description:
 				'''
-				Equipped creature takes
-				-1 dmg from attacks.
+				Equipped creature gains
+				Sturdy (it takes -1 dmg
+				from attacks).
 				'''
 		}
 	}
@@ -1088,8 +1138,9 @@ Cards: {
 			Description:
 				'''
 				Next turn, target ally
-				takes 2 less dmg from
-				attacks.
+				gets Sturdy 2 (it takes 
+				-2 dmg from attacks).
+
 				'''
 		}
 	}
@@ -1230,16 +1281,82 @@ Cards: {
 			Name: Lure
 			Description:
 				'''
-				Costs 1 less for each 
-				item used this game.
+				Costs -1 MP for each 
+				item you've used
+				this game.
 				'''
 		}
 
 		Modifier.Description:
 			'''
-			Sturdy: Takes 1 less
-			dmg from attacks.
+			Sturdy: Takes -1 dmg 
+			from attacks.
 			'''
+	}
+
+	IceMimic: {
+		Name: "{$NPCName.IceMimic}"
+
+		Attack: {
+			Name: Frozen Lure
+			Description:
+				'''
+				Cost reduced by target's 
+				attack cost.
+				'''
+		}
+
+		Modifier.Description:
+			'''
+			Freezing: Enemies' next 
+			attack costs +1 MP.
+			'''
+	}
+
+	IceElemental: {
+		Name: "{$NPCName.IceElemental}"
+		Modifier.Description:
+			'''
+			Freezing: Enemies' next 
+			attack costs +1 MP.
+			'''
+
+		Attack: {
+			Name: Ice Crystals
+			Description:
+				'''
+				Deals dmg equal to
+				target's attack cost.
+				'''
+		}
+	}
+
+	IceTortoise: {
+		Name: "{$NPCName.IceTortoise}"
+		Modifier.Description:
+			'''
+			Freezing. All allies gain
+			Freezing.
+			'''
+		Attack.Name: Slippery Shell
+	}
+
+	Deerclops: {
+		Name: "{$NPCName.Deerclops}"
+		Modifier.Description:
+			'''
+			Freezing. All allies gain
+			Freezing.
+			'''
+
+		Attack: {
+			Name: Icy Fingers
+			Description:
+				'''
+				Deals dmg equal to
+				target's attack cost.
+				'''
+		}
 	}
 
 	Skeletron: {
@@ -1561,7 +1678,7 @@ Cards: {
 		SLIME: Slime
 		JUNGLE: Jungle
 		EVIL: Evil
-		SKY: Sky
+		SNOW: Snow
 		BLOOD_MOON: Blood Moon
 		DESERT: Desert
 		OCEAN: Ocean
@@ -1583,6 +1700,7 @@ Cards: {
 		LIFESTEAL: Lifesteal: Regains {0} HP on attack
 		MORBID: Morbid: An effect triggers when this dies
 		CURSED: Cursed: Cannot use skills
+		FREEZING: Freezing: Enemy's next attack costs {0} more
 	}
 
 	ModifierNames: {
@@ -1596,6 +1714,7 @@ Cards: {
 		LIFESTEAL: Lifesteal
 		MORBID: Morbid
 		CURSED: Cursed
+		FREEZING: Freezing
 	}
 
 	Common: {

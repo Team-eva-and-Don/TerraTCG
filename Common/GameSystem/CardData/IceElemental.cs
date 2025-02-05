@@ -5,37 +5,43 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria.ID;
 using Terraria.ModLoader;
+using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class DarkCaster : BaseCardTemplate, ICardTemplate
+    internal class IceElemental : BaseCardTemplate, ICardTemplate
     {
         internal class AttackCostModifier : ICardModifier
         {
             public void ModifyAttack(ref Attack attack, Zone sourceZone, Zone destZone) 
             {
-                attack.Cost += 2;
+				// Set this card's attack to the attack cost of the creature it's attacking
+				var targetZoneAttackCost = destZone?.HasPlacedCard() ?? false ?
+					destZone.PlacedCard.GetAttackWithModifiers(destZone, null).Cost : 0;
+
+				attack.Damage = targetZoneAttackCost;
             }
-            public bool ShouldRemove(GameEventInfo eventInfo) => 
-                eventInfo.IsMyTurn && eventInfo.Event == GameEvent.END_TURN; 
         }
 
         public override Card CreateCard() => new ()
         {
-            Name = "DarkCaster",
+            Name = "IceElemental",
             MaxHealth = 6,
             MoveCost = 2,
-            NPCID = NPCID.DarkCaster,
+            NPCID = NPCID.IceElemental,
             CardType = CardType.CREATURE,
-            SubTypes = [CardSubtype.CAVERN, CardSubtype.CASTER],
+            SubTypes = [CardSubtype.SNOW, CardSubtype.CASTER],
+            DrawZoneNPC = CardOverlayRenderer.Instance.DrawMimicNPC,
+            Modifiers = () => [
+                new AttackCostModifier(),
+				new FreezingModifier(1),
+            ],
             Attacks = [
                 new() {
-                    Name = "Hex",
-                    Damage = 2,
-                    Cost = 2,
-                    TargetModifiers = t=>[new AttackCostModifier()],
+                    Damage = -1,
+                    Cost = 3,
                 }
             ]
         };

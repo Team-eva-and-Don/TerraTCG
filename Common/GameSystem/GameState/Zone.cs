@@ -66,7 +66,6 @@ namespace TerraTCG.Common.GameSystem.GameState
             PlacedCard.CurrentHealth -= dmgTaken;
             PlacedCard.AddModifiers(itemModifiers);
 
-			Owner.Field.CardModifiers.AddRange(PlacedCard.Template.FieldModifiers?.Invoke() ?? []);
             foreach (var modifier in PlacedCard.CardModifiers.Concat(Owner.Field.CardModifiers))
             {
                 modifier.ModifyCardEntrance(this);
