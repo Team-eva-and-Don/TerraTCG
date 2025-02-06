@@ -22,6 +22,7 @@ namespace TerraTCG
 			LockedShadowChest = 4,
 			RichMahogonyChest = 8,
 			IvyChest = 10,
+			FrozenChest = 11,
 			LivingWoodChest = 12,
 			SkywareChest = 13,
 			WaterChest = 17,
@@ -63,9 +64,10 @@ namespace TerraTCG
 		}
 
 		private readonly List<ChestLootInfo> LootTable = [
-			new(ChestFrame.WoodenChest, ItemType<ForestPack>(), 3, 1),
+			new(ChestFrame.WoodenChest, ItemType<ForestPack>(), 2, 1),
 			new(ChestFrame.GoldChest, ItemType<CavernPack>(), 3, 1),
 			new(ChestFrame.GoldChest, ItemType<MimicPack>(), 8, 1),
+			new(ChestFrame.FrozenChest, ItemType<SnowPack>(), 3, 1),
 			new(ChestFrame.MushroomChest, ItemType<MushroomPack>(), 3, 1),
 			new(ChestFrame.WaterChest, ItemType<OceanPack>(), 3, 1),
 			new(ChestFrame.LockedGoldChest, ItemType<DungeonPack>(), 2, 1),
