@@ -42,15 +42,25 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
         // Return whether we decided to do an action
         private bool DecideAttack()
         {
-            // While we have mana - choose the available attack with the highest damage and use it
-            // against the enemy in the front row with the lowest health
+			// While we have mana - choose the available attack with the highest damage and use it
+			// against the enemy in the front row with the lowest health
+			var oppZones = GamePlayer.Opponent.Field.Zones.Where(z=>z.HasPlacedCard());
             var bestAttackZone = GamePlayer.Field.Zones.Where(z => !z.IsEmpty())
-                .Where(z => z.PlacedCard.GetAttackWithModifiers(z, null).Cost <= GamePlayer.Resources.Mana)
+				// For attacks with variable mana costs against enemies, see if an attack would work against any zone
+                .Where(z => 
+					oppZones.Any(z2 => z.PlacedCard.GetAttackWithModifiers(z, z2).Cost <= GamePlayer.Resources.Mana))
                 .Where(z => !z.PlacedCard.IsExerted)
                 .Where(z => z.Role == ZoneRole.OFFENSE)
-                .OrderByDescending(z => z.PlacedCard.GetAttackWithModifiers(z, null).Damage)
+				// Prefer the attack that could do the most damage against any enemy
+                .OrderByDescending(z => 
+					oppZones.Max(z2 => z.PlacedCard.GetAttackWithModifiers(z, z2).Damage))
                 .ThenBy(z=>z.PlacedCard.GetSkillWithModifiers(z, null).Cost)
                 .FirstOrDefault();
+
+			if(bestAttackZone == null)
+			{
+				return false;
+			}
 
             var action = new MoveCardOrAttackAction(bestAttackZone, GamePlayer);
 
@@ -60,6 +70,10 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                 .OrderByDescending(z => z.PlacedCard.Template.Priority)
 				// Always attack bosses when present since they are worth more points
                 .ThenByDescending(z => z.PlacedCard.Template.SubTypes[0] == CardSubtype.BOSS)
+				// Then prioritize cards that are within lethal range
+				.ThenByDescending(z => bestAttackZone.PlacedCard.GetAttackWithModifiers(bestAttackZone, z).Damage >= z.PlacedCard.CurrentHealth)
+				// Then go for the card against which we'll deal the most damage
+				.ThenByDescending(z => bestAttackZone.PlacedCard.GetAttackWithModifiers(bestAttackZone, z).Damage)
 				// Then go for the card with the least health
                 .ThenBy(z => z.PlacedCard.CurrentHealth)
 				// If multiple cards meet those conditions, choose a random one

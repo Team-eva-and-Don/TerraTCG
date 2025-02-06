@@ -678,6 +678,60 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     GetCard<MotherSlime>(),
                 ]
             };
+		internal static CardCollection GetStarterSnowDeck() =>
+            new ()
+            {
+                Cards = [
+                    GetCard<IceBat>(), 
+                    GetCard<IceBat>(), 
+                    GetCard<FrozenShield>(), 
+                    GetCard<FrozenZombie>(),
+                    GetCard<Guide>(),
+                    GetCard<Guide>(),
+                    GetCard<Shackle>(),
+                    GetCard<Shackle>(),
+                    GetCard<IceElemental>(),
+                    GetCard<IceElemental>(),
+                    GetCard<Dryad>(),
+                    GetCard<Dryad>(),
+                    GetCard<HealingPotion>(), 
+                    GetCard<HealingPotion>(), 
+                    GetCard<FrozenZombie>(),
+                    GetCard<FrozenZombie>(),
+                    GetCard<Wizard>(), 
+                    GetCard<Wizard>(),
+                    GetCard<SnowFlinx>(), 
+                    GetCard<SnowFlinx>(),
+                ]
+            };
+
+		internal static CardCollection GetSnowDeck() =>
+            new ()
+            {
+                Cards = [
+                    GetCard<IceTortoise>(), 
+                    GetCard<IceTortoise>(), 
+                    GetCard<FrozenShield>(), 
+                    GetCard<FrozenZombie>(),
+                    GetCard<Guide>(),
+                    GetCard<Guide>(),
+                    GetCard<DarkCaster>(),
+                    GetCard<IceMimic>(),
+                    GetCard<IceElemental>(),
+                    GetCard<IceElemental>(),
+                    GetCard<Dryad>(),
+                    GetCard<Dryad>(),
+                    GetCard<HealingPotion>(), 
+                    GetCard<HealingPotion>(), 
+                    GetCard<FrozenZombie>(),
+                    GetCard<IceMimic>(),
+                    GetCard<Wizard>(), 
+                    GetCard<DarkCaster>(),
+                    GetCard<SnowFlinx>(), 
+                    GetCard<SnowFlinx>(),
+                ]
+            };
+
 		internal static CardCollection GetSlimeAdvancedDeck() =>
             new ()
             {
@@ -972,6 +1026,33 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     GetCard<PlatinumBroadsword>(), 
                     GetCard<PlatinumBroadsword>(),
                     GetCard<CopperShortsword>(),
+                ]
+            };
+
+		internal static CardCollection GetDeerclopsDeck() =>
+            new ()
+            {
+                Cards = [
+                    GetCard<Deerclops>(), 
+                    GetCard<FrozenShield>(), 
+                    GetCard<FrozenShield>(),
+                    GetCard<Guide>(),
+                    GetCard<Guide>(),
+                    GetCard<IceMimic>(),
+                    GetCard<IceMimic>(),
+                    GetCard<IceElemental>(),
+                    GetCard<IceElemental>(),
+                    GetCard<Dryad>(),
+                    GetCard<Dryad>(),
+                    GetCard<HealingPotion>(), 
+                    GetCard<HealingPotion>(), 
+                    GetCard<IceTortoise>(),
+                    GetCard<IceTortoise>(),
+                    GetCard<Wizard>(), 
+                    GetCard<Wizard>(),
+                    GetCard<SnowFlinx>(), 
+                    GetCard<SnowFlinx>(),
+                    GetCard<FrozenZombie>(),
                 ]
             };
 	}

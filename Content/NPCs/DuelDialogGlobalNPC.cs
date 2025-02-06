@@ -196,6 +196,14 @@ namespace TerraTCG.Content.NPCs
 					["GoblinsBeginner"]),
             ],
 
+            [NPCID.Mechanic] = [
+                new("SnowBeginner", BotDecks.GetStarterSnowDeck(), [GetReward<SnowPack>(1)]),
+                new("Snow", 
+					BotDecks.GetSnowDeck(), 
+					[GetReward<SnowPack>(2), GetReward<InvitationToDuel>(2)], 
+					["SnowBeginner"]),
+            ],
+
             [NPCID.Angler] = [
                 new("CrabsBeginner", BotDecks.GetStarterCrabDeck(), [GetReward<OceanPack>(1)]),
                 new("Crabs", 
@@ -228,6 +236,9 @@ namespace TerraTCG.Content.NPCs
 			],
 			[NPCID.WallofFlesh] = [
 				new("WoF", BotDecks.GetWallOfFleshDeck(), [GetReward<WOFPack>(3), GetReward<InvitationToDuel>(2)], sleeve: CardSleeve.WOF),
+			],
+			[NPCID.Deerclops] = [
+				new("Deerclops", BotDecks.GetDeerclopsDeck(), [GetReward<DeerclopsPack>(2), GetReward<InvitationToDuel>(2)], sleeve: CardSleeve.SNOW),
 			]
         };
     }

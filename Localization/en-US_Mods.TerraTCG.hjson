@@ -219,6 +219,16 @@ Items: {
 			deck with the TerraTCG Deckbox.
 			'''
 	}
+
+	DeerclopsPack: {
+		DisplayName: Deerclops Pack
+		Tooltip: ""
+	}
+
+	SnowPack: {
+		DisplayName: Snow Pack
+		Tooltip: ""
+	}
 }
 
 Cards: {
@@ -334,8 +344,8 @@ Cards: {
 		Attack.Name: Icy Bite
 		Modifier.Description:
 			'''
-			Freezing: Enemies' next 
-			attack costs +1 MP
+			Freezing: Enemy's next 
+			attack costs +1 MP.
 			'''
 	}
 
@@ -344,7 +354,7 @@ Cards: {
 		Attack.Name: Snow Swoop
 		Modifier.Description:
 			'''
-			Freezing: Enemies' next 
+			Freezing: Enemy's next 
 			attack costs +1 MP.
 			Evasive.
 			'''
@@ -372,8 +382,8 @@ Cards: {
 			Description:
 				'''
 				Target ally gains 
-				Freezing (Enemies' 
-				attacks cost +1)
+				Freezing (Enemy's
+				next attack costs +1)
 				'''
 		}
 	}
@@ -1107,6 +1117,21 @@ Cards: {
 		}
 	}
 
+	FrozenShield: {
+		Name: "{$ItemName.FrozenShield}"
+
+		Skill: {
+			Name: Equip
+			Description:
+				'''
+				Equipped creature gains
+				Freezing (enemies' next
+				attack against it cost 
+				+1 MP).
+				'''
+		}
+	}
+
 	SwiftnessPotion: {
 		Name: "{$ItemName.SwiftnessPotion}"
 
@@ -1308,7 +1333,7 @@ Cards: {
 
 		Modifier.Description:
 			'''
-			Freezing: Enemies' next 
+			Freezing: Enemy's next 
 			attack costs +1 MP.
 			'''
 	}
@@ -1317,7 +1342,7 @@ Cards: {
 		Name: "{$NPCName.IceElemental}"
 		Modifier.Description:
 			'''
-			Freezing: Enemies' next 
+			Freezing: Enemy's next 
 			attack costs +1 MP.
 			'''
 
@@ -1779,12 +1804,15 @@ Cards: {
 		EvilBeginner: Evil 1
 		Evil: Evil 2
 		EvilAdvanced: Evil 3
+		SnowBeginner: Snow 1
+		Snow: Snow 2
 		QueenBee: Queen Bee
 		KingSlime: King Slime
 		BoC: Brain of Cthulhu
 		EoC: Eye of Cthulhu
 		EoW: Eater of Worlds
 		Skeletron: Skeletron
+		Deerclops: Deerclops
 		WoF: Wall of Flesh
 	}
 

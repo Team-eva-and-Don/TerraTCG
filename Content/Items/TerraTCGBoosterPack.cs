@@ -124,8 +124,18 @@ namespace TerraTCG.Content.Items
 		internal override Pack Pack => PackDefinitions.WOFPack;
 	}
 
+	internal class DeerclopsPack: TerraTCGBoosterPack
+	{
+		internal override Pack Pack => PackDefinitions.DeerclopsPack;
+	}
+
 	internal class SlimePack: TerraTCGBoosterPack
 	{
 		internal override Pack Pack => PackDefinitions.SlimePack;
+	}
+
+	internal class SnowPack: TerraTCGBoosterPack
+	{
+		internal override Pack Pack => PackDefinitions.SnowPack;
 	}
 }

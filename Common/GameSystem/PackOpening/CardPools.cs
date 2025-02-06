@@ -188,6 +188,19 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 			]
 		};
 
+		public static CardCollection SnowCards => new()
+		{
+			Cards = [
+				GetCard<FrozenZombie>(), 
+				GetCard<IceBat>(), 
+				GetCard<FrozenShield>(), 
+				GetCard<IceElemental>(), 
+				GetCard<SnowFlinx>(), 
+				GetCard<IceMimic>(), 
+				GetCard<IceTortoise>(), 
+			]
+		};
+
 
 		public static CardCollection QueenBeePromoCards => new()
 		{
@@ -251,6 +264,14 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 				GetCard<Tim>(),
 				GetCard<LostGirl>(),
 				GetCard<AngelStatue>(),
+			]
+		};
+
+		public static CardCollection DeerclopsPromoCards => new()
+		{
+			Cards = [
+				GetCard<Deerclops>(),
+				GetCard<FrozenShield>(),
 			]
 		};
 
