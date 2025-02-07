@@ -17,7 +17,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         public override Card CreateCard() => new ()
         {
             Name = "Deerclops",
-            MaxHealth = 9,
+            MaxHealth = 11,
 			Points = 2,
             NPCID = NPCID.Deerclops,
             CardType = CardType.CREATURE,

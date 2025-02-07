@@ -1,3 +1,21 @@
 v{ModVersion} has been published to {tMLBuildPurpose} tML v{tMLVersion}.
 
-* Initial release
+Additions
+=========
+* Challenge the Deerclops and the Mechanic using Snow-themed decks!
+* Add Snow packs to Frozen Chests
+* Bosses now use card sleeves! (Players can't use card sleeves yet)
+
+Changes
+=======
+* Make Forest and Cavern packs more common in chests
+* Right-clicking now clears the deck build text filter
+* Add icon for Cursed Skull's debuff
+* EoC Boss now changes visually at half health
+* Standardize defense-boosting effects to use "Sturdy" keyword
+
+Bugfixes
+========
+
+* Fix issue where Eater of Worlds could move outside start duel range mid animation
+* Fix AI issue where Squirrel buffed its own damage

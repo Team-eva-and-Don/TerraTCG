@@ -1,5 +1,7 @@
 ﻿﻿[h2] TerraTCG: the Terraria Collectible Card Game! [/h2]
 
+[url=https://github.com/westphallm1/TerraTCG]Mod Source[/url]
+
 TerraTCG is a Collectible Card Game built inside of Terraria! Challenge your
 Town NPCs to intense games of 1v1 card-based combat, grow your collection
 with booster packs, and experiment with exciting new strategies! The initial
@@ -24,6 +26,7 @@ Beyond the guide, the following NPCs can all be challenged to a game:
 [*] the Traveling Merchant
 [*] the Clothier
 [*] the Dryad
+[*] the Mechanic
 [*] the Nerdy Slime
 [/list]
 
@@ -41,7 +44,8 @@ challenge the bosses themselves! Beating an NPC's second deck awards you with a
 "Duel Invitation", an item that can be used in the presence of a boss to start
 a life-or-death game of TerraTCG! Defeating a boss in a game of TerraTCG will 
 slay the boss and unlock its progress in the world, but losing that game will
-result in death!
+result in death! Currently, every Pre-Hardmode boss can be fought. 
+Stay tuned for Hardmode!
 
 [img] https://raw.githubusercontent.com/westphallm1/TerraTCG/refs/heads/main/Assets/Workshop/QueenBee_Promo.png [/img]
 

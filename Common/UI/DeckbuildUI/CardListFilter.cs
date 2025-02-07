@@ -38,6 +38,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             CardSubtype.BLOOD_MOON,
             CardSubtype.OCEAN,
             CardSubtype.MUSHROOM,
+            CardSubtype.SNOW,
             CardSubtype.EVIL,
             // Card types
             CardSubtype.EQUIPMENT,

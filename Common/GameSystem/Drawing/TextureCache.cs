@@ -135,8 +135,8 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 [CardSubtype.BLOOD_MOON] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/BLOOD_MOON"),
                 [CardSubtype.OCEAN] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/OCEAN"),
                 [CardSubtype.MUSHROOM] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/MUSHROOM"),
-                [CardSubtype.SNOW] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/SNOW"),
                 [CardSubtype.EVIL] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/CRIMSON"),
+                [CardSubtype.SNOW] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/SNOW"),
                 [CardSubtype.CONSUMABLE] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/ITEM"),
                 [CardSubtype.EQUIPMENT] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/ITEM"),
                 [CardSubtype.TOWNSFOLK] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/TOWNSFOLK"),
@@ -203,6 +203,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 [CardSubtype.OCEAN] = new Rectangle(360, 30, 30, 30),
                 [CardSubtype.MUSHROOM] = new Rectangle(240, 30, 30, 30),
                 [CardSubtype.EVIL] = new Rectangle(360, 0, 30, 30),
+                [CardSubtype.SNOW] = new Rectangle(150, 0, 30, 30),
             };
 
 			SpecialCardSubtypes = new Dictionary<CardSubtype, Asset<Texture2D>>

@@ -222,7 +222,7 @@ Items: {
 
 	DeerclopsPack: {
 		DisplayName: Deerclops Pack
-		Tooltip: 
+		Tooltip:
 			'''
 			A TerraTCG Promo pack! Contains
 			rare Deerclops cards! Build your
@@ -232,7 +232,7 @@ Items: {
 
 	SnowPack: {
 		DisplayName: Snow Pack
-		Tooltip: 
+		Tooltip:
 			'''
 			A TerraTCG booster pack! Contains
 			snow-themed cards. Build your
@@ -2015,7 +2015,7 @@ Cards: {
 			Defeat a boss in battle to earn rare promo cards! Do you have what it takes
 			to defeat every* boss in a game of TerraTCG?
 
-			*TerraTCG currently supports every Pre-Hardmode boss besides Deerclops.
+			*TerraTCG currently supports every Pre-Hardmode boss.
 			'''
 		Slide29:
 			'''

@@ -65,7 +65,7 @@ namespace TerraTCG
 
 		private readonly List<ChestLootInfo> LootTable = [
 			new(ChestFrame.WoodenChest, ItemType<ForestPack>(), 2, 1),
-			new(ChestFrame.GoldChest, ItemType<CavernPack>(), 3, 1),
+			new(ChestFrame.GoldChest, ItemType<CavernPack>(), 2, 1),
 			new(ChestFrame.GoldChest, ItemType<MimicPack>(), 8, 1),
 			new(ChestFrame.FrozenChest, ItemType<SnowPack>(), 3, 1),
 			new(ChestFrame.MushroomChest, ItemType<MushroomPack>(), 3, 1),
