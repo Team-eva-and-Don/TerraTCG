@@ -222,12 +222,22 @@ Items: {
 
 	DeerclopsPack: {
 		DisplayName: Deerclops Pack
-		Tooltip: ""
+		Tooltip: 
+			'''
+			A TerraTCG Promo pack! Contains
+			rare Deerclops cards! Build your
+			deck with the TerraTCG Deckbox.
+			'''
 	}
 
 	SnowPack: {
 		DisplayName: Snow Pack
-		Tooltip: ""
+		Tooltip: 
+			'''
+			A TerraTCG booster pack! Contains
+			snow-themed cards. Build your
+			deck with the TerraTCG Deckbox.
+			'''
 	}
 }
 
