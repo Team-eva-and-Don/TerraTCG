@@ -50,11 +50,13 @@ namespace TerraTCG.Content.Items
 
 		private static void StartDuelWithNearestBoss(Player player)
 		{
-			if(GetNearestDuelableBoss(player) is not NPC boss)
+			var boss = GetNearestDuelableBoss(player);
+			if(boss == null && TCGPlayer.LocalPlayer.NPCInfo.NpcId == 0)
 			{
 				return;
 			}
-			var bossLists = ModContent.GetInstance<NPCDeckMap>().NPCDecklists[boss.netID];
+			var npcId = boss?.netID ?? TCGPlayer.LocalPlayer.NPCInfo.NpcId; 
+			var bossLists = ModContent.GetInstance<NPCDeckMap>().NPCDecklists[npcId];
 			// Exit out of the duel dialogue if the player does not have a valid decklist
 			if(!TCGPlayer.LocalPlayer.Deck.ValidateDeck())
 			{
@@ -70,8 +72,11 @@ namespace TerraTCG.Content.Items
 				DeckName = bossList.Key,
 				Sleeve = bossList.Sleeve,
 			};
+			if(boss != null)
+			{
+				myPlayer.NPCInfo = new(boss);
+			}
 			StartGameAndRigBossHand(myPlayer, opponent);
-			myPlayer.NPCInfo = new(boss);
 		}
 
 		private static NPC GetNearestDuelableBoss(Player player) => Main.npc
@@ -117,7 +122,12 @@ namespace TerraTCG.Content.Items
 
 		public override bool CanUseItem(Player player)
 		{
-			return GetNearestDuelableBoss(player) != null;
+			if (player.whoAmI == Main.myPlayer && GetNearestDuelableBoss(player) is NPC boss)
+			{
+				TCGPlayer.LocalPlayer.NPCInfo = new(boss);
+				return true;
+			}
+			return false;
 		}
 	}
 }
