@@ -1056,6 +1056,33 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                 ]
             };
 
+		internal static CardCollection GetHallowedDeck() =>
+            new ()
+            {
+                Cards = [
+                    GetCard<IlluminantBat>(), 
+                    GetCard<IlluminantBat>(), 
+                    GetCard<RagePotion>(),
+                    GetCard<RagePotion>(),
+                    GetCard<Guide>(),
+                    GetCard<Guide>(),
+                    GetCard<EnchantedSword>(),
+                    GetCard<EnchantedSword>(),
+                    GetCard<FeralClaws>(),
+                    GetCard<FeralClaws>(),
+                    GetCard<Dryad>(),
+                    GetCard<Dryad>(),
+                    GetCard<HealingPotion>(), 
+                    GetCard<HealingPotion>(), 
+                    GetCard<Pixie>(),
+                    GetCard<Pixie>(),
+                    GetCard<Gastropod>(), 
+                    GetCard<Gastropod>(),
+                    GetCard<Unicorn>(), 
+                    GetCard<Unicorn>(),
+                ]
+            };
+
 		internal static CardCollection GetQueenSlimeDeck() =>
             new ()
             {

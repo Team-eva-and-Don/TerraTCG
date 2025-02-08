@@ -211,6 +211,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 [CardSubtype.MUSHROOM] = new Rectangle(240, 30, 30, 30),
                 [CardSubtype.EVIL] = new Rectangle(360, 0, 30, 30),
                 [CardSubtype.SNOW] = new Rectangle(150, 0, 30, 30),
+                [CardSubtype.HALLOWED] = new Rectangle(30, 30, 30, 30),
             };
 
 			SpecialCardSubtypes = new Dictionary<CardSubtype, Asset<Texture2D>>

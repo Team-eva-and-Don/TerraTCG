@@ -216,6 +216,10 @@ namespace TerraTCG.Content.NPCs
 					[GetReward<OceanPack>(3), GetReward<InvitationToDuel>(2)], 
 					["Crabs", "WoF"]),
             ],
+
+            [NPCID.PartyGirl] = [
+                new("Hallowed", BotDecks.GetHallowedDeck(), [GetReward<HallowedPack>(2)], ["WoF"]),
+            ],
 			// Bosses
 			[NPCID.QueenBee] = [
 				new("QueenBee", BotDecks.GetQueenBeeDeck(), [GetReward<QueenBeePack>(2), GetReward<InvitationToDuel>(2)], sleeve: CardSleeve.JUNGLE),
@@ -242,7 +246,7 @@ namespace TerraTCG.Content.NPCs
 				new("Deerclops", BotDecks.GetDeerclopsDeck(), [GetReward<DeerclopsPack>(2), GetReward<InvitationToDuel>(2)], sleeve: CardSleeve.SNOW),
 			],
 			[NPCID.QueenSlimeBoss] = [
-				new("QueenSlime", BotDecks.GetQueenSlimeDeck(), [GetReward<ForestPack>(2), GetReward<InvitationToDuel>(2)], sleeve: CardSleeve.HALLOWED),
+				new("QueenSlime", BotDecks.GetQueenSlimeDeck(), [GetReward<QueenSlimePack>(2), GetReward<InvitationToDuel>(2)], sleeve: CardSleeve.HALLOWED),
 			]
         };
     }
@@ -250,7 +254,8 @@ namespace TerraTCG.Content.NPCs
     {
         public override void GetChat(NPC npc, ref string chat)
         {
-            if (ModContent.GetInstance<NPCDeckMap>().NPCDecklists.ContainsKey(npc.netID))
+            if (ModContent.GetInstance<NPCDeckMap>().NPCDecklists.TryGetValue(npc.netID, out var lists) &&
+				lists.Any(l=>l.IsUnlocked(TCGPlayer.LocalPlayer)))
             {
                 ModContent.GetInstance<UserInterfaces>().StartNPCChat();
             }

@@ -239,6 +239,16 @@ Items: {
 			deck with the TerraTCG Deckbox.
 			'''
 	}
+
+	HallowedPack: {
+		DisplayName: Hallowed Pack
+		Tooltip: ""
+	}
+
+	QueenSlimePack: {
+		DisplayName: Queen Slime Pack
+		Tooltip: ""
+	}
 }
 
 Cards: {
@@ -1915,12 +1925,14 @@ Cards: {
 		Snow: Snow 2
 		QueenBee: Queen Bee
 		KingSlime: King Slime
+		QueenSlime: QueenSlime
 		BoC: Brain of Cthulhu
 		EoC: Eye of Cthulhu
 		EoW: Eater of Worlds
 		Skeletron: Skeletron
 		Deerclops: Deerclops
 		WoF: Wall of Flesh
+		Hallowed: Hallowed
 	}
 
 	ActionText: {

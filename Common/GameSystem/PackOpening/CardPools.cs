@@ -201,6 +201,18 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 			]
 		};
 
+		public static CardCollection HallowedCards => new()
+		{
+			Cards = [
+				GetCard<IlluminantBat>(), 
+				GetCard<Pixie>(), 
+				GetCard<Gastropod>(), 
+				GetCard<ChaosElemental>(), 
+				GetCard<Unicorn>(), 
+				GetCard<EnchantedSword>(), 
+			]
+		};
+
 
 		public static CardCollection QueenBeePromoCards => new()
 		{
@@ -272,6 +284,14 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 			Cards = [
 				GetCard<Deerclops>(),
 				GetCard<FrozenShield>(),
+			]
+		};
+
+		public static CardCollection QueenSlimePromoCards => new()
+		{
+			Cards = [
+				GetCard<QueenSlime>(),
+				GetCard<RodOfDiscord>(),
 			]
 		};
 

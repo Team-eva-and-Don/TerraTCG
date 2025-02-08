@@ -40,6 +40,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
             CardSubtype.MUSHROOM,
             CardSubtype.SNOW,
             CardSubtype.EVIL,
+            CardSubtype.HALLOWED,
             // Card types
             CardSubtype.EQUIPMENT,
             CardSubtype.CONSUMABLE,
@@ -94,7 +95,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
                     CardSubtype = filterType,
                 };
                 btn.Top.Percent = 0.5f;
-                btn.Left.Percent = 0.21f + 0.8f * (i / (float)(FilterTypes.Count + 1));
+                btn.Left.Percent = 0.21f + 0.85f * (i / (float)(FilterTypes.Count + 1));
                 btn.OnLeftClick += (evt, elem) => ToggleVisibility(evt, elem, filterType);
 
                 Append(btn);

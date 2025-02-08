@@ -1,7 +1,7 @@
 TerraTCG is a Terraria-themed Collectible Card Game! Challenge your
 Town NPCs to intense games of 1v1 card-based combat, grow your collection
 with booster packs, and experiment with exciting new strategies! The initial 
-set of TerraTCG contains 100 cards, with over 25 NPC decks to duel against!
+set of TerraTCG contains over 100 cards, with over 25 NPC decks to duel against!
 To start your TerraTCG journey, craft a deck box with 5 wood at a Workbench,
 then talk to the Guide for a tutorial!
 
@@ -23,6 +23,10 @@ following NPCs:
 - the Clothier
 - the Mechanic
 - the Nerdy Slime
+
+After defeating the Wall of Flesh in card-based combat (see below), the following NPCs
+may also be challenged:
+- the Party Girl
 
 Beating an NPC's initial deck will unlock a more challenging deck for that opponent!
 

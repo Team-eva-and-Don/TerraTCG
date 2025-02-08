@@ -138,4 +138,14 @@ namespace TerraTCG.Content.Items
 	{
 		internal override Pack Pack => PackDefinitions.SnowPack;
 	}
+
+	internal class HallowedPack: TerraTCGBoosterPack
+	{
+		internal override Pack Pack => PackDefinitions.HallowedPack;
+	}
+
+	internal class QueenSlimePack: TerraTCGBoosterPack
+	{
+		internal override Pack Pack => PackDefinitions.QueenSlimePack;
+	}
 }

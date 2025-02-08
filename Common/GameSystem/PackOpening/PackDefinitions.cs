@@ -81,6 +81,7 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 		public static Pack SlimePack => new(3, SlimeCards, CommonCards);
 
 		public static Pack SnowPack => new(3, SnowCards, CommonCards);
+		public static Pack HallowedPack => new(3, HallowedCards, CommonCards);
 		public static Pack QueenBeePack => new(3, QueenBeePromoCards, JungleCards);
 		public static Pack BOCPack => new(3, BOCPromoCards, EvilCards);
 		public static Pack EOCPack => new(3, EOCPromoCards, ForestCards);
@@ -90,6 +91,7 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 		public static Pack KingSlimePack => new(3, KingSlimePromoCards, SlimeCards);
 		public static Pack MimicPack => new(3, MimicPromoCards, CavernCards);
 		public static Pack DeerclopsPack => new(3, DeerclopsPromoCards, SnowCards);
+		public static Pack QueenSlimePack => new(3, QueenSlimePromoCards, HallowedCards);
 
 	}
 }
