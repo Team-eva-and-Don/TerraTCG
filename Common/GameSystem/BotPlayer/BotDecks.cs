@@ -1055,5 +1055,32 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     GetCard<FrozenZombie>(),
                 ]
             };
+
+		internal static CardCollection GetQueenSlimeDeck() =>
+            new ()
+            {
+                Cards = [
+                    GetCard<QueenSlime>(), 
+                    GetCard<QueenSlime>(), 
+                    GetCard<RagePotion>(),
+                    GetCard<RagePotion>(),
+                    GetCard<Guide>(),
+                    GetCard<Guide>(),
+                    GetCard<EnchantedSword>(),
+                    GetCard<EnchantedSword>(),
+                    GetCard<FeralClaws>(),
+                    GetCard<FeralClaws>(),
+                    GetCard<Dryad>(),
+                    GetCard<Dryad>(),
+                    GetCard<HealingPotion>(), 
+                    GetCard<HealingPotion>(), 
+                    GetCard<Pixie>(),
+                    GetCard<Pixie>(),
+                    GetCard<Gastropod>(), 
+                    GetCard<Gastropod>(),
+                    GetCard<Unicorn>(), 
+                    GetCard<Unicorn>(),
+                ]
+            };
 	}
 }

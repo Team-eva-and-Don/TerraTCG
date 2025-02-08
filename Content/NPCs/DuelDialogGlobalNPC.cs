@@ -30,7 +30,8 @@ namespace TerraTCG.Content.NPCs
 		JUNGLE,
 		SLIME,
 		SNOW,
-		WOF
+		WOF,
+		HALLOWED
 	}
 
 	internal readonly struct NPCDuelReward(int itemId, int count)
@@ -239,6 +240,9 @@ namespace TerraTCG.Content.NPCs
 			],
 			[NPCID.Deerclops] = [
 				new("Deerclops", BotDecks.GetDeerclopsDeck(), [GetReward<DeerclopsPack>(2), GetReward<InvitationToDuel>(2)], sleeve: CardSleeve.SNOW),
+			],
+			[NPCID.QueenSlimeBoss] = [
+				new("QueenSlime", BotDecks.GetQueenSlimeDeck(), [GetReward<ForestPack>(2), GetReward<InvitationToDuel>(2)], sleeve: CardSleeve.HALLOWED),
 			]
         };
     }

@@ -175,6 +175,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
 				[CardSleeve.JUNGLE] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Card_Back_Jungle"),
 				[CardSleeve.SLIME] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Card_Back_Slime"),
 				[CardSleeve.SNOW] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Card_Back_Snow"),
+				[CardSleeve.HALLOWED] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Card_Back_Hallow"),
 				[CardSleeve.WOF] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Card_Back_WoF"),
 			};
 
@@ -188,6 +189,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 [CardSubtype.OCEAN] = Main.Assets.Request<Texture2D>("Images/MapBG11"),
                 [CardSubtype.MUSHROOM] = Main.Assets.Request<Texture2D>("Images/MapBG20"),
                 [CardSubtype.SNOW] = Main.Assets.Request<Texture2D>("Images/MapBG12"),
+                [CardSubtype.HALLOWED] = Main.Assets.Request<Texture2D>("Images/MapBG8"),
             };
 			OtherMapBackgrounds = new Dictionary<string, Asset<Texture2D>>
 			{

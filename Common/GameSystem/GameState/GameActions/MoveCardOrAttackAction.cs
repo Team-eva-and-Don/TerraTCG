@@ -107,7 +107,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public bool CanAcceptActionButton()
         {
-            if(startZone.PlacedCard?.GetSkillWithModifiers(startZone, null) is Skill skill)
+            if(startZone.PlacedCard?.GetSkillWithModifiers(startZone, null) is Skill skill && skill.SkillType != ActionType.DEFAULT)
             {
                 return startZone.HasPlacedCard() &&  actionType == ActionType.DEFAULT && 
                     skill.Cost <= player.Resources.Mana &&
