@@ -1460,6 +1460,21 @@ Cards: {
 		Attack.Name: Slime Sparkle
 	}
 
+	ChaosElemental: {
+		Name: "{$NPCName.ChaosElemental}"
+
+		Skill: {
+			Name: Warp
+			Description:
+				'''
+				Swap this card's position
+				with target ally.
+				'''
+		}
+
+		Attack.Name: Disorient
+	}
+
 	Skeletron: {
 		Name: "{$NPCName.SkeletronHead}"
 		Attack.Name: Skull Spin

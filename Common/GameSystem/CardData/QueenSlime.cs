@@ -25,7 +25,7 @@ namespace TerraTCG.Common.GameSystem.CardData
 				{
 					return true;
 				}
-				if(eventInfo.Event == GameEvent.AFTER_ATTACK && eventInfo.Zone?.PlacedCard is PlacedCard card && card.IsExerted)
+				if(AppliesToZone(eventInfo.Zone) && eventInfo.Event == GameEvent.AFTER_ATTACK && eventInfo.Zone?.PlacedCard is PlacedCard card && card.IsExerted)
 				{
 					card.IsExerted = false;
 					eventInfo.Zone.QueueAnimation(new BecomeActiveAnimation(card));
