@@ -125,9 +125,7 @@ namespace TerraTCG.Common.GameSystem.CardData
 
 
 			// FieldModifier, remove on turn start
-			public bool ShouldRemove(GameEventInfo eventInfo) => 
-				eventInfo.Event == GameEvent.START_TURN || 
-				(eventInfo.Event == GameEvent.CREATURE_DIED && eventInfo.Zone.PlacedCard?.Template.Name == "SkeletronHandR");
+			public bool ShouldRemove(GameEventInfo eventInfo) => FieldModifierHelper.ShouldRemove(eventInfo, "SkeletronHandR");
 		}
 
         public override Card CreateCard() => new ()

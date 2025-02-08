@@ -32,9 +32,7 @@ namespace TerraTCG.Common.GameSystem.CardData
 			}
 
 			// Field modifier, refresh at start of turn
-			public bool ShouldRemove(GameEventInfo eventInfo) => 
-				eventInfo.Event == GameEvent.START_TURN || 
-				(eventInfo.Event == GameEvent.CREATURE_DIED && eventInfo.Zone.PlacedCard?.Template.Name == "ServantOfCthulhu");
+			public bool ShouldRemove(GameEventInfo eventInfo) => FieldModifierHelper.ShouldRemove(eventInfo, "ServantOfCthulhu");
 		}
 
         public override Card CreateCard() => new ()

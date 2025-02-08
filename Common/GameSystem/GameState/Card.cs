@@ -58,6 +58,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 		EVIL,
 		OWNED,
 		SNOW,
+		HALLOWED,
 	}
 
     // Bot helper function, apply additional

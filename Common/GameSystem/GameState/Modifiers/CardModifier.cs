@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
+using Steamworks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -111,6 +112,17 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
 		{
 			// no-op
 			return true;
+		}
+	}
+
+	// TODO do we want to just make this a parent class?
+	internal static class FieldModifierHelper
+	{
+
+		public static bool ShouldRemove(GameEventInfo eventInfo, string cardName)
+		{
+			return eventInfo.Event == GameEvent.START_TURN || 
+				(eventInfo.Event == GameEvent.CREATURE_DIED && eventInfo.Zone.PlacedCard?.Template.Name == cardName);
 		}
 	}
 }

@@ -1394,6 +1394,61 @@ Cards: {
 		}
 	}
 
+	EnchantedSword: {
+		Name: "{$NPCName.EnchantedSword}"
+		Modifier.Description:
+			'''
+			Hallowed Helper: Your
+			central creature deals
+			+1 dmg
+			'''
+		Attack.Name: Holy Smite
+	}
+
+	Gastropod: {
+		Name: "{$NPCName.Gastropod}"
+		Modifier.Description:
+			'''
+			Hallowed Helper: Your
+			central creature's
+			attack costs -1 MP
+			'''
+		Attack.Name: Snail Laser
+	}
+
+	Unicorn: {
+		Name: "{$NPCName.Unicorn}"
+		Modifier.Description:
+			'''
+			Hallowed Helper: Your
+			central creatures
+			enter Unpaused
+			'''
+		Attack.Name: Glitter Gallop
+	}
+
+	Pixie: {
+		Name: "{$NPCName.Pixie}"
+		Modifier.Description:
+			'''
+			Hallowed Helper: Your
+			central creature heals
+			1 HP/turn.
+			'''
+		Attack.Name: Sparkle Slap
+	}
+
+	IlluminantBat: {
+		Name: "{$NPCName.IlluminantBat}"
+		Modifier.Description:
+			'''
+			Hallowed Helper: Your
+			central creature gains
+			Evasive.
+			'''
+		Attack.Name: Shimmering Swoop
+	}
+
 	Skeletron: {
 		Name: "{$NPCName.SkeletronHead}"
 		Attack.Name: Skull Spin
@@ -1719,6 +1774,7 @@ Cards: {
 		OCEAN: Ocean
 		GOBLIN_ARMY: Goblin Army
 		MUSHROOM: Mushroom
+		HALLOWED: Hallowed
 		EXPERT: Expert
 		BOSS: Boss
 		OWNED: Only Owned
