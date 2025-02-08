@@ -206,7 +206,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
 				}
 				foreach (var keyword in KeywordModifiers)
 				{
-					foreach (Match match in Regex.Matches(line, $"{keyword}[a-z,.:]*"))
+					foreach (Match match in Regex.Matches(line, $"{keyword}( [0-9])?[a-z,.:]*"))
 					{
 						var xOffset = font.MeasureString(line[..match.Index]).X * SmallTextScale * scale;
 						DrawStringWithBorder(

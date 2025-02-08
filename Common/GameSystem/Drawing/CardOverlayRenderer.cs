@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.Graphics.Shaders;
 using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.GameState;
@@ -76,7 +77,42 @@ namespace TerraTCG.Common.GameSystem.Drawing
             spriteBatch.Draw(texture.Value, position - Vector2.UnitY * npcBounds.Height * 0.75f * scale, bounds, color ?? Color.White, 0, origin, scale, effects, 0);
         }
 
-        public void DrawGoblinArcherNPC(
+        public void DrawQueenSlimeNPC(
+            SpriteBatch spriteBatch, PlacedCard card, Vector2 position, int frame, Color? color, float scale, SpriteEffects effects)
+        {
+			// Significantly more complicated than King Slime
+			scale *= 0.75f;
+            var texture = TextureCache.Instance.GetNPCTexture(card.Template.NPCID);
+            var npcBounds = texture.Frame(2, 16, 0, frame % 5);
+
+			// Draw the interior crystal
+			var crystalTexture = TextureCache.Instance.QueenSlimeCore;
+			var crystalBounds = crystalTexture.Value.Bounds;
+			var origin = new Vector2(crystalBounds.Width / 2, crystalBounds.Height);
+			spriteBatch.Draw(crystalTexture.Value, position - Vector2.UnitY * npcBounds.Height * 0.25f * scale, crystalBounds, color ?? Color.White, 0, origin, scale, effects, 0);
+
+
+			// Draw the body using the vanilla shader
+			spriteBatch.End();
+			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.Default, RasterizerState.CullNone, null, Main.Transform);
+
+            origin = new Vector2(npcBounds.Width / 2, npcBounds.Height);
+
+			GameShaders.Misc["QueenSlime"].Apply();
+            spriteBatch.Draw(texture.Value, position, npcBounds, color ?? Color.White, 0, origin, scale, effects, 0);
+
+			spriteBatch.End();
+            spriteBatch.Begin(
+                SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise);
+
+			// Draw the crown
+			var crownTexture = TextureCache.Instance.QueenSlimeCrown;
+			var crownBounds = crownTexture.Value.Bounds;
+			origin = new Vector2(crownBounds.Width / 2, crownBounds.Height);
+			spriteBatch.Draw(crownTexture.Value, position - Vector2.UnitY * npcBounds.Height * 0.75f * scale, crownBounds, color ?? Color.White, 0, origin, scale, effects, 0);
+		}
+
+		public void DrawGoblinArcherNPC(
             SpriteBatch spriteBatch, PlacedCard card, Vector2 position, int frame, Color? color, float scale, SpriteEffects effects)
         {
 			frame = (frame % 12) + 5;

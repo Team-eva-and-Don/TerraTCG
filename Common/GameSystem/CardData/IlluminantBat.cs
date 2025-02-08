@@ -37,11 +37,11 @@ namespace TerraTCG.Common.GameSystem.CardData
             SubTypes = [CardSubtype.HALLOWED, CardSubtype.SCOUT],
             Attacks = [
                 new() {
-                    Damage = 3,
+                    Damage = 2,
                     Cost = 2,
                 }
             ],
-			Modifiers = () => [new IlluminantBatHallowedModifier()],
+			FieldModifiers = () => [new IlluminantBatHallowedModifier()],
         };
     }
 }

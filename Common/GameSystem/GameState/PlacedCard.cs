@@ -15,6 +15,8 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal List<ICardModifier> CardModifiers { get; set; } = [];
 
+		internal Skill? Skill { get; set; } = template.Skills?.FirstOrDefault();
+
         internal TimeSpan PlaceTime { get; set; }
         internal bool IsExerted { get; set; } = false;
 
@@ -64,14 +66,14 @@ namespace TerraTCG.Common.GameSystem.GameState
             }
             return attack;
         }
+
         public Skill GetSkillWithModifiers(Zone startZone, Zone endZone)
         {
-            if(Template.Skills == null || Template.Skills.Count == 0)
+            if(Skill is not Skill skill)
             {
                 return default;
             }
 
-            var skill = Template.Skills[0].Copy();
             foreach (var modifier in CardModifiers.Concat(startZone.Owner.Field.CardModifiers))
             {
                 modifier.ModifySkill(ref skill, startZone, endZone);

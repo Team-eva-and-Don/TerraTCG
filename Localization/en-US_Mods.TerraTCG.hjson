@@ -1446,7 +1446,18 @@ Cards: {
 			central creature gains
 			Evasive.
 			'''
-		Attack.Name: Shimmering Swoop
+		Attack.Name: Shining Swoop
+	}
+
+	QueenSlime: {
+		Name: "{$NPCName.QueenSlimeBoss}"
+		Modifier.Description:
+			'''
+			Hallowed Monarch: Your
+			central creature gains
+			Relentless.
+			'''
+		Attack.Name: Slime Sparkle
 	}
 
 	Skeletron: {

@@ -5,29 +5,35 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria.ID;
 using Terraria.ModLoader;
+using TerraTCG.Common.GameSystem.Drawing;
+using TerraTCG.Common.GameSystem.Drawing.Animations;
 using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class Unicorn : BaseCardTemplate, ICardTemplate
+    internal class QueenSlime : BaseCardTemplate, ICardTemplate
     {
-		private class UnicornHallowedModifier : ICardModifier
+		private class QueenSlimeHallowedModifier : ICardModifier
 		{
 			public bool AppliesToZone(Zone zone) => zone.Index % 3 == 1;
 
-			public void ModifyCardEntrance(Zone sourceZone) 
-			{
-				// Having cards enter unpaused on turn 1 screws up a 
-				// bunch of enemy decision-making.
-				if(AppliesToZone(sourceZone) && sourceZone.Owner.Game.CurrentTurn.TurnCount > 1)
+			public ModifierType Category => ModifierType.RELENTLESS;
+
+			public bool ShouldRemove(GameEventInfo eventInfo) {
+				if(FieldModifierHelper.ShouldRemove(eventInfo, "QueenSlime"))
 				{
-					sourceZone.PlacedCard.IsExerted = false;
+					return true;
 				}
+				if(eventInfo.Event == GameEvent.AFTER_ATTACK && eventInfo.Zone?.PlacedCard is PlacedCard card && card.IsExerted)
+				{
+					card.IsExerted = false;
+					eventInfo.Zone.QueueAnimation(new BecomeActiveAnimation(card));
+					return true;
+				}
+				return false;
 			}
 
-			// Field modifier, refresh at start of turn
-			public bool ShouldRemove(GameEventInfo eventInfo) => FieldModifierHelper.ShouldRemove(eventInfo, "Unicorn");
 		}
 
 		private class UnicornOnEnterModifier : ICardModifier
@@ -49,19 +55,22 @@ namespace TerraTCG.Common.GameSystem.CardData
 
         public override Card CreateCard() => new ()
         {
-            Name = "Unicorn",
-            MaxHealth = 7,
+            Name = "QueenSlime",
+            MaxHealth = 9,
             CardType = CardType.CREATURE,
-            NPCID = NPCID.Unicorn,
-            SubTypes = [CardSubtype.HALLOWED, CardSubtype.FIGHTER],
+			Points = 2,
+            NPCID = NPCID.QueenSlimeBoss,
+			DrawZoneNPC = CardOverlayRenderer.Instance.DrawQueenSlimeNPC,
+            SubTypes = [CardSubtype.BOSS, CardSubtype.HALLOWED, CardSubtype.FIGHTER],
             Attacks = [
                 new() {
-                    Damage = 2,
+                    Damage = 3,
                     Cost = 2,
                 }
             ],
-			Modifiers = () => [new UnicornOnEnterModifier()],
-			FieldModifiers = () => [new UnicornHallowedModifier()],
+			FieldModifiers = () => [
+				new QueenSlimeHallowedModifier()
+			],
         };
     }
 }

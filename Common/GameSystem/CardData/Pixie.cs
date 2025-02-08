@@ -16,7 +16,7 @@ namespace TerraTCG.Common.GameSystem.CardData
 		{
 			public bool ShouldRemove(GameEventInfo eventInfo) {
 				var centralZone = eventInfo.Zone.Siblings.Where(z => z.Index == 1).First();
-				if(centralZone.HasPlacedCard())
+				if(centralZone.HasPlacedCard() && eventInfo.Event == GameEvent.END_TURN)
 				{
 					centralZone.PlacedCard.Heal(1);
 				}
@@ -33,7 +33,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             SubTypes = [CardSubtype.HALLOWED, CardSubtype.DEFENDER],
             Attacks = [
                 new() {
-                    Damage = 3,
+                    Damage = 2,
                     Cost = 2,
                 }
             ],

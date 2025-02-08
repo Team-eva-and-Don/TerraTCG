@@ -55,7 +55,8 @@ namespace TerraTCG.Common.GameSystem.Drawing
 		public Asset<Texture2D> Glint { get; private set; }
 		public Asset<Texture2D> WoFBack { get; private set; }
 		public Asset<Texture2D> KingSlimeCrown { get; private set; }
-        internal Dictionary<int, Asset<Texture2D>> BestiaryTextureCache { get; private set; }
+		public Asset<Texture2D> QueenSlimeCore { get; private set; }
+		internal Dictionary<int, Asset<Texture2D>> BestiaryTextureCache { get; private set; }
         internal Dictionary<int, Asset<Texture2D>> NPCTextureCache { get; private set; }
         internal Dictionary<int, Asset<Texture2D>> ItemTextureCache { get; private set; }
 
@@ -76,7 +77,9 @@ namespace TerraTCG.Common.GameSystem.Drawing
         public Asset<Texture2D> TutorialFrame { get; private set; }
         internal List<Asset<Texture2D>> TutorialSlides { get; private set; }
         internal List<Asset<Texture2D>> TutorialOverlays { get; private set; }
-        public override void Load()
+		public Asset<Texture2D> QueenSlimeCrown { get; internal set; }
+
+		public override void Load()
         {
             base.Load();
             Field = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Field");
@@ -107,6 +110,8 @@ namespace TerraTCG.Common.GameSystem.Drawing
 			WoFBack = Main.Assets.Request<Texture2D>("Images/WallOfFlesh");
 
             KingSlimeCrown = Main.Assets.Request<Texture2D>("Images/Extra_" + ExtrasID.KingSlimeCrown);
+            QueenSlimeCore = Main.Assets.Request<Texture2D>("Images/Extra_" + ExtrasID.QueenSlimeCrystalCore);
+            QueenSlimeCrown = Main.Assets.Request<Texture2D>("Images/Extra_" + ExtrasID.QueenSlimeCrown);
             NPCTextureCache = [];
 			NPCTextureCache[NPCID.EaterofWorldsHead] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/MiniEoW");
             BestiaryTextureCache = [];
