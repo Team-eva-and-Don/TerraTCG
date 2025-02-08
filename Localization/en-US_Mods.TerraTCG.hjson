@@ -1475,6 +1475,21 @@ Cards: {
 		Attack.Name: Disorient
 	}
 
+	RodOfDiscord: {
+		Name: "{$ItemName.RodofDiscord}"
+
+		Skill: {
+			Name: Equip
+			Description:
+				'''
+				Equipped creature's 
+				Skill becomes: "Swap 
+				this card's position 
+				with target ally."
+				'''
+		}
+	}
+
 	Skeletron: {
 		Name: "{$NPCName.SkeletronHead}"
 		Attack.Name: Skull Spin

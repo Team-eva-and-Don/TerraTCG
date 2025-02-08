@@ -15,7 +15,7 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
 
         public void ModifyAttack(ref Attack attack, Zone sourceZone, Zone destZone)
         {
-            attack.Cost = Math.Max(0, attack.Cost - modifier);
+            attack.Cost = Math.Max(1, attack.Cost - modifier);
         }
 
         public bool ShouldRemove(GameEventInfo eventInfo) =>

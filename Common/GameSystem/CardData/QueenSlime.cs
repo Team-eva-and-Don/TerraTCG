@@ -36,23 +36,6 @@ namespace TerraTCG.Common.GameSystem.CardData
 
 		}
 
-		private class UnicornOnEnterModifier : ICardModifier
-		{
-
-			public void ModifyCardEntrance(Zone sourceZone) 
-			{
-				// Having cards enter unpaused on turn 1 screws up a 
-				// bunch of enemy decision-making.
-				var centerZone = sourceZone.Siblings.Where(z => z.Index == 1).First();
-				if(sourceZone.Owner.Game.CurrentTurn.TurnCount > 1 && centerZone.HasPlacedCard())
-				{
-					centerZone.PlacedCard.IsExerted = false;
-				}
-			}
-
-			public bool ShouldRemove(GameEventInfo eventInfo) => true;
-		}
-
         public override Card CreateCard() => new ()
         {
             Name = "QueenSlime",

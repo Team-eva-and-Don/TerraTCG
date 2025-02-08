@@ -109,7 +109,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
         {
             if(startZone.PlacedCard?.GetSkillWithModifiers(startZone, null) is Skill skill)
             {
-                return startZone.HasPlacedCard() &&  actionType == ActionType.DEFAULT && startZone.PlacedCard.Template.HasSkillText &&
+                return startZone.HasPlacedCard() &&  actionType == ActionType.DEFAULT && 
                     skill.Cost <= player.Resources.Mana &&
                     !startZone.PlacedCard.IsExerted;
             }
@@ -124,8 +124,12 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public bool AcceptActionButton()
         {
-            actionType = startZone.PlacedCard.Template.Skills[0].SkillType;
-            return actionType == ActionType.SKILL;
+			if (startZone.PlacedCard.Skill is Skill skill)
+			{
+				actionType = skill.SkillType;
+				return actionType == ActionType.SKILL;
+			}
+			return false;
         }
 
         private void DoMove()
