@@ -218,7 +218,7 @@ namespace TerraTCG.Content.NPCs
             ],
 
             [NPCID.PartyGirl] = [
-                new("Hallowed", BotDecks.GetHallowedDeck(), [GetReward<HallowedPack>(2)], ["WoF"]),
+                new("Hallowed", BotDecks.GetHallowedDeck(), [GetReward<HallowedPack>(2), GetReward<InvitationToDuel>(2)], ["WoF"]),
             ],
 			// Bosses
 			[NPCID.QueenBee] = [
