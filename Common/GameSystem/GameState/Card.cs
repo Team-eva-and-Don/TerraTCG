@@ -66,6 +66,10 @@ namespace TerraTCG.Common.GameSystem.GameState
     // this item on an ally
     internal delegate bool ShouldTarget(Zone zone);
 
+	// Delegate function type to check whether a given card can
+	// be promoted onto a given zone
+	internal delegate bool CanPromote(Zone zone, Card card);
+
     internal class Card
     {
         internal string Name { get; set; }
@@ -131,7 +135,18 @@ namespace TerraTCG.Common.GameSystem.GameState
         // Among cards of the same type, how important is it to play this one first?
         internal int Priority { get; set; } = 0;
 
+		// Helper func for the bot player that suggests whether a zone would be a good target
+		// for this item
         internal ShouldTarget ShouldTarget { get; set; } = z => !(z.PlacedCard?.IsExerted ?? true);
+
+		// Func to apply additional restrictions to whether a zone can be targeted
+		internal Func<Zone, bool> CanTargetZone { get; set; } = (zone) => true;
+
+		// Func to check whether this card can evolve onto a given card on the field
+		// By default, check whether the biome and combat role match
+		internal CanPromote CanPromote { get; set; } = (zone, card) => 
+			zone.PlacedCard?.Template.SubTypes[0] == card.SubTypes[1] &&
+			zone.PlacedCard?.Template.SubTypes.Last() == card.SubTypes.Last();
 
 
         // Localization utils
@@ -155,8 +170,8 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal DrawZoneNPC DrawZoneNPC { get; set; } = CardOverlayRenderer.Instance.DefaultDrawZoneNPC;
 
-        // Do a search of whether any text on the card contains the search term
-        internal bool MatchesTextFilter(string textFilter)
+		// Do a search of whether any text on the card contains the search term
+		internal bool MatchesTextFilter(string textFilter)
         {
             var allMyText = new StringBuilder();
             // All cards have a name and typeline

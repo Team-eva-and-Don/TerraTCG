@@ -57,10 +57,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             {
                 // Check whether the Expert creature type and placed creature type match, eg.
                 // EXPERT FOREST FIGHTER -> FOREST (SLIME) FIGHTER
-                var cardTypeMatches = zone.PlacedCard?.Template.SubTypes[0] == card.SubTypes[1] &&
-                    zone.PlacedCard?.Template.SubTypes.Last() == card.SubTypes.Last(); 
-                return player.Owns(zone) && !zone.IsEmpty() && !zone.PlacedCard.IsExerted && 
-                    cardTypeMatches;
+                return player.Owns(zone) && !zone.IsEmpty() && !zone.PlacedCard.IsExerted && card.CanPromote(zone, card); 
             } else
             {
                 return player.Owns(zone) && zone.IsEmpty();

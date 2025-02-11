@@ -14,7 +14,9 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
     {
         private Zone zone;
 
-        public bool CanAcceptZone(Zone zone) => player.Owns(zone) && !zone.IsEmpty() && player.Resources.Mana >= zone.PlacedCard.ModifyIncomingSkill(card).Cost;
+        public bool CanAcceptZone(Zone zone) => player.Owns(zone) && !zone.IsEmpty()  &&
+			card.CanTargetZone(zone) && 
+			player.Resources.Mana >= zone.PlacedCard.ModifyIncomingSkill(card).Cost;
 
         public bool AcceptZone(Zone zone)
         {

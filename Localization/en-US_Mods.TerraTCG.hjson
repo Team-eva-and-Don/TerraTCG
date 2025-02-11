@@ -1252,6 +1252,20 @@ Cards: {
 		}
 	}
 
+	BatWings: {
+		Name: Bat Wings
+
+		Skill: {
+			Name: Equip
+			Description:
+				'''
+				Equip only to a Bat. It
+				gains Lifesteal and 
+				Sturdy.
+				'''
+		}
+	}
+
 	GuideToCritters: {
 		Name: Guide to Critters
 
@@ -1726,6 +1740,18 @@ Cards: {
 			'''
 			Evasive: May target any 
 			enemy for attacks
+			'''
+	}
+
+	GiantFlyingFox: {
+		Name: "{$NPCName.GiantFlyingFox}"
+		Attack.Name: Giant Swoop
+		Modifier.Description:
+			'''
+			May promote onto any 
+			Bat. Your Bats' attacks
+			deal +1 dmg and 
+			cost -1. Evasive.
 			'''
 	}
 
