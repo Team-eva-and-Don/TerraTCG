@@ -124,6 +124,11 @@ namespace TerraTCG.Content.Items
 		{
 			if (player.whoAmI == Main.myPlayer && GetNearestDuelableBoss(player) is NPC boss)
 			{
+				if(!TCGPlayer.LocalPlayer.Deck.ValidateDeck())
+				{
+					Main.NewText(Language.GetTextValue("Mods.TerraTCG.Cards.Common.DeckNotValid"), Color.Red);
+					return false;
+				}
 				TCGPlayer.LocalPlayer.NPCInfo = new(boss);
 				return true;
 			}
