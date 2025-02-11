@@ -1252,6 +1252,20 @@ Cards: {
 		}
 	}
 
+	GuideToCritters: {
+		Name: Guide to Critters
+
+		Skill: {
+			Name: Equip
+			Description:
+				'''
+				Opponent can't attack
+				Critters while you
+				control equipped creature
+				'''
+		}
+	}
+
 	GoblinThief: {
 		Name: "{$NPCName.GoblinThief}"
 		Attack.Name: Shank
@@ -1639,6 +1653,20 @@ Cards: {
 		Skill: {
 			Name: Skill: Forest Wish
 			Description: Gain 1 MP
+		}
+	}
+
+	ExplosiveBunny: {
+		Name: "{$NPCName.ExplosiveBunny}"
+
+		Attack: {
+			Name: Bunny Boom
+			Description:
+				'''
+				This takes 3 dmg, -1 
+				for each critter you
+				control
+				'''
 		}
 	}
 
