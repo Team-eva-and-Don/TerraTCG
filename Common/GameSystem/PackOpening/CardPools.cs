@@ -213,6 +213,36 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 			]
 		};
 
+		public static CardCollection BatCards => new()
+		{
+			Cards = [
+				GetCard<Bat>(), 
+				GetCard<IlluminantBat>(), 
+				GetCard<JungleBat>(), 
+				GetCard<IceBat>(), 
+				GetCard<SporeBat>(), 
+				GetCard<GiantJungleBat>(), 
+				GetCard<BatWings>(), 
+			]
+		};
+
+		public static CardCollection CritterCards => new()
+		{
+			Cards = [
+				GetCard<Bunny>(), 
+				GetCard<ExplosiveBunny>(), 
+				GetCard<Goldfish>(), 
+				GetCard<Squirrel>(), 
+				GetCard<DoctorBones>(), 
+				GetCard<ViciousBunny>(), 
+				GetCard<Dolphin>(), 
+				GetCard<GoblinThief>(), 
+				GetCard<GlowingSnail>(), 
+				GetCard<GuideToCritters>(), 
+				GetCard<Penguin>(), 
+			]
+		};
+
 
 		public static CardCollection QueenBeePromoCards => new()
 		{

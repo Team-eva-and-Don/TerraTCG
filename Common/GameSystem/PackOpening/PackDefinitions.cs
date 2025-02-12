@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
@@ -82,6 +83,8 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 
 		public static Pack SnowPack => new(3, SnowCards, CommonCards);
 		public static Pack HallowedPack => new(3, HallowedCards, CommonCards);
+		public static Pack BatPack => new(3, BatCards, CommonCards);
+		public static Pack CritterPack => new(3, CritterCards, CommonCards);
 		public static Pack QueenBeePack => new(3, QueenBeePromoCards, JungleCards);
 		public static Pack BOCPack => new(3, BOCPromoCards, EvilCards);
 		public static Pack EOCPack => new(3, EOCPromoCards, ForestCards);

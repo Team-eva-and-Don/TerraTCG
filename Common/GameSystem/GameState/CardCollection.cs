@@ -71,6 +71,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 
             // TODO handle errors
             Cards = cardFullNames
+				.Where(fn => allCards.Any(c => c.FullName == fn))
                 .Select(fn => allCards.Where(c => c.FullName == fn).FirstOrDefault())
                 .ToList();
         }

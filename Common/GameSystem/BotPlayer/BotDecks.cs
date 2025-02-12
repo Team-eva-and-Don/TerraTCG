@@ -1083,6 +1083,60 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                 ]
             };
 
+		internal static CardCollection GetBatsDeck() =>
+            new ()
+            {
+                Cards = [
+                    GetCard<IlluminantBat>(), 
+                    GetCard<IlluminantBat>(), 
+                    GetCard<RagePotion>(),
+                    GetCard<RagePotion>(),
+                    GetCard<Guide>(),
+                    GetCard<Guide>(),
+                    GetCard<GiantJungleBat>(),
+                    GetCard<GiantJungleBat>(),
+                    GetCard<JungleBat>(),
+                    GetCard<JungleBat>(),
+                    GetCard<SporeBat>(),
+                    GetCard<SporeBat>(),
+                    GetCard<HealingPotion>(), 
+                    GetCard<HealingPotion>(), 
+                    GetCard<PartyGirl>(),
+                    GetCard<Bat>(),
+                    GetCard<BatWings>(), 
+                    GetCard<BatWings>(),
+                    GetCard<IceBat>(), 
+                    GetCard<IceBat>(),
+                ]
+            };
+
+		internal static CardCollection GetCrittersDeck() =>
+            new ()
+            {
+                Cards = [
+                    GetCard<Bunny>(), 
+                    GetCard<Bunny>(), 
+                    GetCard<DoctorBones>(),
+                    GetCard<DoctorBones>(),
+                    GetCard<Guide>(),
+                    GetCard<Guide>(),
+                    GetCard<ExplosiveBunny>(),
+                    GetCard<ExplosiveBunny>(),
+                    GetCard<Goldfish>(),
+                    GetCard<Goldfish>(),
+                    GetCard<GuideToCritters>(),
+                    GetCard<GuideToCritters>(),
+                    GetCard<HealingPotion>(), 
+                    GetCard<HealingPotion>(), 
+                    GetCard<Dolphin>(),
+                    GetCard<GlowingSnail>(),
+                    GetCard<Squirrel>(), 
+                    GetCard<Squirrel>(),
+                    GetCard<Dryad>(), 
+                    GetCard<Dryad>(),
+                ]
+            };
+
 		internal static CardCollection GetQueenSlimeDeck() =>
             new ()
             {

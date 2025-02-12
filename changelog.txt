@@ -2,5 +2,12 @@ v{ModVersion} has been published to {tMLBuildPurpose} tML v{tMLVersion}.
 
 Additions
 =========
-* Challenge the Queen Slime and the Party Girl using Snow-themed decks!
-  * Must defeat Wall of Flesh deck before dueling Party Girl
+* Add cards to support Bats and Critters, played by the Zoologist
+
+Changes
+=======
+* Standardize "heals X HP" phrasing in card text
+
+Bugfixes
+========
+* Fix issue where Duel Invitation would be consumed if player had invalid decklist

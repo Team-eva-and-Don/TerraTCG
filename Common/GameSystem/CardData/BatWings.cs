@@ -26,7 +26,7 @@ namespace TerraTCG.Common.GameSystem.CardData
                 new() { Cost = 2 }
             ],
             Modifiers = () => [
-                new ReduceDamageModifier(1)  {
+                new RelentlessModifier()  {
                     Texture = TextureCache.Instance.GetItemTexture(ItemID.BatWings),
                 },
 				new LifestealModifier(1)

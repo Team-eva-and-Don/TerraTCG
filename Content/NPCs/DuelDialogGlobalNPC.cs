@@ -217,8 +217,15 @@ namespace TerraTCG.Content.NPCs
 					["Crabs", "WoF"]),
             ],
 
+			// Post-WoF NPCs
+
             [NPCID.PartyGirl] = [
                 new("Hallowed", BotDecks.GetHallowedDeck(), [GetReward<HallowedPack>(2), GetReward<InvitationToDuel>(2)], ["WoF"]),
+            ],
+
+            [NPCID.BestiaryGirl] = [
+                new("Bats", BotDecks.GetBatsDeck(), [GetReward<BatPack>(2), GetReward<InvitationToDuel>(2)], ["WoF"]),
+                new("Critters", BotDecks.GetCrittersDeck(), [GetReward<CritterPack>(2), GetReward<InvitationToDuel>(2)], ["WoF"]),
             ],
 			// Bosses
 			[NPCID.QueenBee] = [

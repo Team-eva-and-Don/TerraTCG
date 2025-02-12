@@ -12,7 +12,7 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class GiantFlyingFox : BaseCardTemplate, ICardTemplate
+    internal class GiantJungleBat : BaseCardTemplate, ICardTemplate
     {
 		private class BatBuffModifier : ICardModifier
 		{
@@ -28,12 +28,12 @@ namespace TerraTCG.Common.GameSystem.CardData
 			}
 
 			public bool ShouldRemove(GameEventInfo eventInfo) =>
-				FieldModifierHelper.ShouldRemove(eventInfo, "GiantFlyingFox");
+				FieldModifierHelper.ShouldRemove(eventInfo, "GiantJungleBat");
 		}
 
         public override Card CreateCard() => new ()
         {
-            Name = "GiantFlyingFox",
+            Name = "GiantJungleBat",
             MaxHealth = 9,
             NPCID = NPCID.GiantFlyingFox,
             CardType = CardType.CREATURE,
@@ -47,8 +47,8 @@ namespace TerraTCG.Common.GameSystem.CardData
 			],
             Attacks = [
                 new() {
-                    Damage = 4,
-                    Cost = 3,
+                    Damage = 3,
+                    Cost = 4,
                 }
             ]
         };

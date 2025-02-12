@@ -144,6 +144,16 @@ namespace TerraTCG.Content.Items
 		internal override Pack Pack => PackDefinitions.HallowedPack;
 	}
 
+	internal class BatPack: TerraTCGBoosterPack
+	{
+		internal override Pack Pack => PackDefinitions.BatPack;
+	}
+
+	internal class CritterPack: TerraTCGBoosterPack
+	{
+		internal override Pack Pack => PackDefinitions.CritterPack;
+	}
+
 	internal class QueenSlimePack: TerraTCGBoosterPack
 	{
 		internal override Pack Pack => PackDefinitions.QueenSlimePack;

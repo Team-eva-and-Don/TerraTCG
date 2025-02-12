@@ -249,6 +249,26 @@ Items: {
 		DisplayName: Queen Slime Pack
 		Tooltip: ""
 	}
+
+	BatPack: {
+		DisplayName: Bat Pack
+		Tooltip:
+			'''
+			A TerraTCG booster pack! Contains
+			bat-themed cards. Build your
+			deck with the TerraTCG Deckbox.
+			'''
+	}
+
+	CritterPack: {
+		DisplayName: Critter Pack
+		Tooltip:
+			'''
+			A TerraTCG booster pack! Contains
+			critter-themed cards. Build your
+			deck with the TerraTCG Deckbox.
+			'''
+	}
 }
 
 Cards: {
@@ -949,7 +969,7 @@ Cards: {
 		Name: "{$NPCName.Nurse}'s Care"
 		Modifier.Description:
 			'''
-			Target ally heals 3 hp.
+			Target ally heals 3 HP.
 			Remove all debuffs 
 			from it.
 			'''
@@ -1195,7 +1215,7 @@ Cards: {
 
 		Skill: {
 			Name: Use
-			Description: Target ally heals 3 hp.
+			Description: Target ally heals 3 HP.
 		}
 	}
 
@@ -1260,8 +1280,8 @@ Cards: {
 			Description:
 				'''
 				Equip only to a Bat. It
-				gains Lifesteal and 
-				Sturdy.
+				gains Relentless and 
+				Lifesteal.
 				'''
 		}
 	}
@@ -1588,7 +1608,7 @@ Cards: {
 			'''
 			Boss' Helper: Your Wall
 			of Flesh's healing 
-			increases by 1 per turn
+			increases by 1 HP/turn
 			'''
 	}
 
@@ -1719,7 +1739,7 @@ Cards: {
 
 		Skill: {
 			Name: Skill: Pond Healing
-			Description: Target ally heals 1 dmg
+			Description: Target ally heals 1 HP
 		}
 	}
 
@@ -1743,7 +1763,7 @@ Cards: {
 			'''
 	}
 
-	GiantFlyingFox: {
+	GiantJungleBat: {
 		Name: "{$NPCName.GiantFlyingFox}"
 		Attack.Name: Giant Swoop
 		Modifier.Description:
@@ -1987,6 +2007,8 @@ Cards: {
 		Deerclops: Deerclops
 		WoF: Wall of Flesh
 		Hallowed: Hallowed
+		Bats: Bats
+		Critters: Critters
 	}
 
 	ActionText: {
