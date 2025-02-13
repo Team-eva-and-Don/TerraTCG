@@ -1580,6 +1580,30 @@ Cards: {
 			'''
 	}
 
+	SkeletronPrime: {
+		Name: "{$NPCName.SkeletronPrime}"
+		Attack.Name: Skull Spin
+		Modifier.Description:
+			'''
+			When this enters, place
+			two Prime Hands. Copy
+			all Equipment on this
+			card to its hands.
+			'''
+	}
+
+	SkeletronPrimeHandL: {
+		Name: Prime Hand L.
+		Attack.Name: Prime Zap
+		Modifier.Description: Zealous.
+	}
+
+	SkeletronPrimeHandR: {
+		Name: Prime Hand R.
+		Attack.Name: Prime Pinch
+		Modifier.Description: Relentless.
+	}
+
 	WallOfFlesh: {
 		Name: "{$NPCName.WallofFlesh}"
 		Attack.Name: Flesh Wall

@@ -19,8 +19,8 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
 
         public string Description => "";
 
-        // TODO storing state in a modifier is not best practice
-        private bool doUnpause = true;
+		private readonly bool[] doUnpause = [true, true, true, true, true, true];
+
         private Zone sourceZone;
 
         public void ModifyAttack(ref Attack attack, Zone sourceZone, Zone destZone) 
@@ -29,15 +29,15 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
         }
 
         public bool ShouldRemove(GameEventInfo eventInfo) {
-            if(eventInfo.Event == GameEvent.AFTER_ATTACK && doUnpause && sourceZone?.PlacedCard is PlacedCard card && card.IsExerted)
+            if(eventInfo.Event == GameEvent.AFTER_ATTACK && doUnpause[eventInfo.Zone.Index] && sourceZone?.PlacedCard is PlacedCard card && card.IsExerted)
             {
                 card.IsExerted = false;
                 sourceZone.QueueAnimation(new BecomeActiveAnimation(card));
-                doUnpause = false;
+				doUnpause[eventInfo.Zone.Index] = false;
             }
             if(eventInfo.Event == GameEvent.END_TURN)
             {
-                doUnpause = true;
+				Array.Fill(doUnpause, true);
             }
             return false;
         }
