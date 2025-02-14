@@ -372,7 +372,7 @@ Cards: {
 			Name: Pink Slime
 			Description:
 				'''
-				Costs 1 MP less for
+				Costs -1 MP for
 				each slime you 
 				control.
 				'''
@@ -521,7 +521,7 @@ Cards: {
 		Attack.Name: Spore Bite
 		Modifier.Description:
 			'''
-			Lifesteal: Gains 1
+			Lifesteal: Heals 1
 			HP after attacking.
 			'''
 	}
@@ -531,7 +531,7 @@ Cards: {
 		Attack.Name: Fungal Bone
 		Modifier.Description:
 			'''
-			Lifesteal: Gains 1
+			Lifesteal: Heals 1
 			HP after attacking.
 			'''
 	}
@@ -551,7 +551,7 @@ Cards: {
 			Description:
 				'''
 				Allies gain Lifesteal
-				this turn (they gain
+				this turn (they heal 
 				1 HP after attacking)
 				'''
 		}
@@ -565,13 +565,13 @@ Cards: {
 			Description:
 				'''
 				Allies that attack target 
-				creature get +1 HP.
+				creature heal 1 HP.
 				'''
 		}
 
 		Modifier.Description:
 			'''
-			Lifesteal: Gains 1
+			Lifesteal: Heals 1
 			HP after attacking.
 			'''
 	}
@@ -960,7 +960,7 @@ Cards: {
 		Modifier.Description:
 			'''
 			Unpause target Ally. Its
-			attack costs 1 MP less 
+			attack costs -1 MP
 			this turn.
 			'''
 	}
@@ -1122,8 +1122,7 @@ Cards: {
 			Description:
 				'''
 				Equipped creature's
-				attack costs 1 MP
-				less.
+				attack costs -1 MP.
 				'''
 		}
 	}
@@ -1188,9 +1187,51 @@ Cards: {
 			Name: Use
 			Description:
 				'''
-				Next turn, enemies that
-				attack target creature
-				take 2 dmg.
+				Next turn, target ally
+				gets Spiked 2 (enemies 
+				that attack it take 2 
+				dmg).
+				'''
+		}
+	}
+
+	CactusHelmet: {
+		Name: "{$ItemName.CactusHelmet}"
+
+		Skill: {
+			Name: Equip
+			Description:
+				'''
+				Equipped creature gains 
+				Spiked 1 (enemies that 
+				attack it take 1 dmg).
+				'''
+		}
+	}
+
+	BandOfRegeneration: {
+		Name: "{$ItemName.BandofRegeneration}"
+
+		Skill: {
+			Name: Equip
+			Description:
+				'''
+				Equipped creature heals
+				1 HP after each of your 
+				turns.
+				'''
+		}
+	}
+
+	AvengerEmblem: {
+		Name: "{$ItemName.AvengerEmblem}"
+
+		Skill: {
+			Name: Equip
+			Description:
+				'''
+				Equipping equipped
+				creature costs -1 MP.
 				'''
 		}
 	}
@@ -1588,14 +1629,14 @@ Cards: {
 			When this enters, place
 			two Prime Hands. Copy
 			all Equipment on this
-			card to its hands.
+			card to its hands. Sturdy.
 			'''
 	}
 
 	SkeletronPrimeHandL: {
 		Name: Prime Hand L.
 		Attack.Name: Prime Zap
-		Modifier.Description: Zealous.
+		Modifier.Description: Evasive.
 	}
 
 	SkeletronPrimeHandR: {
@@ -1737,7 +1778,7 @@ Cards: {
 			Description:
 				'''
 				Target creature's
-				attack costs 1 MP less
+				attack costs -1 MP
 				this turn.
 				'''
 		}
@@ -1811,7 +1852,7 @@ Cards: {
 			Name: Pickaxe Swing
 			Description:
 				'''
-				Costs 1 MP less for
+				Costs -1 MP for
 				each equipment on
 				this creature
 				'''
@@ -1836,7 +1877,7 @@ Cards: {
 		Modifier.Description:
 			'''
 			Equipping this crea-
-			ture costs 1 MP less.
+			ture costs -1 MP.
 			'''
 		Attack.Name: Cursed Axe
 	}
@@ -1846,15 +1887,15 @@ Cards: {
 		Modifier.Description:
 			'''
 			Equipping this crea-
-			ture costs 1 MP less.
+			ture costs -1 MP.
 			'''
 
 		Attack: {
 			Name: Mighty Swing
 			Description:
 				'''
-				Costs 1 MP less for ea-
-				ch equipment on this
+				Costs -1 MP for each 
+				equipment on this
 				'''
 		}
 	}

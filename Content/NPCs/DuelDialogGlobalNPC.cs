@@ -254,6 +254,9 @@ namespace TerraTCG.Content.NPCs
 			],
 			[NPCID.QueenSlimeBoss] = [
 				new("QueenSlime", BotDecks.GetQueenSlimeDeck(), [GetReward<QueenSlimePack>(2), GetReward<InvitationToDuel>(2)], sleeve: CardSleeve.HALLOWED),
+			],
+			[NPCID.SkeletronPrime] = [
+				new("SkeletronPrime", BotDecks.GetSkeletronPrimeDeck(), [GetReward<ForestPack>(2), GetReward<InvitationToDuel>(2)], sleeve: CardSleeve.FOREST),
 			]
         };
     }

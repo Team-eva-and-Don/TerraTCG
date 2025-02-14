@@ -56,7 +56,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
 		private BiomeBGInfo? GetSpecialBG(CardCollection deck, int regularBiomeCount)
 		{
 			var specialBGs = TextureCache.Instance.OtherMapBackgrounds;
-			foreach (var card in new Card[] {GetCard<Skeletron>(), GetCard<QueenBee>(), GetCard<WallOfFlesh>()})
+			foreach (var card in new Card[] {GetCard<Skeletron>(), GetCard<QueenBee>(), GetCard<WallOfFlesh>(), GetCard<SkeletronPrime>()})
 			{
 				if(deck.Cards.Contains(card))
 				{

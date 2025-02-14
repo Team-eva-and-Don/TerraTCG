@@ -196,6 +196,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
 				["CRIMSON"] = Main.Assets.Request<Texture2D>("Images/MapBG7"),
 				["CORRUPTION"] = Main.Assets.Request<Texture2D>("Images/MapBG6"),
 				["Skeletron"] = Main.Assets.Request<Texture2D>("Images/MapBG5"),
+				["SkeletronPrime"] = Main.Assets.Request<Texture2D>("Images/MapBG1"),
 				["QueenBee"] = Main.Assets.Request<Texture2D>("Images/MapBG16"),
 				["WallOfFlesh"] = Main.Assets.Request<Texture2D>("Images/MapBG24"),
 			};

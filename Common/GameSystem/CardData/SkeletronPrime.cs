@@ -82,7 +82,8 @@ namespace TerraTCG.Common.GameSystem.CardData
             NPCID = NPCID.SkeletronPrime,
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.BOSS, CardSubtype.EVIL, CardSubtype.FIGHTER],
-			Modifiers = () => [new OnEnterSpawnHandsModifier()],
+			DrawZoneNPC = CardOverlayRenderer.Instance.DrawSkeletronPrimeNPC,
+			Modifiers = () => [new OnEnterSpawnHandsModifier(), new ReduceDamageModifier(1)],
 			FieldModifiers = () => Enum.GetValues(typeof(ModifierType)).OfType<ModifierType>()
 				.Select(m=>new CopyBuffTooltipModifier(m) as ICardModifier).ToList(),
             Attacks = [
@@ -118,7 +119,7 @@ namespace TerraTCG.Common.GameSystem.CardData
 			{
 				foreach(var modifier in SkeletronEquips(destZone))
 				{
-					modifier.ModifyAttack(ref attack, sourceZone, destZone);
+					modifier.ModifyIncomingAttack(ref attack, sourceZone, destZone);
 				}
 			}
 
@@ -150,13 +151,13 @@ namespace TerraTCG.Common.GameSystem.CardData
             SubTypes = [CardSubtype.EVIL, CardSubtype.SCOUT],
             IsCollectable = false,
             Modifiers = () => [ 
-				new ZealousModifier(), 
+				new EvasiveModifier(), 
 				new SkeletronEquipmentBuffCopyModifier() 
 			],
             Attacks = [
                 new() {
-                    Damage = 2,
-                    Cost = 1,
+                    Damage = 3,
+                    Cost = 2,
                 }
             ]
         };
@@ -166,7 +167,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         public override Card CreateCard() => new ()
         {
             Name = "SkeletronPrimeHandR",
-            MaxHealth = 9,
+            MaxHealth = 10,
             NPCID = NPCID.PrimeVice,
 			DrawZoneNPC = CardOverlayRenderer.Instance.DrawFlippedZoneNPC,
             CardType = CardType.CREATURE,

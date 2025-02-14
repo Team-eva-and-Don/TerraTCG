@@ -157,6 +157,12 @@ namespace TerraTCG.Common.GameSystem.Drawing
             DefaultDrawZoneNPC(spriteBatch, card, position + new Vector2(0, 48 * scale), frame, color, scale, effects | SpriteEffects.FlipVertically);
 		}
 
+		internal void DrawSkeletronPrimeNPC(SpriteBatch spriteBatch, PlacedCard card, Vector2 position, int frame, Color? color, float scale, SpriteEffects effects)
+		{
+			// TODO we want to get the PlacedCard to do the "transform" animation
+            DefaultDrawZoneNPC(spriteBatch, card, position + new Vector2(0, 24 * scale), frame, color, scale, effects);
+		}
+
 		internal void DrawNoOpNPC(SpriteBatch spriteBatch, PlacedCard card, Vector2 position, int frame, Color? color, float scale, SpriteEffects effects)
 		{
 		}

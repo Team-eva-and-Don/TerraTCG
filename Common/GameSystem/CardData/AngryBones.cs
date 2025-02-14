@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +16,10 @@ namespace TerraTCG.Common.GameSystem.CardData
     {
         internal class EquipCostModifier : ICardModifier
         {
+			public Asset<Texture2D> Texture { get; set; }
+
+			public Card SourceCard { get; set; }
+
             public void ModifyIncomingSkill(ref Skill skill, Card sourceCard) 
             {
                 if(sourceCard.SubTypes.Contains(CardSubtype.EQUIPMENT))

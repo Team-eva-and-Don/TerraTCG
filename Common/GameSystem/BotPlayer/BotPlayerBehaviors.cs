@@ -27,7 +27,8 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                 return GamePlayer.Field.Zones.Where(z => !z.IsEmpty())
                     .Where(z => z.Role == ZoneRole.OFFENSE)
                     .Where(z => cardToUse.ShouldTarget(z))
-                    .OrderByDescending(z => z.PlacedCard.GetAttackWithModifiers(z, null).Damage)
+                    .OrderByDescending(z => z.PlacedCard.Template.SubTypes.Contains(CardSubtype.BOSS))
+                    .ThenByDescending(z => z.PlacedCard.GetAttackWithModifiers(z, null).Damage)
                     .FirstOrDefault();
             } else
             {

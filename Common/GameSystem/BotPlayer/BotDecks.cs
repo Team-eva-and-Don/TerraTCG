@@ -1163,5 +1163,32 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     GetCard<Unicorn>(),
                 ]
             };
+
+		internal static CardCollection GetSkeletronPrimeDeck() =>
+            new ()
+            {
+                Cards = [
+                    GetCard<SkeletronPrime>(), 
+                    GetCard<Guide>(),
+                    GetCard<Guide>(),
+                    GetCard<BandOfRegeneration>(),
+                    GetCard<BandOfRegeneration>(),
+                    GetCard<CobaltShield>(),
+                    GetCard<CobaltShield>(),
+                    GetCard<PlatinumBroadsword>(),
+                    GetCard<PlatinumBroadsword>(),
+                    GetCard<HealingPotion>(), 
+                    GetCard<HealingPotion>(), 
+                    GetCard<AvengerEmblem>(), 
+                    GetCard<AvengerEmblem>(), 
+                    GetCard<Shackle>(),
+                    GetCard<Shackle>(),
+                    GetCard<Nurse>(),
+                    GetCard<CopperShortsword>(),
+                    GetCard<CopperShortsword>(), 
+                    GetCard<CactusHelmet>(), 
+                    GetCard<CactusHelmet>(), 
+                ]
+            };
 	}
 }
