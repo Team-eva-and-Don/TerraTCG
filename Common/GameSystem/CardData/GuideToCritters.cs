@@ -24,7 +24,7 @@ namespace TerraTCG.Common.GameSystem.CardData
 
             public void ModifyIncomingZoneSelection(Zone sourceZone, Zone endZone, ref List<Zone> destZones)
             {
-                // Only allow attacks against the turtle
+                // Only allow attacks against the equipped creature
                 if(!sourceZone.IsEmpty())
                 {
 					destZones = destZones.Where(z => z.PlacedCard is PlacedCard card && !card.Template.SubTypes.Contains(CardSubtype.CRITTER)).ToList();
@@ -44,6 +44,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             SubTypes = [CardSubtype.EQUIPMENT, CardSubtype.ITEM],
             SelectInHandAction = (card, player) => new ApplyModifierAction(card, player),
             ShouldTarget = z => true,
+			CanTargetZone = z => z.HasPlacedCard() && !z.PlacedCard.Template.SubTypes.Contains(CardSubtype.CRITTER),
             Skills = [ 
                 new() { Cost = 2 }
             ],

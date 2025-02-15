@@ -59,10 +59,12 @@ namespace TerraTCG.Common.GameSystem.Drawing
 		internal Dictionary<int, Asset<Texture2D>> BestiaryTextureCache { get; private set; }
         internal Dictionary<int, Asset<Texture2D>> NPCTextureCache { get; private set; }
         internal Dictionary<int, Asset<Texture2D>> ItemTextureCache { get; private set; }
+		internal Dictionary<int, Asset<Texture2D>> CustomNPCOverlayTextureCache { get; private set; }
 
         internal Dictionary<ModifierType, Asset<Texture2D>> ModifierIconTextures { get; private set; }
 		public Dictionary<CardSubtype, Asset<Texture2D>> FoilMasks { get; private set; }
 		public Dictionary<string, Asset<Texture2D>> CardFoilMasks { get; private set; }
+		public Dictionary<string, Asset<Texture2D>> StaticCardOverlays { get; private set; }
 		public Dictionary<CardSleeve, Asset<Texture2D>> CardSleeves { get; private set; }
 		public Dictionary<CardSubtype, Asset<Texture2D>> BiomeMapBackgrounds { get; private set; }
 
@@ -112,10 +114,12 @@ namespace TerraTCG.Common.GameSystem.Drawing
             KingSlimeCrown = Main.Assets.Request<Texture2D>("Images/Extra_" + ExtrasID.KingSlimeCrown);
             QueenSlimeCore = Main.Assets.Request<Texture2D>("Images/Extra_" + ExtrasID.QueenSlimeCrystalCore);
             QueenSlimeCrown = Main.Assets.Request<Texture2D>("Images/Extra_" + ExtrasID.QueenSlimeCrown);
+
             NPCTextureCache = [];
-			NPCTextureCache[NPCID.EaterofWorldsHead] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/MiniEoW");
             BestiaryTextureCache = [];
             ItemTextureCache = [];
+			CustomNPCOverlayTextureCache = [];
+
             ModifierIconTextures = new Dictionary<ModifierType, Asset<Texture2D>>
             {
                 [ModifierType.PAUSED] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/PausedIcon"),
@@ -164,6 +168,10 @@ namespace TerraTCG.Common.GameSystem.Drawing
 				[ModContent.GetInstance<Leech>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/BLOOD_MOON"),
 				[ModContent.GetInstance<Deerclops>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/Deerclops"),
 			};
+			StaticCardOverlays = new Dictionary<string, Asset<Texture2D>>
+			{
+				[ModContent.GetInstance<KingSlime>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/KingSlime"),
+			};
 
 			CardSleeves = new Dictionary<CardSleeve, Asset<Texture2D>>
 			{
@@ -197,6 +205,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
 				["CORRUPTION"] = Main.Assets.Request<Texture2D>("Images/MapBG6"),
 				["Skeletron"] = Main.Assets.Request<Texture2D>("Images/MapBG5"),
 				["SkeletronPrime"] = Main.Assets.Request<Texture2D>("Images/MapBG1"),
+				["Destroyer"] = Main.Assets.Request<Texture2D>("Images/MapBG1"),
 				["QueenBee"] = Main.Assets.Request<Texture2D>("Images/MapBG16"),
 				["WallOfFlesh"] = Main.Assets.Request<Texture2D>("Images/MapBG24"),
 			};
@@ -249,13 +258,23 @@ namespace TerraTCG.Common.GameSystem.Drawing
 
         public Asset<Texture2D> GetBestiaryTexture(int npcId)
         {
-            if(!ItemTextureCache.TryGetValue(npcId, out var asset))
+            if(!BestiaryTextureCache.TryGetValue(npcId, out var asset))
             {
                 asset = Main.Assets.Request<Texture2D>($"Images/UI/Bestiary/NPCs/NPC_{npcId}");
 				BestiaryTextureCache[npcId] = asset;
             }             
             return asset;
         }
+
+		internal Asset<Texture2D> GetStaticNPCTexture(int npcId)
+		{
+            if(!BestiaryTextureCache.TryGetValue(npcId, out var asset))
+            {
+                asset = Mod.Assets.Request<Texture2D>($"Assets/CardOverlays/NPC_{npcId}");
+				CustomNPCOverlayTextureCache[npcId] = asset;
+            }             
+            return asset;
+		}
 
         // Tutorial images are large, don't load them if we don't need to
         public void LoadTutorial()
@@ -274,5 +293,6 @@ namespace TerraTCG.Common.GameSystem.Drawing
                     Mod.Assets.Request<Texture2D>($"Assets/Tutorial/TutorialOverlay{i}"));
             }
         }
-    }
+
+	}
 }

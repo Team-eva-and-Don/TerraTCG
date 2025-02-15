@@ -220,5 +220,20 @@ namespace TerraTCG.Common.GameSystem.Drawing
             var origin = new Vector2(bounds.Width / 2, bounds.Height);
             spriteBatch.Draw(texture.Value, position, bounds, color ?? Color.White, 0, origin, scale, effects, 0);
 		}
+
+		internal void DrawDestroyerNPC(SpriteBatch spriteBatch, PlacedCard card, Vector2 position, int frame, Color? color, float scale, SpriteEffects effects)
+		{
+			scale *= 0.75f;
+			position.Y += 48 * scale;
+			DrawStaticOverlayNPC(spriteBatch, card, position, frame, color, scale, effects);
+		}
+
+		internal void DrawStaticOverlayNPC(SpriteBatch spriteBatch, PlacedCard card, Vector2 position, int frame, Color? color, float scale, SpriteEffects effects)
+		{
+            var texture = TextureCache.Instance.GetStaticNPCTexture(card.Template.NPCID);
+			var bounds = texture.Value.Bounds;
+            var origin = new Vector2(bounds.Width / 2, bounds.Height);
+            spriteBatch.Draw(texture.Value, position, bounds, color ?? Color.White, 0, origin, scale, effects, 0);
+		}
 	}
 }

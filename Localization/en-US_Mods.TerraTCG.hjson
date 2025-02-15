@@ -1334,9 +1334,10 @@ Cards: {
 			Name: Equip
 			Description:
 				'''
+				Equip to a non-Critter.
 				Opponent can't attack
 				Critters while you
-				control equipped creature
+				control equipped creature.
 				'''
 		}
 	}
@@ -1643,6 +1644,54 @@ Cards: {
 		Name: Prime Hand R.
 		Attack.Name: Prime Pinch
 		Modifier.Description: Relentless.
+	}
+
+	Destroyer: {
+		Name: "{$NPCName.TheDestroyer}"
+		Attack.Name: Worm Wreck
+		Modifier.Description:
+			'''
+			When this enters, copy
+			it twice. When this deals
+			or receives damage, add
+			a Probe to your hand.
+			'''
+	}
+
+	DestroyerHead: {
+		Name: "{$NPCName.TheDestroyer}"
+		Attack.Name: Worm Wreck
+		Modifier.Description:
+			'''
+			When this deals or 
+			receives damage, add
+			a Probe to your hand.
+			'''
+	}
+
+	DestroyerTail: {
+		Name: "{$NPCName.TheDestroyer}"
+		Attack.Name: Worm Wreck
+		Modifier.Description:
+			'''
+			When this deals or 
+			receives damage, add 
+			a Probe to your hand.
+			'''
+	}
+
+	Probe: {
+		Name: "{$NPCName.Probe}"
+
+		Skill: {
+			Name: Use
+			Description:
+				'''
+				Target creature's next
+				attack this turn deals
+				+1 dmg
+				'''
+		}
 	}
 
 	WallOfFlesh: {

@@ -91,6 +91,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             NPCID = NPCID.EaterofWorldsHead,
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.EVIL, CardSubtype.SCOUT],
+			DrawZoneNPC = CardOverlayRenderer.Instance.DrawStaticOverlayNPC,
             IsCollectable = false,
             Modifiers = () => [
 				new EaterSegment1MorbidModifier(),
@@ -133,6 +134,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             NPCID = NPCID.EaterofWorldsHead,
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.EVIL, CardSubtype.SCOUT],
+			DrawZoneNPC = CardOverlayRenderer.Instance.DrawStaticOverlayNPC,
             IsCollectable = false,
             Modifiers = () => [
 				new EaterSegment2MorbidModifier(),
