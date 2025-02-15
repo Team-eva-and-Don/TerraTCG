@@ -1186,8 +1186,35 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     GetCard<Nurse>(),
                     GetCard<CopperShortsword>(),
                     GetCard<CopperShortsword>(), 
-                    GetCard<CactusHelmet>(), 
-                    GetCard<CactusHelmet>(), 
+                    GetCard<BloodButcherer>(), 
+                    GetCard<BloodButcherer>(), 
+                ]
+            };
+
+		internal static CardCollection GetDestroyerDeck() =>
+            new ()
+            {
+                Cards = [
+                    GetCard<Destroyer>(), 
+                    GetCard<Guide>(),
+                    GetCard<Guide>(),
+                    GetCard<HealingPotion>(), 
+                    GetCard<HealingPotion>(), 
+                    GetCard<Nurse>(),
+                    GetCard<Nurse>(),
+                    GetCard<IronskinPotion>(),
+                    GetCard<IronskinPotion>(),
+                    GetCard<CobaltShield>(),
+                    GetCard<CobaltShield>(),
+                    GetCard<ThrowingKnife>(),
+                    GetCard<ThrowingKnife>(),
+                    GetCard<RagePotion>(), 
+                    GetCard<RagePotion>(), 
+                    GetCard<Shackle>(),
+                    GetCard<Shackle>(), 
+                    GetCard<Wizard>(), 
+                    GetCard<Shuriken>(), 
+                    GetCard<Shuriken>(), 
                 ]
             };
 	}

@@ -228,8 +228,9 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
         // Check whether any good candidates for using an equipment exist
         private bool DecideUseItem()
         {
+			var targetZones = GamePlayer.Field.Zones.Where(z => z.HasPlacedCard());
             var bestCardInHand = GamePlayer.Hand.Cards.Where(c => c.CardType == CardType.ITEM)
-                .Where(c => c.Skills[0].Cost <= AvailableMana)
+                .Where(c => targetZones.Any(z=>z.PlacedCard.ModifyIncomingSkill(c).Cost <= AvailableMana))
                 .Where(c => GetBestBuffTarget(c) != null)
                 .OrderByDescending(c => c.Priority)
                 .FirstOrDefault();

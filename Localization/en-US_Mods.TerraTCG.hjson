@@ -1627,10 +1627,10 @@ Cards: {
 		Attack.Name: Skull Spin
 		Modifier.Description:
 			'''
-			When this enters, place
-			two Prime Hands. Copy
-			all Equipment on this
-			card to its hands. Sturdy.
+			Enters with two Hands.
+			Copy all Equipment on 
+			this to its Hands. This
+			costs -1 MP to equip.
 			'''
 	}
 

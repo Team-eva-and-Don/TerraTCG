@@ -257,6 +257,9 @@ namespace TerraTCG.Content.NPCs
 			],
 			[NPCID.SkeletronPrime] = [
 				new("SkeletronPrime", BotDecks.GetSkeletronPrimeDeck(), [GetReward<ForestPack>(2), GetReward<InvitationToDuel>(2)], sleeve: CardSleeve.FOREST),
+			],
+			[NPCID.TheDestroyer] = [
+				new("Destroyer", BotDecks.GetDestroyerDeck(), [GetReward<ForestPack>(2), GetReward<InvitationToDuel>(2)], sleeve: CardSleeve.FOREST),
 			]
         };
     }

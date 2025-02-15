@@ -77,13 +77,13 @@ namespace TerraTCG.Common.GameSystem.CardData
         public override Card CreateCard() => new ()
         {
             Name = "SkeletronPrime",
-            MaxHealth = 15,
+            MaxHealth = 13,
 			Points = 2,
             NPCID = NPCID.SkeletronPrime,
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.BOSS, CardSubtype.EVIL, CardSubtype.FIGHTER],
 			DrawZoneNPC = CardOverlayRenderer.Instance.DrawSkeletronPrimeNPC,
-			Modifiers = () => [new OnEnterSpawnHandsModifier(), new ReduceDamageModifier(1)],
+			Modifiers = () => [new OnEnterSpawnHandsModifier(), new AngryBones.EquipCostModifier()],
 			FieldModifiers = () => Enum.GetValues(typeof(ModifierType)).OfType<ModifierType>()
 				.Select(m=>new CopyBuffTooltipModifier(m) as ICardModifier).ToList(),
             Attacks = [
@@ -167,7 +167,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         public override Card CreateCard() => new ()
         {
             Name = "SkeletronPrimeHandR",
-            MaxHealth = 10,
+            MaxHealth = 9,
             NPCID = NPCID.PrimeVice,
 			DrawZoneNPC = CardOverlayRenderer.Instance.DrawFlippedZoneNPC,
             CardType = CardType.CREATURE,
