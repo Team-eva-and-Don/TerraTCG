@@ -74,6 +74,30 @@ namespace TerraTCG.Common.GameSystem.CardData
 				FieldModifierHelper.ShouldRemove(eventInfo, "SkeletronPrime");
 		}
 
+		// Boss fight completely falls over if Skeletron dies otherwise,
+		// let the hands keep the equipment that they already got
+		private class OnDieTransferEquipmentModifier : ICardModifier
+		{
+			public bool ShouldRemove(GameEventInfo eventInfo)
+			{
+				if (eventInfo.Event != GameEvent.CREATURE_DIED)
+				{
+					return false;
+				}
+
+				var equips = eventInfo.Zone.PlacedCard.CardModifiers.Where(m => m.Source == CardSubtype.EQUIPMENT);
+
+				var livingHands = eventInfo.Zone.Siblings.Where(z => z.HasPlacedCard() && z.PlacedCard.Template.Name.StartsWith("SkeletronPrimeHand"));
+
+				foreach(var hand in livingHands)
+				{
+					hand.PlacedCard.AddModifiers([.. equips]);
+				}
+				return true;
+			}
+
+		}
+
         public override Card CreateCard() => new ()
         {
             Name = "SkeletronPrime",
@@ -83,13 +107,17 @@ namespace TerraTCG.Common.GameSystem.CardData
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.BOSS, CardSubtype.EVIL, CardSubtype.FIGHTER],
 			DrawZoneNPC = CardOverlayRenderer.Instance.DrawSkeletronPrimeNPC,
-			Modifiers = () => [new OnEnterSpawnHandsModifier(), new AngryBones.EquipCostModifier()],
+			Modifiers = () => [
+				new OnEnterSpawnHandsModifier(), 
+				new AngryBones.EquipCostModifier(),
+				new OnDieTransferEquipmentModifier(),
+			],
 			FieldModifiers = () => Enum.GetValues(typeof(ModifierType)).OfType<ModifierType>()
 				.Select(m=>new CopyBuffTooltipModifier(m) as ICardModifier).ToList(),
             Attacks = [
                 new() {
-                    Damage = 1,
-                    Cost = 4,
+                    Damage = 3,
+                    Cost = 2,
                 }
             ]
         };

@@ -45,11 +45,11 @@ namespace TerraTCG.Common.GameSystem.CardData
             }
         }
 
-		internal class AddProbeOnDealOrTakeDamage : ICardModifier
+		internal class AddProbeTakeDamage : ICardModifier
 		{
 			public bool ShouldRemove(GameEventInfo eventInfo)
 			{
-				if(eventInfo.Event == GameEvent.AFTER_ATTACK || eventInfo.Event == GameEvent.AFTER_RECEIVE_ATTACK)
+				if(eventInfo.Event == GameEvent.AFTER_RECEIVE_ATTACK)
 				{
 					eventInfo.Zone.Owner.Hand.Add(ModContent.GetInstance<Probe>().Card);
 				}
@@ -60,7 +60,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         public override Card CreateCard() => new ()
         {
             Name = "Destroyer",
-            MaxHealth = 11,
+            MaxHealth = 10,
 			Points = 2,
             NPCID = NPCID.TheDestroyerBody,
             CardType = CardType.CREATURE,
@@ -68,12 +68,12 @@ namespace TerraTCG.Common.GameSystem.CardData
 			DrawZoneNPC = CardOverlayRenderer.Instance.DrawDestroyerNPC,
 			Modifiers = () => [
 				new OnEnterSpawnSegmentsModifier(),
-				new AddProbeOnDealOrTakeDamage(),
+				new AddProbeTakeDamage(),
 			],
             Attacks = [
                 new() {
                     Damage = 3,
-                    Cost = 2,
+                    Cost = 3,
                 }
             ]
         };
@@ -84,7 +84,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         public override Card CreateCard() => new ()
         {
             Name = "DestroyerHead",
-            MaxHealth = 11,
+            MaxHealth = 10,
             MoveCost = 1,
             NPCID = NPCID.TheDestroyer,
 			DrawZoneNPC = CardOverlayRenderer.Instance.DrawDestroyerNPC,
@@ -92,12 +92,12 @@ namespace TerraTCG.Common.GameSystem.CardData
             SubTypes = [CardSubtype.BOSS, CardSubtype.EVIL, CardSubtype.FIGHTER],
             IsCollectable = false,
 			Modifiers = () => [
-				new Destroyer.AddProbeOnDealOrTakeDamage(),
+				new Destroyer.AddProbeTakeDamage(),
 			],
             Attacks = [
                 new() {
                     Damage = 3,
-                    Cost = 2,
+                    Cost = 3,
                 }
             ]
         };
@@ -108,7 +108,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         public override Card CreateCard() => new ()
         {
             Name = "DestroyerTail",
-            MaxHealth = 11,
+            MaxHealth = 10,
             MoveCost = 1,
             NPCID = NPCID.TheDestroyerTail,
 			DrawZoneNPC = CardOverlayRenderer.Instance.DrawDestroyerNPC,
@@ -116,12 +116,12 @@ namespace TerraTCG.Common.GameSystem.CardData
             SubTypes = [CardSubtype.BOSS, CardSubtype.EVIL, CardSubtype.FIGHTER],
             IsCollectable = false,
 			Modifiers = () => [
-				new Destroyer.AddProbeOnDealOrTakeDamage(),
+				new Destroyer.AddProbeTakeDamage(),
 			],
             Attacks = [
                 new() {
                     Damage = 3,
-                    Cost = 2,
+                    Cost = 3,
                 }
             ]
         };

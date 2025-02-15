@@ -31,7 +31,9 @@ namespace TerraTCG.Content.NPCs
 		SLIME,
 		SNOW,
 		WOF,
-		HALLOWED
+		HALLOWED,
+		SKELETRON_PRIME,
+		DESTROYER
 	}
 
 	internal readonly struct NPCDuelReward(int itemId, int count)
@@ -256,10 +258,10 @@ namespace TerraTCG.Content.NPCs
 				new("QueenSlime", BotDecks.GetQueenSlimeDeck(), [GetReward<QueenSlimePack>(2), GetReward<InvitationToDuel>(2)], sleeve: CardSleeve.HALLOWED),
 			],
 			[NPCID.SkeletronPrime] = [
-				new("SkeletronPrime", BotDecks.GetSkeletronPrimeDeck(), [GetReward<ForestPack>(2), GetReward<InvitationToDuel>(2)], sleeve: CardSleeve.FOREST),
+				new("SkeletronPrime", BotDecks.GetSkeletronPrimeDeck(), [GetReward<ForestPack>(2), GetReward<InvitationToDuel>(2)], sleeve: CardSleeve.SKELETRON_PRIME),
 			],
 			[NPCID.TheDestroyer] = [
-				new("Destroyer", BotDecks.GetDestroyerDeck(), [GetReward<ForestPack>(2), GetReward<InvitationToDuel>(2)], sleeve: CardSleeve.FOREST),
+				new("Destroyer", BotDecks.GetDestroyerDeck(), [GetReward<ForestPack>(2), GetReward<InvitationToDuel>(2)], sleeve: CardSleeve.DESTROYER),
 			]
         };
     }

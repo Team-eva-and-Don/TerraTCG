@@ -185,6 +185,8 @@ namespace TerraTCG.Common.GameSystem.Drawing
 				[CardSleeve.SNOW] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Card_Back_Snow"),
 				[CardSleeve.HALLOWED] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Card_Back_Hallow"),
 				[CardSleeve.WOF] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Card_Back_WoF"),
+				[CardSleeve.SKELETRON_PRIME] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Card_Back_Prime"),
+				[CardSleeve.DESTROYER] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Card_Back_Destroyer"),
 			};
 
             BiomeMapBackgrounds = new Dictionary<CardSubtype, Asset<Texture2D>>

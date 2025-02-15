@@ -1652,9 +1652,9 @@ Cards: {
 		Modifier.Description:
 			'''
 			When this enters, copy
-			it twice. When this deals
-			or receives damage, add
-			a Probe to your hand.
+			it twice. When this 
+			takes dmg, add a Probe
+			to your hand.
 			'''
 	}
 
@@ -1663,9 +1663,9 @@ Cards: {
 		Attack.Name: Worm Wreck
 		Modifier.Description:
 			'''
-			When this deals or 
-			receives damage, add
-			a Probe to your hand.
+			When this takes dmg, 
+			add a Probe to your 
+			hand.
 			'''
 	}
 
@@ -1674,9 +1674,9 @@ Cards: {
 		Attack.Name: Worm Wreck
 		Modifier.Description:
 			'''
-			When this deals or 
-			receives damage, add 
-			a Probe to your hand.
+			When this takes dmg, 
+			add a Probe to your 
+			hand.
 			'''
 	}
 
