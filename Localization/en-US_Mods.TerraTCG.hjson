@@ -1694,6 +1694,40 @@ Cards: {
 		}
 	}
 
+	Twins: {
+		Name: The Twins
+		Attack.Name: Double Gaze
+		Modifier.Description:
+			'''
+			This enters as 
+			Retinazer & Spazmatism
+			'''
+	}
+
+	Retinazer: {
+		Name: "{$NPCName.Retinazer}"
+		Attack.Name: Laser Gaze
+		Modifier.Description:
+			'''
+			Your Spaz. gets Spiked 
+			2 while this is above
+			half health, & +2 dmg
+			while this is below
+			'''
+	}
+
+	Spazmatism: {
+		Name: "{$NPCName.Spazmatism}"
+		Attack.Name: Laser Gaze
+		Modifier.Description:
+			'''
+			Your Rez. gets Sturdy
+			while this is above
+			half health, & Relentless
+			while this is below
+			'''
+	}
+
 	LightDisc: {
 		Name: "{$ItemName.LightDisc}"
 
