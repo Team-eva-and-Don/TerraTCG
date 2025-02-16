@@ -1694,6 +1694,20 @@ Cards: {
 		}
 	}
 
+	LightDisc: {
+		Name: "{$ItemName.LightDisc}"
+
+		Skill: {
+			Name: Equip
+			Description:
+				'''
+				Equipped creature gets
+				"This deals +1 dmg for 
+				each item used this turn."
+				'''
+		}
+	}
+
 	WallOfFlesh: {
 		Name: "{$NPCName.WallofFlesh}"
 		Attack.Name: Flesh Wall

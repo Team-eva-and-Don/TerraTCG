@@ -38,6 +38,10 @@ namespace TerraTCG.Common.GameSystem.Drawing
 			CardSubtype.FOREST, CardSubtype.GOBLIN_ARMY, CardSubtype.JUNGLE, CardSubtype.OCEAN, CardSubtype.SNOW, CardSubtype.HALLOWED,
 		];
 
+		internal List<Card> SkyColoredSpecialCards = [
+			GetCard<Destroyer>(), GetCard<SkeletronPrime>(),
+		];
+
 		private static BiomeBGInfo? GetDominantBiome(CardCollection deck)
 		{
 			var bgMap = TextureCache.Instance.BiomeMapBackgrounds;
@@ -60,7 +64,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
 			{
 				if(deck.Cards.Any(c=>c.Name == cardName))
 				{
-					return new(specialBGs[cardName]);
+					return new(specialBGs[cardName], 0, deck.Cards.Any(SkyColoredSpecialCards.Contains));
 				}
 			}
 			if(deck.Cards.Count(CrimsonCards.Contains) > regularBiomeCount)

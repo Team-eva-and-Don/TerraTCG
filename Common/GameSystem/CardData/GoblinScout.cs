@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,8 +16,15 @@ namespace TerraTCG.Common.GameSystem.CardData
     {
         internal class DamageModifier : ICardModifier
         {
+			public Asset<Texture2D> Texture { get; set; }
+			public Card SourceCard { get; set; }
+
             public void ModifyAttack(ref Attack attack, Zone sourceZone, Zone destZone) 
             {
+				if(sourceZone.Owner != sourceZone.Owner.Game.CurrentTurn.ActivePlayer)
+				{
+					return;
+				}
                 var itemCount = sourceZone.Owner.Game.CurrentTurn.UsedItemCount;
                 attack.Damage += itemCount;
             }

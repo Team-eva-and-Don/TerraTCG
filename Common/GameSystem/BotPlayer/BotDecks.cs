@@ -1212,8 +1212,8 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     GetCard<RagePotion>(), 
                     GetCard<Shackle>(),
                     GetCard<Shackle>(), 
-                    GetCard<Wizard>(), 
-                    GetCard<Shuriken>(), 
+                    GetCard<LightDisc>(), 
+                    GetCard<LightDisc>(), 
                     GetCard<Shuriken>(), 
                 ]
             };

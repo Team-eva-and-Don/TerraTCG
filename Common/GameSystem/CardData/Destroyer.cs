@@ -73,7 +73,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             Attacks = [
                 new() {
                     Damage = 3,
-                    Cost = 3,
+                    Cost = 2,
                 }
             ]
         };
@@ -97,7 +97,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             Attacks = [
                 new() {
                     Damage = 3,
-                    Cost = 3,
+                    Cost = 2,
                 }
             ]
         };
@@ -121,7 +121,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             Attacks = [
                 new() {
                     Damage = 3,
-                    Cost = 3,
+                    Cost = 2,
                 }
             ]
         };
