@@ -12,11 +12,11 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal class CactusHelmet : BaseCardTemplate, ICardTemplate
+    internal class ThornChakram : BaseCardTemplate, ICardTemplate
     {
         public override Card CreateCard() => new ()
         {
-            Name = "CactusHelmet",
+            Name = "ThornChakram",
             CardType = CardType.ITEM,
             SubTypes = [CardSubtype.EQUIPMENT, CardSubtype.ITEM],
             SelectInHandAction = (card, player) => new ApplyModifierAction(card, player),
@@ -26,7 +26,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             ],
             Modifiers = () => [
                 new SpikedModifier(1)  {
-                    Texture = TextureCache.Instance.GetItemTexture(ItemID.CactusHelmet),
+                    Texture = TextureCache.Instance.GetItemTexture(ItemID.ThornChakram),
                 }
             ]
         };

@@ -1195,8 +1195,8 @@ Cards: {
 		}
 	}
 
-	CactusHelmet: {
-		Name: "{$ItemName.CactusHelmet}"
+	ThornChakram: {
+		Name: "{$ItemName.ThornChakram}"
 
 		Skill: {
 			Name: Equip
