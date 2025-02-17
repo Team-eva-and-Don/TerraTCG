@@ -1,4 +1,4 @@
-﻿﻿[h2] TerraTCG: the Terraria Collectible Card Game! [/h2]
+﻿﻿[h2] TerraTCG: The Terraria Collectible Card Game! [/h2]
 
 [url=https://github.com/westphallm1/TerraTCG] Mod Source[/url]
 [url=https://forums.terraria.org/index.php?threads/terratcg-the-terraria-collectible-card-game.140791/] Terraria Forums[/url]
@@ -58,6 +58,7 @@ result in death! The following bosses can currently be fought:
 [list]
 [*] All Pre-Hardmode Bosses
 [*] The Queen Slime
+[*] The Mechanical Bosses
 [/list]
 
 Stay tuned for Hardmode!

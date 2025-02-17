@@ -43,7 +43,10 @@ Once you've gotten enough practice playing against your Townsfolk, you're ready 
 challenge the bosses themselves! Beating an NPC's second deck awards you with an
 "Duel Invitation", an item that can be used in the presence of a boss to start
 a life-or-death game of TerraTCG! The loser of a boss game's soul is forfeit!
-Currently, every Pre-Hardmode boss can be fought. Stay tuned for Hardmode!
+Currently, the following bosses can be fought:
+- All Pre-Hardmode Bosses
+- The Queen Slime
+- The Mechanical Bosses
 
 Disclaimers
 -----------
@@ -51,7 +54,6 @@ Disclaimers
   currently no support for PvP games. Stay tuned for a future update!
 - The mod is known to have a couple compatibility issues with High FPS Support
   mod, but should still be playable while it is installed
-
 
 Credits
 -------

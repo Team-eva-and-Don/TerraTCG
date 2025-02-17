@@ -242,12 +242,22 @@ Items: {
 
 	HallowedPack: {
 		DisplayName: Hallowed Pack
-		Tooltip: ""
+		Tooltip:
+			'''
+			A TerraTCG booster pack! Contains
+			Hallow-themed cards. Build your
+			deck with the TerraTCG Deckbox.
+			'''
 	}
 
 	QueenSlimePack: {
 		DisplayName: Queen Slime Pack
-		Tooltip: ""
+		Tooltip:
+			'''
+			A TerraTCG Promo pack! Contains
+			rare Queen Slime cards! Build your
+			deck with the TerraTCG Deckbox.
+			'''
 	}
 
 	BatPack: {
@@ -272,17 +282,32 @@ Items: {
 
 	DestroyerPack: {
 		DisplayName: Destroyer Pack
-		Tooltip: ""
+		Tooltip:
+			'''
+			A TerraTCG Promo pack! Contains
+			rare Destroyer cards! Build your
+			deck with the TerraTCG Deckbox.
+			'''
 	}
 
 	SkeletronPrimePack: {
 		DisplayName: Skeletron Prime Pack
-		Tooltip: ""
+		Tooltip:
+			'''
+			A TerraTCG Promo pack! Contains
+			rare Skeletron Prime cards! Build your
+			deck with the TerraTCG Deckbox.
+			'''
 	}
 
 	TwinsPack: {
 		DisplayName: Twins Pack
-		Tooltip: ""
+		Tooltip:
+			'''
+			A TerraTCG Promo pack! Contains
+			rare Twins cards! Build your
+			deck with the TerraTCG Deckbox.
+			'''
 	}
 }
 
@@ -1714,7 +1739,8 @@ Cards: {
 		Attack.Name: Double Gaze
 		Modifier.Description:
 			'''
-			This enters as 
+			When this enters,
+			transform it into 
 			Retinazer & Spazmatism
 			'''
 	}

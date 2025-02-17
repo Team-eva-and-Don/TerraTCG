@@ -159,6 +159,11 @@ namespace TerraTCG.Common.GameSystem.Drawing
 				[ModContent.GetInstance<EyeOfCthulhu>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/EyeOfCthulhu"),
 				[ModContent.GetInstance<EaterOfWorlds>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/EaterOfWorlds"),
 				[ModContent.GetInstance<BrainOfCthulhu>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/BrainOfCthulhu"),
+				[ModContent.GetInstance<QueenSlime>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/QueenSlime"),
+				[ModContent.GetInstance<Deerclops>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/Deerclops"),
+				[ModContent.GetInstance<Destroyer>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/Destroyer"),
+				[ModContent.GetInstance<Twins>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/Twins"),
+				[ModContent.GetInstance<SkeletronPrime>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/SkeletronPrime"),
 				// TODO this is a bit hacky, foil crimson and corrupt EVIL cards differently
 				[ModContent.GetInstance<FaceMonster>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/CRIMSON"),
 				[ModContent.GetInstance<Crimera>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/CRIMSON"),
@@ -166,7 +171,6 @@ namespace TerraTCG.Common.GameSystem.Drawing
 				[ModContent.GetInstance<EaterOfSouls>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/CORRUPTION"),
 				[ModContent.GetInstance<Devourer>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/CORRUPTION"),
 				[ModContent.GetInstance<Leech>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/BLOOD_MOON"),
-				[ModContent.GetInstance<Deerclops>().Card.FullName] = Mod.Assets.Request<Texture2D>("Assets/FoilMasks/Deerclops"),
 			};
 			StaticCardOverlays = new Dictionary<string, Asset<Texture2D>>
 			{
