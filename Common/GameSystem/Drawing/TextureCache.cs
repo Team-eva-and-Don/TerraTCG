@@ -187,6 +187,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
 				[CardSleeve.WOF] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Card_Back_WoF"),
 				[CardSleeve.SKELETRON_PRIME] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Card_Back_Prime"),
 				[CardSleeve.DESTROYER] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Card_Back_Destroyer"),
+				[CardSleeve.TWINS] = Mod.Assets.Request<Texture2D>("Assets/FieldElements/Card_Back_Twins"),
 			};
 
             BiomeMapBackgrounds = new Dictionary<CardSubtype, Asset<Texture2D>>
@@ -207,6 +208,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
 				["CORRUPTION"] = Main.Assets.Request<Texture2D>("Images/MapBG6"),
 				["Skeletron"] = Main.Assets.Request<Texture2D>("Images/MapBG5"),
 				["SkeletronPrime"] = Main.Assets.Request<Texture2D>("Images/MapBG1"),
+				["Twins"] = Main.Assets.Request<Texture2D>("Images/MapBG1"),
 				["Destroyer"] = Main.Assets.Request<Texture2D>("Images/MapBG1"),
 				["QueenBee"] = Main.Assets.Request<Texture2D>("Images/MapBG16"),
 				["WallOfFlesh"] = Main.Assets.Request<Texture2D>("Images/MapBG24"),

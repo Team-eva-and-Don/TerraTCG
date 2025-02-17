@@ -239,8 +239,10 @@ namespace TerraTCG.Common.GameSystem
 						if(dueledNPC.netID == NPCID.EaterofWorldsHead)
 						{
 							KillAllEaterOfWorldsSegments(dueledNPC.whoAmI);
+						} else if (dueledNPC.netID == NPCID.Retinazer)
+						{
+							KillOtherTwin();
 						}
-
 					}
 				}
 				else if(!Player.creativeGodMode) // don't kill the player if they're in god mode
@@ -265,6 +267,19 @@ namespace TerraTCG.Common.GameSystem
 			foreach(var npc in Main.npc.Where(npc=>npc.active && eowTypes.Contains(npc.netID)))
 			{
 				npc.StrikeInstantKill();
+			}
+		}
+
+		private void KillOtherTwin()
+		{
+			var closestOtherTwin = Main.npc
+				.Where(npc => npc.active && npc.whoAmI < Main.maxNPCs && npc.netID == NPCID.Spazmatism)
+				.OrderBy(npc=>Vector2.DistanceSquared(npc.Center, Player.Center))
+				.FirstOrDefault();
+
+			if(closestOtherTwin != null)
+			{
+				closestOtherTwin.StrikeInstantKill();
 			}
 		}
 

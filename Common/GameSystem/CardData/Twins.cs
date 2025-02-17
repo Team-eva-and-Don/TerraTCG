@@ -51,7 +51,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             Name = "Twins",
             MaxHealth = 14,
             MoveCost = 2,
-			Points = 2,
+			Points = 0,
             NPCID = NPCID.None,
 			DrawZoneNPC = CardOverlayRenderer.Instance.DrawNoOpNPC,
             CardType = CardType.CREATURE,
@@ -117,6 +117,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         {
             Name = "Retinazer",
             MaxHealth = 14,
+			Points = 2,
             NPCID = NPCID.Retinazer,
 			DrawZoneNPC = CardOverlayRenderer.Instance.DrawEOCNPC,
             CardType = CardType.CREATURE,
@@ -184,6 +185,7 @@ namespace TerraTCG.Common.GameSystem.CardData
         {
             Name = "Spazmatism",
             MaxHealth = 14,
+			Points = 2,
             NPCID = NPCID.Spazmatism,
 			DrawZoneNPC = CardOverlayRenderer.Instance.DrawEOCNPC,
             CardType = CardType.CREATURE,

@@ -39,7 +39,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
 		];
 
 		internal List<Card> SkyColoredSpecialCards = [
-			GetCard<Destroyer>(), GetCard<SkeletronPrime>(),
+			GetCard<Destroyer>(), GetCard<SkeletronPrime>(), GetCard<Twins>(),
 		];
 
 		private static BiomeBGInfo? GetDominantBiome(CardCollection deck)

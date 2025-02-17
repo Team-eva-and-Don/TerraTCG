@@ -33,7 +33,8 @@ namespace TerraTCG.Content.NPCs
 		WOF,
 		HALLOWED,
 		SKELETRON_PRIME,
-		DESTROYER
+		DESTROYER,
+		TWINS
 	}
 
 	internal readonly struct NPCDuelReward(int itemId, int count)
@@ -262,6 +263,9 @@ namespace TerraTCG.Content.NPCs
 			],
 			[NPCID.TheDestroyer] = [
 				new("Destroyer", BotDecks.GetDestroyerDeck(), [GetReward<ForestPack>(2), GetReward<InvitationToDuel>(2)], sleeve: CardSleeve.DESTROYER),
+			],
+			[NPCID.Retinazer] = [
+				new("Destroyer", BotDecks.GetTwinsDeck(), [GetReward<ForestPack>(2), GetReward<InvitationToDuel>(2)], sleeve: CardSleeve.TWINS),
 			]
         };
     }
