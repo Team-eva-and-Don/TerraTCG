@@ -269,6 +269,21 @@ Items: {
 			deck with the TerraTCG Deckbox.
 			'''
 	}
+
+	DestroyerPack: {
+		DisplayName: Destroyer Pack
+		Tooltip: ""
+	}
+
+	SkeletronPrimePack: {
+		DisplayName: Skeletron Prime Pack
+		Tooltip: ""
+	}
+
+	TwinsPack: {
+		DisplayName: Twins Pack
+		Tooltip: ""
+	}
 }
 
 Cards: {

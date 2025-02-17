@@ -101,6 +101,7 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 				GetCard<Piranha>(),
 				GetCard<SpikedJungleSlime>(),
 				GetCard<BladeOfGrass>(),
+				GetCard<ThornChakram>(),
 			]
 		};
 
@@ -171,6 +172,7 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 				GetCard<MushroomZombie>(),
 				GetCard<SporeSkeleton>(),
 				GetCard<HealingPotion>(),
+				GetCard<BandOfRegeneration>(),
 				GetCard<Nurse>(),
 			]
 		};
@@ -322,6 +324,31 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 			Cards = [
 				GetCard<QueenSlime>(),
 				GetCard<RodOfDiscord>(),
+			]
+		};
+
+		public static CardCollection SkeletronPrimePromoCards => new()
+		{
+			Cards = [
+				GetCard<SkeletronPrime>(),
+				GetCard<AvengerEmblem>(),
+			]
+		};
+
+		public static CardCollection DestroyerPromoCards => new()
+		{
+			Cards = [
+				GetCard<Destroyer>(),
+				GetCard<LightDisc>(),
+			]
+		};
+
+		public static CardCollection TwinsPromoCards => new()
+		{
+			Cards = [
+				GetCard<Twins>(),
+				GetCard<FairyBell>(),
+				GetCard<MagicalHarp>(),
 			]
 		};
 

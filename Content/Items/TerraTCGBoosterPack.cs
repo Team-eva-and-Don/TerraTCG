@@ -158,4 +158,18 @@ namespace TerraTCG.Content.Items
 	{
 		internal override Pack Pack => PackDefinitions.QueenSlimePack;
 	}
+	internal class SkeletronPrimePack: TerraTCGBoosterPack
+	{
+		internal override Pack Pack => PackDefinitions.SkeletronPrimePack;
+	}
+
+	internal class DestroyerPack: TerraTCGBoosterPack
+	{
+		internal override Pack Pack => PackDefinitions.DestroyerPack;
+	}
+
+	internal class TwinsPack: TerraTCGBoosterPack
+	{
+		internal override Pack Pack => PackDefinitions.TwinsPack;
+	}
 }

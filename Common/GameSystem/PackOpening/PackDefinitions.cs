@@ -96,5 +96,9 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 		public static Pack DeerclopsPack => new(3, DeerclopsPromoCards, SnowCards);
 		public static Pack QueenSlimePack => new(3, QueenSlimePromoCards, HallowedCards);
 
+		public static Pack SkeletronPrimePack => new(3, SkeletronPrimePromoCards, CommonCards);
+		public static Pack DestroyerPack => new(3, DestroyerPromoCards, CommonCards);
+		public static Pack TwinsPack => new(3, TwinsPromoCards, CommonCards);
+
 	}
 }
