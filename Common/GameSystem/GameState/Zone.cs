@@ -42,10 +42,11 @@ namespace TerraTCG.Common.GameSystem.GameState
             {
                 IsExerted = true,
                 PlaceTime = TCGPlayer.TotalGameTime,
-                CardModifiers = [.. card.Modifiers?.Invoke() ?? []]
+                CardModifiers = [.. card.Modifiers?.Invoke() ?? []],
+                FieldModifiers = [.. card.FieldModifiers?.Invoke() ?? []],
             };
 
-			Owner.Field.CardModifiers.AddRange(PlacedCard.Template.FieldModifiers?.Invoke() ?? []);
+			Owner.Field.CardModifiers.AddRange(PlacedCard.FieldModifiers);
             foreach (var modifier in PlacedCard.CardModifiers.Concat(Owner.Field.CardModifiers))
             {
                 modifier.ModifyCardEntrance(this);

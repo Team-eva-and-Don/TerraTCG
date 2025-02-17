@@ -1728,6 +1728,34 @@ Cards: {
 			'''
 	}
 
+	FairyBell: {
+		Name: "{$ItemName.FairyBell}"
+
+		Skill: {
+			Name: Use
+			Description:
+				'''
+				Target ally heals 2 HP.
+				All allies of the same
+				biome & role heal 1 HP.
+				'''
+		}
+	}
+
+	MagicalHarp: {
+		Name: "{$ItemName.MagicalHarp}"
+
+		Skill: {
+			Name: Equip
+			Description:
+				'''
+				Equipped ally, and all 
+				allies of the same biome 
+				& role, deal +1 dmg.
+				'''
+		}
+	}
+
 	LightDisc: {
 		Name: "{$ItemName.LightDisc}"
 

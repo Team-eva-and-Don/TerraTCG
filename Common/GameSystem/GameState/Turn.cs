@@ -57,7 +57,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 
 			foreach(var zone in ActivePlayer.Game.AllZones())
 			{
-				var fieldModifiers = zone.PlacedCard?.Template.FieldModifiers?.Invoke();
+				var fieldModifiers = zone.PlacedCard?.FieldModifiers;
 				if(fieldModifiers?.Count > 0)
 				{
 					zone.Owner.Field.CardModifiers.AddRange(fieldModifiers);

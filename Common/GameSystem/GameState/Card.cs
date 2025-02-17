@@ -95,6 +95,8 @@ namespace TerraTCG.Common.GameSystem.GameState
         internal CardSubtype SortType => 
             (SubTypes[0] == CardSubtype.EXPERT || SubTypes[0] == CardSubtype.BOSS) ? SubTypes[1] : SubTypes[0];
 
+		internal CardSubtype RoleSubtype => SubTypes.Last();
+
         internal int MaxHealth { get; set; }
 
         internal int MoveCost { get; set; }

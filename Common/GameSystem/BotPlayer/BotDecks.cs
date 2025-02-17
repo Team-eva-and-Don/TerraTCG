@@ -1217,5 +1217,32 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
                     GetCard<Shuriken>(), 
                 ]
             };
+
+		internal static CardCollection GetTwinsDeck() =>
+            new ()
+            {
+                Cards = [
+                    GetCard<Twins>(), 
+                    GetCard<Guide>(),
+                    GetCard<Guide>(),
+                    GetCard<HealingPotion>(), 
+                    GetCard<HealingPotion>(), 
+                    GetCard<Nurse>(),
+                    GetCard<Nurse>(),
+                    GetCard<FairyBell>(),
+                    GetCard<FairyBell>(),
+                    GetCard<CobaltShield>(),
+                    GetCard<CobaltShield>(),
+                    GetCard<MagicalHarp>(),
+                    GetCard<MagicalHarp>(),
+                    GetCard<RagePotion>(), 
+                    GetCard<RagePotion>(), 
+                    GetCard<Shackle>(),
+                    GetCard<Shackle>(), 
+                    GetCard<FeralClaws>(), 
+                    GetCard<FeralClaws>(), 
+                    GetCard<ArmsDealer>(), 
+                ]
+            };
 	}
 }

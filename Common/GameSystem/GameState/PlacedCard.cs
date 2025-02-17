@@ -15,6 +15,8 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal List<ICardModifier> CardModifiers { get; set; } = [];
 
+        internal List<ICardModifier> FieldModifiers { get; set; } = [];
+
 		internal Skill? Skill { get; set; } = template.Skills?.FirstOrDefault();
 
         internal TimeSpan PlaceTime { get; set; }

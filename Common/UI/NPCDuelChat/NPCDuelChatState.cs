@@ -57,6 +57,12 @@ namespace TerraTCG.Common.UI.NPCDuelChat
 
         public void AdvanceToDeckSelectDialogue()
         {
+			// Failsafe if other 'player is no longer talking to an NPC' checks don't work
+			if(Main.LocalPlayer.TalkNPC == null)
+			{
+                ModContent.GetInstance<UserInterfaces>().StopNPCChat();
+				return;
+			}
             dialog.NPCInfo = new(Main.LocalPlayer.TalkNPC);
             talkNPCIdx = Main.LocalPlayer.talkNPC;
             Main.CloseNPCChatOrSign();
@@ -95,7 +101,15 @@ namespace TerraTCG.Common.UI.NPCDuelChat
                 // Chat closed before launching the duel dialog, exit out of this UI state
                 ModContent.GetInstance<UserInterfaces>().StopNPCChat();
                 return;
-            }
+            } 
+			
+			if ((Main.npcChatText?.Length ?? 0) > 0 && Main.LocalPlayer.TalkNPC == null)
+			{
+				// Player has clicked from an NPC to a sign without closing the dialogue, exit out of 
+				// this UI state
+                ModContent.GetInstance<UserInterfaces>().StopNPCChat();
+                return;
+			}
 
             if(talkNPCIdx != -1)
             {
