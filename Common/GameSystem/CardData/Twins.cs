@@ -67,73 +67,6 @@ namespace TerraTCG.Common.GameSystem.CardData
     }
     internal class Retinazer : BaseCardTemplate, ICardTemplate
     {
-        private class BuffSpazmatismSpikedModifier : ICardModifier
-		{
-			public ModifierType Category => ModifierType.SPIKED;
-
-			public int Amount => 2;
-
-			public bool AppliesToZone(Zone zone) => 
-				zone.HasPlacedCard() && zone.PlacedCard.Template.Name == "Spazmatism" &&
-				zone.Siblings.Any(z=> z.PlacedCard is PlacedCard card && 
-					card.Template.Name == "Retinazer" &&
-					card.CurrentHealth > (card.Template.MaxHealth + 1) / 2);
-
-			public void ModifyIncomingAttack(ref Attack attack, Zone sourceZone, Zone destZone) 
-			{
-				if(AppliesToZone(destZone))
-				{
-					attack.SelfDamage += 2;
-				}
-			}
-
-			public bool ShouldRemove(GameEventInfo eventInfo) => FieldModifierHelper.ShouldRemove(eventInfo, "Retinazer");
-		}
-
-        private class BuffSpazmatismDmgModifier : ICardModifier
-		{
-			public ModifierType Category => ModifierType.SPIKED;
-
-			public int Amount => 2;
-
-			public bool AppliesToZone(Zone zone) => 
-				zone.HasPlacedCard() && zone.PlacedCard.Template.Name == "Spazmatism" &&
-				zone.Siblings.Any(z=> z.PlacedCard is PlacedCard card && 
-					card.Template.Name == "Retinazer" &&
-					card.CurrentHealth <= (card.Template.MaxHealth + 1) / 2);
-
-			public void ModifyIncomingAttack(ref Attack attack, Zone sourceZone, Zone destZone) 
-			{
-				if(AppliesToZone(sourceZone))
-				{
-					attack.Damage += 2;
-				}
-			}
-
-			public bool ShouldRemove(GameEventInfo eventInfo) => FieldModifierHelper.ShouldRemove(eventInfo, "Retinazer");
-		}
-
-        public override Card CreateCard() => new ()
-        {
-            Name = "Retinazer",
-            MaxHealth = 14,
-			Points = 2,
-            NPCID = NPCID.Retinazer,
-			DrawZoneNPC = CardOverlayRenderer.Instance.DrawEOCNPC,
-            CardType = CardType.CREATURE,
-            SubTypes = [CardSubtype.BOSS, CardSubtype.EVIL, CardSubtype.SCOUT],
-            IsCollectable = false,
-            FieldModifiers = () => [ new BuffSpazmatismSpikedModifier(), new BuffSpazmatismDmgModifier(),],
-            Attacks = [
-                new() {
-                    Damage = 3,
-                    Cost = 2,
-                }
-            ]
-        };
-    }
-    internal class Spazmatism : BaseCardTemplate, ICardTemplate
-    {
         private class BuffRetinazerSturdyModifier : ICardModifier
 		{
 			public ModifierType Category => ModifierType.DEFENSE_BOOST;
@@ -162,9 +95,10 @@ namespace TerraTCG.Common.GameSystem.CardData
 
 			public bool AppliesToZone(Zone zone) => 
 				zone.HasPlacedCard() && zone.PlacedCard.Template.Name == "Retinazer" &&
+				(!zone.Siblings.Any(z=>z.PlacedCard?.Template.Name == "Spazmatism") ||
 				zone.Siblings.Any(z=> z.PlacedCard is PlacedCard card && 
 					card.Template.Name == "Spazmatism" &&
-					card.CurrentHealth <= (card.Template.MaxHealth + 1) / 2);
+					card.CurrentHealth <= (card.Template.MaxHealth + 1) / 2));
 
 			public bool ShouldRemove(GameEventInfo eventInfo) {
 				if(FieldModifierHelper.ShouldRemove(eventInfo, "Spazmatism"))
@@ -183,6 +117,70 @@ namespace TerraTCG.Common.GameSystem.CardData
 
         public override Card CreateCard() => new ()
         {
+            Name = "Retinazer",
+            MaxHealth = 14,
+			Points = 2,
+            NPCID = NPCID.Retinazer,
+			DrawZoneNPC = CardOverlayRenderer.Instance.DrawEOCNPC,
+            CardType = CardType.CREATURE,
+            SubTypes = [CardSubtype.BOSS, CardSubtype.EVIL, CardSubtype.SCOUT],
+            IsCollectable = false,
+            FieldModifiers = () => [ new BuffRetinazerSturdyModifier(), new BuffRetinazerRelentlessModifier(),],
+            Attacks = [
+                new() {
+                    Damage = 3,
+                    Cost = 2,
+                }
+            ]
+        };
+    }
+    internal class Spazmatism : BaseCardTemplate, ICardTemplate
+    {
+        private class BuffSpazmatismSpikedModifier : ICardModifier
+		{
+			public ModifierType Category => ModifierType.SPIKED;
+
+			public int Amount => 2;
+
+			public bool AppliesToZone(Zone zone) => 
+				zone.HasPlacedCard() && zone.PlacedCard.Template.Name == "Spazmatism" &&
+				zone.Siblings.Any(z=> z.PlacedCard is PlacedCard card && 
+					card.Template.Name == "Retinazer" &&
+					card.CurrentHealth > (card.Template.MaxHealth + 1) / 2);
+
+			public void ModifyIncomingAttack(ref Attack attack, Zone sourceZone, Zone destZone) 
+			{
+				if(AppliesToZone(destZone))
+				{
+					attack.SelfDamage += 2;
+				}
+			}
+
+			public bool ShouldRemove(GameEventInfo eventInfo) => FieldModifierHelper.ShouldRemove(eventInfo, "Retinazer");
+		}
+
+        private class BuffSpazmatismDmgModifier : ICardModifier
+		{
+			public bool AppliesToZone(Zone zone) => 
+				zone.HasPlacedCard() && zone.PlacedCard.Template.Name == "Spazmatism" &&
+				(!zone.Siblings.Any(z=>z.PlacedCard?.Template.Name == "Retinazer") ||
+				zone.Siblings.Any(z=> z.PlacedCard is PlacedCard card && 
+					card.Template.Name == "Retinazer" &&
+					card.CurrentHealth <= (card.Template.MaxHealth + 1) / 2));
+
+			public void ModifyAttack(ref Attack attack, Zone sourceZone, Zone destZone) 
+			{
+				if(AppliesToZone(sourceZone))
+				{
+					attack.Damage += 2;
+				}
+			}
+
+			public bool ShouldRemove(GameEventInfo eventInfo) => FieldModifierHelper.ShouldRemove(eventInfo, "Retinazer");
+		}
+
+        public override Card CreateCard() => new ()
+        {
             Name = "Spazmatism",
             MaxHealth = 14,
 			Points = 2,
@@ -191,7 +189,7 @@ namespace TerraTCG.Common.GameSystem.CardData
             CardType = CardType.CREATURE,
             SubTypes = [CardSubtype.BOSS, CardSubtype.EVIL, CardSubtype.SCOUT],
             IsCollectable = false,
-			FieldModifiers = () => [new BuffRetinazerSturdyModifier(), new BuffRetinazerRelentlessModifier()],
+			FieldModifiers = () => [new BuffSpazmatismDmgModifier(), new BuffSpazmatismSpikedModifier()],
             Attacks = [
                 new() {
                     Damage = 3,
