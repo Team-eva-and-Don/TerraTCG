@@ -23,7 +23,7 @@ namespace TerraTCG.Content.Items
 		public override void SetDefaults()
 		{
             Item.useStyle = ItemUseStyleID.HoldUp;
-            Item.useAnimation = 120;
+            Item.useAnimation = 90;
             Item.useTime = 90;
             Item.rare = ItemRarityID.Blue;
 			Item.maxStack = 9999;
