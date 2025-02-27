@@ -10,9 +10,14 @@ using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
-    internal class BounceCardAction(Card card, GamePlayer player) : TownsfolkAction(card, player)
+    internal class BounceCardAction : TownsfolkAction
     {
         private Zone zone;
+
+		public BounceCardAction() : base() { }
+
+		public BounceCardAction(Card card, GamePlayer player) : base(card, player) { }
+
         public override ActionLogInfo GetLogMessage() => new(Card, $"{ActionText("Bounced")} {ActionText("With")} {Card.CardName}");
 
         public override bool CanAcceptZone(Zone zone) => base.CanAcceptZone(zone) && 

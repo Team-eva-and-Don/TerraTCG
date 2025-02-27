@@ -10,9 +10,17 @@ using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
-    internal class DrawCardAction(Card card, GamePlayer player, int drawCount=1) : TownsfolkAction(card, player), IGameAction
+    internal class DrawCardAction : TownsfolkAction, IGameAction
     {
-        public override ActionLogInfo GetLogMessage() => new(card, $"{ActionText("Drew")} {drawCount} {ActionText("Cards")} {ActionText("With")} {Card.CardName}");
+		private int drawCount;
+		public DrawCardAction() : base() { }
+
+		public DrawCardAction(Card card, GamePlayer player, int drawCount=1) : base(card, player) 
+		{ 
+			this.drawCount = drawCount; 
+		}
+
+        public override ActionLogInfo GetLogMessage() => new(Card, $"{ActionText("Drew")} {drawCount} {ActionText("Cards")} {ActionText("With")} {Card.CardName}");
 
         public override bool CanAcceptZone(Zone zone) => false;
 

@@ -10,9 +10,13 @@ using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
-    internal class SearchBossAction(Card card, GamePlayer player) : TownsfolkAction(card, player), IGameAction
+    internal class SearchBossAction : TownsfolkAction, IGameAction
     {
-        public override ActionLogInfo GetLogMessage() => new(card, $"{ActionText("Used")} {Card.CardName}");
+		public SearchBossAction() : base() { }
+
+		public SearchBossAction(Card card, GamePlayer player) : base(card, player) { }
+
+        public override ActionLogInfo GetLogMessage() => new(Card, $"{ActionText("Used")} {Card.CardName}");
 
         public override bool CanAcceptZone(Zone zone) => false;
 

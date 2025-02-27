@@ -11,11 +11,15 @@ using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
-    internal class ReduceAttackCostAction(Card card, GamePlayer player) : TownsfolkAction(card, player)
+    internal class ReduceAttackCostAction : TownsfolkAction
     {
         private Zone zone;
 
-        public override ActionLogInfo GetLogMessage() => new(card, $"{ActionText("Used")} {Card.CardName} {ActionText("On")} {zone.CardName}");
+		public ReduceAttackCostAction() : base() { }
+
+		public ReduceAttackCostAction(Card card, GamePlayer player) : base(card, player) { }
+
+        public override ActionLogInfo GetLogMessage() => new(Card, $"{ActionText("Used")} {Card.CardName} {ActionText("On")} {zone.CardName}");
 
         public override bool CanAcceptZone(Zone zone) => base.CanAcceptZone(zone) && Player.Owns(zone) && !zone.IsEmpty();
 

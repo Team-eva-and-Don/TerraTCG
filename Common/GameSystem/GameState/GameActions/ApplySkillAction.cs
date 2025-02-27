@@ -10,9 +10,18 @@ using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
-    internal class ApplySkillAction(Card card, GamePlayer player) : IGameAction
+    internal class ApplySkillAction() : IGameAction
     {
         private Zone zone;
+
+		private Card card;
+		private GamePlayer player;
+
+		public ApplySkillAction(Card card, GamePlayer player) : this()
+		{
+			this.card = card;
+			this.player = player;
+		}
 
         public bool CanAcceptZone(Zone zone) => player.Owns(zone) && !zone.IsEmpty() && player.Resources.Mana >= zone.PlacedCard.ModifyIncomingSkill(card).Cost;
 

@@ -12,10 +12,23 @@ using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
-    internal class MoveCardAction(Card card, GamePlayer player, bool targetEnemies = true, bool allowSwap = false) : TownsfolkAction(card, player)
+    internal class MoveCardAction : TownsfolkAction
     {
         private Zone sourceZone;
         private Zone destZone;
+		private bool targetEnemies;
+		private bool allowSwap;
+
+		public MoveCardAction() : base()
+		{
+
+		}
+
+		public MoveCardAction(Card card, GamePlayer player, bool targetEnemies = true, bool allowSwap = false) : base(card, player)
+		{
+			this.targetEnemies = true;
+			this.allowSwap = false;
+		}
 
         public override ActionLogInfo GetLogMessage() => new(Card, $"{ActionText("Moved")} {destZone.CardName}");
 

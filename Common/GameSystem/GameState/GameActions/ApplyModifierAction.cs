@@ -10,8 +10,18 @@ using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
-    internal class ApplyModifierAction(Card card, GamePlayer player) : IGameAction
+    internal class ApplyModifierAction() : IGameAction
     {
+		private Card card;
+		private GamePlayer player;
+
+		public ApplyModifierAction(Card card, GamePlayer player) : this()
+		{
+			this.card = card;
+			this.player = player;
+		}
+
+
         private Zone zone;
 
         public bool CanAcceptZone(Zone zone) => player.Owns(zone) && !zone.IsEmpty()  &&

@@ -14,9 +14,18 @@ using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
-    internal class DeployCreatureAction(Card card, GamePlayer player) : IGameAction
+    internal class DeployCreatureAction() : IGameAction
     {
         private Zone zone;
+
+		private Card card;
+		private GamePlayer player;
+
+		public DeployCreatureAction(Card card, GamePlayer player) : this()
+		{
+			this.card = card;
+			this.player = player;
+		}
 
         public ActionLogInfo GetLogMessage() => new(card,
             ActionText(card.SubTypes.Contains(CardSubtype.EXPERT) ? "Promoted" : "Played") + " " + card.CardName);

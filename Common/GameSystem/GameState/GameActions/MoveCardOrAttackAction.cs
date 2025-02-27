@@ -17,9 +17,19 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
     // - Declare an attack by clicking an ally zone, then any enemy zone
     // - Move a creature by clicking two ally zones
     // - Use a skill by clicking an ally zone, then a "use skill" button
-    internal class MoveCardOrAttackAction(Zone startZone, GamePlayer player) : IGameAction
+    internal class MoveCardOrAttackAction : IGameAction
     {
         private Zone endZone;
+		private Zone startZone;
+		private GamePlayer player;
+
+		public MoveCardOrAttackAction()  { }
+
+		public MoveCardOrAttackAction(Zone startZone, GamePlayer player) 
+		{
+			this.startZone = startZone;
+			this.player = player;
+		}
 
 
         private ActionType actionType = ActionType.DEFAULT;

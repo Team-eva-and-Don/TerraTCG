@@ -8,12 +8,24 @@ using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
-    internal abstract class TownsfolkAction(Card card, GamePlayer player) : IGameAction
+    internal abstract class TownsfolkAction : IGameAction
     {
-        internal Card Card { get; } = card;
-        internal GamePlayer Player { get; } = player;
+
+        internal Card Card { get; set;  }
+        internal GamePlayer Player { get; set; }
 
         private bool checkingValidZone = false;
+		public TownsfolkAction()
+		{
+
+		}
+
+		public TownsfolkAction(Card card, GamePlayer player)
+		{
+			Card = card;
+			Player = player;
+		}
+
         public virtual bool CanAcceptZone(Zone zone) => checkingValidZone || Player.Resources.TownsfolkMana > 0;
         public abstract bool AcceptZone(Zone zone);
 

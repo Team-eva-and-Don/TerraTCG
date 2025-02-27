@@ -10,9 +10,18 @@ using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
-    internal class RampAction(Card card, GamePlayer player, int amount=1) : TownsfolkAction(card, player), IGameAction
+    internal class RampAction : TownsfolkAction, IGameAction
     {
-        public override ActionLogInfo GetLogMessage() => new(card, $"{ActionText("AddedMana")} {ActionText("With")} {Card.CardName}");
+		private int amount;
+
+		public RampAction() : base() { }
+
+		public RampAction(Card card, GamePlayer player, int amount=1) : base(card, player) 
+		{
+			this.amount = amount;
+		}
+
+        public override ActionLogInfo GetLogMessage() => new(Card, $"{ActionText("AddedMana")} {ActionText("With")} {Card.CardName}");
 
         public override bool CanAcceptZone(Zone zone) => false;
 
