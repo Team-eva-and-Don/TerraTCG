@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -44,5 +45,15 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             zone.QueueAnimation(new BecomeActiveAnimation(zone.PlacedCard));
             GameSounds.PlaySound(GameAction.USE_SKILL);
         }
+
+		public override void PostSend(BinaryWriter writer)
+		{
+			writer.Write((byte)zone.Index);
+		}
+
+		public override void PostReceive(BinaryReader reader, CardGame game)
+		{
+			zone = Player.Field.Zones[reader.ReadByte()];
+		}
     }
 }

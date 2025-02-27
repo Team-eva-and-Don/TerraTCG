@@ -12,13 +12,10 @@ using TerraTCG.Common.GameSystem.GameState;
 
 namespace TerraTCG.Common.Netcode.Packets
 {
-	internal class DecklistPacket : PlayerPacket
+	internal class CardNetworkSync : ModSystem
 	{
-
+		public static CardNetworkSync Instance => ModContent.GetInstance<CardNetworkSync>();
 		// TODO *really* need a central location for this
-
-		private CardCollection Collection { get; set; }
-
 		private List<Card> _allCards;
 		public List<Card> AllCards
 		{
@@ -30,6 +27,17 @@ namespace TerraTCG.Common.Netcode.Packets
 				return _allCards;
 			}
 		}
+
+		public static ushort Serialize(Card card) => (ushort)Instance.AllCards.IndexOf(card);
+
+		public static Card Deserialize(ushort idx) => Instance.AllCards[idx];
+	}
+
+	internal class DecklistPacket : PlayerPacket
+	{
+
+		private CardCollection Collection { get; set; }
+
 
 		public DecklistPacket(): base()
 		{
@@ -47,9 +55,10 @@ namespace TerraTCG.Common.Netcode.Packets
 			var collection = new CardCollection();
 			for(int _ = 0; _ < cardCount; _++)
 			{
-				var cardIdx = reader.ReadInt16();
-				collection.Add(AllCards[cardIdx]);
-				Main.NewText(AllCards[cardIdx].Name);
+				var cardIdx = reader.ReadUInt16();
+				var card = CardNetworkSync.Deserialize(cardIdx);
+				collection.Add(card);
+				Main.NewText(card.Name);
 			}
 
 			if(Main.netMode == NetmodeID.Server)
@@ -64,7 +73,7 @@ namespace TerraTCG.Common.Netcode.Packets
 			writer.Write((short)Collection.Cards.Count);
 			foreach (var card in Collection.Cards)
 			{
-				writer.Write((short)AllCards.IndexOf(card));
+				writer.Write(CardNetworkSync.Serialize(card));
 			}
 		}
 	}

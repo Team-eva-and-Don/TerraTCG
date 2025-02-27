@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TerraTCG.Common.GameSystem.Drawing.Animations.FieldAnimations;
+using TerraTCG.Common.Netcode.Packets;
 using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
@@ -69,5 +71,24 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             Player.Hand.Remove(Card);
 			Player.Game.FieldAnimation = new ShowCardAnimation(TCGPlayer.TotalGameTime, Card, TargetZone(), Player == TCGPlayer.LocalGamePlayer);
         }
-    }
+
+		public void Send(BinaryWriter writer)
+		{
+			writer.Write(Player.Index);
+			writer.Write(CardNetworkSync.Serialize(Card));
+			PostSend(writer);
+		}
+
+		public abstract void PostSend(BinaryWriter writer);
+
+		public void Receive(BinaryReader reader, CardGame game)
+		{
+			Player = game.GamePlayers[reader.ReadByte()];
+			Card = CardNetworkSync.Deserialize(reader.ReadUInt16());
+			PostReceive(reader, game);
+		}
+
+		public abstract void PostReceive(BinaryReader reader, CardGame game);
+
+	}
 }

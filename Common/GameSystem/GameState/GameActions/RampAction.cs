@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,5 +40,15 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             Player.ManaPerTurn += amount;
             GameSounds.PlaySound(GameAction.USE_SKILL);
         }
+
+		public override void PostSend(BinaryWriter writer)
+		{
+			writer.Write((byte)amount);
+		}
+
+		public override void PostReceive(BinaryReader reader, CardGame game)
+		{
+			amount = reader.ReadByte();
+		}
     }
 }

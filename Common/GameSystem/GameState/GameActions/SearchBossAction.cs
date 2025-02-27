@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -42,5 +43,14 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 			}
             GameSounds.PlaySound(GameAction.USE_SKILL);
         }
+		public override void PostSend(BinaryWriter writer)
+		{
+			// no-op
+		}
+
+		public override void PostReceive(BinaryReader reader, CardGame game)
+		{
+			// no-op
+		}
     }
 }

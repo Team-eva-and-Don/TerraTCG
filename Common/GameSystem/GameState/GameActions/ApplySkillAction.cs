@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using TerraTCG.Common.GameSystem.Drawing.Animations;
 using TerraTCG.Common.GameSystem.Drawing.Animations.FieldAnimations;
+using TerraTCG.Common.Netcode.Packets;
 using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
@@ -66,5 +68,16 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
                 GameSounds.PlaySound(GameAction.USE_CONSUMABLE);
             }
         }
+		public void Send(BinaryWriter writer)
+		{
+			writer.Write(player.Index);
+			writer.Write(CardNetworkSync.Serialize(card));
+		}
+
+		public void Receive(BinaryReader reader, CardGame game)
+		{
+			player = game.GamePlayers[reader.ReadByte()];
+			card = CardNetworkSync.Deserialize(reader.ReadUInt16());
+		}
     }
 }

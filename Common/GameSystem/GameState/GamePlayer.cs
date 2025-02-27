@@ -25,6 +25,8 @@ namespace TerraTCG.Common.GameSystem.GameState
 
 		internal IGamePlayerController Controller { get; set; }
 
+		internal byte Index => (byte)Game.GamePlayers.IndexOf(this);
+
         internal int ManaPerTurn { get; set; } = 0;
 
         public PlayerResources _resources = new(MAX_HEALTH, 0, 0);

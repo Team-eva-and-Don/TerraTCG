@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -245,5 +246,17 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
         {
             // No-op
         }
-    }
+
+		public void Send(BinaryWriter writer)
+		{
+			// TODO
+			throw new NotImplementedException();
+		}
+
+		public void Receive(BinaryReader reader, CardGame game)
+		{
+			// TODO
+			throw new NotImplementedException();
+		}
+	}
 }
