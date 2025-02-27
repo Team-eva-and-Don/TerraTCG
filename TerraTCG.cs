@@ -1,6 +1,8 @@
+using System.IO;
 using Terraria;
 using Terraria.Localization;
 using Terraria.ModLoader;
+using TerraTCG.Common.Netcode;
 using TerraTCG.Common.UI;
 using TerraTCG.Common.UI.NPCDuelChat;
 using TerraTCG.Content.Items;
@@ -17,9 +19,19 @@ namespace TerraTCG
 			GoreAutoloadingEnabled = false;
         }
 
-        // Set up cross-mod API calls in Dialogue Tweaks for initiating a duel
-        // with a duel-able NPC
-        public override void PostSetupContent()
+		public override void Load()
+		{
+			NetHandler.Load();
+		}
+
+		public override void Unload()
+		{
+			NetHandler.Unload();
+		}
+
+		// Set up cross-mod API calls in Dialogue Tweaks for initiating a duel
+		// with a duel-able NPC
+		public override void PostSetupContent()
         {
             foreach (var duelableNPC in ModContent.GetInstance<NPCDeckMap>().NPCDecklists.Keys)
             {
@@ -38,5 +50,11 @@ namespace TerraTCG
             }
         }
 
-    }
+		// Handle a multiplayer data packet
+		public override void HandlePacket(BinaryReader reader, int whoAmI)
+		{
+			NetHandler.HandlePackets(reader, whoAmI);
+		}
+
+	}
 }

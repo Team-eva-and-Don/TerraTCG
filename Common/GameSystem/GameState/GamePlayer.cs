@@ -64,14 +64,18 @@ namespace TerraTCG.Common.GameSystem.GameState
 
 			Controller = controller;
 
-            Deck.Shuffle();
+			if(controller.ShouldShuffle)
+			{
+				Deck.Shuffle();
+
+				// Auto-mulligan a 1+ fighter creature hand for the player
+				while(!Deck.Cards.Skip(15).Any(
+					c=>c.CardType == CardType.CREATURE && c.SubTypes[0] != CardSubtype.EXPERT && c.SubTypes.Last() != CardSubtype.CRITTER))
+				{
+					Deck.Shuffle();
+				}
+			}
         
-            // Auto-mulligan a 1+ fighter creature hand for the player
-            while(!Deck.Cards.Skip(15).Any(
-				c=>c.CardType == CardType.CREATURE && c.SubTypes[0] != CardSubtype.EXPERT && c.SubTypes.Last() != CardSubtype.CRITTER))
-            {
-                Deck.Shuffle();
-            }
 
             Hand = new CardCollection()
             {

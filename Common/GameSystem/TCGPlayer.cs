@@ -17,6 +17,7 @@ using TerraTCG.Common.GameSystem.BotPlayer;
 using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState;
+using TerraTCG.Common.Netcode.Packets;
 using TerraTCG.Common.UI;
 using TerraTCG.Content.Gores;
 using TerraTCG.Content.Items;
@@ -29,6 +30,9 @@ namespace TerraTCG.Common.GameSystem
         public GamePlayer GamePlayer { get; set; }
 
         public CardCollection Deck { get; set; }
+
+		// Whether the game should shuffle the deck list given for this player
+		public bool ShouldShuffle { get => true; }
 
         public string DeckName { get; set; }
 
@@ -152,6 +156,15 @@ namespace TerraTCG.Common.GameSystem
 			MouseoverCard = null;
 			MouseoverZone = null;
             ModContent.GetInstance<UserInterfaces>().StartGame();
+
+			if(Main.netMode == NetmodeID.MultiplayerClient)
+			{
+				var handAndDeck = new CardCollection()
+				{
+					Cards = [.. player.Deck.Cards, .. player.Hand.Cards]
+				};
+				new DecklistPacket(Player, handAndDeck).Send(-1);
+			}
         }
 
 		private IEnumerable<(int, NamedNPCDeck)> UnlockedDecks =>
