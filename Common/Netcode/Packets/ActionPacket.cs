@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Core;
 using TerraTCG.Common.GameSystem.GameState.GameActions;
@@ -24,17 +25,29 @@ namespace TerraTCG.Common.Netcode.Packets
 
 		protected override void PostReceive(BinaryReader reader, int sender, Player player)
 		{
-			throw new NotImplementedException();
+			byte actionIdx = reader.ReadByte();
+			IGameAction action = ActionRegistry.Instance.GetActionFromIdx(actionIdx);
+
+			if(Main.netMode == NetmodeID.Server)
+			{
+				new ActionPacket(player, action).Send(from: sender);
+			} else
+			{
+				Main.NewText(action.GetType().Name);
+			}
 		}
 
 		protected override void PostSend(BinaryWriter writer, Player player)
 		{
-			byte actionType = (byte)ModContent.GetInstance<ActionRegistry>().ActionTypes.IndexOf(GameAction.GetType());
+			var actionIdx = ActionRegistry.Instance.GetActionIdx(GameAction);
+			writer.Write(actionIdx);
 		}
 	}
 
 	internal class ActionRegistry : ModSystem
 	{
+		public static ActionRegistry Instance => ModContent.GetInstance<ActionRegistry>();
+
 		internal List<Type> ActionTypes { get; set; }
 
 		public override void Load()
@@ -46,13 +59,13 @@ namespace TerraTCG.Common.Netcode.Packets
 			ActionTypes = actionTypes.ToList();
 		}
 
-		public byte GetActionIdx<T>(T _) where T : IGameAction
+		public byte GetActionIdx<T>(T action) where T : IGameAction
 		{
 			// TODO bounds checking
-			return (byte)ActionTypes.IndexOf(typeof(T));
+			return (byte)ActionTypes.IndexOf(action.GetType());
 		}
 
-		public IGameAction ConstructActionFromIdx(byte idx)
+		public IGameAction GetActionFromIdx(byte idx)
 		{
 			// TODO bounds checking
 			var actionType = ActionTypes[idx];

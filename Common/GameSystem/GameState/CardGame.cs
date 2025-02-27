@@ -15,6 +15,7 @@ using TerraTCG.Common.GameSystem.Drawing.Animations;
 using TerraTCG.Common.GameSystem.Drawing.Animations.FieldAnimations;
 using TerraTCG.Common.GameSystem.GameState.GameActions;
 using TerraTCG.Common.GameSystem.GameState.Modifiers;
+using TerraTCG.Common.Netcode.Packets;
 using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState
@@ -170,6 +171,11 @@ namespace TerraTCG.Common.GameSystem.GameState
             var info = action.GetLogMessage();
             var toLog = new ActionLogInfo(info.Card, player + " " + info.Message);
             CurrentTurn.ActionLog.Add(toLog);
+
+			if(Main.netMode == NetmodeID.MultiplayerClient && CurrentTurn.ActivePlayer == TCGPlayer.LocalGamePlayer)
+			{
+				new ActionPacket(Main.LocalPlayer, action).Send(-1);
+			}
         }
     }
 
