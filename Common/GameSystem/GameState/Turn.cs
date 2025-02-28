@@ -64,10 +64,13 @@ namespace TerraTCG.Common.GameSystem.GameState
 				}
 			}
 
-            TCGPlayer.LocalGamePlayer.Game.FieldAnimation =
-                new TurnChangeAnimation(TCGPlayer.TotalGameTime, this);
-
             ActionLog = [new(null, $"Start of Turn {TurnCount}")];
+
+			if(!Main.dedServ)
+			{
+				TCGPlayer.LocalGamePlayer.Game.FieldAnimation =
+					new TurnChangeAnimation(TCGPlayer.TotalGameTime, this);
+			}
         }
 
         public void End()

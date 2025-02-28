@@ -157,14 +157,6 @@ namespace TerraTCG.Common.GameSystem
 			MouseoverZone = null;
             ModContent.GetInstance<UserInterfaces>().StartGame();
 
-			if(Main.netMode == NetmodeID.MultiplayerClient)
-			{
-				var handAndDeck = new CardCollection()
-				{
-					Cards = [.. player.Deck.Cards, .. player.Hand.Cards]
-				};
-				new DecklistPacket(Player, handAndDeck).Send(-1);
-			}
         }
 
 		private IEnumerable<(int, NamedNPCDeck)> UnlockedDecks =>

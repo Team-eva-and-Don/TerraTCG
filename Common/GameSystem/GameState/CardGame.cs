@@ -44,7 +44,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal bool IsActive => EndTime == default || TCGPlayer.TotalGameTime - EndTime < FadeOutTime;
 
-        public void StartGame(IGamePlayerController player1, IGamePlayerController player2)
+        public virtual void StartGame(IGamePlayerController player1, IGamePlayerController player2, int? startIdx = null)
         {
             GamePlayers = [
                 new GamePlayer(this, player1.Deck.Copy(), player1),
@@ -64,7 +64,7 @@ namespace TerraTCG.Common.GameSystem.GameState
             CurrentTurn = new()
             {
                 Game = this,
-                ActivePlayer = GamePlayers[Main.rand.Next(2)],
+                ActivePlayer = GamePlayers[startIdx ?? Main.rand.Next(2)],
                 TurnCount = 1
             };
             CurrentTurn.ActivePlayer.Opponent.ManaPerTurn += 1;
@@ -189,10 +189,10 @@ namespace TerraTCG.Common.GameSystem.GameState
         }
 
 
-        public CardGame StartGame(IGamePlayerController player1, IGamePlayerController player2)
+        public CardGame StartGame(IGamePlayerController player1, IGamePlayerController player2, int? startIdx = null)
         {
             var game = new CardGame();
-            game.StartGame(player1, player2);
+            game.StartGame(player1, player2, startIdx);
             ActiveGames.Add(game);
             return game;
         }

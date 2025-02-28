@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
+using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.GameSystem.GameState;
 
@@ -61,9 +62,21 @@ namespace TerraTCG.Common.Netcode.Packets
 				Main.NewText(card.Name);
 			}
 
+
+
 			if(Main.netMode == NetmodeID.Server)
 			{
+				// ModContent.GetInstance<GameModSystem>().StartGame(remotePlayer, new NoOpNetGamePlayerController());
 				new DecklistPacket(player, collection).Send(from: sender);
+			} else
+			{
+				// Start a game between the player and a dummy opponent
+				// TODO pair a real opponent
+				var remotePlayer = NetSyncPlayerSystem.Instance.RegisterPlayer(player.whoAmI, collection);
+				if(TCGPlayer.LocalGamePlayer == null)
+				{
+					ModContent.GetInstance<GameModSystem>().StartGame(remotePlayer, TCGPlayer.LocalPlayer, 0);
+				}
 			}
 		}
 

@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.BotPlayer;
 using TerraTCG.Common.GameSystem.GameState;
+using TerraTCG.Common.Netcode;
+using TerraTCG.Common.Netcode.Packets;
 
 namespace TerraTCG.Common.Commands
 {
@@ -17,18 +20,26 @@ namespace TerraTCG.Common.Commands
 
         public override string Command => "bg";
 
-        public override string Description => "Start a TerraTCG game against a bot opponent";
+        public override string Description => "Start a networked TerraTCG game against a bot opponent!";
 
         public override void Action(CommandCaller caller, string input, string[] args)
         {
             if(caller.Player.whoAmI == Main.myPlayer)
             {
                 var myPlayer = TCGPlayer.LocalPlayer;
-                var opponent = new SimpleBotPlayer();
+				var opponent = new NoOpNetGamePlayerController();
 
-                myPlayer.Deck = BotDecks.GetDeck(args.Length > 0 ? int.Parse(args[0]) : -1);
-                opponent.Deck = BotDecks.GetDeck(args.Length > 1 ? int.Parse(args[1]) : -1);
-                ModContent.GetInstance<GameModSystem>().StartGame(myPlayer, opponent);
+                var game = ModContent.GetInstance<GameModSystem>().StartGame(myPlayer, opponent, 0);
+				// Send out a net packet to trigger a game with another player
+				if(Main.netMode == NetmodeID.MultiplayerClient)
+				{
+					var handAndDeck = new CardCollection()
+					{
+						Cards = [.. myPlayer.GamePlayer.Deck.Cards, .. myPlayer.GamePlayer.Hand.Cards]
+					};
+					new DecklistPacket(myPlayer.Player, handAndDeck).Send(-1);
+				}
+
             }
         }
     }

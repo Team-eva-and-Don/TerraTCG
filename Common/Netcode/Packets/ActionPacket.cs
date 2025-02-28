@@ -30,9 +30,13 @@ namespace TerraTCG.Common.Netcode.Packets
 
 			if(Main.netMode == NetmodeID.Server)
 			{
+				action.Receive(reader, NetSyncPlayerSystem.Instance.DummyGame);
 				new ActionPacket(player, action).Send(from: sender);
 			} else
 			{
+				var remotePlayer = NetSyncPlayerSystem.Instance.SyncPlayerMap[player.whoAmI];
+				action.Receive(reader, remotePlayer.GamePlayer.Game);
+				remotePlayer.CompleteAction(action);
 				Main.NewText(action.GetType().Name);
 			}
 		}
@@ -41,6 +45,7 @@ namespace TerraTCG.Common.Netcode.Packets
 		{
 			var actionIdx = ActionRegistry.Instance.GetActionIdx(GameAction);
 			writer.Write(actionIdx);
+			GameAction.Send(writer);
 		}
 	}
 
