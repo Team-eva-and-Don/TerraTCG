@@ -83,12 +83,14 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 		{
 			writer.Write(player.Index);
 			writer.Write(CardNetworkSync.Serialize(card));
+			writer.Write((byte)zone.Index);
 		}
 
 		public void Receive(BinaryReader reader, CardGame game)
 		{
 			player = game.GamePlayers[reader.ReadByte()];
 			card = CardNetworkSync.Deserialize(reader.ReadUInt16());
+			zone = player.Field.Zones[reader.ReadByte()];
 		}
 	}
 }

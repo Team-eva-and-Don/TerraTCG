@@ -23,6 +23,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
         private Zone endZone;
 		private Zone startZone;
 		private GamePlayer player;
+        private ActionType actionType = ActionType.DEFAULT;
 
 		public MoveCardOrAttackAction()  { }
 
@@ -33,7 +34,6 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 		}
 
 
-        private ActionType actionType = ActionType.DEFAULT;
 
 
         private string _logMessage;
@@ -249,14 +249,23 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
 		public void Send(BinaryWriter writer)
 		{
-			// TODO
-			throw new NotImplementedException();
+			// Invariable info - player & start zone
+			writer.Write(player.Index);
+			writer.Write((byte)startZone.Index);
+			// Variable info - end zone and/or action type
+			writer.Write((byte)(endZone?.Index ?? 255));
+			writer.Write((byte)actionType);
 		}
 
 		public void Receive(BinaryReader reader, CardGame game)
 		{
-			// TODO
-			throw new NotImplementedException();
+			player = game.GamePlayers[reader.ReadByte()];
+			startZone = player.Field.Zones[reader.ReadByte()];
+			if(reader.ReadByte() is var endZoneIdx && endZoneIdx != 255)
+			{
+				endZone = player.Opponent.Field.Zones[endZoneIdx];
+			}
+			actionType = (ActionType)reader.ReadByte();
 		}
 	}
 }
