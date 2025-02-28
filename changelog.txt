@@ -1,4 +1,4 @@
 v{ModVersion} has been published to {tMLBuildPurpose} tML v{tMLVersion}.
 Bugfixes
 ========
-* Fix issue where mech bosses dropped incorrect pack on defeat
+* Fix issue where queen slime drew incorrectly on non-100% UI scales

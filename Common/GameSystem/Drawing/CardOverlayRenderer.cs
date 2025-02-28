@@ -94,7 +94,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
 
 			// Draw the body using the vanilla shader
 			spriteBatch.End();
-			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.Default, RasterizerState.CullNone, null, Main.Transform);
+			spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointClamp, DepthStencilState.Default, RasterizerState.CullNone, null, Main.UIScaleMatrix);
 
             origin = new Vector2(npcBounds.Width / 2, npcBounds.Height);
 
@@ -103,7 +103,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
 
 			spriteBatch.End();
             spriteBatch.Begin(
-                SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise);
+                SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise, null, Main.UIScaleMatrix);
 
 			// Draw the crown
 			var crownTexture = TextureCache.Instance.QueenSlimeCrown;
