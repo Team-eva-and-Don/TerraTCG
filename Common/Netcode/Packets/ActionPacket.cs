@@ -37,7 +37,6 @@ namespace TerraTCG.Common.Netcode.Packets
 				var remotePlayer = NetSyncPlayerSystem.Instance.SyncPlayerMap[player.whoAmI];
 				action.Receive(reader, remotePlayer.GamePlayer.Game);
 				remotePlayer.CompleteAction(action);
-				Main.NewText(action.GetType().Name);
 			}
 		}
 

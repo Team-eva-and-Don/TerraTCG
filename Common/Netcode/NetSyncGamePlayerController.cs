@@ -42,6 +42,11 @@ namespace TerraTCG.Common.Netcode
 		{
 			GamePlayer?.Game.LogAndCompleteAction(action);
 		}
+
+		internal void PassTurn()
+		{
+			GamePlayer?.PassTurn();
+		}
 	}
 
 	// Dummy GamePlayer used for debugging network-initiated games

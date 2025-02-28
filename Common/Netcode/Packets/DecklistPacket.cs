@@ -70,13 +70,27 @@ namespace TerraTCG.Common.Netcode.Packets
 				new DecklistPacket(player, collection).Send(from: sender);
 			} else
 			{
-				// Start a game between the player and a dummy opponent
-				// TODO pair a real opponent
+				// Start a game between the player and a networked opponent
 				var remotePlayer = NetSyncPlayerSystem.Instance.RegisterPlayer(player.whoAmI, collection);
-				if(TCGPlayer.LocalGamePlayer == null)
+				// If we are not yet in game - we are receiving an opponent's invite to duel
+				// Start the game, then send our deck list back to the opponent
+				if (TCGPlayer.LocalGamePlayer == null)
 				{
 					ModContent.GetInstance<GameModSystem>().StartGame(remotePlayer, TCGPlayer.LocalPlayer, 0);
+					// Send a decklist back to the paired opponent
+					var handAndDeck = new CardCollection()
+					{
+						Cards = [.. TCGPlayer.LocalGamePlayer.Deck.Cards, .. TCGPlayer.LocalGamePlayer.Hand.Cards]
+					};
+					new DecklistPacket(Main.LocalPlayer, handAndDeck).Send(to: sender);
+				} else
+				{
+					// We are already in a game - and are receiving our opponent's decklist. Update the
+					// state of our opponent
+					var game = TCGPlayer.LocalGamePlayer.Game;
+					game.SwapController(remotePlayer, remotePlayer.Deck.Copy());
 				}
+
 			}
 		}
 

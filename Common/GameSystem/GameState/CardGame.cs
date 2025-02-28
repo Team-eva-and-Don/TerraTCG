@@ -15,6 +15,7 @@ using TerraTCG.Common.GameSystem.Drawing.Animations;
 using TerraTCG.Common.GameSystem.Drawing.Animations.FieldAnimations;
 using TerraTCG.Common.GameSystem.GameState.GameActions;
 using TerraTCG.Common.GameSystem.GameState.Modifiers;
+using TerraTCG.Common.Netcode;
 using TerraTCG.Common.Netcode.Packets;
 using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
@@ -177,7 +178,22 @@ namespace TerraTCG.Common.GameSystem.GameState
 				new ActionPacket(Main.LocalPlayer, action).Send(-1);
 			}
         }
-    }
+
+		// Swap in a new controller for the existing game,
+		// Used to replace a placeholder dummy player with a real opponent in networked gameplay
+		internal void SwapController(IGamePlayerController newController, CardCollection deckList, int replaceIdx = 1)
+		{
+			var gamePlayer = GamePlayers[replaceIdx];
+			GamePlayerControllers[replaceIdx] = newController;
+			newController.GamePlayer = gamePlayer;
+			gamePlayer.Deck = deckList;
+			gamePlayer.Hand = new();
+			for(int i = 0; i < 5; i++)
+			{
+				gamePlayer.Hand.Add(gamePlayer.Deck.Draw());
+			}
+		}
+	}
 
     internal class GameModSystem : ModSystem
     {
