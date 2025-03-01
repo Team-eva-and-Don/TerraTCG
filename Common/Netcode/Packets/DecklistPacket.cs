@@ -83,13 +83,16 @@ namespace TerraTCG.Common.Netcode.Packets
 					{
 						Cards = [.. TCGPlayer.LocalGamePlayer.Deck.Cards, .. TCGPlayer.LocalGamePlayer.Hand.Cards]
 					};
-					new DecklistPacket(Main.LocalPlayer, sender, handAndDeck).Send();
-				} else if(TCGPlayer.LocalGamePlayer.Opponent.Controller is NoOpNetGamePlayerController)
+					new DecklistPacket(Main.LocalPlayer, player.whoAmI, handAndDeck).Send();
+				} else
 				{
 					// We are already in a game but have not yet replaced the placeholder enemy with the
 					// opponent's actual decklist, do that now
 					var game = TCGPlayer.LocalGamePlayer.Game;
 					game.SwapController(remotePlayer, remotePlayer.Deck.Copy());
+
+					// Remove this player from the list of players looking for a game
+					new AcceptGamePacket(Main.LocalPlayer).Send();
 				}
 			}
 		}

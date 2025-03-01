@@ -62,7 +62,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 				{
 					return controller.PlayerId;
 				}
-				return -1;
+				throw new Exception("Attempting to access opponent ID while not in a multiplayer match!");
 			}
 		}
 

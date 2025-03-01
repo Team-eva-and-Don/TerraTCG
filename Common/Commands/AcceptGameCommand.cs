@@ -27,6 +27,7 @@ namespace TerraTCG.Common.Commands
 			var matchmaker = MatchmakingSystem.Instance;
             if(caller.Player.whoAmI == Main.myPlayer && matchmaker.NextPlayer is Player opponent)
             {
+				matchmaker.RemoveLookingForGamePlayer(opponent);
                 var myPlayer = TCGPlayer.LocalPlayer;
 				var opponentController = new NoOpNetGamePlayerController(); // Replaced with real opponent during deck sync
 
