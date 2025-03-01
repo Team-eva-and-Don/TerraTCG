@@ -15,9 +15,9 @@ namespace TerraTCG.Common.Netcode.Packets
 
 		public AckPacket(Player player) : base(player) { }
 
-		public AckPacket(Player player, TurnOrder turnOrder) : base(player, turnOrder) { }
+		public AckPacket(Player player, TurnOrder turnOrder, int opponentId) : base(player, turnOrder, opponentId) { }
 
-		protected override void PostReceive(BinaryReader reader, int sender, Player player, TurnOrder turnOrder)
+		protected override void PostReceive(BinaryReader reader, int sender, int recipient, Player player, TurnOrder turnOrder)
 		{
 			// Server doesn't broadcast acks to other clients
 			GameActionPacketQueue.Instance.DeuqueueOutgoingMessage(player, turnOrder);

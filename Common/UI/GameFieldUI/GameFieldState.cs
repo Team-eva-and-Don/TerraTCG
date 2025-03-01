@@ -61,7 +61,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
                 OnClickAction = ()=>
 				{
 					TCGPlayer.LocalGamePlayer?.Surrender();
-					GameActionPacketQueue.Instance.QueueOutgoingMessage(new SurrenderPacket(Main.LocalPlayer), -1);
+					GameActionPacketQueue.Instance.QueueOutgoingMessage(new SurrenderPacket(Main.LocalPlayer));
 				}
             };
             Append(cancelButton);

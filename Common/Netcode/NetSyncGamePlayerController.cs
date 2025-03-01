@@ -20,7 +20,7 @@ namespace TerraTCG.Common.Netcode
 	internal class NetSyncGamePlayerController : IGamePlayerController
 	{
 
-		public int PlayerID { get; set; }
+		public int PlayerId { get; set; }
 		public GamePlayer GamePlayer { get ; set ; }
 		public CardCollection Deck { get ; set ; }
 		public string DeckName { get ; set ; }
@@ -45,7 +45,7 @@ namespace TerraTCG.Common.Netcode
 		}
 		public void EndGame()
 		{
-			NetSyncPlayerSystem.Instance.UnregisterPlayer(PlayerID);
+			NetSyncPlayerSystem.Instance.UnregisterPlayer(PlayerId);
 		}
 
 		public void StartGame(GamePlayer player, CardGame game)
@@ -129,7 +129,7 @@ namespace TerraTCG.Common.Netcode
 		{
 			var controller = new NetSyncGamePlayerController()
 			{
-				PlayerID = playerId,
+				PlayerId = playerId,
 				Deck = playerDecklist,
 			};
 

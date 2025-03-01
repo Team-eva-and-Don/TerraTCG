@@ -22,6 +22,10 @@ namespace TerraTCG.Common.Netcode
 		
 		public TimeSpan LastSent { get; set; }
 	}
+
+	// Queue of not-yet-acknowledged outgoing network packets maintained on all clients
+	// and the server. Clients queue actions for delivery to the server, server queues
+	// actions from clients to forward to other clients
 	internal class GameActionPacketQueue : ModSystem
 	{
 		public static GameActionPacketQueue Instance => ModContent.GetInstance<GameActionPacketQueue>();
@@ -38,7 +42,7 @@ namespace TerraTCG.Common.Netcode
 		}
 
 		// Add a new Multiplayer Packet to the outgoing queue for the given player
-		public void QueueOutgoingMessage(TurnOrderPacket packet, int sendTo = -1, int from = -1)
+		public void QueueOutgoingMessage(TurnOrderPacket packet, int from = -1)
 		{
 			if(Main.netMode == NetmodeID.SinglePlayer)
 			{
@@ -54,7 +58,7 @@ namespace TerraTCG.Common.Netcode
 				{
 					Packet = packet,
 					SortOrder = packet.TurnOrder,
-					SendTo = sendTo,
+					SendTo = packet.OpponentId,
 					From = from,
 				});
 			}

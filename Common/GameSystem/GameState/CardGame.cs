@@ -180,7 +180,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 
 			if(Main.netMode == NetmodeID.MultiplayerClient && CurrentTurn.ActivePlayer == TCGPlayer.LocalGamePlayer)
 			{
-				GameActionPacketQueue.Instance.QueueOutgoingMessage(new ActionPacket(Main.LocalPlayer, action), -1);
+				GameActionPacketQueue.Instance.QueueOutgoingMessage(new ActionPacket(Main.LocalPlayer, action));
 			}
         }
 
@@ -191,6 +191,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 			var gamePlayer = GamePlayers[replaceIdx];
 			GamePlayerControllers[replaceIdx] = newController;
 			newController.GamePlayer = gamePlayer;
+			gamePlayer.Controller = newController;
 			gamePlayer.Deck = deckList;
 			gamePlayer.Hand = new();
 			for(int i = 0; i < 5; i++)

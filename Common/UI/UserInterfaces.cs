@@ -91,7 +91,7 @@ namespace TerraTCG.Common.UI
 			if(TCGPlayer.LocalGamePlayer.Game.FieldAnimation is QuitNotificationAnimation)
 			{
 				TCGPlayer.LocalGamePlayer.Surrender();
-				GameActionPacketQueue.Instance.QueueOutgoingMessage(new SurrenderPacket(Main.LocalPlayer), -1);
+				GameActionPacketQueue.Instance.QueueOutgoingMessage(new SurrenderPacket(Main.LocalPlayer));
 			} else
 			{
 				TCGPlayer.LocalGamePlayer.Game.FieldAnimation =

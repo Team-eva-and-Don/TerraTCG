@@ -23,12 +23,12 @@ namespace TerraTCG.Common.Netcode.Packets
 			GameAction = action;
 		}
 
-		public ActionPacket(Player player, IGameAction action, TurnOrder turnOrder) : base(player, turnOrder)
+		public ActionPacket(Player player, IGameAction action, TurnOrder turnOrder, int opponentId) : base(player, turnOrder, opponentId)
 		{
 			GameAction = action;
 		}
 
-		protected override void PostReceive(BinaryReader reader, int sender, Player player, TurnOrder turnOrder)
+		protected override void PostReceive(BinaryReader reader, int sender, int recipient, Player player, TurnOrder turnOrder)
 		{
 			byte actionIdx = reader.ReadByte();
 			IGameAction action = ActionRegistry.Instance.GetActionFromIdx(actionIdx);
@@ -41,11 +41,12 @@ namespace TerraTCG.Common.Netcode.Packets
 				// Simulate an unreliable connection by not always processing or acknowledging the message
 				if(Main.rand.NextBool(4))
 				{
-					GameActionPacketQueue.Instance.QueueOutgoingMessage(new ActionPacket(player, action, turnOrder), from: sender);
+					GameActionPacketQueue.Instance.QueueOutgoingMessage(
+						new ActionPacket(player, action, turnOrder, recipient), from: sender);
 					if(Main.rand.NextBool())
 					{
 						// Acknowledge back to the client that we've received the packet
-						new AckPacket(player, turnOrder).Send(to: sender);
+						new AckPacket(player, turnOrder, recipient).Send(to: sender);
 					}
 				}
 			} else
@@ -54,7 +55,7 @@ namespace TerraTCG.Common.Netcode.Packets
 				action.Receive(reader, remotePlayer.GamePlayer.Game);
 				remotePlayer.CompleteAction(action, turnOrder);
 				// Acknowledge back to the server that we've received the packet
-				new AckPacket(player, turnOrder).Send();
+				new AckPacket(player, turnOrder, recipient).Send();
 			}
 		}
 

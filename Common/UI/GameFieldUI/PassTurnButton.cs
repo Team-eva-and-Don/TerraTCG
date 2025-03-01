@@ -41,8 +41,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
                     gamePlayer.PassTurn();
 					if(Main.netMode == NetmodeID.MultiplayerClient)
 					{
-						new PassTurnPacket(Main.LocalPlayer).Send(to: -1);
-						GameActionPacketQueue.Instance.QueueOutgoingMessage(new PassTurnPacket(Main.LocalPlayer), -1);
+						GameActionPacketQueue.Instance.QueueOutgoingMessage(new PassTurnPacket(Main.LocalPlayer));
 					}
                 }
             }

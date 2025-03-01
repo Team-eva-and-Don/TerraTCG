@@ -15,21 +15,21 @@ namespace TerraTCG.Common.Netcode.Packets
 
 		public PassTurnPacket(Player player) : base(player) { }
 
-		public PassTurnPacket(Player player, TurnOrder turnOrder) : base(player, turnOrder) { }
+		public PassTurnPacket(Player player, TurnOrder turnOrder, int opponentId) : base(player, turnOrder, opponentId) { }
 
-		protected override void PostReceive(BinaryReader reader, int sender, Player player, TurnOrder turnOrder)
+		protected override void PostReceive(BinaryReader reader, int sender, int recipient, Player player, TurnOrder turnOrder)
 		{
 
 			if(Main.netMode == NetmodeID.Server)
 			{
-				GameActionPacketQueue.Instance.QueueOutgoingMessage(new PassTurnPacket(player, turnOrder), from: sender);
+				GameActionPacketQueue.Instance.QueueOutgoingMessage(new PassTurnPacket(player, turnOrder, recipient), from: sender);
 
-				new AckPacket(player, turnOrder).Send(to: sender);
+				new AckPacket(player, turnOrder, recipient).Send(to: sender);
 			} else
 			{
 				var remotePlayer = NetSyncPlayerSystem.Instance.SyncPlayerMap[player.whoAmI];
 				remotePlayer.PassTurn(turnOrder);
-				new AckPacket(player, turnOrder).Send();
+				new AckPacket(player, turnOrder, recipient).Send();
 			}
 		}
 

@@ -24,6 +24,8 @@ namespace TerraTCG.Common.Netcode.Packets
 	{
 		internal TurnOrder TurnOrder { get; set; }
 
+		internal int OpponentId { get; set; }
+
 		public TurnOrderPacket() : base()
 		{
 
@@ -39,16 +41,19 @@ namespace TerraTCG.Common.Netcode.Packets
 				TurnIndex = turnIdx,
 				ActionIndex = actionIdx
 			};
+			OpponentId = player.GetModPlayer<TCGPlayer>().GamePlayer.OpponentPlayerId;
 		}
 
-		public TurnOrderPacket(Player player, TurnOrder turnOrder) : base(player) 
+		public TurnOrderPacket(Player player, TurnOrder turnOrder, int opponentId) : base(player) 
 		{ 
-			this.TurnOrder = turnOrder;
+			TurnOrder = turnOrder;
+			OpponentId = opponentId;
 		}
 		protected override void PostSend(BinaryWriter writer, Player player)
 		{
 			writer.Write((byte)TurnOrder.TurnIndex);
 			writer.Write((byte)TurnOrder.ActionIndex);
+			writer.Write((byte)OpponentId);
 			PostSend(writer, player, TurnOrder);
 		}
 
@@ -56,7 +61,8 @@ namespace TerraTCG.Common.Netcode.Packets
 		{
 			byte turnIdx = reader.ReadByte();
 			byte actionIdx = reader.ReadByte();
-			PostReceive(reader, sender, player, new TurnOrder()
+			byte opponentId = reader.ReadByte();
+			PostReceive(reader, sender, opponentId, player, new TurnOrder()
 			{
 				TurnIndex = turnIdx,
 				ActionIndex = actionIdx,
@@ -64,6 +70,6 @@ namespace TerraTCG.Common.Netcode.Packets
 		}
 
 		protected abstract void PostSend(BinaryWriter writer, Player player, TurnOrder order);
-		protected abstract void PostReceive(BinaryReader reader, int sender, Player player, TurnOrder order);
+		protected abstract void PostReceive(BinaryReader reader, int sender, int recipient, Player player, TurnOrder order);
 	}
 }

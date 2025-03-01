@@ -11,6 +11,7 @@ using TerraTCG.Common.GameSystem.BotPlayer;
 using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.GameSystem.Drawing.Animations;
 using TerraTCG.Common.GameSystem.GameState.GameActions;
+using TerraTCG.Common.Netcode;
 using TerraTCG.Content.NPCs;
 
 namespace TerraTCG.Common.GameSystem.GameState
@@ -53,7 +54,19 @@ namespace TerraTCG.Common.GameSystem.GameState
         // TODO real implementation
         internal bool IsMyTurn => Game.CurrentTurn.ActivePlayer == this;
 
-        public static Card GetCard<T>() where T : BaseCardTemplate, ICardTemplate
+		public int OpponentPlayerId
+		{
+			get
+			{
+				if(Opponent.Controller is NetSyncGamePlayerController controller)
+				{
+					return controller.PlayerId;
+				}
+				return -1;
+			}
+		}
+
+		public static Card GetCard<T>() where T : BaseCardTemplate, ICardTemplate
         {
             return ModContent.GetInstance<T>().Card;
         }
