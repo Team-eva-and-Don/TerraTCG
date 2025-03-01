@@ -12,6 +12,7 @@ using Terraria.Localization;
 using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState.GameActions;
+using TerraTCG.Common.Netcode;
 using TerraTCG.Common.Netcode.Packets;
 using TerraTCG.Common.UI.Common;
 
@@ -41,6 +42,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
 					if(Main.netMode == NetmodeID.MultiplayerClient)
 					{
 						new PassTurnPacket(Main.LocalPlayer).Send(to: -1);
+						GameActionPacketQueue.Instance.QueueOutgoingMessage(new PassTurnPacket(Main.LocalPlayer), -1);
 					}
                 }
             }

@@ -12,6 +12,8 @@ namespace TerraTCG.Common.Netcode.Packets
 	{
 		protected readonly byte whoAmI;
 
+		internal byte WhoAmI => whoAmI;
+
 		//For reflection
 		public PlayerPacket() { }
 

@@ -22,11 +22,14 @@ namespace TerraTCG.Common.Netcode.Packets
 
 			if(Main.netMode == NetmodeID.Server)
 			{
-				new PassTurnPacket(player, turnOrder).Send(from: sender);
+				GameActionPacketQueue.Instance.QueueOutgoingMessage(new PassTurnPacket(player, turnOrder), from: sender);
+
+				new AckPacket(player, turnOrder).Send(to: sender);
 			} else
 			{
 				var remotePlayer = NetSyncPlayerSystem.Instance.SyncPlayerMap[player.whoAmI];
 				remotePlayer.PassTurn();
+				new AckPacket(player, turnOrder).Send();
 			}
 		}
 

@@ -175,7 +175,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 
 			if(Main.netMode == NetmodeID.MultiplayerClient && CurrentTurn.ActivePlayer == TCGPlayer.LocalGamePlayer)
 			{
-				new ActionPacket(Main.LocalPlayer, action).Send(-1);
+				GameActionPacketQueue.Instance.QueueOutgoingMessage(new ActionPacket(Main.LocalPlayer, action), -1);
 			}
         }
 
