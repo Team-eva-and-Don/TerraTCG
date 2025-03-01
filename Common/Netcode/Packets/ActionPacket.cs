@@ -12,7 +12,7 @@ using TerraTCG.Common.GameSystem.GameState.GameActions;
 
 namespace TerraTCG.Common.Netcode.Packets
 {
-	internal class ActionPacket : PlayerPacket
+	internal class ActionPacket : TurnOrderPacket
 	{
 		private IGameAction GameAction { get; set; }
 
@@ -23,7 +23,12 @@ namespace TerraTCG.Common.Netcode.Packets
 			GameAction = action;
 		}
 
-		protected override void PostReceive(BinaryReader reader, int sender, Player player)
+		public ActionPacket(Player player, IGameAction action, TurnOrder turnOrder) : base(player, turnOrder)
+		{
+			GameAction = action;
+		}
+
+		protected override void PostReceive(BinaryReader reader, int sender, Player player, TurnOrder turnOrder)
 		{
 			byte actionIdx = reader.ReadByte();
 			IGameAction action = ActionRegistry.Instance.GetActionFromIdx(actionIdx);
@@ -31,7 +36,7 @@ namespace TerraTCG.Common.Netcode.Packets
 			if(Main.netMode == NetmodeID.Server)
 			{
 				action.Receive(reader, NetSyncPlayerSystem.Instance.DummyGame);
-				new ActionPacket(player, action).Send(from: sender);
+				new ActionPacket(player, action, turnOrder).Send(from: sender);
 			} else
 			{
 				var remotePlayer = NetSyncPlayerSystem.Instance.SyncPlayerMap[player.whoAmI];
@@ -40,7 +45,7 @@ namespace TerraTCG.Common.Netcode.Packets
 			}
 		}
 
-		protected override void PostSend(BinaryWriter writer, Player player)
+		protected override void PostSend(BinaryWriter writer, Player player, TurnOrder turnOrder)
 		{
 			var actionIdx = ActionRegistry.Instance.GetActionIdx(GameAction);
 			writer.Write(actionIdx);

@@ -9,18 +9,20 @@ using Terraria.ID;
 
 namespace TerraTCG.Common.Netcode.Packets
 {
-	internal class PassTurnPacket : PlayerPacket
+	internal class PassTurnPacket : TurnOrderPacket
 	{
 		public PassTurnPacket() : base() { }
 
 		public PassTurnPacket(Player player) : base(player) { }
 
-		protected override void PostReceive(BinaryReader reader, int sender, Player player)
+		public PassTurnPacket(Player player, TurnOrder turnOrder) : base(player, turnOrder) { }
+
+		protected override void PostReceive(BinaryReader reader, int sender, Player player, TurnOrder turnOrder)
 		{
 
 			if(Main.netMode == NetmodeID.Server)
 			{
-				new PassTurnPacket(player).Send(from: sender);
+				new PassTurnPacket(player, turnOrder).Send(from: sender);
 			} else
 			{
 				var remotePlayer = NetSyncPlayerSystem.Instance.SyncPlayerMap[player.whoAmI];
@@ -28,7 +30,7 @@ namespace TerraTCG.Common.Netcode.Packets
 			}
 		}
 
-		protected override void PostSend(BinaryWriter writer, Player player)
+		protected override void PostSend(BinaryWriter writer, Player player, TurnOrder turnOrder)
 		{
 			// No-op
 		}
