@@ -95,5 +95,18 @@ namespace TerraTCG.Common.Netcode
 				}
 			}
 		}
+
+		public void ClearPlayerQueue(Player player)
+		{
+			ActionQueue[player.whoAmI] = [];
+		}
+	}
+
+	public class QueueClearModPlayer : ModPlayer
+	{
+		public override void PlayerDisconnect()
+		{
+			GameActionPacketQueue.Instance.ClearPlayerQueue(Player);
+		}
 	}
 }

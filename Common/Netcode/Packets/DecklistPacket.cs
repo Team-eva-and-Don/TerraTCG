@@ -34,7 +34,9 @@ namespace TerraTCG.Common.Netcode.Packets
 		public static Card Deserialize(ushort idx) => Instance.AllCards[idx];
 	}
 
-	internal class DecklistPacket : PlayerPacket
+	// Packet used to sync each player's ordered decklist with their opponent's client
+	// at the start of a multiplayer game
+	internal class DecklistPacket : TurnOrderPacket
 	{
 
 		private CardCollection Collection { get; set; }
@@ -45,12 +47,12 @@ namespace TerraTCG.Common.Netcode.Packets
 
 		}
 
-		public DecklistPacket(Player player, CardCollection cardCollection): base(player)
+		public DecklistPacket(Player player, int opponentId, CardCollection cardCollection): base(player, new(), opponentId)
 		{
 			Collection = cardCollection;
 		}
 
-		protected override void PostReceive(BinaryReader reader, int sender, Player player)
+		protected override void PostReceive(BinaryReader reader, int sender, int recipient, Player player, TurnOrder turnOrder)
 		{
 			var cardCount = reader.ReadInt16();
 			var collection = new CardCollection();
@@ -65,12 +67,12 @@ namespace TerraTCG.Common.Netcode.Packets
 
 			if(Main.netMode == NetmodeID.Server)
 			{
-				// ModContent.GetInstance<GameModSystem>().StartGame(remotePlayer, new NoOpNetGamePlayerController());
-				new DecklistPacket(player, collection).Send(from: sender);
+				new DecklistPacket(player, recipient, collection).Send(to: recipient, from: sender);
 			} else
 			{
 				// Start a game between the player and a networked opponent
 				var remotePlayer = NetSyncPlayerSystem.Instance.RegisterPlayer(player.whoAmI, collection);
+
 				// If we are not yet in game - we are receiving an opponent's invite to duel
 				// Start the game, then send our deck list back to the opponent
 				if (TCGPlayer.LocalGamePlayer == null)
@@ -81,19 +83,18 @@ namespace TerraTCG.Common.Netcode.Packets
 					{
 						Cards = [.. TCGPlayer.LocalGamePlayer.Deck.Cards, .. TCGPlayer.LocalGamePlayer.Hand.Cards]
 					};
-					new DecklistPacket(Main.LocalPlayer, handAndDeck).Send(to: sender);
-				} else
+					new DecklistPacket(Main.LocalPlayer, sender, handAndDeck).Send();
+				} else if(TCGPlayer.LocalGamePlayer.Opponent.Controller is NoOpNetGamePlayerController)
 				{
-					// We are already in a game - and are receiving our opponent's decklist. Update the
-					// state of our opponent
+					// We are already in a game but have not yet replaced the placeholder enemy with the
+					// opponent's actual decklist, do that now
 					var game = TCGPlayer.LocalGamePlayer.Game;
 					game.SwapController(remotePlayer, remotePlayer.Deck.Copy());
 				}
-
 			}
 		}
 
-		protected override void PostSend(BinaryWriter writer, Player player)
+		protected override void PostSend(BinaryWriter writer, Player player, TurnOrder turnOrder)
 		{
 			// Write the size of the collection, then each card one by one
 			writer.Write((short)Collection.Cards.Count);

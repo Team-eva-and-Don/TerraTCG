@@ -9,6 +9,8 @@ using Terraria.ID;
 
 namespace TerraTCG.Common.Netcode.Packets
 {
+	// Action packet used to send the "end of turn" button click to the other client
+	// in a multiplayer match
 	internal class PassTurnPacket : TurnOrderPacket
 	{
 		public PassTurnPacket() : base() { }

@@ -12,6 +12,8 @@ using TerraTCG.Common.GameSystem.GameState.GameActions;
 
 namespace TerraTCG.Common.Netcode.Packets
 {
+	// Action packet used to send any completed game action to the other client
+	// in a multiplayer match
 	internal class ActionPacket : TurnOrderPacket
 	{
 		private IGameAction GameAction { get; set; }

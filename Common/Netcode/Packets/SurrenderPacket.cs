@@ -9,6 +9,8 @@ using Terraria.ID;
 
 namespace TerraTCG.Common.Netcode.Packets
 {
+	// Action packet used to send the "surrender" button click to the other client
+	// in a multiplayer match
 	internal class SurrenderPacket : TurnOrderPacket
 	{
 		public SurrenderPacket() : base() { }
