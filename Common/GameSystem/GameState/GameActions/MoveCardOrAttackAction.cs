@@ -253,19 +253,25 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 			writer.Write(player.Index);
 			writer.Write((byte)startZone.Index);
 			// Variable info - end zone and/or action type
-			writer.Write((byte)(endZone?.Index ?? 255));
 			writer.Write((byte)actionType);
+			writer.Write((byte)(endZone?.Index ?? 255));
 		}
 
 		public void Receive(BinaryReader reader, CardGame game)
 		{
 			player = game.GamePlayers[reader.ReadByte()];
 			startZone = player.Field.Zones[reader.ReadByte()];
+			actionType = (ActionType)reader.ReadByte();
 			if(reader.ReadByte() is var endZoneIdx && endZoneIdx != 255)
 			{
-				endZone = player.Opponent.Field.Zones[endZoneIdx];
+				if(actionType == ActionType.TARGET_ALLY)
+				{
+					endZone = player.Field.Zones[endZoneIdx];
+				} else
+				{
+					endZone = player.Opponent.Field.Zones[endZoneIdx];
+				}
 			}
-			actionType = (ActionType)reader.ReadByte();
 		}
 	}
 }

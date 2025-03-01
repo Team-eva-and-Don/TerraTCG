@@ -33,22 +33,21 @@ namespace TerraTCG.Common.Netcode.Packets
 			byte actionIdx = reader.ReadByte();
 			IGameAction action = ActionRegistry.Instance.GetActionFromIdx(actionIdx);
 
-			// Simulate an unreliable network connection
-			// BIG TODO: Remove me!
-			if(Main.rand.NextBool())
-			{
-				return;
-			}
-
 			if(Main.netMode == NetmodeID.Server)
 			{
 				action.Receive(reader, NetSyncPlayerSystem.Instance.DummyGame);
 				
 				// Queue the message for delivery to the next client
-				GameActionPacketQueue.Instance.QueueOutgoingMessage(new ActionPacket(player, action, turnOrder), from: sender);
-
-				// Acknowledge back to the client that we've received the packet
-				new AckPacket(player, turnOrder).Send(to: sender);
+				// Simulate an unreliable connection by not always processing or acknowledging the message
+				if(Main.rand.NextBool(4))
+				{
+					GameActionPacketQueue.Instance.QueueOutgoingMessage(new ActionPacket(player, action, turnOrder), from: sender);
+					if(Main.rand.NextBool())
+					{
+						// Acknowledge back to the client that we've received the packet
+						new AckPacket(player, turnOrder).Send(to: sender);
+					}
+				}
 			} else
 			{
 				var remotePlayer = NetSyncPlayerSystem.Instance.SyncPlayerMap[player.whoAmI];

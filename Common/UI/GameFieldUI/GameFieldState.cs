@@ -10,6 +10,8 @@ using Terraria.UI;
 using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState;
+using TerraTCG.Common.Netcode;
+using TerraTCG.Common.Netcode.Packets;
 
 namespace TerraTCG.Common.UI.GameFieldUI
 {
@@ -56,7 +58,11 @@ namespace TerraTCG.Common.UI.GameFieldUI
             cancelButton = new()
             {
                 RequireDoubleClick = true,
-                OnClickAction = ()=>TCGPlayer.LocalGamePlayer?.Surrender()
+                OnClickAction = ()=>
+				{
+					TCGPlayer.LocalGamePlayer?.Surrender();
+					GameActionPacketQueue.Instance.QueueOutgoingMessage(new SurrenderPacket(Main.LocalPlayer), -1);
+				}
             };
             Append(cancelButton);
 

@@ -40,6 +40,12 @@ namespace TerraTCG.Common.Netcode
 		// Add a new Multiplayer Packet to the outgoing queue for the given player
 		public void QueueOutgoingMessage(TurnOrderPacket packet, int sendTo = -1, int from = -1)
 		{
+			if(Main.netMode == NetmodeID.SinglePlayer)
+			{
+				// Short circuit out of this in single player
+				return;
+			}
+
 			var playerQueue = ActionQueue[packet.WhoAmI];
 			// Don't doubly queue a single message with the same sort order
 			if (!playerQueue.Any(m => m.SortOrder.Equals(packet.TurnOrder)))
@@ -57,11 +63,21 @@ namespace TerraTCG.Common.Netcode
 		// Remove a packet from the outgoing queue once it's been acknowledged by its recipient
 		public void DeuqueueOutgoingMessage(Player player, TurnOrder turnOrder)
 		{
+			if(Main.netMode == NetmodeID.SinglePlayer)
+			{
+				// Short circuit out of this in single player
+				return;
+			}
 			ActionQueue[player.whoAmI] = ActionQueue[player.whoAmI].Where(a => !a.SortOrder.Equals(turnOrder)).ToList();
 		}
 
 		public override void PostUpdatePlayers() // TODO is this the right hook
 		{
+			if(Main.netMode == NetmodeID.SinglePlayer)
+			{
+				// Short circuit out of this in single player
+				return;
+			}
 			var now = Main.netMode == NetmodeID.Server ? 
 				TimeSpan.FromTicks(DateTime.Now.Ticks) : // TODO what time variables are naturally kept on the server?
 				Main.gameTimeCache.TotalGameTime;

@@ -13,6 +13,8 @@ using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.Drawing.Animations.FieldAnimations;
+using TerraTCG.Common.Netcode;
+using TerraTCG.Common.Netcode.Packets;
 using TerraTCG.Common.UI.DeckbuildUI;
 using TerraTCG.Common.UI.GameFieldUI;
 using TerraTCG.Common.UI.NPCDuelChat;
@@ -89,6 +91,7 @@ namespace TerraTCG.Common.UI
 			if(TCGPlayer.LocalGamePlayer.Game.FieldAnimation is QuitNotificationAnimation)
 			{
 				TCGPlayer.LocalGamePlayer.Surrender();
+				GameActionPacketQueue.Instance.QueueOutgoingMessage(new SurrenderPacket(Main.LocalPlayer), -1);
 			} else
 			{
 				TCGPlayer.LocalGamePlayer.Game.FieldAnimation =
