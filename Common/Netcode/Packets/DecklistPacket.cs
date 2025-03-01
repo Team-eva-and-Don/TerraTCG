@@ -59,7 +59,6 @@ namespace TerraTCG.Common.Netcode.Packets
 				var cardIdx = reader.ReadUInt16();
 				var card = CardNetworkSync.Deserialize(cardIdx);
 				collection.Add(card);
-				Main.NewText(card.Name);
 			}
 
 

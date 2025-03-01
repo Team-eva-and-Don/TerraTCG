@@ -28,7 +28,7 @@ namespace TerraTCG.Common.Netcode.Packets
 			} else
 			{
 				var remotePlayer = NetSyncPlayerSystem.Instance.SyncPlayerMap[player.whoAmI];
-				remotePlayer.GamePlayer.Surrender();
+				remotePlayer.Surrender(turnOrder);
 				new AckPacket(player, turnOrder).Send();
 			}
 		}

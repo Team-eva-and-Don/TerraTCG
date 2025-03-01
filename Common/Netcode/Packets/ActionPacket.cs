@@ -52,7 +52,7 @@ namespace TerraTCG.Common.Netcode.Packets
 			{
 				var remotePlayer = NetSyncPlayerSystem.Instance.SyncPlayerMap[player.whoAmI];
 				action.Receive(reader, remotePlayer.GamePlayer.Game);
-				remotePlayer.CompleteAction(action);
+				remotePlayer.CompleteAction(action, turnOrder);
 				// Acknowledge back to the server that we've received the packet
 				new AckPacket(player, turnOrder).Send();
 			}

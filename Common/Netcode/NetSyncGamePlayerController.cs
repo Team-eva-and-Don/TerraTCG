@@ -11,6 +11,7 @@ using TerraTCG.Common.GameSystem.BotPlayer;
 using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.GameSystem.GameState.GameActions;
+using TerraTCG.Common.Netcode.Packets;
 using TerraTCG.Content.NPCs;
 
 namespace TerraTCG.Common.Netcode
@@ -18,6 +19,8 @@ namespace TerraTCG.Common.Netcode
 	// Implementation of IGamePlayerController that performs actions based on 
 	internal class NetSyncGamePlayerController : IGamePlayerController
 	{
+
+		public int PlayerID { get; set; }
 		public GamePlayer GamePlayer { get ; set ; }
 		public CardCollection Deck { get ; set ; }
 		public string DeckName { get ; set ; }
@@ -28,9 +31,21 @@ namespace TerraTCG.Common.Netcode
 
 		public Asset<Texture2D> Sleeve => TextureCache.Instance.CardSleeves[CardSleeve.FOREST];
 
+		// Keep track of the actions already served this game to prevent duplication
+		private List<TurnOrder> CompletedActions { get; set; } = [];
+
+		public bool NotYetPerformed(TurnOrder sequence)
+		{
+			var notYetPerformed = !CompletedActions.Contains(sequence);
+			if(notYetPerformed)
+			{
+				CompletedActions.Add(sequence);
+			}
+			return notYetPerformed;
+		}
 		public void EndGame()
 		{
-			// TODO
+			NetSyncPlayerSystem.Instance.UnregisterPlayer(PlayerID);
 		}
 
 		public void StartGame(GamePlayer player, CardGame game)
@@ -38,14 +53,28 @@ namespace TerraTCG.Common.Netcode
 			GamePlayer = player;
 		}
 
-		public void CompleteAction(IGameAction action)
+		public void CompleteAction(IGameAction action, TurnOrder sequence)
 		{
-			GamePlayer?.Game.LogAndCompleteAction(action);
+			if (NotYetPerformed(sequence))
+			{
+				GamePlayer?.Game.LogAndCompleteAction(action);
+			}
 		}
 
-		internal void PassTurn()
+		internal void PassTurn(TurnOrder sequence)
 		{
-			GamePlayer?.PassTurn();
+			if (NotYetPerformed(sequence))
+			{
+				GamePlayer?.PassTurn();
+			}
+		}
+
+		internal void Surrender(TurnOrder sequence)
+		{
+			if(NotYetPerformed(sequence))
+			{
+				GamePlayer.Surrender();
+			}
 		}
 	}
 
@@ -87,7 +116,7 @@ namespace TerraTCG.Common.Netcode
 			{
 				if(_dummyGame == null)
 				{
-					_dummyGame = new ServersideCardGame();
+					_dummyGame = new CardGame();
 					_dummyGame.StartGame(DummyControllers[0], DummyControllers[1]);
 				}
 				return _dummyGame;
@@ -100,11 +129,17 @@ namespace TerraTCG.Common.Netcode
 		{
 			var controller = new NetSyncGamePlayerController()
 			{
-				Deck = playerDecklist
+				PlayerID = playerId,
+				Deck = playerDecklist,
 			};
 
 			SyncPlayerMap[playerId] = controller;
 			return controller;
+		}
+
+		public void UnregisterPlayer(int playerId)
+		{
+			SyncPlayerMap.Remove(playerId);
 		}
 	}
 }

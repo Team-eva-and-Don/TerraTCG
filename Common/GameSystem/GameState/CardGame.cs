@@ -45,6 +45,8 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal bool IsActive => EndTime == default || TCGPlayer.TotalGameTime - EndTime < FadeOutTime;
 
+		internal bool IsMultiplayer => GamePlayerControllers.Any(c => c is NetSyncGamePlayerController);
+
         public virtual void StartGame(IGamePlayerController player1, IGamePlayerController player2, int? startIdx = null)
         {
             GamePlayers = [
@@ -71,8 +73,11 @@ namespace TerraTCG.Common.GameSystem.GameState
             CurrentTurn.ActivePlayer.Opponent.ManaPerTurn += 1;
             CurrentTurn.Start();
 
-            StartTime = Main._drawInterfaceGameTime.TotalGameTime;
-            SoundEngine.PlaySound(SoundID.MenuOpen);
+			if(Main.netMode != NetmodeID.Server)
+			{
+				StartTime = Main._drawInterfaceGameTime.TotalGameTime;
+				SoundEngine.PlaySound(SoundID.MenuOpen);
+			}
         }
 
         // Start game wrap-up animations

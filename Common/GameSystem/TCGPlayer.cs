@@ -318,7 +318,10 @@ namespace TerraTCG.Common.GameSystem
 			// check whether the game was with a boss
 			// TODO this is a bit clunky but I don't want to add more state variables
 
-			if(NPCInfo.IsBoss)
+			if(GamePlayer.Game.IsMultiplayer)
+			{
+				// TODO how should multiplayer game victory be handled/rewarded?
+			} else if(NPCInfo.IsBoss)
 			{
 				var dueledNPC = Main.npc
 					.Where(npc => npc.active && npc.whoAmI < Main.maxNPCs && npc.netID == NPCInfo.NpcId)
