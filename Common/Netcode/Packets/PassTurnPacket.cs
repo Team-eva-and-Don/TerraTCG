@@ -15,7 +15,14 @@ namespace TerraTCG.Common.Netcode.Packets
 	{
 		public PassTurnPacket() : base() { }
 
-		public PassTurnPacket(Player player) : base(player) { }
+		public PassTurnPacket(Player player) : base(player) 
+		{
+			TurnOrder = new TurnOrder
+			{
+				TurnIndex = TurnOrder.TurnIndex,
+				ActionIndex = 255,
+			};
+		}
 
 		public PassTurnPacket(Player player, TurnOrder turnOrder, int opponentId) : base(player, turnOrder, opponentId) { }
 

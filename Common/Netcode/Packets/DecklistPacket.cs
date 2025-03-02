@@ -75,13 +75,13 @@ namespace TerraTCG.Common.Netcode.Packets
 				new AckPacket(player, turnOrder, recipient).Send(to: sender);
 			} else
 			{
-				// Start a game between the player and a networked opponent
-				var remotePlayer = NetSyncPlayerSystem.Instance.RegisterPlayer(player.whoAmI, collection);
 
 				// If we are not yet in game - we are receiving an opponent's invite to duel
 				// Start the game, then send our deck list back to the opponent
 				if (TCGPlayer.LocalGamePlayer == null)
 				{
+					// Start a game between the player and a networked opponent
+					var remotePlayer = NetSyncPlayerSystem.Instance.RegisterPlayer(player.whoAmI, collection);
 					ModContent.GetInstance<GameModSystem>().StartGame(remotePlayer, TCGPlayer.LocalPlayer, 0);
 					// Send a decklist back to the paired opponent
 					var handAndDeck = new CardCollection()
@@ -90,8 +90,10 @@ namespace TerraTCG.Common.Netcode.Packets
 					};
 					GameActionPacketQueue.Instance.QueueOutgoingMessage(
 						new DecklistPacket(Main.LocalPlayer, player.whoAmI, handAndDeck));
-				} else
+				} else if (TCGPlayer.LocalGamePlayer.Opponent.Controller is NoOpNetGamePlayerController)
 				{
+					// Start a game between the player and a networked opponent
+					var remotePlayer = NetSyncPlayerSystem.Instance.RegisterPlayer(player.whoAmI, collection);
 					// We are already in a game but have not yet replaced the placeholder enemy with the
 					// opponent's actual decklist, do that now
 					var game = TCGPlayer.LocalGamePlayer.Game;
