@@ -11,9 +11,14 @@ namespace TerraTCG.Common.Netcode.Packets
 	public abstract class MPPacket
 	{
 		//Shortcut
-		public virtual void Send(int to = -1, int from = -1, Func<Player, bool> bcCondition = null)
+		public void Send(int to = -1, int from = -1, Func<Player, bool> bcCondition = null)
 		{
-			NetHandler.Send(this, to, from, bcCondition);
+			// simulate unreliable network by dropping 25% of packets
+			// BIG TODO: Remove me
+			if (!Main.rand.NextBool(4))
+			{
+				NetHandler.Send(this, to, from, bcCondition);
+			}
 		}
 
 		/// <summary>
