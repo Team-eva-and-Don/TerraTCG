@@ -18,28 +18,34 @@ namespace TerraTCG.Common.Commands
     {
         public override CommandType Type => CommandType.Chat;
 
-        public override string Command => "accept";
+        public override string Command => "acc";
 
         public override string Description => "Start a networked TerraTCG game!";
 
         public override void Action(CommandCaller caller, string input, string[] args)
         {
-			var matchmaker = MatchmakingSystem.Instance;
-            if(caller.Player.whoAmI == Main.myPlayer && matchmaker.NextPlayer is Player opponent)
-            {
-				matchmaker.RemoveLookingForGamePlayer(opponent);
-                var myPlayer = TCGPlayer.LocalPlayer;
+			if(caller.Player.whoAmI != Main.myPlayer)
+			{
+				return;
+			}
+			var playerId = int.Parse(args[0]);
+			if (Main.player[playerId] is Player player && player.active && player.GetModPlayer<GameStateSyncPlayer>().LookingForGame)
+			{
+				var myPlayer = TCGPlayer.LocalPlayer;
 				var opponentController = new NoOpNetGamePlayerController(); // Replaced with real opponent during deck sync
 
-                ModContent.GetInstance<GameModSystem>().StartGame(myPlayer, opponentController, 0);
+				ModContent.GetInstance<GameModSystem>().StartGame(myPlayer, opponentController, 0);
 				// Send out a net packet to trigger a game with another player
 				var handAndDeck = new CardCollection()
 				{
 					Cards = [.. myPlayer.GamePlayer.Deck.Cards, .. myPlayer.GamePlayer.Hand.Cards]
 				};
 				GameActionPacketQueue.Instance.QueueOutgoingMessage(
-					new DecklistPacket(myPlayer.Player, opponent.whoAmI, handAndDeck));
-            }
+					new DecklistPacket(myPlayer.Player, playerId, handAndDeck));
+			} else
+			{
+				Main.NewText($"Player with id {playerId} isn't looking for a game!");
+			}
         }
     }
 }

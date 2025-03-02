@@ -17,6 +17,7 @@ using TerraTCG.Common.GameSystem.BotPlayer;
 using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState;
+using TerraTCG.Common.Netcode;
 using TerraTCG.Common.Netcode.Packets;
 using TerraTCG.Common.UI;
 using TerraTCG.Content.Gores;
@@ -343,6 +344,11 @@ namespace TerraTCG.Common.GameSystem
             MouseoverZone = null;
 			NPCInfo = default;
             ModContent.GetInstance<UserInterfaces>().EndGame();
+			// Update sync state to let other players know we're no longer in game
+			if(Main.netMode == NetmodeID.MultiplayerClient)
+			{
+				Main.LocalPlayer.GetModPlayer<GameStateSyncPlayer>().BroadcastSyncState();
+			}
         }
 
         public void AddCardsToCollection(List<Card> cards)

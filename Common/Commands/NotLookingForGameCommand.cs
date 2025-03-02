@@ -14,11 +14,11 @@ using TerraTCG.Common.Netcode.Packets;
 
 namespace TerraTCG.Common.Commands
 {
-    internal class LookingForGameCommand : ModCommand
+    internal class NotLookingForGameCommand : ModCommand
     {
         public override CommandType Type => CommandType.Chat;
 
-        public override string Command => "lfg";
+        public override string Command => "nlfg";
 
         public override string Description => "Start a networked TerraTCG game!";
 
@@ -28,7 +28,7 @@ namespace TerraTCG.Common.Commands
             {
 				// Broadcast to other clients that you are looking for a game
 				var syncPlayer = caller.Player.GetModPlayer<GameStateSyncPlayer>();
-				syncPlayer.LookingForGame = true;
+				syncPlayer.LookingForGame = false;
 				syncPlayer.BroadcastSyncState();
             }
         }

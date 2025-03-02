@@ -90,6 +90,9 @@ namespace TerraTCG.Common.Netcode.Packets
 					};
 					GameActionPacketQueue.Instance.QueueOutgoingMessage(
 						new DecklistPacket(Main.LocalPlayer, player.whoAmI, handAndDeck));
+
+					// Update sync state to let other players know we're no longer looking for a game
+					Main.LocalPlayer.GetModPlayer<GameStateSyncPlayer>().BroadcastSyncState();
 				} else if (TCGPlayer.LocalGamePlayer.Opponent.Controller is NoOpNetGamePlayerController)
 				{
 					// Start a game between the player and a networked opponent
@@ -99,9 +102,10 @@ namespace TerraTCG.Common.Netcode.Packets
 					var game = TCGPlayer.LocalGamePlayer.Game;
 					game.SwapController(remotePlayer, remotePlayer.Deck.Copy());
 
-					// Remove this player from the list of players looking for a game
-					new AcceptGamePacket(Main.LocalPlayer).Send();
+					// Update sync state to let other players know we're no longer looking for a game
+					Main.LocalPlayer.GetModPlayer<GameStateSyncPlayer>().BroadcastSyncState();
 				}
+				// Acknowledge the message from the server
 				new AckPacket(player, turnOrder, recipient).Send();
 			}
 		}
