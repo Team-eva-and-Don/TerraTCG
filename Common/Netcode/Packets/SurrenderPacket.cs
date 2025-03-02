@@ -15,7 +15,12 @@ namespace TerraTCG.Common.Netcode.Packets
 	{
 		public SurrenderPacket() : base() { }
 
-		public SurrenderPacket(Player player) : base(player) { }
+		public SurrenderPacket(Player player) : base(player) 
+		{
+			// Use special index for surrender action to ensure it doesn't
+			// collide with another game action
+			TurnOrder = new() { ActionIndex = 255, TurnIndex = 255 };
+		}
 
 		public SurrenderPacket(Player player, TurnOrder turnOrder, int opponentId) : base(player, turnOrder, opponentId) { }
 
