@@ -49,6 +49,7 @@ namespace TerraTCG.Common.Netcode.Packets
 			TurnOrder = turnOrder;
 			OpponentId = opponentId;
 		}
+
 		protected override void PostSend(BinaryWriter writer, Player player)
 		{
 			writer.Write((byte)TurnOrder.TurnIndex);

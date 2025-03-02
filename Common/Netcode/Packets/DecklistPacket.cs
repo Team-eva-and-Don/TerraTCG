@@ -47,7 +47,10 @@ namespace TerraTCG.Common.Netcode.Packets
 
 		}
 
-		public DecklistPacket(Player player, int opponentId, CardCollection cardCollection): base(player, new(), opponentId)
+		public DecklistPacket(Player player, int opponentId, CardCollection cardCollection): base(
+			player, 
+			new() { TurnIndex = 255, ActionIndex = 254 }, 
+			opponentId)
 		{
 			Collection = cardCollection;
 		}
@@ -67,7 +70,9 @@ namespace TerraTCG.Common.Netcode.Packets
 
 			if(Main.netMode == NetmodeID.Server)
 			{
-				new DecklistPacket(player, recipient, collection).Send(to: recipient, from: sender);
+				GameActionPacketQueue.Instance.QueueOutgoingMessage(
+					new DecklistPacket(player, recipient, collection), from: sender);
+				new AckPacket(player, turnOrder, recipient).Send(to: sender);
 			} else
 			{
 				// Start a game between the player and a networked opponent
@@ -83,7 +88,8 @@ namespace TerraTCG.Common.Netcode.Packets
 					{
 						Cards = [.. TCGPlayer.LocalGamePlayer.Deck.Cards, .. TCGPlayer.LocalGamePlayer.Hand.Cards]
 					};
-					new DecklistPacket(Main.LocalPlayer, player.whoAmI, handAndDeck).Send();
+					GameActionPacketQueue.Instance.QueueOutgoingMessage(
+						new DecklistPacket(Main.LocalPlayer, player.whoAmI, handAndDeck));
 				} else
 				{
 					// We are already in a game but have not yet replaced the placeholder enemy with the
@@ -94,6 +100,7 @@ namespace TerraTCG.Common.Netcode.Packets
 					// Remove this player from the list of players looking for a game
 					new AcceptGamePacket(Main.LocalPlayer).Send();
 				}
+				new AckPacket(player, turnOrder, recipient).Send();
 			}
 		}
 

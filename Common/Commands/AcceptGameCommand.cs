@@ -37,7 +37,8 @@ namespace TerraTCG.Common.Commands
 				{
 					Cards = [.. myPlayer.GamePlayer.Deck.Cards, .. myPlayer.GamePlayer.Hand.Cards]
 				};
-				new DecklistPacket(myPlayer.Player, opponent.whoAmI, handAndDeck).Send();
+				GameActionPacketQueue.Instance.QueueOutgoingMessage(
+					new DecklistPacket(myPlayer.Player, opponent.whoAmI, handAndDeck));
             }
         }
     }

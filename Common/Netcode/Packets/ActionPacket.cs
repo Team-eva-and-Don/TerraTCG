@@ -38,19 +38,11 @@ namespace TerraTCG.Common.Netcode.Packets
 			if(Main.netMode == NetmodeID.Server)
 			{
 				action.Receive(reader, NetSyncPlayerSystem.Instance.DummyGame);
-				
-				// Queue the message for delivery to the next client
-				// Simulate an unreliable connection by not always processing or acknowledging the message
-				if(Main.rand.NextBool(4))
-				{
-					GameActionPacketQueue.Instance.QueueOutgoingMessage(
-						new ActionPacket(player, action, turnOrder, recipient), from: sender);
-					if(Main.rand.NextBool())
-					{
-						// Acknowledge back to the client that we've received the packet
-						new AckPacket(player, turnOrder, recipient).Send(to: sender);
-					}
-				}
+				GameActionPacketQueue.Instance.QueueOutgoingMessage(
+					new ActionPacket(player, action, turnOrder, recipient), from: sender);
+
+				// Acknowledge back to the client that we've received the packet
+				new AckPacket(player, turnOrder, recipient).Send(to: sender);
 			} else
 			{
 				var remotePlayer = NetSyncPlayerSystem.Instance.SyncPlayerMap[player.whoAmI];

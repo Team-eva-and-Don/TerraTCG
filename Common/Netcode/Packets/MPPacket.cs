@@ -11,7 +11,7 @@ namespace TerraTCG.Common.Netcode.Packets
 	public abstract class MPPacket
 	{
 		//Shortcut
-		public void Send(int to = -1, int from = -1, Func<Player, bool> bcCondition = null)
+		public virtual void Send(int to = -1, int from = -1, Func<Player, bool> bcCondition = null)
 		{
 			NetHandler.Send(this, to, from, bcCondition);
 		}
