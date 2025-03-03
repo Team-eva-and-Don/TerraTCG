@@ -122,7 +122,19 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             return $"{ActionText("Use")} {startZone.CardName}{ActionText("Ownership")} {ActionText("Skill")}";
         }
 
-        private bool CanAttackZone(Zone zone)
+		public PlayerResources GetZoneResources(Zone zone) => zone switch
+		{
+			// does this first case happen?
+			_ when actionType != ActionType.DEFAULT => new(0, mana: GetSkillCost(), 0),
+			_ when player.Owns(endZone) => new(0, mana: GetMoveCost(), 0),
+			_ => new(0, mana: GetAttackCostWithZoneShifts(startZone, zone), 0)
+		};
+
+		public PlayerResources GetActionButtonResources() => CanAcceptActionButton()
+			? new(0, mana: GetSkillCost(), 0)
+			: default;
+
+		private bool CanAttackZone(Zone zone)
         {
             bool hasEnoughMana = GetAttackCostWithZoneShifts(startZone, zone) <= player.Resources.Mana;
             InsufficientManaFor = hasEnoughMana ? "": ActionText("Attack");
@@ -159,6 +171,8 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 			}
 			return false;
         }
+
+		private int GetMoveCost() => startZone.PlacedCard.Template.MoveCost;
 
         private void DoMove()
         {
@@ -198,7 +212,9 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             GameSounds.PlaySound(GameAction.ATTACK);
         }
 
-        private void DoSkill()
+		private int GetSkillCost() => startZone.PlacedCard.GetSkillWithModifiers(startZone, null).Cost;
+
+		private void DoSkill()
         {
             var skill = startZone.PlacedCard.GetSkillWithModifiers(startZone, null);
             startZone.PlacedCard.IsExerted = true;

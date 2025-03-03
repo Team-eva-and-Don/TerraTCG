@@ -46,6 +46,12 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
         public string GetCantAcceptZoneTooltip(Zone zone) => player.Owns(zone) && !zone.IsEmpty() ? 
             $"{ActionText("NotEnoughMana")} {ActionText("To")} {ActionText("Use")}" : "";
 
+		public PlayerResources GetZoneResources(Zone zone) => new(
+			0,
+			mana: zone.PlacedCard.ModifyIncomingSkill(card).Cost,
+			0
+		);
+
         public void Complete()
         {
             var showAnimation = new ShowCardAnimation(TCGPlayer.TotalGameTime, card, zone, player == TCGPlayer.LocalGamePlayer);

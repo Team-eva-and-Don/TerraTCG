@@ -18,5 +18,8 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         public PlayerResources UseResource(int health = 0, int mana = 0, int townsfolkMana = 0)
             => new(Health - health, Mana - mana, TownsfolkMana - townsfolkMana);
+
+		public static PlayerResources operator -(PlayerResources a, PlayerResources b)
+			=> a.UseResource(b.Health, b.Mana, b.TownsfolkMana);
     }
 }

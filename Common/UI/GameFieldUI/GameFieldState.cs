@@ -108,7 +108,11 @@ namespace TerraTCG.Common.UI.GameFieldUI
         public override void Update(GameTime gameTime)
         {
             SetRectangles();
-            base.Update(gameTime);
+			if (TCGPlayer.LocalGamePlayer is GamePlayer gamePlayer)
+			{
+				gamePlayer.PreviewResources = gamePlayer.Resources;
+			}
+			base.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)

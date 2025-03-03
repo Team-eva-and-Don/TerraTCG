@@ -65,7 +65,11 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             return null;
         }
 
-        public virtual void Complete()
+		public virtual PlayerResources GetZoneResources(Zone zone) => new(0, 0, townsfolkMana: 1);
+
+		public virtual PlayerResources GetActionButtonResources() => new(0, 0, townsfolkMana: 1);
+
+		public virtual void Complete()
         {
             Player.Resources = Player.Resources.UseResource(townsfolkMana: 1);
             Player.Hand.Remove(Card);
