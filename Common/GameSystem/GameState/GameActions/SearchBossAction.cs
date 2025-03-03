@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,9 +11,13 @@ using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
-    internal class SearchBossAction(Card card, GamePlayer player) : TownsfolkAction(card, player), IGameAction
+    internal class SearchBossAction : TownsfolkAction, IGameAction
     {
-        public override ActionLogInfo GetLogMessage() => new(card, $"{ActionText("Used")} {Card.CardName}");
+		public SearchBossAction() : base() { }
+
+		public SearchBossAction(Card card, GamePlayer player) : base(card, player) { }
+
+        public override ActionLogInfo GetLogMessage() => new(Card, $"{ActionText("Used")} {Card.CardName}");
 
         public override bool CanAcceptZone(Zone zone) => false;
 
@@ -38,5 +43,14 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 			}
             GameSounds.PlaySound(GameAction.USE_SKILL);
         }
+		public override void PostSend(BinaryWriter writer)
+		{
+			// no-op
+		}
+
+		public override void PostReceive(BinaryReader reader, CardGame game)
+		{
+			// no-op
+		}
     }
 }

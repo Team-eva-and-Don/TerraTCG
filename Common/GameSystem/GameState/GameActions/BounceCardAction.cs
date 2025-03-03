@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,9 +11,14 @@ using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
-    internal class BounceCardAction(Card card, GamePlayer player) : TownsfolkAction(card, player)
+    internal class BounceCardAction : TownsfolkAction
     {
         private Zone zone;
+
+		public BounceCardAction() : base() { }
+
+		public BounceCardAction(Card card, GamePlayer player) : base(card, player) { }
+
         public override ActionLogInfo GetLogMessage() => new(Card, $"{ActionText("Bounced")} {ActionText("With")} {Card.CardName}");
 
         public override bool CanAcceptZone(Zone zone) => base.CanAcceptZone(zone) && 
@@ -44,5 +50,15 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             Player.Hand.Add(leavingCard.Template);
             GameSounds.PlaySound(GameAction.BOUNCE_CARD);
         }
-    }
+
+		public override void PostSend(BinaryWriter writer)
+		{
+			writer.Write((byte)zone.Index);
+		}
+
+		public override void PostReceive(BinaryReader reader, CardGame game)
+		{
+			zone = Player.Field.Zones[reader.ReadByte()];
+		}
+	}
 }

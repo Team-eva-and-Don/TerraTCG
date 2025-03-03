@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,9 +11,18 @@ using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
-    internal class RampAction(Card card, GamePlayer player, int amount=1) : TownsfolkAction(card, player), IGameAction
+    internal class RampAction : TownsfolkAction, IGameAction
     {
-        public override ActionLogInfo GetLogMessage() => new(card, $"{ActionText("AddedMana")} {ActionText("With")} {Card.CardName}");
+		private int amount;
+
+		public RampAction() : base() { }
+
+		public RampAction(Card card, GamePlayer player, int amount=1) : base(card, player) 
+		{
+			this.amount = amount;
+		}
+
+        public override ActionLogInfo GetLogMessage() => new(Card, $"{ActionText("AddedMana")} {ActionText("With")} {Card.CardName}");
 
         public override bool CanAcceptZone(Zone zone) => false;
 
@@ -30,5 +40,15 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             Player.ManaPerTurn += amount;
             GameSounds.PlaySound(GameAction.USE_SKILL);
         }
+
+		public override void PostSend(BinaryWriter writer)
+		{
+			writer.Write((byte)amount);
+		}
+
+		public override void PostReceive(BinaryReader reader, CardGame game)
+		{
+			amount = reader.ReadByte();
+		}
     }
 }

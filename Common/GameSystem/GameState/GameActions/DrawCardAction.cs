@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,9 +11,17 @@ using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
-    internal class DrawCardAction(Card card, GamePlayer player, int drawCount=1) : TownsfolkAction(card, player), IGameAction
+    internal class DrawCardAction : TownsfolkAction, IGameAction
     {
-        public override ActionLogInfo GetLogMessage() => new(card, $"{ActionText("Drew")} {drawCount} {ActionText("Cards")} {ActionText("With")} {Card.CardName}");
+		private int drawCount;
+		public DrawCardAction() : base() { }
+
+		public DrawCardAction(Card card, GamePlayer player, int drawCount=1) : base(card, player) 
+		{ 
+			this.drawCount = drawCount; 
+		}
+
+        public override ActionLogInfo GetLogMessage() => new(Card, $"{ActionText("Drew")} {drawCount} {ActionText("Cards")} {ActionText("With")} {Card.CardName}");
 
         public override bool CanAcceptZone(Zone zone) => false;
 
@@ -34,5 +43,15 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             }
             GameSounds.PlaySound(GameAction.USE_SKILL);
         }
+
+		public override void PostSend(BinaryWriter writer)
+		{
+			writer.Write((byte)drawCount);
+		}
+
+		public override void PostReceive(BinaryReader reader, CardGame game)
+		{
+			drawCount = reader.ReadByte();
+		}
     }
 }

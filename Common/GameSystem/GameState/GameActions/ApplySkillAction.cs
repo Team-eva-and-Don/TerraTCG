@@ -1,18 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using TerraTCG.Common.GameSystem.Drawing.Animations;
 using TerraTCG.Common.GameSystem.Drawing.Animations.FieldAnimations;
+using TerraTCG.Common.Netcode.Packets;
 using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
-    internal class ApplySkillAction(Card card, GamePlayer player) : IGameAction
+    internal class ApplySkillAction() : IGameAction
     {
         private Zone zone;
+
+		private Card card;
+		private GamePlayer player;
+
+		public ApplySkillAction(Card card, GamePlayer player) : this()
+		{
+			this.card = card;
+			this.player = player;
+		}
 
         public bool CanAcceptZone(Zone zone) => player.Owns(zone) && !zone.IsEmpty() && player.Resources.Mana >= zone.PlacedCard.ModifyIncomingSkill(card).Cost;
 
@@ -57,5 +68,18 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
                 GameSounds.PlaySound(GameAction.USE_CONSUMABLE);
             }
         }
+		public void Send(BinaryWriter writer)
+		{
+			writer.Write(player.Index);
+			writer.Write(CardNetworkSync.Serialize(card));
+			writer.Write((byte)zone.Index);
+		}
+
+		public void Receive(BinaryReader reader, CardGame game)
+		{
+			player = game.GamePlayers[reader.ReadByte()];
+			card = CardNetworkSync.Deserialize(reader.ReadUInt16());
+			zone = player.Field.Zones[reader.ReadByte()];
+		}
     }
 }

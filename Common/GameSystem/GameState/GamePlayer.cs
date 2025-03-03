@@ -11,6 +11,7 @@ using TerraTCG.Common.GameSystem.BotPlayer;
 using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.GameSystem.Drawing.Animations;
 using TerraTCG.Common.GameSystem.GameState.GameActions;
+using TerraTCG.Common.Netcode;
 using TerraTCG.Content.NPCs;
 
 namespace TerraTCG.Common.GameSystem.GameState
@@ -24,6 +25,8 @@ namespace TerraTCG.Common.GameSystem.GameState
         internal CardCollection Deck { get; set; }
 
 		internal IGamePlayerController Controller { get; set; }
+
+		internal byte Index => (byte)Game.GamePlayers.IndexOf(this);
 
         internal int ManaPerTurn { get; set; } = 0;
 
@@ -51,7 +54,19 @@ namespace TerraTCG.Common.GameSystem.GameState
         // TODO real implementation
         internal bool IsMyTurn => Game.CurrentTurn.ActivePlayer == this;
 
-        public static Card GetCard<T>() where T : BaseCardTemplate, ICardTemplate
+		public int OpponentPlayerId
+		{
+			get
+			{
+				if(Opponent.Controller is NetSyncGamePlayerController controller)
+				{
+					return controller.PlayerId;
+				}
+				throw new Exception("Attempting to access opponent ID while not in a multiplayer match!");
+			}
+		}
+
+		public static Card GetCard<T>() where T : BaseCardTemplate, ICardTemplate
         {
             return ModContent.GetInstance<T>().Card;
         }
@@ -64,14 +79,18 @@ namespace TerraTCG.Common.GameSystem.GameState
 
 			Controller = controller;
 
-            Deck.Shuffle();
+			if(controller.ShouldShuffle)
+			{
+				Deck.Shuffle();
+
+				// Auto-mulligan a 1+ fighter creature hand for the player
+				while(!Deck.Cards.Skip(15).Any(
+					c=>c.CardType == CardType.CREATURE && c.SubTypes[0] != CardSubtype.EXPERT && c.SubTypes.Last() != CardSubtype.CRITTER))
+				{
+					Deck.Shuffle();
+				}
+			}
         
-            // Auto-mulligan a 1+ fighter creature hand for the player
-            while(!Deck.Cards.Skip(15).Any(
-				c=>c.CardType == CardType.CREATURE && c.SubTypes[0] != CardSubtype.EXPERT && c.SubTypes.Last() != CardSubtype.CRITTER))
-            {
-                Deck.Shuffle();
-            }
 
             Hand = new CardCollection()
             {

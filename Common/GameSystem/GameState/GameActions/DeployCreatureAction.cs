@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,13 +11,23 @@ using TerraTCG.Common.GameSystem.BotPlayer;
 using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.GameSystem.Drawing.Animations;
 using TerraTCG.Common.GameSystem.GameState.Modifiers;
+using TerraTCG.Common.Netcode.Packets;
 using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
-    internal class DeployCreatureAction(Card card, GamePlayer player) : IGameAction
+    internal class DeployCreatureAction() : IGameAction
     {
         private Zone zone;
+
+		private Card card;
+		private GamePlayer player;
+
+		public DeployCreatureAction(Card card, GamePlayer player) : this()
+		{
+			this.card = card;
+			this.player = player;
+		}
 
         public ActionLogInfo GetLogMessage() => new(card,
             ActionText(card.SubTypes.Contains(CardSubtype.EXPERT) ? "Promoted" : "Played") + " " + card.CardName);
@@ -92,6 +103,20 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
         {
             // No-op
         }
+
+		public void Send(BinaryWriter writer)
+		{
+			writer.Write(player.Index);
+			writer.Write(CardNetworkSync.Serialize(card));
+			writer.Write((byte)zone.Index);
+		}
+
+		public void Receive(BinaryReader reader, CardGame game)
+		{
+			player = game.GamePlayers[reader.ReadByte()];
+			card = CardNetworkSync.Deserialize(reader.ReadUInt16());
+			zone = player.Field.Zones[reader.ReadByte()];
+		}
 
     }
 }

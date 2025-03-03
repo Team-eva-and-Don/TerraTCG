@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,11 +12,15 @@ using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
-    internal class HealAndRemoveDebuffsAction(Card card, GamePlayer player) : TownsfolkAction(card, player)
+    internal class HealAndRemoveDebuffsAction : TownsfolkAction
     {
         private Zone zone;
 
-        public override ActionLogInfo GetLogMessage() => new(card, $"{ActionText("Used")} {Card.CardName} {ActionText("On")} {zone.CardName}");
+		public HealAndRemoveDebuffsAction() : base() { }
+
+		public HealAndRemoveDebuffsAction(Card card, GamePlayer player) : base(card, player) { }
+
+        public override ActionLogInfo GetLogMessage() => new(Card, $"{ActionText("Used")} {Card.CardName} {ActionText("On")} {zone.CardName}");
 
         public override bool CanAcceptZone(Zone zone) => base.CanAcceptZone(zone) && Player.Owns(zone) && !zone.IsEmpty();
 
@@ -41,5 +46,15 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             zone.QueueAnimation(new ActionAnimation(zone.PlacedCard));
             GameSounds.PlaySound(GameAction.USE_SKILL);
         }
+
+		public override void PostSend(BinaryWriter writer)
+		{
+			writer.Write((byte)zone.Index);
+		}
+
+		public override void PostReceive(BinaryReader reader, CardGame game)
+		{
+			zone = Player.Field.Zones[reader.ReadByte()];
+		}
     }
 }

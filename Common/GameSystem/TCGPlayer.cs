@@ -17,6 +17,8 @@ using TerraTCG.Common.GameSystem.BotPlayer;
 using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState;
+using TerraTCG.Common.Netcode;
+using TerraTCG.Common.Netcode.Packets;
 using TerraTCG.Common.UI;
 using TerraTCG.Content.Gores;
 using TerraTCG.Content.Items;
@@ -29,6 +31,9 @@ namespace TerraTCG.Common.GameSystem
         public GamePlayer GamePlayer { get; set; }
 
         public CardCollection Deck { get; set; }
+
+		// Whether the game should shuffle the deck list given for this player
+		public bool ShouldShuffle { get => true; }
 
         public string DeckName { get; set; }
 
@@ -152,6 +157,7 @@ namespace TerraTCG.Common.GameSystem
 			MouseoverCard = null;
 			MouseoverZone = null;
             ModContent.GetInstance<UserInterfaces>().StartGame();
+
         }
 
 		private IEnumerable<(int, NamedNPCDeck)> UnlockedDecks =>
@@ -313,7 +319,10 @@ namespace TerraTCG.Common.GameSystem
 			// check whether the game was with a boss
 			// TODO this is a bit clunky but I don't want to add more state variables
 
-			if(NPCInfo.IsBoss)
+			if(GamePlayer.Game.IsMultiplayer)
+			{
+				// TODO how should multiplayer game victory be handled/rewarded?
+			} else if(NPCInfo.IsBoss)
 			{
 				var dueledNPC = Main.npc
 					.Where(npc => npc.active && npc.whoAmI < Main.maxNPCs && npc.netID == NPCInfo.NpcId)
@@ -335,6 +344,11 @@ namespace TerraTCG.Common.GameSystem
             MouseoverZone = null;
 			NPCInfo = default;
             ModContent.GetInstance<UserInterfaces>().EndGame();
+			// Update sync state to let other players know we're no longer in game
+			if(Main.netMode == NetmodeID.MultiplayerClient)
+			{
+				Main.LocalPlayer.GetModPlayer<GameStateSyncPlayer>().BroadcastSyncState();
+			}
         }
 
         public void AddCardsToCollection(List<Card> cards)

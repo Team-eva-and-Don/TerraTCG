@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,12 +18,22 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
     // - Declare an attack by clicking an ally zone, then any enemy zone
     // - Move a creature by clicking two ally zones
     // - Use a skill by clicking an ally zone, then a "use skill" button
-    internal class MoveCardOrAttackAction(Zone startZone, GamePlayer player) : IGameAction
+    internal class MoveCardOrAttackAction : IGameAction
     {
         private Zone endZone;
-
-
+		private Zone startZone;
+		private GamePlayer player;
         private ActionType actionType = ActionType.DEFAULT;
+
+		public MoveCardOrAttackAction()  { }
+
+		public MoveCardOrAttackAction(Zone startZone, GamePlayer player) 
+		{
+			this.startZone = startZone;
+			this.player = player;
+		}
+
+
 
 
         private string _logMessage;
@@ -235,5 +246,32 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
         {
             // No-op
         }
-    }
+
+		public void Send(BinaryWriter writer)
+		{
+			// Invariable info - player & start zone
+			writer.Write(player.Index);
+			writer.Write((byte)startZone.Index);
+			// Variable info - end zone and/or action type
+			writer.Write((byte)actionType);
+			writer.Write((byte)(endZone?.Index ?? 255));
+		}
+
+		public void Receive(BinaryReader reader, CardGame game)
+		{
+			player = game.GamePlayers[reader.ReadByte()];
+			startZone = player.Field.Zones[reader.ReadByte()];
+			actionType = (ActionType)reader.ReadByte();
+			if(reader.ReadByte() is var endZoneIdx && endZoneIdx != 255)
+			{
+				if(actionType == ActionType.TARGET_ALLY)
+				{
+					endZone = player.Field.Zones[endZoneIdx];
+				} else
+				{
+					endZone = player.Opponent.Field.Zones[endZoneIdx];
+				}
+			}
+		}
+	}
 }

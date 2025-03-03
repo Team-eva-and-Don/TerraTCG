@@ -15,6 +15,8 @@ using TerraTCG.Common.GameSystem.Drawing.Animations;
 using TerraTCG.Common.GameSystem.Drawing.Animations.FieldAnimations;
 using TerraTCG.Common.GameSystem.GameState.GameActions;
 using TerraTCG.Common.GameSystem.GameState.Modifiers;
+using TerraTCG.Common.Netcode;
+using TerraTCG.Common.Netcode.Packets;
 using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState
@@ -43,7 +45,9 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal bool IsActive => EndTime == default || TCGPlayer.TotalGameTime - EndTime < FadeOutTime;
 
-        public void StartGame(IGamePlayerController player1, IGamePlayerController player2)
+		internal bool IsMultiplayer => GamePlayerControllers.Any(c => c is NetSyncGamePlayerController);
+
+        public virtual void StartGame(IGamePlayerController player1, IGamePlayerController player2, int? startIdx = null)
         {
             GamePlayers = [
                 new GamePlayer(this, player1.Deck.Copy(), player1),
@@ -63,14 +67,17 @@ namespace TerraTCG.Common.GameSystem.GameState
             CurrentTurn = new()
             {
                 Game = this,
-                ActivePlayer = GamePlayers[Main.rand.Next(2)],
+                ActivePlayer = GamePlayers[startIdx ?? Main.rand.Next(2)],
                 TurnCount = 1
             };
             CurrentTurn.ActivePlayer.Opponent.ManaPerTurn += 1;
             CurrentTurn.Start();
 
-            StartTime = Main._drawInterfaceGameTime.TotalGameTime;
-            SoundEngine.PlaySound(SoundID.MenuOpen);
+			if(Main.netMode != NetmodeID.Server)
+			{
+				StartTime = Main._drawInterfaceGameTime.TotalGameTime;
+				SoundEngine.PlaySound(SoundID.MenuOpen);
+			}
         }
 
         // Start game wrap-up animations
@@ -170,8 +177,29 @@ namespace TerraTCG.Common.GameSystem.GameState
             var info = action.GetLogMessage();
             var toLog = new ActionLogInfo(info.Card, player + " " + info.Message);
             CurrentTurn.ActionLog.Add(toLog);
+
+			if(IsMultiplayer && CurrentTurn.ActivePlayer == TCGPlayer.LocalGamePlayer)
+			{
+				GameActionPacketQueue.Instance.QueueOutgoingMessage(new ActionPacket(Main.LocalPlayer, action));
+			}
         }
-    }
+
+		// Swap in a new controller for the existing game,
+		// Used to replace a placeholder dummy player with a real opponent in networked gameplay
+		internal void SwapController(IGamePlayerController newController, CardCollection deckList, int replaceIdx = 1)
+		{
+			var gamePlayer = GamePlayers[replaceIdx];
+			GamePlayerControllers[replaceIdx] = newController;
+			newController.GamePlayer = gamePlayer;
+			gamePlayer.Controller = newController;
+			gamePlayer.Deck = deckList;
+			gamePlayer.Hand = new();
+			for(int i = 0; i < 5; i++)
+			{
+				gamePlayer.Hand.Add(gamePlayer.Deck.Draw());
+			}
+		}
+	}
 
     internal class GameModSystem : ModSystem
     {
@@ -183,10 +211,10 @@ namespace TerraTCG.Common.GameSystem.GameState
         }
 
 
-        public CardGame StartGame(IGamePlayerController player1, IGamePlayerController player2)
+        public CardGame StartGame(IGamePlayerController player1, IGamePlayerController player2, int? startIdx = null)
         {
             var game = new CardGame();
-            game.StartGame(player1, player2);
+            game.StartGame(player1, player2, startIdx);
             ActiveGames.Add(game);
             return game;
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,10 +13,23 @@ using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
-    internal class MoveCardAction(Card card, GamePlayer player, bool targetEnemies = true, bool allowSwap = false) : TownsfolkAction(card, player)
+    internal class MoveCardAction : TownsfolkAction
     {
         private Zone sourceZone;
         private Zone destZone;
+		private readonly bool targetEnemies;
+		private readonly bool allowSwap;
+
+		public MoveCardAction() : base()
+		{
+
+		}
+
+		public MoveCardAction(Card card, GamePlayer player, bool targetEnemies = true, bool allowSwap = false) : base(card, player)
+		{
+			this.targetEnemies = true;
+			this.allowSwap = false;
+		}
 
         public override ActionLogInfo GetLogMessage() => new(Card, $"{ActionText("Moved")} {destZone.CardName}");
 
@@ -89,5 +103,20 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             destZone.QueueAnimation(new PlaceCardAnimation(movedCard));
             GameSounds.PlaySound(GameAction.PLACE_CARD);
         }
-    }
+
+		public override void PostSend(BinaryWriter writer)
+		{
+			writer.Write(sourceZone.Owner == Player);
+			writer.Write((byte)sourceZone.Index);
+			writer.Write((byte)destZone.Index);
+		}
+
+		public override void PostReceive(BinaryReader reader, CardGame game)
+		{
+			var targetsOwnField = reader.ReadBoolean();
+			var field = targetsOwnField ? Player.Field : Player.Opponent.Field;
+			sourceZone = field.Zones[reader.ReadByte()];
+			destZone = field.Zones[reader.ReadByte()];
+		}
+	}
 }
