@@ -17,8 +17,8 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
     {
         private Zone sourceZone;
         private Zone destZone;
-		private bool targetEnemies;
-		private bool allowSwap;
+		private readonly bool targetEnemies;
+		private readonly bool allowSwap;
 
 		public MoveCardAction() : base()
 		{
@@ -106,14 +106,17 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
 		public override void PostSend(BinaryWriter writer)
 		{
-			// TODO
-			throw new NotImplementedException();
+			writer.Write(sourceZone.Owner == Player);
+			writer.Write((byte)sourceZone.Index);
+			writer.Write((byte)destZone.Index);
 		}
 
 		public override void PostReceive(BinaryReader reader, CardGame game)
 		{
-			// TODO
-			throw new NotImplementedException();
+			var targetsOwnField = reader.ReadBoolean();
+			var field = targetsOwnField ? Player.Field : Player.Opponent.Field;
+			sourceZone = field.Zones[reader.ReadByte()];
+			destZone = field.Zones[reader.ReadByte()];
 		}
 	}
 }
