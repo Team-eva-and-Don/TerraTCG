@@ -13,12 +13,7 @@ namespace TerraTCG.Common.Netcode.Packets
 		//Shortcut
 		public void Send(int to = -1, int from = -1, Func<Player, bool> bcCondition = null)
 		{
-			// simulate unreliable network by dropping 25% of packets
-			// BIG TODO: Remove me
-			if (!Main.rand.NextBool(4))
-			{
-				NetHandler.Send(this, to, from, bcCondition);
-			}
+			NetHandler.Send(this, to, from, bcCondition);
 		}
 
 		/// <summary>
