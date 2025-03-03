@@ -112,7 +112,9 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 				return $"{resourceUsage}{ActionText("Attack")} {zone.CardName} {ActionText("With")} {startZone.CardName} {ActionText("For")} {attackDmg}";
             } else if (actionType == ActionType.TARGET_ALLY && player.Owns(zone) && !zone.IsEmpty())
             {
-                return $"{ActionText("Use")} {startZone.CardName}{ActionText("Ownership")} {ActionText("Skill")} {ActionText("On")}";
+				var resourceTooltip = GetZoneResources(zone).ToTooltipString();
+				var resourceUsage = resourceTooltip == "" ? "" : $"{resourceTooltip}\n";
+				return $"{resourceUsage}{ActionText("Use")} {startZone.CardName}{ActionText("Ownership")} {ActionText("Skill")} {ActionText("On")} {zone.CardName}";
             } else
             {
                 return "";
@@ -121,20 +123,24 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public string GetActionButtonTooltip()
         {
-            return $"{ActionText("Use")} {startZone.CardName}{ActionText("Ownership")} {ActionText("Skill")}";
+			var resourceTooltip = GetActionButtonResources().ToTooltipString();
+			var resourceUsage = resourceTooltip == "" ? "" : $"{resourceTooltip}\n";
+			return $"{resourceUsage}{ActionText("Use")} {startZone.CardName}{ActionText("Ownership")} {ActionText("Skill")}";
         }
 
 		public PlayerResources GetZoneResources(Zone zone) => zone switch
 		{
 			// does this first case happen?
 			_ when actionType != ActionType.DEFAULT => new(0, mana: GetSkillCost(), 0),
-			_ when player.Owns(endZone) => new(0, mana: GetMoveCost(), 0),
+			_ when player.Owns(zone) => new(0, mana: GetMoveCost(), 0),
 			_ => new(0, mana: GetAttackCostWithZoneShifts(startZone, zone), 0)
 		};
 
-		public PlayerResources GetActionButtonResources() => CanAcceptActionButton()
-			? new(0, mana: GetSkillCost(), 0)
-			: default;
+		public PlayerResources GetActionButtonResources() => new(
+			0, 
+			mana: GetSkillCost(), 
+			0
+		);
 
 		private bool CanAttackZone(Zone zone)
         {

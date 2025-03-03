@@ -47,7 +47,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public virtual string GetZoneTooltip(Zone zone)
         {
-			var resourceTooltip = GetActionButtonResources().ToTooltipString();
+			var resourceTooltip = GetZoneResources(zone).ToTooltipString();
 			var resourceUsage = resourceTooltip == "" ? "" : $"{resourceTooltip}\n";
 			return $"{resourceUsage}{ActionText("Use")} {Card.CardName} {ActionText("On")} {zone.CardName}";
         }
