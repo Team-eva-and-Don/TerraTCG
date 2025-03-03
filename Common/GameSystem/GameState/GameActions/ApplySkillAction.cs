@@ -37,11 +37,13 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public string GetZoneTooltip(Zone zone)
         {
-            return $"{ActionText("Use")} {card.CardName} {ActionText("On")} {zone.CardName}";
+			var resourceTooltip = GetZoneResources(zone).ToTooltipString();
+			var resourceUsage = resourceTooltip == "" ? "" : $"{resourceTooltip}\n";
+			return $"{resourceUsage}{ActionText("Use")} {card.CardName} {ActionText("On")} {zone.CardName}";
         }
 
         public string GetCantAcceptZoneTooltip(Zone zone) => player.Owns(zone) && !zone.IsEmpty() ? 
-            $"{ActionText("NotEnoughMana")} {ActionText("To")} {ActionText("Use")}" : "";
+            $"{ActionText("NotEnoughMana")} ({player.Resources.Mana}/{GetZoneResources(zone).Mana}) {ActionText("To")} {ActionText("Use")}" : "";
 
 		public PlayerResources GetZoneResources(Zone zone) => new(
 			0, 

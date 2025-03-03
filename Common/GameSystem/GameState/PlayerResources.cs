@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
+using Terraria.Localization;
+using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState
 {
@@ -21,5 +23,29 @@ namespace TerraTCG.Common.GameSystem.GameState
 
 		public static PlayerResources operator -(PlayerResources a, PlayerResources b)
 			=> a.UseResource(b.Health, b.Mana, b.TownsfolkMana);
+
+		public string ToTooltipString()
+		{
+			var builder = new StringBuilder();
+			int appendCount = 0;
+
+			Append(Health, Language.GetTextValue("Mods.TerraTCG.Cards.Common.Hearts"));
+			Append(Mana, Language.GetTextValue("Mods.TerraTCG.Cards.Common.Mana"));
+			Append(TownsfolkMana, Language.GetTextValue("Mods.TerraTCG.Cards.Common.Townsfolk"));
+
+			if (appendCount > 0)
+				builder.Append($" {ActionText("To")}");
+
+			return builder.ToString();
+
+			void Append(int amount, string resource)
+			{
+				if (amount == 0) return;
+				if (appendCount == 0) builder.Append($"{ActionText("Use")} ");
+				if (appendCount > 0) builder.Append(", ");
+				builder.Append($"{amount} {resource}");
+				appendCount++;
+			}
+		}
     }
 }

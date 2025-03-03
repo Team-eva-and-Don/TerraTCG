@@ -40,12 +40,16 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public string GetActionButtonTooltip()
         {
-            return $"{ActionText("Use")} {Card.CardName}";
+			var resourceTooltip = GetActionButtonResources().ToTooltipString();
+			var resourceUsage = resourceTooltip == "" ? "" : $"{resourceTooltip}\n";
+			return $"{resourceUsage}{ActionText("Use")} {Card.CardName}";
         }
 
         public virtual string GetZoneTooltip(Zone zone)
         {
-            return $"{ActionText("Use")} {Card.CardName} {ActionText("On")} {zone.CardName}";
+			var resourceTooltip = GetActionButtonResources().ToTooltipString();
+			var resourceUsage = resourceTooltip == "" ? "" : $"{resourceTooltip}\n";
+			return $"{resourceUsage}{ActionText("Use")} {Card.CardName} {ActionText("On")} {zone.CardName}";
         }
 
         // TODO this is hacky, check whether not having a townsfolk emblem

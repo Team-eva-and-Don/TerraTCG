@@ -79,7 +79,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
 
         public string GetCantAcceptZoneTooltip(Zone zone) => InsufficientManaFor == "" ? null :
-            $"{ActionText("NotEnoughMana")} {ActionText("To")} {InsufficientManaFor}"; 
+            $"{ActionText("NotEnoughMana")} ({player.Resources.Mana}/{GetZoneResources(zone).Mana}) {ActionText("To")} {InsufficientManaFor}"; 
 
 		private static Attack GetAttackWithZoneShifts(Zone srcZone, Zone dstZone)
 		{
@@ -107,7 +107,9 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             } else if (actionType == ActionType.DEFAULT && !player.Owns(zone) && !zone.IsEmpty())
             {
 				var attackDmg = GetAttackDamageWithZoneShifts(startZone, zone);
-                return $"{ActionText("Attack")} {zone.CardName} {ActionText("With")} {startZone.CardName} {ActionText("For")} {attackDmg}";
+				var resourceTooltip = GetZoneResources(zone).ToTooltipString();
+				var resourceUsage = resourceTooltip == "" ? "" : $"{resourceTooltip}\n";
+				return $"{resourceUsage}{ActionText("Attack")} {zone.CardName} {ActionText("With")} {startZone.CardName} {ActionText("For")} {attackDmg}";
             } else if (actionType == ActionType.TARGET_ALLY && player.Owns(zone) && !zone.IsEmpty())
             {
                 return $"{ActionText("Use")} {startZone.CardName}{ActionText("Ownership")} {ActionText("Skill")} {ActionText("On")}";
