@@ -39,7 +39,8 @@ namespace TerraTCG.Common.Netcode.Packets
 	internal class DecklistPacket : TurnOrderPacket
 	{
 
-		private CardCollection Collection { get; set; }
+		private readonly CardCollection collection;
+		private int goingFirst;
 
 
 		public DecklistPacket(): base()
@@ -47,16 +48,18 @@ namespace TerraTCG.Common.Netcode.Packets
 
 		}
 
-		public DecklistPacket(Player player, int opponentId, CardCollection cardCollection): base(
+		public DecklistPacket(Player player, int opponentId, int goingFirst, CardCollection cardCollection): base(
 			player, 
 			new() { TurnIndex = 255, ActionIndex = 254 }, 
 			opponentId)
 		{
-			Collection = cardCollection;
+			collection = cardCollection;
+			this.goingFirst = goingFirst;
 		}
 
 		protected override void PostReceive(BinaryReader reader, int sender, int recipient, Player player, TurnOrder turnOrder)
 		{
+			var goingFirst = reader.ReadByte();
 			var cardCount = reader.ReadInt16();
 			var collection = new CardCollection();
 			for(int _ = 0; _ < cardCount; _++)
@@ -71,7 +74,7 @@ namespace TerraTCG.Common.Netcode.Packets
 			if(Main.netMode == NetmodeID.Server)
 			{
 				GameActionPacketQueue.Instance.QueueOutgoingMessage(
-					new DecklistPacket(player, recipient, collection), from: sender);
+					new DecklistPacket(player, recipient, goingFirst, collection), from: sender);
 				new AckPacket(player, turnOrder, recipient).Send(to: sender);
 			} else
 			{
@@ -82,14 +85,14 @@ namespace TerraTCG.Common.Netcode.Packets
 				{
 					// Start a game between the player and a networked opponent
 					var remotePlayer = NetSyncPlayerSystem.Instance.RegisterPlayer(player.whoAmI, collection);
-					ModContent.GetInstance<GameModSystem>().StartGame(remotePlayer, TCGPlayer.LocalPlayer, 0);
+					ModContent.GetInstance<GameModSystem>().StartGame(remotePlayer, TCGPlayer.LocalPlayer, goingFirst);
 					// Send a decklist back to the paired opponent
 					var handAndDeck = new CardCollection()
 					{
 						Cards = [.. TCGPlayer.LocalGamePlayer.Deck.Cards, .. TCGPlayer.LocalGamePlayer.Hand.Cards]
 					};
 					GameActionPacketQueue.Instance.QueueOutgoingMessage(
-						new DecklistPacket(Main.LocalPlayer, player.whoAmI, handAndDeck));
+						new DecklistPacket(Main.LocalPlayer, player.whoAmI, goingFirst, handAndDeck));
 
 					// Update sync state to let other players know we're no longer looking for a game
 					Main.LocalPlayer.GetModPlayer<GameStateSyncPlayer>().BroadcastSyncState();
@@ -113,8 +116,9 @@ namespace TerraTCG.Common.Netcode.Packets
 		protected override void PostSend(BinaryWriter writer, Player player, TurnOrder turnOrder)
 		{
 			// Write the size of the collection, then each card one by one
-			writer.Write((short)Collection.Cards.Count);
-			foreach (var card in Collection.Cards)
+			writer.Write((byte)goingFirst);
+			writer.Write((short)collection.Cards.Count);
+			foreach (var card in collection.Cards)
 			{
 				writer.Write(CardNetworkSync.Serialize(card));
 			}

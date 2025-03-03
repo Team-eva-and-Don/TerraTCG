@@ -33,15 +33,18 @@ namespace TerraTCG.Common.Commands
 			{
 				var myPlayer = TCGPlayer.LocalPlayer;
 				var opponentController = new NoOpNetGamePlayerController(); // Replaced with real opponent during deck sync
+				// TODO allowing the client to decide who goes first is not great
+				var goingFirst = Main.rand.Next() % 2;
 
-				ModContent.GetInstance<GameModSystem>().StartGame(myPlayer, opponentController, 0);
+
+				ModContent.GetInstance<GameModSystem>().StartGame(myPlayer, opponentController, goingFirst);
 				// Send out a net packet to trigger a game with another player
 				var handAndDeck = new CardCollection()
 				{
 					Cards = [.. myPlayer.GamePlayer.Deck.Cards, .. myPlayer.GamePlayer.Hand.Cards]
 				};
 				GameActionPacketQueue.Instance.QueueOutgoingMessage(
-					new DecklistPacket(myPlayer.Player, playerId, handAndDeck));
+					new DecklistPacket(myPlayer.Player, playerId, goingFirst, handAndDeck));
 			} else
 			{
 				Main.NewText($"Player with id {playerId} isn't looking for a game!");

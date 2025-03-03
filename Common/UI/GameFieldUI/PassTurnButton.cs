@@ -39,7 +39,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
                 if(isClicked)
                 {
                     gamePlayer.PassTurn();
-					if(Main.netMode == NetmodeID.MultiplayerClient)
+					if(TCGPlayer.LocalGamePlayer.Game.IsMultiplayer)
 					{
 						GameActionPacketQueue.Instance.QueueOutgoingMessage(new PassTurnPacket(Main.LocalPlayer));
 					}

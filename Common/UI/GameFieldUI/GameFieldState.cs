@@ -60,8 +60,11 @@ namespace TerraTCG.Common.UI.GameFieldUI
                 RequireDoubleClick = true,
                 OnClickAction = ()=>
 				{
+					if(TCGPlayer.LocalGamePlayer?.Game.IsMultiplayer ?? false)
+					{
+						GameActionPacketQueue.Instance.QueueOutgoingMessage(new SurrenderPacket(Main.LocalPlayer));
+					}
 					TCGPlayer.LocalGamePlayer?.Surrender();
-					GameActionPacketQueue.Instance.QueueOutgoingMessage(new SurrenderPacket(Main.LocalPlayer));
 				}
             };
             Append(cancelButton);

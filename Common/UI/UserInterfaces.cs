@@ -90,8 +90,11 @@ namespace TerraTCG.Common.UI
 			}
 			if(TCGPlayer.LocalGamePlayer.Game.FieldAnimation is QuitNotificationAnimation)
 			{
+				if(TCGPlayer.LocalGamePlayer?.Game.IsMultiplayer ?? false)
+				{
+					GameActionPacketQueue.Instance.QueueOutgoingMessage(new SurrenderPacket(Main.LocalPlayer));
+				}
 				TCGPlayer.LocalGamePlayer.Surrender();
-				GameActionPacketQueue.Instance.QueueOutgoingMessage(new SurrenderPacket(Main.LocalPlayer));
 			} else
 			{
 				TCGPlayer.LocalGamePlayer.Game.FieldAnimation =

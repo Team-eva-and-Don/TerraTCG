@@ -178,7 +178,7 @@ namespace TerraTCG.Common.GameSystem.GameState
             var toLog = new ActionLogInfo(info.Card, player + " " + info.Message);
             CurrentTurn.ActionLog.Add(toLog);
 
-			if(Main.netMode == NetmodeID.MultiplayerClient && CurrentTurn.ActivePlayer == TCGPlayer.LocalGamePlayer)
+			if(IsMultiplayer && CurrentTurn.ActivePlayer == TCGPlayer.LocalGamePlayer)
 			{
 				GameActionPacketQueue.Instance.QueueOutgoingMessage(new ActionPacket(Main.LocalPlayer, action));
 			}
