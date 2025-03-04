@@ -25,7 +25,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 			this.player = player;
 		}
 
-        public bool CanAcceptZone(Zone zone) => player.Owns(zone) && !zone.IsEmpty() && player.Resources.Mana >= zone.PlacedCard.ModifyIncomingSkill(card).Cost;
+        public bool CanAcceptZone(Zone zone) => player.Owns(zone) && !zone.IsEmpty() && player.Resources.SufficientResourcesFor(GetZoneResources(zone));
 
         public bool AcceptZone(Zone zone)
         {
@@ -37,7 +37,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public string GetZoneTooltip(Zone zone)
         {
-			var resourceTooltip = GetZoneResources(zone).ToTooltipString();
+			var resourceTooltip = GetZoneResources(zone).GetUsageTooltip();
 			var resourceUsage = resourceTooltip == "" ? "" : $"{resourceTooltip}\n";
 			return $"{resourceUsage}{ActionText("Use")} {card.CardName} {ActionText("On")} {zone.CardName}";
         }
@@ -54,7 +54,6 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
         public void Complete()
         {
             var showAnimation = new ShowCardAnimation(TCGPlayer.TotalGameTime, card, zone, player == TCGPlayer.LocalGamePlayer);
-            var skill = zone.PlacedCard.ModifyIncomingSkill(card);
             player.Game.FieldAnimation = showAnimation;
             if(card.CardType == CardType.ITEM)
             {
@@ -66,7 +65,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             zone.QueueAnimation(new ApplyModifierAnimation(zone.PlacedCard, card.Skills[0].Texture));
 
             card.Skills[0].DoSkill(player, null, zone);
-            player.Resources = player.Resources.UseResource(mana: skill.Cost);
+			player.Resources -= GetZoneResources(zone);
             player.Hand.Remove(card);
             if(card.SubTypes.Contains(CardSubtype.EQUIPMENT))
             {

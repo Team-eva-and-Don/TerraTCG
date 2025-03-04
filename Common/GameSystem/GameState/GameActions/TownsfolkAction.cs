@@ -28,8 +28,11 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 			Player = player;
 		}
 
-        public virtual bool CanAcceptZone(Zone zone) => checkingValidZone || Player.Resources.TownsfolkMana > 0;
-        public abstract bool AcceptZone(Zone zone);
+        public virtual bool CanAcceptZone(Zone zone) => checkingValidZone || Player.Resources.SufficientResourcesFor(GetZoneResources(zone));
+		public abstract bool AcceptZone(Zone zone);
+
+		public virtual bool CanAcceptActionButton() => false;
+		public virtual bool AcceptActionButton() => false;
 
         public abstract ActionLogInfo GetLogMessage();
 
@@ -40,14 +43,14 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public string GetActionButtonTooltip()
         {
-			var resourceTooltip = GetActionButtonResources().ToTooltipString();
+			var resourceTooltip = GetActionButtonResources().GetUsageTooltip();
 			var resourceUsage = resourceTooltip == "" ? "" : $"{resourceTooltip}\n";
 			return $"{resourceUsage}{ActionText("Use")} {Card.CardName}";
         }
 
         public virtual string GetZoneTooltip(Zone zone)
         {
-			var resourceTooltip = GetZoneResources(zone).ToTooltipString();
+			var resourceTooltip = GetZoneResources(zone).GetUsageTooltip();
 			var resourceUsage = resourceTooltip == "" ? "" : $"{resourceTooltip}\n";
 			return $"{resourceUsage}{ActionText("Use")} {Card.CardName} {ActionText("On")} {zone.CardName}";
         }

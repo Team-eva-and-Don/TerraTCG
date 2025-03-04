@@ -24,7 +24,12 @@ namespace TerraTCG.Common.GameSystem.GameState
 		public static PlayerResources operator -(PlayerResources a, PlayerResources b)
 			=> a.UseResource(b.Health, b.Mana, b.TownsfolkMana);
 
-		public string ToTooltipString()
+		public bool SufficientResourcesFor(PlayerResources other)
+			=> Health - other.Health >= 0
+			&& Mana - other.Mana >= 0
+			&& TownsfolkMana - other.TownsfolkMana >= 0;
+
+		public string GetUsageTooltip()
 		{
 			var builder = new StringBuilder();
 			int appendCount = 0;
@@ -44,6 +49,29 @@ namespace TerraTCG.Common.GameSystem.GameState
 				if (appendCount == 0) builder.Append($"{ActionText("Use")} ");
 				if (appendCount > 0) builder.Append(", ");
 				builder.Append($"{amount} {resource}");
+				appendCount++;
+			}
+		}
+
+		public string GetDeficencyTooltip(PlayerResources other)
+		{
+			var builder = new StringBuilder();
+			int appendCount = 0;
+
+			Append(Health, other.Health, ActionText("NotEnoughHealth"));
+			Append(Mana, other.Mana, ActionText("NotEnoughMana"));
+			Append(TownsfolkMana, other.TownsfolkMana, ActionText("NotEnoughTownsfolk"));
+
+			if (appendCount > 0)
+				builder.Append($" {ActionText("To")}");
+
+			return builder.ToString();
+
+			void Append(int has, int needed, string resource)
+			{
+				if (has >= needed) return;
+				if (appendCount > 0) builder.Append(", ");
+				builder.Append($"{resource} ({has}/{needed})");
 				appendCount++;
 			}
 		}
