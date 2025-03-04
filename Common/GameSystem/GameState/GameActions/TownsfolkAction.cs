@@ -43,17 +43,17 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public string GetActionButtonTooltip()
         {
-			var resourceTooltip = GetActionButtonResources().GetUsageTooltip();
-			var resourceUsage = resourceTooltip == "" ? "" : $"{resourceTooltip}\n";
-			return $"{resourceUsage}{ActionText("Use")} {Card.CardName}";
+			var useResourceTo = GetActionButtonResources().GetUsageTooltip();
+			var useCard = $"{ActionText("Use")} {Card.CardName}";
+			return string.IsNullOrEmpty(useResourceTo) ? useCard : $"{useResourceTo}\n{useCard}";
         }
 
         public virtual string GetZoneTooltip(Zone zone)
         {
-			var resourceTooltip = GetZoneResources(zone).GetUsageTooltip();
-			var resourceUsage = resourceTooltip == "" ? "" : $"{resourceTooltip}\n";
-			return $"{resourceUsage}{ActionText("Use")} {Card.CardName} {ActionText("On")} {zone.CardName}";
-        }
+			var useResourceTo = GetZoneResources(zone).GetUsageTooltip();
+			var useCardOnCard = $"{ActionText("Use")} {Card.CardName} {ActionText("On")} {zone.CardName}";
+			return string.IsNullOrEmpty(useResourceTo) ? useCardOnCard : $"{useResourceTo}\n{useCardOnCard}";
+		}
 
         // TODO this is hacky, check whether not having a townsfolk emblem
         // is the reason that the zone can't be selected

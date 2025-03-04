@@ -48,12 +48,12 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 		public Zone StartZone => startZone;
 
         // State var for calculations to determine whether the inability to
-        // perform an action is due to lack of available MP.
-        private string InsufficientManaFor = "";
+        // perform an action is due to lack of available resources.
+        private string InsufficientResourcesFor = "";
 
         public bool CanAcceptZone(Zone zone) 
         {
-            InsufficientManaFor = "";
+			InsufficientResourcesFor = "";
 
             if(startZone?.PlacedCard?.IsExerted ?? true)
             {
@@ -80,10 +80,10 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public string GetCantAcceptZoneTooltip(Zone zone)
 		{
-			if (InsufficientManaFor == "") return null;
-			var resourceTooltip = player.Resources.GetDeficencyTooltip(GetZoneResources(zone));
-			var resourceUsage = resourceTooltip == "" ? "" : $"{resourceTooltip} ";
-			return $"{resourceUsage}{InsufficientManaFor}";
+			if (InsufficientResourcesFor == "") return null;
+
+			var notEnoughResourceTo = player.Resources.GetDeficencyTooltip(GetZoneResources(zone));
+			return string.IsNullOrEmpty(notEnoughResourceTo) ? "" : $"{notEnoughResourceTo} {InsufficientResourcesFor}";
 		}
 
 		private static Attack GetAttackWithZoneShifts(Zone srcZone, Zone dstZone)
@@ -112,14 +112,14 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
             } else if (actionType == ActionType.DEFAULT && !player.Owns(zone) && !zone.IsEmpty())
             {
 				var attackDmg = GetAttackDamageWithZoneShifts(startZone, zone);
-				var resourceTooltip = GetZoneResources(zone).GetUsageTooltip();
-				var resourceUsage = resourceTooltip == "" ? "" : $"{resourceTooltip}\n";
-				return $"{resourceUsage}{ActionText("Attack")} {zone.CardName} {ActionText("With")} {startZone.CardName} {ActionText("For")} {attackDmg}";
+				var useResourceTo = GetZoneResources(zone).GetUsageTooltip();
+				var attackCardWithCardForDamage = $"{ActionText("Attack")} {zone.CardName} {ActionText("With")} {startZone.CardName} {ActionText("For")} {attackDmg}";
+				return string.IsNullOrEmpty(useResourceTo) ? attackCardWithCardForDamage : $"{useResourceTo}\n{attackCardWithCardForDamage}";
             } else if (actionType == ActionType.TARGET_ALLY && player.Owns(zone) && !zone.IsEmpty())
             {
-				var resourceTooltip = GetZoneResources(zone).GetUsageTooltip();
-				var resourceUsage = resourceTooltip == "" ? "" : $"{resourceTooltip}\n";
-				return $"{resourceUsage}{ActionText("Use")} {startZone.CardName}{ActionText("Ownership")} {ActionText("Skill")} {ActionText("On")} {zone.CardName}";
+				var useResourceTo = GetZoneResources(zone).GetUsageTooltip();
+				var useCardsSkillOnCard = $"{ActionText("Use")} {startZone.CardName}{ActionText("Ownership")} {ActionText("Skill")} {ActionText("On")} {zone.CardName}";
+				return string.IsNullOrEmpty(useResourceTo) ? useCardsSkillOnCard : $"{useResourceTo}\n{useCardsSkillOnCard}";
             } else
             {
                 return "";
@@ -128,9 +128,9 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
         public string GetActionButtonTooltip()
         {
-			var resourceTooltip = GetActionButtonResources().GetUsageTooltip();
-			var resourceUsage = resourceTooltip == "" ? "" : $"{resourceTooltip}\n";
-			return $"{resourceUsage}{ActionText("Use")} {startZone.CardName}{ActionText("Ownership")} {ActionText("Skill")}";
+			var useResourceTo = GetActionButtonResources().GetUsageTooltip();
+			var useCardsSkill = $"{ActionText("Use")} {startZone.CardName}{ActionText("Ownership")} {ActionText("Skill")}";
+			return string.IsNullOrEmpty(useResourceTo) ? useCardsSkill : $"{useResourceTo}\n{useCardsSkill}";
         }
 
 		public PlayerResources GetZoneResources(Zone zone) => zone switch
@@ -149,7 +149,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 		private bool CanAttackZone(Zone zone)
         {
 			bool hasEnoughMana = player.Resources.SufficientResourcesFor(GetZoneResources(zone));
-            InsufficientManaFor = hasEnoughMana ? "": ActionText("Attack");
+            InsufficientResourcesFor = hasEnoughMana ? "": ActionText("Attack");
             return startZone.HasPlacedCard() && hasEnoughMana &&
 				startZone.PlacedCard.CurrentHealth > 0 && 
                 startZone.PlacedCard.GetValidAttackZones(startZone, zone).Contains(zone);
@@ -184,7 +184,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 			return false;
         }
 
-		private int GetMoveCost(Zone zone) => zone.PlacedCard.Template.MoveCost;
+		private static int GetMoveCost(Zone zone) => zone.PlacedCard.Template.MoveCost;
 
         private void DoMove()
         {
