@@ -98,7 +98,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
 
         internal IEnumerable<T> FilterCards<T>(IEnumerable<T> cardList) where T : IHasCard => cardListFilter.FilterCardContainer(cardList);
 
-        // Flag to prevent Draw() from running before element dims are calculated in Update()
+        // Flag to prevent Draw() from running before element dimensions are calculated in Update()
         public bool IsOpen { get; internal set; }
 
 

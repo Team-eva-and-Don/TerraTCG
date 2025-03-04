@@ -309,6 +309,11 @@ Items: {
 			deck with the TerraTCG Deckbox.
 			'''
 	}
+
+	FriendlyDuelInvitation: {
+		DisplayName: Friendly Duel Invitation
+		Tooltip: ""
+	}
 }
 
 Cards: {
@@ -2340,6 +2345,10 @@ Cards: {
 		AnyPack: Any Pack
 		Forfeited: forfeited their soul to {0} in a card game!
 		PressEscAgainToExit: Press ESC again to concede
+		Matchmaking: PvP Matchmaking
+		Host: Host
+		Join: Join
+		Cancel: Cancel
 	}
 
 	DeckNames: {

@@ -17,6 +17,7 @@ using TerraTCG.Common.Netcode;
 using TerraTCG.Common.Netcode.Packets;
 using TerraTCG.Common.UI.DeckbuildUI;
 using TerraTCG.Common.UI.GameFieldUI;
+using TerraTCG.Common.UI.MatchmakingUI;
 using TerraTCG.Common.UI.NPCDuelChat;
 using TerraTCG.Common.UI.PackOpeningUI;
 using TerraTCG.Common.UI.TutorialUI;
@@ -37,6 +38,8 @@ namespace TerraTCG.Common.UI
         private PackOpeningState PackState { get; set; }
 
         private TutorialUIState TutorialState { get; set; }
+
+        private MatchmakingUIState MatchmakingState { get; set; }
 
         private bool? CachedAutoPause;
 
@@ -60,6 +63,9 @@ namespace TerraTCG.Common.UI
 
             TutorialState = new();
             TutorialState.Activate();
+
+			MatchmakingState = new();
+			MatchmakingState.Activate();
 
             _userInterface = new();
             On_Player.OpenInventory += On_Player_OpenInventory;
@@ -146,6 +152,10 @@ namespace TerraTCG.Common.UI
                 {
                     StopTutorial();
                 }
+				if(_userInterface.CurrentState == MatchmakingState)
+				{
+					StopMatchmaking();
+				}
             }
         }
 
@@ -221,6 +231,26 @@ namespace TerraTCG.Common.UI
             Main.playerInventory = false;
         }
 
+		internal void StartMatchmaking()
+		{
+			if(_userInterface.CurrentState != MatchmakingState)
+			{
+				SoundEngine.PlaySound(SoundID.MenuOpen);
+				_userInterface.SetState(MatchmakingState);
+                Main.playerInventory = false;
+			}
+		}
+
+		internal void StopMatchmaking()
+		{
+            DeckbuildState.IsOpen = false;
+            DeckbuildState.ResetState();
+            SoundEngine.PlaySound(SoundID.MenuClose);
+            _userInterface.SetState(null);
+
+            Main.playerInventory = false;
+		}
+
         internal void AdvanceChat()
         {
             DuelChat.AdvanceToDeckSelectDialogue();
@@ -254,5 +284,5 @@ namespace TerraTCG.Common.UI
                 }, InterfaceScaleType.UI));
             }         
         }
-    }
+	}
 }
