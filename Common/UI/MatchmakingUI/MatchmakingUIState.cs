@@ -15,8 +15,8 @@ namespace TerraTCG.Common.UI.MatchmakingUI
 	{
 		private MatchmakingPanel matchmakingPanel;
 
-		private int PANEL_WIDTH = 480;
-		private int PANEL_HEIGHT = 270;
+		private const int PANEL_WIDTH = 480;
+		private const int PANEL_HEIGHT = 280;
         const int MIN_TOP_MARGIN = 140;
 
         // Flag to prevent Draw() from running before element dimensions are calculated in Update()

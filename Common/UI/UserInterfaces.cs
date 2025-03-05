@@ -47,6 +47,8 @@ namespace TerraTCG.Common.UI
         // to see whether vanilla UI is currently being suppressed
         public bool VanillaDialogueLayerActive { get; private set; }
 
+		public bool MatchmakingLayerActive => _userInterface.CurrentState == MatchmakingState;
+
         public override void OnModLoad()
         {
             GameField = new();
@@ -237,7 +239,9 @@ namespace TerraTCG.Common.UI
 			{
 				SoundEngine.PlaySound(SoundID.MenuOpen);
 				_userInterface.SetState(MatchmakingState);
-                Main.playerInventory = false;
+				var syncPlayer = Main.LocalPlayer.GetModPlayer<GameStateSyncPlayer>();
+				syncPlayer.LookingForGame = true;
+				syncPlayer.BroadcastSyncState();
 			}
 		}
 
@@ -248,7 +252,9 @@ namespace TerraTCG.Common.UI
             SoundEngine.PlaySound(SoundID.MenuClose);
             _userInterface.SetState(null);
 
-            Main.playerInventory = false;
+			var syncPlayer = Main.LocalPlayer.GetModPlayer<GameStateSyncPlayer>();
+			syncPlayer.LookingForGame = false;
+			syncPlayer.BroadcastSyncState();
 		}
 
         internal void AdvanceChat()

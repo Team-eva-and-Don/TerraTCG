@@ -148,6 +148,7 @@ namespace TerraTCG.Common.GameSystem
             {
                 ModContent.GetInstance<FieldRenderer>().OnEnterWorld();
                 ModContent.GetInstance<CardWithTextRenderer>().OnEnterWorld();
+                ModContent.GetInstance<LookingForGamePlayerHeadRenderer>().OnEnterWorld();
             }
         }
 
