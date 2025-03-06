@@ -312,7 +312,7 @@ Items: {
 
 	FriendlyDuelInvitation: {
 		DisplayName: Friendly Duel Invitation
-		Tooltip: 
+		Tooltip:
 			'''
 			A tool used to seek a friendly
 			game of TerraTCG with your 
