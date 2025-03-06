@@ -4,9 +4,16 @@
 [url=https://forums.terraria.org/index.php?threads/terratcg-the-terraria-collectible-card-game.140791/] Terraria Forums[/url]
 
 TerraTCG is a Collectible Card Game built inside of Terraria! Challenge your
-Town NPCs to intense games of 1v1 card-based combat, grow your collection
-with booster packs, and experiment with exciting new strategies! The initial
-set of TerraTCG contains over 100 cards, with over 25 NPC decks to duel against!
+friends, Town NPCs, and bosses to intense games of 1v1 card-based combat, 
+grow your collection with booster packs, and experiment with exciting new strategies! 
+The initial set of TerraTCG contains over 100 cards, with over 25 NPC decks,
+11 boss fights, and a friendly PvP mode!
+
+[h2] PvP is now available! [/h2]
+
+You can now invite your friends to duel! Craft 3 Duel Invitations into a
+"Friendly Duel Invitation" at work bench, then use the item in a multiplayer
+server to find a friendly game with another player!
 
 [img] https://raw.githubusercontent.com/westphallm1/TerraTCG/refs/heads/main/Assets/Workshop/Forest_Promo.png [/img]
 [h2] Getting Started [/h2]
@@ -61,15 +68,11 @@ result in death! The following bosses can currently be fought:
 [*] The Mechanical Bosses
 [/list]
 
-Stay tuned for Hardmode!
-
 [img] https://raw.githubusercontent.com/westphallm1/TerraTCG/refs/heads/main/Assets/Workshop/QueenBee_Promo.png [/img]
 
 [h3] Disclaimers [/h3]
 
 [list]
-[*] While the PvE mode of this mod is fully supported in Multiplayer, there is currently no support for
-PvP games. Stay tuned for a future update!
 [*] The mod is known to have a couple compatibility issues with High FPS Support
 mod, but should still be playable while it is installed.
 [/list]

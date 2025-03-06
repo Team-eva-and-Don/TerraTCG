@@ -73,20 +73,12 @@ namespace TerraTCG.Common.Netcode
 
 		public void NetworkUpdate(bool inGame, bool lookingForGame, TurnOrder turnOrder)
 		{
-			// started a game in the last udpate cycle
-			if(inGame && !InGame)
-			{
-				Main.NewText($"{Player.name} started a game!");
-			} else if (InGame && !inGame)
-			{
-				Main.NewText($"{Player.name} finished a game!");
-			}
 			if(lookingForGame && !LookingForGame)
 			{
-				Main.NewText($"{Player.name} (id {Player.whoAmI}) is looking for a game!");
+				Main.NewText($"{Player.name} is looking for a game!");
 			} else if (LookingForGame && !lookingForGame)
 			{
-				Main.NewText($"{Player.name} (id {Player.whoAmI}) is no longer looking for a game!");
+				Main.NewText($"{Player.name} is no longer looking for a game!");
 			}
 
 			InGame = inGame;

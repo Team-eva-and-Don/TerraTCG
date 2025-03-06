@@ -312,7 +312,14 @@ Items: {
 
 	FriendlyDuelInvitation: {
 		DisplayName: Friendly Duel Invitation
-		Tooltip: ""
+		Tooltip: 
+			'''
+			A tool used to seek a friendly
+			game of TerraTCG with your 
+			fellow players! If you and a friend
+			both use this item, you'll be able
+			to start a PvP game together!
+			'''
 	}
 }
 
