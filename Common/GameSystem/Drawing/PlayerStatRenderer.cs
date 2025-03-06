@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.GameState;
+using TerraTCG.Common.UI.MatchmakingUI;
 
 namespace TerraTCG.Common.GameSystem.Drawing
 {
@@ -84,6 +85,22 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 var mpPos = position + (mpOffsets[row] + col * mpSpacing) * scale;
                 spriteBatch.Draw(mpTexture, mpPos, mpTexture.Bounds, Color.White * transparency, 0, mpOrigin, scale, SpriteEffects.None, 0);
             }
+
+			// In a multiplayer game, the player's head
+			if(!player.Game.IsMultiplayer)
+			{
+				return;
+			}
+
+			var headOffset = new Vector2(statTexture.Width / 2, -16) * scale;
+			var headIdx = player == TCGPlayer.LocalGamePlayer ? 0 : 1;
+			// var effects = player.Player.direction == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+			var effects = LookingForGamePlayerHeadRenderer.Instance.FrameEffects[headIdx];
+			var headTexture = LookingForGamePlayerHeadRenderer.Instance.PlayerHeadRenderTarget;
+			var headFrame = headTexture.Frame(1, MatchmakingPanel.MAX_OPPONENTS, 0, headIdx);
+			var origin = new Vector2(headFrame.Width, headFrame.Height) / 2;
+
+			spriteBatch.Draw(headTexture, position + headOffset, headFrame, Color.White, 0, origin, scale, effects, 0);
 
         }
     }

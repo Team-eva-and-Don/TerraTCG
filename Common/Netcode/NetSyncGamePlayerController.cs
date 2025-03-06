@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Terraria;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.BotPlayer;
@@ -21,9 +22,12 @@ namespace TerraTCG.Common.Netcode
 	{
 
 		public int PlayerId { get; set; }
+		public string Name { get; set; }
+
 		public GamePlayer GamePlayer { get ; set ; }
 		public CardCollection Deck { get ; set ; }
 		public string DeckName { get ; set ; }
+
 
 		public bool ShouldShuffle { get => false; }
 
@@ -130,6 +134,7 @@ namespace TerraTCG.Common.Netcode
 			var controller = new NetSyncGamePlayerController()
 			{
 				PlayerId = playerId,
+				Name = Main.player[playerId].name,
 				Deck = playerDecklist,
 			};
 

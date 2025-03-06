@@ -2346,9 +2346,9 @@ Cards: {
 		Forfeited: forfeited their soul to {0} in a card game!
 		PressEscAgainToExit: Press ESC again to concede
 		Matchmaking: PvP Matchmaking
-		Host: Host
 		Join: Join
 		Cancel: Cancel
+		WaitingForOpponents: Waiting for opponents
 	}
 
 	DeckNames: {

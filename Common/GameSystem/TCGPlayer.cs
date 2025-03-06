@@ -17,6 +17,7 @@ using TerraTCG.Common.GameSystem.BotPlayer;
 using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState;
+using TerraTCG.Common.GameSystem.GameState.GameActions;
 using TerraTCG.Common.Netcode;
 using TerraTCG.Common.Netcode.Packets;
 using TerraTCG.Common.UI;
@@ -28,6 +29,8 @@ namespace TerraTCG.Common.GameSystem
 {
     internal interface IGamePlayerController
     {
+		public string Name => IGameAction.ActionText("Opponent");
+
         public GamePlayer GamePlayer { get; set; }
 
         public CardCollection Deck { get; set; }

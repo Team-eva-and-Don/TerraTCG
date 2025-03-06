@@ -22,6 +22,8 @@ namespace TerraTCG.Common.GameSystem.Drawing
 
         public RenderTarget2D PlayerHeadRenderTarget { get; private set; }
 
+		public SpriteEffects[] FrameEffects { get; private set; } = new SpriteEffects[MatchmakingPanel.MAX_OPPONENTS];
+
         public void OnEnterWorld()
         {
             if(PlayerHeadRenderTarget != null)
@@ -49,12 +51,15 @@ namespace TerraTCG.Common.GameSystem.Drawing
 
 		private void OnPreDraw(GameTime gameTime)
 		{
-			if(!ModContent.GetInstance<UserInterfaces>().MatchmakingLayerActive)
+			bool inMultiPlayerGame = (TCGPlayer.LocalGamePlayer?.Game.IsMultiplayer ?? false);
+			bool shouldDraw = inMultiPlayerGame || ModContent.GetInstance<UserInterfaces>().MatchmakingLayerActive;
+
+			if(!shouldDraw)
 			{
 				return;
 			}
 
-			if(MatchmakingPanel.LookingForGamePlayers.Count == 0)
+			if(MatchmakingPanel.LookingForGamePlayers.Count == 0 && !inMultiPlayerGame)
 			{
 				return;
 			}
@@ -65,10 +70,16 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.None, RasterizerState.CullCounterClockwise);
 
 			Vector2 headDrawPos = new(24, 24);
-			foreach(var player in MatchmakingPanel.LookingForGamePlayers)
+
+			List<Player> playersToDraw = inMultiPlayerGame ?
+				[Main.LocalPlayer, Main.player[(TCGPlayer.LocalGamePlayer.Opponent.Controller as NetSyncGamePlayerController).PlayerId]] :
+				MatchmakingPanel.LookingForGamePlayers.Select(p => p.Player).ToList();
+			for(int i = 0; i < playersToDraw.Count; i++)
 			{
-				var xOffset = player.Player.direction == 1 ? 0 : -8;
-				Main.MapPlayerRenderer.DrawPlayerHead(Main.Camera, player.Player, headDrawPos + Vector2.UnitX * xOffset, borderColor: Color.White);
+				var player = playersToDraw[i];
+				FrameEffects[i] = player.direction == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
+				var xOffset = player.direction == 1 ? 0 : -8;
+				Main.MapPlayerRenderer.DrawPlayerHead(Main.Camera, player, headDrawPos + Vector2.UnitX * xOffset, borderColor: Color.White);
 				headDrawPos.Y += 48;
 			}
 

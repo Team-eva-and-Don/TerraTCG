@@ -78,11 +78,6 @@ namespace TerraTCG.Common.UI.MatchmakingUI
 			Append(cancelButton);
         }
 
-		private void MatchmakingPanel_OnLeftClick(UIMouseEvent evt, UIElement listeningElement)
-		{
-			throw new NotImplementedException();
-		}
-
 		// Draggable UI Panel
 		private void MatchmakingPanel_OnLeftMouseDown(UIMouseEvent evt, UIElement listeningElement)
 		{
@@ -93,6 +88,8 @@ namespace TerraTCG.Common.UI.MatchmakingUI
 		public void AcceptGame(int playerIdx)
 		{
 			isDragging = false;
+			ModContent.GetInstance<UserInterfaces>().StopMatchmaking();
+
 			var opponentId = LookingForGamePlayers[playerIdx].Player.whoAmI;
 			var myPlayer = TCGPlayer.LocalPlayer;
 			var opponentController = new NoOpNetGamePlayerController(); // Replaced with real opponent during deck sync
@@ -118,8 +115,15 @@ namespace TerraTCG.Common.UI.MatchmakingUI
 
 		public override void Update(GameTime gameTime)
         {
+            base.Update(gameTime);
+			// Auto-close if we start a game
+			if(TCGPlayer.LocalGamePlayer != null)
+			{
+				ModContent.GetInstance<UserInterfaces>().StopMatchmaking();
+				return;
+			}
+
             Main.LocalPlayer.mouseInterface = true;
-			var syncPlayer = Main.LocalPlayer.GetModPlayer<GameStateSyncPlayer>();
 
 			// TODO do we want to make a DraggablePanel base class?
 			if(Main.mouseLeft && isDragging)
@@ -145,7 +149,6 @@ namespace TerraTCG.Common.UI.MatchmakingUI
 					joinButtons[i].Left.Percent = 0.92f;
 				}
 			}
-            base.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -157,15 +160,22 @@ namespace TerraTCG.Common.UI.MatchmakingUI
 			var textHeight = font.MeasureString(text).Y;
             CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, text, textPos, font: font);
 
+			if(lookingForGamePlayers.Count == 0)
+			{
+				int dotCount = TCGPlayer.TotalGameTime.Seconds % 4;
+				text = Language.GetTextValue("Mods.TerraTCG.Cards.Common.WaitingForOpponents") + 
+					string.Concat(Enumerable.Repeat(".", dotCount));
+				CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, text, textPos + Vector2.UnitY * textHeight, font: font);
+			}
+
 			var headDrawPos = textPos + new Vector2(12, textHeight + 16);
 			var headTexture = LookingForGamePlayerHeadRenderer.Instance.PlayerHeadRenderTarget;
-			// TODO this is hacky
 			for(int i = 0; i < lookingForGamePlayers.Count; i++)
 			{
 				var player = lookingForGamePlayers[i];
 				var headFrame = headTexture.Frame(1, MAX_OPPONENTS, 0, i);
 				var origin = new Vector2(headFrame.Width, headFrame.Height) / 2;
-				var effects = player.Player.direction == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
+				var effects = LookingForGamePlayerHeadRenderer.Instance.FrameEffects[i];
 				spriteBatch.Draw(headTexture, headDrawPos, headFrame, Color.White, 0, origin, 1, effects, 0);
 
 				textPos = headDrawPos + new Vector2(24, -textHeight/4);
