@@ -309,6 +309,18 @@ Items: {
 			deck with the TerraTCG Deckbox.
 			'''
 	}
+
+	FriendlyDuelInvitation: {
+		DisplayName: Friendly Duel Invitation
+		Tooltip:
+			'''
+			A tool used to seek a friendly
+			game of TerraTCG with your 
+			fellow players! If you and a friend
+			both use this item, you'll be able
+			to start a PvP game together!
+			'''
+	}
 }
 
 Cards: {
@@ -2340,6 +2352,10 @@ Cards: {
 		AnyPack: Any Pack
 		Forfeited: forfeited their soul to {0} in a card game!
 		PressEscAgainToExit: Press ESC again to concede
+		Matchmaking: PvP Matchmaking
+		Join: Join
+		Cancel: Cancel
+		WaitingForOpponents: Waiting for opponents
 	}
 
 	DeckNames: {

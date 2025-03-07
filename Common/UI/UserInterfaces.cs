@@ -17,6 +17,7 @@ using TerraTCG.Common.Netcode;
 using TerraTCG.Common.Netcode.Packets;
 using TerraTCG.Common.UI.DeckbuildUI;
 using TerraTCG.Common.UI.GameFieldUI;
+using TerraTCG.Common.UI.MatchmakingUI;
 using TerraTCG.Common.UI.NPCDuelChat;
 using TerraTCG.Common.UI.PackOpeningUI;
 using TerraTCG.Common.UI.TutorialUI;
@@ -38,11 +39,15 @@ namespace TerraTCG.Common.UI
 
         private TutorialUIState TutorialState { get; set; }
 
+        private MatchmakingUIState MatchmakingState { get; set; }
+
         private bool? CachedAutoPause;
 
         // For DialogueTweaks support, this can be checked by UIState code
         // to see whether vanilla UI is currently being suppressed
         public bool VanillaDialogueLayerActive { get; private set; }
+
+		public bool MatchmakingLayerActive => _userInterface.CurrentState == MatchmakingState;
 
         public override void OnModLoad()
         {
@@ -60,6 +65,9 @@ namespace TerraTCG.Common.UI
 
             TutorialState = new();
             TutorialState.Activate();
+
+			MatchmakingState = new();
+			MatchmakingState.Activate();
 
             _userInterface = new();
             On_Player.OpenInventory += On_Player_OpenInventory;
@@ -146,6 +154,10 @@ namespace TerraTCG.Common.UI
                 {
                     StopTutorial();
                 }
+				if(_userInterface.CurrentState == MatchmakingState)
+				{
+					StopMatchmaking();
+				}
             }
         }
 
@@ -221,6 +233,30 @@ namespace TerraTCG.Common.UI
             Main.playerInventory = false;
         }
 
+		internal void StartMatchmaking()
+		{
+			if(_userInterface.CurrentState != MatchmakingState)
+			{
+				SoundEngine.PlaySound(SoundID.MenuOpen);
+				_userInterface.SetState(MatchmakingState);
+				var syncPlayer = Main.LocalPlayer.GetModPlayer<GameStateSyncPlayer>();
+				syncPlayer.LookingForGame = true;
+				syncPlayer.BroadcastSyncState();
+			}
+		}
+
+		internal void StopMatchmaking()
+		{
+            DeckbuildState.IsOpen = false;
+            DeckbuildState.ResetState();
+            SoundEngine.PlaySound(SoundID.MenuClose);
+            _userInterface.SetState(null);
+
+			var syncPlayer = Main.LocalPlayer.GetModPlayer<GameStateSyncPlayer>();
+			syncPlayer.LookingForGame = false;
+			syncPlayer.BroadcastSyncState();
+		}
+
         internal void AdvanceChat()
         {
             DuelChat.AdvanceToDeckSelectDialogue();
@@ -254,5 +290,5 @@ namespace TerraTCG.Common.UI
                 }, InterfaceScaleType.UI));
             }         
         }
-    }
+	}
 }

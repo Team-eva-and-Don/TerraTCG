@@ -172,8 +172,8 @@ namespace TerraTCG.Common.GameSystem.GameState
         public void LogAndCompleteAction(IGameAction action)
         {
             action.Complete();
-            var player = CurrentTurn.ActivePlayer == TCGPlayer.LocalGamePlayer ?
-                ActionText("You") : ActionText("Opponent");
+			var player = CurrentTurn.ActivePlayer == TCGPlayer.LocalGamePlayer ?
+				ActionText("You") : CurrentTurn.ActivePlayer.Controller.Name;
             var info = action.GetLogMessage();
             var toLog = new ActionLogInfo(info.Card, player + " " + info.Message);
             CurrentTurn.ActionLog.Add(toLog);
