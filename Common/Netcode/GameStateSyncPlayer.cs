@@ -76,7 +76,7 @@ namespace TerraTCG.Common.Netcode
 		{
 			if(lookingForGame && !LookingForGame)
 			{
-				Main.NewText($"{Player.name} is looking for a game of TerraTCG!", Color.SkyBlue);
+				Main.NewText($"{Player.name} is looking for a game of TerraTCG!", Color.DeepSkyBlue);
 			} 
 			InGame = inGame;
 			LookingForGame = lookingForGame;

@@ -228,7 +228,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
                 DrawPlayerStats(spriteBatch);
                 DrawFieldOverlays(spriteBatch);
 
-                if(fieldTooltip != "" && fieldTooltip != "" && ModContent.GetInstance<ClientConfig>().ShowTooltips)
+                if(fieldTooltip != "" && ModContent.GetInstance<ClientConfig>().ShowTooltips)
                 {
                     DeckbuildState.SetTooltip(fieldTooltip, fieldRare);
                 }

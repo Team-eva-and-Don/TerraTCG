@@ -17,7 +17,9 @@ namespace TerraTCG.Common.UI.GameFieldUI
 	{
 		// TODO this is a fairly crude solution, we are not fully copying the 
 		// vanilla state variables that control chat opening/closing though
-		public static TimeSpan lastChatOpenTime;
+		private static TimeSpan lastChatOpenTime;
+
+		private static MethodInfo DrawPlayerChat;
 		public static void TogglePlayerChat()
 		{
 			if(Main.keyState.IsKeyDown(Keys.Enter) && TCGPlayer.TotalGameTime - lastChatOpenTime > TimeSpan.FromSeconds(0.5f))
@@ -36,8 +38,8 @@ namespace TerraTCG.Common.UI.GameFieldUI
 			{
 				return;
 			}
-			typeof(Main).GetMethod("DrawPlayerChat", BindingFlags.NonPublic | BindingFlags.Instance)
-				.Invoke(Main.instance, []);
+			DrawPlayerChat ??= typeof(Main).GetMethod("DrawPlayerChat", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Public);
+			DrawPlayerChat.Invoke(Main.instance, []);
 		}
 	}
 }
