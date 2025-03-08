@@ -49,6 +49,20 @@ namespace TerraTCG.Common.GameSystem.Drawing
             Main.OnPreDraw -= OnPreDraw;
         }
 
+		private static Color GetPlayerOutlineColor(int playerId, bool inMultiplayerGame)
+		{
+			if(!inMultiplayerGame)
+			{
+				return Color.White;
+			}
+			if(playerId == Main.myPlayer)
+			{
+				return TCGPlayer.LocalGamePlayer.IsMyTurn ? Color.DeepSkyBlue : Color.White;
+			} else
+			{
+				return TCGPlayer.LocalGamePlayer.IsMyTurn ? Color.White : Color.Crimson;
+			}
+		}
 		private void OnPreDraw(GameTime gameTime)
 		{
 			bool inMultiPlayerGame = (TCGPlayer.LocalGamePlayer?.Game.IsMultiplayer ?? false);
@@ -74,12 +88,15 @@ namespace TerraTCG.Common.GameSystem.Drawing
 			List<Player> playersToDraw = inMultiPlayerGame ?
 				[Main.LocalPlayer, Main.player[(TCGPlayer.LocalGamePlayer.Opponent.Controller as NetSyncGamePlayerController).PlayerId]] :
 				MatchmakingPanel.LookingForGamePlayers.Select(p => p.Player).ToList();
+
 			for(int i = 0; i < playersToDraw.Count; i++)
 			{
 				var player = playersToDraw[i];
 				FrameEffects[i] = player.direction == 1 ? SpriteEffects.None : SpriteEffects.FlipHorizontally;
 				var xOffset = player.direction == 1 ? 0 : -8;
-				Main.MapPlayerRenderer.DrawPlayerHead(Main.Camera, player, headDrawPos + Vector2.UnitX * xOffset, borderColor: Color.White);
+
+				var drawColor = GetPlayerOutlineColor(player.whoAmI, inMultiPlayerGame);
+				Main.MapPlayerRenderer.DrawPlayerHead(Main.Camera, player, headDrawPos + Vector2.UnitX * xOffset, borderColor: drawColor);
 				headDrawPos.Y += 48;
 			}
 

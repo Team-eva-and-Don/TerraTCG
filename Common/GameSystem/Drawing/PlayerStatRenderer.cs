@@ -95,6 +95,10 @@ namespace TerraTCG.Common.GameSystem.Drawing
 				return;
 			}
 
+			var turnTime = TCGPlayer.TotalGameTime - player.Game.CurrentTurn.StartTime;
+			var scaleModifier = player.IsMyTurn ?
+				1 + 1/16f * MathF.Sin(MathF.PI * (float)turnTime.TotalSeconds) : 1f;
+
 			var headOffset = new Vector2(statTexture.Width / 2, -16) * scale;
 			var headIdx = player == TCGPlayer.LocalGamePlayer ? 0 : 1;
 			// var effects = player.Player.direction == -1 ? SpriteEffects.FlipHorizontally : SpriteEffects.None;
@@ -103,7 +107,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
 			var headFrame = headTexture.Frame(1, MatchmakingPanel.MAX_OPPONENTS, 0, headIdx);
 			var origin = new Vector2(headFrame.Width, headFrame.Height) / 2;
 
-			spriteBatch.Draw(headTexture, position + headOffset, headFrame, Color.White, 0, origin, scale, effects, 0);
+			spriteBatch.Draw(headTexture, position + headOffset, headFrame, Color.White, 0, origin, scale * scaleModifier, effects, 0);
 
 			void DrawResource(Texture2D texture, Vector2 pos, Color color, Vector2 origin, float scale, int resourceAmount, int cost, int index)
 			{

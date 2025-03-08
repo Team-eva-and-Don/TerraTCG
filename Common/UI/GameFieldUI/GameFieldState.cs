@@ -112,7 +112,9 @@ namespace TerraTCG.Common.UI.GameFieldUI
 			{
 				gamePlayer.PreviewResources = gamePlayer.Resources;
 			}
-			base.Update(gameTime);
+            base.Update(gameTime);
+			// Chat is disabled inside fancy UI by default, we want it here
+			InGameChat.TogglePlayerChat();
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -120,6 +122,8 @@ namespace TerraTCG.Common.UI.GameFieldUI
             Main.hoverItemName = ""; // suppress any tooltips from the main game state
             Main.HoveringOverAnNPC = false;
             base.Draw(spriteBatch);
+			// Chat is disabled inside fancy UI by default, we want it here
+			InGameChat.InvokeMainDrawPlayerChat();
         }
     }
 }
