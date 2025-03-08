@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Bson;
+﻿using Microsoft.Xna.Framework;
+using Newtonsoft.Json.Bson;
 using Steamworks;
 using System;
 using System.Collections.Generic;
@@ -75,12 +76,8 @@ namespace TerraTCG.Common.Netcode
 		{
 			if(lookingForGame && !LookingForGame)
 			{
-				Main.NewText($"{Player.name} is looking for a game!");
-			} else if (LookingForGame && !lookingForGame)
-			{
-				Main.NewText($"{Player.name} is no longer looking for a game!");
-			}
-
+				Main.NewText($"{Player.name} is looking for a game of TerraTCG!", Color.SkyBlue);
+			} 
 			InGame = inGame;
 			LookingForGame = lookingForGame;
 			TurnOrder = turnOrder;

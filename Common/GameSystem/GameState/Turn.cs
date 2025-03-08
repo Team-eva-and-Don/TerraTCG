@@ -22,8 +22,12 @@ namespace TerraTCG.Common.GameSystem.GameState
         internal int UsedItemCount { get; set; }
         public List<ActionLogInfo> ActionLog { get; internal set; } = [];
 
+		public TimeSpan StartTime { get; private set; }
+
         public void Start()
         {
+			StartTime = TCGPlayer.TotalGameTime;
+
             if(ActivePlayer.ManaPerTurn < GamePlayer.MAX_MANA)
             {
                 ActivePlayer.ManaPerTurn += 1;
@@ -64,7 +68,9 @@ namespace TerraTCG.Common.GameSystem.GameState
 				}
 			}
 
-            ActionLog = [new(null, $"Start of Turn {TurnCount}")];
+			var ownerText = ActivePlayer == TCGPlayer.LocalGamePlayer ? "your" :
+				$"{ActivePlayer.Controller.Name}'s";
+            ActionLog = [new(null, $"Start of {ownerText} turn")];
 
 			if(!Main.dedServ)
 			{

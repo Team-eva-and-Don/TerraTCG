@@ -161,7 +161,7 @@ namespace TerraTCG.Common.GameSystem
 			MouseoverCard = null;
 			MouseoverZone = null;
             ModContent.GetInstance<UserInterfaces>().StartGame();
-
+			Main.chatMonitor.Clear();
         }
 
 		private IEnumerable<(int, NamedNPCDeck)> UnlockedDecks =>
