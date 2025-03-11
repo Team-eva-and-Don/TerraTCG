@@ -323,7 +323,7 @@ namespace TerraTCG.Common.GameSystem
 			// check whether the game was with a boss
 			// TODO this is a bit clunky but I don't want to add more state variables
 
-			if(GamePlayer.Game.IsMultiplayer)
+			if(GamePlayer.Game.IsMultiplayer || GamePlayer.Game.IsNoOp)
 			{
 				// TODO how should multiplayer game victory be handled/rewarded?
 			} else if(NPCInfo.IsBoss)

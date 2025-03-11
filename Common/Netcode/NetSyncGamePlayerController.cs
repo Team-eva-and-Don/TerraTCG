@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework.Graphics;
+﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 using ReLogic.Content;
 using System;
 using System.Collections.Generic;
@@ -113,6 +114,7 @@ namespace TerraTCG.Common.Netcode
 			if(TCGPlayer.TotalGameTime - GamePlayer.Game.StartTime > TimeSpan.FromSeconds(5f))
 			{
 				GamePlayer.Surrender();
+				Main.NewText("ERROR: Failed to complete start-of-game network exchange. Please contact the developer.", Color.Red);
 			}
 		}
 	}

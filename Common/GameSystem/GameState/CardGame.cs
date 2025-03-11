@@ -47,6 +47,8 @@ namespace TerraTCG.Common.GameSystem.GameState
 
 		internal bool IsMultiplayer => GamePlayerControllers.Any(c => c is NetSyncGamePlayerController);
 
+		internal bool IsNoOp => GamePlayerControllers.Any(c => c is NoOpNetGamePlayerController);
+
         public virtual void StartGame(IGamePlayerController player1, IGamePlayerController player2, int? startIdx = null)
         {
             GamePlayers = [
