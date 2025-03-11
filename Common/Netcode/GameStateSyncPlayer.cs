@@ -78,14 +78,34 @@ namespace TerraTCG.Common.Netcode
 			{
 				Main.NewText($"{Player.name} is looking for a game of TerraTCG!", Color.DeepSkyBlue);
 			} 
+			if(InGame && !inGame)
+			{
+				ResetSyncState();
+			}
+
 			InGame = inGame;
 			LookingForGame = lookingForGame;
 			TurnOrder = turnOrder;
 		}
 
-		public bool Synced(GameStateSyncPlayer other)
+		public void ResetSyncState()
 		{
-			return InGame == other.InGame && TurnOrder.Equals(other.TurnOrder);
+			// Clear out any queued messages for the player this game - prevent re-sending
+			// stale messages when the player starts another game
+			GameActionPacketQueue.Instance.ClearPlayerQueue(Player);
+
+			if(TCGPlayer.LocalGamePlayer?.Opponent.Controller is NetSyncGamePlayerController controller &&
+				controller.PlayerId == Player.whoAmI)
+			{
+				// If the standard net syncing failed to exit the local player out of their game
+				// with this opponent, try to exit again here
+				controller.GamePlayer.Surrender();
+			}
+		}
+
+		public override void PlayerDisconnect()
+		{
+			ResetSyncState();
 		}
 	}
 }

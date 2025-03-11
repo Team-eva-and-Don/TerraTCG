@@ -189,6 +189,11 @@ namespace TerraTCG.Common.GameSystem.GameState
 		internal void SwapController(IGamePlayerController newController, CardCollection deckList, int replaceIdx = 1)
 		{
 			var gamePlayer = GamePlayers[replaceIdx];
+
+			var oldController = gamePlayer.Controller;
+			// Let the old controller clean itself up before swapping
+			oldController.EndGame();
+
 			GamePlayerControllers[replaceIdx] = newController;
 			newController.GamePlayer = gamePlayer;
 			gamePlayer.Controller = newController;

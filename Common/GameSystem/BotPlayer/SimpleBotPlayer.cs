@@ -208,7 +208,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
         {
             Game = game;
             GamePlayer = player;
-            BotPlayerSystem.Instance.RegisterBotPlayer(this, game, player);
+            BotPlayerSystem.Instance.RegisterBotPlayer(this);
         }
 
         public void EndGame()

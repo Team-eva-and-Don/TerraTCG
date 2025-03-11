@@ -82,8 +82,10 @@ namespace TerraTCG.Common.Netcode
 		}
 	}
 
-	// Dummy GamePlayer used for debugging network-initiated games
-	internal class NoOpNetGamePlayerController : IGamePlayerController
+	// Dummy GamePlayer used as placeholder when starting network-initiated games
+	// Auto-concedes after 5 seconds to bail out of scenarios where handshake
+	// fails to complete
+	internal class NoOpNetGamePlayerController : IBotPlayer
 	{
 		public GamePlayer GamePlayer { get ; set ; }
 		public CardCollection Deck { get; set; } = BotDecks.GetStarterDeck();
@@ -95,14 +97,23 @@ namespace TerraTCG.Common.Netcode
 
 		public Asset<Texture2D> Sleeve => TextureCache.Instance.CardSleeves[CardSleeve.FOREST];
 
-		public void EndGame()
-		{
-			// TODO
-		}
-
 		public void StartGame(GamePlayer player, CardGame game)
 		{
 			GamePlayer = player;
+		}
+
+        public void EndGame()
+        {
+            // de-register myself
+            ModContent.GetInstance<BotPlayerSystem>().UnregisterBotPlayer(this);
+        }
+
+		public void Update()
+		{
+			if(TCGPlayer.TotalGameTime - GamePlayer.Game.StartTime > TimeSpan.FromSeconds(5f))
+			{
+				GamePlayer.Surrender();
+			}
 		}
 	}
 

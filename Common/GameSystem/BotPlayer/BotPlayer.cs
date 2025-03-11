@@ -35,7 +35,7 @@ namespace TerraTCG.Common.GameSystem.BotPlayer
             }
         }
 
-        public void RegisterBotPlayer(IBotPlayer botPlayer, CardGame game, GamePlayer player)
+        public void RegisterBotPlayer(IBotPlayer botPlayer)
         {
             Players.Add(botPlayer);
         }

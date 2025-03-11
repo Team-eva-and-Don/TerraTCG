@@ -12,6 +12,7 @@ using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
 using TerraTCG.Common.GameSystem;
+using TerraTCG.Common.GameSystem.BotPlayer;
 using TerraTCG.Common.GameSystem.Drawing;
 using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.Netcode;
@@ -93,6 +94,7 @@ namespace TerraTCG.Common.UI.MatchmakingUI
 			var opponentId = LookingForGamePlayers[playerIdx].Player.whoAmI;
 			var myPlayer = TCGPlayer.LocalPlayer;
 			var opponentController = new NoOpNetGamePlayerController(); // Replaced with real opponent during deck sync
+            BotPlayerSystem.Instance.RegisterBotPlayer(opponentController);
 			// TODO allowing the client to decide who goes first is not great
 			var goingFirst = Main.rand.Next() % 2;
 

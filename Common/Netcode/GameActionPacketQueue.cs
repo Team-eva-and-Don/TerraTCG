@@ -104,9 +104,5 @@ namespace TerraTCG.Common.Netcode
 
 	public class QueueClearModPlayer : ModPlayer
 	{
-		public override void PlayerDisconnect()
-		{
-			GameActionPacketQueue.Instance.ClearPlayerQueue(Player);
-		}
 	}
 }
