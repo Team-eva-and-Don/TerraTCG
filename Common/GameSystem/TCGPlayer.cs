@@ -49,13 +49,15 @@ namespace TerraTCG.Common.GameSystem
         public void EndGame();
     }
 
-    internal class TCGPlayer : ModPlayer, IGamePlayerController
-    {
-        private const string SAVE_VERSION = "1"; // TagCompound format for save data
+	internal class TCGPlayer : ModPlayer, IGamePlayerController
+	{
+		private const string SAVE_VERSION = "1"; // TagCompound format for save data
 
-        internal static TCGPlayer LocalPlayer => Main.LocalPlayer.GetModPlayer<TCGPlayer>();
-        internal static GamePlayer LocalGamePlayer => LocalPlayer.GamePlayer;
-        internal static TimeSpan TotalGameTime => Main._drawInterfaceGameTime?.TotalGameTime ?? TimeSpan.FromSeconds(0);
+		internal static TCGPlayer LocalPlayer => Main.LocalPlayer.GetModPlayer<TCGPlayer>();
+		internal static GamePlayer LocalGamePlayer => LocalPlayer.GamePlayer;
+		internal static TimeSpan TotalGameTime => Main._drawInterfaceGameTime?.TotalGameTime ?? TimeSpan.FromSeconds(0);
+
+		string IGamePlayerController.Name => Language.GetTextValue("Mods.TerraTCG.Cards.ActionText.You");
 
         // TODO putting all this UI stuff here is probably not correct
         internal static float FieldTransitionPoint

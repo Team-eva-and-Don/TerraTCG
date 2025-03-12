@@ -47,10 +47,10 @@ namespace TerraTCG.Common.GameSystem.Drawing
 
         public ProjBounds GetTextureSpaceXBoundsForZone(GamePlayer player, Zone zone)
         {
-            // need to account for mirroring of opponent's rows
             var zoneCount = player.Field.Zones.Count;
             int horizontalSlot;
             int baseOffset = FieldRenderer.CARD_WIDTH + FieldRenderer.CARD_MARGIN + FieldRenderer.FIELD_MARGIN;
+            // need to account for mirroring of opponent's rows
             if(player.Owns(zone))
             {
                 horizontalSlot = player.Field.Zones.IndexOf(zone) % (zoneCount / 2);

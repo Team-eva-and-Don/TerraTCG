@@ -11,6 +11,7 @@ using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem;
 using TerraTCG.Common.GameSystem.BotPlayer;
 using TerraTCG.Common.GameSystem.Drawing;
+using TerraTCG.Common.GameSystem.Drawing.Animations.FieldAnimations;
 using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.GameSystem.GameState.GameActions;
 using TerraTCG.Common.Netcode.Packets;
@@ -19,7 +20,7 @@ using TerraTCG.Content.NPCs;
 namespace TerraTCG.Common.Netcode
 {
 	// Implementation of IGamePlayerController that performs actions based on 
-	internal class NetSyncGamePlayerController : IGamePlayerController
+	internal class NetSyncGamePlayerController : IBotPlayer
 	{
 
 		public int PlayerId { get; set; }
@@ -51,6 +52,7 @@ namespace TerraTCG.Common.Netcode
 		public void EndGame()
 		{
 			NetSyncPlayerSystem.Instance.UnregisterPlayer(PlayerId);
+			ModContent.GetInstance<BotPlayerSystem>().UnregisterBotPlayer(this);
 		}
 
 		public void StartGame(GamePlayer player, CardGame game)
@@ -80,6 +82,11 @@ namespace TerraTCG.Common.Netcode
 			{
 				GamePlayer.Surrender();
 			}
+		}
+
+		public void Update()
+		{
+			// No-op
 		}
 	}
 
@@ -152,6 +159,7 @@ namespace TerraTCG.Common.Netcode
 			};
 
 			SyncPlayerMap[playerId] = controller;
+			BotPlayerSystem.Instance.RegisterBotPlayer(controller);
 			return controller;
 		}
 

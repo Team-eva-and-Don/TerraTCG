@@ -2352,10 +2352,12 @@ Cards: {
 		AnyPack: Any Pack
 		Forfeited: forfeited their soul to {0} in a card game!
 		PressEscAgainToExit: Press ESC again to concede
-		Matchmaking: PvP Matchmaking
+		Matchmaking: TerraTCG Lobby
 		Join: Join
 		Cancel: Cancel
 		WaitingForOpponents: Waiting for opponents
+		InGame: In Game
+		AFKWarning: "{0} will time out in 30 seconds"
 	}
 
 	DeckNames: {

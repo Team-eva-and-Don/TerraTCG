@@ -36,9 +36,10 @@ namespace TerraTCG.Common.UI.MatchmakingUI
 
 		public static List<GameStateSyncPlayer> LookingForGamePlayers =>
 			Main.player.Where(p => p.active && p.whoAmI != Main.myPlayer)
-				.OrderBy(p => Vector2.DistanceSquared(p.Center, Main.LocalPlayer.Center))
 				.Select(p => p.GetModPlayer<GameStateSyncPlayer>())
-				.Where(p => p.LookingForGame)
+				.Where(p => p.LookingForGame || p.InGame)
+				.OrderByDescending(p => p.LookingForGame)
+				.ThenBy(p => Vector2.DistanceSquared(p.Player.Center, Main.LocalPlayer.Center))
 				.Take(MAX_OPPONENTS)
 				.ToList();
 
@@ -141,7 +142,7 @@ namespace TerraTCG.Common.UI.MatchmakingUI
 
 			for(int i = 0; i < MAX_OPPONENTS; i++)
 			{
-				if(i >= lookingForGamePlayers.Count || lookingForGamePlayers[i].Player.whoAmI == Main.myPlayer)
+				if(i >= lookingForGamePlayers.Count || lookingForGamePlayers[i].InGame || lookingForGamePlayers[i].Player.whoAmI == Main.myPlayer)
 				{
 					joinButtons[i].Text = null;
 					joinButtons[i].Left.Percent = 1000;
@@ -175,13 +176,16 @@ namespace TerraTCG.Common.UI.MatchmakingUI
 			for(int i = 0; i < lookingForGamePlayers.Count; i++)
 			{
 				var player = lookingForGamePlayers[i];
+				var color = player.LookingForGame ? Color.White : Color.LightGray;
 				var headFrame = headTexture.Frame(1, MAX_OPPONENTS, 0, i);
 				var origin = new Vector2(headFrame.Width, headFrame.Height) / 2;
 				var effects = LookingForGamePlayerHeadRenderer.Instance.FrameEffects[i];
-				spriteBatch.Draw(headTexture, headDrawPos, headFrame, Color.White, 0, origin, 1, effects, 0);
+				spriteBatch.Draw(headTexture, headDrawPos, headFrame, color, 0, origin, 1, effects, 0);
 
 				textPos = headDrawPos + new Vector2(24, -textHeight/4);
-				CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, player.Player.name, textPos, font: font);
+				var nameText = player.LookingForGame ? player.Player.name :
+					$"{player.Player.name} ({Language.GetTextValue("Mods.TerraTCG.Cards.Common.InGame")})";
+				CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, nameText, textPos, color: color, font: font);
 
 				headDrawPos.Y += 48;
 			}

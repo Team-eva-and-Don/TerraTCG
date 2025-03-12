@@ -32,6 +32,8 @@ namespace TerraTCG.Common.GameSystem.GameState
         internal IFieldAnimation FieldAnimation { get; set; }
 
         internal TimeSpan StartTime { get; private set; }
+		internal TimeSpan LastActionTime { get; set; }
+
         internal TimeSpan EndTime { get; private set; }
 
         internal TimeSpan FadeOutTime { get; } = TimeSpan.FromSeconds(2f);
@@ -49,7 +51,8 @@ namespace TerraTCG.Common.GameSystem.GameState
 
 		internal bool IsNoOp => GamePlayerControllers.Any(c => c is NoOpNetGamePlayerController);
 
-        public virtual void StartGame(IGamePlayerController player1, IGamePlayerController player2, int? startIdx = null)
+
+		public virtual void StartGame(IGamePlayerController player1, IGamePlayerController player2, int? startIdx = null)
         {
             GamePlayers = [
                 new GamePlayer(this, player1.Deck.Copy(), player1),
@@ -78,6 +81,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 			if(Main.netMode != NetmodeID.Server)
 			{
 				StartTime = Main._drawInterfaceGameTime.TotalGameTime;
+				LastActionTime = StartTime;
 				SoundEngine.PlaySound(SoundID.MenuOpen);
 			}
         }
@@ -159,6 +163,21 @@ namespace TerraTCG.Common.GameSystem.GameState
 					zone.PlacedCard = null;
 				}
 			}
+			// Check whether any players are AFK in the current multiplayer match
+			if(IsMultiplayer && Main.netMode != NetmodeID.Server)
+			{
+				var elapsedTime = TCGPlayer.TotalGameTime - LastActionTime;
+				// auto-surrender if the net-synced player is AFK for too long
+				if (elapsedTime >= TimeSpan.FromSeconds(60) && elapsedTime < TimeSpan.FromSeconds(60.5f) && 
+					FieldAnimation == null)
+				{
+					FieldAnimation = new AFKWarningAnimation(TCGPlayer.TotalGameTime, CurrentTurn);
+				} else if (elapsedTime >= TimeSpan.FromSeconds(90))
+				{
+					CurrentTurn.ActivePlayer.Surrender();
+				}
+
+			}
 
             foreach(var player in GamePlayers)
             {
@@ -179,6 +198,7 @@ namespace TerraTCG.Common.GameSystem.GameState
             var info = action.GetLogMessage();
             var toLog = new ActionLogInfo(info.Card, player + " " + info.Message);
             CurrentTurn.ActionLog.Add(toLog);
+			LastActionTime = TCGPlayer.TotalGameTime;
 
 			if(IsMultiplayer && CurrentTurn.ActivePlayer == TCGPlayer.LocalGamePlayer)
 			{

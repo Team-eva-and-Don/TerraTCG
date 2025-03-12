@@ -27,6 +27,7 @@ namespace TerraTCG.Common.GameSystem.GameState
         public void Start()
         {
 			StartTime = TCGPlayer.TotalGameTime;
+			Game.LastActionTime = StartTime;
 
             if(ActivePlayer.ManaPerTurn < GamePlayer.MAX_MANA)
             {
