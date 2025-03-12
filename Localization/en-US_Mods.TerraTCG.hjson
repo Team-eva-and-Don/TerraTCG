@@ -2357,6 +2357,7 @@ Cards: {
 		Cancel: Cancel
 		WaitingForOpponents: Waiting for opponents
 		InGame: In Game
+		PlayingTerraTCG: Playing TerraTCG
 		AFKWarning: "{0} will time out in 30 seconds"
 	}
 

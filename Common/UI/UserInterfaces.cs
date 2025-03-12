@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.UI;
 using TerraTCG.Common.GameSystem;
@@ -75,7 +76,36 @@ namespace TerraTCG.Common.UI
 			On_IngameFancyUI.Close += On_IngameFancyUI_Close;
 
 			On_Main.GUIBarsDraw += On_Main_GUIBarsDraw;
+
+			On_Main.DrawMouseOver += On_Main_DrawMouseOver;
         }
+
+		private void On_Main_DrawMouseOver(On_Main.orig_DrawMouseOver orig, Main self)
+		{
+			// Hack to display (Playing TerraTCG) when mousing over an in-game player
+			var mouseOverInGamePlayer = Main.player
+				.Where(p => p.active && p.whoAmI != Main.myPlayer)
+				.Where(p =>
+				{
+					var hb = p.Hitbox;
+					hb.Inflate(10, 10);
+					return hb.Contains((int)Main.MouseWorld.X, (int)Main.MouseWorld.Y);
+				})
+				.Where(p => p.GetModPlayer<GameStateSyncPlayer>().InGame)
+				.FirstOrDefault();
+			var realName = mouseOverInGamePlayer?.name;
+			if(mouseOverInGamePlayer != null)
+			{
+				mouseOverInGamePlayer.name = $"{realName} ({Language.GetTextValue("Mods.TerraTCG.Cards.Common.PlayingTerraTCG")})";
+			}
+			
+			orig.Invoke(self);
+
+			if(mouseOverInGamePlayer != null)
+			{
+				mouseOverInGamePlayer.name = realName;
+			}
+		}
 
 		private void On_Main_GUIBarsDraw(On_Main.orig_GUIBarsDraw orig, Main self)
 		{
