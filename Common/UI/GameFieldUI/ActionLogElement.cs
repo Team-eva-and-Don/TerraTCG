@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using Terraria.GameContent;
+using Terraria.GameInput;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Config;
 using TerraTCG.Common.Configs;
@@ -23,6 +24,13 @@ namespace TerraTCG.Common.UI.GameFieldUI
         internal const int MAX_ACTION_LINES = 20;
 
         internal IEnumerable<(Turn, ActionLogInfo)> VisibleLogs { get; set; } = [];
+
+		// State var to hold how far back in the log the player has scrolled
+		internal int SkipLines;
+
+		// State var to check whether a new action log has been recorded and needs
+		// to be immediately scrolled to
+		internal int LineCount;
 
         private IEnumerable<(Turn, ActionLogInfo, string)> IterateLogMessageLines()
         {
@@ -56,8 +64,22 @@ namespace TerraTCG.Common.UI.GameFieldUI
                 .SelectMany(a => a)
                 .Reverse();
 
+			var allLogLines = IterateLogMessageLines();
+			var allLogLineCount = allLogLines.Count();
+
+			if(allLogLineCount != LineCount)
+			{
+				SkipLines = 0;
+			} else if(allLogLineCount > MAX_ACTION_LINES && PlayerInput.ScrollWheelDelta != 0) 
+			{
+				SkipLines += Math.Sign(PlayerInput.ScrollWheelDelta);
+				SkipLines = Math.Min(allLogLineCount - MAX_ACTION_LINES, SkipLines);
+				SkipLines = Math.Max(0, SkipLines);
+			}
+			LineCount = allLogLineCount;
+
             var boundsCheckPos = Position;
-            foreach(var (turn, action, line) in IterateLogMessageLines().Take(MAX_ACTION_LINES))
+            foreach(var (turn, action, line) in allLogLines.Skip(SkipLines).Take(MAX_ACTION_LINES))
             {
                 var bbox = font.MeasureString(line);
                 var logBounds = new Rectangle((int)boundsCheckPos.X, (int)boundsCheckPos.Y, (int)bbox.X, (int)bbox.Y);
@@ -77,7 +99,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
             var drawPos = Position;
             var font = FontAssets.ItemStack.Value;
             var gamePlayer = TCGPlayer.LocalGamePlayer;
-            foreach(var (turn, _, line) in IterateLogMessageLines().Take(MAX_ACTION_LINES))
+            foreach(var (turn, _, line) in IterateLogMessageLines().Skip(SkipLines).Take(MAX_ACTION_LINES))
             {
                 var color = turn.ActivePlayer == gamePlayer ? Color.SkyBlue : Color.Coral;
                 color *= Main.mouseTextColor / 255f;
