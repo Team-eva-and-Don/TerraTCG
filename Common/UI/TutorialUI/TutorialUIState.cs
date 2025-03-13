@@ -75,7 +75,8 @@ namespace TerraTCG.Common.UI.TutorialUI
             new(18, 27),
             new(19, 28),
             new(17, 29),
-            new(0, 30),
+            new(20, 30),
+            new(0, 31),
         ];
         public int SlideIdx { get; set; }
 

@@ -2605,7 +2605,13 @@ Cards: {
 			edit your decks. Experiment with the cards you get from booster packs, and 
 			challenge more difficult opponents!
 			'''
-		Slide30: That's all for this tutorial. Talk to me again to challenge me to a game!
+		Slide30:
+			'''
+			You can also play TerraTCG with your friends! Craft a Friendly Duel 
+			Invitation using 3 Duel Invitations, then use it in a Multiplayer server to start 
+			a TerraTCG game against another player!
+			'''
+		Slide31: That's all for this tutorial. Talk to me again to challenge me to a game!
 	}
 }
 

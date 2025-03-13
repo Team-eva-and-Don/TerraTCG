@@ -74,7 +74,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
         internal Dictionary<CardSubtype, Rectangle> CardTypeEmoteBounds { get; private set; }
         internal Dictionary<CardSubtype, Asset<Texture2D>> SpecialCardSubtypes { get; private set; }
 
-        internal const int TUTORIAL_SLIDE_COUNT = 20;
+        internal const int TUTORIAL_SLIDE_COUNT = 21;
 
         public Asset<Texture2D> TutorialFrame { get; private set; }
         internal List<Asset<Texture2D>> TutorialSlides { get; private set; }
