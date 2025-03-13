@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using Terraria.Audio;
+using Terraria.GameContent;
 using Terraria.ID;
 using Terraria.Localization;
 using Terraria.ModLoader;
@@ -200,6 +201,32 @@ namespace TerraTCG.Common.UI.GameFieldUI
             PlayerStatRenderer.Instance.DrawPlayerStats(spriteBatch, new(oppBounds.X, oppBounds.Y), opponent, oppScale);
         }
 
+		private void DrawPlayerDeckCounts(SpriteBatch spriteBatch)
+		{
+			if(!ModContent.GetInstance<ClientConfig>().ShowActionLog)
+			{
+				return;
+			}
+			var localPlayer = TCGPlayer.LocalPlayer;
+			var gamePlayer = localPlayer.GamePlayer;
+			var opponent = gamePlayer.Opponent;
+
+			var myListPos = ProjectedFieldUtils.Instance.WorldSpaceToScreenSpace(gamePlayer, gamePlayer.Field.Zones[5], new(1.65f, 1f));
+
+			var deckCount = $"{gamePlayer.Deck.Cards.Count}/20";
+			var font = FontAssets.ItemStack.Value;
+			var yOffset = font.MeasureString(deckCount).Y/2;
+
+			var drawPos = localPlayer.GameFieldPosition + myListPos + Vector2.UnitY * yOffset;
+			CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, deckCount, drawPos, centered: true, font: font);
+
+			var oppListPos = ProjectedFieldUtils.Instance.WorldSpaceToScreenSpace(gamePlayer, opponent.Field.Zones[2], new(-0.65f, 0f));
+			deckCount = $"{opponent.Deck.Cards.Count}/20";
+			drawPos = localPlayer.GameFieldPosition + oppListPos + Vector2.UnitY * yOffset;
+			CardTextRenderer.Instance.DrawStringWithBorder(spriteBatch, deckCount, drawPos, centered: true, font: font);
+
+		}
+
         private void DrawFieldOverlays(SpriteBatch spriteBatch)
         {
             TCGPlayer.LocalGamePlayer.Game.FieldAnimation?.DrawFieldOverlay(spriteBatch, Position);
@@ -226,6 +253,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
                 spriteBatch.Draw(texture, Position, Color.White);
                 DrawZoneNPCs(spriteBatch);
                 DrawPlayerStats(spriteBatch);
+				DrawPlayerDeckCounts(spriteBatch);
                 DrawFieldOverlays(spriteBatch);
 
                 if(fieldTooltip != "" && ModContent.GetInstance<ClientConfig>().ShowTooltips)

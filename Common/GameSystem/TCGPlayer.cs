@@ -491,6 +491,18 @@ namespace TerraTCG.Common.GameSystem
             return GamePlayer == null;
         }
 
+		public override bool CanHitPvp(Item item, Player target)
+		{
+			// Prevent hitting other players that are in game during PvP
+			return !target.GetModPlayer<GameStateSyncPlayer>().InGame;
+		}
+
+		public override bool CanHitPvpWithProj(Projectile proj, Player target)
+		{
+			// Prevent hitting other players that are in game during PvP
+			return !target.GetModPlayer<GameStateSyncPlayer>().InGame;
+		}
+
 		public override void PreUpdate()
 		{
 			// Safety valve in case the "surrender and exit properly"
