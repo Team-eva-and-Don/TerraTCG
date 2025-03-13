@@ -84,7 +84,8 @@ namespace TerraTCG.Common.UI
 		{
 			// Hack to display (Playing TerraTCG) when mousing over an in-game player
 			var mouseOverInGamePlayer = Main.player
-				.Where(p => p.active && p.whoAmI != Main.myPlayer)
+				// Vanilla conditions for displaying a tooltip over a player
+				.Where(p => p.active && p.whoAmI != Main.myPlayer && !p.dead && !p.ShouldNotDraw && p.stealth < 0.5f)
 				.Where(p =>
 				{
 					var hb = p.Hitbox;

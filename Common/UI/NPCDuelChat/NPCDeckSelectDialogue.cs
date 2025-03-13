@@ -23,7 +23,10 @@ namespace TerraTCG.Common.UI.NPCDuelChat
 {
     internal class NPCDeckSelectDialogue : UIPanel
     {
-        internal NPCInfoCache NPCInfo { get; set; }
+        internal NPCInfoCache NPCInfo { 
+			get; 
+			set; 
+		}
 		internal int NPCID => NPCInfo.NpcId;
 
         internal List<NPCDuelChatButton> Buttons { get; set; }
@@ -55,6 +58,7 @@ namespace TerraTCG.Common.UI.NPCDuelChat
                     return;
                 }
 
+				var selectedNPCInfo = NPCInfo;
                 ModContent.GetInstance<UserInterfaces>().StopNPCChat();
                 if (lists[deckIdx].IsTutorial)
                 {
@@ -79,7 +83,7 @@ namespace TerraTCG.Common.UI.NPCDuelChat
 					Sleeve = lists[deckIdx].Sleeve,
                 };
                 ModContent.GetInstance<GameModSystem>().StartGame(myPlayer, opponent);
-				myPlayer.NPCInfo = NPCInfo;
+				myPlayer.NPCInfo = selectedNPCInfo;
             }
             ModContent.GetInstance<UserInterfaces>().StopNPCChat();
         }

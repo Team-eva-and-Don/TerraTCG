@@ -86,12 +86,7 @@ namespace TerraTCG.Common.GameSystem.Drawing
                 spriteBatch.Draw(mpTexture, mpPos, mpTexture.Bounds, Color.White * transparency, 0, mpOrigin, scale, SpriteEffects.None, 0);
             }
 
-			// In a multiplayer game, the player's head
-			if(!player.Game.IsMultiplayer)
-			{
-				return;
-			}
-
+			// The player's head
 			var turnTime = TCGPlayer.TotalGameTime - player.Game.CurrentTurn.StartTime;
 			var scaleModifier = player.IsMyTurn ?
 				1 + 1/16f * MathF.Sin(MathF.PI * (float)turnTime.TotalSeconds) : 1f;
