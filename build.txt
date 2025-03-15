@@ -1,4 +1,4 @@
-displayName = TerraTCG
+displayName = TerraTCG: PvP Update!
 author = billybobmcbo
 version = 1.2.0
 sortAfter = DialogueTweak

@@ -2,6 +2,8 @@
 
 [url=https://github.com/westphallm1/TerraTCG] Mod Source[/url]
 [url=https://forums.terraria.org/index.php?threads/terratcg-the-terraria-collectible-card-game.140791/] Terraria Forums[/url]
+[url=https://discord.gg/gqhknNj9ME]Discord[/url]
+
 
 TerraTCG is a Collectible Card Game built inside of Terraria! Challenge your
 friends, Town NPCs, and bosses to intense games of 1v1 card-based combat, 
@@ -15,7 +17,8 @@ You can now invite your friends to duel! Craft 3 Duel Invitations into a
 "Friendly Duel Invitation" at work bench, then use the item in a multiplayer
 server to find a friendly game with another player!
 
-[img] https://raw.githubusercontent.com/westphallm1/TerraTCG/refs/heads/main/Assets/Workshop/Forest_Promo.png [/img]
+[img] https://raw.githubusercontent.com/westphallm1/TerraTCG/refs/heads/main/Assets/Workshop/PvP_Promo.png [/img]
+
 [h2] Getting Started [/h2]
 
 To begin playing TerraTCG in-game, craft a TerraTCG Deckbox at a workbench using
@@ -45,6 +48,7 @@ may also be challenged:
 [*] the Zoologist
 [/list]
 
+[img] https://raw.githubusercontent.com/westphallm1/TerraTCG/refs/heads/main/Assets/Workshop/Forest_Promo.png [/img]
 
 [h2] Grow your Collection [/h2]
 All 100 TerraTCG cards can be obtained by opening packs rewarded by beating NPCs or
@@ -145,4 +149,4 @@ You can only use one Townsfolk per turn, which consumes your single Townsfolk Em
 [h2]Credits[/h2]
 
 Development: Billybobmcbo, Direwolf420
-Playtesting: Direwolf420, Harblesnargits
+Playtesting: Direwolf420, Harblesnargits, Iceman970, Jadams, Campaigner

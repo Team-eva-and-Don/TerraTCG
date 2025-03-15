@@ -1,12 +1,16 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Terraria;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
+using TerraTCG.Common.Configs;
 using TerraTCG.Common.GameSystem;
+using TerraTCG.Common.GameSystem.GameState;
 using TerraTCG.Common.UI;
 
 namespace TerraTCG.Content.Items
@@ -32,7 +36,21 @@ namespace TerraTCG.Content.Items
             return true;
         }
 
-        public override void AddRecipes() => 
+		public override bool CanUseItem(Player player)
+		{
+			if(!ServerConfig.Instance.AllowPvPBosses && player.whoAmI == Main.myPlayer)
+			{
+				if(player.GetModPlayer<TCGPlayer>().Deck.Cards.Any(c => c.SubTypes.Contains(CardSubtype.BOSS)))
+				{
+					var msg = Language.GetTextValue("Mods.TerraTCG.Cards.Common.BossesNotAllowed");
+					Main.NewText(msg, Color.Red);
+					return false;
+				}
+			}
+			return true;
+		}
+
+		public override void AddRecipes() => 
             CreateRecipe()
                 .AddIngredient(ModContent.ItemType<InvitationToDuel>(), 3)
                 .AddTile(TileID.WorkBenches)
