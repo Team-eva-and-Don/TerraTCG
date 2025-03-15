@@ -1,4 +1,6 @@
 v{ModVersion} has been published to {tMLBuildPurpose} tML v{tMLVersion}.
-Bugfixes
+New Features
 ========
-* Fix issue where queen slime drew incorrectly on non-100% UI scales
+* PvP support
+* Initiate PvP by crafting a "Friendly Duel Invitation" using regular Duel Invitations at a Workbench, then using it on a multiplayer server
+
