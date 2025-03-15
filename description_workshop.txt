@@ -149,4 +149,4 @@ You can only use one Townsfolk per turn, which consumes your single Townsfolk Em
 [h2]Credits[/h2]
 
 Development: Billybobmcbo, Direwolf420
-Playtesting: Direwolf420, Harblesnargits, Iceman970, Jadams, Campaigner
+Playtesting: Direwolf420, Harblesnargits, Iceman970, Jadams

@@ -42,7 +42,7 @@ namespace TerraTCG.Common.Configs
 				return true;
 			} else if (!IsPlayerLocalServerOwner(whoAmI))
 			{
-				message = Language.GetText("Mods.TerraTCG.Cards.Common.NotServerOwner").ToNetworkText();
+				message = NetworkText.FromKey("tModLoader.ModConfigRejectChangesNotHost");
 				return false;
 			}
 			return base.AcceptClientChanges(pendingConfig, whoAmI, ref message);

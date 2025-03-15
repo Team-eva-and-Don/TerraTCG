@@ -2359,7 +2359,6 @@ Cards: {
 		InGame: In Game
 		PlayingTerraTCG: Playing TerraTCG
 		AFKWarning: "{0} will time out in 30 seconds"
-		NotServerOwner: Only the server owner can edit server config.
 		BossesNotAllowed: The server owner has disabled Bosses in PvP on this server.
 	}
 
@@ -2649,10 +2648,7 @@ Configs: {
 
 		AllowPvPBosses: {
 			Label: Allow Bosses in PvP Games
-			Tooltip: 
-				'''
-				Whether to allow players to use boss cards in PvP games.
-				'''
+			Tooltip: Whether to allow players to use boss cards in PvP games.
 		}
 	}
 }
