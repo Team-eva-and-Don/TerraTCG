@@ -1,0 +1,2654 @@
+Items: {
+	TerraTCGDeckbox: {
+		DisplayName: TerraTCG Deckbox
+		Tooltip:
+			'''
+			Eine TerraTCG Deckbox! Öffne sie, um
+			deine Decks zu bearbeiten. Fordere NPCs
+			zu einem Spiel TerraTCG heraus, indem du
+			mit ihnen sprichst.
+			'''
+	}
+
+	TerraTCGDebugDeckbox: {
+		DisplayName: Terra TCG Debug Deckbox
+		Tooltip:
+			'''
+			Öffnet den TerraTCG Deck-Editor mit Zugriff
+			auf jede Karte.
+			'''
+	}
+
+	TerraTCGBoosterPack: {
+		DisplayName: Terra TCG Booster-Pack
+		Tooltip:
+			'''
+			Ein TerraTCG Booster-Pack! Öffne es, um
+			3 zufällige Karten zu erhalten! Baue dein
+			Deck mit der TerraTCG Deckbox.
+			'''
+	}
+
+	CavernPack: {
+		DisplayName: Höhlen-Pack
+		Tooltip:
+			'''
+			Ein TerraTCG Booster-Pack! Enthält
+			höhlenthematische Karten. Baue dein
+			Deck mit der TerraTCG Deckbox.
+			'''
+	}
+
+	DungeonPack: {
+		DisplayName: Dungeon-Pack
+		Tooltip:
+			'''
+			Ein TerraTCG Booster-Pack! Enthält
+			dungeonthematische Karten. Baue dein
+			Deck mit der TerraTCG Deckbox.
+			'''
+	}
+
+	EvilPack: {
+		DisplayName: Böses Pack
+		Tooltip:
+			'''
+			Ein TerraTCG Booster-Pack! Enthält
+			weltböse-thematische Karten. Baue dein
+			Deck mit der TerraTCG Deckbox.
+			'''
+	}
+
+	ForestPack: {
+		DisplayName: Wald-Pack
+		Tooltip:
+			'''
+			Ein TerraTCG Booster-Pack! Enthält
+			waldthematische Karten. Baue dein
+			Deck mit der TerraTCG Deckbox.
+			'''
+	}
+
+	GoblinPack: {
+		DisplayName: Goblin-Pack
+		Tooltip:
+			'''
+			Ein TerraTCG Booster-Pack! Enthält
+			goblinthematische Karten. Baue dein
+			Deck mit der TerraTCG Deckbox.
+			'''
+	}
+
+	JunglePack: {
+		DisplayName: Dschungel-Pack
+		Tooltip:
+			'''
+			Ein TerraTCG Booster-Pack! Enthält
+			dschungelthematische Karten. Baue dein
+			Deck mit der TerraTCG Deckbox.
+			'''
+	}
+
+	KingSlimePack: {
+		DisplayName: König Schleim Promos
+		Tooltip:
+			'''
+			Ein TerraTCG Promo-Pack! Enthält
+			seltene König Schleim Karten! Baue dein
+			Deck mit der TerraTCG Deckbox.
+			'''
+	}
+
+	MushroomPack: {
+		DisplayName: Pilz-Pack
+		Tooltip:
+			'''
+			Ein TerraTCG Booster-Pack! Enthält
+			pilzthematische Karten. Baue dein
+			Deck mit der TerraTCG Deckbox.
+			'''
+	}
+
+	OceanPack: {
+		DisplayName: Ozean-Pack
+		Tooltip:
+			'''
+			Ein TerraTCG Booster-Pack! Enthält
+			ozeanthematische Karten. Baue dein
+			Deck mit der TerraTCG Deckbox.
+			'''
+	}
+
+	QueenBeePack: {
+		DisplayName: Bienenkönigin Promos
+		Tooltip:
+			'''
+			Ein TerraTCG Promo-Pack! Enthält
+			seltene Bienenkönigin Karten! Baue dein
+			Deck mit der TerraTCG Deckbox.
+			'''
+	}
+
+	SlimePack: {
+		DisplayName: Schleim-Pack
+		Tooltip:
+			'''
+			Ein TerraTCG Booster-Pack! Enthält
+			schleimthematische Karten. Baue dein
+			Deck mit der TerraTCG Deckbox.
+			'''
+	}
+
+	BloodMoonPack: {
+		DisplayName: Blutmond-Pack
+		Tooltip:
+			'''
+			Ein TerraTCG Booster-Pack! Enthält
+			blutmondthematische Karten. Baue dein
+			Deck mit der TerraTCG Deckbox.
+			'''
+	}
+
+	MimicPack: {
+		DisplayName: Mimik Promos
+		Tooltip:
+			'''
+			Ein TerraTCG Promo-Pack! Enthält
+			seltene Mimik Karten! Baue dein
+			Deck mit der TerraTCG Deckbox.
+			'''
+	}
+
+	InvitationToDuel: {
+		DisplayName: Duell-Einladung!
+		Tooltip:
+			'''
+			Setze deine Seele für TerraTCG-Ruhm ein! Benutze
+			es in Gegenwart eines Vor-Hardmode-Bosses,
+			um ein Spiel TerraTCG mit deiner Seele 
+			als Einsatz zu starten. Sei gewarnt, die 
+			Konsequenzen einer Niederlage sind tödlich!
+			'''
+	}
+
+	BOCPack: {
+		DisplayName: Gehirn von Cthulhu Promos
+		Tooltip:
+			'''
+			Ein TerraTCG Promo-Pack! Enthält
+			seltene Gehirn von Cthulhu Karten! Baue dein
+			Deck mit der TerraTCG Deckbox.
+			'''
+	}
+
+	EOCPack: {
+		DisplayName: Auge von Cthulhu Promos
+		Tooltip:
+			'''
+			Ein TerraTCG Promo-Pack! Enthält
+			seltene Auge von Cthulhu Karten! Baue dein
+			Deck mit der TerraTCG Deckbox.
+			'''
+	}
+
+	EOWPack: {
+		DisplayName: Weltenfresser Promos
+		Tooltip:
+			'''
+			Ein TerraTCG Promo-Pack! Enthält
+			seltene Weltenfresser Karten! Baue dein
+			Deck mit der TerraTCG Deckbox.
+			'''
+	}
+
+	SkeletronPack: {
+		DisplayName: Skeletron Promos
+		Tooltip:
+			'''
+			Ein TerraTCG Promo-Pack! Enthält
+			seltene Skeletron Karten! Baue dein
+			Deck mit der TerraTCG Deckbox.
+			'''
+	}
+
+	WOFPack: {
+		DisplayName: Fleischwand Promos
+		Tooltip:
+			'''
+			Ein TerraTCG Promo-Pack! Enthält
+			seltene Fleischwand Karten! Baue dein
+			Deck mit der TerraTCG Deckbox.
+			'''
+	}
+
+	DeerclopsPack: {
+		DisplayName: Deerclops-Pack
+		Tooltip:
+			'''
+			Ein TerraTCG Promo-Pack! Enthält
+			seltene Deerclops Karten! Baue dein
+			Deck mit der TerraTCG Deckbox.
+			'''
+	}
+
+	SnowPack: {
+		DisplayName: Schnee-Pack
+		Tooltip:
+			'''
+			Ein TerraTCG Booster-Pack! Enthält
+			schneethematische Karten. Baue dein
+			Deck mit der TerraTCG Deckbox.
+			'''
+	}
+
+	HallowedPack: {
+		DisplayName: Heiliges Pack
+		Tooltip:
+			'''
+			Ein TerraTCG Booster-Pack! Enthält
+			Heilig-thematische Karten. Baue dein
+			Deck mit der TerraTCG Deckbox.
+			'''
+	}
+
+	QueenSlimePack: {
+		DisplayName: Schleimkönigin Pack
+		Tooltip:
+			'''
+			Ein TerraTCG Promo-Pack! Enthält
+			seltene Schleimkönigin Karten! Baue dein
+			Deck mit der TerraTCG Deckbox.
+			'''
+	}
+
+	BatPack: {
+		DisplayName: Fledermaus-Pack
+		Tooltip:
+			'''
+			Ein TerraTCG Booster-Pack! Enthält
+			fledermausthematische Karten. Baue dein
+			Deck mit der TerraTCG Deckbox.
+			'''
+	}
+
+	CritterPack: {
+		DisplayName: Kreaturen-Pack
+		Tooltip:
+			'''
+			Ein TerraTCG Booster-Pack! Enthält
+			kreaturthematische Karten. Baue dein
+			Deck mit der TerraTCG Deckbox.
+			'''
+	}
+
+	DestroyerPack: {
+		DisplayName: Zerstörer-Pack
+		Tooltip:
+			'''
+			Ein TerraTCG Promo-Pack! Enthält
+			seltene Zerstörer Karten! Baue dein
+			Deck mit der TerraTCG Deckbox.
+			'''
+	}
+
+	SkeletronPrimePack: {
+		DisplayName: Skeletron Prime Pack
+		Tooltip:
+			'''
+			Ein TerraTCG Promo-Pack! Enthält
+			seltene Skeletron Prime Karten! Baue dein
+			Deck mit der TerraTCG Deckbox.
+			'''
+	}
+
+	TwinsPack: {
+		DisplayName: Zwillinge Pack
+		Tooltip:
+			'''
+			Ein TerraTCG Promo-Pack! Enthält
+			seltene Zwillinge Karten! Baue dein
+			Deck mit der TerraTCG Deckbox.
+			'''
+	}
+
+	FriendlyDuelInvitation: {
+		DisplayName: Freundliche Duell-Einladung
+		Tooltip:
+			'''
+			Ein Werkzeug, um ein freundliches
+			Spiel TerraTCG mit deinen 
+			Mitspielern zu suchen! Wenn du und ein Freund
+			beide diesen Gegenstand benutzt, könnt ihr
+			ein PvP-Spiel zusammen starten!
+			'''
+	}
+}
+
+Cards: {
+	GiantShelly: {
+		Name: "{$NPCName.GiantShelly}"
+		Attack.Name: Stacheliger Panzer
+
+		Skill: {
+			Name: Fähigkeit: Fester Panzer
+			Description:
+				'''
+				Dein Salamander & 
+				Crawdad erleiden -1
+				Schaden in dieser Runde.
+				'''
+		}
+	}
+
+	Crawdad: {
+		Name: "{$NPCName.Crawdad}"
+		Attack.Name: Quetsch-Klaue
+
+		Skill: {
+			Name: Fähigkeit: Klauen-Jubel
+			Description:
+				'''
+				Dein Salamander & 
+				Shelly verursachen +1 Schaden 
+				in dieser Runde.
+				'''
+		}
+	}
+
+	Salamander: {
+		Name: "{$NPCName.Salamander}"
+		Attack.Name: Säure-Spucke
+
+		Skill: {
+			Name: Fähigkeit: Seidige Schuppen
+			Description:
+				'''
+				Dein Crawdad & Shelly 
+				greifen für -1 MP 
+				in dieser Runde an.
+				'''
+		}
+	}
+
+	Zombie: {
+		Name: "{$NPCName.Zombie}"
+		Attack.Name: Zombiebiss
+	}
+
+	GreenSlime: {
+		Name: "{$NPCName.GreenSlime}"
+		Attack.Name: Schleimball
+	}
+
+	BlueSlime: {
+		Name: "{$NPCName.BlueSlime}"
+		Attack.Name: Schleim-Schlag
+	}
+
+	MotherSlime: {
+		Name: "{$NPCName.MotherSlime}"
+
+		Attack: {
+			Name: Schleim-Brut
+			Description:
+				'''
+				Verursacht +1 Schaden für
+				jeden Schleim, den du 
+				kontrollierst.
+				'''
+		}
+	}
+
+	SlimedZombie: {
+		Name: Verschleimter Zombie
+
+		Attack: {
+			Name: Schleim-Biss
+			Description:
+				'''
+				Verursacht +1 Schaden, wenn du
+				einen Schleim kontrollierst.
+				'''
+		}
+
+		Modifier.Description:
+			'''
+			Erleidet -1 Schaden, wenn du 
+			einen Schleim kontrollierst.
+			'''
+	}
+
+	Pinky: {
+		Name: "{$NPCName.Pinky}"
+
+		Attack: {
+			Name: Rosa Schleim
+			Description:
+				'''
+				Kostet -1 MP für
+				jeden Schleim, den du 
+				kontrollierst.
+				'''
+		}
+	}
+
+	FrozenZombie: {
+		Name: Gefrorener Zombie
+		Attack.Name: Eisiger Biss
+		Modifier.Description:
+			'''
+			Gefrierend: Der nächste 
+			Angriff des Gegners kostet +1 MP.
+			'''
+	}
+
+	IceBat: {
+		Name: "{$NPCName.IceBat}"
+		Attack.Name: Schnee-Sturzflug
+		Modifier.Description:
+			'''
+			Gefrierend: Der nächste 
+			Angriff des Gegners kostet +1 MP.
+			Ausweichend.
+			'''
+	}
+
+	SnowFlinx: {
+		Name: "{$NPCName.SnowFlinx}"
+
+		Attack: {
+			Name: Tiefer Schnee
+			Description:
+				'''
+				Der nächste Angriff des
+				Zielgegners kostet +1 MP.
+				'''
+		}
+	}
+
+	Penguin: {
+		Name: "{$NPCName.Penguin}"
+		Attack.Name: Watscheln
+
+		Skill: {
+			Name: Fähigkeit: Schneelied
+			Description:
+				'''
+				Zielverbündeter erhält 
+				Gefrierend (Der nächste
+				Angriff des Gegners kostet +1)
+				'''
+		}
+	}
+
+	FaceMonster: {
+		Name: "{$NPCName.FaceMonster}"
+
+		Attack: {
+			Name: Klaffender Kiefer
+			Description:
+				'''
+				Angriffsziel erhält
+				Blutend (erleidet +1
+				Schaden durch Angriffe.)
+				'''
+		}
+	}
+
+	Crimera: {
+		Name: "{$NPCName.Crimera}"
+
+		Attack: {
+			Name: Blutsauger
+			Description:
+				'''
+				Angriffsziel erhält
+				Blutend (erleidet +1
+				Schaden durch Angriffe.)
+				'''
+		}
+	}
+
+	Creeper: {
+		Name: "{$NPCName.Creeper}"
+		Modifier.Description:
+			'''
+			Boss-Helfer: Dein
+			Gehirn von Cthulhu 
+			verursacht Blutung.
+			'''
+		Attack.Name: Böser Blick
+	}
+
+	BrainOfCthulhu: {
+		Name: "{$NPCName.BrainofCthulhu}"
+		Modifier.Description:
+			'''
+			Blutdurst: Verursacht +2 Schaden 
+			gegen blutende Gegner.
+			Eifrig.
+			'''
+		Attack.Name: Kopfschmerzen
+	}
+
+	QueenBee: {
+		Name: "{$NPCName.QueenBee}"
+		Modifier.Description:
+			'''
+			Königlicher Honig: Gegner
+			werden vergiftet, wenn
+			sie einen Verbündeten angreifen.
+			'''
+		Attack.Name: Königliches Summen
+	}
+
+	SpikedSlime: {
+		Name: "{$NPCName.SlimeSpiked}"
+		Modifier.Description:
+			'''
+			Boss-Helfer: Stachelig.
+			Dein König Schleim hat 
+			Stachelig.
+			'''
+		Attack.Name: Königlicher Helfer
+	}
+
+	KingSlime: {
+		Name: "{$NPCName.KingSlime}"
+
+		Skill: {
+			Name: Königliches Dekret
+			Description:
+				'''
+				Alle verbündeten Schleime verursachen 
+				+1 Schaden in dieser Runde und 
+				heilen 1 TP.
+				'''
+		}
+
+		Attack.Name: Königlicher Sprung
+	}
+
+	MushroomZombie: {
+		Name: "{$NPCName.ZombieMushroom}"
+		Attack.Name: Sporenbiss
+		Modifier.Description:
+			'''
+			Lebensraub: Heilt 1
+			TP nach dem Angriff.
+			'''
+	}
+
+	SporeSkeleton: {
+		Name: "{$NPCName.SporeSkeleton}"
+		Attack.Name: Pilz-Knochen
+		Modifier.Description:
+			'''
+			Lebensraub: Heilt 1
+			TP nach dem Angriff.
+			'''
+	}
+
+	SporeBat: {
+		Name: "{$NPCName.SporeBat}"
+		Attack.Name: Sporenbiss
+		Modifier.Description: Lebensraub, Ausweichend
+	}
+
+	GlowingSnail: {
+		Name: "{$NPCName.GlowingSnail}"
+		Attack.Name: Leuchtender Panzer
+
+		Skill: {
+			Name: Fähigkeit: Sporenverbreitung
+			Description:
+				'''
+				Verbündete erhalten Lebensraub
+				in dieser Runde (sie heilen 
+				1 TP nach dem Angriff)
+				'''
+		}
+	}
+
+	AnomuraFungus: {
+		Name: "{$NPCName.AnomuraFungus}"
+
+		Attack: {
+			Name: Infizieren
+			Description:
+				'''
+				Verbündete, die das Ziel 
+				angreifen, heilen 1 TP.
+				'''
+		}
+
+		Modifier.Description:
+			'''
+			Lebensraub: Heilt 1
+			TP nach dem Angriff.
+			'''
+	}
+
+	Wraith: {
+		Name: "{$NPCName.Wraith}"
+		Attack.Name: Heimsuchen
+		Modifier.Description:
+			'''
+			Ausweichend: Kann blockierte 
+			Gegner angreifen
+			'''
+	}
+
+	PosessedArmor: {
+		Name: "{$NPCName.PossessedArmor}"
+		Attack.Name: Verfluchter Stahl
+		Modifier.Description:
+			'''
+			Robust: Erleidet -1 Schaden 
+			durch Angriffe.
+			'''
+	}
+
+	ServantOfCthulhu: {
+		Name: Diener von C.
+		Modifier.Description:
+			'''
+			Boss-Helfer: Dein Auge
+			von Cthulhu ist Robust, 
+			wenn es unter der Hälfte TP ist.
+			'''
+		Attack.Name: Königlicher Helfer
+	}
+
+	EyeOfCthulhu: {
+		Name: "{$NPCName.EyeofCthulhu}"
+		Modifier.Description:
+			'''
+			Ausweichend: Kann blockierte 
+			Gegner angreifen
+			'''
+
+		Attack: {
+			Name: Augenbiss
+			Description:
+				'''
+				Wenn unter der Hälfte TP,
+				verursacht doppelten Schaden.
+				'''
+		}
+	}
+
+	WanderingEye: {
+		Name: "{$NPCName.WanderingEye}"
+		Modifier.Description:
+			'''
+			Ausweichend: Kann blockierte 
+			Gegner angreifen
+			'''
+
+		Attack: {
+			Name: Augenbiss
+			Description:
+				'''
+				Wenn unter der Hälfte TP,
+				verursacht +2 Schaden.
+				'''
+		}
+	}
+
+	DemonEye: {
+		Name: "{$NPCName.DemonEye}"
+		Attack.Name: Harter Blick
+		Modifier.Description:
+			'''
+			Ausweichend: Kann blockierte 
+			Gegner angreifen
+			'''
+	}
+
+	Drippler: {
+		Name: "{$NPCName.Drippler}"
+
+		Attack: {
+			Name: Blut-Tropfen
+			Description:
+				'''
+				+2 Schaden in der Runde, 
+				in der diese Kreatur ins Spiel kommt
+				'''
+		}
+
+		Modifier.Description:
+			'''
+			Eifrig: Diese Karte kann
+			in der Runde handeln, in der sie ins Spiel kommt
+			'''
+	}
+
+	WanderingEyeFish: {
+		Name: Augenfisch
+		Attack.Name: Blutiger Blick
+		Modifier.Description: Eifrig, Ausweichend
+	}
+
+	ZombieMerman: {
+		Name: "{$NPCName.ZombieMerman}"
+		Attack.Name: Hinunterziehen
+	}
+
+	ViciousGoldfish: {
+		Name: "{$NPCName.CrimsonGoldfish}"
+
+		Attack: {
+			Name: Blutige Schuppen
+			Description:
+				'''
+				+1 Schaden in der Runde, 
+				in der diese Kreatur ins Spiel kommt
+				'''
+		}
+
+		Modifier.Description:
+			'''
+			Eifrig: Diese Karte kann
+			in der Runde handeln, in der sie ins Spiel kommt
+			'''
+	}
+
+	ViciousBunny: {
+		Name: "{$NPCName.CrimsonBunny}"
+		Attack.Name: Blutiger Tritt
+
+		Skill: {
+			Name: Fähigkeit: Blut-Jubel
+			Description:
+				'''
+				Zielverbündeter verursacht +1 Schaden 
+				in dieser Runde und erhält
+				Blutend (erleidet +1 Schaden)
+				'''
+		}
+	}
+
+	BloodZombie: {
+		Name: "{$NPCName.BloodZombie}"
+
+		Attack: {
+			Name: Bösartiger Riss
+			Description:
+				'''
+				+1 Schaden in der Runde, 
+				in der diese Kreatur ins Spiel kommt
+				'''
+		}
+
+		Modifier.Description:
+			'''
+			Eifrig: Diese Karte kann
+			in der Runde handeln, in der sie ins Spiel kommt
+			'''
+	}
+
+	Harpy: {
+		Name: "{$NPCName.Harpy}"
+
+		Attack: {
+			Name: Sturzbombenangriff
+			Description:
+				'''
+				Alle Verbündeten können
+				den Zielgegner angreifen
+				'''
+		}
+
+		Modifier.Description:
+			'''
+			Ausweichend: Kann blockierte 
+			Gegner angreifen
+			'''
+	}
+
+	JungleTurtle: {
+		Name: "{$NPCName.TurtleJungle}"
+		Attack.Name: Harter Panzer
+
+		Skill: {
+			Name: Fähigkeit: Wächter
+			Description:
+				'''
+				Dein Gegner muss 
+				diese in der nächsten Runde angreifen
+				'''
+		}
+	}
+
+	GiantTortoise: {
+		Name: "{$NPCName.GiantTortoise}"
+		Attack.Name: Panzerschlag
+		Modifier.Description:
+			'''
+			Stachelpanzer: Stachelig.
+			Gegner können keine 
+			Verbündeten mit den niedrigsten
+			TP angreifen.
+			'''
+	}
+
+	Piranha: {
+		Name: "{$NPCName.Piranha}"
+
+		Attack: {
+			Name: Tödlicher Biss
+			Description:
+				'''
+				Angriffsziel erhält
+				Blutend (erleidet +1
+				Schaden durch Angriffe.)
+				'''
+		}
+	}
+
+	MossHornet: {
+		Name: "{$NPCName.MossHornet}"
+
+		Attack: {
+			Name: Moosiger Stich
+			Description:
+				'''
+				Vergiftet den Zielgegner
+				(er erleidet 1 Schaden in jeder
+				Runde)
+				'''
+		}
+	}
+
+	Hornet: {
+		Name: "{$NPCName.Hornet}"
+
+		Attack: {
+			Name: Stich
+			Description:
+				'''
+				Vergiftet den Zielgegner
+				(er erleidet 1 Schaden in jeder
+				Runde)
+				'''
+		}
+	}
+
+	Bee: {
+		Name: "{$NPCName.Bee}"
+		Attack.Name: Stich
+
+		Skill: {
+			Name: Fähigkeit: Giftiger Honig
+			Description:
+				'''
+				Zielverbündeter vergiftet 
+				Gegner in dieser Runde 
+				(sie erleiden 1 Schaden/Runde)
+				'''
+		}
+	}
+
+	SpikedJungleSlime: {
+		Name: "{$NPCName.JungleSlime}"
+		Attack.Name: Giftiger Schleim
+		Modifier.Description:
+			'''
+			Stachelig: Eine Kreatur, die
+			diese Karte angreift, erleidet
+			2 Schaden
+			'''
+	}
+
+	DoctorBones: {
+		Name: "{$NPCName.DoctorBones}"
+
+		Attack: {
+			Name: Fauna finden
+			Description:
+				'''
+				Verursacht +1 Schaden für jede
+				Kreatur, die du kontrollierst.
+				'''
+		}
+	}
+
+	Crab: {
+		Name: "{$NPCName.Crab}"
+		Attack.Name: Zwicken
+		Modifier.Description:
+			'''
+			Unnachgiebig: Kann jede
+			Runde zusätzlich einmal
+			angreifen.
+			'''
+	}
+
+	Jellyfish: {
+		Name: Qualle
+		Attack.Name: Stechen
+		Modifier.Description:
+			'''
+			Unnachgiebig: Kann jede
+			Runde zusätzlich einmal
+			angreifen.
+			'''
+	}
+
+	Shark: {
+		Name: "{$NPCName.Shark}"
+		Attack.Name: Kiefer
+		Modifier.Description:
+			'''
+			Unnachgiebig: Kann jede
+			Runde zusätzlich einmal
+			angreifen.
+			'''
+	}
+
+	FeralClaws: {
+		Name: "{$ItemName.FeralClaws}"
+
+		Skill: {
+			Name: Ausrüsten
+			Description:
+				'''
+				Ausgerüstete Kreatur erhält
+				Unnachgiebig (sie kann in jeder
+				Runde zusätzlich einmal angreifen.)
+				'''
+		}
+	}
+
+	Tim: {
+		Name: "{$NPCName.Tim}"
+
+		Attack: {
+			Name: Magisches Geschoss
+			Description:
+				'''
+				Verursacht 1 Schaden für jeden
+				Gegenstand, den du in diesem
+				Spiel benutzt hast.
+				'''
+		}
+	}
+
+	LostGirl: {
+		Name: "{$NPCName.LostGirl}"
+		Attack.Name: Falsche Tränen
+		Modifier.Description:
+			'''
+			Wenn du einen Gegenstand
+			für die Runde ziehst, verwandelt
+			sich diese Karte.
+			'''
+	}
+
+	Nymph: {
+		Name: "{$NPCName.Nymph}"
+		Attack.Name: Verstricken
+		Modifier.Description:
+			'''
+			Ausweichend: Kann blockierte 
+			Gegner angreifen
+			'''
+	}
+
+	Dryad: {
+		Name: "{$NPCName.Dryad}'s Schutz"
+		Modifier.Description:
+			'''
+			Gib eine verbündete,
+			nicht pausierte, nicht-Experten 
+			Kreatur auf die Hand zurück
+			'''
+	}
+
+	PartyGirl: {
+		Name: "{$NPCName.PartyGirl}'s Gunst"
+		Modifier.Description:
+			'''
+			Hebe die Pause eines Verbündeten auf. Sein
+			Angriff kostet -1 MP
+			in dieser Runde.
+			'''
+	}
+
+	Nurse: {
+		Name: "{$NPCName.Nurse}'s Pflege"
+		Modifier.Description:
+			'''
+			Zielverbündeter heilt 3 TP.
+			Entferne alle Debuffs 
+			von ihm.
+			'''
+	}
+
+	TorturedSoul: {
+		Name: Gequälte Seele
+		Modifier.Description:
+			'''
+			Wenn du weniger TP
+			als dein Gegner hast,
+			füge einen Boss aus deinem
+			Deck zur Hand hinzu.
+			'''
+	}
+
+	ArmsDealer: {
+		Name: "{$NPCName.ArmsDealer}'s Zielen"
+		Modifier.Description:
+			'''
+			Hebe die Pause eines verbündeten
+			Wesens auf. Es verursacht +2 
+			Schaden in dieser Runde.
+			'''
+	}
+
+	Guide: {
+		Name: "{$NPCName.Guide}'s Führung"
+		Modifier.Description: Ziehe 2 Karten.
+	}
+
+	Wizard: {
+		Name: "{$NPCName.Wizard}'s Weisheit"
+		Modifier.Description: Füge 1 Mana-Kristall hinzu
+	}
+
+	OldMan: {
+		Name: "{$NPCName.OldMan}'s Fluch"
+		Modifier.Description:
+			'''
+			Bewege eine Zielkreatur zu
+			einer unbesetzten Spalte
+			'''
+	}
+
+	Shuriken: {
+		Name: "{$ItemName.Shuriken}"
+
+		Skill: {
+			Name: Benutzen
+			Description:
+				'''
+				Zielkreatur
+				verursacht in dieser Runde Blutungen
+				(Gegner erleiden
+				+1 Schaden)
+				'''
+		}
+	}
+
+	LightsBane: {
+		Name: "{$ItemName.LightsBane}"
+
+		Skill: {
+			Name: Ausrüsten
+			Description:
+				'''
+				Wenn die Zielkreatur stirbt,
+				verursachen deine anderen Kreaturen 
+				+1 Schaden.
+				'''
+		}
+	}
+
+	BloodButcherer: {
+		Name: "{$ItemName.BloodButcherer}"
+
+		Skill: {
+			Name: Ausrüsten
+			Description:
+				'''
+				Ausgerüstete Kreatur
+				verursacht Blutungen
+				(Gegner erleiden +1 Schaden)
+				'''
+		}
+	}
+
+	PoisonedKnife: {
+		Name: "{$ItemName.PoisonedKnife}"
+
+		Skill: {
+			Name: Benutzen
+			Description:
+				'''
+				Zielkreatur
+				verursacht in dieser Runde Gift
+				(Gegner erleiden
+				1 Schaden pro Runde)
+				'''
+		}
+	}
+
+	BladeOfGrass: {
+		Name: "{$ItemName.BladeofGrass}"
+
+		Skill: {
+			Name: Ausrüsten
+			Description:
+				'''
+				Ausgerüstete Kreatur
+				verursacht Gift 
+				(Gegner erleiden
+				1 Schaden pro Runde)
+				'''
+		}
+	}
+
+	CopperShortsword: {
+		Name: "{$ItemName.CopperShortsword}"
+
+		Skill: {
+			Name: Ausrüsten
+			Description:
+				'''
+				Ausgerüstete Kreatur
+				verursacht +1 Schaden.
+				'''
+		}
+	}
+
+	PlatinumBroadsword: {
+		Name: "{$ItemName.PlatinumBroadsword}"
+
+		Skill: {
+			Name: Ausrüsten
+			Description:
+				'''
+				Ausgerüstete Kreatur
+				verursacht +2 Schaden.
+				'''
+		}
+	}
+
+	Muramasa: {
+		Name: "{$ItemName.Muramasa}"
+
+		Skill: {
+			Name: Ausrüsten
+			Description:
+				'''
+				Der Angriff der ausgerüsteten Kreatur
+				kostet -1 MP.
+				'''
+		}
+	}
+
+	Shackle: {
+		Name: "{$ItemName.Shackle}"
+
+		Skill: {
+			Name: Ausrüsten
+			Description:
+				'''
+				Ausgerüstete Kreatur erleidet
+				-2 Schaden vom nächsten 
+				Angriff gegen sie. Dann
+				entferne Fessel.
+				'''
+		}
+	}
+
+	CobaltShield: {
+		Name: "{$ItemName.CobaltShield}"
+
+		Skill: {
+			Name: Ausrüsten
+			Description:
+				'''
+				Ausgerüstete Kreatur erhält
+				Robust (sie erleidet -1 Schaden
+				durch Angriffe).
+				'''
+		}
+	}
+
+	FrozenShield: {
+		Name: "{$ItemName.FrozenShield}"
+
+		Skill: {
+			Name: Ausrüsten
+			Description:
+				'''
+				Ausgerüstete Kreatur erhält
+				Gefrierend (der nächste Angriff
+				des Gegners gegen sie kostet 
+				+1 MP).
+				'''
+		}
+	}
+
+	SwiftnessPotion: {
+		Name: "{$ItemName.SwiftnessPotion}"
+
+		Skill: {
+			Name: Benutzen
+			Description: Hebe die Pause der Zielkreatur auf.
+		}
+	}
+
+	ThornsPotion: {
+		Name: "{$ItemName.ThornsPotion}"
+
+		Skill: {
+			Name: Benutzen
+			Description:
+				'''
+				In der nächsten Runde erhält der Zielverbündete
+				Stachelig 2 (Gegner, 
+				die ihn angreifen, erleiden 2 
+				Schaden).
+				'''
+		}
+	}
+
+	ThornChakram: {
+		Name: "{$ItemName.ThornChakram}"
+
+		Skill: {
+			Name: Ausrüsten
+			Description:
+				'''
+				Ausgerüstete Kreatur erhält 
+				Stachelig 1 (Gegner, die 
+				sie angreifen, erleiden 1 Schaden).
+				'''
+		}
+	}
+
+	BandOfRegeneration: {
+		Name: "{$ItemName.BandofRegeneration}"
+
+		Skill: {
+			Name: Ausrüsten
+			Description:
+				'''
+				Ausgerüstete Kreatur heilt
+				1 TP nach jeder deiner 
+				Runden.
+				'''
+		}
+	}
+
+	AvengerEmblem: {
+		Name: "{$ItemName.AvengerEmblem}"
+
+		Skill: {
+			Name: Ausrüsten
+			Description:
+				'''
+				Das Ausrüsten der ausgerüsteten
+				Kreatur kostet -1 MP.
+				'''
+		}
+	}
+
+	IronskinPotion: {
+		Name: "{$ItemName.IronskinPotion}"
+
+		Skill: {
+			Name: Benutzen
+			Description:
+				'''
+				In der nächsten Runde erhält der Zielverbündete
+				Robust 2 (er erleidet 
+				-2 Schaden durch Angriffe).
+
+				'''
+		}
+	}
+
+	LesserHealingPotion: {
+		Name: "{$ItemName.HealingPotion}"
+
+		Skill: {
+			Name: Benutzen
+			Description: Zielverbündeter heilt 3 TP.
+		}
+	}
+
+	AngelStatue: {
+		Name: "{$ItemName.AngelStatue}"
+
+		Skill: {
+			Name: Benutzen
+			Description:
+				'''
+				Zielkreatur tut 
+				nichts.
+				'''
+		}
+	}
+
+	RagePotion: {
+		Name: "{$ItemName.RagePotion}"
+
+		Skill: {
+			Name: Benutzen
+			Description:
+				'''
+				In dieser Runde verursacht der Zielverbündete
+				+2 Schaden.
+				'''
+		}
+	}
+
+	ThrowingKnife: {
+		Name: "{$ItemName.ThrowingKnife}"
+
+		Skill: {
+			Name: Benutzen
+			Description:
+				'''
+				Der nächste Angriff des Zielverbündeten
+				verursacht +1 Schaden.
+				'''
+		}
+	}
+
+	FledglingWings: {
+		Name: Flüglingsschwingen
+
+		Skill: {
+			Name: Ausrüsten
+			Description:
+				'''
+				Ausgerüstete Kreatur erhält
+				Ausweichend (sie kann blockierte
+				Gegner angreifen)
+				'''
+		}
+	}
+
+	BatWings: {
+		Name: Fledermausflügel
+
+		Skill: {
+			Name: Ausrüsten
+			Description:
+				'''
+				Nur für eine Fledermaus ausrüstbar. Sie
+				erhält Unnachgiebig und 
+				Lebensraub.
+				'''
+		}
+	}
+
+	GuideToCritters: {
+		Name: Leitfaden für Kreaturen
+
+		Skill: {
+			Name: Ausrüsten
+			Description:
+				'''
+				Rüste eine Nicht-Kreatur aus.
+				Gegner kann keine
+				Kreaturen angreifen, während du
+				die ausgerüstete Kreatur kontrollierst.
+				'''
+		}
+	}
+
+	GoblinThief: {
+		Name: "{$NPCName.GoblinThief}"
+		Attack.Name: Erdolchen
+
+		Skill: {
+			Name: Fähigkeit: Taschendiebstahl
+			Description:
+				'''
+				Wenn du in dieser Runde einen 
+				Gegenstand benutzt hast, ziehe 1 
+				Karte.
+				'''
+		}
+	}
+
+	GoblinScout: {
+		Name: "{$NPCName.GoblinScout}"
+
+		Attack: {
+			Name: Kundschaften
+			Description:
+				'''
+				Verursacht +1 Schaden für jeden
+				in dieser Runde benutzten Gegenstand.
+				'''
+		}
+
+		Modifier.Description:
+			'''
+			Eifrig: Diese Karte kann
+			in der Runde handeln, in der sie ins Spiel kommt
+			'''
+	}
+
+	GoblinArcher: {
+		Name: "{$NPCName.GoblinArcher}"
+
+		Attack: {
+			Name: Scharfschießen
+			Description:
+				'''
+				Verursacht +1 Schaden für jeden
+				in dieser Runde benutzten Gegenstand.
+				'''
+		}
+
+		Modifier.Description:
+			'''
+			Ausweichend: Kann jeden 
+			Gegner für Angriffe anvisieren
+			'''
+	}
+
+	GoblinWarlock: {
+		Name: "{$NPCName.GoblinSummoner}"
+
+		Attack: {
+			Name: Schattenflamme
+			Description:
+				'''
+				Verursacht +1 Schaden jedes 
+				Mal, wenn du einen 
+				Gegenstand benutzt.
+				'''
+		}
+	}
+
+	Mimic: {
+		Name: "{$NPCName.Mimic}"
+
+		Attack: {
+			Name: Locken
+			Description:
+				'''
+				Kostet -1 MP für jeden 
+				Gegenstand, den du in
+				diesem Spiel benutzt hast.
+				'''
+		}
+
+		Modifier.Description:
+			'''
+			Robust: Erleidet -1 Schaden 
+			durch Angriffe.
+			'''
+	}
+
+	IceMimic: {
+		Name: "{$NPCName.IceMimic}"
+
+		Attack: {
+			Name: Gefrorener Köder
+			Description:
+				'''
+				Kosten reduziert um die 
+				Angriffskosten des Ziels.
+				'''
+		}
+
+		Modifier.Description:
+			'''
+			Gefrierend: Der nächste 
+			Angriff des Gegners kostet +1 MP.
+			'''
+	}
+
+	IceElemental: {
+		Name: "{$NPCName.IceElemental}"
+		Modifier.Description:
+			'''
+			Gefrierend: Der nächste 
+			Angriff des Gegners kostet +1 MP.
+			'''
+
+		Attack: {
+			Name: Eiskristalle
+			Description:
+				'''
+				Verursacht Schaden entsprechend
+				den Angriffskosten des Ziels.
+				'''
+		}
+	}
+
+	IceTortoise: {
+		Name: "{$NPCName.IceTortoise}"
+		Modifier.Description:
+			'''
+			Gefrierend. Alle Verbündeten erhalten
+			Gefrierend.
+			'''
+		Attack.Name: Rutschiger Panzer
+	}
+
+	Deerclops: {
+		Name: "{$NPCName.Deerclops}"
+		Modifier.Description:
+			'''
+			Gefrierend. Alle Verbündeten erhalten
+			Gefrierend.
+			'''
+
+		Attack: {
+			Name: Eisige Finger
+			Description:
+				'''
+				Verursacht Schaden entsprechend
+				den Angriffskosten des Ziels.
+				'''
+		}
+	}
+
+	EnchantedSword: {
+		Name: "{$NPCName.EnchantedSword}"
+		Modifier.Description:
+			'''
+			Heiliger Helfer: Deine
+			zentrale Kreatur verursacht
+			+1 Schaden
+			'''
+		Attack.Name: Heiliger Schlag
+	}
+
+	Gastropod: {
+		Name: "{$NPCName.Gastropod}"
+		Modifier.Description:
+			'''
+			Heiliger Helfer: Der
+			Angriff deiner zentralen Kreatur
+			kostet -1 MP
+			'''
+		Attack.Name: Schnecken-Laser
+	}
+
+	Unicorn: {
+		Name: "{$NPCName.Unicorn}"
+		Modifier.Description:
+			'''
+			Heiliger Helfer: Deine
+			zentralen Kreaturen
+			erscheinen nicht pausiert
+			'''
+		Attack.Name: Glitzer-Galopp
+	}
+
+	Pixie: {
+		Name: "{$NPCName.Pixie}"
+		Modifier.Description:
+			'''
+			Heiliger Helfer: Deine
+			zentrale Kreatur heilt
+			1 TP/Runde.
+			'''
+		Attack.Name: Funkelnde Ohrfeige
+	}
+
+	IlluminantBat: {
+		Name: "{$NPCName.IlluminantBat}"
+		Modifier.Description:
+			'''
+			Heiliger Helfer: Deine
+			zentrale Kreatur erhält
+			Ausweichend.
+			'''
+		Attack.Name: Leuchtender Sturzflug
+	}
+
+	QueenSlime: {
+		Name: "{$NPCName.QueenSlimeBoss}"
+		Modifier.Description:
+			'''
+			Heilige Monarchin: Deine
+			zentrale Kreatur erhält
+			Unnachgiebig.
+			'''
+		Attack.Name: Schleim-Glitzer
+	}
+
+	ChaosElemental: {
+		Name: "{$NPCName.ChaosElemental}"
+
+		Skill: {
+			Name: Teleportation
+			Description:
+				'''
+				Tausche die Position dieser Karte
+				mit einem Zielverbündeten.
+				'''
+		}
+
+		Attack.Name: Verwirren
+	}
+
+	RodOfDiscord: {
+		Name: "{$ItemName.RodofDiscord}"
+
+		Skill: {
+			Name: Ausrüsten
+			Description:
+				'''
+				Die Fähigkeit der ausgerüsteten Kreatur 
+				wird zu: "Tausche 
+				die Position dieser Karte 
+				mit einem Zielverbündeten."
+				'''
+		}
+	}
+
+	Skeletron: {
+		Name: "{$NPCName.SkeletronHead}"
+		Attack.Name: Schädel-Rotation
+		Modifier.Description:
+			'''
+			Wenn diese ins Spiel kommt, platziere
+			zwei Skeletron-Hände
+			'''
+	}
+
+	SkeletronHandL: {
+		Name: "{$NPCName.SkeletronHand} L."
+		Attack.Name: Schlag
+		Modifier.Description:
+			'''
+			Während diese in der
+			Angriffsreihe ist, verursacht dein 
+			Skeletron +2 Schaden
+			'''
+	}
+
+	SkeletronHandR: {
+		Name: "{$NPCName.SkeletronHand} R."
+		Attack.Name: Schlag
+		Modifier.Description:
+			'''
+			Während diese in der
+			Angriffsreihe ist, erleidet dein 
+			Skeletron -2 Schaden
+			'''
+	}
+
+	SkeletronPrime: {
+		Name: "{$NPCName.SkeletronPrime}"
+		Attack.Name: Schädel-Rotation
+		Modifier.Description:
+			'''
+			Erscheint mit zwei Händen.
+			Kopiere alle Ausrüstung auf 
+			diese auf seine Hände. Dies
+			kostet -1 MP zum Ausrüsten.
+			'''
+	}
+
+	SkeletronPrimeHandL: {
+		Name: Prime Hand L.
+		Attack.Name: Prime-Zap
+		Modifier.Description: Ausweichend.
+	}
+
+	SkeletronPrimeHandR: {
+		Name: Prime Hand R.
+		Attack.Name: Prime-Zwicken
+		Modifier.Description: Unnachgiebig.
+	}
+
+	Destroyer: {
+		Name: "{$NPCName.TheDestroyer}"
+		Attack.Name: Wurm-Verwüstung
+		Modifier.Description:
+			'''
+			Wenn dieser ins Spiel kommt, kopiere
+			ihn zweimal. Wenn er 
+			Schaden erleidet, füge eine Sonde
+			zu deiner Hand hinzu.
+			'''
+	}
+
+	DestroyerHead: {
+		Name: "{$NPCName.TheDestroyer}"
+		Attack.Name: Wurm-Verwüstung
+		Modifier.Description:
+			'''
+			Wenn dieser Schaden erleidet, 
+			füge eine Sonde zu deiner 
+			Hand hinzu.
+			'''
+	}
+
+	DestroyerTail: {
+		Name: "{$NPCName.TheDestroyer}"
+		Attack.Name: Wurm-Verwüstung
+		Modifier.Description:
+			'''
+			Wenn dieser Schaden erleidet, 
+			füge eine Sonde zu deiner 
+			Hand hinzu.
+			'''
+	}
+
+	Probe: {
+		Name: "{$NPCName.Probe}"
+
+		Skill: {
+			Name: Benutzen
+			Description:
+				'''
+				Der nächste Angriff der Zielkreatur
+				in dieser Runde verursacht
+				+1 Schaden
+				'''
+		}
+	}
+
+	Twins: {
+		Name: Die Zwillinge
+		Attack.Name: Doppelter Blick
+		Modifier.Description:
+			'''
+			Wenn diese ins Spiel kommen,
+			verwandeln sie sich in 
+			Retinazer & Spazmatism
+			'''
+	}
+
+	Retinazer: {
+		Name: "{$NPCName.Retinazer}"
+		Attack.Name: Laserblick
+		Modifier.Description:
+			'''
+			Dein Spaz. erhält Stachelig 
+			2, während dieser über
+			der Hälfte seiner Gesundheit ist, & +2 Schaden
+			während dieser darunter ist
+			'''
+	}
+
+	Spazmatism: {
+		Name: "{$NPCName.Spazmatism}"
+		Attack.Name: Laserblick
+		Modifier.Description:
+			'''
+			Dein Rez. erhält Robust,
+			während dieser über
+			der Hälfte seiner Gesundheit ist, & Unnachgiebig
+			während dieser darunter ist
+			'''
+	}
+
+	FairyBell: {
+		Name: "{$ItemName.FairyBell}"
+
+		Skill: {
+			Name: Benutzen
+			Description:
+				'''
+				Zielverbündeter heilt 2 TP.
+				Alle Verbündeten des gleichen
+				Bioms & Rolle heilen 1 TP.
+				'''
+		}
+	}
+
+	MagicalHarp: {
+		Name: "{$ItemName.MagicalHarp}"
+
+		Skill: {
+			Name: Ausrüsten
+			Description:
+				'''
+				Ausgerüsteter Verbündeter und alle 
+				Verbündeten des gleichen Bioms 
+				& Rolle verursachen +1 Schaden.
+				'''
+		}
+	}
+
+	LightDisc: {
+		Name: "{$ItemName.LightDisc}"
+
+		Skill: {
+			Name: Ausrüsten
+			Description:
+				'''
+				Ausgerüstete Kreatur erhält
+				"Diese verursacht +1 Schaden für 
+				jeden in dieser Runde benutzten Gegenstand."
+				'''
+		}
+	}
+
+	WallOfFlesh: {
+		Name: "{$NPCName.WallofFlesh}"
+		Attack.Name: Fleischwand
+		Modifier.Description:
+			'''
+			Unvermeidlich: Wenn diese
+			ins Spiel kommt, platziere zwei Augen.
+			Diese heilt 1 TP/Runde.
+			'''
+	}
+
+	WallOfFleshEye: {
+		Name: "{$NPCName.WallofFlesh} Auge"
+		Modifier.Description:
+			'''
+			Robust. Kann nicht angreifen. 
+			Deine Fleischwand 
+			verursacht +1 Schaden/Runde.
+			'''
+	}
+
+	Leech: {
+		Name: "{$NPCName.LeechHead}"
+		Attack.Name: Blutsauger
+		Modifier.Description:
+			'''
+			Boss-Helfer: Die Heilung deiner
+			Fleischwand 
+			erhöht sich um 1 TP/Runde
+			'''
+	}
+
+	EaterOfWorlds: {
+		Name: "{$NPCName.EaterofWorldsHead}"
+		Attack.Name: Wurms Welt
+		Modifier.Description:
+			'''
+			Stachelig. Lebensraub. Wenn diese
+			Karte die Hälfte ihrer Gesundheit erreicht,
+			verwandelt sie sich.
+			'''
+	}
+
+	EaterSegment1: {
+		Name: Fresser-Segment
+		Attack.Name: Wurms Welt
+		Modifier.Description:
+			'''
+			Morbid: Wenn dies stirbt, 
+			erhalten deine anderen Kreaturen 
+			Stachelig. Dies hat
+			Stachelig.
+			'''
+	}
+
+	EaterSegment2: {
+		Name: Fresser-Segment
+		Attack.Name: Wurms Welt
+		Modifier.Description:
+			'''
+			Morbid: Wenn dies stirbt, 
+			erhalten deine anderen Kreaturen 
+			Lebensraub. Dies hat
+			Lebensraub.
+			'''
+	}
+
+	EaterOfSouls: {
+		Name: "{$NPCName.EaterofSouls}"
+		Attack.Name: Seelensauger
+		Modifier.Description:
+			'''
+			Morbid: Wenn dies stirbt, 
+			erhalten deine anderen Kreaturen 
+			Robust.
+			'''
+	}
+
+	Devourer: {
+		Name: "{$NPCName.DevourerHead}"
+		Attack.Name: Wurm-Wackeln
+		Modifier.Description:
+			'''
+			Morbid: Wenn dies stirbt, 
+			verursachen deine anderen Kreaturen 
+			+1 Schaden.
+			'''
+	}
+
+	EnchantedNightcrawler: {
+		Name: V. Nachtwurm
+		Attack.Name: Wurm-Wunsch
+		Modifier.Description:
+			'''
+			Morbid: Wenn dies stirbt, erhältst 
+			du 1 Mana-Kristall und 
+			ziehst 1 Karte.
+			'''
+	}
+
+	Bunny: {
+		Name: "{$NPCName.Bunny}"
+		Attack.Name: Hasen-Tritt
+
+		Skill: {
+			Name: Fähigkeit: Waldwunsch
+			Description: Erhalte 1 MP
+		}
+	}
+
+	ExplosiveBunny: {
+		Name: "{$NPCName.ExplosiveBunny}"
+
+		Attack: {
+			Name: Hasen-Boom
+			Description:
+				'''
+				Dieser erleidet 3 Schaden, -1 
+				für jede Kreatur, die du
+				kontrollierst
+				'''
+		}
+	}
+
+	Dolphin: {
+		Name: "{$NPCName.Dolphin}"
+		Attack.Name: Nasen-Stupser
+
+		Skill: {
+			Name: Fähigkeit: Ozeanwunsch
+			Description:
+				'''
+				Der Angriff der Zielkreatur
+				kostet -1 MP
+				in dieser Runde.
+				'''
+		}
+	}
+
+	Squirrel: {
+		Name: "{$NPCName.Squirrel}"
+		Attack.Name: Eichelwurf
+
+		Skill: {
+			Name: Fähigkeit: Wald-Jubel
+			Description:
+				'''
+				Der nächste Angriff des Zielverbündeten
+				in dieser Runde verursacht +1 Schaden
+				'''
+		}
+	}
+
+	Goldfish: {
+		Name: "{$NPCName.Goldfish}"
+		Attack.Name: Flossen-Schlag
+
+		Skill: {
+			Name: Fähigkeit: Teich-Heilung
+			Description: Zielverbündeter heilt 1 TP
+		}
+	}
+
+	Bat: {
+		Name: "{$NPCName.CaveBat}"
+		Attack.Name: Sturzflug
+		Modifier.Description:
+			'''
+			Ausweichend: Kann jeden 
+			Gegner für Angriffe anvisieren
+			'''
+	}
+
+	JungleBat: {
+		Name: "{$NPCName.JungleBat}"
+		Attack.Name: Dschungel-Sturzflug
+		Modifier.Description:
+			'''
+			Ausweichend: Kann jeden 
+			Gegner für Angriffe anvisieren
+			'''
+	}
+
+	GiantJungleBat: {
+		Name: "{$NPCName.GiantFlyingFox}"
+		Attack.Name: Riesen-Sturzflug
+		Modifier.Description:
+			'''
+			Kann auf jede 
+			Fledermaus befördert werden. Die Angriffe deiner
+			Fledermäuse verursachen +1 Schaden und 
+			kosten -1. Ausweichend.
+			'''
+	}
+
+	Skeleton: {
+		Name: "{$NPCName.Skeleton}"
+		Attack.Name: Knochenbruch
+	}
+
+	UndeadMiner: {
+		Name: "{$NPCName.UndeadMiner}"
+
+		Attack: {
+			Name: Spitzhackenschwung
+			Description:
+				'''
+				Kostet -1 MP für
+				jede Ausrüstung auf
+				dieser Kreatur
+				'''
+		}
+	}
+
+	UndeadViking: {
+		Name: "{$NPCName.UndeadViking}"
+
+		Attack: {
+			Name: Gefrorene Axt
+			Description:
+				'''
+				Verursacht +1 Schaden, wenn diese 
+				Kreatur ausgerüstet ist.
+				'''
+		}
+	}
+
+	AngryBones: {
+		Name: "{$NPCName.AngryBones}"
+		Modifier.Description:
+			'''
+			Das Ausrüsten dieser Krea-
+			tur kostet -1 MP.
+			'''
+		Attack.Name: Verfluchte Axt
+	}
+
+	ArmoredSkeleton: {
+		Name: Bewaffnetes Skelett
+		Modifier.Description:
+			'''
+			Das Ausrüsten dieser Krea-
+			tur kostet -1 MP.
+			'''
+
+		Attack: {
+			Name: Mächtiger Schwung
+			Description:
+				'''
+				Kostet -1 MP für jede 
+				Ausrüstung auf diesem
+				'''
+		}
+	}
+
+	ToxicSludge: {
+		Name: "{$NPCName.ToxicSludge}"
+
+		Attack: {
+			Name: Korrodieren
+			Description:
+				'''
+				Entferne die neueste
+				Ausrüstung vom 
+				Zielgegner.
+				'''
+		}
+	}
+
+	DarkCaster: {
+		Name: "{$NPCName.DarkCaster}"
+
+		Attack: {
+			Name: Verhexen
+			Description:
+				'''
+				Der Angriff des Zielgegners
+				kostet in der nächsten Runde +2 MP.
+				'''
+		}
+	}
+
+	CursedSkull: {
+		Name: "{$NPCName.CursedSkull}"
+
+		Attack: {
+			Name: Fluch
+			Description:
+				'''
+				Zielgegner kann in der
+				nächsten Runde keine Fähigkeiten einsetzen.
+				'''
+		}
+
+		Modifier.Description: Ausweichend
+	}
+
+	DesertSpirit: {
+		Name: "{$NPCName.DesertDjinn}"
+		Attack.Name: Geisterflamme
+		Modifier.Description:
+			'''
+			Sandsturm: Wenn ein Verbündeter 
+			einen Gegner in einer 
+			leeren Spalte angreift, bewege ihn 
+			in diese Spalte.
+			'''
+	}
+
+	SandstormInABottle: {
+		Name: "{$ItemName.SandstorminaBottle}"
+
+		Skill: {
+			Name: Ausrüsten
+			Description:
+				'''
+				Wenn der ausgerüstete Verbündete 
+				einen Gegner in einer 
+				leeren Spalte angreift, bewege ihn 
+				in diese Spalte.
+				'''
+		}
+	}
+
+	Lamia: {
+		Name: "{$NPCName.DesertLamiaDark}"
+		Attack.Name: Umschlingen
+		Modifier.Description:
+			'''
+			Sandsturm: Angriffe von Verbündeten
+			auf Gegner in
+			derselben Spalte kosten
+			-1 MP.
+			'''
+	}
+
+	AntlionCharger: {
+		Name: "{$NPCName.WalkingAntlion}"
+
+		Attack: {
+			Name: Käferbiss
+			Description:
+				'''
+				Verursacht +1 Schaden beim
+				Angriff auf Gegner in 
+				derselben Spalte.
+				'''
+		}
+
+		Modifier.Description: Eifrig.
+	}
+
+	AntlionSwarmer: {
+		Name: "{$NPCName.FlyingAntlion}"
+
+		Attack: {
+			Name: Sand-Schwarm
+			Description:
+				'''
+				Verursacht +1 Schaden beim
+				Angriff auf Gegner in 
+				derselben Spalte.
+				'''
+		}
+
+		Modifier.Description: Ausweichend.
+	}
+
+	Ghoul: {
+		Name: "{$NPCName.DesertGhoul}"
+
+		Attack: {
+			Name: Ghul-Starre
+			Description:
+				'''
+				Verursacht +1 Schaden beim
+				Angriff auf Gegner in 
+				derselben Spalte.
+				'''
+		}
+	}
+
+	Scorpion: {
+		Name: "{$NPCName.Scorpion}"
+		Attack.Name: Stechen
+
+		Skill: {
+			Name: Fähigkeit: Sandiges Lied
+			Description:
+				'''
+				Zielverbündeter verursacht 
+				+1 Schaden gegen Gegner in 
+				seiner Spalte in dieser Runde.
+				'''
+		}
+	}
+
+	SandShark: {
+		Name: "{$NPCName.SandShark}"
+		Attack.Name: Kaktus-Schnappen
+		Modifier.Description:
+			'''
+			Sandsturm: Dieser pausiert nicht
+			nach dem Angriff 
+			auf einen Gegner in derselben 
+			Spalte.
+			'''
+	}
+
+	Basilisk: {
+		Name: "{$NPCName.DesertBeast}"
+		Attack.Name: Steinerner Blick
+		Modifier.Description:
+			'''
+			Wenn dieser ins Spiel kommt, erleidet 
+			der Gegner in seiner Spalte 
+			2 Schaden, dann heilt dieser 
+			2 Schaden
+			'''
+	}
+
+	Vulture: {
+		Name: "{$NPCName.Vulture}"
+		Attack.Name: Aasfresser
+		Modifier.Description:
+			'''
+			Dieser hat Ausweichend, wenn
+			er Gegner in
+			seiner Spalte angreift.
+			'''
+	}
+
+	DyeTrader: {
+		Name: "{$NPCName.DyeTrader}'s Tanz"
+		Modifier.Description:
+			'''
+			Bewege einen Zielverbündeten zu
+			jeder Spalte (tausche ihn, wenn
+			diese Spalte besetzt ist)
+			'''
+	}
+
+	Types: {
+		CREATURE: Kreatur
+		ITEM: Gegenstand
+		TOWNSFOLK: Stadtbewohner
+		EQUIPMENT: Ausrüstung
+		CONSUMABLE: Verbrauchbar
+		FOREST: Wald
+		CAVERN: Höhle
+		FIGHTER: Kämpfer
+		CRITTER: Kreatur
+		SCOUT: Kundschafter
+		DEFENDER: Verteidiger
+		CASTER: Zauberer
+		SLIME: Schleim
+		JUNGLE: Dschungel
+		EVIL: Böse
+		SNOW: Schnee
+		BLOOD_MOON: Blutmond
+		DESERT: Wüste
+		OCEAN: Ozean
+		GOBLIN_ARMY: Goblin-Armee
+		MUSHROOM: Pilz
+		HALLOWED: Heilig
+		EXPERT: Experte
+		BOSS: Boss
+		OWNED: Nur Besessene
+	}
+
+	Modifiers: {
+		PAUSED: Pausiert: Kann bis zur nächsten Runde nicht handeln
+		DEFENSE_BOOST: Robust: Nimmt {0} weniger Schaden
+		BLEEDING: Blutend: Nimmt {0} mehr Schaden
+		POISON: Vergiftet: Nimmt {0} Schaden pro Runde
+		RELENTLESS: Unnachgiebig: Kann {0} zusätzliche Male angreifen
+		EVASIVE: Ausweichend: Kann blockierte Gegner angreifen
+		SPIKED: Stachelig: Angreifer nehmen {0} Schaden
+		LIFESTEAL: Lebensraub: Erhält {0} TP bei Angriff zurück
+		MORBID: Morbid: Ein Effekt wird ausgelöst, wenn dies stirbt
+		CURSED: Verflucht: Kann keine Fähigkeiten einsetzen
+		FREEZING: Gefrierend: Nächster Angriff des Gegners kostet {0} mehr
+		SHIFTING_SANDS: Wandernder Sand: Bewegt sich bei Angriff in die Spalte des Ziels
+	}
+
+	ModifierNames: {
+		DEFENSE_BOOST: Robust
+		BLEEDING: Blutend
+		POISON: Gift
+		RELENTLESS: Unnachgiebig
+		EVASIVE: Ausweichend
+		ZEALOUS: Eifrig
+		SPIKED: Stachelig
+		LIFESTEAL: Lebensraub
+		MORBID: Morbid
+		CURSED: Verflucht
+		FREEZING: Gefrierend
+	}
+
+	Common: {
+		Turn: Runde
+		EndTurn: Passen
+		AddToDeck: Füge 1 {0} zum Deck hinzu
+		RemoveFromDeck: Entferne 1 {0} aus dem Deck
+		UseDeck: Benutze Deck {0}
+		DeckEdit: Bearbeite Deck {0}
+		DeckCount: Karten
+		FilterCards: Karten filtern
+		ShowCards: Zeige {0} Karten
+		DuelChat: Lass uns duellieren!
+		AskDeck: Welches Deck möchtest du herausfordern?
+		YouWin: Du gewinnst!
+		YouLose: Du verlierst...
+		DeckNotValid: Dein Deck muss genau 20 Karten enthalten und mindestens eine Nicht-Experten-, Nicht-Kreatur-Kreatur enthalten.
+		Prev: Zurück
+		Next: Weiter
+		Close: Schließen
+		DoubleClickToClose: Doppelklick zum Aufgeben
+		Hearts: Herzen
+		Mana: Mana-Kristalle
+		Townsfolk: Stadtbewohner-Emblem
+		Search: Suche
+		For: " nach"
+		UnlockedANewDeck: Ein neues Deck freigeschaltet
+		AcceptedInvitation: hat deine Einladung zu einem Spiel um die Seele angenommen!
+		FoundIn: Gefunden in:
+		AnyPack: Beliebiges Pack
+		Forfeited: hat seine Seele an {0} in einem Kartenspiel verloren!
+		PressEscAgainToExit: ESC erneut drücken, um aufzugeben
+		Matchmaking: TerraTCG Lobby
+		Join: Beitreten
+		Cancel: Abbrechen
+		WaitingForOpponents: Warte auf Gegner
+		InGame: Im Spiel
+		PlayingTerraTCG: Spiele TerraTCG
+		AFKWarning: "{0} wird in 30 Sekunden wegen Inaktivität getrennt"
+		BossesNotAllowed: Der Serverbesitzer hat Bosse im PvP auf diesem Server deaktiviert.
+	}
+
+	DeckNames: {
+		Tutorial: Tutorial
+		ForestBeginner: Wald 1
+		Forest: Wald 2
+		ForestAdvanced: Wald 3
+		SlimeBeginner: Schleime 1
+		Slime: Schleime 2
+		SlimeAdvanced: Schleime 3
+		JungleBeginner: Dschungel 1
+		Jungle: Dschungel 2
+		JungleAdvanced: Dschungel 3
+		Treasure: Schätze
+		Salamander: Salamander
+		BloodMoonBeginner: Blutmond 1
+		BloodMoon: Blutmond 2
+		BloodMoonAdvanced: Blutmond 3
+		MushroomBeginner: Pilze 1
+		Mushroom: Pilze 2
+		SkeletonsBeginner: Skelette 1
+		Skeletons: Skelette 2
+		Curse: Dungeon 1
+		CurseAdvanced: Dungeon 2
+		GoblinsBeginner: Goblins 1
+		Goblins: Goblins 2
+		CrabsBeginner: Ozean 1
+		Crabs: Ozean 2
+		CrabsAdvanced: Ozean 3
+		EvilBeginner: Böse 1
+		Evil: Böse 2
+		EvilAdvanced: Böse 3
+		SnowBeginner: Schnee 1
+		Snow: Schnee 2
+		QueenBee: Bienenkönigin
+		KingSlime: König Schleim
+		QueenSlime: Schleimkönigin
+		BoC: Gehirn von Cthulhu
+		EoC: Auge von Cthulhu
+		EoW: Weltenfresser
+		Skeletron: Skeletron
+		Deerclops: Deerclops
+		WoF: Fleischwand
+		Hallowed: Heilig
+		Bats: Fledermäuse
+		Critters: Kreaturen
+		Desert: Wüste
+	}
+
+	ActionText: {
+		You: Du
+		Opponent: Gegner
+		Move: Bewegen
+		Use: Benutzen
+		Attack: Angreifen
+		Promote: Befördern
+		Play: Spielen
+		Moved: bewegte
+		Used: benutzte
+		Attacked: griff an
+		Promoted: beförderte
+		Played: spielte
+		With: mit
+		For: für
+		On: auf
+		Died: starb
+		Ownership: s
+		Skill: Fähigkeit
+		Bounced: gab eine Karte auf die Hand zurück
+		AddedMana: fügte einen Mana-Kristall hinzu
+		Drew: zog
+		Cards: Karten
+		To: zu
+		NotEnoughMana: Nicht genug Mana
+		NotEnoughTownsfolk: Kein Stadtbewohner-Emblem verfügbar
+		OnlyOneBoss: Du kannst nur einen Boss kontrollieren
+		Morbid: Seine Morbid-Fähigkeit wurde ausgelöst.
+	}
+
+	Tutorial: {
+		Slide0:
+			'''
+			Willkommen bei TerraTCG, dem Terraria Trading Card Game! Um ein Spiel zu starten,
+			versuche mit einem NPC zu sprechen und "Lass uns duellieren!" auszuwählen. Nicht jeder NPC wird
+			derzeit unterstützt, aber in Zukunft werden weitere hinzugefügt.
+			'''
+		Slide1:
+			'''
+			TerraTCG ist ein Kartenspiel, das zwischen zwei Spielern gespielt wird. Jeder Spieler beginnt damit, 
+			sein Deck zu mischen und 5 Karten zu ziehen. Ein Spieler wird dann
+			zufällig ausgewählt, um als Erster zu beginnen.
+			'''
+		Slide2:
+			'''
+			Jeder Spieler hat einen Pool von 3 Ressourcentypen, die auf unterschiedliche Weise verwendet werden:
+			- Herzen, die verloren gehen, wenn eine Kreatur, die der Spieler kontrolliert, stirbt.
+			- Mana-Kristalle, die zum Angreifen und Spielen von Gegenständen verwendet werden und pro Runde um 1 wachsen.
+			- Ein Stadtbewohner-Emblem, das zum Spielen von Stadtbewohnern verwendet wird und sich jede Runde erneuert.
+			'''
+		Slide3:
+			'''
+			Herzen repräsentieren die verbleibende Lebensenergie eines Spielers. Ein Herz geht verloren,
+			wenn eine Kreatur, die der Spieler kontrolliert, stirbt, und ein Spieler verliert das
+			Spiel, wenn alle seine Herzen aufgebraucht sind.
+			'''
+		Slide4:
+			'''
+			Mana-Kristalle werden verbraucht, wenn die meisten Spielaktionen ausgeführt werden, wie z.B.
+			das Angreifen mit einer Kreatur oder das Spielen eines Gegenstands. Spieler beginnen mit einem einzelnen
+			Kristall in Runde 1 und erhalten dann pro Runde einen zusätzlichen Kristall bis zu 8 in
+			Runde 8. 
+			'''
+		Slide5:
+			'''
+			Das Stadtbewohner-Emblem wird verwendet, um Stadtbewohner-Karten zu wirken, mächtige Einmaleffekte,
+			die allein das Blatt im Spiel wenden können. Ein Stadtbewohner-
+			Emblem wird pro Runde generiert.
+			'''
+		Slide6:
+			'''
+			Es gibt 3 Arten von Karten in TerraTCG:
+			- Kreaturen, die auf das Schlachtfeld für den Kampf platziert werden
+			- Gegenstände, die temporäre oder permanente Verstärkungen für Kreaturen bieten
+			- Stadtbewohner, die mächtige Einmaleffekte wie Kartenziehen bieten.
+			'''
+		Slide7:
+			'''
+			Kreaturen sind der Kern des Spiels. Sie können kostenlos von der Hand
+			auf das Schlachtfeld platziert werden. 
+			'''
+		Slide8:
+			'''
+			Um eine Kreatur zu spielen, klicke auf diese Kreatur in der Hand und dann auf eine entsprechende 
+			leere Zone auf deinem Schlachtfeld.
+			'''
+		Slide9:
+			'''
+			Kämpfer-Kreaturen sind für den Kampf gedacht und sollten in die Angriffs-
+			reihe platziert werden. Nur Kreaturen in der Angriffsreihe (Schwert-Symbole) dürfen angreifen.
+			'''
+		Slide10: "Kreaturen betreten das Schlachtfeld Pausiert und müssen eine Runde warten, um zu handeln. "
+		Slide11:
+			'''
+			Kreatur-Kreaturen fehlt es an Kampfkraft, haben aber mächtige Fähigkeiten, 
+			die andere Kreaturen im Kampf unterstützen. 
+			'''
+		Slide12:
+			'''
+			Kreaturen sind anfällig für Angriffe von Feinden, können aber geschützt werden, 
+			indem man sie in die Verteidigungsreihe (Schild-Symbol) in der gleichen Spalte wie 
+			eine andere freundliche Kreatur platziert.
+			'''
+		Slide13:
+			'''
+			Gegenstände können an Kreaturen angebracht werden und bieten Boni auf ihre Werte. Es 
+			kostet Mana-Kristalle, um Gegenstände von der Hand zu spielen. 
+			'''
+		Slide14:
+			'''
+			Um einen Gegenstand zu spielen, klicke auf die Gegenstandskarte in der Hand und dann auf eine geeignete Ziel-
+			kreatur auf dem Feld. 
+			'''
+		Slide15:
+			'''
+			Halte den Mauszeiger über die Kartenvorschau einer Kreatur, um zu sehen, welche Gegenstandsverstärkungen derzeit
+			auf sie wirken!
+			'''
+		Slide16:
+			'''
+			Stadtbewohner sind ein spezieller Kartentyp, der mächtige Vorteile bietet,
+			wie Kartenziehen und zusätzliche Mana-Kristalle. Du kannst nur einen Stadtbewohner pro 
+			Runde einsetzen, was dein einzelnes Stadtbewohner-Emblem verbraucht.
+			'''
+		Slide17:
+			'''
+			Sobald alle Mana-Kristalle und das Stadtbewohner-Emblem verbraucht sind und alle 
+			Kreaturen auf deinem Feld Pausiert sind, kannst du keine weiteren Spielaktionen ausführen. 
+			Klicke auf die Schaltfläche "Passen", um die Runde an deinen Gegner zu übergeben.
+			'''
+		Slide18:
+			'''
+			Dein Gegner spielt seine eigenen Kreaturen, Gegenstände und Stadtbewohner während seiner
+			Runde. Sobald er wieder zu dir zurückkehrt, werden deine Kreaturen nicht mehr Pausiert sein und können
+			handeln! 
+			'''
+		Slide19:
+			'''
+			Experten-Kreaturen sind ein spezieller Kreaturentyp, der auf 
+			eine nicht pausierte Kreatur mit dem gleichen Biom und der gleichen Kampfrolle platziert werden kann. Sowohl der 
+			Geist als auch der Zombie sind Wald-Kämpfer, also kann der Zombie befördert werden!
+			'''
+		Slide20:
+			'''
+			Um eine Experten-Kreatur zu befördern, klicke auf diese Kreatur in der Hand und dann auf eine
+			passende Kreatur auf dem Feld.
+			'''
+		Slide21:
+			'''
+			Kreaturen haben Fähigkeiten, die deine anderen Kreaturen unterstützen. Klicke auf eine nicht pausierte 
+			Kreatur, um ihre Fähigkeit zu nutzen. Hier gewährt der Hase dir einen zusätzlichen Mana-Kristall!
+			Die Verwendung der Fähigkeit einer Kreatur Pausiert sie bis zur nächsten Runde.
+			'''
+		Slide22:
+			'''
+			Zu jedem Zeitpunkt in deiner Runde kannst du einen Angriff mit einer Kreatur in deiner
+			Angriffsreihe erklären. Das Angreifen mit einer Kreatur verbraucht Mana-Kristalle entsprechend den
+			Angriffskosten dieser Kreatur und Pausiert sie bis zu deiner nächsten Runde.
+			'''
+		Slide23:
+			'''
+			Um einen Angriff zu erklären, klicke zuerst auf eine Kreatur in deiner Angriffsreihe und dann
+			auf eine beliebige gegnerische Kreatur. 
+			'''
+		Slide24: "Der gegnerische Hase nimmt 4 Schaden von dem Angriff. "
+		Slide25:
+			'''
+			Sobald die Lebenspunkte einer Kreatur vollständig erschöpft sind, stirbt sie, und der Gegner verliert 
+			1 Lebenspunkt. Wiederhole diesen Vorgang, bis die Herzen des Gegners verschwunden sind,
+			um das Spiel zu gewinnen!
+			'''
+		Slide26:
+			'''
+			Das Gewinnen eines TerraTCG-Spiels gewährt dir mehrere TerraTCG-Booster-Packs. 
+			Öffne sie, um neue Karten für deine Sammlung zu erhalten! Stadtbewohner geben
+			Packs, die Karten enthalten, die zu ihren Decks passen.
+			'''
+		Slide27:
+			'''
+			Ein NPC einmal zu besiegen schaltet ein zweites, herausfordernderes Deck für
+			diesen NPC frei. Besiege dieses zweite Deck, um eine Einladung zum Duell zu erhalten, einen 
+			mystischen Gegenstand, der es dir ermöglicht, die Bosse selbst zu
+			einem Spiel TerraTCG herauszufordern!
+			'''
+		Slide28:
+			'''
+			Besiege einen Boss im Kampf, um seltene Promo-Karten zu erhalten! Hast du das Zeug,
+			jeden* Boss in einem Spiel TerraTCG zu besiegen?
+
+			*TerraTCG unterstützt derzeit jeden Vor-Hardmode-Boss.
+			'''
+		Slide29:
+			'''
+			Eine TerraTCG-Deckbox, gefertigt mit 5 Holz an einer Werkbank, kann verwendet werden, um
+			deine Decks zu bearbeiten. Experimentiere mit den Karten, die du aus Booster-Packs erhältst, und 
+			fordere schwierigere Gegner heraus!
+			'''
+		Slide30:
+			'''
+			Du kannst TerraTCG auch mit deinen Freunden spielen! Fertige eine Freundliche Duell-
+			Einladung aus 3 Duell-Einladungen an und benutze sie in einem Multiplayer-Server, um 
+			ein TerraTCG-Spiel gegen einen anderen Spieler zu starten!
+			'''
+		Slide31: Das ist alles für dieses Tutorial. Sprich mich erneut an, um mich zu einem Spiel herauszufordern!
+	}
+}
+
+Configs: {
+	ClientConfig: {
+		DisplayName: Client-Konfiguration
+		Headers.GameUI: Spiel-UI
+
+		ShowActionLog: {
+			Label: Aktionsprotokoll anzeigen
+			Tooltip: Zeigt ein scrollendes Protokoll aller TerraTCG-Spielaktionen an.
+		}
+
+		ShowTooltips: {
+			Label: Tooltips anzeigen
+			Tooltip: Zeigt Aktionstooltips während TerraTCG-Spielen an.
+		}
+
+		ShowCardPreview: {
+			Label: Kartenvorschau anzeigen
+			Tooltip: Zeigt ein großes Bild der Karte, über der die Maus schwebt, während TerraTCG-Spielen an.
+		}
+
+		ShowFoils: {
+			Label: Folien anzeigen
+			Tooltip: ""
+		}
+	}
+
+	ServerConfig: {
+		DisplayName: Server-Konfiguration
+		Headers.PvPConfig: PvP-Konfiguration
+
+		AllowPvPBosses: {
+			Label: Bosse in PvP-Spielen erlauben
+			Tooltip: Ob Spieler Boss-Karten in PvP-Spielen verwenden dürfen.
+		}
+	}
+}
