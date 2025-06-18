@@ -10,11 +10,11 @@ using Terraria.ModLoader;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
-    internal delegate IGameAction SelectInHandAction(Card card, GamePlayer gamePlayer);
+    public delegate IGameAction SelectInHandAction(Card card, GamePlayer gamePlayer);
 
-    internal delegate IGameAction SelectOnFieldAction(Zone zone, GamePlayer gamePlayer);
+    public delegate IGameAction SelectOnFieldAction(Zone zone, GamePlayer gamePlayer);
 
-    internal readonly struct ActionLogInfo(Card card, string message)
+	public readonly struct ActionLogInfo(Card card, string message)
     {
         public Card Card { get; } = card;
         public string Message { get; } = message;
@@ -22,7 +22,7 @@ namespace TerraTCG.Common.GameSystem.GameState.GameActions
 
     // Interface for a state machine that accepts player input until
     // enough info has been gathered to perform an action
-    internal interface IGameAction
+	public interface IGameAction
     {
         public bool CanAcceptZone(Zone zone) => false;
         public bool AcceptZone(Zone zone) => false;
