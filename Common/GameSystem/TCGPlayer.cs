@@ -49,7 +49,7 @@ namespace TerraTCG.Common.GameSystem
         public void EndGame();
     }
 
-	internal class TCGPlayer : ModPlayer, IGamePlayerController
+	public class TCGPlayer : ModPlayer, IGamePlayerController
 	{
 		private const string SAVE_VERSION = "1"; // TagCompound format for save data
 
