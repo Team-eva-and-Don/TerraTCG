@@ -14,7 +14,7 @@ using TerraTCG.Common.GameSystem.GameState.GameActions;
 
 namespace TerraTCG.Common.GameSystem.Drawing.Animations
 {
-    internal interface IAnimation
+	public interface IAnimation
     {
         TimeSpan StartTime { get; set; }
 
@@ -37,7 +37,7 @@ namespace TerraTCG.Common.GameSystem.Drawing.Animations
 		internal TimeSpan RemainingTime => Duration - (TCGPlayer.TotalGameTime - StartTime);
     }
 
-    internal class AnimationUtils 
+	public class AnimationUtils 
     {
         public static void DrawZoneNPC(
             SpriteBatch spriteBatch, 
