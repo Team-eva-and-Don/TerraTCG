@@ -10,7 +10,7 @@ using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState
 {
-    readonly struct PlayerResources(int health, int mana, int townsfolkMana)
+	public readonly struct PlayerResources(int health, int mana, int townsfolkMana)
     {
         public int Health { get; } = health;
         public int Mana { get; } = mana;
