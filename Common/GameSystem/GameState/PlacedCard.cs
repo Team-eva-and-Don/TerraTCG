@@ -7,34 +7,34 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.GameState
 {
-    internal class PlacedCard(Card template)
+	public class PlacedCard(Card template)
     {
-        internal Card Template { get; set; } = template;
+		public Card Template { get; set; } = template;
 
-        internal int CurrentHealth { get; set; } = template.MaxHealth;
+		public int CurrentHealth { get; set; } = template.MaxHealth;
 
-        internal List<ICardModifier> CardModifiers { get; set; } = [];
+		public List<ICardModifier> CardModifiers { get; set; } = [];
 
-        internal List<ICardModifier> FieldModifiers { get; set; } = [];
+		public List<ICardModifier> FieldModifiers { get; set; } = [];
 
-		internal Skill? Skill { get; set; } = template.Skills?.FirstOrDefault();
+		public Skill? Skill { get; set; } = template.Skills?.FirstOrDefault();
 
         internal TimeSpan PlaceTime { get; set; }
-        internal bool IsExerted { get; set; } = false;
+		public bool IsExerted { get; set; } = false;
 
         internal bool IsDamaged => CurrentHealth < Template.MaxHealth;
 
-        internal void Heal(int amount)
+		public void Heal(int amount)
         {
             CurrentHealth = Math.Min(Template.MaxHealth, CurrentHealth + amount);
         }
 
-        internal void AddModifiers(List<ICardModifier> modifiers)
+		public void AddModifiers(List<ICardModifier> modifiers)
         {
             CardModifiers.AddRange(modifiers);
         }
 
-        internal Dictionary<ModifierType, int> GetKeywordModifiers(Zone myZone)
+		public Dictionary<ModifierType, int> GetKeywordModifiers(Zone myZone)
         {
             var modifierMap = new Dictionary<ModifierType, int>();
             if(IsExerted)
@@ -101,7 +101,7 @@ namespace TerraTCG.Common.GameSystem.GameState
             return skill;
         }
 
-        internal List<Zone> GetValidAttackZones(Zone startZone, Zone endZone) 
+		public List<Zone> GetValidAttackZones(Zone startZone, Zone endZone) 
         {
             // default list of zones: Attack zones and unblocked defense zones
             var targetZones = endZone.Siblings.Where(z => !z.IsEmpty() && !z.IsBlocked()).ToList();
