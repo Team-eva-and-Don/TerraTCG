@@ -21,7 +21,7 @@ using static TerraTCG.Common.GameSystem.GameState.GameActions.IGameAction;
 
 namespace TerraTCG.Common.GameSystem.GameState
 {
-    internal class CardGame
+	public class CardGame
     {
         internal List<GamePlayer> GamePlayers { get; set; }
 
