@@ -13,7 +13,7 @@ using static TerraTCG.Common.GameSystem.PackOpening.CardPools;
 
 namespace TerraTCG.Common.GameSystem.PackOpening
 {
-	internal readonly struct Pack(int count, params CardCollection[] pools)
+	public readonly struct Pack(int count, params CardCollection[] pools)
 	{
 		List<CardCollection> Pools { get; } = [.. pools];
 		int Count { get; } = count;
@@ -35,7 +35,7 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 			return pool.Cards[Main.rand.Next(pool.Cards.Count)];
 		}
 
-		internal void OpenPack(TCGPlayer recipient)
+		public void OpenPack(TCGPlayer recipient)
 		{
 			// first card in pack always comes from first
 			// card in pool
@@ -67,7 +67,7 @@ namespace TerraTCG.Common.GameSystem.PackOpening
             ModContent.GetInstance<UserInterfaces>().StartPackOpening();
 		}
 	}
-	internal class PackDefinitions
+	public class PackDefinitions
 	{
 
 		public static Pack ForestPack => new(3, ForestCards, CommonCards);
