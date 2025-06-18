@@ -10,7 +10,7 @@ using Terraria.ID;
 
 namespace TerraTCG.Common.GameSystem.GameState.Modifiers
 {
-    internal enum GameEvent
+	public enum GameEvent
     {
         // End of the current turn
         END_TURN,
@@ -26,7 +26,7 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
 	}
 
 	// Keyworded modifier types
-    internal enum ModifierType
+	public enum ModifierType
     {
         NONE,
         PAUSED,
@@ -44,7 +44,7 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
 		SHIFTING_SANDS
 	}
 
-    internal struct GameEventInfo
+	public struct GameEventInfo
     {
         public GameEvent Event { get; set; }
         public bool IsMyTurn { get; set; }
@@ -52,7 +52,7 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
         public Zone Zone { get; set; }
     }
 
-    internal interface ICardModifier
+	public interface ICardModifier
     {
         public Asset<Texture2D> Texture { get => null; }
 
@@ -124,7 +124,7 @@ namespace TerraTCG.Common.GameSystem.GameState.Modifiers
 	}
 
 	// TODO do we want to just make this a parent class?
-	internal static class FieldModifierHelper
+	public static class FieldModifierHelper
 	{
 
 		public static bool ShouldRemove(GameEventInfo eventInfo, string cardName)
