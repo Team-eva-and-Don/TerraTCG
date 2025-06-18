@@ -12,9 +12,9 @@ using TerraTCG.Common.UI;
 
 namespace TerraTCG.Content.Items
 {
-    internal abstract class TerraTCGBoosterPack : ModItem
+	public abstract class TerraTCGBoosterPack : ModItem
     {
-		internal abstract Pack Pack { get; }
+		public abstract Pack Pack { get; }
         public override void SetDefaults()
         {
             Item.consumable = true;
@@ -47,129 +47,129 @@ namespace TerraTCG.Content.Items
 
 	internal class ForestPack: TerraTCGBoosterPack
 	{
-		internal override Pack Pack => PackDefinitions.ForestPack;
+		public override Pack Pack => PackDefinitions.ForestPack;
 	}
 
 	internal class CavernPack: TerraTCGBoosterPack
 	{
-		internal override Pack Pack => PackDefinitions.CavernPack;
+		public override Pack Pack => PackDefinitions.CavernPack;
 	}
 
 	internal class DungeonPack: TerraTCGBoosterPack
 	{
-		internal override Pack Pack => PackDefinitions.DungeonPack;
+		public override Pack Pack => PackDefinitions.DungeonPack;
 	}
 
 	internal class MimicPack : TerraTCGBoosterPack
 	{
-		internal override Pack Pack => PackDefinitions.MimicPack;
+		public override Pack Pack => PackDefinitions.MimicPack;
 	}
 
 	internal class EvilPack: TerraTCGBoosterPack
 	{
-		internal override Pack Pack => PackDefinitions.EvilPack;
+		public override Pack Pack => PackDefinitions.EvilPack;
 	}
 	internal class GoblinPack: TerraTCGBoosterPack
 	{
-		internal override Pack Pack => PackDefinitions.GoblinPack;
+		public override Pack Pack => PackDefinitions.GoblinPack;
 	}
 	internal class JunglePack: TerraTCGBoosterPack
 	{
-		internal override Pack Pack => PackDefinitions.JunglePack;
+		public override Pack Pack => PackDefinitions.JunglePack;
 	}
 	internal class BloodMoonPack: TerraTCGBoosterPack
 	{
-		internal override Pack Pack => PackDefinitions.BloodMoonPack;
+		public override Pack Pack => PackDefinitions.BloodMoonPack;
 	}
 
 	internal class KingSlimePack: TerraTCGBoosterPack
 	{
-		internal override Pack Pack => PackDefinitions.KingSlimePack;
+		public override Pack Pack => PackDefinitions.KingSlimePack;
 	}
 
 	internal class BOCPack: TerraTCGBoosterPack
 	{
-		internal override Pack Pack => PackDefinitions.BOCPack;
+		public override Pack Pack => PackDefinitions.BOCPack;
 	}
 
 	internal class EOCPack: TerraTCGBoosterPack
 	{
-		internal override Pack Pack => PackDefinitions.EOCPack;
+		public override Pack Pack => PackDefinitions.EOCPack;
 	}
 
 	internal class MushroomPack: TerraTCGBoosterPack
 	{
-		internal override Pack Pack => PackDefinitions.MushroomPack;
+		public override Pack Pack => PackDefinitions.MushroomPack;
 	}
 
 	internal class OceanPack: TerraTCGBoosterPack
 	{
-		internal override Pack Pack => PackDefinitions.OceanPack;
+		public override Pack Pack => PackDefinitions.OceanPack;
 	}
 	internal class QueenBeePack: TerraTCGBoosterPack
 	{
-		internal override Pack Pack => PackDefinitions.QueenBeePack;
+		public override Pack Pack => PackDefinitions.QueenBeePack;
 	}
 	internal class EOWPack: TerraTCGBoosterPack
 	{
-		internal override Pack Pack => PackDefinitions.EOWPack;
+		public override Pack Pack => PackDefinitions.EOWPack;
 	}
 	internal class SkeletronPack: TerraTCGBoosterPack
 	{
-		internal override Pack Pack => PackDefinitions.SkeletronPack;
+		public override Pack Pack => PackDefinitions.SkeletronPack;
 	}
 
 	internal class WOFPack: TerraTCGBoosterPack
 	{
-		internal override Pack Pack => PackDefinitions.WOFPack;
+		public override Pack Pack => PackDefinitions.WOFPack;
 	}
 
 	internal class DeerclopsPack: TerraTCGBoosterPack
 	{
-		internal override Pack Pack => PackDefinitions.DeerclopsPack;
+		public override Pack Pack => PackDefinitions.DeerclopsPack;
 	}
 
 	internal class SlimePack: TerraTCGBoosterPack
 	{
-		internal override Pack Pack => PackDefinitions.SlimePack;
+		public override Pack Pack => PackDefinitions.SlimePack;
 	}
 
 	internal class SnowPack: TerraTCGBoosterPack
 	{
-		internal override Pack Pack => PackDefinitions.SnowPack;
+		public override Pack Pack => PackDefinitions.SnowPack;
 	}
 
 	internal class HallowedPack: TerraTCGBoosterPack
 	{
-		internal override Pack Pack => PackDefinitions.HallowedPack;
+		public override Pack Pack => PackDefinitions.HallowedPack;
 	}
 
 	internal class BatPack: TerraTCGBoosterPack
 	{
-		internal override Pack Pack => PackDefinitions.BatPack;
+		public override Pack Pack => PackDefinitions.BatPack;
 	}
 
 	internal class CritterPack: TerraTCGBoosterPack
 	{
-		internal override Pack Pack => PackDefinitions.CritterPack;
+		public override Pack Pack => PackDefinitions.CritterPack;
 	}
 
 	internal class QueenSlimePack: TerraTCGBoosterPack
 	{
-		internal override Pack Pack => PackDefinitions.QueenSlimePack;
+		public override Pack Pack => PackDefinitions.QueenSlimePack;
 	}
 	internal class SkeletronPrimePack: TerraTCGBoosterPack
 	{
-		internal override Pack Pack => PackDefinitions.SkeletronPrimePack;
+		public override Pack Pack => PackDefinitions.SkeletronPrimePack;
 	}
 
 	internal class DestroyerPack: TerraTCGBoosterPack
 	{
-		internal override Pack Pack => PackDefinitions.DestroyerPack;
+		public override Pack Pack => PackDefinitions.DestroyerPack;
 	}
 
 	internal class TwinsPack: TerraTCGBoosterPack
 	{
-		internal override Pack Pack => PackDefinitions.TwinsPack;
+		public override Pack Pack => PackDefinitions.TwinsPack;
 	}
 }
