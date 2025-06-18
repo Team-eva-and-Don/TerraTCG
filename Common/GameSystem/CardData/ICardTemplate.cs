@@ -10,14 +10,14 @@ using TerraTCG.Content.Gores;
 
 namespace TerraTCG.Common.GameSystem.CardData
 {
-    internal interface ICardTemplate
+	public interface ICardTemplate
     {
         public Card Card { get; }
         public Card CreateCard();
     }
 
 
-    internal abstract class BaseCardTemplate : ModSystem, ICardTemplate
+	public abstract class BaseCardTemplate : ModSystem, ICardTemplate
     {
         private Card _card;
         public Card Card { 
