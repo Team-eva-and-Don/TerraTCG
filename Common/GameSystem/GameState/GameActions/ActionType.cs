@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TerraTCG.Common.GameSystem.GameState.GameActions
 {
-    internal enum ActionType
+	public enum ActionType
     {
         DEFAULT,
         SKILL,
