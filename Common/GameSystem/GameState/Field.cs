@@ -11,7 +11,7 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.GameState
 {
-    internal class Field
+	public class Field
     {
 		internal CardGame Game { get; set; }
         internal List<Zone> Zones { get; set; }
