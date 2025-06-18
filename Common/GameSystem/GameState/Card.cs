@@ -93,7 +93,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 
 		public Asset<Texture2D> OverlayTexture => ModContent.Request<Texture2D>(TexturePath);
 
-		public int OverlayFlame = 1;
+		public int OverlayFrame = 1;
 
 		public CardType CardType { get; set; }
 
