@@ -20,7 +20,7 @@ using static TerraTCG.Content.NPCs.NPCDuelReward;
 namespace TerraTCG.Content.NPCs
 {
 	// TODO is this the correct location for this?
-	internal enum CardSleeve
+	public enum CardSleeve
 	{
 		FOREST,
 		CORRUPT,
@@ -37,7 +37,7 @@ namespace TerraTCG.Content.NPCs
 		TWINS
 	}
 
-	internal readonly struct NPCDuelReward(int itemId, int count)
+	public readonly struct NPCDuelReward(int itemId, int count)
 	{
 		public int ItemId { get; } = itemId;
 		public int Count { get; } = count;
@@ -48,7 +48,7 @@ namespace TerraTCG.Content.NPCs
 
 	// Cache for NPC fields used in determining duel outcome -
 	// used in case the NPC dies in multiplayer while the player is dueling it
-	internal readonly struct NPCInfoCache(NPC npc)
+	public readonly struct NPCInfoCache(NPC npc)
 	{
 		public int NpcId { get; } = npc.netID;
 
