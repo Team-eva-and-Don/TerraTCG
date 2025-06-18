@@ -13,8 +13,8 @@ using TerraTCG.Common.GameSystem.GameState;
 
 namespace TerraTCG.Common.GameSystem.Drawing
 {
-    delegate void DrawZoneNPC(SpriteBatch spriteBatch, PlacedCard card, Vector2 position, int frame, Color? color, float scale, SpriteEffects effects);
-    internal class CardOverlayRenderer : ModSystem
+	public delegate void DrawZoneNPC(SpriteBatch spriteBatch, PlacedCard card, Vector2 position, int frame, Color? color, float scale, SpriteEffects effects);
+	public class CardOverlayRenderer : ModSystem
     {
         public static CardOverlayRenderer Instance => ModContent.GetInstance<CardOverlayRenderer>();
 
