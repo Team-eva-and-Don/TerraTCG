@@ -16,22 +16,22 @@ using TerraTCG.Common.GameSystem.GameState.Modifiers;
 
 namespace TerraTCG.Common.GameSystem.GameState
 {
-    internal enum ZoneRole
+    public enum ZoneRole
     {
         OFFENSE,
         DEFENSE,
         SKILL
     }
-    internal class Zone
+    public class Zone
     {
-        internal CardGame Game { get; set; }
-        internal PlacedCard PlacedCard { get; set; }
-        internal ZoneRole Role { get; set; }
+        public CardGame Game { get; internal set; }
+        public PlacedCard PlacedCard { get; internal set; }
+        public ZoneRole Role { get; internal set; }
 
-        internal int Index { get; set; }
+        public int Index { get; internal set; }
 
-		internal int Row => Index / 3;
-		internal int Column => Index % 3;
+		public int Row => Index / 3;
+		public int Column => Index % 3;
 
         private List<IAnimation> animationQueue = [];
         internal IAnimation Animation { get => animationQueue.Count > 0 ? animationQueue[0] : null; set { QueueAnimation(value); } }
@@ -50,7 +50,7 @@ namespace TerraTCG.Common.GameSystem.GameState
         // For defense zones, check whether an enemy is in the aligned offense zone
         public bool IsBlocked() => Role == ZoneRole.DEFENSE && !Owner.Field.Zones[Index - 3].IsEmpty();
 
-		internal bool ColumnAligned(Zone other) => Column == 2 - (other?.Column ?? -1);
+		public bool ColumnAligned(Zone other) => Column == 2 - (other?.Column ?? -1);
 
         public void PlaceCard(Card card, int initialDamage = 0)
         {
@@ -89,7 +89,7 @@ namespace TerraTCG.Common.GameSystem.GameState
             GameSounds.PlaySound(GameAction.PROMOTE_CARD);
         }
 
-        internal void QueueAnimation(IAnimation animation)
+        public void QueueAnimation(IAnimation animation)
         {
             // Clear out any infinite idle animations
             if(!animation.IsDefault())
@@ -101,7 +101,7 @@ namespace TerraTCG.Common.GameSystem.GameState
             animationQueue.Add(animation);
         }
 
-		internal TimeSpan QueuedAnimationDuration()
+		public TimeSpan QueuedAnimationDuration()
 		{
 			var nonDefault = animationQueue.Where(a => !a.IsDefault());
 			if (!nonDefault.Any())
@@ -165,7 +165,7 @@ namespace TerraTCG.Common.GameSystem.GameState
             return modifierMap;
 		}
 
-        internal bool IsEmpty() => PlacedCard == null;
+        public bool IsEmpty() => PlacedCard == null;
 
         internal void Draw(SpriteBatch spriteBatch, Vector2 position, float rotation)
         {
