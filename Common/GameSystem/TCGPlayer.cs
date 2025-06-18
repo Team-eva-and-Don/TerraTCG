@@ -27,7 +27,7 @@ using TerraTCG.Content.NPCs;
 
 namespace TerraTCG.Common.GameSystem
 {
-    internal interface IGamePlayerController
+	public interface IGamePlayerController
     {
 		public string Name => IGameAction.ActionText("Opponent");
 
