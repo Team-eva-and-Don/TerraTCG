@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using ReLogic.Content;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,9 @@ namespace TerraTCG.Common.GameSystem.Drawing
 		{
             var texture = TextureCache.Instance.GetNPCTexture(card.Template.NPCID);
             var bounds = texture.Frame(1, Main.npcFrameCount[card.Template.NPCID], 0, frame);
+			if (card.Template.NPCID == 0 && card.Template.Mod != Mod.Name)
+				texture = card.Template.OverlayTexture;
+			    bounds = texture.Frame(1, card.Template.OverlayFlame, 0, frame);
             var origin = new Vector2(bounds.Width / 2, bounds.Height);
             spriteBatch.Draw(texture.Value, position, bounds, color ?? Color.White, rotation, origin, scale, effects, 0);
 		}
