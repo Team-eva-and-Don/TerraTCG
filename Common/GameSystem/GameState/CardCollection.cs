@@ -11,7 +11,7 @@ using TerraTCG.Common.GameSystem.CardData;
 namespace TerraTCG.Common.GameSystem.GameState
 {
     // Class representing an ordered collection of cards - eg. a hand, deck, or graveyard
-    internal class CardCollection
+	public class CardCollection
     {
         internal List<Card> Cards { get; set; } = [];
 
