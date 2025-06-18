@@ -16,19 +16,19 @@ using TerraTCG.Content.NPCs;
 
 namespace TerraTCG.Common.GameSystem.GameState
 {
-    internal class GamePlayer
+	public class GamePlayer
     {
-        internal const int MAX_HEALTH = 4;
-        internal const int MAX_MANA = 8;
-        internal CardGame Game { get; set; } // back reference to the game this player belongs to
-        internal CardCollection Hand { get; set; }
-        internal CardCollection Deck { get; set; }
+		public const int MAX_HEALTH = 4;
+		public const int MAX_MANA = 8;
+		public CardGame Game { get; set; } // back reference to the game this player belongs to
+		public CardCollection Hand { get; set; }
+		public CardCollection Deck { get; set; }
 
-		internal IGamePlayerController Controller { get; set; }
+		public IGamePlayerController Controller { get; set; }
 
 		internal byte Index => (byte)Game.GamePlayers.IndexOf(this);
 
-        internal int ManaPerTurn { get; set; } = 0;
+		public int ManaPerTurn { get; set; } = 0;
 
         public PlayerResources _resources = new(MAX_HEALTH, 0, 0);
         public PlayerResources Resources { 
@@ -43,7 +43,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 
 		public PlayerResources PreviewResources { get; set; }
 
-		internal Field Field { get; set; }
+		public Field Field { get; set; }
 
         internal int SelectedHandIdx { get; set; }
         internal Card SelectedHandCard { get; set; }
