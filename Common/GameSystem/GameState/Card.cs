@@ -91,7 +91,7 @@ namespace TerraTCG.Common.GameSystem.GameState
 
 		internal string OverlayTexturePath => $"{Mod}/Assets/Overlay/{Name}";
 
-		public Asset<Texture2D> OverlayTexture => ModContent.Request<Texture2D>(TexturePath);
+		public Asset<Texture2D> OverlayTexture => ModContent.Request<Texture2D>(OverlayTexturePath);
 
 		public int OverlayFrame = 1;
 
