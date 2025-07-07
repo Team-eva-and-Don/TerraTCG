@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.CardData;
@@ -6,8 +7,18 @@ using TerraTCG.Common.GameSystem.GameState;
 
 namespace TerraTCG.Common.GameSystem
 {
-	public class CardRegistry : ModSystem
+
+	public  class CardRegistry : ModSystem
 	{
+		public static CardRegistry Instance;
+
+		public static Action<Card> CardChanged;
+
+		public override void Load()
+		{
+			Instance = this;
+		}
+
 		private static List<Card> _allCards;
 		public static List<Card> AllCards
 		{
