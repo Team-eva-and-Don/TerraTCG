@@ -25,9 +25,8 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         public override void OnInitialize()
         {
             base.OnInitialize();
-            cards = ModContent.GetContent<BaseCardTemplate>()
-                .Select(t=>t.Card)
-                .Where(c => c.IsCollectable)
+            cards = CardRegistry.AllCards
+				.Where(c => c.IsCollectable)
                 .OrderBy(t => t.SortType)
                 .ThenBy(t => t.Name)
                 .Select(c => new DeckbuildCardElement(c))
