@@ -34,6 +34,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
 			}
 			OnInitialize();
 		}
+			CardRegistry.CardChanges += ResetCards;
 				.Where(c => c.IsCollectable)
                 .OrderBy(t => t.SortType)
                 .ThenBy(t => t.Name)
