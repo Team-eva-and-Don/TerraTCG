@@ -4,6 +4,7 @@ using System.Linq;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.CardData;
 using TerraTCG.Common.GameSystem.GameState;
+using TerraTCG.Common.GameSystem.PackOpening;
 
 namespace TerraTCG.Common.GameSystem
 {
@@ -13,6 +14,7 @@ namespace TerraTCG.Common.GameSystem
 		public static CardRegistry Instance;
 
 		public static Action<Card> CardChanged;
+		public static Action CardChanges;
 
 		public override void Load()
 		{
@@ -34,11 +36,18 @@ namespace TerraTCG.Common.GameSystem
 		public static void AddCard(Card card)
 		{
 			_allCards.Add(card);
+			if (card.IsCollectable)
+				CardPools.CollectableCards.Add(card);
+			CardChanges.Invoke();
 		}
 
 		public static void AddCard(params Card[] cards)
 		{
 			_allCards.AddRange(cards);
+			foreach (Card card in cards)
+				if (card.IsCollectable)
+					CardPools.CollectableCards.Add(card);
+			CardChanges.Invoke();
 		}
 	}
 }
