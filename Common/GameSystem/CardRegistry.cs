@@ -9,11 +9,10 @@ using TerraTCG.Common.GameSystem.PackOpening;
 namespace TerraTCG.Common.GameSystem
 {
 
-	public  class CardRegistry : ModSystem
+	public class CardRegistry : ModSystem
 	{
 		public static CardRegistry Instance;
 
-		public static Action<Card> CardChanged;
 		public static Action CardChanges;
 
 		public override void Load()
@@ -24,7 +23,7 @@ namespace TerraTCG.Common.GameSystem
 		private static List<Card> _allCards;
 		public static List<Card> AllCards
 		{
-		 	get
+			get
 			{
 				_allCards ??= ModContent.GetContent<BaseCardTemplate>()
 							.Select(t => t.Card)
