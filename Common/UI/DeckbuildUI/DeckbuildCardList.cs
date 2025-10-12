@@ -26,6 +26,14 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         {
             base.OnInitialize();
             cards = CardRegistry.AllCards
+		public void ResetCards()
+		{
+			foreach (UIElement c in Children)
+			{
+				c.Deactivate();
+			}
+			OnInitialize();
+		}
 				.Where(c => c.IsCollectable)
                 .OrderBy(t => t.SortType)
                 .ThenBy(t => t.Name)
