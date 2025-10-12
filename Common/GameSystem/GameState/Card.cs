@@ -176,6 +176,8 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         internal string TypeLine => string.Join(" ", 
             SubTypes.Select(t => Language.GetTextValue($"Mods.{Mod}.Cards.Types.{t}")));
+		internal string TypeLine => string.Join(" ",
+			SubTypes.Select(t => Language.Exists($"Mods.{Mod}.Cards.Types.{t}") ? Language.GetTextValue($"Mods.{Mod}.Cards.Types.{t}") : Language.GetTextValue($"Mods.TerraTCG.Cards.Types.{t}")));
 
         public DrawZoneNPC DrawZoneNPC { get; set; } = CardOverlayRenderer.Instance.DefaultDrawZoneNPC;
 
