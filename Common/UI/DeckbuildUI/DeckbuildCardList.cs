@@ -17,9 +17,12 @@ namespace TerraTCG.Common.UI.DeckbuildUI
 		internal List<DeckbuildCardElement> cards;
 		private UIScrollbar scrollBar;
 
+		private bool needsReconstruction = false;
+
 		public override void OnInitialize()
 		{
 			base.OnInitialize();
+			CardRegistry.OnCardsAdded += () => needsReconstruction = true;
 			ConstructUI();
 		}
 
@@ -122,14 +125,15 @@ namespace TerraTCG.Common.UI.DeckbuildUI
 			CalculateCardPositions();
 		}
 
-		public override void Draw(SpriteBatch spriteBatch)
+		protected override void DrawChildren(SpriteBatch spriteBatch)
 		{
-			base.Draw(spriteBatch);
-			if (CardRegistry.RequestAddCards)
+			if (needsReconstruction)
 			{
-				CardRegistry.RequestAddCards = false;
+				needsReconstruction = false;
 				ReconstructUI();
 			}
+
+			base.DrawChildren(spriteBatch);
 		}
 	}
 }
