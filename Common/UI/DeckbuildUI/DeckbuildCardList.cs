@@ -27,7 +27,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
 
 		public override void OnInitialize()
 		{
-			CardRegistry.CardChanges += ResetCards;
+			CardRegistry.OnCardsAdded += ResetCards;
 			base.OnInitialize();
 			cards = CardRegistry.AllCards
 				.Where(c => c.IsCollectable)
