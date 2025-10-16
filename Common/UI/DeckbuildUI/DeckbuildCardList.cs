@@ -19,7 +19,6 @@ namespace TerraTCG.Common.UI.DeckbuildUI
 		public override void OnInitialize()
 		{
 			base.OnInitialize();
-			CardRegistry.OnCardsAdded += ReconstructUI;
 			ConstructUI();
 		}
 
@@ -27,6 +26,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
 		{
 			RemoveAllChildren();
 			ConstructUI();
+			CardRegistry.RequestAddCards = false;
 		}
 
 		private void ConstructUI()
@@ -114,6 +114,8 @@ namespace TerraTCG.Common.UI.DeckbuildUI
 		public override void Update(GameTime gameTime)
 		{
 			base.Update(gameTime);
+			if (CardRegistry.RequestAddCards)
+				ReconstructUI();
 			if (IsMouseHovering)
 			{
 				Terraria.GameInput.PlayerInput.LockVanillaMouseScroll("TerraTCG");

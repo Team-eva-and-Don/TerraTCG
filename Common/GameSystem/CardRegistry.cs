@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Terraria.ModLoader;
 using TerraTCG.Common.GameSystem.CardData;
@@ -13,7 +12,7 @@ namespace TerraTCG.Common.GameSystem
 	{
 		public static CardRegistry Instance;
 
-		public static event Action OnCardsAdded;
+		public static bool RequestAddCards = false;
 
 		public override void Load()
 		{
@@ -39,7 +38,7 @@ namespace TerraTCG.Common.GameSystem
 			foreach (Card card in cards)
 				if (card.IsCollectable)
 					CardPools.CollectableCards.Add(card);
-			OnCardsAdded.Invoke();
+			RequestAddCards = true;
 		}
 	}
 }
