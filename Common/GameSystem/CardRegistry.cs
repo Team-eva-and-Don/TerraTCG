@@ -13,7 +13,7 @@ namespace TerraTCG.Common.GameSystem
 	{
 		public static CardRegistry Instance;
 
-		public static Action CardChanges;
+		public static event Action OnCardsAdded;
 
 		public override void Load()
 		{
