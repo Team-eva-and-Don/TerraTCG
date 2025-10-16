@@ -16,19 +16,21 @@ namespace TerraTCG.Common.UI.DeckbuildUI
 		internal List<DeckbuildCardElement> cards;
 		private UIScrollbar scrollBar;
 
-		public void ResetCards()
-		{
-			foreach (UIElement c in Children)
-			{
-				c.Deactivate();
-			}
-			OnInitialize();
-		}
-
 		public override void OnInitialize()
 		{
-			CardRegistry.OnCardsAdded += ResetCards;
+			CardRegistry.OnCardsAdded += ReconstructUI;
 			base.OnInitialize();
+			ConstructUI();
+		}
+
+		public void ReconstructUI()
+		{
+			RemoveAllChildren();
+			ConstructUI();
+		}
+
+		private void ConstructUI()
+		{
 			cards = CardRegistry.AllCards
 				.Where(c => c.IsCollectable)
 				.OrderBy(t => t.SortType)
