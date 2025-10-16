@@ -32,21 +32,14 @@ namespace TerraTCG.Common.GameSystem
 			}
 		}
 
-		public static void AddCard(Card card)
-		{
-			_allCards.Add(card);
-			if (card.IsCollectable)
-				CardPools.CollectableCards.Add(card);
-			CardChanges.Invoke();
-		}
 
-		public static void AddCard(params Card[] cards)
+		public static void AddCards(params Card[] cards)
 		{
 			_allCards.AddRange(cards);
 			foreach (Card card in cards)
 				if (card.IsCollectable)
 					CardPools.CollectableCards.Add(card);
-			CardChanges.Invoke();
+			OnCardsAdded.Invoke();
 		}
 	}
 }
