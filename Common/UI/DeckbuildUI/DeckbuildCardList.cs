@@ -18,8 +18,8 @@ namespace TerraTCG.Common.UI.DeckbuildUI
 
 		public override void OnInitialize()
 		{
-			CardRegistry.OnCardsAdded += ReconstructUI;
 			base.OnInitialize();
+			CardRegistry.OnCardsAdded += ReconstructUI;
 			ConstructUI();
 		}
 
