@@ -15,10 +15,9 @@ namespace TerraTCG.Common.GameSystem.PackOpening
 	internal class CardPools
 	{
 		// Cards that can appear in any pack, generally, "not good" cards
-		public static CardCollection AllCards => new()
+		public static CardCollection CollectableCards => new()
 		{
-			Cards = ModContent.GetContent<BaseCardTemplate>()
-				.Select(t => t.Card)
+			Cards = CardRegistry.AllCards
 				.Where(c=>c.IsCollectable && c.SubTypes[0] != CardSubtype.BOSS)
 				.ToList()
 		};

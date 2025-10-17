@@ -54,8 +54,6 @@ namespace TerraTCG.Common.UI.DeckbuildUI
 
         public string FilterString { get; private set; }
 
-        private List<Card> allCards;
-
         private int visibleCount;
         private int totalCount;
 
@@ -69,11 +67,6 @@ namespace TerraTCG.Common.UI.DeckbuildUI
 
         public override void OnInitialize()
         {
-            allCards = ModContent.GetContent<BaseCardTemplate>()
-                .Select(t=>t.Card)
-                .Where(c => c.IsCollectable)
-                .ToList();
-
             filterButtons = [];
             searchTextBox = new(Language.GetText("Mods.TerraTCG.Cards.Common.Search"))
             {
@@ -167,7 +160,7 @@ namespace TerraTCG.Common.UI.DeckbuildUI
         public override void Update(GameTime gameTime)
         {
             Main.LocalPlayer.mouseInterface = true;
-            totalCount = 2 * allCards.Count;
+            totalCount = 2 * CardRegistry.AllCards.Count;
 			visibleCount = TCGPlayer.LocalPlayer.Collection.Cards.Count;
             base.Update(gameTime);
         }
