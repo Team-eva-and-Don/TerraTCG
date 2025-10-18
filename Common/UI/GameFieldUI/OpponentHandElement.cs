@@ -35,8 +35,7 @@ namespace TerraTCG.Common.UI.GameFieldUI
 
 		private void DrawBossBehindHand(SpriteBatch spriteBatch, int bossId)
 		{
-			var bossCard = ModContent.GetContent<BaseCardTemplate>()
-				.Select(c => c.Card)
+			var bossCard = CardRegistry.AllCards
 				.Where(c => c.NPCID == bossId)
 				.FirstOrDefault();
 			// check the vertical clearance above the hand to see if there's enough

@@ -16,22 +16,10 @@ namespace TerraTCG.Common.Netcode.Packets
 	internal class CardNetworkSync : ModSystem
 	{
 		public static CardNetworkSync Instance => ModContent.GetInstance<CardNetworkSync>();
-		// TODO *really* need a central location for this
-		private List<Card> _allCards;
-		public List<Card> AllCards
-		{
-			get
-			{
-				_allCards ??= ModContent.GetContent<BaseCardTemplate>()
-					.Select(t => t.Card)
-					.ToList();
-				return _allCards;
-			}
-		}
 
-		public static ushort Serialize(Card card) => (ushort)Instance.AllCards.IndexOf(card);
+		public static ushort Serialize(Card card) => (ushort)CardRegistry.AllCards.IndexOf(card);
 
-		public static Card Deserialize(ushort idx) => Instance.AllCards[idx];
+		public static Card Deserialize(ushort idx) => CardRegistry.AllCards[idx];
 	}
 
 	// Packet used to sync each player's ordered decklist with their opponent's client

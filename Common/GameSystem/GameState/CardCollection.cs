@@ -66,13 +66,10 @@ namespace TerraTCG.Common.GameSystem.GameState
 
         public void DeSerialize(List<string> cardFullNames)
         {
-            var allCards = ModContent.GetContent<BaseCardTemplate>()
-                .Select(t => t.Card);
-
             // TODO handle errors
             Cards = cardFullNames
-				.Where(fn => allCards.Any(c => c.FullName == fn))
-                .Select(fn => allCards.Where(c => c.FullName == fn).FirstOrDefault())
+				.Where(fn => CardRegistry.AllCards.Any(c => c.FullName == fn))
+                .Select(fn => CardRegistry.AllCards.Where(c => c.FullName == fn).FirstOrDefault())
                 .ToList();
         }
     }
