@@ -13,14 +13,11 @@ namespace TerraTCG.Common.GameSystem
 	{
 		public static CardRegistry Instance;
 
-		public static bool needsReconstruction = false;
-
 		public static event Action OnCardsAdded;
 
 		public override void Load()
 		{
 			Instance = this;
-			OnCardsAdded += () => needsReconstruction = true;
 		}
 
 		private static List<Card> _allCards;
@@ -36,13 +33,13 @@ namespace TerraTCG.Common.GameSystem
 		}
 
 
-		public void AddCards(params Card[] cards)
+		public static void AddCards(params Card[] cards)
 		{
 			AllCards.AddRange(cards);
 			foreach (Card card in cards)
 				if (card.IsCollectable)
 					CardPools.CollectableCards.Add(card);
-			OnCardsAdded.Invoke();
+			OnCardsAdded?.Invoke();
 		}
 	}
 }
