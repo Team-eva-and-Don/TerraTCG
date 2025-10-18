@@ -17,12 +17,9 @@ namespace TerraTCG.Common.UI.DeckbuildUI
 		internal List<DeckbuildCardElement> cards;
 		private UIScrollbar scrollBar;
 
-		private bool needsReconstruction = false;
-
 		public override void OnInitialize()
 		{
 			base.OnInitialize();
-			CardRegistry.OnCardsAdded += () => needsReconstruction = true;
 			ConstructUI();
 		}
 
@@ -127,9 +124,9 @@ namespace TerraTCG.Common.UI.DeckbuildUI
 
 		protected override void DrawChildren(SpriteBatch spriteBatch)
 		{
-			if (needsReconstruction)
+			if (CardRegistry.needsReconstruction)
 			{
-				needsReconstruction = false;
+				CardRegistry.needsReconstruction = false;
 				ReconstructUI();
 			}
 
