@@ -35,7 +35,7 @@ namespace TerraTCG.Common.GameSystem
 
 		public static void AddCards(params Card[] cards)
 		{
-			_allCards.AddRange(cards);
+			AllCards.AddRange(cards);
 			foreach (Card card in cards)
 				if (card.IsCollectable)
 					CardPools.CollectableCards.Add(card);
